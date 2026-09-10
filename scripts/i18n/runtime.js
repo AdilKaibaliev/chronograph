@@ -17,7 +17,7 @@ function localizePage(){
   observer.disconnect();
   pendingTranslations.clear();
   document.documentElement.lang=language;
-  document.title='CHRONOGRAPH 1.1 · '+({ru:'Рабочая версия переводов',en:'Translation preview',ky:'Котормонун алдын ала нускасы'})[language];
+  document.title='CHRONOGRAPH 1.1 · '+({ru:'Исторический атлас',en:'Historical atlas',ky:'Тарыхый атлас'})[language];
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
   while(walker.nextNode()){
     const node=walker.currentNode,parent=node.parentElement;
@@ -33,7 +33,6 @@ function localizePage(){
     for(const key of attributes){if(!el.hasAttribute(key))continue;const record=translateValue(el.getAttribute(key),saved[key]);saved[key]=record;if(record.output!==el.getAttribute(key))el.setAttribute(key,record.output);}
     originalAttributes.set(el,saved);
   }
-  $('translationNotice').textContent=({ru:'Рабочая версия переводов · English / Кыргызча в подготовке',en:'Translation preview · some historical texts are still in Russian.',ky:'Котормонун алдын ала нускасы · айрым тарыхый тексттер азырынча орусча.'})[language];
   localeSelect.setAttribute('aria-label',({ru:'Язык сайта',en:'Site language',ky:'Сайттын тили'})[language]);
   observer.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:attributes});
 }
