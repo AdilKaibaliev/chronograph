@@ -1,2 +1,12 @@
-RC3.8: проверены 690 лет, 57 карточек, 9072 отображаемых контуров. Все современники показаны; контуры принадлежат существующим срезам и не взяты из будущего; даты жизни корректно форматируются; внешних переходов нет.
-Это функциональная проверка данных и HTML-шаблонов без браузера. Размеры элементов и взаимодействия в браузере заново не проверялись. Полная историческая экспертиза данных не завершена.
+CHRONOGRAPH 1.1 — 2026-09-10
+PASS: 1168 translation rows in English and Kyrgyz; exact Russian preservation.
+PASS: 690 years, 68 political layers, 57 people; 147361 generated-text checks, zero residual Russian fragments in English output.
+PASS: syntax of all inline JavaScript.
+PASS: original state/event/biography data and geometry unchanged.
+PASS: sources remain plain text, zero external source anchors.
+PASS: browser language switching preserves year and map transform.
+PASS: direct URL restores Kyrgyz language, year 1205, regions tab and map view.
+PASS: Compare, Sources, Methodology, biography and selected-state card translated.
+PASS: Play advances years and Pause stops; zero browser JavaScript errors.
+PASS: mobile 390 x 844: document 390 x 844, Play bottom 781.92.
+Scope: functional/localization checks; not an independent historical audit or native-speaker editorial certification.

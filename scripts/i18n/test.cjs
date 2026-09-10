@@ -1,0 +1,20 @@
+const fs=require('fs'),assert=require('assert/strict');
+const {createChronographTranslator}=require('./core.js');
+const rows=JSON.parse(fs.readFileSync(__dirname+'/compiled-messages.json','utf8'));
+const t=createChronographTranslator(rows);
+for(const [ru,en,ky] of rows){assert.equal(t(ru,'en'),en);assert.equal(t(ru,'ky'),ky);assert.equal(t(ru,'ru'),ru);assert.equal(t(' '+ru+' ','en'),' '+en+' ');}
+assert.equal(t('23 г. х.','en'),'23 AH');
+assert.equal(t('ок. 573–634 (ок. 51 до хиджры – 13 г. х.)','en'),'c. 573–634 (c. 51 BH – 13 AH)');
+assert.equal(t('612–712 (10 до хиджры – 93 г. х.)','ky'),'612–712 (10 хижрага чейин – 93 х. ж.)');
+assert.equal(t('Исламская история · 750 н. э.','en'),'Islamic history · 750 CE');
+assert.equal(t('132 г. х. · Аббасидская революция','en'),'132 AH · Abbasid Revolution');
+assert.equal(t('Сподвижники · 19','ky'),'Сахабалар · 19');
+assert.equal(t('Непереведённая историческая справка','en'),'Непереведённая историческая справка');
+assert.equal(t('Атлас','invalid'),'Атлас');
+const base=fs.readFileSync(fs.existsSync('src/atlas.html')?'src/atlas.html':'publish/index.html','utf8');
+const built=fs.readFileSync(fs.existsSync('src/atlas.html')?'index.html':'outputs/chronograph_1_1.html','utf8');
+for(const [start,end] of [['const S =','function resampleRing'],['const EVENTS = {','function ceToAHApprox'],['const ISLAM_STARS = [','function starsByGroupForYear']])assert.equal(built.slice(built.indexOf(start),built.indexOf(end)),base.slice(base.indexOf(start),base.indexOf(end)),'Historical data changed: '+start);
+assert(!/<a(?=\s|>)|\bhref=|window\.open\(/.test(built),'Sources must remain plain text');
+assert(!built.includes('id="translationNotice"'),'Preview notice remains');
+console.log('PASS: '+rows.length+' message pairs, Russian preservation, calendar and dynamic labels, explicit Russian fallback.');
+console.log('PASS: original historical states, geometry, events and biographies unchanged; plain-text sources.');

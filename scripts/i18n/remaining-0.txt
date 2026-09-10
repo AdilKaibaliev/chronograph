@@ -1,0 +1,96 @@
+0|The first major victory of Medina's Muslim community.|Мединанын мусулман коомунун алгачкы ири жеңиши.
+1|The map still reflects late antiquity: ar-Rum and Sasanian Persia dominate the Middle East. Central Asia consists of khaganates, city domains and regional kingdoms.|Картада кеч антикалык дүйнө чагылдырылат: Жакынкы Чыгышта ар-Рум жана Сасаний Персиясы үстөмдүк кылат. Борбордук Азия каганаттардан, шаардык ээликтерден жана аймактык падышалыктардан турат.
+2|Western Roman Empire|Батыш Рим империясы
+3|ceased to exist in 476. Its faint outline is a historical reference; by 610, Franks, Visigoths and Lombards ruled in the West.|476-жылы жоюлган. Анын күңүрт контуру тарыхый маалымат үчүн берилген; 610-жылы Батышта франктар, вестготтор жана лангобарддар бийлик жүргүзгөн.
+4|Ibn Hisham|Ибн Хишам
+5|al-Baladhuri|ал-Балазури
+6|Ibn al-Athir|Ибн ал-Асир
+7|Ibn Kathir|Ибн Касир
+8|Ata-Malik Juvayni|Ата-Малик Жувейни
+9|Rashid al-Din|Рашид ад-Дин
+10|Ibn Khaldun|Ибн Халдун
+11|Persian Islamic geography, 372 AH / 982–983 CE|Перс тилиндеги ислам географиясы, 372 х. ж. / 982–983 б. з.
+12|al-Azraqi|ал-Азраки
+13|al-Samhudi|ас-Самхуди
+14|Ahmad ibn Fadlan|Ахмад ибн Фадлан
+15|Risāla, 309 AH / 921–922 CE|Risāla, 309 х. ж. / 921–922 б. з.
+16|al-Masʿudi|ал-Масуди
+17|Ibn Jubayr|Ибн Жубайр
+18|Riḥla, 578–581 AH / 1183–1185 CE|Riḥla, 578–581 х. ж. / 1183–1185 б. з.
+19|al-Istakhri / Ibn Hawqal corpus|ал-Истахри / Ибн Хаукалдын эмгектери
+20|al-Muqaddasi|ал-Мукаддаси
+21|Nasir-i Khusraw|Насир-и Хусрав
+22|al-Idrisi|ал-Идриси
+23|Yaqut al-Hamawi|Якут ал-Хамави
+24|Sahih, hadith 6429|«Сахих», 6429-хадис
+25|Ibn Saʿd|Ибн Саад
+26|al-Tabaqat al-kubra|«ат-Табакат ал-кубра»
+27|Ibn Hajar|Ибн Хажар
+28|al-Isaba fi tamyiz al-sahaba|«ал-Исаба фи тамйиз ас-сахаба»
+29|Entries: Ebû Bekir, Enes b. Mâlik, Saîd b. Müseyyeb, Selmân-ı Fârisî|«Ebû Bekir», «Enes b. Mâlik», «Saîd b. Müseyyeb», «Selmân-ı Fârisî» макалалары
+30|· Ar-Rum, Sasanian Persia and the Turkic khaganates still shape much of Eurasia's political map.|· Евразиянын саясий картасынын көп бөлүгүн ар-Рум, Сасаний Персиясы жана түрк каганаттары аныктайт.
+31|610–1299 · detailed early Islamic chronology · use the era buttons to move across centuries|610–1299 · алгачкы ислам доору кеңири берилген · кылымдар арасында өтүү үчүн доор баскычтарын колдонуңуз
+32|Ibn Hisham, al-Sīra al-Nabawiyya; al-Tabari. The early Muslim community's map layer is a reconstruction.|Ибн Хишам, al-Sīra al-Nabawiyya; ат-Табари. Алгачкы мусулман коомунун картадагы катмары — реконструкция.
+33|Qur'an 30:2–4 uses ar-Rum, the Romans, for Heraclius's realm. This is the atlas's primary name.|Курандын 30:2–4 аяттарында Ираклийдин мамлекети ар-Рум — римдиктер деп аталат. Атласта ушул аталыш колдонулат.
+34|Metropolitan Museum: Iran and Eastern Mediterranean chronologies. Boundaries are approximate.|Metropolitan Museum: Иран жана Чыгыш Жер Ортолук деңиз аймагынын хронологиялары. Чек аралар болжолдуу.
+35|UNESCO Silk Roads; Encyclopaedia Iranica: Western Turkic Khaganate / On Oq in Semirechye; Suyab in the Chuy valley.|UNESCO Silk Roads; Encyclopaedia Iranica: Жети-Суудагы Батыш Түрк каганаты / Он ок; Чүй өрөөнүндөгү Суяб.
+36|Early Tang and Turkic chronology. Tang defeated the khaganate in 630.|Алгачкы Тан жана түрк каганаттарынын хронологиясы. Тан каганатты 630-жылы талкалаган.
+37|Xin Tangshu; Zizhi Tongjian: 黠戛斯 (Xiajiasi). Ibn Khordadbeh; Hudud al-ʿAlam (982); al-Idrisi. Boundaries are schematic.|Xin Tangshu; Zizhi Tongjian: 黠戛斯 (Xiajiasi). Ибн Хордадбех; Hudud al-ʿAlam (982); ал-Идриси. Чек аралар шарттуу.
+38|Regional reconstruction: local ruling lines in Ferghana within the Western Turkic political orbit.|Аймактык реконструкция: Батыш Түрк саясий чөйрөсүндөгү Фергананын жергиликтүү башкаруучулары.
+39|UNESCO, History of Civilizations of Central Asia, vol. III: Chach joined the Western Turkic Khaganate after 606, retaining local autonomy.|UNESCO, History of Civilizations of Central Asia, III том: Чач 606-жылдан кийин жергиликтүү автономиясын сактап, Батыш Түрк каганатына кошулган.
+40|Encyclopaedia Iranica: early seventh-century Tokharistan covered northern Afghanistan and southern Uzbekistan and Tajikistan, with multiple local domains.|Encyclopaedia Iranica: VII кылымдын башындагы Тохаристан Ооганстандын түндүгүн, Өзбекстан менен Тажикстандын түштүгүн камтып, бир нече жергиликтүү ээликтен турган.
+41|Jiu Tangshu; Xin Tangshu; ChinaKnowledge; official Chinese chronology: Tang, 618–907.|Jiu Tangshu; Xin Tangshu; ChinaKnowledge; Кытайдын расмий хронологиясы: Тан, 618–907.
+42|Late-antique Northeast African chronology. The map shows the state's core region.|Кеч антикалык Түндүк-Чыгыш Африканын хронологиясы. Картада мамлекеттин негизги аймагы көрсөтүлгөн.
+43|Indian chronology: Harsha, 606–647. The outline approximates his sphere of power.|Индия хронологиясы: Харша, 606–647. Контур анын бийлик чөйрөсүн болжолдуу көрсөтөт.
+44|Early medieval European chronology; schematic boundaries.|Эрте орто кылымдагы Европа хронологиясы; чек аралар шарттуу.
+45|al-Baladhuri, Futūḥ al-buldān; al-Tabari, Tārīkh al-rusul wa-l-mulūk. Reconstructed boundary.|ал-Балазури, Futūḥ al-buldān; ат-Табари, Tārīkh al-rusul wa-l-mulūk. Чек ара реконструкцияланган.
+46|al-Baladhuri; al-Tabari; Ibn al-Athir for later chronology. Reconstructed boundary.|ал-Балазури; ат-Табари; кийинки хронология үчүн Ибн ал-Асир. Чек ара реконструкцияланган.
+47|al-Tabari for the early Abbasids; Ibn al-Athir and Ibn Kathir for later centuries.|Алгачкы Аббасийлер үчүн ат-Табари; кийинки кылымдар үчүн Ибн ал-Асир жана Ибн Касир.
+48|Eighth-century Central Asia.|VIII кылымдагы Борбордук Азия.
+49|al-Istakhri; Ibn Hawqal; al-Muqaddasi: Karluk and Turkic geography. Chinese chronicles for the early period.|ал-Истахри; Ибн Хаукал; ал-Мукаддаси: карлук жана түрк дүйнөсүнүн географиясы. Алгачкы доор үчүн кытай жылнаамалары.
+50|al-Muqaddasi and Ibn Hawqal: Transoxiana and Khurasan. Ibn al-Athir: political chronology.|ал-Мукаддаси жана Ибн Хаукал: Мавераннахр жана Хорасан. Ибн ал-Асир: саясий хронология.
+51|al-Muqaddasi; Ibn Hawqal; Yaqut al-Hamawi: cities and regions. Reconstructed dynastic boundary.|ал-Мукаддаси; Ибн Хаукал; Якут ал-Хамави: шаарлар жана аймактар. Династиянын чек арасы реконструкцияланган.
+52|Ibn al-Athir; Ibn Kathir: Seljuk political history.|Ибн ал-Асир; Ибн Касир: Селжуктардын саясий тарыхы.
+53|Ibn al-Athir; Ibn Kathir: Sultanate of Rum chronology. Reconstructed boundaries.|Ибн ал-Асир; Ибн Касир: Рум султанатынын хронологиясы. Чек аралар реконструкцияланган.
+54|Mongol Empire from 1206.|1206-жылдан тартып Монгол империясы.
+55|Chagatai Khanate, c. 1227.|Чагатай хандыгы, болж. 1227.
+56|Ibn Kathir: thirteenth-century events. Ibn Khaldun: later synthesis. Reconstructed boundaries.|Ибн Касир: XIII кылымдагы окуялар. Ибн Халдун: кийинки жалпылоо. Чек аралар реконструкцияланган.
+57|Ibn Kathir for the thirteenth century; Ibn Khaldun as a later synthesis.|XIII кылым үчүн Ибн Касир; кийинки жалпылоо үчүн Ибн Халдун.
+58|1299 is a conventional date; the polity emerged gradually around 1300.|1299 — шарттуу дата; мамлекет болжол менен 1300-жылдары акырындап калыптанган.
+59|Educational reconstruction of ar-Rum's territorial changes.|Ар-Румдун аймактык өзгөрүүлөрүнүн окуу реконструкциясы.
+60|Principal Eastern Roman successor state after 1204.|1204-жылдан кийинки Чыгыш Римдин негизги мураскер мамлекети.
+61|Roman Empire (ar-Rum) after the recovery of Constantinople in 1261.|1261-жылы Константинополь кайтарылгандан кийинки Рим империясы (ар-Рум).
+62|Ibn al-Athir: Qara Khitai and Central Asia in the twelfth and thirteenth centuries. East Asian records supplement the map.|Ибн ал-Асир: XII–XIII кылымдардагы Каракытайлар жана Борбордук Азия. Картаны Чыгыш Азия булактары толуктайт.
+63|Western ulus of Jochi in the thirteenth century.|XIII кылымдагы Жучу улусунун батыш бөлүгү.
+64|Yuan proclaimed in 1271; Southern Song conquered by 1279.|Юань 1271-жылы жарыяланган; Түштүк Сунду басып алуу 1279-жылы аяктаган.
+65|Xin Tangshu; Zizhi Tongjian; Chinese historiography: in 840 the Kyrgyz defeated the Uyghur Khaganate. The wide area represents influence, not uniform direct rule.|Xin Tangshu; Zizhi Tongjian; кытай тарыхнаамасы: 840-жылы кыргыздар Уйгур каганатын талкалаган. Кең аймак түз башкарууну эмес, таасир чөйрөсүн көрсөтөт.
+66|Jiu Wudaishi; Xin Wudaishi: Five Dynasties, 907–960.|Jiu Wudaishi; Xin Wudaishi: Беш династия, 907–960.
+67|Official histories of the Five Dynasties: Ten Kingdoms, 902/907–979.|Беш династиянын расмий тарыхтары: Он падышалык, 902/907–979.
+68|Liaoshi: Liao, 907–1125.|Liaoshi: Ляо, 907–1125.
+69|Chinese dynastic chronology: Northern Song, 960–1127.|Кытай династиялык хронологиясы: Түндүк Сун, 960–1127.
+70|Chinese chronology: Tangut Western Xia, 1038–1227.|Кытай хронологиясы: Тангут Батыш Ся мамлекети, 1038–1227.
+71|Jinshi: Jin, 1115–1234.|Jinshi: Цзинь, 1115–1234.
+72|Chinese dynastic chronology: Southern Song, 1127–1279.|Кытай династиялык хронологиясы: Түштүк Сун, 1127–1279.
+73|Ibn al-Athir, al-Kāmil fī al-tārīkh; Ibn Kathir, al-Bidāya wa-l-Nihāya. The polygon shows direct power in Iraq, not the caliph's full religious authority.|Ибн ал-Асир, al-Kāmil fī al-tārīkh; Ибн Касир, al-Bidāya wa-l-Nihāya. Полигон халифтин жалпы диний беделин эмес, Ирактагы түз бийлигин көрсөтөт.
+74|Ibn al-Athir; Ibn Kathir: Ayyubid chronology.|Ибн ал-Асир; Ибн Касир: Айюбийлердин хронологиясы.
+75|Ibn al-Athir: Khwarazmshahs and the Mongol invasion. Yaqut: regional geography.|Ибн ал-Асир: Хорезмшахтар жана монгол чабуулу. Якут: аймактын географиясы.
+76|Crusaders founded the Latin Empire after taking Constantinople in 1204. It ended with the restoration of Roman rule in 1261.|Кресттүүлөр 1204-жылы Константинополду алып, Латын империясын түзгөн. Ал 1261-жылы Рим бийлиги калыбына келгенде жоюлган.
+77|Trebizond emerged in 1204 as an Eastern Roman successor and lasted until 1461.|Трапезунд 1204-жылы Чыгыш Римдин мураскери катары пайда болуп, 1461-жылга чейин жашаган.
+78|After 1204, Epirus was one of three principal Roman successor states, alongside Nicaea and Trebizond.|1204-жылдан кийин Эпир Никея жана Трапезунд менен бирге Римдин үч негизги мураскер мамлекетинин бири болгон.
+79|A major medieval Central European polity with complex boundaries unlike those of modern states.|Орто кылымдагы Борбордук Европанын ири мамлекети; анын татаал чек аралары азыркы мамлекеттердикине дал келген эмес.
+80|Capetian France: a major Western European kingdom in the tenth–thirteenth centuries.|Капетингдердин Франциясы: X–XIII кылымдардагы Батыш Европанын ири падышалыгы.
+81|The Delhi Sultanate emerged in 1206 and became a major Islamic state of South Asia.|Дели султанаты 1206-жылы түзүлүп, Түштүк Азиянын негизги ислам мамлекеттеринин бирине айланган.
+82|Western imperial rule in Rome and Ravenna ended in 476. This reference layer shows the late Roman inheritance; post-Roman kingdoms ruled here by 610.|Рим жана Равеннадагы батыш императордук бийлик 476-жылы аяктаган. Бул маалыматтык катмар кеч Рим мурасын көрсөтөт; 610-жылы бул жерде Римден кийинки падышалыктар болгон.
+83|The Lombards invaded Italy in 568–569. Charlemagne conquered their kingdom in 774.|Лангобарддар Италияга 568–569-жылдары кирген. Карл Улуу алардын падышалыгын 774-жылы басып алган.
+84|Charlemagne was crowned emperor in 800. The Treaty of Verdun divided the empire in 843.|Карл Улуу 800-жылы император болгон. 843-жылдагы Верден келишими империяны бөлгөн.
+85|West Francia emerged from the division of 843 and preceded medieval France.|Батыш Франкия 843-жылдагы бөлүнүүдөн келип чыгып, орто кылымдагы Франциянын башаты болгон.
+86|East Francia succeeded the Carolingian Empire in the east and developed into the political system of the Holy Roman Empire.|Чыгыш Франкия Каролинг империясынын чыгыштагы мураскери болуп, кийин Ыйык Рим империясынын саясий түзүлүшүнө негиз болгон.
+87|Ibn Khaldun: later synthesis of Maghrib and al-Andalus history; detailed boundaries require comparison with Andalusi chronicles.|Ибн Халдун: Магриб жана ал-Андалус тарыхынын кийинки жалпылоосу; так чек аралар үчүн андалус жылнаамалары менен салыштыруу керек.
+88|Ibn al-Athir; Ibn Kathir: political chronology. Ibn Khaldun: later comparative synthesis.|Ибн ал-Асир; Ибн Касир: саясий хронология. Ибн Халдун: кийинки салыштырма жалпылоо.
+89|Ibn al-Athir; Ibn Kathir: Buyids and their relations with the Abbasid caliphs.|Ибн ал-Асир; Ибн Касир: Буийлер жана алардын Аббасий халифтери менен мамилелери.
+90|Ibn al-Athir; tenth- and eleventh-century Islamic geographers for regional context.|Ибн ал-Асир; аймактык маалымат үчүн X–XI кылымдардагы ислам географтары.
+91|Ibn al-Athir, al-Kāmil: a governor of Mecca in 237 AH; conflict and a crisis of Abbasid control in 251 AH. The layer represents a political orbit with varying degrees of direct rule.|Ибн ал-Асир, al-Kāmil: 237 х. ж. Меккенин башкаруучусу; 251 х. ж. кагылышуу жана Аббасий көзөмөлүнүн кризиси. Катмар түз башкаруунун деңгээли ар башка болгон саясий чөйрөнү көрсөтөт.
+92|al-Fasi, Shifāʾ al-Gharām; chronicles of competition over the khutba. Ibn Kathir records Egyptian–Iraqi rivalry over Mecca's khutba in 341 AH. The layer represents allegiance, not direct Fatimid government.|ал-Фаси, Shifāʾ al-Gharām; хутба үчүн атаандаштык тууралуу жылнаамалар. Ибн Касир 341 х. ж. Меккенин хутбасы үчүн Египет менен Ирак тараптарынын атаандаштыгын баяндайт. Катмар түз Фатимий башкаруусун эмес, саясий багытты көрсөтөт.
+93|Taqi al-Din al-Fasi, Shifāʾ al-Gharām: Jaʿfar ibn Muhammad's rule in Mecca began in 356–358 AH. Later Meccan histories trace the sharifs; Ibn al-Athir calls Qatada emir of Mecca in the thirteenth century.|Таки ад-Дин ал-Фаси, Shifāʾ al-Gharām: Жафар ибн Мухаммаддын Меккедеги бийлиги 356–358 х. ж. башталган. Кийинки Мекке тарыхтары шарифтерди баяндайт; Ибн ал-Асир XIII кылымда Катаданы Меккенин эмири деп атайт.
+94|Ibn al-Athir, 601 AH: Salim ibn Qasim al-Husayni is named emir of Medina, separately from Qatada al-Hasani, emir of Mecca.|Ибн ал-Асир, 601 х. ж.: Салим ибн Касим ал-Хусайни Мединанын эмири, ал эми Катада ал-Хасани өзүнчө Меккенин эмири деп аталат.
+95|Xin Yuan Shi, 卷003: Jochi's northern expedition in 1207; the Kyrgyz rulers acknowledged Mongol authority and offered white gyrfalcons, white horses and black sables.|Xin Yuan Shi, 卷003: Жучунун 1207-жылдагы түндүк жортуулу; кыргыз башкаруучулары монгол бийлигин таанып, ак шумкарларды, ак аттарды жана кара булгундарды тартуулаган.
