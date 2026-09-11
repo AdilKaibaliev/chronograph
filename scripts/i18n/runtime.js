@@ -17,7 +17,7 @@ function localizePage(){
   observer.disconnect();
   pendingTranslations.clear();
   document.documentElement.lang=language;
-  document.title='CHRONOGRAPH 1.1 · '+({ru:'Исторический атлас',en:'Historical atlas',ky:'Тарыхый атлас'})[language];
+  document.title='CHRONOGRAPH 1.2 · '+({ru:'Исторический атлас',en:'Historical atlas',ky:'Тарыхый атлас'})[language];
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
   while(walker.nextNode()){
     const node=walker.currentNode,parent=node.parentElement;
@@ -46,6 +46,7 @@ function saveLocation(){
   url.searchParams.set('view',[mapState.scale,mapState.tx,mapState.ty].map(n=>n.toFixed(3)).join(','));
   const tab=document.querySelector('.side-tabs [aria-selected="true"]');
   if(tab)url.searchParams.set('tab',tab.id.replace('tab-',''));
+  if(futureLocationHook)futureLocationHook(url);
   try{history.replaceState(null,'',url);}catch{/* Local file browsers may restrict URL replacement. */}
 }
 let saveTimer;

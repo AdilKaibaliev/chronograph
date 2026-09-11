@@ -22,6 +22,7 @@ function createChronographTranslator(rows) {
       const m=value.match(/^Ближайшее предшествующее событие — (\d+) год: (.*?) Следующий рубеж — (\d+) год: «(.*?)»\. Ниже показаны государства и процессы, относящиеся к выбранному году\.$/);
       if(m)out=pick('Previous milestone — '+m[1]+' CE: '+translate(m[2],lang)+' Next milestone — '+m[3]+' CE: “'+translate(m[4],lang)+'”. The states and developments below relate to the selected year.','Мурунку маанилүү окуя — '+m[1]+'-жыл: '+translate(m[2],lang)+' Кийинки маанилүү окуя — '+m[3]+'-жыл: «'+translate(m[4],lang)+'». Төмөндө тандалган жылга тиешелүү мамлекеттер жана процесстер көрсөтүлгөн.');
     }
+    else if (/^≈\d+ г\. х\. · /.test(value)) {const at=value.indexOf(' · ');out=translate(value.slice(0,at),lang)+' · '+translate(value.slice(at+3),lang);}
     else if (/^≈\d+ г\. х\.$/.test(value)) out=value.replace('г. х.',pick('AH','х. ж.'));
     else if (/^\d+ год$/.test(value)) out=value.replace(' год',pick(' CE','-жыл'));
     else if (/^Исламская история · \d+ н\. э\.$/.test(value)) out=value.replace('Исламская история',dict.get('Исламская история')).replace('н. э.',pick('CE','б. з.'));
