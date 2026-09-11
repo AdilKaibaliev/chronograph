@@ -1,12 +1,24 @@
-CHRONOGRAPH 1.1 — 2026-09-10
-PASS: 1168 translation rows in English and Kyrgyz; exact Russian preservation.
-PASS: 690 years, 68 political layers, 57 people; 147361 generated-text checks, zero residual Russian fragments in English output.
-PASS: syntax of all inline JavaScript.
-PASS: original state/event/biography data and geometry unchanged.
-PASS: sources remain plain text, zero external source anchors.
-PASS: browser language switching preserves year and map transform.
-PASS: direct URL restores Kyrgyz language, year 1205, regions tab and map view.
-PASS: Compare, Sources, Methodology, biography and selected-state card translated.
-PASS: Play advances years and Pause stops; zero browser JavaScript errors.
-PASS: mobile 390 x 844: document 390 x 844, Play bottom 781.92.
-Scope: functional/localization checks; not an independent historical audit or native-speaker editorial certification.
+CHRONOGRAPH 1.2 — verification, 2026-09-10
+
+Build: PASS, standalone HTML, 1,148,613 bytes.
+Historical localization: PASS, 1,168 message pairs; Russian round trip; dynamic date and caption translation.
+Historical data preservation: PASS, original states, geometry, events and biographies unchanged.
+Historical text audit: PASS, 147,361 checks over 690 years, 68 political entities and 57 biographies; no remaining English audit failures.
+Future catalogue: PASS, 78 entries; 10 unique major signs; 68 distinct hadith references; 29 named places/regions, including explicitly unlocated entries; 3 partial sequences.
+Future data tests: PASS, valid IDs and references, all three languages, no invented Gregorian/Hijri dates, acyclic sequence graph, unknown sites have no coordinates, search and category filtering, syntax, plain-text sources.
+Regression: compound historical date/title (1299) fully translated on return from future mode.
+
+Browser verification on Vercel preview:
+- Future button opens same SVG map with separate event sidebar and persistent previous/play/next controls.
+- Named sites have markers; unlocated smoke has no marker.
+- 10-entry major-sign filter, whole 78-entry catalogue, source numbers and sequence steps verified.
+- Russian, English and Kyrgyz mode text verified.
+- Search by Ludd returns matching entry; nonexistent query returns empty state with disabled controls; clearing via keyboard restores entries.
+- Play advances a sequence; pause stops it.
+- Direct URL to mode=future, section=seq:isa, event=yajuj restores the correct event.
+- Return to historical atlas preserves 1299 and restores historical layers, Stars of Islam and controls.
+- Mobile 390x844: document scrollWidth=390, scrollHeight=844; map bottom=403.92, sidebar bottom=773.98, controls bottom=837. No page overflow.
+- Desktop and mobile screenshots visually inspected; markers are readable in the final mobile build.
+- Browser error logs: none during checked flows.
+
+Content scope: thematic first edition based on profile chapters and related hadiths. This is not a claim of exhaustive line-by-line scholarly review of both entire collections. See scripts/future/README.md for editorial decisions and limitations.
