@@ -23,8 +23,23 @@ rows.push(...JSON.parse(fs.readFileSync(root+'/supplement.json','utf8')));
 const auditBase=JSON.parse(fs.readFileSync(root+'/audit-base.json','utf8'));
 for(const [i,pair] of Object.entries(JSON.parse(fs.readFileSync(root+'/audit-translations.json','utf8'))))rows.push([auditBase[+i],...pair]);
 for(const row of rows)row[2]=row[2].replaceAll('Енисей','Энесай').replaceAll('енисей','энесай');
+const biographies=require('../biographies.cjs');
+const details=vm.runInNewContext(source.slice(source.indexOf('const STAR_DETAILS='),source.indexOf('const STAR_GROUP_HELP='))+';STAR_DETAILS');
+const stars=vm.runInNewContext(source.slice(source.indexOf('const ISLAM_STARS = ['),source.indexOf('const STAR_DETAILS='))+';ISLAM_STARS');
+for(const [name,article,ru,en,ky] of biographies){
+ assert(stars.some(p=>p.name===name),'Unknown biography '+name);
+ assert(ru&&en&&ky&&article,'Incomplete biography '+name);
+ const sourceText='TDV İslâm Ansiklopedisi, статья «'+article+'».';
+ details[name]={...details[name],text:ru,source:sourceText};
+ rows.push([ru,en,ky],[sourceText,'TDV İslâm Ansiklopedisi, article “'+article+'”.','TDV İslâm Ansiklopedisi, «'+article+'» макаласы.']);
+}
+for(const row of require('../biography-notes.cjs')){details[row[0]].note=row[1];rows.push(row.slice(1));}
+assert.equal(new Set(biographies.map(r=>r[0])).size,biographies.length,'Duplicate biography');
+assert.equal(Object.keys(details).length,stars.length);
+for(const p of stars)assert(details[p.name]?.text&&details[p.name]?.source,'Missing biography '+p.name);
 const {createChronographTranslator}=require('./core.js');createChronographTranslator(rows);
-let html=source.replaceAll('CHRONOGRAPH 1.0 RC3.8','CHRONOGRAPH 1.2');
+let html=source.replaceAll('CHRONOGRAPH 1.0 RC3.8','CHRONOGRAPH 1.3');
+html=html.slice(0,html.indexOf('const STAR_DETAILS='))+'const STAR_DETAILS='+JSON.stringify(details).replaceAll('<','\\u003c')+';\n'+html.slice(html.indexOf('const STAR_GROUP_HELP='));
 html=html.replace("$('compareWorld').textContent=(e.world||[]).map(w=>`${w[1]}: ${w[2]}`).join(' ')","$('compareWorld').innerHTML=(e.world||[]).map(w=>`<span>${w[1]}</span>: <span>${w[2]}</span>`).join(' ')");
 html=html.replace("getShiftText(y).replace(/<[^>]+>/g,'')","getShiftText(y)");
 html=html.replace('${frameCaption(emp,year)} Прямая власть, дань и политическое влияние показаны разными типами слоёв.','<span>${frameCaption(emp,year)}</span> <span>Прямая власть, дань и политическое влияние показаны разными типами слоёв.</span>');

@@ -332,6 +332,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,[
 .source-group .works{color:#cbb27b}.source-badge{cursor:default}
 
 #starsCard button.star-chip{font-family:inherit;color:inherit;text-align:left;cursor:pointer}#starsCard button.star-chip:hover{background:#3c382c}#starsCard button.star-chip:focus-visible{outline:2px solid #e2c17c;outline-offset:2px}.map-slice-note{font-size:9px!important;color:#d4c399!important}
+.biography-peers{display:flex;flex-wrap:wrap;gap:7px}.biography-peers .star-chip{font-size:12px;line-height:1.5;padding:8px 11px;text-align:left;white-space:normal}.modal-close{position:sticky;top:0;background:#211e18;border-radius:6px;min-width:36px;min-height:36px}.modal-box{overscroll-behavior:contain}.modal p{font-size:13px}.modal-close:focus-visible,.biography-peers button:focus-visible{outline:2px solid #dfbe79;outline-offset:2px}
 </style>
 </head>
 <body>
@@ -1634,23 +1635,23 @@ const ISLAM_STARS = [
   {name:'Абу Хурайра',birth:603,death:679,birthApprox:true,cat:'sahabi',group:'Сподвижники',era:'20 до хиджры – 59 г. х.'},
   {name:'Анас ибн Малик',birth:612,death:712,cat:'sahabi',group:'Сподвижники',era:'10 до хиджры – 93 г. х.'},
   {name:'Муавия ибн Абу Суфьян',birth:602,death:680,cat:'sahabi',group:'Сподвижники',era:'20 до хиджры – 60 г. х.'},
-  {name:'Саад ибн Абу Ваккас',birth:595,death:674,cat:'sahabi',group:'Сподвижники',era:'27 до хиджры – 55 г. х.'},
+  {name:'Саад ибн Абу Ваккас',birth:592,birthApprox:true,death:675,cat:'sahabi',group:'Сподвижники',era:'ок. 31 до хиджры – 55 г. х.'},
 
   // Tabi'un
   {name:'Саид ибн аль-Мусаййиб',birth:636,death:713,cat:'tabiun',group:'Табиины',era:'15–94 г. х.'},
   {name:'аль-Хасан аль-Басри',birth:642,death:728,cat:'tabiun',group:'Табиины',era:'21–110 г. х.'},
   {name:'Ибн Сирин',birth:653,death:729,cat:'tabiun',group:'Табиины',era:'33–110 г. х.'},
   {name:'Ата ибн Аби Рабах',birth:647,death:732,cat:'tabiun',group:'Табиины',era:'27–114 г. х.'},
-  {name:'Икрима, мауля Ибн Аббаса',birth:645,death:723,cat:'tabiun',group:'Табиины',era:'25–105 г. х.'},
-  {name:'Муджахид ибн Джабр',birth:645,death:722,cat:'tabiun',group:'Табиины',era:'25–104 г. х.'},
+  {name:'Икрима, мауля Ибн Аббаса',birth:642,birthApprox:true,death:723,cat:'tabiun',group:'Табиины',era:'ок. 21–105 г. х.'},
+  {name:'Муджахид ибн Джабр',birth:642,death:722,cat:'tabiun',group:'Табиины',era:'21–104 г. х.'},
   {name:'Катада ибн Диама',birth:680,death:735,cat:'tabiun',group:'Табиины',era:'60–117 г. х.'},
   {name:'Аз-Зухри',birth:671,death:742,cat:'tabiun',group:'Табиины',era:'51–124 г. х.'},
   {name:'Нафи, мауля Ибн Умара',birth:670,death:735,birthApprox:true,cat:'tabiun',group:'Табиины',era:'50–117 г. х.'},
-  {name:'Таус ибн Кайсан',birth:634,death:724,cat:'tabiun',group:'Табиины',era:'14–106 г. х.'},
+  {name:'Таус ибн Кайсан',birth:653,death:725,cat:'tabiun',group:'Табиины',era:'33–106 г. х.'},
 
   // Tabi' al-tabi'in
   {name:'Абу Ханифа',birth:699,death:767,cat:'scholar',group:'Ранние имамы и ученые',era:'80–150 г. х.'},
-  {name:'Малик ибн Анас',birth:711,death:795,cat:'tabi-tabiin',group:"Таба-таби'ины",era:'93–179 г. х.'},
+  {name:'Малик ибн Анас',birth:712,birthApprox:true,death:795,cat:'tabi-tabiin',group:"Таба-таби'ины",era:'ок. 93–179 г. х.'},
   {name:'Суфьян ас-Саури',birth:716,death:778,cat:'tabi-tabiin',group:"Таба-таби'ины",era:'97–161 г. х.'},
   {name:'аль-Аузаи',birth:707,death:774,cat:'tabi-tabiin',group:"Таба-таби'ины",era:'88–157 г. х.'},
   {name:'Лейс ибн Саад',birth:713,death:791,cat:'tabi-tabiin',group:"Таба-таби'ины",era:'94–175 г. х.'},
@@ -1664,14 +1665,14 @@ const ISLAM_STARS = [
   {name:'Муслим ибн аль-Хаджжадж',birth:821,death:875,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'206–261 г. х.'},
   {name:'Абу Дауд',birth:817,death:889,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'202–275 г. х.'},
   {name:'ат-Тирмизи',birth:824,death:892,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'209–279 г. х.'},
-  {name:'ан-Насаи',birth:829,death:915,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'214–303 г. х.'},
+  {name:'ан-Насаи',birth:830,death:915,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'215–303 г. х.'},
   {name:'ат-Табари',birth:839,death:923,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'224–310 г. х.'},
   {name:'ат-Тахави',birth:853,death:933,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'239–321 г. х.'},
   {name:'Ибн Абд аль-Барр',birth:978,death:1071,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'368–463 г. х.'},
   {name:'аль-Багави',birth:1041,death:1122,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'433–516 г. х.'},
   {name:'Абдуль-Кадир аль-Джиляни',birth:1077,death:1166,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'470–561 г. х.'},
   {name:'Ибн Асакир',birth:1105,death:1176,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'499–571 г. х.'},
-  {name:'ан-Навави',birth:1233,death:1277,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'631–676 г. х.'},
+  {name:'ан-Навави',birth:1234,death:1277,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'631–676 г. х.'},
   {name:'Ибн Таймия',birth:1263,death:1328,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'661–728 г. х.'},
   {name:'Ибн Кудама аль-Макдиси',birth:1147,death:1223,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'541–620 г. х.'},
   {name:'Ибн аль-Джаузи',birth:1116,death:1201,cat:'scholar',group:'Позднейшие ученые суннитской традиции',era:'510–597 г. х.'},
@@ -1700,8 +1701,11 @@ function starDates(p){return (p.birthUnknown?'?':(p.birthApprox?'ок. ':'')+p.b
 function openStar(p){
  stopPlay();
  const d=STAR_DETAILS[p.name];
- $('modalBody').innerHTML='<div class="kicker">Звезды Ислама · '+p.group+'</div><h2>'+p.name+'</h2><p>'+starDates(p)+'</p><p>'+(d?d.text:STAR_GROUP_HELP[p.group])+'</p>'+(d?'<p>'+d.note+'</p><p class="source-note">Источник: '+d.source+'</p>':'<p class="source-note">В этой версии доступна хронологическая справка; подробная биография ещё не добавлена.</p>')+'<h3>Современники в '+year+' году</h3><p>'+ISLAM_STARS.filter(q=>q!==p&&year>=(q.birth??q.knownBy)&&year<=q.death).map(q=>q.name).join(' · ')+'</p>';
- $('modal').classList.add('show');
+ const peers=ISLAM_STARS.filter(q=>q!==p&&year>=(q.birth??q.knownBy)&&year<=q.death);
+ $('modalBody').innerHTML='<div class="kicker">Звезды Ислама · '+p.group+'</div><h2>'+p.name+'</h2><p>'+starDates(p)+'</p><p>'+d.text+'</p>'+(d.note?'<p class="source-note">'+d.note+'</p>':'')+'<p class="source-note"><span>Источник:</span> <span>'+d.source+'</span></p>'+(peers.length?'<h3>Современники в '+year+' году</h3><div class="biography-peers">'+peers.map(q=>'<button type="button" class="star-chip" data-bio-index="'+ISLAM_STARS.indexOf(q)+'">'+q.name+'</button>').join('')+'</div>':'');
+ const box=$('modal').querySelector('.modal-box');if(box)box.scrollTop=0;
+ if($('modal').classList.contains('show'))$('modalClose').focus();
+ else $('modal').classList.add('show');
 }
 
 function starsByGroupForYear(y){
@@ -1744,6 +1748,7 @@ function renderStars(y){
 }
 
 
+$('modalBody').addEventListener('click',e=>{const b=e.target.closest('[data-bio-index]');if(b)openStar(ISLAM_STARS[Number(b.dataset.bioIndex)]);});
 $('starsContent').addEventListener('click',e=>{const b=e.target.closest('[data-star]');if(b)openStar(ISLAM_STARS[Number(b.dataset.star)]);});
 function renderLegend(active){
   const major=active.filter(e=>e.type!=='local'&&e.type!=='reference').sort((a,b)=>labelPriority(b,year)-labelPriority(a,year)).slice(0,18);

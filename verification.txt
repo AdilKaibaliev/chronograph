@@ -1,24 +1,18 @@
-CHRONOGRAPH 1.2 — verification, 2026-09-10
+CHRONOGRAPH 1.3 — 2026-09-12
 
-Build: PASS, standalone HTML, 1,148,613 bytes.
-Historical localization: PASS, 1,168 message pairs; Russian round trip; dynamic date and caption translation.
-Historical data preservation: PASS, original states, geometry, events and biographies unchanged.
-Historical text audit: PASS, 147,361 checks over 690 years, 68 political entities and 57 biographies; no remaining English audit failures.
-Future catalogue: PASS, 78 entries; 10 unique major signs; 68 distinct hadith references; 29 named places/regions, including explicitly unlocated entries; 3 partial sequences.
-Future data tests: PASS, valid IDs and references, all three languages, no invented Gregorian/Hijri dates, acyclic sequence graph, unknown sites have no coordinates, search and category filtering, syntax, plain-text sources.
-Regression: compound historical date/title (1299) fully translated on return from future mode.
+scripts/i18n/test.cjs
+PASS: 1281 message pairs, Russian preservation, calendar and dynamic labels, explicit Russian fallback.
+PASS: original historical states, geometry, events and person dates preserved from source; plain-text sources.
 
-Browser verification on Vercel preview:
-- Future button opens same SVG map with separate event sidebar and persistent previous/play/next controls.
-- Named sites have markers; unlocated smoke has no marker.
-- 10-entry major-sign filter, whole 78-entry catalogue, source numbers and sequence steps verified.
-- Russian, English and Kyrgyz mode text verified.
-- Search by Ludd returns matching entry; nonexistent query returns empty state with disabled controls; clearing via keyboard restores entries.
-- Play advances a sequence; pause stops it.
-- Direct URL to mode=future, section=seq:isa, event=yajuj restores the correct event.
-- Return to historical atlas preserves 1299 and restores historical layers, Stars of Islam and controls.
-- Mobile 390x844: document scrollWidth=390, scrollHeight=844; map bottom=403.92, sidebar bottom=773.98, controls bottom=837. No page overflow.
-- Desktop and mobile screenshots visually inspected; markers are readable in the final mobile build.
-- Browser error logs: none during checked flows.
+scripts/i18n/audit.cjs
+{"checks":147536,"years":690,"empires":68,"stars":57,"remaining":0}
 
-Content scope: thematic first edition based on profile chapters and related hadiths. This is not a claim of exhaustive line-by-line scholarly review of both entire collections. See scripts/future/README.md for editorial decisions and limitations.
+scripts/future/test.cjs
+{"events":78,"majorSigns":10,"references":68,"places":29,"sequences":3,"status":"PASS: schema, translations, sequence graph, filters, uncertain places, calendar preservation, syntax, sources"}
+
+scripts/biographies-test.cjs
+PASS: 57 individual biographies and plain-text sources in 3 languages; all contemporary buttons, dates, scroll reset and focus transitions.
+
+Browser verification: desktop 1280x720 and mobile 390x844; RU/EN/KY biography cards, contemporary navigation, Escape and focus restoration. Mobile page height 844, scroll height 844; width 390, scroll width 390; play control bottom 783. No application console errors observed.
+
+Editorial scope: 57 individual biographies. Source: TDV Islam Ansiklopedisi, named articles. This check does not certify every historical claim elsewhere in the atlas. Kyrgyz editorial review remains recommended.
