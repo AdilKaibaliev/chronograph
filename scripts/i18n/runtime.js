@@ -20,7 +20,10 @@ function localizePage(){
   observer.disconnect();
   pendingTranslations.clear();
   document.documentElement.lang=language;
-  document.title='CHRONOGRAPH 1.4.3 · '+({ru:'Исторический атлас',en:'Historical atlas',ky:'Тарыхый атлас'})[language];
+  const brand=({ru:['Хронограф','Исторический атлас'],en:['Chronograph','Historical Atlas'],ky:['Хронограф','Тарыхый атлас']})[language];
+  document.title=brand.join(' — ');
+  document.querySelector('.brand-title').textContent=brand[0];
+  document.querySelector('.brand-sub').textContent=brand[1];
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
   while(walker.nextNode()){
     const node=walker.currentNode,parent=node.parentElement;

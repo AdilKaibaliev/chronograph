@@ -337,6 +337,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,[
 .kyrgyz-route-label{font-size:7px!important}#kyrgyzEraFacts{display:block}#kyrgyzEraFacts details{margin-top:10px}#kyrgyzEraFacts .history-toggle{font-size:12px}
 #mongolScope{position:absolute;left:14px;bottom:63px;max-width:340px;padding:8px 10px;background:rgba(33,29,22,.92);color:#ebdfc8;border-radius:10px;font:10px/1.4 system-ui;z-index:5}#mongolScope[hidden]{display:none}#mongolScope button{display:block;margin-top:5px;background:#5b4930;color:#fff1d8;border:1px solid #a68b57;border-radius:6px;padding:5px 9px;cursor:pointer;font:inherit}.unified-mongol{stroke:none!important}.mongol-dependencies{stroke:none}.kyrgyz-core{stroke:none}body.future-mode #mongolScope{display:none!important}@media(max-width:700px){#mongolScope{max-width:235px;font-size:9px;bottom:48px;padding:5px 8px}}
 #worldMap.city-mode .empire-label.realm-label{display:block!important}.kyrgyz-extent-note{display:block;margin-top:9px}
+/* The localized atlas subtitle remains visible in compact headers. */
+.brand .brand-sub{display:block;font-size:10px;letter-spacing:.04em}
+@media(max-width:700px){.brand .brand-sub{font-size:9px;margin-top:1px}}
 </style>
 </head>
 <body>
@@ -344,7 +347,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,[
   <header class="topbar">
     <div class="brand">
       <div class="monogram">ح</div>
-      <div><div class="brand-title">Хронография</div><div class="brand-sub">Исламская история · мировой контекст · интерактивный атлас 610–1299</div></div>
+      <div><div class="brand-title" data-locale-owned>Хронограф</div><div class="brand-sub" data-locale-owned>Исторический атлас</div></div>
     </div>
     <div class="top-actions">
       <button class="btn active" id="atlasBtn">Атлас</button>

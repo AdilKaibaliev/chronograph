@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CHRONOGRAPH 1.4.3 · Historical atlas</title>
+<title>Chronograph — Historical Atlas</title>
 <style>
 :root{
   --ink:#1c1a16;
@@ -337,6 +337,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,[
 .kyrgyz-route-label{font-size:7px!important}#kyrgyzEraFacts{display:block}#kyrgyzEraFacts details{margin-top:10px}#kyrgyzEraFacts .history-toggle{font-size:12px}
 #mongolScope{position:absolute;left:14px;bottom:63px;max-width:340px;padding:8px 10px;background:rgba(33,29,22,.92);color:#ebdfc8;border-radius:10px;font:10px/1.4 system-ui;z-index:5}#mongolScope[hidden]{display:none}#mongolScope button{display:block;margin-top:5px;background:#5b4930;color:#fff1d8;border:1px solid #a68b57;border-radius:6px;padding:5px 9px;cursor:pointer;font:inherit}.unified-mongol{stroke:none!important}.mongol-dependencies{stroke:none}.kyrgyz-core{stroke:none}body.future-mode #mongolScope{display:none!important}@media(max-width:700px){#mongolScope{max-width:235px;font-size:9px;bottom:48px;padding:5px 8px}}
 #worldMap.city-mode .empire-label.realm-label{display:block!important}.kyrgyz-extent-note{display:block;margin-top:9px}
+/* The localized atlas subtitle remains visible in compact headers. */
+.brand .brand-sub{display:block;font-size:10px;letter-spacing:.04em}
+@media(max-width:700px){.brand .brand-sub{font-size:9px;margin-top:1px}}
 
 #languageSelect{font:inherit;color:#eadbc1;background:#252218;border:1px solid #675b40;border-radius:8px;max-width:112px;padding:6px}#languageSelect:focus-visible{outline:2px solid #dfbe79}#translationNotice{flex:none;margin:0;padding:5px 12px;font-size:10px;line-height:1.3;color:#e3c994;background:#302a1e}html[lang=en] .brand-sub,html[lang=ky] .brand-sub{font-size:9px}@media(max-width:700px){.top-actions{gap:3px}#languageSelect{max-width:87px;padding:4px;font-size:10px}.top-actions .btn{font-size:9px;padding:5px 7px}#translationNotice{font-size:9px;padding:3px 10px}}
 #futureBtn{display:inline-flex!important;align-items:center;border-color:#9e8552;color:#f6dfaa;white-space:nowrap}#futureBtn[aria-pressed=true]{background:#665332;color:#fff4d8}
@@ -372,7 +375,7 @@ body.future-mode #countryLayer{display:block!important;pointer-events:none;opaci
   <header class="topbar">
     <div class="brand">
       <div class="monogram">ح</div>
-      <div><div class="brand-title">Хронография</div><div class="brand-sub">Исламская история · мировой контекст · интерактивный атлас 610–1299</div></div>
+      <div><div class="brand-title" data-locale-owned>Хронограф</div><div class="brand-sub" data-locale-owned>Исторический атлас</div></div>
     </div>
     <div class="top-actions"><select id="languageSelect" aria-label="Язык сайта"><option value="en" lang="en" selected>English</option><option value="ru" lang="ru">Русский</option><option value="ky" lang="ky">Кыргызча</option></select>
       <button class="btn active" id="atlasBtn">Атлас</button>
@@ -15326,7 +15329,10 @@ function localizePage(){
   observer.disconnect();
   pendingTranslations.clear();
   document.documentElement.lang=language;
-  document.title='CHRONOGRAPH 1.4.3 · '+({ru:'Исторический атлас',en:'Historical atlas',ky:'Тарыхый атлас'})[language];
+  const brand=({ru:['Хронограф','Исторический атлас'],en:['Chronograph','Historical Atlas'],ky:['Хронограф','Тарыхый атлас']})[language];
+  document.title=brand.join(' — ');
+  document.querySelector('.brand-title').textContent=brand[0];
+  document.querySelector('.brand-sub').textContent=brand[1];
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
   while(walker.nextNode()){
     const node=walker.currentNode,parent=node.parentElement;
