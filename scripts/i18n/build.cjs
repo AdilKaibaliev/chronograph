@@ -40,8 +40,8 @@ for(const p of stars)assert(details[p.name]?.text&&details[p.name]?.source,'Miss
 rows.push(...require('../support/messages.json'));
 rows.push(...require('./history-messages.json')); 
 const {createChronographTranslator}=require('./core.js');createChronographTranslator(rows);
-let html=source.replaceAll('CHRONOGRAPH 1.0 RC3.8','CHRONOGRAPH 1.4.2');
-html=html.replace('<html lang="ru">','<html lang="en">').replace(/<title>.*?<\/title>/,'<title>CHRONOGRAPH 1.4.2 · Historical atlas</title>');
+let html=source.replaceAll('CHRONOGRAPH 1.0 RC3.8','CHRONOGRAPH 1.4.3');
+html=html.replace('<html lang="ru">','<html lang="en">').replace(/<title>.*?<\/title>/,'<title>CHRONOGRAPH 1.4.3 · Historical atlas</title>');
 html=html.slice(0,html.indexOf('const STAR_DETAILS='))+'const STAR_DETAILS='+JSON.stringify(details).replaceAll('<','\\u003c')+';\n'+html.slice(html.indexOf('const STAR_GROUP_HELP='));
 html=html.replace("$('compareWorld').textContent=(e.world||[]).map(w=>`${w[1]}: ${w[2]}`).join(' ')","$('compareWorld').innerHTML=(e.world||[]).map(w=>`<span>${w[1]}</span>: <span>${w[2]}</span>`).join(' ')");
 html=html.replace("getShiftText(y).replace(/<[^>]+>/g,'')","getShiftText(y)");

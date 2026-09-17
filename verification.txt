@@ -1,4 +1,4 @@
-CHRONOGRAPH 1.4.2 — 2026-09-17
+CHRONOGRAPH 1.4.3 — 2026-09-17
 Editorial release. Era heading at 1235: «Эпоха: Евразия во время монгольского расширения».
 Removed empty-map rhetoric and editorial instructions from state cards, era summaries and methodology; preserved historical uncertainty and source notes.
 PASS: all historical geometry and dates byte-identical as data to 1.4.1.

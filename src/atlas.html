@@ -2821,9 +2821,9 @@ const EMPIRES = [
    92,
    55
   ],
-  "source": "Xin Tang shu (新唐書), juan 217b; Tang huiyao (唐會要), juan 100; Hudud al-Alam (982).",
+  "source": "Xin Tang shu (新唐書), juan 217b; Tang huiyao (唐會要), juan 100; Hudud al-Alam (982); Nikolay N. Kradin, Kyrgyz Khaganate, The Encyclopedia of Empire (2016).",
   "sourceUrl": "https://lishisuo.cssn.cn/xsyj/gdzwgxs/202011/t20201106_5212431.shtml",
-  "body": "Здесь различаются политический статус и расселение кыргызов. Контакты с Тан, зависимость от Уйгурского каганата и самостоятельная кыргызская власть относятся к разным этапам. После IX века этнографическая область не изображается самостоятельным государством.",
+  "body": "После утраты господства в Монголии кыргызы сохраняли свои земли в Саяно-Енисейском регионе. В X веке ставка кагана находилась в Туве; в XI–XII веках власть стала более раздробленной. В 1207 году кыргызы подчинились монголам. Пунктир обозначает приблизительную область расселения, а не точные государственные границы.",
   "territories": "Основной исторический регион: Верхний Енисей, Минусинская котловина, Тува и Саяны. После 840 года влияние временно расширяется в Монголию и степные районы, но территория современного Кыргызстана не должна автоматически окрашиваться как «кыргызская» в этот период.",
   "focus": [
    92,
@@ -3039,6 +3039,7 @@ const EMPIRES = [
      ]
     ],
     "hidden": false,
+    "alwaysVisible": true,
     "type": "population",
     "short": "Кыргызы · Саяно-Енисейский регион"
    }
@@ -13784,6 +13785,7 @@ const EMPIRES = [
  },
  {
   "id": "kyrgyzMongol",
+  "alwaysVisible": true,
   "name": "Енисейские кыргызы под монгольской верховной властью",
   "short": "Кыргызское население",
   "type": "population",
@@ -14630,8 +14632,8 @@ function renderEmpires(y){
   const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','empire-group');
   const lg=document.createElementNS('http://www.w3.org/2000/svg','g');lg.setAttribute('class','empire-group');
   const active=[];
-  displayEmpiresForYear(y).forEach(emp=>{
-    const f=emp;if(emp.type==='population'&&!showKyrgyzContext)return;active.push(emp);
+  displayEmpiresForYear(y).slice().sort((a,b)=>Number(a.type==='population')-Number(b.type==='population')).forEach(emp=>{
+    const f=emp;if(emp.type==='population'&&!emp.alwaysVisible&&!showKyrgyzContext)return;active.push(emp);
     const p=document.createElementNS('http://www.w3.org/2000/svg','path');const ref=emp.type==='reference',influence=emp.type==='influence';
     p.setAttribute('d',polygonPath(f.polys));p.setAttribute('fill',emp.color);p.setAttribute('fill-opacity',(emp.type==='population'?0:ref?Math.min(.10,overlayOpacity*.30):influence?Math.min(.17,overlayOpacity*.45):overlayOpacity).toFixed(2));p.setAttribute('stroke',emp.color);p.setAttribute('stroke-opacity',ref?'.50':'.94');
     p.setAttribute('class',`empire-path ${emp.type==='local'?'local':''}${emp.type==='fuzzy'||ref?' fuzzy':''}${influence?' influence':''}${selectedEmpire===emp.id?' selected':''}`);if(ref||emp.type==='population')p.setAttribute('stroke-dasharray','5 5');p.dataset.empire=emp.id;
@@ -14650,7 +14652,7 @@ function renderEmpires(y){
     if(!emp.label)return;const pr=labelPriority(emp,y);if(pr<minP&&emp.type!=='reference')return;
     const [bx,by]=project(emp.label),off=FIXED_LABEL_OFFSETS[emp.id]||[0,0],x=bx+off[0],yy=by+off[1],fs=emp.type==='empire'?13.4:10.8,box=estimateLabelBox(emp.short,x,yy,fs);
     if(occupied.some(o=>rectsOverlap(box,o,3)))return; // hide lower-priority label; never move it
-    const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',x);t.setAttribute('y',yy);t.setAttribute('text-anchor','middle');t.setAttribute('class',`empire-label${emp.type!=='empire'?' small':''}${emp.type==='reference'?' reference':''}`);t.textContent=emp.short;if(['mongolRealm','kyrgyzKhaganate'].includes(emp.id))t.classList.add('realm-label');lg.appendChild(t);occupied.push(box)
+    const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',x);t.setAttribute('y',yy);t.setAttribute('text-anchor','middle');t.setAttribute('class',`empire-label${emp.type!=='empire'?' small':''}${emp.type==='reference'?' reference':''}`);t.textContent=emp.short;if(['mongolRealm','kyrgyzKhaganate','yeniseiKyrgyz','kyrgyzMongol'].includes(emp.id))t.classList.add('realm-label');lg.appendChild(t);occupied.push(box)
   });
   empireLayer.appendChild(g);empireLabelLayer.appendChild(lg);renderLegend(active)
 }
@@ -15000,7 +15002,7 @@ function layerConfidence(emp){
 }
 function frameCaption(emp,y){
   const f=frameFor(emp,y);
-  if(!f||f.hidden||(f.type==='population'||emp.type==='population')&&!showKyrgyzContext)return 'Для выбранного года контур не показан.';
+  if(!f||f.hidden||(f.type==='population'||emp.type==='population')&&!(f.alwaysVisible||emp.alwaysVisible)&&!showKyrgyzContext)return 'Для выбранного года контур не показан.';
   return f.year===y ? 'Контур: исторический срез '+f.year+' года.' : 'Контур: последний доступный срез '+f.year+' года; выбран '+y+' год. Изменения между срезами не восстановлены.';
 }
 
