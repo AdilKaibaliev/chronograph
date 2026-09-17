@@ -1,18 +1,18 @@
-CHRONOGRAPH 1.3 — 2026-09-12
+CHRONOGRAPH 1.3.1 — 2026-09-17
 
-scripts/i18n/test.cjs
-PASS: 1281 message pairs, Russian preservation, calendar and dynamic labels, explicit Russian fallback.
-PASS: original historical states, geometry, events and person dates preserved from source; plain-text sources.
+PASS: 1285 message pairs and plain-text historical sources.
+PASS: dynamic historical text audit: 147536 checks, 690 years, 68 political layers, 57 biographies, zero untranslated English strings.
+PASS: 57 biographies, contemporary navigation, dates, focus transitions.
+PASS: future catalogue: 78 events, 10 major signs, 68 references, 29 places, 3 partial sequences.
+PASS: support integration: English first visit, explicit URL priority, saved language, unavailable storage, future-mode language mapping, RU/EN/KY support copy, both timelines paused on support opening.
 
-scripts/i18n/audit.cjs
-{"checks":147536,"years":690,"empires":68,"stars":57,"remaining":0}
+Browser verification on the final preview:
+- Initial page in English, including Future events and Support the project.
+- Support dialog content and accessible name in EN/RU/KY.
+- Escape closes the dialog and restores focus to Support the project.
+- Kyrgyz manual choice persists after reopening the bare address; an explicit Russian URL overrides it.
+- Mobile 390x844: scroll width 390, scroll height 844; play control bottom 780.5.
+- Future-mode playback stops when support opens; closing it retains the paused state.
+- No application console errors observed. Temporary mobile viewport reset.
 
-scripts/future/test.cjs
-{"events":78,"majorSigns":10,"references":68,"places":29,"sequences":3,"status":"PASS: schema, translations, sequence graph, filters, uncertain places, calendar preservation, syntax, sources"}
-
-scripts/biographies-test.cjs
-PASS: 57 individual biographies and plain-text sources in 3 languages; all contemporary buttons, dates, scroll reset and focus transitions.
-
-Browser verification: desktop 1280x720 and mobile 390x844; RU/EN/KY biography cards, contemporary navigation, Escape and focus restoration. Mobile page height 844, scroll height 844; width 390, scroll width 390; play control bottom 783. No application console errors observed.
-
-Editorial scope: 57 individual biographies. Source: TDV Islam Ansiklopedisi, named articles. This check does not certify every historical claim elsewhere in the atlas. Kyrgyz editorial review remains recommended.
+Payments are not configured: owner has not chosen a recipient or payment method. The dialog states this explicitly and contains no payment destination or payment form. No bank account or payment service was registered or connected.

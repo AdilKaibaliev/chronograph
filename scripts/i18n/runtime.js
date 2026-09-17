@@ -2,7 +2,10 @@
 const translate=createChronographTranslator(CHRONOGRAPH_MESSAGES);
 const supportedLanguages=['ru','en','ky'];
 const stateParams=new URLSearchParams(location.search);
-let language=supportedLanguages.includes(stateParams.get('lang'))?stateParams.get('lang'):'ru';
+const languageStorageKey='chronograph.language';
+let savedLanguage=null;
+try{savedLanguage=localStorage.getItem(languageStorageKey);}catch{/* Storage may be unavailable in private browsing. */}
+let language=supportedLanguages.includes(stateParams.get('lang'))?stateParams.get('lang'):(supportedLanguages.includes(savedLanguage)?savedLanguage:'en');
 const originalText=new WeakMap(),originalAttributes=new WeakMap();
 const localeSelect=$('languageSelect');
 localeSelect.value=language;
@@ -17,7 +20,7 @@ function localizePage(){
   observer.disconnect();
   pendingTranslations.clear();
   document.documentElement.lang=language;
-  document.title='CHRONOGRAPH 1.3 · '+({ru:'Исторический атлас',en:'Historical atlas',ky:'Тарыхый атлас'})[language];
+  document.title='CHRONOGRAPH 1.3.1 · '+({ru:'Исторический атлас',en:'Historical atlas',ky:'Тарыхый атлас'})[language];
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
   while(walker.nextNode()){
     const node=walker.currentNode,parent=node.parentElement;
@@ -52,7 +55,8 @@ function saveLocation(){
 let saveTimer;
 function queueLocationSave(){clearTimeout(saveTimer);saveTimer=setTimeout(saveLocation,850);}
 localeSelect.addEventListener('change',()=>{
-  language=supportedLanguages.includes(localeSelect.value)?localeSelect.value:'ru';
+  language=supportedLanguages.includes(localeSelect.value)?localeSelect.value:'en';
+  try{localStorage.setItem(languageStorageKey,language);}catch{/* The current page still changes language without storage. */}
   localizePage();saveLocation();
 });
 // Restore only validated display state from a shared address.
