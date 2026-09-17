@@ -1,26 +1,242 @@
 {
- "earlyIslam":["Medinan community / early Muslim state","Медина коомчулугу / алгачкы мусулман мамлекети","Early Muslim community","Алгачкы мусулман коомчулугу","After the Hijra, Medina became the political centre of the Muslim community. Its influence spread rapidly across Arabia in 622–632.","Хижрадан кийин Медина мусулман коомчулугунун саясий борборуна айланган. 622–632-жылдары анын таасири Арабстанга тез тараган.","Modern reference: mainly Saudi Arabia; by 632, political influence covered most of the Arabian Peninsula.","Азыркы география боюнча: негизинен Сауд Арабиясы; 632-жылга карата саясий таасири Арабстан жарым аралынын көп бөлүгүн камтыган."],
- "byzantine":["Roman Empire (al-Rum)","Рим империясы (ар-Рум)","al-Rum","ар-Рум","Under Heraclius, al-Rum fought a devastating war with the Sasanians. It lost the Levant and Egypt in the 610s and early 620s, recovering much of its eastern provinces in 628–629.","Ираклийдин тушунда ар-Рум Сасаниддер менен оор согуш жүргүзгөн. 610-жылдарда жана 620-жылдардын башында Левант менен Египеттен ажырап, 628–629-жылдары чыгыштагы провинцияларынын көбүн кайтарган.","Approximate, changing extent: parts of present-day Turkey, Greece, the Balkans, Cyprus, Syria, Lebanon, Israel/Palestinian territories, Egypt, Libya and Tunisia.","Өзгөрүп турган болжолдуу аймагы: азыркы Түркиянын, Грекиянын, Балкандын, Кипрдин, Сириянын, Ливандын, Израилдин/Палестина аймактарынын, Египеттин, Ливиянын жана Тунистин бөлүктөрү."],
- "sasanian":["Sasanian Persia (al-Furs)","Сасаниддердин Персиясы (аль-Фурс)","al-Furs","аль-Фурс","Under Khusraw II, Sasanian Persia expanded greatly against al-Rum, capturing Jerusalem and later Egypt. A severe dynastic crisis followed after 628.","Хосров IIнин тушунда Сасаниддердин Персиясы ар-Румга каршы согушта кеңейип, Иерусалимди жана кийин Египетти алган. 628-жылдан кийин оор династиялык кризис башталган.","Modern reference: Iran, Iraq and parts of the Caucasus, Turkey, Syria and Central Asia; at its military peak, also the Levant and Egypt.","Азыркы география боюнча: Иран, Ирак, Кавказдын, Түркиянын, Сириянын жана Борбордук Азиянын бөлүктөрү; аскердик көзөмөлү эң кеңейгенде Левант менен Египет да кирген."],
- "westernTurkic":["Western Turkic Khaganate","Батыш Түрк каганаты","Western Turks","Батыш түрктөр","After the Turkic state's division, its western branch dominated much of Central Asia. The On Oq, or Ten Arrows, included tribal wings and autonomous cities. This layer represents political hegemony, not a uniform ethnic territory. Suyab in the Chuy Valley was a major centre under Tong Yabghu Qaghan (618–630).","Түрк мамлекети бөлүнгөндөн кийин батыш бутагы Борбордук Азиянын көп бөлүгүндө үстөмдүк кылган. Он Ок бирикмесине уруулук канаттар жана автономиялуу шаарлар кирген. Катмар бир тектүү этностук аймакты эмес, саясий үстөмдүктү көрсөтөт. Тон-ябгу кагандын тушунда (618–630) Чүйдөгү Суяб негизги борборлордун бири болгон.","Modern reference: large parts of Kyrgyzstan and Kazakhstan and parts of Uzbekistan, Tajikistan, Turkmenistan and Xinjiang. Rule over urban regions could be indirect.","Азыркы география боюнча: Кыргызстан менен Казакстандын чоң бөлүктөрү, Өзбекстандын, Тажикстандын, Түркмөнстандын жана Шинжаңдын бөлүктөрү. Шаардык аймактар кыйыр башкарылышы мүмкүн болгон."],
- "easternTurkic":["Eastern Turkic Khaganate","Чыгыш Түрк каганаты","Eastern Turks","Чыгыш түрктөр","The Eastern Turkic Khaganate dominated Mongolia and the steppes north of China until its defeat by Tang in 630, when this layer ends.","Чыгыш Түрк каганаты 630-жылы Тан тарабынан талкаланганга чейин Монголияда жана Кытайдын түндүгүндөгү талааларда үстөмдүк кылган. Катмар ошол жылы аяктайт.","Modern reference: mainly Mongolia, southern Siberia and China's northern borderlands.","Азыркы география боюнча: негизинен Монголия, Түштүк Сибирь жана Кытайдын түндүк чек ара аймактары."],
- "yeniseiKyrgyz":["Yenisei Kyrgyz","Энесай кыргыздары","Yenisei Kyrgyz","Энесай кыргыздары","Chinese chronicles call the Kyrgyz 黠戛斯 (Xiajiasi) and place their homeland on the Upper Yenisei. In 840 they defeated the Uyghur Khaganate and temporarily became a leading power in Mongolia. Islamic geography of the tenth to twelfth centuries continues to describe their country after this influence declined. Their core remained on the Upper Yenisei, in the Minusinsk Basin, Tuva and the Sayan Mountains; this does not imply continuous control of the Tian Shan.","Кытай жылнаамалары кыргыздарды 黠戛斯 (Сяцзясы) деп атап, алардын жерин Жогорку Энесайда көрсөтөт. 840-жылы кыргыздар Уйгур каганатын талкалап, Монголияда убактылуу негизги күчкө айланган. Таасири азайгандан кийин да X–XII кылымдардагы ислам географиясы алардын өлкөсүн сүрөттөйт. Негизги аймак Жогорку Энесай, Миң-Суу ойдуңу, Тува жана Саян бойдон калган; бул Теңир-Тоону үзгүлтүксүз көзөмөлдөө дегенди билдирбейт.","Core region: Upper Yenisei, Minusinsk Basin, Tuva and the Sayan Mountains. Influence temporarily extended into Mongolia after 840; present-day Kyrgyzstan should not automatically be included.","Негизги аймак: Жогорку Энесай, Миң-Суу ойдуңу, Тува жана Саян. 840-жылдан кийин таасири Монголияга убактылуу кеңейген; азыркы Кыргызстандын аймагын ага автоматтык кошууга болбойт."],
- "sogd":["Al-Sughd — Sogdian cities and principalities","Ас-Сугд — согду шаарлары жана ээликтери","al-Sughd","ас-Сугд","Sogd was a network of prosperous cities and trading centres, including Samarkand and Bukhara, rather than a single centralised empire. These often depended on or allied with Western Turkic rulers.","Согду бирдиктүү борборлошкон империя эмес, Самарканд, Бухара сыяктуу бай шаарлардын жана соода борборлорунун тармагы болгон. Алар көбүнчө Батыш Түрк башкаруучуларына көз каранды же союздаш болгон.","Modern reference: mainly Uzbekistan and Tajikistan, with neighbouring parts of Central Asia.","Азыркы география боюнча: негизинен Өзбекстан, Тажикстан жана Борбордук Азиянын коңшу аймактары."],
- "ferghana":["Farghana — local principalities","Фаргана — жергиликтүү ээликтер","Farghana","Фаргана","Seventh-century Ferghana had local political centres interacting with the Western Turkic Khaganate and Sogd; it was not an undifferentiated part of a Turkic world.","VII кылымдагы Ферганада Батыш Түрк каганаты жана Согду менен байланышкан жергиликтүү саясий борборлор болгон. Аны түрк дүйнөсүнүн айырмасыз бөлүгү катары кароого болбойт.","Modern reference: eastern Uzbekistan, southern Kyrgyzstan and northern Tajikistan.","Азыркы география боюнча: Чыгыш Өзбекстан, Түштүк Кыргызстан жана Түндүк Тажикстан."],
- "suyabZone":["Suyab and the Upper Chuy Valley","Суяб жана Жогорку Чүй өрөөнү","Suyab / Chuy","Суяб / Чүй","Suyab (Ak-Beshim) lies in the Chuy Valley of present-day Kyrgyzstan. UNESCO describes the Upper Chuy Valley as a major political, economic and military centre under the Western Turks and later the Turgesh.","Суяб (Ак-Бешим) азыркы Кыргызстандын Чүй өрөөнүндө жайгашкан. ЮНЕСКО Жогорку Чүй өрөөнүн Батыш түрктөрдүн жана кийинки Түргөштөрдүн тушундагы ири саясий, экономикалык жана аскердик борбор катары сүрөттөйт.","Modern reference: northern Kyrgyzstan, especially the Chuy Valley east of Bishkek; a local centre within the wider Western Turkic system.","Азыркы география боюнча: Түндүк Кыргызстан, өзгөчө Бишкектин чыгышындагы Чүй өрөөнү; кеңири Батыш Түрк түзүлүшүнүн ичиндеги жергиликтүү борбор."],
- "chach":["Al-Shash (Chach) — Tashkent principality","Аш-Шаш (Чач) — Ташкент ээлиги","al-Shash","аш-Шаш","Chach lay around present-day Tashkent. Western Turkic supremacy was established after 606, while local dynastic and administrative autonomy continued. Imperial supremacy did not mean identical direct rule in every region.","Чач азыркы Ташкенттин айланасында жайгашкан. 606-жылдан кийинки окуялардан соң Батыш Түрк үстөмдүгү орноп, жергиликтүү династиялык жана башкаруу автономиясы сакталган. Империялык үстөмдүк бардык аймакта бирдей түз башкаруу болгонун билдирбейт.","Modern reference: Tashkent and the Chirchiq Valley in Uzbekistan, near Kazakhstan and Kyrgyzstan.","Азыркы география боюнча: Өзбекстандагы Ташкент жана Чырчык өрөөнү, Казакстан менен Кыргызстанга жакын аймак."],
- "tokharistan":["Tokharistan","Тохаристан","Tokharistan","Тохаристан","Tokharistan was a distinct historical region around Balkh and the Upper Amu Darya, with local dynasties, Buddhist centres and changing relations with Turkic and Iranian powers.","Тохаристан Балхтын жана Жогорку Аму-Дарыянын айланасындагы өзүнчө тарыхый аймак болгон. Анда жергиликтүү династиялар, буддалык борборлор жана түрк-иран державалары менен өзгөрмөлүү байланыштар болгон.","Modern reference: northern Afghanistan, southern Uzbekistan and Tajikistan.","Азыркы география боюнча: Түндүк Ооганстан, Түштүк Өзбекстан жана Тажикстан."],
- "khwarezm":["Khwarazm","Хорезм","Khwarazm","Хорезм","Khwarazm retained its own political tradition on the lower Amu Darya, within a Central Asian mosaic of khaganate supremacy, city-states and regional kingdoms.","Төмөнкү Аму-Дарыядагы Хорезм өзүнүн саясий салтын сактаган. Ал Борбордук Азиядагы кагандык үстөмдүк, шаар-мамлекеттер жана аймактык падышалыктар аралашкан түзүлүштүн бир бөлүгү болгон.","Modern reference: western Uzbekistan and northern Turkmenistan around the lower Amu Darya.","Азыркы география боюнча: Төмөнкү Аму-Дарыянын айланасындагы Батыш Өзбекстан жана Түндүк Түркмөнстан."],
- "tang":["Al-Sin — Tang Empire","Ас-Син — Тан империясы","al-Sin / Tang","ас-Син / Тан","The Tang dynasty lasted from 618 to 907. Its fall was followed by the Five Dynasties and Ten Kingdoms, alongside the rise of Khitan Liao and, from 960, Song.","Тан династиясы 618–907-жылдары жашаган. Анын кулашынан кийин Беш династия жана Он падышалык мезгили башталып, кидандардын Ляосу, ал эми 960-жылдан Сун күч алган.","Modern reference: much of eastern and central China, with political influence in the northern steppes after 630.","Азыркы география боюнча: Чыгыш жана Борбордук Кытайдын көп бөлүгү; 630-жылдан кийин түндүк талааларда да саясий таасир болгон."],
- "aksum":["Al-Habasha (Aksum)","Аль-Хабаша (Аксум)","al-Habasha","аль-Хабаша","Aksum remained an important Christian power in the Red Sea region. Its connection with Abyssinia and the Muslims' first migration makes it significant in early Islamic history.","Аксум Кызыл деңиз аймагындагы маанилүү христиан державасы болгон. Хабаша менен байланыштар жана мусулмандардын алгачкы көчү анын исламдын баштапкы тарыхындагы маанисин аныктайт.","Modern reference: mainly Ethiopia and Eritrea.","Азыркы география боюнча: негизинен Эфиопия жана Эритрея."],
- "harsha":["Harsha's realm","Харша мамлекети","Harsha","Харша","Harsha (606–647) formed a major state in the Ganges Valley and neighbouring parts of northern India.","Харша (606–647) Ганг өрөөнүндө жана Түндүк Индиянын коңшу аймактарында ири мамлекет түзгөн.","Modern reference: parts of northern India and neighbouring regions.","Азыркы география боюнча: Түндүк Индиянын бөлүктөрү жана коңшу аймактар."],
- "franks":["Frankish kingdom / kingdoms","Франк падышалыгы / падышалыктары","Franks","Франктар","Western Europe was divided among post-Roman kingdoms. Frankish lands covered much of Gaul.","Батыш Европа Римден кийинки падышалыктарга бөлүнгөн. Франктар Галлиянын көп бөлүгүн ээлеген.","Modern reference: France, Belgium, Luxembourg, western Germany and neighbouring regions.","Азыркы география боюнча: Франция, Бельгия, Люксембург, Батыш Германия жана коңшу аймактар."],
- "visigoths":["Visigothic Kingdom","Вестгот падышалыгы","Visigoths","Вестготтор","The Visigothic Kingdom controlled almost the whole Iberian Peninsula until the early eighth century.","Вестгот падышалыгы VIII кылымдын башына чейин Пиреней жарым аралынын дээрлик баарын көзөмөлдөгөн.","Modern reference: mainly Spain and Portugal.","Азыркы география боюнча: негизинен Испания жана Португалия."],
- "rashidun":["Rashidun Caliphate","Туура жолдогу халифтердин мамлекети","Rashidun caliphs","Туура жолдогу халифтер","After 632, the rule of the first four caliphs rapidly expanded beyond Arabia.","632-жылдан кийин алгачкы төрт халифтин бийлиги Арабстандан тышкары тез кеңейген.","Arabia, the Levant, Iraq, Egypt and much of Iran.","Арабстан, Левант, Ирак, Египет жана Ирандын көп бөлүгү."],
- "umayyad":["Umayyad Caliphate","Омейяд халифаты","Umayyads","Омейяддар","The Damascus-based caliphate became one of the largest powers of its time.","Борбору Дамаскта болгон халифат өз мезгилинин эң ири державаларынын бирине айланган.","From Iberia and North Africa to Iran and Central Asia.","Иберия менен Түндүк Африкадан Иранга жана Борбордук Азияга чейин."],
- "abbasid":["Abbasid Caliphate — early and middle periods","Аббасийлер халифаты — алгачкы жана орто мезгилдер","Abbasids","Аббасийлер","Under the Abbasids, the political centre shifted to Iraq. From the ninth century, power increasingly passed to regional rulers.","Аббасийлердин тушунда саясий борбор Иракка жылган. IX кылымдан тартып бийлик барган сайын аймактык башкаруучуларга өткөн.","Initially a vast caliphate, later with much more limited direct rule.","Башында кеңири халифат, кийин түз бийлиги кыйла чектелген мамлекет."],
- "turgesh":["Turgesh Khaganate","Түргөш каганаты","Turgesh","Түргөштөр","The Turgesh became the principal power in Semirechye after the Western Turks.","Батыш түрктөрдөн кийин Жети-Суудагы негизги күч Түргөштөр болгон.","Semirechye, northern Kyrgyzstan and southeastern Kazakhstan.","Жети-Суу, Түндүк Кыргызстан жана Түштүк-Чыгыш Казакстан."],
- "karluk":["Karluk confederation","Карлук бирикмеси","Karluks","Карлуктар","The Karluks played a central role in the Tian Shan and Semirechye after the Turgesh.","Түргөштөрдөн кийин Карлуктар Теңир-Тоодо жана Жети-Сууда негизги роль ойногон.","Kyrgyzstan, southeastern Kazakhstan and neighbouring regions.","Кыргызстан, Түштүк-Чыгыш Казакстан жана коңшу аймактар."],
- "samanid":["Samanid state","Саманийлер мамлекети","Samanids","Саманийлер","Bukhara and Samarkand became major centres of Islamic culture.","Бухара менен Самарканд ислам маданиятынын ири борборлоруна айланган.","Uzbekistan, Tajikistan, northern Afghanistan and neighbouring regions.","Өзбекстан, Тажикстан, Түндүк Ооганстан жана коңшу аймактар."],
- "qarakhanid":["Karakhanid state","Караханийлер мамлекети","Karakhanids","Караханийлер","The Karakhanids are especially important to the history of Balasagun, the Chuy Valley and the Tian Shan.","Караханийлер Баласагындын, Чүй өрөөнүнүн жана Теңир-Тоонун тарыхында өзгөчө маанилүү.","Kyrgyzstan, southeastern Kazakhstan, Xinjiang and Transoxiana.","Кыргызстан, Түштүк-Чыгыш Казакстан, Шинжаң жана Мавераннахр."]
+  "earlyIslam": [
+    "Medinan community / early Muslim state",
+    "Медина коомчулугу / алгачкы мусулман мамлекети",
+    "Early Muslim community",
+    "Алгачкы мусулман коомчулугу",
+    "After the Hijra, Medina became the political centre of the Muslim community. Its influence spread rapidly across Arabia in 622–632.",
+    "Хижрадан кийин Медина мусулман коомчулугунун саясий борборуна айланган. 622–632-жылдары анын таасири Арабстанга тез тараган.",
+    "Modern reference: mainly Saudi Arabia; by 632, political influence covered most of the Arabian Peninsula.",
+    "Азыркы география боюнча: негизинен Сауд Арабиясы; 632-жылга карата саясий таасири Арабстан жарым аралынын көп бөлүгүн камтыган."
+  ],
+  "byzantine": [
+    "Roman Empire (al-Rum)",
+    "Рим империясы (ар-Рум)",
+    "al-Rum",
+    "ар-Рум",
+    "Under Heraclius, al-Rum fought a devastating war with the Sasanians. It lost the Levant and Egypt in the 610s and early 620s, recovering much of its eastern provinces in 628–629.",
+    "Ираклийдин тушунда ар-Рум Сасаниддер менен оор согуш жүргүзгөн. 610-жылдарда жана 620-жылдардын башында Левант менен Египеттен ажырап, 628–629-жылдары чыгыштагы провинцияларынын көбүн кайтарган.",
+    "Approximate, changing extent: parts of present-day Turkey, Greece, the Balkans, Cyprus, Syria, Lebanon, Israel/Palestinian territories, Egypt, Libya and Tunisia.",
+    "Өзгөрүп турган болжолдуу аймагы: азыркы Түркиянын, Грекиянын, Балкандын, Кипрдин, Сириянын, Ливандын, Израилдин/Палестина аймактарынын, Египеттин, Ливиянын жана Тунистин бөлүктөрү."
+  ],
+  "sasanian": [
+    "Sasanian Persia (al-Furs)",
+    "Сасаниддердин Персиясы (аль-Фурс)",
+    "al-Furs",
+    "аль-Фурс",
+    "Under Khusraw II, Sasanian Persia expanded greatly against al-Rum, capturing Jerusalem and later Egypt. A severe dynastic crisis followed after 628.",
+    "Хосров IIнин тушунда Сасаниддердин Персиясы ар-Румга каршы согушта кеңейип, Иерусалимди жана кийин Египетти алган. 628-жылдан кийин оор династиялык кризис башталган.",
+    "Modern reference: Iran, Iraq and parts of the Caucasus, Turkey, Syria and Central Asia; at its military peak, also the Levant and Egypt.",
+    "Азыркы география боюнча: Иран, Ирак, Кавказдын, Түркиянын, Сириянын жана Борбордук Азиянын бөлүктөрү; аскердик көзөмөлү эң кеңейгенде Левант менен Египет да кирген."
+  ],
+  "westernTurkic": [
+    "Western Turkic Khaganate",
+    "Батыш Түрк каганаты",
+    "Western Turks",
+    "Батыш түрктөр",
+    "After the Turkic state's division, its western branch dominated much of Central Asia. The On Oq, or Ten Arrows, included tribal wings and autonomous cities. This layer represents political hegemony, not a uniform ethnic territory. Suyab in the Chuy Valley was a major centre under Tong Yabghu Qaghan (618–630).",
+    "Түрк мамлекети бөлүнгөндөн кийин батыш бутагы Борбордук Азиянын көп бөлүгүндө үстөмдүк кылган. Он Ок бирикмесине уруулук канаттар жана автономиялуу шаарлар кирген. Катмар бир тектүү этностук аймакты эмес, саясий үстөмдүктү көрсөтөт. Тон-ябгу кагандын тушунда (618–630) Чүйдөгү Суяб негизги борборлордун бири болгон.",
+    "Modern reference: large parts of Kyrgyzstan and Kazakhstan and parts of Uzbekistan, Tajikistan, Turkmenistan and Xinjiang. Rule over urban regions could be indirect.",
+    "Азыркы география боюнча: Кыргызстан менен Казакстандын чоң бөлүктөрү, Өзбекстандын, Тажикстандын, Түркмөнстандын жана Шинжаңдын бөлүктөрү. Шаардык аймактар кыйыр башкарылышы мүмкүн болгон."
+  ],
+  "easternTurkic": [
+    "Eastern Turkic Khaganate",
+    "Чыгыш Түрк каганаты",
+    "Eastern Turks",
+    "Чыгыш түрктөр",
+    "The Eastern Turkic Khaganate dominated Mongolia and the steppes north of China until its defeat by Tang in 630, when this layer ends.",
+    "Чыгыш Түрк каганаты 630-жылы Тан тарабынан талкаланганга чейин Монголияда жана Кытайдын түндүгүндөгү талааларда үстөмдүк кылган. Катмар ошол жылы аяктайт.",
+    "Modern reference: mainly Mongolia, southern Siberia and China's northern borderlands.",
+    "Азыркы география боюнча: негизинен Монголия, Түштүк Сибирь жана Кытайдын түндүк чек ара аймактары."
+  ],
+  "yeniseiKyrgyz": [
+    "Yenisei Kyrgyz",
+    "Энесай кыргыздары",
+    "Yenisei Kyrgyz",
+    "Энесай кыргыздары",
+    "Kyrgyz settlement is distinguished from political status. Tang contacts, dependence on the Uyghur Khaganate and independent Kyrgyz rule belong to different phases. After the ninth century, the settlement area is not portrayed as an independent state.",
+    "Кыргыздардын отурукташкан аймагы саясий макамынан айырмаланат. Тан менен байланыштар, Уйгур каганатына көз карандылык жана өз алдынча кыргыз бийлиги ар башка этаптарга таандык. IX кылымдан кийинки этнографиялык аймак өз алдынча мамлекет катары берилбейт.",
+    "Core region: Upper Yenisei, Minusinsk Basin, Tuva and the Sayan Mountains. Influence temporarily extended into Mongolia after 840; present-day Kyrgyzstan should not automatically be included.",
+    "Негизги аймак: Жогорку Энесай, Миң-Суу ойдуңу, Тува жана Саян. 840-жылдан кийин таасири Монголияга убактылуу кеңейген; азыркы Кыргызстандын аймагын ага автоматтык кошууга болбойт."
+  ],
+  "sogd": [
+    "Al-Sughd — Sogdian cities and principalities",
+    "Ас-Сугд — согду шаарлары жана ээликтери",
+    "al-Sughd",
+    "ас-Сугд",
+    "Sogd was a network of prosperous cities and trading centres, including Samarkand and Bukhara, rather than a single centralised empire. These often depended on or allied with Western Turkic rulers.",
+    "Согду бирдиктүү борборлошкон империя эмес, Самарканд, Бухара сыяктуу бай шаарлардын жана соода борборлорунун тармагы болгон. Алар көбүнчө Батыш Түрк башкаруучуларына көз каранды же союздаш болгон.",
+    "Modern reference: mainly Uzbekistan and Tajikistan, with neighbouring parts of Central Asia.",
+    "Азыркы география боюнча: негизинен Өзбекстан, Тажикстан жана Борбордук Азиянын коңшу аймактары."
+  ],
+  "ferghana": [
+    "Farghana — local principalities",
+    "Фаргана — жергиликтүү ээликтер",
+    "Farghana",
+    "Фаргана",
+    "Seventh-century Ferghana had local political centres interacting with the Western Turkic Khaganate and Sogd; it was not an undifferentiated part of a Turkic world.",
+    "VII кылымдагы Ферганада Батыш Түрк каганаты жана Согду менен байланышкан жергиликтүү саясий борборлор болгон. Аны түрк дүйнөсүнүн айырмасыз бөлүгү катары кароого болбойт.",
+    "Modern reference: eastern Uzbekistan, southern Kyrgyzstan and northern Tajikistan.",
+    "Азыркы география боюнча: Чыгыш Өзбекстан, Түштүк Кыргызстан жана Түндүк Тажикстан."
+  ],
+  "suyabZone": [
+    "Suyab and the Upper Chuy Valley",
+    "Суяб жана Жогорку Чүй өрөөнү",
+    "Suyab / Chuy",
+    "Суяб / Чүй",
+    "Suyab (Ak-Beshim) lies in the Chuy Valley of present-day Kyrgyzstan. UNESCO describes the Upper Chuy Valley as a major political, economic and military centre under the Western Turks and later the Turgesh.",
+    "Суяб (Ак-Бешим) азыркы Кыргызстандын Чүй өрөөнүндө жайгашкан. ЮНЕСКО Жогорку Чүй өрөөнүн Батыш түрктөрдүн жана кийинки Түргөштөрдүн тушундагы ири саясий, экономикалык жана аскердик борбор катары сүрөттөйт.",
+    "Modern reference: northern Kyrgyzstan, especially the Chuy Valley east of Bishkek; a local centre within the wider Western Turkic system.",
+    "Азыркы география боюнча: Түндүк Кыргызстан, өзгөчө Бишкектин чыгышындагы Чүй өрөөнү; кеңири Батыш Түрк түзүлүшүнүн ичиндеги жергиликтүү борбор."
+  ],
+  "chach": [
+    "Al-Shash (Chach) — Tashkent principality",
+    "Аш-Шаш (Чач) — Ташкент ээлиги",
+    "al-Shash",
+    "аш-Шаш",
+    "Chach lay around present-day Tashkent. Western Turkic supremacy was established after 606, while local dynastic and administrative autonomy continued. Imperial supremacy did not mean identical direct rule in every region.",
+    "Чач азыркы Ташкенттин айланасында жайгашкан. 606-жылдан кийинки окуялардан соң Батыш Түрк үстөмдүгү орноп, жергиликтүү династиялык жана башкаруу автономиясы сакталган. Империялык үстөмдүк бардык аймакта бирдей түз башкаруу болгонун билдирбейт.",
+    "Modern reference: Tashkent and the Chirchiq Valley in Uzbekistan, near Kazakhstan and Kyrgyzstan.",
+    "Азыркы география боюнча: Өзбекстандагы Ташкент жана Чырчык өрөөнү, Казакстан менен Кыргызстанга жакын аймак."
+  ],
+  "tokharistan": [
+    "Tokharistan",
+    "Тохаристан",
+    "Tokharistan",
+    "Тохаристан",
+    "Tokharistan was a distinct historical region around Balkh and the Upper Amu Darya, with local dynasties, Buddhist centres and changing relations with Turkic and Iranian powers.",
+    "Тохаристан Балхтын жана Жогорку Аму-Дарыянын айланасындагы өзүнчө тарыхый аймак болгон. Анда жергиликтүү династиялар, буддалык борборлор жана түрк-иран державалары менен өзгөрмөлүү байланыштар болгон.",
+    "Modern reference: northern Afghanistan, southern Uzbekistan and Tajikistan.",
+    "Азыркы география боюнча: Түндүк Ооганстан, Түштүк Өзбекстан жана Тажикстан."
+  ],
+  "khwarezm": [
+    "Khwarazm",
+    "Хорезм",
+    "Khwarazm",
+    "Хорезм",
+    "Khwarazm retained its own political tradition on the lower Amu Darya, within a Central Asian mosaic of khaganate supremacy, city-states and regional kingdoms.",
+    "Төмөнкү Аму-Дарыядагы Хорезм өзүнүн саясий салтын сактаган. Ал Борбордук Азиядагы кагандык үстөмдүк, шаар-мамлекеттер жана аймактык падышалыктар аралашкан түзүлүштүн бир бөлүгү болгон.",
+    "Modern reference: western Uzbekistan and northern Turkmenistan around the lower Amu Darya.",
+    "Азыркы география боюнча: Төмөнкү Аму-Дарыянын айланасындагы Батыш Өзбекстан жана Түндүк Түркмөнстан."
+  ],
+  "tang": [
+    "Al-Sin — Tang Empire",
+    "Ас-Син — Тан империясы",
+    "al-Sin / Tang",
+    "ас-Син / Тан",
+    "The Tang dynasty lasted from 618 to 907. Its fall was followed by the Five Dynasties and Ten Kingdoms, alongside the rise of Khitan Liao and, from 960, Song.",
+    "Тан династиясы 618–907-жылдары жашаган. Анын кулашынан кийин Беш династия жана Он падышалык мезгили башталып, кидандардын Ляосу, ал эми 960-жылдан Сун күч алган.",
+    "Modern reference: much of eastern and central China, with political influence in the northern steppes after 630.",
+    "Азыркы география боюнча: Чыгыш жана Борбордук Кытайдын көп бөлүгү; 630-жылдан кийин түндүк талааларда да саясий таасир болгон."
+  ],
+  "aksum": [
+    "Al-Habasha (Aksum)",
+    "Аль-Хабаша (Аксум)",
+    "al-Habasha",
+    "аль-Хабаша",
+    "Aksum remained an important Christian power in the Red Sea region. Its connection with Abyssinia and the Muslims' first migration makes it significant in early Islamic history.",
+    "Аксум Кызыл деңиз аймагындагы маанилүү христиан державасы болгон. Хабаша менен байланыштар жана мусулмандардын алгачкы көчү анын исламдын баштапкы тарыхындагы маанисин аныктайт.",
+    "Modern reference: mainly Ethiopia and Eritrea.",
+    "Азыркы география боюнча: негизинен Эфиопия жана Эритрея."
+  ],
+  "harsha": [
+    "Harsha's realm",
+    "Харша мамлекети",
+    "Harsha",
+    "Харша",
+    "Harsha (606–647) formed a major state in the Ganges Valley and neighbouring parts of northern India.",
+    "Харша (606–647) Ганг өрөөнүндө жана Түндүк Индиянын коңшу аймактарында ири мамлекет түзгөн.",
+    "Modern reference: parts of northern India and neighbouring regions.",
+    "Азыркы география боюнча: Түндүк Индиянын бөлүктөрү жана коңшу аймактар."
+  ],
+  "franks": [
+    "Frankish kingdom / kingdoms",
+    "Франк падышалыгы / падышалыктары",
+    "Franks",
+    "Франктар",
+    "Western Europe was divided among post-Roman kingdoms. Frankish lands covered much of Gaul.",
+    "Батыш Европа Римден кийинки падышалыктарга бөлүнгөн. Франктар Галлиянын көп бөлүгүн ээлеген.",
+    "Modern reference: France, Belgium, Luxembourg, western Germany and neighbouring regions.",
+    "Азыркы география боюнча: Франция, Бельгия, Люксембург, Батыш Германия жана коңшу аймактар."
+  ],
+  "visigoths": [
+    "Visigothic Kingdom",
+    "Вестгот падышалыгы",
+    "Visigoths",
+    "Вестготтор",
+    "The Visigothic Kingdom controlled almost the whole Iberian Peninsula until the early eighth century.",
+    "Вестгот падышалыгы VIII кылымдын башына чейин Пиреней жарым аралынын дээрлик баарын көзөмөлдөгөн.",
+    "Modern reference: mainly Spain and Portugal.",
+    "Азыркы география боюнча: негизинен Испания жана Португалия."
+  ],
+  "rashidun": [
+    "Rashidun Caliphate",
+    "Туура жолдогу халифтердин мамлекети",
+    "Rashidun caliphs",
+    "Туура жолдогу халифтер",
+    "After 632, the rule of the first four caliphs rapidly expanded beyond Arabia.",
+    "632-жылдан кийин алгачкы төрт халифтин бийлиги Арабстандан тышкары тез кеңейген.",
+    "Arabia, the Levant, Iraq, Egypt and much of Iran.",
+    "Арабстан, Левант, Ирак, Египет жана Ирандын көп бөлүгү."
+  ],
+  "umayyad": [
+    "Umayyad Caliphate",
+    "Омейяд халифаты",
+    "Umayyads",
+    "Омейяддар",
+    "The Damascus-based caliphate became one of the largest powers of its time.",
+    "Борбору Дамаскта болгон халифат өз мезгилинин эң ири державаларынын бирине айланган.",
+    "From Iberia and North Africa to Iran and Central Asia.",
+    "Иберия менен Түндүк Африкадан Иранга жана Борбордук Азияга чейин."
+  ],
+  "abbasid": [
+    "Abbasid Caliphate — early and middle periods",
+    "Аббасийлер халифаты — алгачкы жана орто мезгилдер",
+    "Abbasids",
+    "Аббасийлер",
+    "Under the Abbasids, the political centre shifted to Iraq. From the ninth century, power increasingly passed to regional rulers.",
+    "Аббасийлердин тушунда саясий борбор Иракка жылган. IX кылымдан тартып бийлик барган сайын аймактык башкаруучуларга өткөн.",
+    "Initially a vast caliphate, later with much more limited direct rule.",
+    "Башында кеңири халифат, кийин түз бийлиги кыйла чектелген мамлекет."
+  ],
+  "turgesh": [
+    "Turgesh Khaganate",
+    "Түргөш каганаты",
+    "Turgesh",
+    "Түргөштөр",
+    "The Turgesh became the principal power in Semirechye after the Western Turks.",
+    "Батыш түрктөрдөн кийин Жети-Суудагы негизги күч Түргөштөр болгон.",
+    "Semirechye, northern Kyrgyzstan and southeastern Kazakhstan.",
+    "Жети-Суу, Түндүк Кыргызстан жана Түштүк-Чыгыш Казакстан."
+  ],
+  "karluk": [
+    "Karluk confederation",
+    "Карлук бирикмеси",
+    "Karluks",
+    "Карлуктар",
+    "The Karluks played a central role in the Tian Shan and Semirechye after the Turgesh.",
+    "Түргөштөрдөн кийин Карлуктар Теңир-Тоодо жана Жети-Сууда негизги роль ойногон.",
+    "Kyrgyzstan, southeastern Kazakhstan and neighbouring regions.",
+    "Кыргызстан, Түштүк-Чыгыш Казакстан жана коңшу аймактар."
+  ],
+  "samanid": [
+    "Samanid state",
+    "Саманийлер мамлекети",
+    "Samanids",
+    "Саманийлер",
+    "Bukhara and Samarkand became major centres of Islamic culture.",
+    "Бухара менен Самарканд ислам маданиятынын ири борборлоруна айланган.",
+    "Uzbekistan, Tajikistan, northern Afghanistan and neighbouring regions.",
+    "Өзбекстан, Тажикстан, Түндүк Ооганстан жана коңшу аймактар."
+  ],
+  "qarakhanid": [
+    "Karakhanid state",
+    "Караханийлер мамлекети",
+    "Karakhanids",
+    "Караханийлер",
+    "The Karakhanids are especially important to the history of Balasagun, the Chuy Valley and the Tian Shan.",
+    "Караханийлер Баласагындын, Чүй өрөөнүнүн жана Теңир-Тоонун тарыхында өзгөчө маанилүү.",
+    "Kyrgyzstan, southeastern Kazakhstan, Xinjiang and Transoxiana.",
+    "Кыргызстан, Түштүк-Чыгыш Казакстан, Шинжаң жана Мавераннахр."
+  ]
 }

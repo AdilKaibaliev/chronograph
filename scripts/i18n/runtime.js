@@ -20,7 +20,7 @@ function localizePage(){
   observer.disconnect();
   pendingTranslations.clear();
   document.documentElement.lang=language;
-  document.title='CHRONOGRAPH 1.3.1 · '+({ru:'Исторический атлас',en:'Historical atlas',ky:'Тарыхый атлас'})[language];
+  document.title='CHRONOGRAPH 1.4 · '+({ru:'Исторический атлас',en:'Historical atlas',ky:'Тарыхый атлас'})[language];
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
   while(walker.nextNode()){
     const node=walker.currentNode,parent=node.parentElement;

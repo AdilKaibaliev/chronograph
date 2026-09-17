@@ -1,25 +1,90 @@
 {
- "900":["In the ninth and tenth centuries, Mecca and Medina retain their special sacred status within the Abbasid world. Governors and influential families conduct local government in the Hijaz.","IX–X кылымдарда Мекке менен Медина Аббасийлер дүйнөсүндө өзгөчө ыйык макамын сактайт. Хижаздагы жергиликтүү башкарууну наместниктер жана таасирдүү үй-бүлөлөр жүргүзөт."],
- "907":["The Tang dynasty ends in 907. Five Dynasties follow in northern China, while the Ten Kingdoms exist in the south and the Khitan Liao emerges as a major northern power.","907-жылы Тан династиясы аяктайт. Кытайдын түндүгүндө Беш династия мезгили башталып, түштүгүндө Он падышалык жашайт. Кидандардын Ляо мамлекети түндүктөгү ири күч катары калыптанат."],
- "950":["The Karakhanid dynasty takes shape in the tenth century as the first Muslim Turkic dynasty of Central Asia.","X кылымда Борбордук Азиядагы алгачкы мусулман түрк династиясы болгон Караханийлер калыптанат."],
- "960":["Zhao Kuangyin founds the Song dynasty. China remains politically divided: Liao controls northern regions, and Western Xia later emerges.","Чжао Куанъинь Сун династиясын негиздейт. Кытай саясий жактан бөлүнгөн бойдон калат: түндүк аймактарды Ляо көзөмөлдөйт, кийин Батыш Ся түзүлөт."],
- "982":["Hudud al-‘Alam, compiled in 372 AH / 982–983, describes the land of the Kyrgyz and neighbouring regions separately, documenting its continued presence after the ninth century.","372-хижрий жылы, башкача айтканда 982–983-жылдары түзүлгөн «Худуд аль-Алам» кыргыздардын өлкөсүн жана коңшу аймактарды өзүнчө сүрөттөйт. Бул кыргыздардын IX кылымдан кийин да тарыхта бар экенин көрсөтөт."],
- "1000":["From the late tenth century, Mecca and parts of the Hijaz fall within the Fatimid sphere of influence, while local sharifian rulers retain a distinct political role.","X кылымдын аягынан тартып Мекке жана Хижаздын бир бөлүгү Фатимийлердин таасир чөйрөсүнө кирет. Ошол эле учурда жергиликтүү шарифтер өз алдынча саясий роль ойнойт."],
- "1038":["Tangut Western Xia becomes a separate state. The political landscape of eleventh-century China includes Song, Liao and Western Xia.","Тангуттардын Батыш Ся мамлекети өзүнчө түзүлөт. XI кылымдагы Кытайдын саясий мейкиндигине Сун, Ляо жана Батыш Ся кирет."],
- "1100":["The Hijaz retains its own local politics during the Seljuk era. Mecca and Medina are also involved in the rivalry of larger powers: the Abbasids, Fatimids and Seljuks.","Селжуктар доорунда Хижаз өзүнүн жергиликтүү саясий түзүлүшүн сактайт. Мекке менен Медина Аббасийлер, Фатимийлер жана Селжуктар сыяктуу ири күчтөрдүн атаандаштыгына да байланыштуу."],
- "1115":["The Jurchens establish the Jin dynasty. It will soon overthrow Liao and displace Song from northern China.","Чжурчжэндер Цзинь династиясын түзөт. Көп өтпөй ал Ляону кулатып, Сунду Түндүк Кытайдан сүрүп чыгарат."],
- "1127":["Jin occupies northern territories and Kaifeng. Song continues in the south as Southern Song, alongside Jin and Western Xia.","Цзинь түндүк аймактарды жана Кайфэнди ээлейт. Сун түштүктө Түштүк Сун катары жашоосун улантат. Картада Цзинь, Түштүк Сун жана Батыш Ся бир убакта көрсөтүлөт."],
- "1154":["In the twelfth century, al-Idrisi includes the land of the Kyrgyz in his geographical account. Some information derives from earlier Islamic geography; the map therefore shows an ethnopolitical region rather than a precisely bounded centralised empire.","XII кылымда аль-Идриси кыргыздардын өлкөсүн өзүнүн географиялык эмгегине киргизет. Маалыматтын бир бөлүгү мурдагы ислам географиясына таянат. Ошондуктан картада так чек аралуу борборлошкон империя эмес, этносаясий аймак көрсөтүлөт."],
- "1157":["As direct Seljuk control over Baghdad ends, the Abbasid caliphs recover political authority in Iraq. By the thirteenth century, their state is much smaller than the earlier caliphate but still exists.","Багдаддын үстүнөн Селжуктардын түз көзөмөлү аяктагандан кийин Аббасий халифтери Иракта саясий бийлигин калыбына келтирет. XIII кылымда алардын мамлекети мурдагы халифаттан кыйла чакан болгону менен жашоосун улантат."],
- "1171":["Salah al-Din establishes the Ayyubid dynastic order. Egypt and Syria become major Islamic centres during the Crusades.","Салах ад-Дин Айюбийлердин династиялык бийлигин түзөт. Египет менен Сирия Крест жортуулдары доорунда ислам дүйнөсүнүн негизги борборлоруна айланат."],
- "1180":["Under Caliph al-Nasir (1180–1225), Abbasid political authority in Iraq grows stronger. The Abbasid state remains present before the Mongol invasion.","Халиф ан-Насирдин тушунда (1180–1225) Ирактагы Аббасийлердин саясий бийлиги күчөйт. Монгол баскынчылыгынын алдында Аббасийлер мамлекети жашоосун улантат."],
- "1200":["After the end of Fatimid rule, the holy cities develop new relations with the Ayyubids and other major powers. Mecca and Medina retain separate local sharifian lines and should not automatically be treated as a single state.","Фатимийлердин бийлиги аяктагандан кийин ыйык шаарлар Айюбийлер жана башка ири күчтөр менен жаңы байланыштарды түзөт. Мекке менен Мединада өзүнчө жергиликтүү шарифтик бийликтер бар; аларды дайыма бир мамлекет катары кароого болбойт."],
- "1204":["After the Fourth Crusade, the Latin Empire holds Constantinople. Roman statehood continues in Nicaea, Epirus and Trebizond.","Төртүнчү Крест жортуулунан кийин Константинополь Латын империясынын карамагына өтөт. Рим мамлекеттүүлүгү Никеяда, Эпирде жана Трапезундда уланат."],
- "1205":["Under the year 601 AH, Ibn al-Athir describes a war between Qatada al-Hasani, emir of Mecca, and Salim ibn Qasim al-Husayni, emir of Medina. The account shows that the holy cities could have separate political authorities.","Ибн аль-Асир 601-хижрий жылдагы окуяларда Меккенин эмири Катада аль-Хасани менен Мединанын эмири Салим ибн Касим аль-Хусайнинин согушун баяндайт. Бул ыйык шаарларда өзүнчө саясий бийликтер болушу мүмкүн экенин көрсөтөт."],
- "1207":["The Xin Yuan Shi reports Jochi's arrival among northern peoples in 1207 and the Kyrgyz rulers' recognition of Chinggis Khan's authority through the presentation of gifts. The Kyrgyz region remains on the map with a changed political status.","«Синь Юань ши» 1207-жылы Жучунун түндүк элдерге келишин, кыргыз башкаруучуларынын Чыңгыз хандын бийлигин таанып, белектерди тапшырышын баяндайт. Кыргыз аймагы саясий макамы өзгөргөн түрдө картада калат."],
- "1219":["Mongol expansion disrupts and absorbs existing states. Before the invasion, the Khwarazmshahs ruled an extensive state across this region.","Монголдордун кеңейиши мурдагы мамлекеттерди талкалап, өзүнө кошот. Басып кирүүгө чейин бул аймакта Хорезмшахтардын кеңири мамлекети болгон."],
- "1230":["The Mongol Empire coexists with the Abbasids in Iraq, Ayyubids, Sultanate of Rum, Nicaea, Trebizond, Epirus, Latin Empire, Delhi Sultanate, European kingdoms and other states.","Монгол империясы менен катар Ирактагы Аббасийлер, Айюбийлер, Рум султандыгы, Никея, Трапезунд, Эпир, Латын империясы, Дели султандыгы, Европа падышалыктары жана башка мамлекеттер жашайт."],
- "1261":["Michael VIII of Nicaea recovers Constantinople. The restored Roman Empire (al-Rum) returns to the map, with a much smaller territory than before.","Никеянын императору Михаил VIII Константинополду кайтарып алат. Калыбына келген Рим империясы (ар-Рум) картада кайра пайда болот, бирок анын аймагы мурдагыдан кыйла чакан."],
- "1271":["Khubilai proclaims the Yuan dynasty, creating a new Chinese-Mongol imperial order distinct from Tang, Song, Liao and Jin.","Хубилай Юань династиясын жарыялайт. Тан, Сун, Ляо жана Цзинден айырмаланган жаңы кытай-монгол империялык түзүлүшү пайда болот."],
- "1279":["Yuan completes the conquest of Southern Song, uniting most of the Chinese political realm under its rule.","Юань Түштүк Сунду басып алууну аяктап, Кытайдын саясий мейкиндигинин көп бөлүгүн өз бийлигине бириктирет."]
+  "900": [
+    "In the ninth and tenth centuries, Mecca and Medina retain their special sacred status within the Abbasid world. Governors and influential families conduct local government in the Hijaz.",
+    "IX–X кылымдарда Мекке менен Медина Аббасийлер дүйнөсүндө өзгөчө ыйык макамын сактайт. Хижаздагы жергиликтүү башкарууну наместниктер жана таасирдүү үй-бүлөлөр жүргүзөт."
+  ],
+  "907": [
+    "The Tang dynasty ends in 907. Five Dynasties follow in northern China, while the Ten Kingdoms exist in the south and the Khitan Liao emerges as a major northern power.",
+    "907-жылы Тан династиясы аяктайт. Кытайдын түндүгүндө Беш династия мезгили башталып, түштүгүндө Он падышалык жашайт. Кидандардын Ляо мамлекети түндүктөгү ири күч катары калыптанат."
+  ],
+  "950": [
+    "The Karakhanid dynasty takes shape in the tenth century as the first Muslim Turkic dynasty of Central Asia.",
+    "X кылымда Борбордук Азиядагы алгачкы мусулман түрк династиясы болгон Караханийлер калыптанат."
+  ],
+  "960": [
+    "Zhao Kuangyin founds the Song dynasty. China remains politically divided: Liao controls northern regions, and Western Xia later emerges.",
+    "Чжао Куанъинь Сун династиясын негиздейт. Кытай саясий жактан бөлүнгөн бойдон калат: түндүк аймактарды Ляо көзөмөлдөйт, кийин Батыш Ся түзүлөт."
+  ],
+  "982": [
+    "Hudud al-‘Alam, compiled in 372 AH / 982–983, describes the land of the Kyrgyz and neighbouring regions separately, documenting its continued presence after the ninth century.",
+    "372-хижрий жылы, башкача айтканда 982–983-жылдары түзүлгөн «Худуд аль-Алам» кыргыздардын өлкөсүн жана коңшу аймактарды өзүнчө сүрөттөйт. Бул кыргыздардын IX кылымдан кийин да тарыхта бар экенин көрсөтөт."
+  ],
+  "1000": [
+    "From the late tenth century, Mecca and parts of the Hijaz fall within the Fatimid sphere of influence, while local sharifian rulers retain a distinct political role.",
+    "X кылымдын аягынан тартып Мекке жана Хижаздын бир бөлүгү Фатимийлердин таасир чөйрөсүнө кирет. Ошол эле учурда жергиликтүү шарифтер өз алдынча саясий роль ойнойт."
+  ],
+  "1038": [
+    "Tangut Western Xia becomes a separate state. The political landscape of eleventh-century China includes Song, Liao and Western Xia.",
+    "Тангуттардын Батыш Ся мамлекети өзүнчө түзүлөт. XI кылымдагы Кытайдын саясий мейкиндигине Сун, Ляо жана Батыш Ся кирет."
+  ],
+  "1100": [
+    "The Hijaz retains its own local politics during the Seljuk era. Mecca and Medina are also involved in the rivalry of larger powers: the Abbasids, Fatimids and Seljuks.",
+    "Селжуктар доорунда Хижаз өзүнүн жергиликтүү саясий түзүлүшүн сактайт. Мекке менен Медина Аббасийлер, Фатимийлер жана Селжуктар сыяктуу ири күчтөрдүн атаандаштыгына да байланыштуу."
+  ],
+  "1115": [
+    "The Jurchens establish the Jin dynasty. It will soon overthrow Liao and displace Song from northern China.",
+    "Чжурчжэндер Цзинь династиясын түзөт. Көп өтпөй ал Ляону кулатып, Сунду Түндүк Кытайдан сүрүп чыгарат."
+  ],
+  "1127": [
+    "Jin occupies northern territories and Kaifeng. Song continues in the south as Southern Song, alongside Jin and Western Xia.",
+    "Цзинь түндүк аймактарды жана Кайфэнди ээлейт. Сун түштүктө Түштүк Сун катары жашоосун улантат. Картада Цзинь, Түштүк Сун жана Батыш Ся бир убакта көрсөтүлөт."
+  ],
+  "1154": [
+    "In the twelfth century, al-Idrisi includes the land of the Kyrgyz in his geographical account. Some information derives from earlier Islamic geography; the map therefore shows an ethnopolitical region rather than a precisely bounded centralised empire.",
+    "XII кылымда аль-Идриси кыргыздардын өлкөсүн өзүнүн географиялык эмгегине киргизет. Маалыматтын бир бөлүгү мурдагы ислам географиясына таянат. Ошондуктан картада так чек аралуу борборлошкон империя эмес, этносаясий аймак көрсөтүлөт."
+  ],
+  "1157": [
+    "As direct Seljuk control over Baghdad ends, the Abbasid caliphs recover political authority in Iraq. By the thirteenth century, their state is much smaller than the earlier caliphate but still exists.",
+    "Багдаддын үстүнөн Селжуктардын түз көзөмөлү аяктагандан кийин Аббасий халифтери Иракта саясий бийлигин калыбына келтирет. XIII кылымда алардын мамлекети мурдагы халифаттан кыйла чакан болгону менен жашоосун улантат."
+  ],
+  "1171": [
+    "Salah al-Din establishes the Ayyubid dynastic order. Egypt and Syria become major Islamic centres during the Crusades.",
+    "Салах ад-Дин Айюбийлердин династиялык бийлигин түзөт. Египет менен Сирия Крест жортуулдары доорунда ислам дүйнөсүнүн негизги борборлоруна айланат."
+  ],
+  "1180": [
+    "Under Caliph al-Nasir (1180–1225), Abbasid political authority in Iraq grows stronger. The Abbasid state remains present before the Mongol invasion.",
+    "Халиф ан-Насирдин тушунда (1180–1225) Ирактагы Аббасийлердин саясий бийлиги күчөйт. Монгол баскынчылыгынын алдында Аббасийлер мамлекети жашоосун улантат."
+  ],
+  "1200": [
+    "After the end of Fatimid rule, the holy cities develop new relations with the Ayyubids and other major powers. Mecca and Medina retain separate local sharifian lines and should not automatically be treated as a single state.",
+    "Фатимийлердин бийлиги аяктагандан кийин ыйык шаарлар Айюбийлер жана башка ири күчтөр менен жаңы байланыштарды түзөт. Мекке менен Мединада өзүнчө жергиликтүү шарифтик бийликтер бар; аларды дайыма бир мамлекет катары кароого болбойт."
+  ],
+  "1204": [
+    "After the Fourth Crusade, the Latin Empire holds Constantinople. Roman statehood continues in Nicaea, Epirus and Trebizond.",
+    "Төртүнчү Крест жортуулунан кийин Константинополь Латын империясынын карамагына өтөт. Рим мамлекеттүүлүгү Никеяда, Эпирде жана Трапезундда уланат."
+  ],
+  "1205": [
+    "Under the year 601 AH, Ibn al-Athir describes a war between Qatada al-Hasani, emir of Mecca, and Salim ibn Qasim al-Husayni, emir of Medina. The account shows that the holy cities could have separate political authorities.",
+    "Ибн аль-Асир 601-хижрий жылдагы окуяларда Меккенин эмири Катада аль-Хасани менен Мединанын эмири Салим ибн Касим аль-Хусайнинин согушун баяндайт. Бул ыйык шаарларда өзүнчө саясий бийликтер болушу мүмкүн экенин көрсөтөт."
+  ],
+  "1219": [
+    "Mongol expansion disrupts and absorbs existing states. Before the invasion, the Khwarazmshahs ruled an extensive state across this region.",
+    "Монголдордун кеңейиши мурдагы мамлекеттерди талкалап, өзүнө кошот. Басып кирүүгө чейин бул аймакта Хорезмшахтардын кеңири мамлекети болгон."
+  ],
+  "1230": [
+    "The Mongol Empire coexists with the Abbasids in Iraq, Ayyubids, Sultanate of Rum, Nicaea, Trebizond, Epirus, Latin Empire, Delhi Sultanate, European kingdoms and other states.",
+    "Монгол империясы менен катар Ирактагы Аббасийлер, Айюбийлер, Рум султандыгы, Никея, Трапезунд, Эпир, Латын империясы, Дели султандыгы, Европа падышалыктары жана башка мамлекеттер жашайт."
+  ],
+  "1261": [
+    "Michael VIII of Nicaea recovers Constantinople. The restored Roman Empire (al-Rum) returns to the map, with a much smaller territory than before.",
+    "Никеянын императору Михаил VIII Константинополду кайтарып алат. Калыбына келген Рим империясы (ар-Рум) картада кайра пайда болот, бирок анын аймагы мурдагыдан кыйла чакан."
+  ],
+  "1271": [
+    "Khubilai proclaims the Yuan dynasty, creating a new Chinese-Mongol imperial order distinct from Tang, Song, Liao and Jin.",
+    "Хубилай Юань династиясын жарыялайт. Тан, Сун, Ляо жана Цзинден айырмаланган жаңы кытай-монгол империялык түзүлүшү пайда болот."
+  ],
+  "1279": [
+    "Yuan completes the conquest of Southern Song, uniting most of the Chinese political realm under its rule.",
+    "Юань Түштүк Сунду басып алууну аяктап, Кытайдын саясий мейкиндигинин көп бөлүгүн өз бийлигине бириктирет."
+  ]
 }
