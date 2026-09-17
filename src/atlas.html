@@ -335,6 +335,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,[
 .biography-peers{display:flex;flex-wrap:wrap;gap:7px}.biography-peers .star-chip{font-size:12px;line-height:1.5;padding:8px 11px;text-align:left;white-space:normal}.modal-close{position:sticky;top:0;background:#211e18;border-radius:6px;min-width:36px;min-height:36px}.modal-box{overscroll-behavior:contain}.modal p{font-size:13px}.modal-close:focus-visible,.biography-peers button:focus-visible{outline:2px solid #dfbe79;outline-offset:2px}
 .history-toggle{display:flex;align-items:center;gap:6px;color:#e5cca0}.history-stages{display:grid;gap:5px}.history-stages button{background:#2c281e;color:#e8d8b9;border:1px solid #685a3f;border-radius:5px;text-align:left;padding:7px;font:11px/1.4 system-ui;cursor:pointer}.history-stages button[aria-current=true]{border-color:#d6b574;background:#49402b}#kyrgyzEraFacts details{margin-top:10px}#kyrgyzEraFacts summary{cursor:pointer;color:#dcc18b;padding:5px 0}.kyrgyz-movement{fill:none;stroke:#744c22;stroke-width:2.4;stroke-dasharray:7 4;vector-effect:non-scaling-stroke}.kyrgyz-movement-node{fill:#fff0c9;stroke:#744c22;stroke-width:1.5;vector-effect:non-scaling-stroke}.kyrgyz-route-label{font:10px system-ui;fill:#382817;paint-order:stroke;stroke:#f0e2c6;stroke-width:3;stroke-linejoin:round}#kyrgyzRouteLayer{pointer-events:none}body.future-mode #kyrgyzRouteLayer{display:none!important}body.future-mode #kyrgyzHistoryBtn{display:none!important}@media(max-width:700px){#kyrgyzHistoryBtn{font-size:9px;padding:5px;max-width:105px;white-space:normal;line-height:1.15}}
 .kyrgyz-route-label{font-size:7px!important}#kyrgyzEraFacts{display:block}#kyrgyzEraFacts details{margin-top:10px}#kyrgyzEraFacts .history-toggle{font-size:12px}
+#mongolScope{position:absolute;left:14px;bottom:63px;max-width:340px;padding:8px 10px;background:rgba(33,29,22,.92);color:#ebdfc8;border-radius:10px;font:10px/1.4 system-ui;z-index:5}#mongolScope[hidden]{display:none}#mongolScope button{display:block;margin-top:5px;background:#5b4930;color:#fff1d8;border:1px solid #a68b57;border-radius:6px;padding:5px 9px;cursor:pointer;font:inherit}.unified-mongol{stroke:none!important}.mongol-dependencies{stroke:none}.kyrgyz-core{stroke:none}body.future-mode #mongolScope{display:none!important}@media(max-width:700px){#mongolScope{max-width:235px;font-size:9px;bottom:48px;padding:5px 8px}}
+#worldMap.city-mode .empire-label.realm-label{display:block!important}.kyrgyz-extent-note{display:block;margin-top:9px}
 </style>
 </head>
 <body>
@@ -391,7 +393,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,[
       <details class="map-legend"><summary>Исторические слои <span>выбрать государство</span></summary><div class="legend-body">
         <div class="legend-top"><b>Исторические слои</b><span>названия по исламской традиции, где они устойчиво засвидетельствованы · <strong>ар-Рум = Римская империя</strong></span></div>
         <div class="legend-items" id="legendItems"></div>
-      </div></details><div class="tooltip" id="tooltip"></div>
+      </div></details><div class="tooltip" id="tooltip"></div><div id="mongolScope" hidden><span id="mongolScopeText"></span><button type="button" id="toggleMongolUluses" aria-pressed="false">Показать улусы</button></div>
       
       
 
@@ -3618,6 +3620,73 @@ const EMPIRES = [
       [
        108,
        45
+      ]
+     ]
+    ]
+   },
+   {
+    "year": 840,
+    "polys": [
+     [
+      [
+       104,
+       36
+      ],
+      [
+       106,
+       39
+      ],
+      [
+       111,
+       41
+      ],
+      [
+       117,
+       41
+      ],
+      [
+       120,
+       40
+      ],
+      [
+       121,
+       39
+      ],
+      [
+       120,
+       36
+      ],
+      [
+       122,
+       31
+      ],
+      [
+       120,
+       26
+      ],
+      [
+       117,
+       23
+      ],
+      [
+       111,
+       21
+      ],
+      [
+       107,
+       21
+      ],
+      [
+       105,
+       24
+      ],
+      [
+       103,
+       28
+      ],
+      [
+       104,
+       32
       ]
      ]
     ]
@@ -9887,17 +9956,17 @@ const EMPIRES = [
   "from": 840,
   "to": 923,
   "label": [
-   101,
-   52
+   100,
+   49.5
   ],
-  "source": "Xin Tangshu, Zizhi Tongjian и исследования китайской историографии: в 840 黠戛斯 разгромили Уйгурский каганат; широкая зона означает влияние, а не сплошное прямое управление.",
-  "sourceUrl": "https://zh.wikisource.org/zh-hans/%E6%96%B0%E5%94%90%E6%9B%B8/%E5%8D%B7217%E4%B8%8B",
-  "body": "После победы 840 года кыргызская власть и военные действия распространяются в Монголию. «Синь Тан шу» сообщает о переносе ставки южнее гор Лаошань / Думань. Область показана как приблизительная зона влияния; точное положение ставки и границы не установлены.",
-  "territories": "Временная сфера военного и политического влияния от Верхнего Енисея в сторону Монголии; не следует читать как современную жесткую государственную границу.",
+  "source": "Xin Tang shu (新唐書), juan 217b; Jiu Tang shu (舊唐書), juan 195; Nikolay N. Kradin, Kyrgyz Khaganate, The Encyclopedia of Empire (2016).",
+  "sourceUrl": "https://doi.org/10.1002/9781118455074.wbeoe173",
+  "body": "После победы 840 года Кыргызский каганат вышел далеко за пределы енисейского ядра. Широкий светлый контур показывает реконструируемую область влияния в Алтае, Джунгарии, Монголии и Прибайкалье; тёмная область — Саяно-Енисейское ядро. Контроль был неодинаковым, а точные границы и их ежегодные изменения неизвестны.",
+  "territories": "Саяно-Енисейское ядро; широкая область влияния: Алтай, Джунгария, монгольские степи и Прибайкалье.",
   "focus": [
-   101,
-   51,
-   2.6
+   99,
+   50,
+   2.5
   ],
   "keyframes": [
    {
@@ -9905,70 +9974,96 @@ const EMPIRES = [
     "polys": [
      [
       [
-       88,
-       54
+       83,
+       47
+      ],
+      [
+       86,
+       52
       ],
       [
        90,
        56
       ],
       [
-       94,
-       56.5
-      ],
-      [
        97,
-       55
-      ],
-      [
-       98,
-       52
-      ],
-      [
-       95,
-       50.5
-      ],
-      [
-       91,
-       51
-      ],
-      [
-       88,
-       52
-      ]
-     ],
-     [
-      [
-       91,
-       51
-      ],
-      [
-       98,
-       52
+       57
       ],
       [
        105,
+       56
+      ],
+      [
+       111,
+       54
+      ],
+      [
+       116,
        51
       ],
       [
-       108,
+       117,
        48
       ],
       [
-       105,
-       46
+       112,
+       45
       ],
       [
-       99,
-       47
+       104,
+       43.5
       ],
       [
-       94,
-       49
+       96,
+       44
+      ],
+      [
+       91,
+       45
+      ],
+      [
+       87,
+       45.5
       ]
      ]
     ]
    }
+  ],
+  "corePolys": [
+   [
+    [
+     88,
+     54
+    ],
+    [
+     90,
+     56
+    ],
+    [
+     94,
+     56.5
+    ],
+    [
+     97,
+     55
+    ],
+    [
+     98,
+     52
+    ],
+    [
+     95,
+     50.5
+    ],
+    [
+     91,
+     51
+    ],
+    [
+     88,
+     52
+    ]
+   ]
   ]
  },
  {
@@ -14126,6 +14221,26 @@ const KYRGYZ_DEVELOPMENT="В «Синь Тан шу» описаны посев�
 let showKyrgyzContext=false;
 const EMPIRE_BY_ID = Object.fromEntries(EMPIRES.map(e=>[e.id,e]));
 
+
+let showMongolUluses=false;
+const MONGOL_IDS=['mongol','yuan','chagatai','goldenHorde','ilkhanate','mongolSiberia','mongolTibet','mongolKorea','rusTribute'];
+const MONGOL_REALM={"id":"mongolRealm","from":1206,"to":1299,"type":"empire","color":"#785344","label":[89,49],"focus":[88,45,1.75],"source":"Yuan shi (元史); Juvayni, Tarikh-i Jahan-gusha; Rashid al-Din, Jami al-tawarikh; Peter Jackson, Mongols, Encyclopaedia Iranica.","sourceUrl":"https://www.iranicaonline.org/articles/mongols/","name":"Монгольская империя","short":"Монгольская империя","body":"Общий вид монгольских владений выбранного года: один цвет и одна подпись, без внутренних границ улусов. Зависимые области показаны более светлым оттенком. Кнопка «Показать улусы» открывает подробную политическую карту.","territories":"Только владения, показанные для выбранного года; зависимые области выделены отдельно."};
+function empireStatesForYear(y){return EMPIRES.flatMap(e=>{const f=frameFor(e,y);return !f||f.hidden?[]:[{...e,...f}];});}
+function positiveRings(polys){return polys.map(r=>{let area=0;for(let i=0;i<r.length;i++){const a=r[i],b=r[(i+1)%r.length];area+=a[0]*b[1]-b[0]*a[1];}return area<0?r.slice().reverse():r;});}
+function mongolRealmForYear(y){
+ if(y<1206||y>1299)return null;
+ const parts=empireStatesForYear(y).filter(e=>MONGOL_IDS.includes(e.id));
+ const polys=positiveRings(parts.filter(e=>e.type!=='influence').flatMap(e=>e.polys));
+ const dependentPolys=positiveRings(parts.filter(e=>e.type==='influence').flatMap(e=>e.polys));
+ const name=y<1260?MONGOL_REALM.name:"Монгольская империя и улусы";
+ return {...MONGOL_REALM,name,short:name,body:y<1260?MONGOL_REALM.body:"Общий обзор монгольского мира после начала распада империи. Юань, улус Джучи, Чагатайский улус и государство Хулагу показаны одним цветом для сравнения общего масштаба. После 1260 года они не составляли единого централизованного государства. Включите «Показать улусы», чтобы увидеть их отдельно.",polys,dependentPolys,year:y,keyframes:[{year:y,polys}]};
+}
+function displayEmpiresForYear(y){
+ const states=empireStatesForYear(y);
+ if(showMongolUluses||y<1206)return states;
+ const realm=mongolRealmForYear(y);return states.filter(e=>!MONGOL_IDS.includes(e.id)).concat(realm?[realm]:[]);
+}
+
 function resampleRing(ring,n=42){
   if(!ring || ring.length<3) return ring||[];
   const pts = ring.slice();
@@ -14506,7 +14621,7 @@ const FIXED_LABEL_OFFSETS={
   hijazAbbasid:[22,12],hijazFatimid:[22,12],sharifsMecca:[22,15],sharifsMedina:[20,-12]
 };
 function labelPriority(emp,y){
-  const p={earlyIslam:25,rashidun:25,umayyad:25,abbasid:24,abbasidIraq:24,mongol:28,chagatai:23,ilkhanate:23,mamluk:23,byzantine:24,medievalByzantine:24,nicaea:20,lateByzantine:24,sasanian:24,tang:23,northernSong:22,southernSong:22,yuan:24,westernTurkic:21,qarakhanid:22,greatSeljuk:23,khwarazmian:23,rumSeljuk:20,ottoman:26,ayyubid:21,fatimid:21,cordoba:19,holyRoman:20,franceMedieval:18,delhiSultanate:19,yeniseiKyrgyz:25,kyrgyzKhaganate:26,kyrgyzMongol:25,westernRomanRef:2};
+  const p={mongolRealm:35,earlyIslam:25,rashidun:25,umayyad:25,abbasid:24,abbasidIraq:24,mongol:28,chagatai:23,ilkhanate:23,mamluk:23,byzantine:24,medievalByzantine:24,nicaea:20,lateByzantine:24,sasanian:24,tang:23,northernSong:22,southernSong:22,yuan:24,westernTurkic:21,qarakhanid:22,greatSeljuk:23,khwarazmian:23,rumSeljuk:20,ottoman:26,ayyubid:21,fatimid:21,cordoba:19,holyRoman:20,franceMedieval:18,delhiSultanate:19,yeniseiKyrgyz:25,kyrgyzKhaganate:32,kyrgyzMongol:25,westernRomanRef:2};
   return p[emp.id]??(emp.type==='empire'?15:emp.type==='fuzzy'?10:emp.type==='local'?7:emp.type==='influence'?6:2)
 }
 function renderEmpires(y){
@@ -14515,19 +14630,27 @@ function renderEmpires(y){
   const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','empire-group');
   const lg=document.createElementNS('http://www.w3.org/2000/svg','g');lg.setAttribute('class','empire-group');
   const active=[];
-  EMPIRES.forEach(emp=>{
-    const f=frameFor(emp,y);if(!f||f.hidden)return;emp={...emp,...f};if(emp.type==='population'&&!showKyrgyzContext)return;active.push(emp);
+  displayEmpiresForYear(y).forEach(emp=>{
+    const f=emp;if(emp.type==='population'&&!showKyrgyzContext)return;active.push(emp);
     const p=document.createElementNS('http://www.w3.org/2000/svg','path');const ref=emp.type==='reference',influence=emp.type==='influence';
     p.setAttribute('d',polygonPath(f.polys));p.setAttribute('fill',emp.color);p.setAttribute('fill-opacity',(emp.type==='population'?0:ref?Math.min(.10,overlayOpacity*.30):influence?Math.min(.17,overlayOpacity*.45):overlayOpacity).toFixed(2));p.setAttribute('stroke',emp.color);p.setAttribute('stroke-opacity',ref?'.50':'.94');
     p.setAttribute('class',`empire-path ${emp.type==='local'?'local':''}${emp.type==='fuzzy'||ref?' fuzzy':''}${influence?' influence':''}${selectedEmpire===emp.id?' selected':''}`);if(ref||emp.type==='population')p.setAttribute('stroke-dasharray','5 5');p.dataset.empire=emp.id;
-    p.addEventListener('mouseenter',ev=>showTooltip(ev,`<b>${emp.name}</b><small>${emp.territories}</small>`));p.addEventListener('mousemove',moveTooltip);p.addEventListener('mouseleave',hideTooltip);p.addEventListener('click',ev=>{ev.stopPropagation();selectEmpire(emp.id,false)});g.appendChild(p)
+    if(emp.id==='mongolRealm'){
+      p.classList.add('unified-mongol');p.setAttribute('fill-rule','nonzero');p.setAttribute('stroke','none');
+      if(emp.dependentPolys.length){const dep=document.createElementNS('http://www.w3.org/2000/svg','path');dep.setAttribute('d',polygonPath(emp.dependentPolys));dep.setAttribute('fill',emp.color);dep.setAttribute('fill-rule','nonzero');dep.setAttribute('fill-opacity',Math.min(.20,overlayOpacity*.48));dep.setAttribute('class','mongol-dependencies');dep.addEventListener('click',()=>selectEmpire('mongolRealm'));dep.addEventListener('mouseenter',ev=>showTooltip(ev,"Монгольские владения · зависимые области"));dep.addEventListener('mouseleave',hideTooltip);g.appendChild(dep);}
+    }
+    p.addEventListener('mouseenter',ev=>showTooltip(ev,`<b>${emp.name}</b><small>${emp.territories}</small>`));p.addEventListener('mousemove',moveTooltip);p.addEventListener('mouseleave',hideTooltip);p.addEventListener('click',ev=>{ev.stopPropagation();selectEmpire(emp.id,false)});g.appendChild(p);
+    if(emp.corePolys){const core=document.createElementNS('http://www.w3.org/2000/svg','path');core.setAttribute('d',polygonPath(emp.corePolys));core.setAttribute('fill',emp.color);core.setAttribute('fill-opacity',Math.min(.50,overlayOpacity+.08));core.setAttribute('class','kyrgyz-core');core.style.pointerEvents='none';g.appendChild(core);}
   });
+  const scope=$('mongolScope');scope.hidden=y<1206;
+  $('mongolScopeText').textContent=showMongolUluses?"Монгольские владения · показаны улусы":y<1260?"Монгольская империя · общий вид":"Общий вид империи и улусов · с 1260 года политический раскол";
+  $('toggleMongolUluses').textContent=showMongolUluses?'Единый вид':'Показать улусы';$('toggleMongolUluses').setAttribute('aria-pressed',String(showMongolUluses));
   const occupied=[];const minP=mapState.scale<1.45?19:mapState.scale<1.8?17:0;
   active.slice().sort((a,b)=>labelPriority(b,y)-labelPriority(a,y)).forEach(emp=>{
     if(!emp.label)return;const pr=labelPriority(emp,y);if(pr<minP&&emp.type!=='reference')return;
     const [bx,by]=project(emp.label),off=FIXED_LABEL_OFFSETS[emp.id]||[0,0],x=bx+off[0],yy=by+off[1],fs=emp.type==='empire'?13.4:10.8,box=estimateLabelBox(emp.short,x,yy,fs);
     if(occupied.some(o=>rectsOverlap(box,o,3)))return; // hide lower-priority label; never move it
-    const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',x);t.setAttribute('y',yy);t.setAttribute('text-anchor','middle');t.setAttribute('class',`empire-label${emp.type!=='empire'?' small':''}${emp.type==='reference'?' reference':''}`);t.textContent=emp.short;lg.appendChild(t);occupied.push(box)
+    const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',x);t.setAttribute('y',yy);t.setAttribute('text-anchor','middle');t.setAttribute('class',`empire-label${emp.type!=='empire'?' small':''}${emp.type==='reference'?' reference':''}`);t.textContent=emp.short;if(['mongolRealm','kyrgyzKhaganate'].includes(emp.id))t.classList.add('realm-label');lg.appendChild(t);occupied.push(box)
   });
   empireLayer.appendChild(g);empireLabelLayer.appendChild(lg);renderLegend(active)
 }
@@ -14813,10 +14936,10 @@ function kyrgyzHistoryForYear(y){return KYRGYZ_STAGES.filter(s=>s.year<=y).at(-1
 function renderKyrgyzHistory(y){
  const d=kyrgyzHistoryForYear(y);
  const openSections=Array.from($('kyrgyzEraFacts').querySelectorAll('details')).map(el=>el.open);
- $('kyrgyzEraTitle').textContent=d.title; $('kyrgyzEraText').textContent=d.text;
+ $('kyrgyzEraTitle').textContent=d.title; $('kyrgyzEraText').innerHTML='<span>'+d.text+'</span>'+(y>=840&&y<924?'<span class="kyrgyz-extent-note">'+EMPIRE_BY_ID.kyrgyzKhaganate.body+'</span>':'');
  $('kyrgyzEraFacts').innerHTML='<label class="history-toggle"><input type="checkbox" id="kyrgyzContextToggle" '+(showKyrgyzContext?'checked':'')+'> <span>Расселение и перемещения</span></label><p>Пунктир: расселение и приблизительные направления. Политическая власть показана отдельными слоями.</p><details><summary>Этапы кыргызской истории</summary><div class="history-stages">'+KYRGYZ_STAGES.map(s=>'<button type="button" data-history-year="'+s.year+'" aria-current="'+(s===d)+'">'+s.title+'</button>').join('')+'</div></details><details><summary>Тянь-Шань и дальнейшая история</summary><p>'+KYRGYZ_MIGRATION_NOTE+'</p></details><details><summary>Хозяйство и общество в китайских описаниях</summary><p>'+KYRGYZ_DEVELOPMENT+'</p><p>Xin Tang shu, juan 217b.</p></details>';
  $('kyrgyzEraFacts').querySelectorAll('details').forEach((el,i)=>{el.open=!!openSections[i];});
- $('kyrgyzEraSource').textContent=d.source;
+ $('kyrgyzEraSource').textContent=d.source+(y>=840&&y<924?' Nikolay N. Kradin, Kyrgyz Khaganate, The Encyclopedia of Empire (2016).':'');
  const b=$('focusKyrgyzHistory');b.textContent='Показать на карте';b.onclick=()=>{showKyrgyzContext=true;renderYear(year);focusLonLat(...d.view);};
  $('kyrgyzContextToggle').onchange=e=>{showKyrgyzContext=e.target.checked;renderYear(year);};
  $('kyrgyzEraFacts').querySelectorAll('[data-history-year]').forEach(b=>b.onclick=()=>{stopPlay();showKyrgyzContext=true;renderYear(+b.dataset.historyYear);focusLonLat(...kyrgyzHistoryForYear(year).view);$('panel-regions').scrollTop=0;});
@@ -14900,7 +15023,7 @@ function sourceMeta(emp){
 }
 
 function selectEmpire(id,doFocus=false,activate=true){
-  const base=EMPIRE_BY_ID[id]; if(!base) return; const f=frameFor(base,year); const emp={...base,...(f||{})};
+  const base=id==='mongolRealm'?mongolRealmForYear(year):EMPIRE_BY_ID[id]; if(!base) return; const f=frameFor(base,year); const emp={...base,...(f||{})};
   selectedEmpire=id; if(activate)switchPanel('selection'); $('selectionEmpty').hidden=true;
   document.querySelectorAll('.empire-path').forEach(p=>p.classList.toggle('selected',p.dataset.empire===id));
   $('selectedCard').classList.remove('hidden'); $('selectedTitle').textContent=emp.name; $('selectedBody').textContent=emp.body; $('selectedTerritories').textContent=emp.territories;
@@ -14909,7 +15032,7 @@ function selectEmpire(id,doFocus=false,activate=true){
   $('selectedSource').innerHTML=`<div class="confidence-row"><span class="confidence-pill approx">тип слоя: ${cf.exist}</span><span class="confidence-pill ${cf.b}">граница: ${cf.boundary}</span></div><span class="source-badge ${sm.cls}">${sm.label}</span><span class="source-main">Источник: <span>${emp.source}</span></span>${sourceBundleHtml(emp)}<span class="source-method">${frameCaption(emp,year)} Прямая власть, дань и политическое влияние показаны разными типами слоёв.</span>`;
   if(doFocus){ const [lon,lat,z]=emp.focus; focusLonLat(lon,lat,z); }
 }
-function focusEmpire(id){ selectEmpire(id,true); }
+function focusEmpire(id){ selectEmpire(!showMongolUluses&&year>=1206&&MONGOL_IDS.includes(id)?'mongolRealm':id,true); }
 
 function highlightKyrgyzstan(focus=false){
   kgHighlighted=true;
@@ -15096,6 +15219,7 @@ window.addEventListener('keydown',e=>{
 });
 
 $('kyrgyzHistoryBtn').addEventListener('click',()=>{stopPlay();showKyrgyzContext=true;switchPanel('regions');renderYear(year);focusLonLat(...kyrgyzHistoryForYear(year).view);});
+$('toggleMongolUluses').onclick=()=>{showMongolUluses=!showMongolUluses;selectedEmpire=null;renderYear(year);};
 // Init
 drawGraticule();drawCountries();buildTicks();setViewport();renderTradeRoutes(624);renderCampaigns(624);renderYear(624);
 })();
