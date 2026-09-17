@@ -100,7 +100,7 @@
 486|Central Asia.|Борбордук Азия.
 487|The main centre in central and southern China.|Борбордук жана түштүк Кытайдагы негизги борбор.
 488|A coexisting northern power.|Катар жашаган түндүк державасы.
-489|Mecca and Medina remain populated centres within their own political orbit.|Мекке жана Медина өз саясий чөйрөсүндөгү жашап турган борборлор бойдон калат.
+489|Mecca and Medina belong to the political system of the Hijaz.|Мекке менен Медина Хижаздын саясий түзүлүшүнө кирет.
 490|Eleventh–twelfth centuries:|XI–XII кылымдар:
 491|The Seljuks dominate the Islamic East; ar-Rum survives, and China is divided between Song and northern powers. Hijaz has its own local politics, linked to the Fatimids and sharifs.|Селжуктар ислам Чыгышында үстөмдүк кылат; ар-Рум жашоосун улантат, Кытай Сун жана түндүк державаларга бөлүнөт. Хижаздын Фатимийлер жана шарифтер менен байланышкан өз жергиликтүү саясаты бар.
 492|Iran, Iraq and neighbouring regions.|Иран, Ирак жана коңшу аймактар.
@@ -115,7 +115,7 @@
 501|Karakhanid rulers|Караханий башкаруучулар
 502|Local dynastic lines survive under changing overlords.|Жергиликтүү династиялар алмашкан жогорку бийликтин алдында жашоосун улантат.
 503|The Kyrgyz lands of southern Siberia enter a new phase of relations with Mongol power.|Түштүк Сибирдеги кыргыз жерлери монгол бийлиги менен мамилелердин жаңы баскычына өтөт.
-504|Twelfth–early thirteenth centuries: political authority has multiple levels, rather than one uniform state.|XII – XIII кылымдын башы: бирдиктүү мамлекеттин ордуна саясий бийликтин ар кандай деңгээлдери бар.
+504|Twelfth–early thirteenth centuries: local dynasties and the overlordship of major powers.|XII – XIII кылымдын башы: жергиликтүү династиялар жана ири державалардын үстөм бийлиги.
 505|Southern China.|Түштүк Кытай.
 506|Northern China.|Түндүк Кытай.
 507|Abbasid caliphs regain effective power in Iraq. Ayyubids control Egypt and Syria, Khwarazmshahs rise in the east, and the Sultanate of Rum in Anatolia. Hijaz retains its local structures around Mecca and Medina.|Аббасий халифтери Иракта иш жүзүндөгү бийлигин кайтарат. Айюбийлер Египет менен Сирияны көзөмөлдөйт, чыгышта Хорезмшахтар, Анадолуда Рум султанаты күчөйт. Хижаз Мекке менен Мединанын айланасындагы жергиликтүү түзүлүшүн сактайт.
@@ -142,9 +142,9 @@
 528|The Mongol turning point|Монгол бурулушу
 529|The Mongols destroy and absorb existing states, especially the Qara Khitai and Khwarazmshah systems.|Монголдор мурдагы мамлекеттерди, айрыкча Каракытай жана Хорезмшах түзүлүштөрүн талкалап, өзүнө кошот.
 530|Much of present-day Kyrgyzstan and Transoxiana enters Chagatai's political world.|Азыркы Кыргызстандын жана Мавераннахрдын көп бөлүгү Чагатайдын саясий дүйнөсүнө кирет.
-531|A populated political landscape|Саясий түзүлүштөргө бай мейкиндик
+531|States of Eurasia|Евразия мамлекеттери
 532|The Ilkhanate, Golden Horde, Yuan, Mamluks, Eastern Roman tradition and other states coexist.|Ильханат, Алтын Ордо, Юань, Мамлюктар, Чыгыш Рим салты жана башка мамлекеттер катар жашайт.
-533|Thirteenth century: new Mongol states replace earlier political systems rather than emerging in empty space.|XIII кылым: жаңы монгол мамлекеттери бош мейкиндикте эмес, мурдагы саясий түзүлүштөрдүн ордунда пайда болот.
+533|Thirteenth century: Mongol conquests reshape Eurasia’s political organisation.|XIII кылым: монгол басып алуулары Евразиянын саясий түзүлүшүн өзгөртөт.
 534|Mongol expansion absorbs the Khwarazmshah state and other existing systems. Abbasids, Ayyubids, Meccan sharifs, Roman states and the Sultanate of Rum continue alongside it.|монгол кеңейиши Хорезмшах мамлекетин жана башка түзүлүштөрдү өзүнө сиңирет. Алар менен катар Аббасийлер, Айюбийлер, Мекке шарифтери, Рим мамлекеттери жана Рум султанаты жашоосун улантат.
 535|Expand through existing states.|Мурдагы мамлекеттердин эсебинен кеңейет.
 536|Collapse under the Mongol assault.|Монгол чабуулунан кыйрайт.
