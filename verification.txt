@@ -1,13 +1,8 @@
-CHRONOGRAPH 1.4.1 — 2026-09-17
-PASS: 1396 translation pairs; 157116 dynamic text checks across 690 years; 72 historical layers and 57 biographies.
-PASS: history regressions, 2522 coordinate checks; all biography, future-catalogue and support tests.
-PASS: unified-map-test across all 690 years: shared Mongol shape preserves dated source territories; ulus paths are not duplicated; dependent areas distinguished; consistent ring winding prevents false holes; detailed mode restores layers; post-1260 name distinguishes uluses; Kyrgyz core and broad influence remain distinct; three-language coverage.
-PASS: JS syntax, source/build equivalence and plain-text source policy.
-Browser final preview: chronograph-190it5oei-adils-projects-7b8d0e6c.vercel.app
-- 1258 shared Mongol view: one colour/label, no internal historical strokes; separate Southern Song.
-- Detailed mode restores individual uluses and toggles back.
-- 840 Kyrgyz broad influence and darker Yenisei core; stale northern Tang overlay removed in this slice; Kyrgyz label remains visible when zoomed.
-- Russian, English and Kyrgyz labels, scope notices and switching verified.
-- 390x844: document remains 390x844; scope control inside map; timeline bottom 837.
-- Future mode hides Mongol scope control; no console errors or warnings; viewport reset.
-Historical boundaries remain schematic. General Mongol overview after 1260 does not assert a politically unified centralised state. Source scope and interpretation recorded in HISTORICAL_REVIEW.md.
+CHRONOGRAPH 1.4.2 — 2026-09-17
+Editorial release. Era heading at 1235: «Эпоха: Евразия во время монгольского расширения».
+Removed empty-map rhetoric and editorial instructions from state cards, era summaries and methodology; preserved historical uncertainty and source notes.
+PASS: all historical geometry and dates byte-identical as data to 1.4.1.
+PASS: 1396 translation pairs; 157116 dynamic checks over 690 years; 72 layers; 2522 coordinate checks; unified Mongol mode; 57 biographies; 78 future cards; support and language settings; source/build agreement; JS syntax.
+Browser preview: chronograph-3cqe6n6ng-adils-projects-7b8d0e6c.vercel.app
+PASS: requested 1235 heading and surrounding descriptions in RU/EN/KY; no console errors or warnings.
+This text revision does not claim a complete scientific verification of every historical statement. Source scope and approximate geography remain documented in HISTORICAL_REVIEW.md.
