@@ -243,3 +243,4 @@ const sequences=[
 ];
 module.exports=require('./journey.cjs')({version:1,places,events,sequences});
 module.exports.hadithTexts=require('./hadith-texts.json');
+module.exports=require('./quotes.cjs')(module.exports);

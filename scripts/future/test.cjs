@@ -37,3 +37,7 @@ console.log(JSON.stringify({events:ids.size,majorSigns:keys.size,references:refs
 assert(!('review' in d));assert(!html.includes('futureReview'));assert(!/2269|4084|4286/.test(JSON.stringify(d)));assert(d.events.find(e=>e.id==='battle').title.ru.includes('Аль-Мальхама'));
 
 for(const ref of refs){const t=d.hadithTexts[ref];assert(t&&t.arabic.length>100,'Missing original: '+ref);assert(!/[A-Za-z]|||…/.test(t.arabic),'Contaminated original: '+ref);assert(t.source.startsWith('https://sunnah.com/'));}assert.equal(Object.keys(d.hadithTexts).length,refs.size);
+for(const event of d.events){const q=event.quote;assert(q&&event.refs.includes(q.ref),'Missing quote '+event.id);assert(d.hadithTexts[q.ref].arabic.includes(q.arabic),'Quote differs from original '+event.id);for(const lang of ['ru','en','ky'])assert(q.translation[lang]?.trim(),'Missing meaning '+event.id+' '+lang);assert(!/[А-Яа-я]/.test(q.translation.en),'Untranslated English '+event.id);}
+assert(!runtime.includes('const context='));assert(!html.includes('Шаги соединены по указанному хадису'));
+assert(runtime.indexOf("quote.className='future-quote'")<runtime.indexOf("where.className='future-places'"),'Quotation must lead the card');
+assert(runtime.includes("const quote=document.createElement('section')"),'Quotation cannot be hidden in a disclosure');

@@ -2,6 +2,10 @@
 
 82 catalogue entries, four account sequences. RU / EN / KY.
 
+Visible quotations update: all 82 events have a selected Arabic excerpt and an original translation of its meaning in Russian, English and Kyrgyz. The quotation and book/number lead the card without a disclosure click. Whole Arabic transmissions remain available below. Narrator wording and embedded dialogue are identified in the translated excerpts; they are not relabelled as the Prophet's direct speech. Repeated chronology paragraphs and paraphrase-first presentation were removed.
+
+`quotes.tsv` holds reviewed excerpts and translations. `quotes.cjs` locates each excerpt in the corresponding Arabic transmission and retains its original vocalization. Build checks require complete 82-event coverage, correct source association and an exact original-text substring. Vercel rebuilds `index.html` from source on each deployment.
+
 New source checks:
 - Sahih Muslim 2897: Medina → al-Amaq OR Dabiq → Constantinople → al-Sham. The lines are schematic directions, never claimed road itineraries. Dabiq is an alternative, not the sole location.
 - Sunan Abi Dawud 4292: peace and joint campaign → return to an unnamed meadow → breach of treaty and preparations for al-Malhama. Sahih according to al-Albani. This is not identified as the return from Constantinople.

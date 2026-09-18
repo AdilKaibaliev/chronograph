@@ -22,3 +22,5 @@ body.future-mode #countryLayer{display:block!important;pointer-events:none;opaci
 #futureBattle{display:block;width:100%;margin-top:8px;color:#f4dfac;border-color:#a68a51;text-align:left}
 
 .future-hadith{margin-top:14px;border-top:1px solid #71603e;padding-top:12px}.future-hadith summary{cursor:pointer;color:#f4dfac;padding:8px 0}.future-hadith h4{font-size:12px;color:#d8bd80}.future-hadith .future-arabic{font-family:"Traditional Arabic","Noto Naskh Arabic",Tahoma,serif;font-size:22px;line-height:2.05;text-align:right;white-space:pre-wrap;overflow-wrap:anywhere;color:#eee5d0}.future-hadith section+section{border-top:1px solid #71603e;margin-top:16px}
+
+.future-quote .future-source{margin:6px 0 14px;padding-top:0;border:0;color:#d8bd80}.future-translation{margin:8px 0 20px;padding:0 0 0 14px;border-left:2px solid #b7985d;font-size:16px;line-height:1.7;color:#f2e9d7}.future-quote .future-arabic{margin:8px 0 20px;padding:0;font-family:"Traditional Arabic","Noto Naskh Arabic",Tahoma,serif;font-size:23px;line-height:1.9;text-align:right;white-space:pre-wrap;overflow-wrap:anywhere;color:#eee5d0}.future-quote .future-label{font-size:9px;color:#bca777}
