@@ -17,3 +17,18 @@ new MutationObserver(()=>{
  if(!$('modal').classList.contains('show'))$('modal').setAttribute('aria-label',translate('Историческая справка',language));
 }).observe($('modal'),{attributes:true,attributeFilter:['class']});
 localizePage();
+
+// Contact follows the same email flow as Concord House.
+const contactButton=document.createElement('button');
+contactButton.id='contactBtn';contactButton.type='button';contactButton.className='btn';
+contactButton.textContent='Связаться';
+contactButton.setAttribute('aria-haspopup','dialog');contactButton.setAttribute('aria-controls','modal');
+supportButton.after(contactButton);
+contactButton.addEventListener('click',()=>{
+ stopPlay();if(futureState.active)futureStop();
+ $('modalBody').innerHTML='<div class="kicker">CHRONOGRAPH</div><h2>Связаться</h2><p>Вопросы, предложения и уточнения к исторической карте:</p><p><a class="contact-email" href="mailto:lfc@legacyfidelity.com?subject=Chronograph">lfc@legacyfidelity.com</a></p>';
+ $('modal').querySelector('.modal-box').scrollTop=0;
+ localizePage();$('modal').setAttribute('aria-label',translate('Связаться',language));
+ $('modal').classList.add('show');
+});
+localizePage();

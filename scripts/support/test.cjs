@@ -12,11 +12,12 @@ for(const [query,saved,blocked,expected] of [['',null,false,'en'],['', 'ky',fals
  assert.equal(vm.runInNewContext(init+';language',ctx),expected);
 }
 const support=fs.readFileSync(__dirname+'/runtime.js','utf8');
-let clicked,stopped=0,futureStopped=0,localized=0;const el={classList:{contains(){return false},add(){}},setAttribute(){},querySelector(){return {scrollTop:0}},addEventListener(n,fn){clicked=fn;}};
+let stopped=0,futureStopped=0,localized=0;const clicks=[];const el={classList:{contains(){return false},add(){}},after(){},setAttribute(){},querySelector(){return {scrollTop:0}},addEventListener(n,fn){clicks.push(fn);}};
 const body={innerHTML:''};
 vm.runInNewContext(support,{document:{createElement:()=>el},futureButton:{after(){}},$:id=>id==='modalBody'?body:el,stopPlay(){stopped++},futureState:{active:true},futureStop(){futureStopped++},localizePage(){localized++},language:'en',translate:s=>s,MutationObserver:class{observe(){}}});
-clicked();assert.equal(stopped,1);assert.equal(futureStopped,1);assert(localized>=2);assert(body.innerHTML.includes('Приём переводов пока не подключён'));
-assert(!/https?:|href=|window.open|fetch\(/.test(support),'No invented payment destination');
+clicks[0]();assert.equal(stopped,1);assert.equal(futureStopped,1);assert(localized>=2);assert(body.innerHTML.includes('Приём переводов пока не подключён'));
+assert(!/https?:|href=|window.open|fetch\(/.test(support.split('// Contact follows')[0]),'No invented payment destination');
+clicks[1]();assert.equal(stopped,2);assert.equal(futureStopped,2);assert(body.innerHTML.includes('mailto:lfc@legacyfidelity.com?subject=Chronograph'));
 const rows=require('../i18n/compiled-messages.json'),t=require('../i18n/core.js').createChronographTranslator(rows);
 for(const [ru,en,ky] of require('./messages.json')){assert.equal(t(ru,'en'),en);assert.equal(t(ru,'ky'),ky);}
 console.log('PASS: English default, URL priority, saved language, blocked storage, RU/EN/KY support copy, both timelines paused, no payment destination.');

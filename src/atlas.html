@@ -14623,7 +14623,7 @@ function estimateLabelBox(text,x,y,fontSize=11){const width=Math.max(34,text.len
 const FIXED_LABEL_OFFSETS={
   earlyIslam:[0,-12],rashidun:[0,-14],umayyad:[0,-14],abbasid:[0,-14],abbasidIraq:[0,-16],
   sasanian:[16,10],byzantine:[-18,-8],medievalByzantine:[-20,-12],lateByzantine:[-22,-12],nicaea:[-16,12],
-  westernTurkic:[-18,-8],yeniseiKyrgyz:[0,-12],kyrgyzKhaganate:[0,-16],kyrgyzMongol:[0,-14],
+  easternTurkic:[0,0],westernTurkic:[-18,-8],yeniseiKyrgyz:[0,-12],kyrgyzKhaganate:[0,-16],kyrgyzMongol:[0,-14],
   tang:[0,-14],northernSong:[0,12],southernSong:[0,14],liao:[0,-14],jinChina:[0,-12],yuan:[0,-16],
   samanid:[-10,-12],qarakhanid:[8,-12],greatSeljuk:[18,-15],rumSeljuk:[-18,12],khwarazmian:[0,-15],
   mongol:[0,-18],chagatai:[0,15],ilkhanate:[0,15],goldenHorde:[0,-15],mamluk:[-12,14],ayyubid:[-12,14],fatimid:[-12,14],
@@ -14631,7 +14631,7 @@ const FIXED_LABEL_OFFSETS={
   hijazAbbasid:[22,12],hijazFatimid:[22,12],sharifsMecca:[22,15],sharifsMedina:[20,-12]
 };
 function labelPriority(emp,y){
-  const p={mongolRealm:35,earlyIslam:25,rashidun:25,umayyad:25,abbasid:24,abbasidIraq:24,mongol:28,chagatai:23,ilkhanate:23,mamluk:23,byzantine:24,medievalByzantine:24,nicaea:20,lateByzantine:24,sasanian:24,tang:23,northernSong:22,southernSong:22,yuan:24,westernTurkic:21,qarakhanid:22,greatSeljuk:23,khwarazmian:23,rumSeljuk:20,ottoman:26,ayyubid:21,fatimid:21,cordoba:19,holyRoman:20,franceMedieval:18,delhiSultanate:19,yeniseiKyrgyz:25,kyrgyzKhaganate:32,kyrgyzMongol:25,westernRomanRef:2};
+  const p={mongolRealm:35,earlyIslam:25,rashidun:25,umayyad:25,abbasid:24,abbasidIraq:24,mongol:28,chagatai:23,ilkhanate:23,mamluk:23,byzantine:24,medievalByzantine:24,nicaea:20,lateByzantine:24,sasanian:24,tang:23,northernSong:22,southernSong:22,yuan:24,easternTurkic:24,westernTurkic:21,qarakhanid:22,greatSeljuk:23,khwarazmian:23,rumSeljuk:20,ottoman:26,ayyubid:21,fatimid:21,cordoba:19,holyRoman:20,franceMedieval:18,delhiSultanate:19,yeniseiKyrgyz:25,kyrgyzKhaganate:32,kyrgyzMongol:25,westernRomanRef:2};
   return p[emp.id]??(emp.type==='empire'?15:emp.type==='fuzzy'?10:emp.type==='local'?7:emp.type==='influence'?6:2)
 }
 function renderEmpires(y){
@@ -14658,9 +14658,10 @@ function renderEmpires(y){
   const occupied=[];const minP=mapState.scale<1.45?19:mapState.scale<1.8?17:0;
   active.slice().sort((a,b)=>labelPriority(b,y)-labelPriority(a,y)).forEach(emp=>{
     if(!emp.label)return;const pr=labelPriority(emp,y);if(pr<minP&&emp.type!=='reference')return;
-    const [bx,by]=project(emp.label),off=FIXED_LABEL_OFFSETS[emp.id]||[0,0],x=bx+off[0],yy=by+off[1],fs=emp.type==='empire'?13.4:10.8,box=estimateLabelBox(emp.short,x,yy,fs);
+    const labelText=emp.id==='easternTurkic'?emp.name:emp.short;
+    const [bx,by]=project(emp.label),off=FIXED_LABEL_OFFSETS[emp.id]||[0,0],x=bx+off[0],yy=by+off[1],fs=emp.type==='empire'?13.4:10.8,box=estimateLabelBox(labelText,x,yy,fs);
     if(occupied.some(o=>rectsOverlap(box,o,3)))return; // hide lower-priority label; never move it
-    const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',x);t.setAttribute('y',yy);t.setAttribute('text-anchor','middle');t.setAttribute('class',`empire-label${emp.type!=='empire'?' small':''}${emp.type==='reference'?' reference':''}`);t.textContent=emp.short;if(['mongolRealm','kyrgyzKhaganate','yeniseiKyrgyz','kyrgyzMongol'].includes(emp.id))t.classList.add('realm-label');lg.appendChild(t);occupied.push(box)
+    const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',x);t.setAttribute('y',yy);t.setAttribute('text-anchor','middle');t.setAttribute('class',`empire-label${emp.type!=='empire'?' small':''}${emp.type==='reference'?' reference':''}`);t.dataset.empire=emp.id;t.textContent=labelText;if(['easternTurkic','westernTurkic','mongolRealm','kyrgyzKhaganate','yeniseiKyrgyz','kyrgyzMongol'].includes(emp.id))t.classList.add('realm-label');lg.appendChild(t);occupied.push(box)
   });
   empireLayer.appendChild(g);empireLabelLayer.appendChild(lg);renderLegend(active)
 }
