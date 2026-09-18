@@ -12,6 +12,10 @@ body.future-mode #countryLayer{display:block!important;pointer-events:none;opaci
 @media(max-height:550px) and (min-width:701px){.future-head{padding:8px 12px}.future-head h2{font-size:20px}.future-head p{display:none}.future-controls{grid-template-columns:1fr 1fr}.future-scroll{padding:10px 12px}}
 
 .future-area{fill:#d6b876;fill-opacity:.19;stroke:#d6b876;stroke-width:1;stroke-dasharray:4 3;vector-effect:non-scaling-stroke;pointer-events:none}
+.future-territory{fill:#aa7640;fill-opacity:.45;stroke:#ffdb92;stroke-width:2;vector-effect:non-scaling-stroke;pointer-events:none}
+.future-territory-label{font:600 12px system-ui;fill:#fff1cf;paint-order:stroke;stroke:#302316;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.future-geography{margin:8px 0 16px;padding:12px;border:1px solid #625037;border-radius:8px;background:#30291f}.future-geography strong{display:block;margin-top:4px;color:#f0dcae;font:13px system-ui}.future-geography p{margin:6px 0 10px!important;font-size:11px!important;line-height:1.55!important}.future-geography .future-geography-source{font-size:10px!important;margin-bottom:0!important;color:#bfae8e!important}.future-geography .btn{font-size:11px;padding:6px 10px}
+.future-map-caption strong,.future-map-caption span{display:block}.future-map-caption strong{color:#f4dcaa;margin-bottom:3px;font-size:12px}
 .future-route{fill:none;stroke:#f3d17e;stroke-width:3;stroke-dasharray:3 2;vector-effect:non-scaling-stroke;pointer-events:none;animation:future-route-travel 7s linear 1}
 @keyframes future-route-travel{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
 .future-chapters{display:flex;gap:6px;overflow-x:auto;margin-top:10px}.future-chapters[hidden]{display:none}

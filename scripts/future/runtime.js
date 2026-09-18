@@ -9,6 +9,11 @@ const futureText={
  route:['Направление движения · схема','Direction of movement · schematic','Кыймылдын багыты · схема'],
  replay:['Повторить движение','Replay movement','Кыймылды кайталоо'],
  regions:['Места события','Event locations','Окуянын жерлери'],
+ historicalGeo:['Историческая география','Historical geography','Тарыхый география'],
+ namedGeo:['География хадиса','Hadith geography','Хадистин географиясы'],
+ overview:['Мировой обзор','World overview','Дүйнөлүк көрүнүш'],
+ showMap:['Показать на карте','Show on map','Картадан көрсөтүү'],
+ geoSources:['Источники географии','Geography sources','Географиянын булактары'],
  
  button:['Будущие события','Future events','Келечектеги окуялар'],back:['← Исторический атлас','← Historical atlas','← Тарыхый атлас'],
  intro:['События и места в достоверных хадисах.','Events and places in authentic hadiths.','Сахих хадистердеги окуялар жана жерлер.'],
@@ -20,7 +25,7 @@ const futureText={
  history:['Сообщение о прошлом','Account concerning the past','Өткөнгө тиешелүү баян'],
  sources:['Источники','Sources','Булактар'],list:['Список событий','Event list','Окуялардын тизмеси'],method:['О каталоге и карте','About the catalogue and map','Каталог жана карта жөнүндө'],
  methodBody:['«Сахих аль-Бухари», «Сахих Муслим», «Сунан Абу Дауд». Номер передачи указан рядом с каждым фрагментом.','Sahih al-Bukhari, Sahih Muslim, Sunan Abi Dawud. Each excerpt includes its transmission number.','«Сахих аль-Бухари», «Сахих Муслим», «Сунан Абу Дауд». Ар бир үзүндүнүн жанында риваяттын номери берилет.'],
- mapMethod:['На карте — названные в хадисах места. Линии показывают схематичные направления движения. Общая хронология всех признаков и точные маршруты хадисами не заданы.','The map shows places named in the hadiths. Lines show schematic directions of movement. The hadiths do not specify a complete chronology of all signs or exact routes.','Картада хадистерде аталган жерлер көрсөтүлгөн. Сызыктар кыймылдын шарттуу багытын берет. Хадистерде бардык белгилердин жалпы хронологиясы жана так жолдор берилбейт.'],
+ mapMethod:['Места из хадисов и историческая география. Области и направления движения показаны схематично; исторические сведения сопровождаются названиями источников.','Places from hadiths and historical geography. Areas and directions are schematic; historical information includes source titles.','Хадистердеги жерлер жана тарыхый география. Аймактар менен багыттар шарттуу көрсөтүлөт; тарыхый маалыматтардын булактары берилет.'],
  empty:['Ничего не найдено. Измените запрос или раздел.','No matches. Change the search or section.','Эч нерсе табылган жок. Издөөнү же бөлүмдү өзгөртүңүз.'],
  previous:['Предыдущее событие','Previous event','Мурунку окуя'],next:['Следующее событие','Next event','Кийинки окуя'],play:['Начать просмотр карточек','Start browsing cards','Карточкаларды көрүүнү баштоо'],pause:['Остановить просмотр','Pause browsing','Көрүүнү токтотуу'],step:['Карточка','Card','Карточка'],browse:['Просмотр карточек · без дат','Browsing cards · no dates','Карточкаларды көрүү · датасыз'],reset:['Показать места события','Show event places','Окуянын жерлерин көрсөтүү'],map:['Карта мест, упомянутых в хадисах','Map of places mentioned in hadiths','Хадистерде аталган жерлердин картасы'],
  named:['Названные места','Named places','Аталган жерлер'],partial:['Часть названных мест не нанесена: точка не установлена.','Some named places have no point: their location is not fixed.','Аталган жерлердин айрымдары белгиленген эмес: так чекити аныкталган эмес.'],
@@ -43,7 +48,7 @@ function futureSequence(){return FUTURE_CATALOG.sequences.find(s=>'seq:'+s.id===
 function futureItems(){
  const seq=futureSequence();let result=seq?seq.ids.map(id=>futureById.get(id)):FUTURE_CATALOG.events.filter(e=>futureState.filter==='all'||e.group===futureState.filter);
  const q=futureState.query.trim().toLocaleLowerCase();
- if(q)result=result.filter(e=>[fl(e.title),fl(e.quote.translation),fl(e.summary),...e.places.map(p=>fl(FUTURE_CATALOG.places[p].name)),...e.refs].join(' ').toLocaleLowerCase().includes(q));
+ if(q)result=result.filter(e=>[fl(e.title),fl(e.quote.translation),fl(e.summary),e.geography.note?fl(e.geography.note):'',...e.places.map(p=>fl(FUTURE_CATALOG.places[p].name)),...e.refs].join(' ').toLocaleLowerCase().includes(q));
  return result;
 }
 function futureRef(ref){const [collection,num]=ref.split(':');if(collection==='abudawud')return ({ru:'Сунан Абу Дауд',en:'Sunan Abi Dawud',ky:'Сунан Абу Дауд'})[language]+' · '+num;return (collection==='bukhari'?({ru:'Сахих аль-Бухари',en:'Sahih al-Bukhari',ky:'Сахих аль-Бухари'})[language]:({ru:'Сахих Муслим',en:'Sahih Muslim',ky:'Сахих Муслим'})[language])+' · '+num;}
@@ -60,9 +65,16 @@ function futureSetCamera(points){
 function futureMap(event,focus){
  futureLayer.replaceChildren();const places=event?event.places.map(id=>[id,FUTURE_CATALOG.places[id]]):[];
  const located=places.filter(([,p])=>p.coord);
- if(focus)futureSetCamera(located.map(([,p])=>p.coord));
+ const territories=(event?.geography.territories||[]).map(id=>[id,FUTURE_CATALOG.territories[id]]);
+ if(focus)futureSetCamera([...located.map(([,p])=>p.coord),...territories.flatMap(([,t])=>t.polygons.flat())]);
+ for(const [id,t] of territories){
+  const shape=document.createElementNS(svg.namespaceURI,'path');shape.setAttribute('d',polygonPath(t.polygons));shape.setAttribute('class','future-territory');shape.dataset.territory=id;
+  const title=document.createElementNS(svg.namespaceURI,'title');title.textContent=fl(t.name)+' · '+fl(t.period);shape.append(title);futureLayer.append(shape);
+  const g=document.createElementNS(svg.namespaceURI,'g');g.setAttribute('transform',`translate(${project(t.labelCoord).join(' ')})`);
+  const label=document.createElementNS(svg.namespaceURI,'text');label.classList.add('future-marker-inner','future-territory-label');label.setAttribute('transform',`scale(${futureMarkerScale()})`);label.setAttribute('text-anchor','middle');label.textContent=fl(t.name);g.append(label);futureLayer.append(g);
+ }
  // Geographic spotlights are schematic areas, not claimed event boundaries.
- for(const [,p] of located){const r=p.area?1.5:.22,ring=Array.from({length:49},(_,i)=>[p.coord[0]+r*Math.cos(i*Math.PI/24),p.coord[1]+r*.7*Math.sin(i*Math.PI/24)]);const area=document.createElementNS(svg.namespaceURI,'path');area.setAttribute('d',polygonPath([ring]));area.setAttribute('class','future-area');futureLayer.append(area);}
+ for(const [id,p] of located){const r=p.radius||(p.area?1.5:.22),ring=Array.from({length:49},(_,i)=>[p.coord[0]+r*Math.cos(i*Math.PI/24),p.coord[1]+r*.7*Math.sin(i*Math.PI/24)]);const area=document.createElementNS(svg.namespaceURI,'path');area.setAttribute('d',polygonPath([ring]));area.setAttribute('class','future-area');area.dataset.place=id;futureLayer.append(area);}
  const route=event&&FUTURE_CATALOG.routes[event.id];
  if(route){const points=route.map(id=>project(FUTURE_CATALOG.places[id].coord));const path=document.createElementNS(svg.namespaceURI,'path');path.setAttribute('d',points.map((p,i)=>(i?'L':'M')+p.join(' ')).join(' '));path.setAttribute('class','future-route');path.setAttribute('pathLength','100');const title=document.createElementNS(svg.namespaceURI,'title');title.textContent=ft('route');path.append(title);futureLayer.append(path);}
  // Screen-size markers remain legible under map zoom.
@@ -75,7 +87,17 @@ function futureMap(event,focus){
   g.addEventListener('pointerdown',e=>e.stopPropagation());
   const activate=()=>{futureStop();futureSetCamera([p.coord]);updateFutureMarkerScale();};g.addEventListener('click',activate);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.code==='Space'){e.preventDefault();e.stopPropagation();activate();}});futureLayer.append(g);
  }
- futureNote.replaceChildren();const caption=document.createElement('div');caption.className='future-map-caption';caption.textContent=located.length?ft('regions'):ft('unknown');futureNote.append(caption);if(route){const note=document.createElement('div');note.className='future-map-caption';note.textContent=ft('route');futureNote.append(note);}
+ futureNote.replaceChildren();
+ if(event){
+  const caption=document.createElement('div');caption.className='future-map-caption';
+  const heading=document.createElement('strong');heading.textContent=fl(event.title);caption.append(heading);
+  const line=document.createElement('span');line.textContent=located.length
+   ?[ft(event.geography.mode==='historical'?'historicalGeo':'namedGeo'),event.geography.date?fl(event.geography.date):''].filter(Boolean).join(' · ')
+   :ft('overview')+' · '+fl(event.geography.note);caption.append(line);
+  for(const [,t] of territories){const period=document.createElement('span');period.textContent=fl(t.period);caption.append(period);}
+  futureNote.append(caption);
+ }
+ if(route){const note=document.createElement('div');note.className='future-map-caption';note.textContent=ft('route');futureNote.append(note);}
 }
 function futureMarkerScale(){return 1/(mapState.scale*Math.max(.1,Math.min(svg.clientWidth/SVG_W,svg.clientHeight/SVG_H)));}
 function updateFutureMarkerScale(){if(!futureState.active)return;for(const inner of futureLayer.querySelectorAll('.future-marker-inner'))inner.setAttribute('transform',`scale(${futureMarkerScale()})`);}
@@ -95,6 +117,13 @@ function futureRender(focus=false,scroll=false){
  if(event){
   const label=document.createElement('div');label.className='future-label';label.textContent=ft(event.group==='historical'?'history':event.group==='major'?'statusMajor':event.group==='minor'?'statusMinor':'statusExpected');article.append(label);
   const title=document.createElement('h3');title.textContent=fl(event.title);article.append(title);
+  const geo=document.createElement('section');geo.className='future-geography';geo.dataset.mode=event.geography.mode;
+  const geoHeading=document.createElement('div');geoHeading.className='future-label';geoHeading.textContent=ft(event.geography.mode==='historical'?'historicalGeo':event.geography.mode==='unlocated'?'overview':'namedGeo');geo.append(geoHeading);
+  if(event.geography.date){const date=document.createElement('strong');date.textContent=fl(event.geography.date);geo.append(date);}
+  const description=document.createElement('p');description.textContent=event.geography.note?fl(event.geography.note):event.places.map(id=>fl(FUTURE_CATALOG.places[id].name)).join(' · ');geo.append(description);
+  if(event.geography.mode!=='unlocated'){const show=document.createElement('button');show.type='button';show.className='btn';show.textContent=ft('showMap');show.onclick=()=>{futureStop();futureMap(event,true);};geo.append(show);}
+  if(event.geography.sources.length){const source=document.createElement('p');source.className='future-geography-source';source.textContent=ft('geoSources')+': '+event.geography.sources.map(s=>s.title).join('; ');geo.append(source);}
+  article.append(geo);
   const quote=document.createElement('section');quote.className='future-quote';quote.setAttribute('aria-label',ft('excerpt'));
   const citation=document.createElement('p');citation.className='future-source';citation.textContent=ft('excerpt')+' · '+futureRef(event.quote.ref);quote.append(citation);
   const meaningLabel=document.createElement('div');meaningLabel.className='future-label';meaningLabel.textContent=ft('meaning');quote.append(meaningLabel);
@@ -141,4 +170,4 @@ localeSelect.addEventListener('change',()=>futureRender(false));
 futureLocationHook=url=>{if(futureState.active){url.searchParams.set('mode','future');url.searchParams.set('section',futureState.filter);if(futureState.selected)url.searchParams.set('event',futureState.selected);else url.searchParams.delete('event');url.searchParams.set('view',Object.values(futureState.history.view).map(n=>n.toFixed(3)).join(','));url.searchParams.set('fview',[mapState.scale,mapState.tx,mapState.ty].map(n=>n.toFixed(3)).join(','));if(futureState.query)url.searchParams.set('q',futureState.query);else url.searchParams.delete('q');}else for(const key of ['mode','section','event','fview','q'])url.searchParams.delete(key);};
 const futureInitialFilter=stateParams.get('section');if(['major','minor','expected','historical','all',...FUTURE_CATALOG.sequences.map(s=>'seq:'+s.id)].includes(futureInitialFilter))futureState.filter=futureInitialFilter;
 if(futureById.has(stateParams.get('event')))futureState.selected=stateParams.get('event');futureState.query=(stateParams.get('q')||'').slice(0,200);$('futureSearch').value=futureState.query;
-futureRender();if(stateParams.get('mode')==='future'){setFutureMode(true);const v=(stateParams.get('fview')||'').split(',').map(Number);if(v.length===3&&v.every(Number.isFinite)&&v[0]>=.75&&v[0]<=9&&Math.abs(v[1])<=20000&&Math.abs(v[2])<=20000){++cameraAnimationVersion;[mapState.scale,mapState.tx,mapState.ty]=v;setViewport();updateFutureMarkerScale();}}
+futureRender();if(stateParams.get('mode')==='future'){setFutureMode(true);const v=(stateParams.get('fview')||'').split(',').map(Number);const oldEmptyOverview=v[0]===1&&v[1]===0&&v[2]===0;if(!oldEmptyOverview&&v.length===3&&v.every(Number.isFinite)&&v[0]>=.75&&v[0]<=9&&Math.abs(v[1])<=20000&&Math.abs(v[2])<=20000){++cameraAnimationVersion;[mapState.scale,mapState.tx,mapState.ty]=v;setViewport();updateFutureMarkerScale();}}

@@ -41,3 +41,26 @@ for(const event of d.events){const q=event.quote;assert(q&&event.refs.includes(q
 assert(!runtime.includes('const context='));assert(!html.includes('Шаги соединены по указанному хадису'));
 assert(runtime.indexOf("quote.className='future-quote'")<runtime.indexOf("where.className='future-places'"),'Quotation must lead the card');
 assert(runtime.includes("const quote=document.createElement('section')"),'Quotation cannot be hidden in a disclosure');
+
+// Regression: historical cards must have evidence-backed geography and visible map content.
+for(const [id,place,year] of [['kisra','ctesiphon',637],['hasan','kufa',661],['ammar','siffin',657],['death-prophet','medina',632]]){
+ const e=d.events.find(e=>e.id===id);assert(e.places.includes(place),id+' missing location');assert(d.places[place].coord);
+ assert.equal(e.geography.mode,'historical');assert(e.geography.sources.length);assert(e.geography.date.en.includes(String(year)));
+}
+for(const e of d.events){assert(['historical','named','unlocated'].includes(e.geography.mode));if(e.geography.mode==='unlocated'){assert(!e.places.some(p=>d.places[p].coord));assert(e.geography.note.ru);}else assert(e.places.some(p=>d.places[p].coord));}
+const territory=d.territories.sasanian;
+assert(d.events.find(e=>e.id==='kisra').geography.territories.includes('sasanian'));
+function inside([x,y],ring){let yes=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const [xi,yi]=ring[i],[xj,yj]=ring[j];if((yi>y)!==(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi)yes=!yes;}return yes;}
+for(const ring of territory.polygons){assert(ring.length>20);assert.deepEqual(ring[0],ring.at(-1));assert(ring.every(p=>p.every(Number.isFinite)));}
+assert(territory.polygons.some(r=>inside(d.places.ctesiphon.coord,r)),'Capital must be inside mainland core');
+for(const outside of [[31.2,30],[39.83,21.42],[51,40]])assert(!territory.polygons.some(r=>inside(outside,r)),'Core must not include Egypt, Mecca or the Caspian Sea');
+assert(d.places.siffin.area&&d.places.siffin.radius<.5,'Siffin must be a local battle area');
+assert(runtime.includes('t.polygons.flat()'),'Camera must fit the whole territory');
+assert(runtime.includes('oldEmptyOverview'),'Old empty-map links must focus new geography');
+// Complete numbered lists and context must survive future editing.
+const six=d.events.find(e=>e.id==='death-prophet').quote;
+for(const id of ['jerusalem','plague','arab-fitna','truce'])assert.deepEqual(d.events.find(e=>e.id===id).quote,six);
+for(const term of ['шесть','Байт-аль-Макдиса','мор','сто динаров','смуту','перемирие','двенадцать тысяч'])assert(six.translation.ru.includes(term),term);
+const harsh=d.events.find(e=>e.id==='harshness').quote.translation.ru;assert(harsh.includes('женщин')||harsh.includes('женщины'));assert(/кнут|плеть/.test(harsh));
+assert(d.events.find(e=>e.id==='constantinople').quote.translation.en.includes('report is false'));
+console.log(JSON.stringify({status:'PASS: sourced geography, Sasanian polygon, complete excerpts',mapped:d.events.filter(e=>e.geography.mode!=='unlocated').length,unlocated:d.events.filter(e=>e.geography.mode==='unlocated').length}));
