@@ -241,4 +241,4 @@ const sequences=[
  {id:'isa',title:L('Даджаль → Иса → Яджудж и Маджудж','Dajjal → Isa → Yajuj and Majuj','Дажжал → Иса → Яжуж жана Мажуж'),refs:['muslim:2937a'],ids:['dajjal','isa','ludd','yajuj','yajuj-end','wind']},
  {id:'wind',title:L('Мир → ветер → наступление Часа','Peace → wind → the Hour','Тынчтык → шамал → Кыямат'),refs:['muslim:2940a'],ids:['ludd','peace','wind','idols','hour']}
 ];
-module.exports={version:1,places,events,sequences};
+module.exports=require('./journey.cjs')({version:1,places,events,sequences});

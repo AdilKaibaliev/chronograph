@@ -1,7 +1,13 @@
 // This module owns its text and state; it does not alter historical datasets.
 const futureText={
+ grade:['Оценка передачи','Transmission grading','Риваяттын баасы'],
+ review:['Разбор: Махди, присяга и чёрные знамёна','Review: Mahdi, allegiance and black banners','Талдоо: Махди, ант жана кара туулар'],
+ route:['Пунктир — условное направление, не точный путь. Дабик показан как один из двух вариантов хадиса.','Dashed line: schematic direction, not an exact route. Dabiq is one of two alternatives in the hadith.','Үзүк сызык — так жол эмес, шарттуу багыт. Дабик — хадистеги эки варианттын бири.'],
+ replay:['Повторить движение','Replay movement','Кыймылды кайталоо'],
+ regions:['Подсветка — ориентир места, не граница события.','Highlight: location guide, not an event boundary.','Жарык аймак — жердин багыты, окуянын чек арасы эмес.'],
+ 
  button:['Будущие события','Future events','Келечектеги окуялар'],back:['← Исторический атлас','← Historical atlas','← Тарыхый атлас'],
- intro:['События по хадисам Пророка Мухаммада ﷺ из «Сахиха аль-Бухари» и «Сахиха Муслима».','Events in the hadiths of Prophet Muhammad ﷺ from Sahih al-Bukhari and Sahih Muslim.','Мухаммад пайгамбардын ﷺ «Сахих аль-Бухари» жана «Сахих Муслим» жыйнактарындагы хадистерден окуялар.'],
+ intro:['Интерактивный атлас сообщений о признаках Часа. Пересказ, источник и оценка — в каждой карточке.','Interactive atlas of accounts about the signs of the Hour. Each card gives a paraphrase, source and grading.','Кыямат белгилери тууралуу баяндардын интерактивдүү атласы. Ар бир карточкада мазмуну, булагы жана баасы берилет.'],
  search:['Найти событие или место','Find an event or place','Окуяны же жерди издөө'],group:['Раздел событий','Event section','Окуялар бөлүмү'],
  main:['Связанные последовательности','Connected sequences','Байланышкан ырааттар'],major:['Большие признаки · 10','Major signs · 10','Чоң белгилер · 10'],minor:['Малые признаки и связанные сообщения','Minor signs and related accounts','Кичине белгилер жана байланыштуу баяндар'],expected:['Другие ожидаемые события','Other expected events','Башка күтүлгөн окуялар'],historical:['Исторические сообщения','Historical accounts','Тарыхый баяндар'],all:['Весь каталог','Whole catalogue','Толук каталог'],
  unknown:['Место не названо или не установлено','Place unnamed or unidentified','Жер аталган эмес же аныктала элек'],
@@ -14,7 +20,7 @@ const futureText={
  majorNote:['Десять признаков перечислены в Муслиме 2901a. Порядок перечисления не задаёт полную последовательность. Солнце и Зверь следуют близко друг за другом; который раньше — здесь не установлено.','Muslim 2901a lists ten signs. Listing order does not establish a complete sequence. The sun and the Beast follow closely; which comes first is not fixed here.','Муслим 2901aда он белги саналат. Тизмедеги орун толук ыраатты аныктабайт. Күн менен жаныбардын чыгышы жакын болот; кайсынысы биринчи экени бул жерде белгиленбейт.'],
  orderNote:['Шаги соединены по указанному хадису. Другие признаки не вставлены между ними без текстового основания.','Steps follow the cited hadith. Other signs are not inserted between them without textual support.','Кадамдар көрсөтүлгөн хадис боюнча байланышкан. Башка белгилер тексттик негизсиз алардын арасына кошулган эмес.'],
  sources:['Источники','Sources','Булактар'],list:['Список событий','Event list','Окуялардын тизмеси'],method:['О каталоге и карте','About the catalogue and map','Каталог жана карта жөнүндө'],
- methodBody:['Тематический указатель сообщений о признаках Часа из двух сборников. Повторяющиеся передачи объединены; карточки содержат краткий пересказ, а не полный перевод хадиса. Номера приведены по сквозной нумерации, буквы различают варианты. Это первая редакция каталога: она не означает построчную проверку всего корпуса обоих сборников.','A thematic index of accounts about signs of the Hour from the two collections. Repeated transmissions are grouped; cards give short paraphrases, not full hadith translations. Continuous numbering is used, with letters for variants. This is the first catalogue edition, not a claim that every line of both collections has been audited.','Эки жыйнактагы Кыямат белгилери тууралуу баяндардын тематикалык көрсөткүчү. Кайталанган риваяттар бириктирилген; карточкалар толук котормо эмес, кыскача мазмун берет. Жалпы номерлөө колдонулуп, тамгалар варианттарды айырмалайт. Бул — каталогдун алгачкы редакциясы; эки жыйнактын ар бир сабы текшерилди дегенди билдирбейт.'],
+ methodBody:['Основа: «Сахих аль-Бухари», «Сахих Муслим»; дополнения: «Сунан Абу Дауд» с указанной оценкой. Карточки дают краткий пересказ, номера различают передачи. Последовательности разных хадисов не объединяются без основания.','Core: Sahih al-Bukhari and Sahih Muslim; additions: Sunan Abi Dawud with stated grading. Cards provide short paraphrases and numbered references. Separate accounts are not merged into one chronology without evidence.','Негизи: «Сахих аль-Бухари», «Сахих Муслим»; кошумча: баасы көрсөтүлгөн «Сунан Абу Дауд». Карточкаларда кыскача мазмун жана номер берилет. Өзүнчө баяндар негизсиз бир хронологияга бириктирилбейт.'],
  mapMethod:['Координаты городов приблизительны, области не имеют предсказанных границ. Неназванные места и спорные точные отождествления оставлены без точки. Даты по григорианскому календарю и хиджре не назначаются.','City coordinates are approximate; areas do not represent predicted borders. Unnamed places and uncertain exact identifications have no point. Gregorian and Hijri dates are not assigned.','Шаарлардын координаттары болжолдуу; аймактар болочок чек араларды билдирбейт. Аталбаган жана так аныкталбаган жерлер чекитсиз берилет. Григориандык жана хижралык даталар коюлбайт.'],
  empty:['Ничего не найдено. Измените запрос или раздел.','No matches. Change the search or section.','Эч нерсе табылган жок. Издөөнү же бөлүмдү өзгөртүңүз.'],
  previous:['Предыдущее событие','Previous event','Мурунку окуя'],next:['Следующее событие','Next event','Кийинки окуя'],play:['Начать просмотр карточек','Start browsing cards','Карточкаларды көрүүнү баштоо'],pause:['Остановить просмотр','Pause browsing','Көрүүнү токтотуу'],step:['Карточка','Card','Карточка'],browse:['Просмотр карточек · без дат','Browsing cards · no dates','Карточкаларды көрүү · датасыз'],reset:['Показать места события','Show event places','Окуянын жерлерин көрсөтүү'],map:['Карта мест, упомянутых в хадисах','Map of places mentioned in hadiths','Хадистерде аталган жерлердин картасы'],
@@ -26,7 +32,7 @@ const futureState={active:false,filter:'seq:sham',selected:'battle',query:'',tim
 const futureById=new Map(FUTURE_CATALOG.events.map(e=>[e.id,e]));
 const futureButton=document.createElement('button');futureButton.id='futureBtn';futureButton.className='btn';futureButton.dataset.localeOwned='true';futureButton.setAttribute('aria-pressed','false');futureButton.setAttribute('aria-controls','futurePanel');localeSelect.after(futureButton);
 const futurePanel=document.createElement('aside');futurePanel.id='futurePanel';futurePanel.className='card';futurePanel.dataset.localeOwned='true';futurePanel.hidden=true;
-futurePanel.innerHTML='<header class="future-head"><div class="future-label">CHRONOGRAPH 1.4.3</div><h2></h2><p></p><div class="future-controls"><select id="futureGroup"></select><input id="futureSearch" type="search" autocomplete="off"></div></header><div class="future-scroll" id="futureScroll"><article id="futureArticle"></article><details class="future-index" open><summary id="futureListTitle"></summary><ol class="future-list" id="futureList"></ol></details><details class="future-method"><summary id="futureMethodTitle"></summary><p id="futureMethodBody"></p><p id="futureMapMethod"></p></details></div>';
+futurePanel.innerHTML='<header class="future-head"><div class="future-label">CHRONOGRAPH 1.4.3</div><h2></h2><p></p><div class="future-controls"><select id="futureGroup"></select><input id="futureSearch" type="search" autocomplete="off"></div><nav id="futureChapters" class="future-chapters"></nav></header><div class="future-scroll" id="futureScroll"><article id="futureArticle"></article><details class="future-index" open><summary id="futureListTitle"></summary><ol class="future-list" id="futureList"></ol></details><details class="future-method"><summary id="futureMethodTitle"></summary><p id="futureMethodBody"></p><p id="futureMapMethod"></p></details><details class="future-method" id="futureReview"></details></div>';
 $('timelineCard').before(futurePanel);
 const futureTimeline=document.createElement('section');futureTimeline.id='futureTimeline';futureTimeline.className='card timeline-card';futureTimeline.dataset.localeOwned='true';futureTimeline.hidden=true;futureTimeline.innerHTML='<button class="round" id="futurePrevious">‹</button><button class="round" id="futurePlay">▶</button><div class="future-progress"><strong id="futureCurrent"></strong><small id="futureCount" role="status" aria-live="polite"></small><progress id="futureProgress" max="1" value="0"></progress></div><button class="round" id="futureNext">›</button>';
 $('timelineCard').after(futureTimeline);
@@ -41,7 +47,7 @@ function futureItems(){
  if(q)result=result.filter(e=>[fl(e.title),fl(e.summary),...e.places.map(p=>fl(FUTURE_CATALOG.places[p].name)),...e.refs].join(' ').toLocaleLowerCase().includes(q));
  return result;
 }
-function futureRef(ref){const [collection,num]=ref.split(':');return (collection==='bukhari'?({ru:'Сахих аль-Бухари',en:'Sahih al-Bukhari',ky:'Сахих аль-Бухари'})[language]:({ru:'Сахих Муслим',en:'Sahih Muslim',ky:'Сахих Муслим'})[language])+' · '+num;}
+function futureRef(ref){const [collection,num]=ref.split(':');if(collection==='abudawud')return ({ru:'Сунан Абу Дауд',en:'Sunan Abi Dawud',ky:'Сунан Абу Дауд'})[language]+' · '+num;return (collection==='bukhari'?({ru:'Сахих аль-Бухари',en:'Sahih al-Bukhari',ky:'Сахих аль-Бухари'})[language]:({ru:'Сахих Муслим',en:'Sahih Muslim',ky:'Сахих Муслим'})[language])+' · '+num;}
 function futureStop(){if(futureState.timer!==null)clearInterval(futureState.timer);futureState.timer=null;futurePlayLabel();}
 function futurePlayLabel(){$('futurePlay').textContent=futureState.timer===null?'▶':'Ⅱ';$('futurePlay').setAttribute('aria-label',ft(futureState.timer===null?'play':'pause'));$('futurePlay').setAttribute('aria-pressed',String(futureState.timer!==null));}
 function futureSetCamera(points){
@@ -50,23 +56,27 @@ function futureSetCamera(points){
  const ps=points.map(project),xs=ps.map(p=>p[0]),ys=ps.map(p=>p[1]);
  const cx=(Math.min(...xs)+Math.max(...xs))/2,cy=(Math.min(...ys)+Math.max(...ys))/2;
  const scale=Math.min(5,1000/(Math.max(...xs)-Math.min(...xs)+90),410/(Math.max(...ys)-Math.min(...ys)+65));
- mapState={scale,tx:720-cx*scale,ty:360-cy*scale};setViewport();
+ animateCamera({scale,tx:720-cx*scale,ty:360-cy*scale},650);
 }
 function futureMap(event,focus){
  futureLayer.replaceChildren();const places=event?event.places.map(id=>[id,FUTURE_CATALOG.places[id]]):[];
  const located=places.filter(([,p])=>p.coord);
  if(focus)futureSetCamera(located.map(([,p])=>p.coord));
+ // Geographic spotlights are schematic areas, not claimed event boundaries.
+ for(const [,p] of located){const r=p.area?1.5:.22,ring=Array.from({length:49},(_,i)=>[p.coord[0]+r*Math.cos(i*Math.PI/24),p.coord[1]+r*.7*Math.sin(i*Math.PI/24)]);const area=document.createElementNS(svg.namespaceURI,'path');area.setAttribute('d',polygonPath([ring]));area.setAttribute('class','future-area');futureLayer.append(area);}
+ const route=event&&FUTURE_CATALOG.routes[event.id];
+ if(route){const points=route.map(id=>project(FUTURE_CATALOG.places[id].coord));const path=document.createElementNS(svg.namespaceURI,'path');path.setAttribute('d',points.map((p,i)=>(i?'L':'M')+p.join(' ')).join(' '));path.setAttribute('class','future-route');path.setAttribute('pathLength','100');const title=document.createElementNS(svg.namespaceURI,'title');title.textContent=ft('route');path.append(title);futureLayer.append(path);}
  // Screen-size markers remain legible under map zoom.
  for(const [id,p] of located){
   const [x,y]=project(p.coord),g=document.createElementNS(svg.namespaceURI,'g');g.classList.add('future-marker');g.setAttribute('transform',`translate(${x} ${y})`);g.setAttribute('role','button');g.setAttribute('tabindex','0');g.setAttribute('aria-label',fl(p.name));g.dataset.place=id;
   const inner=document.createElementNS(svg.namespaceURI,'g');inner.classList.add('future-marker-inner');inner.setAttribute('transform',`scale(${futureMarkerScale()})`);
-  if(p.area){const halo=document.createElementNS(svg.namespaceURI,'circle');halo.classList.add('future-halo');halo.setAttribute('r','24');inner.append(halo);}
+  {const halo=document.createElementNS(svg.namespaceURI,'circle');halo.classList.add('future-halo');halo.setAttribute('r','24');inner.append(halo);}
   const dot=document.createElementNS(svg.namespaceURI,'circle');dot.setAttribute('r','6');inner.append(dot);
   const label=document.createElementNS(svg.namespaceURI,'text');label.setAttribute('x','11');label.setAttribute('y',String(4+located.findIndex(v=>v[0]===id)%2*13));label.textContent=fl(p.name).split(' · ')[0].split(' — ')[0];inner.append(label);g.append(inner);
   g.addEventListener('pointerdown',e=>e.stopPropagation());
   const activate=()=>{futureStop();futureSetCamera([p.coord]);updateFutureMarkerScale();};g.addEventListener('click',activate);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.code==='Space'){e.preventDefault();e.stopPropagation();activate();}});futureLayer.append(g);
  }
- futureNote.replaceChildren();const caption=document.createElement('div');caption.className='future-map-caption';caption.textContent=located.length?ft('approx')+' '+ft('borders'):ft('unknown');futureNote.append(caption);
+ futureNote.replaceChildren();const caption=document.createElement('div');caption.className='future-map-caption';caption.textContent=located.length?ft('regions')+' '+ft('borders'):ft('unknown');futureNote.append(caption);if(route){const note=document.createElement('div');note.className='future-map-caption';note.textContent=ft('route');futureNote.append(note);}
  if(located.length&&located.length<places.length){const more=document.createElement('div');more.className='future-map-caption';more.textContent=ft('partial');futureNote.append(more);}
 }
 function futureMarkerScale(){return 1/(mapState.scale*Math.max(.1,Math.min(svg.clientWidth/SVG_W,svg.clientHeight/SVG_H)));}
@@ -90,8 +100,13 @@ function futureRender(focus=false,scroll=false){
   const where=document.createElement('div');where.className='future-places';where.setAttribute('role','group');where.setAttribute('aria-label',ft('named'));
   if(!event.places.length){const no=document.createElement('p');no.textContent=ft('unknown');where.append(no);}
   for(const id of event.places){const place=FUTURE_CATALOG.places[id],b=document.createElement('button');b.textContent=fl(place.name);b.disabled=!place.coord;b.onclick=()=>{futureStop();futureSetCamera([place.coord]);};where.append(b);}article.append(where);
+  const grade=document.createElement('p');grade.className='future-grade';grade.textContent=ft('grade')+': '+fl(event.grade);article.append(grade);
+  if(FUTURE_CATALOG.routes[event.id]){const replay=document.createElement('button');replay.type='button';replay.className='btn';replay.textContent=ft('replay');replay.onclick=()=>{futureStop();futureMap(event,true);};article.append(replay);}
   const sources=document.createElement('div');sources.className='future-source';sources.textContent=ft('sources')+': '+event.refs.map(futureRef).join('; ');article.append(sources);
  }else{const p=document.createElement('p');p.textContent=ft('empty');article.append(p);}
+ const chapters=$('futureChapters');chapters.replaceChildren();chapters.hidden=!seq;
+ if(seq)for(const [i,id] of seq.ids.entries()){const b=document.createElement('button');b.textContent=String(i+1);b.title=fl(futureById.get(id).title);b.setAttribute('aria-label',b.title);b.setAttribute('aria-current',String(event?.id===id));b.onclick=()=>{futureStop();futureState.selected=id;futureState.query='';$('futureSearch').value='';futureRender(true,true);queueLocationSave();};chapters.append(b);}
+ const review=$('futureReview');review.replaceChildren();const reviewTitle=document.createElement('summary');reviewTitle.textContent=ft('review');review.append(reviewTitle);for(const item of FUTURE_CATALOG.review){const h=document.createElement('h4');h.textContent=fl(item.title);const p=document.createElement('p');p.textContent=fl(item.text);review.append(h,p);}
  $('futureListTitle').textContent=ft('list')+' · '+items.length;const list=$('futureList');list.replaceChildren();
  for(const [i,e] of items.entries()){const li=document.createElement('li'),b=document.createElement('button');b.textContent=(seq?(i+1)+'. ':'')+fl(e.title);b.dataset.event=e.id;b.setAttribute('aria-current',String(e.id===futureState.selected));b.onclick=()=>{futureStop();futureState.selected=e.id;futureRender(true,true);queueLocationSave();};li.append(b);list.append(li);}
  for(const [id,key] of [['futureMethodTitle','method'],['futureMethodBody','methodBody'],['futureMapMethod','mapMethod']])$(id).textContent=ft(key);
