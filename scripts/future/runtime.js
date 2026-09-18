@@ -59,7 +59,7 @@ function futureSetCamera(points){
  if(!points.length){mapState={scale:1,tx:0,ty:0};setViewport();return;}
  const ps=points.map(project),xs=ps.map(p=>p[0]),ys=ps.map(p=>p[1]);
  const cx=(Math.min(...xs)+Math.max(...xs))/2,cy=(Math.min(...ys)+Math.max(...ys))/2;
- const scale=Math.min(5,1000/(Math.max(...xs)-Math.min(...xs)+90),410/(Math.max(...ys)-Math.min(...ys)+65));
+ const scale=Math.min(7,1100/(Math.max(...xs)-Math.min(...xs)+60),650/(Math.max(...ys)-Math.min(...ys)+45));
  animateCamera({scale,tx:720-cx*scale,ty:360-cy*scale},window.matchMedia('(prefers-reduced-motion: reduce)').matches?1:650);
 }
 function futureMap(event,focus){
