@@ -34,8 +34,8 @@ const places={
 const events=[];
 function add(id,group,refs,where,title,summary,extra={}){events.push({id,group,refs:refs.split(' '),places:where?where.split(' '):[],title:L(...title),summary:L(...summary),...extra});}
 add('battle','expected','muslim:2897','dabiq amaq medina',
- ['Сражение у аль-Амака или Дабика','Battle at al-Amaq or Dabiq','Аль-Амакта же Дабикте болгон салгылаш'],
- ['В хадисе названо одно из двух мест. Из Медины выходит войско; после сражения победившая часть направляется к Константинополю.','The hadith names two alternative locations. An army comes from Medina; its victorious part proceeds to Constantinople.','Хадисте эки жердин бири аталат. Мединадан кошуун чыгат; жеңген бөлүгү Константинополго барат.']);
+ ['Аль-Мальхама — сражение с ар-Рум','Al-Malhama — battle with al-Rum','Аль-Мальхама — ар-Рум менен салгылаш'],
+ ['Войско мусульман выходит из Медины навстречу ар-Рум (римлянам). Место сражения — аль-Амак или Дабик. На карте выделен Дабик на севере современной Сирии; точная область аль-Амака здесь не установлена. После победы следует взятие Константинополя.','A Muslim army leaves Medina to confront al-Rum (the Romans). The battle is at al-Amaq or Dabiq. The map highlights Dabiq in northern present-day Syria; al-Amaq is not precisely located here. Victory is followed by the taking of Constantinople.','Мусулман кошууну Мединадан ар-Румга (римдиктерге) каршы чыгат. Салгылаш аль-Амакта же Дабикте болот. Картада азыркы Сириянын түндүгүндөгү Дабик көрсөтүлгөн; аль-Амактын так аймагы бул жерде аныкталган эмес. Жеңиштен кийин Константинополь алынат.']);
 add('constantinople','expected','muslim:2897','constantinople',
  ['Взятие Константинополя','Taking of Constantinople','Константинополдун алынышы'],
  ['После победы сообщается о взятии города. Известие о Даджале сначала оказывается ложным; затем при возвращении в аш-Шам он появляется. Год не назван.','Victory is followed by taking the city. An initial report of the Dajjal is false; he appears upon the return to al-Sham. No year is given.','Жеңиштен кийин шаар алынат. Дажжал тууралуу алгачкы кабар жалган чыгат; аш-Шамга кайтып келгенде ал пайда болот. Жылы айтылган эмес.']);
@@ -237,8 +237,9 @@ add('conquests','minor','muslim:2900','arabia',
  ['Аравия, Персия, ар-Рум и Даджаль','Arabia, Persia, al-Rum and the Dajjal','Аравия, Персия, ар-Рум жана Дажжал'],
  ['В передаче названы последовательно Аравия, Персия, ар-Рум и Даджаль. Этот рассказ охватывает разные этапы; ар-Рум не заменён точкой современного Рима.','The report names Arabia, Persia, al-Rum and the Dajjal in sequence. It spans different stages; al-Rum is not replaced with a pin on modern Rome.','Риваятта кезеги менен Аравия, Персия, ар-Рум жана Дажжал аталат. Ал ар түрдүү этаптарды камтыйт; ар-Рум азыркы Римдин чекити менен алмаштырылбайт.']);
 const sequences=[
- {id:'sham',title:L('Аль-Амак / Дабик → Даджаль','Al-Amaq / Dabiq → Dajjal','Аль-Амак / Дабик → Дажжал'),refs:['muslim:2897'],ids:['battle','constantinople','dajjal','isa','ludd']},
+ {id:'sham',title:L('Аль-Мальхама → Константинополь → Даджаль','Al-Malhama → Constantinople → Dajjal','Аль-Мальхама → Константинополь → Дажжал'),refs:['muslim:2897'],ids:['battle','constantinople','dajjal','isa','ludd']},
  {id:'isa',title:L('Даджаль → Иса → Яджудж и Маджудж','Dajjal → Isa → Yajuj and Majuj','Дажжал → Иса → Яжуж жана Мажуж'),refs:['muslim:2937a'],ids:['dajjal','isa','ludd','yajuj','yajuj-end','wind']},
  {id:'wind',title:L('Мир → ветер → наступление Часа','Peace → wind → the Hour','Тынчтык → шамал → Кыямат'),refs:['muslim:2940a'],ids:['ludd','peace','wind','idols','hour']}
 ];
 module.exports=require('./journey.cjs')({version:1,places,events,sequences});
+module.exports.hadithTexts=require('./hadith-texts.json');

@@ -1,7 +1,10 @@
 // This module owns its text and state; it does not alter historical datasets.
 const futureText={
+ hadith:['Текст хадиса · арабский оригинал','Hadith text · Arabic original','Хадистин тексти · арабча түп нуска'],
+ paraphrase:['Краткий пересказ','Brief paraphrase','Кыскача мазмун'],
+ transmission:['Полный текст передачи, включая слова передатчиков. Прямая речь сохранена в оригинале.','Full transmission, including the narrators’ words. Direct speech is preserved in the original.','Риваяттын толук тексти, анын ичинде риваятчылардын сөздөрү. Тике сөз түп нускада сакталган.'],
+ battleJump:['Аль-Мальхама · место сражения','Al-Malhama · battle location','Аль-Мальхама · салгылаштын жери'],
  grade:['Оценка передачи','Transmission grading','Риваяттын баасы'],
- review:['Разбор: Махди, присяга и чёрные знамёна','Review: Mahdi, allegiance and black banners','Талдоо: Махди, ант жана кара туулар'],
  route:['Пунктир — условное направление, не точный путь. Дабик показан как один из двух вариантов хадиса.','Dashed line: schematic direction, not an exact route. Dabiq is one of two alternatives in the hadith.','Үзүк сызык — так жол эмес, шарттуу багыт. Дабик — хадистеги эки варианттын бири.'],
  replay:['Повторить движение','Replay movement','Кыймылды кайталоо'],
  regions:['Подсветка — ориентир места, не граница события.','Highlight: location guide, not an event boundary.','Жарык аймак — жердин багыты, окуянын чек арасы эмес.'],
@@ -32,7 +35,7 @@ const futureState={active:false,filter:'seq:sham',selected:'battle',query:'',tim
 const futureById=new Map(FUTURE_CATALOG.events.map(e=>[e.id,e]));
 const futureButton=document.createElement('button');futureButton.id='futureBtn';futureButton.className='btn';futureButton.dataset.localeOwned='true';futureButton.setAttribute('aria-pressed','false');futureButton.setAttribute('aria-controls','futurePanel');localeSelect.after(futureButton);
 const futurePanel=document.createElement('aside');futurePanel.id='futurePanel';futurePanel.className='card';futurePanel.dataset.localeOwned='true';futurePanel.hidden=true;
-futurePanel.innerHTML='<header class="future-head"><div class="future-label">CHRONOGRAPH 1.4.3</div><h2></h2><p></p><div class="future-controls"><select id="futureGroup"></select><input id="futureSearch" type="search" autocomplete="off"></div><nav id="futureChapters" class="future-chapters"></nav></header><div class="future-scroll" id="futureScroll"><article id="futureArticle"></article><details class="future-index" open><summary id="futureListTitle"></summary><ol class="future-list" id="futureList"></ol></details><details class="future-method"><summary id="futureMethodTitle"></summary><p id="futureMethodBody"></p><p id="futureMapMethod"></p></details><details class="future-method" id="futureReview"></details></div>';
+futurePanel.innerHTML='<header class="future-head"><div class="future-label">CHRONOGRAPH 1.4.3</div><h2></h2><p></p><div class="future-controls"><select id="futureGroup"></select><input id="futureSearch" type="search" autocomplete="off"></div><button type="button" class="btn" id="futureBattle"></button><nav id="futureChapters" class="future-chapters"></nav></header><div class="future-scroll" id="futureScroll"><article id="futureArticle"></article><details class="future-index" open><summary id="futureListTitle"></summary><ol class="future-list" id="futureList"></ol></details><details class="future-method"><summary id="futureMethodTitle"></summary><p id="futureMethodBody"></p><p id="futureMapMethod"></p></details></div>';
 $('timelineCard').before(futurePanel);
 const futureTimeline=document.createElement('section');futureTimeline.id='futureTimeline';futureTimeline.className='card timeline-card';futureTimeline.dataset.localeOwned='true';futureTimeline.hidden=true;futureTimeline.innerHTML='<button class="round" id="futurePrevious">‹</button><button class="round" id="futurePlay">▶</button><div class="future-progress"><strong id="futureCurrent"></strong><small id="futureCount" role="status" aria-live="polite"></small><progress id="futureProgress" max="1" value="0"></progress></div><button class="round" id="futureNext">›</button>';
 $('timelineCard').after(futureTimeline);
@@ -87,6 +90,7 @@ function futureRender(focus=false,scroll=false){
  const items=futureItems();if(!items.some(e=>e.id===futureState.selected))futureState.selected=items[0]?.id||'';
  const event=futureById.get(futureState.selected),seq=futureSequence();
  futureButton.textContent=ft(futureState.active?'back':'button');futureButton.setAttribute('aria-pressed',String(futureState.active));futurePanel.setAttribute('aria-label',ft('button'));
+ $('futureBattle').textContent=ft('battleJump');$('futureBattle').onclick=()=>{futureStop();futureState.filter='seq:sham';futureState.selected='battle';futureState.query='';$('futureSearch').value='';futureRender(true,true);queueLocationSave();};
  futurePanel.querySelector('h2').textContent=ft('button');futurePanel.querySelector('.future-head p').textContent=ft('intro');
  const group=$('futureGroup');group.replaceChildren();
  const seqGroup=document.createElement('optgroup');seqGroup.label=ft('main');for(const s of FUTURE_CATALOG.sequences){const o=document.createElement('option');o.value='seq:'+s.id;o.textContent=fl(s.title);seqGroup.append(o);}group.append(seqGroup);
@@ -95,7 +99,7 @@ function futureRender(focus=false,scroll=false){
  const article=$('futureArticle');article.replaceChildren();
  if(event){
   const label=document.createElement('div');label.className='future-label';label.textContent=ft(event.group==='historical'?'history':event.group==='major'?'statusMajor':event.group==='minor'?'statusMinor':'statusExpected');article.append(label);
-  const title=document.createElement('h3');title.textContent=fl(event.title);article.append(title);const p=document.createElement('p');p.textContent=fl(event.summary);article.append(p);
+  const title=document.createElement('h3');title.textContent=fl(event.title);article.append(title);const recap=document.createElement('div');recap.className='future-label';recap.textContent=ft('paraphrase');article.append(recap);const p=document.createElement('p');p.textContent=fl(event.summary);article.append(p);
   const context=document.createElement('p');context.className='future-context';context.textContent=seq?ft('orderNote'):event.group==='major'?ft('majorNote'):event.group==='minor'?ft('minorNote'):event.group==='historical'?ft('history'):ft('noorder');article.append(context);
   const where=document.createElement('div');where.className='future-places';where.setAttribute('role','group');where.setAttribute('aria-label',ft('named'));
   if(!event.places.length){const no=document.createElement('p');no.textContent=ft('unknown');where.append(no);}
@@ -103,10 +107,12 @@ function futureRender(focus=false,scroll=false){
   const grade=document.createElement('p');grade.className='future-grade';grade.textContent=ft('grade')+': '+fl(event.grade);article.append(grade);
   if(FUTURE_CATALOG.routes[event.id]){const replay=document.createElement('button');replay.type='button';replay.className='btn';replay.textContent=ft('replay');replay.onclick=()=>{futureStop();futureMap(event,true);};article.append(replay);}
   const sources=document.createElement('div');sources.className='future-source';sources.textContent=ft('sources')+': '+event.refs.map(futureRef).join('; ');article.append(sources);
+  const texts=document.createElement('details');texts.className='future-hadith';const heading=document.createElement('summary');heading.textContent=ft('hadith');texts.append(heading);
+  const explanation=document.createElement('p');explanation.className='future-context';explanation.textContent=ft('transmission');texts.append(explanation);
+  for(const ref of event.refs){const source=FUTURE_CATALOG.hadithTexts[ref],section=document.createElement('section'),title=document.createElement('h4'),original=document.createElement('p');title.textContent=futureRef(ref);original.lang='ar';original.dir='rtl';original.className='future-arabic';original.textContent=source.arabic;section.append(title,original);texts.append(section);}texts.addEventListener('toggle',()=>{if(texts.open)futureStop();});article.append(texts);
  }else{const p=document.createElement('p');p.textContent=ft('empty');article.append(p);}
  const chapters=$('futureChapters');chapters.replaceChildren();chapters.hidden=!seq;
  if(seq)for(const [i,id] of seq.ids.entries()){const b=document.createElement('button');b.textContent=String(i+1);b.title=fl(futureById.get(id).title);b.setAttribute('aria-label',b.title);b.setAttribute('aria-current',String(event?.id===id));b.onclick=()=>{futureStop();futureState.selected=id;futureState.query='';$('futureSearch').value='';futureRender(true,true);queueLocationSave();};chapters.append(b);}
- const review=$('futureReview');review.replaceChildren();const reviewTitle=document.createElement('summary');reviewTitle.textContent=ft('review');review.append(reviewTitle);for(const item of FUTURE_CATALOG.review){const h=document.createElement('h4');h.textContent=fl(item.title);const p=document.createElement('p');p.textContent=fl(item.text);review.append(h,p);}
  $('futureListTitle').textContent=ft('list')+' · '+items.length;const list=$('futureList');list.replaceChildren();
  for(const [i,e] of items.entries()){const li=document.createElement('li'),b=document.createElement('button');b.textContent=(seq?(i+1)+'. ':'')+fl(e.title);b.dataset.event=e.id;b.setAttribute('aria-current',String(e.id===futureState.selected));b.onclick=()=>{futureStop();futureState.selected=e.id;futureRender(true,true);queueLocationSave();};li.append(b);list.append(li);}
  for(const [id,key] of [['futureMethodTitle','method'],['futureMethodBody','methodBody'],['futureMapMethod','mapMethod']])$(id).textContent=ft(key);

@@ -6,10 +6,9 @@ New source checks:
 - Sahih Muslim 2897: Medina → al-Amaq OR Dabiq → Constantinople → al-Sham. The lines are schematic directions, never claimed road itineraries. Dabiq is an alternative, not the sole location.
 - Sunan Abi Dawud 4292: peace and joint campaign → return to an unnamed meadow → breach of treaty and preparations for al-Malhama. Sahih according to al-Albani. This is not identified as the return from Constantinople.
 - Sunan Abi Dawud 4284: Mahdi descended from Fatimah; sahih according to al-Albani. No location specified in this report.
-- Sunan Abi Dawud 4286: detailed Meccan allegiance report; daif according to al-Albani. Kept in source review, outside the authenticated event sequence.
-- Jami al-Tirmidhi 2269 and Sunan Ibn Majah 4084: black-banner reports graded daif in the consulted Darussalam edition. Kept in source review, without a predictive map route.
+- Weak-report appendix removed at the owner's request. No weak reports, map routes or event cards are retained in the published future catalogue.
 
-Texts and displayed grading checked at sunnah.com using these collection and hadith numbers. Summaries are original paraphrases, not full translations. These named grading assessments do not imply unanimity among all hadith scholars. No calendar dates or modern political identifications are assigned.
+Texts and displayed grading checked at sunnah.com using these collection and hadith numbers. All 82 cards now include the Arabic transmissions for their 70 distinct references, including narrator wording and direct speech. Summaries are explicitly labelled original paraphrases, not full translations. Arabic chapter headings are omitted. These named grading assessments do not imply unanimity among all hadith scholars. No calendar dates or modern political identifications are assigned.
 
 Map highlights are approximate location spotlights, not predicted event boundaries. Unidentified places remain unplotted. Geographical routes are illustrative; no intermediate road or crossing is asserted.
 

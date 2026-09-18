@@ -33,3 +33,7 @@ assert(html.includes("document.body.classList.contains('future-mode') || e.defau
 const translate=require('../i18n/core.js').createChronographTranslator(require('../i18n/compiled-messages.json'));
 for(const lang of ['en','ky']){const result=translate('≈699 г. х. · Осман I · традиционная точка начала Османского государства',lang);assert(!result.includes('традиционная'),result);}
 console.log(JSON.stringify({events:ids.size,majorSigns:keys.size,references:refs.size,places:Object.keys(d.places).length,sequences:d.sequences.length,status:'PASS: schema, translations, sequence graph, filters, uncertain places, calendar preservation, syntax, sources'}));
+
+assert(!('review' in d));assert(!html.includes('futureReview'));assert(!/2269|4084|4286/.test(JSON.stringify(d)));assert(d.events.find(e=>e.id==='battle').title.ru.includes('Аль-Мальхама'));
+
+for(const ref of refs){const t=d.hadithTexts[ref];assert(t&&t.arabic.length>100,'Missing original: '+ref);assert(!/[A-Za-z]|||…/.test(t.arabic),'Contaminated original: '+ref);assert(t.source.startsWith('https://sunnah.com/'));}assert.equal(Object.keys(d.hadithTexts).length,refs.size);

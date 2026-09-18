@@ -17,5 +17,8 @@ body.future-mode #countryLayer{display:block!important;pointer-events:none;opaci
 .future-chapters{display:flex;gap:6px;overflow-x:auto;margin-top:10px}.future-chapters[hidden]{display:none}
 .future-chapters button{min-width:28px;min-height:28px;border:1px solid #79653e;border-radius:50%;color:#ddc89d;background:#2e281d;cursor:pointer}.future-chapters button[aria-current=true]{background:#d5b878;color:#221e17}
 .future-grade{display:inline-block;border:1px solid #63735b;border-radius:6px;padding:5px 8px;color:#cee0bb!important;font-size:10px!important}
-#futureReview h4{color:#e7cc94;margin-bottom:4px}
 @media(prefers-reduced-motion:reduce){.future-route{animation:none}}
+
+#futureBattle{display:block;width:100%;margin-top:8px;color:#f4dfac;border-color:#a68a51;text-align:left}
+
+.future-hadith{margin-top:14px;border-top:1px solid #71603e;padding-top:12px}.future-hadith summary{cursor:pointer;color:#f4dfac;padding:8px 0}.future-hadith h4{font-size:12px;color:#d8bd80}.future-hadith .future-arabic{font-family:"Traditional Arabic","Noto Naskh Arabic",Tahoma,serif;font-size:22px;line-height:2.05;text-align:right;white-space:pre-wrap;overflow-wrap:anywhere;color:#eee5d0}.future-hadith section+section{border-top:1px solid #71603e;margin-top:16px}
