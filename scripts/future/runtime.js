@@ -56,7 +56,7 @@ function futureSetCamera(points){
  const ps=points.map(project),xs=ps.map(p=>p[0]),ys=ps.map(p=>p[1]);
  const cx=(Math.min(...xs)+Math.max(...xs))/2,cy=(Math.min(...ys)+Math.max(...ys))/2;
  const scale=Math.min(5,1000/(Math.max(...xs)-Math.min(...xs)+90),410/(Math.max(...ys)-Math.min(...ys)+65));
- animateCamera({scale,tx:720-cx*scale,ty:360-cy*scale},650);
+ animateCamera({scale,tx:720-cx*scale,ty:360-cy*scale},window.matchMedia('(prefers-reduced-motion: reduce)').matches?1:650);
 }
 function futureMap(event,focus){
  futureLayer.replaceChildren();const places=event?event.places.map(id=>[id,FUTURE_CATALOG.places[id]]):[];
@@ -123,7 +123,7 @@ function setFutureMode(active){
  if(active)futureState.history={view:{...mapState},resetText:$('resetView').textContent};
  futureState.active=active;document.body.classList.toggle('future-mode',active);futurePanel.hidden=!active;futureTimeline.hidden=!active;futureNote.hidden=!active;futureLayer.style.display=active?'':'none';
  $('layerPanel').hidden=true;tooltip.classList.remove('show');
- if(!active){mapState={...futureState.history.view};setViewport();delete svg.dataset.localeOwned;svg.setAttribute('aria-label',futureOriginalMapLabel);delete $('resetView').dataset.localeOwned;$('resetView').textContent='Обзор';localizePage();}
+ if(!active){++cameraAnimationVersion;mapState={...futureState.history.view};setViewport();delete svg.dataset.localeOwned;svg.setAttribute('aria-label',futureOriginalMapLabel);delete $('resetView').dataset.localeOwned;$('resetView').textContent='Обзор';localizePage();}
  futureRender(active,true);queueLocationSave();
 }
 futureButton.onclick=()=>setFutureMode(!futureState.active);
@@ -137,4 +137,4 @@ localeSelect.addEventListener('change',()=>futureRender(false));
 futureLocationHook=url=>{if(futureState.active){url.searchParams.set('mode','future');url.searchParams.set('section',futureState.filter);if(futureState.selected)url.searchParams.set('event',futureState.selected);else url.searchParams.delete('event');url.searchParams.set('view',Object.values(futureState.history.view).map(n=>n.toFixed(3)).join(','));url.searchParams.set('fview',[mapState.scale,mapState.tx,mapState.ty].map(n=>n.toFixed(3)).join(','));if(futureState.query)url.searchParams.set('q',futureState.query);else url.searchParams.delete('q');}else for(const key of ['mode','section','event','fview','q'])url.searchParams.delete(key);};
 const futureInitialFilter=stateParams.get('section');if(['major','minor','expected','historical','all',...FUTURE_CATALOG.sequences.map(s=>'seq:'+s.id)].includes(futureInitialFilter))futureState.filter=futureInitialFilter;
 if(futureById.has(stateParams.get('event')))futureState.selected=stateParams.get('event');futureState.query=(stateParams.get('q')||'').slice(0,200);$('futureSearch').value=futureState.query;
-futureRender();if(stateParams.get('mode')==='future'){setFutureMode(true);const v=(stateParams.get('fview')||'').split(',').map(Number);if(v.length===3&&v.every(Number.isFinite)&&v[0]>=.75&&v[0]<=9&&Math.abs(v[1])<=20000&&Math.abs(v[2])<=20000){[mapState.scale,mapState.tx,mapState.ty]=v;setViewport();updateFutureMarkerScale();}}
+futureRender();if(stateParams.get('mode')==='future'){setFutureMode(true);const v=(stateParams.get('fview')||'').split(',').map(Number);if(v.length===3&&v.every(Number.isFinite)&&v[0]>=.75&&v[0]<=9&&Math.abs(v[1])<=20000&&Math.abs(v[2])<=20000){++cameraAnimationVersion;[mapState.scale,mapState.tx,mapState.ty]=v;setViewport();updateFutureMarkerScale();}}
