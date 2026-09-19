@@ -44,6 +44,7 @@ const futureNote=document.createElement('div');futureNote.id='futureMapNote';fut
 const futureLayer=document.createElementNS('http://www.w3.org/2000/svg','g');futureLayer.id='futureLayer';futureLayer.dataset.localeOwned='true';futureLayer.style.display='none';viewport.append(futureLayer);
 const futureOriginalMapLabel=svg.getAttribute('aria-label');
 const futureOriginalReset=$('resetView').onclick;
+// ILLUSTRATIONS_RUNTIME
 function futureSequence(){return FUTURE_CATALOG.sequences.find(s=>'seq:'+s.id===futureState.filter);}
 function futureItems(){
  const seq=futureSequence();let result=seq?seq.ids.map(id=>futureById.get(id)):FUTURE_CATALOG.events.filter(e=>futureState.filter==='all'||e.group===futureState.filter);
@@ -121,19 +122,19 @@ function futureRender(focus=false,scroll=false){
   const geoHeading=document.createElement('div');geoHeading.className='future-label';geoHeading.textContent=ft(event.geography.mode==='historical'?'historicalGeo':event.geography.mode==='unlocated'?'overview':'namedGeo');geo.append(geoHeading);
   if(event.geography.date){const date=document.createElement('strong');date.textContent=fl(event.geography.date);geo.append(date);}
   const description=document.createElement('p');description.textContent=event.geography.note?fl(event.geography.note):event.places.map(id=>fl(FUTURE_CATALOG.places[id].name)).join(' · ');geo.append(description);
-  if(event.geography.mode!=='unlocated'){const show=document.createElement('button');show.type='button';show.className='btn';show.textContent=ft('showMap');show.onclick=()=>{futureStop();futureMap(event,true);};geo.append(show);}
+  if(event.geography.mode!=='unlocated'){const show=document.createElement('button');show.type='button';show.className='btn';show.textContent=ft('showMap');show.onclick=()=>{futureStop();futureSceneView('map');futureMap(event,true);};geo.append(show);}
   if(event.geography.sources.length){const source=document.createElement('p');source.className='future-geography-source';source.textContent=ft('geoSources')+': '+event.geography.sources.map(s=>s.title).join('; ');geo.append(source);}
-  article.append(geo);
   const quote=document.createElement('section');quote.className='future-quote';quote.setAttribute('aria-label',ft('excerpt'));
   const citation=document.createElement('p');citation.className='future-source';citation.textContent=ft('excerpt')+' · '+futureRef(event.quote.ref);quote.append(citation);
   const meaningLabel=document.createElement('div');meaningLabel.className='future-label';meaningLabel.textContent=ft('meaning');quote.append(meaningLabel);
   const translation=document.createElement('blockquote');translation.className='future-translation';translation.lang=language;translation.textContent=fl(event.quote.translation);quote.append(translation);
   const arabicLabel=document.createElement('div');arabicLabel.className='future-label';arabicLabel.textContent=ft('original');quote.append(arabicLabel);
   const arabic=document.createElement('blockquote');arabic.className='future-arabic';arabic.lang='ar';arabic.dir='rtl';arabic.textContent=event.quote.arabic;quote.append(arabic);article.append(quote);
+  article.append(geo);
   const where=document.createElement('div');where.className='future-places';where.setAttribute('role','group');where.setAttribute('aria-label',ft('named'));
-  for(const id of event.places){const place=FUTURE_CATALOG.places[id],b=document.createElement('button');b.textContent=fl(place.name).split(' — ')[0];b.disabled=!place.coord;b.onclick=()=>{futureStop();futureSetCamera([place.coord]);};where.append(b);}article.append(where);
+  for(const id of event.places){const place=FUTURE_CATALOG.places[id],b=document.createElement('button');b.textContent=fl(place.name).split(' — ')[0];b.disabled=!place.coord;b.onclick=()=>{futureStop();futureSceneView('map');futureSetCamera([place.coord]);};where.append(b);}article.append(where);
   const grade=document.createElement('p');grade.className='future-grade';grade.textContent=ft('grade')+': '+fl(event.grade);article.append(grade);
-  if(FUTURE_CATALOG.routes[event.id]){const replay=document.createElement('button');replay.type='button';replay.className='btn';replay.textContent=ft('replay');replay.onclick=()=>{futureStop();futureMap(event,true);};article.append(replay);}
+  if(FUTURE_CATALOG.routes[event.id]){const replay=document.createElement('button');replay.type='button';replay.className='btn';replay.textContent=ft('replay');replay.onclick=()=>{futureStop();futureSceneView('map');futureMap(event,true);};article.append(replay);}
   const sources=document.createElement('div');sources.className='future-source';sources.textContent=ft('sources')+': '+event.refs.map(futureRef).join('; ');article.append(sources);
   const texts=document.createElement('details');texts.className='future-hadith';const heading=document.createElement('summary');heading.textContent=ft('hadith');texts.append(heading);
   for(const ref of event.refs){const source=FUTURE_CATALOG.hadithTexts[ref],section=document.createElement('section'),title=document.createElement('h4'),original=document.createElement('p');title.textContent=futureRef(ref);original.lang='ar';original.dir='rtl';original.className='future-arabic';original.textContent=source.arabic;section.append(title,original);texts.append(section);}texts.addEventListener('toggle',()=>{if(texts.open)futureStop();});article.append(texts);
@@ -147,10 +148,11 @@ function futureRender(focus=false,scroll=false){
  $('futureProgress').max=Math.max(1,items.length);$('futureProgress').value=items.findIndex(e=>e.id===futureState.selected)+1;$('futureProgress').setAttribute('aria-label',ft('browse'));
  $('futurePrevious').setAttribute('aria-label',ft('previous'));$('futureNext').setAttribute('aria-label',ft('next'));const index=items.findIndex(e=>e.id===futureState.selected);$('futurePrevious').disabled=index<=0;$('futureNext').disabled=index<0||index>=items.length-1;$('futurePlay').disabled=items.length<2;futurePlayLabel();
  if(futureState.active){futureMap(event,focus);svg.dataset.localeOwned='true';svg.setAttribute('aria-label',ft('map'));$('resetView').dataset.localeOwned='true';$('resetView').textContent=ft('reset');}
+ futureSceneRender(event);
  if(scroll)$('futureScroll').scrollTop=0;
 }
 function futureStep(delta){const items=futureItems(),i=items.findIndex(e=>e.id===futureState.selected),next=i+delta;if(next<0||next>=items.length){futureStop();return;}futureState.selected=items[next].id;futureRender(true,true);queueLocationSave();if(next===items.length-1)futureStop();}
-function futureTogglePlay(){if(futureState.timer!==null){futureStop();return;}const items=futureItems();if(items.length<2)return;if(futureState.selected===items.at(-1).id){futureState.selected=items[0].id;futureRender(true,true);}futureState.timer=setInterval(()=>futureStep(1),8500);futurePlayLabel();}
+function futureTogglePlay(){futureSceneStop();if(futureState.timer!==null){futureStop();return;}const items=futureItems();if(items.length<2)return;if(futureState.selected===items.at(-1).id){futureState.selected=items[0].id;futureRender(true,true);}futureState.timer=setInterval(()=>futureStep(1),8500);futurePlayLabel();}
 function setFutureMode(active){
  if(active===futureState.active)return;stopPlay();futureStop();
  if(active)futureState.history={view:{...mapState},resetText:$('resetView').textContent};
@@ -167,7 +169,7 @@ $('resetView').onclick=()=>{if(futureState.active){futureMap(futureById.get(futu
 window.addEventListener('keydown',e=>{if(!futureState.active||e.defaultPrevented||$('modal').classList.contains('show')||e.target.closest('input,select,button,summary,[role=button],[contenteditable=true]'))return;if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();futureStop();futureStep(e.key==='ArrowLeft'?-1:1);}if(e.code==='Space'){e.preventDefault();futureTogglePlay();}},true);
 localeSelect.addEventListener('change',()=>futureRender(false));
 // Save the historical view separately so leaving this mode returns to it.
-futureLocationHook=url=>{if(futureState.active){url.searchParams.set('mode','future');url.searchParams.set('section',futureState.filter);if(futureState.selected)url.searchParams.set('event',futureState.selected);else url.searchParams.delete('event');url.searchParams.set('view',Object.values(futureState.history.view).map(n=>n.toFixed(3)).join(','));url.searchParams.set('fview',[mapState.scale,mapState.tx,mapState.ty].map(n=>n.toFixed(3)).join(','));if(futureState.query)url.searchParams.set('q',futureState.query);else url.searchParams.delete('q');}else for(const key of ['mode','section','event','fview','q'])url.searchParams.delete(key);};
+futureLocationHook=url=>{if(futureState.active){url.searchParams.set('mode','future');url.searchParams.set('presentation',futureSceneState.view);url.searchParams.set('section',futureState.filter);if(futureState.selected)url.searchParams.set('event',futureState.selected);else url.searchParams.delete('event');url.searchParams.set('view',Object.values(futureState.history.view).map(n=>n.toFixed(3)).join(','));url.searchParams.set('fview',[mapState.scale,mapState.tx,mapState.ty].map(n=>n.toFixed(3)).join(','));if(futureState.query)url.searchParams.set('q',futureState.query);else url.searchParams.delete('q');}else for(const key of ['mode','section','event','fview','q','presentation'])url.searchParams.delete(key);};
 const futureInitialFilter=stateParams.get('section');if(['major','minor','expected','historical','all',...FUTURE_CATALOG.sequences.map(s=>'seq:'+s.id)].includes(futureInitialFilter))futureState.filter=futureInitialFilter;
 if(futureById.has(stateParams.get('event')))futureState.selected=stateParams.get('event');futureState.query=(stateParams.get('q')||'').slice(0,200);$('futureSearch').value=futureState.query;
 futureRender();if(stateParams.get('mode')==='future'){setFutureMode(true);const v=(stateParams.get('fview')||'').split(',').map(Number);const oldEmptyOverview=v[0]===1&&v[1]===0&&v[2]===0;if(!oldEmptyOverview&&v.length===3&&v.every(Number.isFinite)&&v[0]>=.75&&v[0]<=9&&Math.abs(v[1])<=20000&&Math.abs(v[2])<=20000){++cameraAnimationVersion;[mapState.scale,mapState.tx,mapState.ty]=v;setViewport();updateFutureMarkerScale();}}

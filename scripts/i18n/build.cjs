@@ -52,8 +52,11 @@ const core=fs.readFileSync(root+'/core.js','utf8').replace("if(typeof module!=='
 html=html.replace('// Init\n',core+'\nconst CHRONOGRAPH_MESSAGES='+JSON.stringify(rows).replaceAll('<','\\u003c')+';\n// Init\n');
 const ending=html.lastIndexOf('})();');assert(ending>0);
 const future=require('../future/catalog.cjs');
-html=html.slice(0,ending)+'let futureLocationHook=null;\n'+fs.readFileSync(root+'/runtime.js','utf8')+'\nconst FUTURE_CATALOG='+JSON.stringify(future).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../future/runtime.js','utf8')+'\n'+fs.readFileSync(root+'/../support/runtime.js','utf8')+'\n'+html.slice(ending);
-html=html.replace('</style>',fs.readFileSync(root+'/../future/style.css','utf8')+'\n'+fs.readFileSync(root+'/../support/style.css','utf8')+'\n</style>');
+const illustrations=require('../future/illustrations.cjs');
+assert.deepEqual(Object.keys(illustrations).sort(),future.events.map(e=>e.id).sort(),'Every future card needs an explicit illustration');
+const futureRuntime=fs.readFileSync(root+'/../future/runtime.js','utf8').replace('// ILLUSTRATIONS_RUNTIME',fs.readFileSync(root+'/../future/illustration-runtime.js','utf8'));
+html=html.slice(0,ending)+'let futureLocationHook=null;\n'+fs.readFileSync(root+'/runtime.js','utf8')+'\nconst FUTURE_CATALOG='+JSON.stringify(future).replaceAll('<','\\u003c')+';\nconst FUTURE_ILLUSTRATIONS='+JSON.stringify(illustrations).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../future/illustration-art.js','utf8')+'\n'+futureRuntime+'\n'+fs.readFileSync(root+'/../support/runtime.js','utf8')+'\n'+html.slice(ending);
+html=html.replace('</style>',fs.readFileSync(root+'/../future/style.css','utf8')+'\n'+fs.readFileSync(root+'/../future/illustration-style.css','utf8')+'\n'+fs.readFileSync(root+'/../support/style.css','utf8')+'\n</style>');
 html=html.replace('function animateCamera(target, duration=700){','let cameraAnimationVersion=0;\nfunction animateCamera(target, duration=700){\n  const cameraVersion=++cameraAnimationVersion;');
 html=html.replace('function frame(now){','function frame(now){\n    if(cameraVersion!==cameraAnimationVersion)return;');
 html=html.replace("if(e.defaultPrevented || $('modal').classList.contains('show') || e.target.closest('input,button,a,summary", "if(document.body.classList.contains('future-mode') || e.defaultPrevented || $('modal').classList.contains('show') || e.target.closest('input,select,button,a,summary");

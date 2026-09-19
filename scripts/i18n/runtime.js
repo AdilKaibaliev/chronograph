@@ -42,7 +42,9 @@ function localizePage(){
   localeSelect.setAttribute('aria-label',({ru:'Язык сайта',en:'Site language',ky:'Сайттын тили'})[language]);
   observer.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:attributes});
 }
-const observer=new MutationObserver(()=>{
+const observer=new MutationObserver(records=>{
+  // Self-localized scenes update frequently; they never require an atlas-wide text walk.
+  if(records.every(record=>{const el=record.target.nodeType===Node.ELEMENT_NODE?record.target:record.target.parentElement;return el?.closest('[data-locale-owned]');}))return;
   if(translationQueued)return;translationQueued=true;
   queueMicrotask(()=>{translationQueued=false;localizePage();});
 });
