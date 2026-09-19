@@ -13,9 +13,10 @@ const futureSceneText={
  direction:['Направление · схема','Direction · schematic','Багыт · схема']
 };
 const fst=k=>futureSceneText[k][supportedLanguages.indexOf(language)];
-const futureSceneState={id:'',progress:0,playing:false,frame:0,last:0,painted:0,view:stateParams.get('presentation')==='map'?'map':'illustration'};
+// Open on the map; illustrations are enabled by the visitor's view button.
+const futureSceneState={id:'',progress:0,playing:false,frame:0,last:0,painted:0,view:'map'};
 const futureSceneSwitch=document.createElement('nav');futureSceneSwitch.id='futureSceneSwitch';futureSceneSwitch.dataset.localeOwned='true';futureSceneSwitch.hidden=true;
-futureSceneSwitch.innerHTML='<button type="button" data-future-view="illustration"></button><button type="button" data-future-view="map"></button>';
+futureSceneSwitch.innerHTML='<button type="button" data-future-view="map"></button><button type="button" data-future-view="illustration"></button>';
 const futureScene=document.createElement('section');futureScene.id='futureScene';futureScene.dataset.localeOwned='true';futureScene.hidden=true;
 futureScene.innerHTML='<header class="future-scene-head"><div class="future-scene-kicker"></div><h2 id="futureSceneTitle"></h2><div id="futureScenePlaces"></div></header><div class="future-scene-canvas"><svg id="futureSceneArt" viewBox="0 0 760 420" role="img" preserveAspectRatio="xMidYMid meet"></svg></div><div class="future-scene-caption"><span id="futureSceneCaption"></span><small id="futureSceneKind"></small></div><footer class="future-scene-player"><button type="button" id="futureScenePlay"><span class="future-scene-play-symbol" aria-hidden="true">▶</span><span class="future-scene-play-label"></span></button><label class="future-scene-track"><span class="future-scene-track-head"><span id="futureSceneSeekLabel"></span><output id="futureScenePercent">0%</output></span><input id="futureSceneSeek" type="range" min="0" max="1000" step="1" value="0"></label></footer><span id="futureSceneStatus" class="future-scene-sr" role="status" aria-live="polite"></span>';
 $('mapCard').append(futureSceneSwitch,futureScene);

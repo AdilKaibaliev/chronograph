@@ -155,7 +155,7 @@ function futureStep(delta){const items=futureItems(),i=items.findIndex(e=>e.id==
 function futureTogglePlay(){futureSceneStop();if(futureState.timer!==null){futureStop();return;}const items=futureItems();if(items.length<2)return;if(futureState.selected===items.at(-1).id){futureState.selected=items[0].id;futureRender(true,true);}futureState.timer=setInterval(()=>futureStep(1),8500);futurePlayLabel();}
 function setFutureMode(active){
  if(active===futureState.active)return;stopPlay();futureStop();
- if(active)futureState.history={view:{...mapState},resetText:$('resetView').textContent};
+ if(active){futureState.history={view:{...mapState},resetText:$('resetView').textContent};futureSceneState.view='map';}
  futureState.active=active;document.body.classList.toggle('future-mode',active);futurePanel.hidden=!active;futureTimeline.hidden=!active;futureNote.hidden=!active;futureLayer.style.display=active?'':'none';
  $('layerPanel').hidden=true;tooltip.classList.remove('show');
  if(!active){++cameraAnimationVersion;mapState={...futureState.history.view};setViewport();delete svg.dataset.localeOwned;svg.setAttribute('aria-label',futureOriginalMapLabel);delete $('resetView').dataset.localeOwned;$('resetView').textContent='Обзор';localizePage();}
