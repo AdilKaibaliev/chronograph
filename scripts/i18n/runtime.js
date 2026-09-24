@@ -54,6 +54,7 @@ function saveLocation(){
   url.searchParams.set('view',[mapState.scale,mapState.tx,mapState.ty].map(n=>n.toFixed(3)).join(','));
   const tab=document.querySelector('.side-tabs [aria-selected="true"]');
   if(tab)url.searchParams.set('tab',tab.id.replace('tab-',''));
+  if(worldLocationHook)worldLocationHook(url);
   if(futureLocationHook)futureLocationHook(url);
   try{history.replaceState(null,'',url);}catch{/* Local file browsers may restrict URL replacement. */}
 }
@@ -68,7 +69,7 @@ localeSelect.addEventListener('change',()=>{
 const initialYear=stateParams.get('year');
 if(initialYear!==null&&/^\d{3,4}$/.test(initialYear)&&+initialYear>=610&&+initialYear<=1299)renderYear(+initialYear);
 const initialView=(stateParams.get('view')||'').split(',').map(Number);
-if(initialView.length===3&&initialView.every(Number.isFinite)&&initialView[0]>=.75&&initialView[0]<=9&&Math.abs(initialView[1])<=20000&&Math.abs(initialView[2])<=20000){[mapState.scale,mapState.tx,mapState.ty]=initialView;setViewport();}
+if(initialView.length===3&&initialView.every(Number.isFinite)&&initialView[0]>=.75&&initialView[0]<=24&&Math.abs(initialView[1])<=40000&&Math.abs(initialView[2])<=40000){[mapState.scale,mapState.tx,mapState.ty]=initialView;setViewport();}
 const initialPanel=stateParams.get('tab');
 if(['events','regions','compare','sources','selection'].includes(initialPanel))switchPanel(initialPanel);
 localizePage();
