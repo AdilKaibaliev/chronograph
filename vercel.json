@@ -1,7 +1,7 @@
 {
   "version": 2,
   "framework": null,
-  "buildCommand": "node scripts/i18n/build.cjs && node scripts/world/test.cjs && node scripts/world/render-test.cjs && node scripts/world/content-audit-test.cjs && node scripts/world/education-test.cjs && node scripts/world/maghreb-outline-test.cjs && node scripts/future/test.cjs && node scripts/future/illustrations-test.cjs && node scripts/i18n/test.cjs && node scripts/support/test.cjs && node scripts/biographies-test.cjs && node scripts/history-test.cjs && node scripts/unified-map-test.cjs",
+  "buildCommand": "node scripts/release-check.cjs",
   "outputDirectory": ".",
   "cleanUrls": true
 }
