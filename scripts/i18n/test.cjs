@@ -13,7 +13,12 @@ assert.equal(t('Непереведённая историческая справ
 assert.equal(t('Атлас','invalid'),'Атлас');
 const base=fs.readFileSync(fs.existsSync('src/atlas.html')?'src/atlas.html':'publish/index.html','utf8');
 const built=fs.readFileSync(fs.existsSync('src/atlas.html')?'index.html':'outputs/chronograph_1_1.html','utf8');
-for(const [start,end] of [['const S =','function resampleRing'],['const EVENTS = {','function ceToAHApprox'],['const ISLAM_STARS = [','const STAR_DETAILS=']])assert.equal(built.slice(built.indexOf(start),built.indexOf(end)),base.slice(base.indexOf(start),base.indexOf(end)),'Historical data changed: '+start);
+for(const [start,end] of [['const S =','function resampleRing'],['const EVENTS = {','function ceToAHApprox']])assert.equal(built.slice(built.indexOf(start),built.indexOf(end)),base.slice(base.indexOf(start),base.indexOf(end)),'Historical data changed: '+start);
+const vm=require('node:vm');
+const people=html=>JSON.parse(JSON.stringify(vm.runInNewContext(html.slice(html.indexOf('const ISLAM_STARS = ['),html.indexOf('const STAR_DETAILS='))+';ISLAM_STARS;')));
+const originalPeople=people(base),extendedPeople=people(built);
+assert.deepEqual(extendedPeople.slice(0,originalPeople.length),originalPeople,'Original biographies and dates preserved');
+assert.equal(extendedPeople.length,originalPeople.length+require('../late/biographies.cjs').length+require('../early/biographies.cjs').length+require('../to1789/biographies.cjs').length);
 assert(!/<a(?=\s|>)|\bhref=|window\.open\(/.test(built.replace(/<link rel="icon"[^>]*>/g,'').replace(/<a class="contact-email" href="mailto:lfc@legacyfidelity\.com\?subject=Chronograph">lfc@legacyfidelity\.com<\/a>/g,'')),'Sources must remain plain text');
 assert(!built.includes('id="translationNotice"'),'Preview notice remains');
 console.log('PASS: '+rows.length+' message pairs, Russian preservation, calendar and dynamic labels, explicit Russian fallback.');

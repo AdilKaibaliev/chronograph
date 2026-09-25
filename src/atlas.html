@@ -15216,7 +15216,7 @@ $('modalClose').onclick=()=>$('modal').classList.remove('show');
 $('modal').onclick=e=>{if(e.target.id==='modal')$('modal').classList.remove('show')};
 
 svg.addEventListener('wheel',e=>{e.preventDefault();zoomAt(e.clientX,e.clientY,e.deltaY<0?1.13:.885)},{passive:false});
-svg.addEventListener('pointerdown',e=>{if(e.button!==0)return;dragging=true;lastPointer=[e.clientX,e.clientY];$('mapCard').classList.add('dragging');svg.setPointerCapture(e.pointerId)});
+svg.addEventListener('pointerdown',e=>{if(e.button!==0)return;e.preventDefault();dragging=true;lastPointer=[e.clientX,e.clientY];$('mapCard').classList.add('dragging');svg.setPointerCapture(e.pointerId)});
 svg.addEventListener('pointermove',e=>{
   if(!dragging)return; const a=screenPoint(e.clientX,e.clientY),b=screenPoint(...lastPointer); const dx=a.x-b.x,dy=a.y-b.y;mapState.tx+=dx;mapState.ty+=dy;lastPointer=[e.clientX,e.clientY];setViewport();
 });

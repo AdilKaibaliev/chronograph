@@ -1,5 +1,6 @@
 const assert=require('assert/strict'),fs=require('fs'),vm=require('vm');
 const catalog=require('./catalog.cjs'),{createWorldHistory}=require('./core.js'),history=createWorldHistory(catalog);
+const MAX=catalog.range?.max??1299;
 const languageRows=[];
 function text(row){assert.equal(row.length,3);for(const value of row)assert(typeof value==='string'&&value.trim());assert(!/[А-Яа-яЁё]/.test(row[1]),'Russian remains in English: '+row[1]);languageRows.push(row);}
 const ids=new Set(),used=new Set();let phases=0;
@@ -11,14 +12,17 @@ for(const e of catalog.entries){
  for(const p of e.phases){
   phases++;assert(Number.isInteger(p.from)&&Number.isInteger(p.to)&&p.to>p.from);assert(p.from>=previous,'Overlapping phases '+e.id);previous=p.to;
   [p.period,p.title,p.text].forEach(text);assert(p.sources.length);
+  if(p.name)text(p.name);
+  if(p.kind)assert(['state','uninhabited','city','community','culture','region','landscape'].includes(p.kind));
   if(p.learning){assert(Object.keys(p.learning).length);for(const [topic,row] of Object.entries(p.learning)){assert(['government','economy','society'].includes(topic),'Unknown learning topic '+topic);text(row);}}
   for(const id of p.sources){assert(catalog.sources[id]?.title&&catalog.sources[id].urls.length,'Missing source '+id);used.add(id);}
   const c=p.coord||e.coord;assert(c.length===2&&c.every(Number.isFinite)&&c[0]>=-180&&c[0]<=180&&c[1]>=-90&&c[1]<=85,'Invalid map coordinate');
-  if(p.from>=610&&p.from<=1299){assert.equal(history.phaseAt(e,p.from),p);assert.notEqual(history.phaseAt(e,p.from-1),p);}
-  if(p.to<=1299){assert.equal(history.phaseAt(e,p.to-1),p);assert.notEqual(history.phaseAt(e,p.to),p);}
+  if(p.from>=610&&p.from<=MAX){assert.equal(history.phaseAt(e,p.from),p);assert.notEqual(history.phaseAt(e,p.from-1),p);}
+  if(p.to<=MAX){assert.equal(history.phaseAt(e,p.to-1),p);assert.notEqual(history.phaseAt(e,p.to),p);}
  }
 }
-for(const e of catalog.events){assert(e.from>=610&&e.from<=1299&&e.to<=1300&&e.from<=e.to);assert(!ids.has(e.id));ids.add(e.id);[e.title,e.text].forEach(text);assert(catalog.regions.some(r=>r.id===e.region));assert(e.coord.length===2);assert(e.sources.length);for(const id of e.sources){assert(catalog.sources[id]);used.add(id);}if(e.entry)assert(catalog.entries.some(p=>p.id===e.entry));if(e.route){assert(e.route.length>=2);for(const p of e.route)assert(p.length===2&&p.every(Number.isFinite));}}
+for(const e of catalog.events){assert(e.from>=610&&e.from<=MAX&&e.to<=MAX+1&&e.from<=e.to);assert(!ids.has(e.id));ids.add(e.id);[e.title,e.text].forEach(text);assert(catalog.regions.some(r=>r.id===e.region));assert(e.coord.length===2);assert(e.sources.length);for(const id of e.sources){assert(catalog.sources[id]);used.add(id);}if(e.entry)assert(catalog.entries.some(p=>p.id===e.entry));if(e.route){assert(e.route.length>=2);for(const p of e.route)assert(p.length===2&&p.every(Number.isFinite));}}
+for(const e of catalog.events)assert(['war','politics','diplomacy','migration','culture','nature'].includes(e.kind),'Untranslated or unfilterable event topic: '+e.id+' / '+e.kind);
 const areaIds=new Set();
 for(const a of catalog.areas){
  assert(!areaIds.has(a.id),'Duplicate territorial frame '+a.id);areaIds.add(a.id);
@@ -26,11 +30,11 @@ for(const a of catalog.areas){
  assert(['polity','influence','cultural','settlement','landscape','uninhabited'].includes(a.kind));
  [a.name,a.title,a.text].forEach(text);assert(a.sources.length);for(const id of a.sources){assert(catalog.sources[id]);used.add(id);}
  assert(a.polygons.length);for(const ring of a.polygons){assert(ring.length>=3);for(const p of ring)assert(p.length===2&&p.every(Number.isFinite)&&p[0]>=-180&&p[0]<=180&&p[1]>=-90&&p[1]<=85);const signed=ring.reduce((s,p,i)=>{const q=ring[(i+1)%ring.length];return s+p[0]*q[1]-q[0]*p[1];},0);assert(Math.abs(signed)>.00001,'Degenerate polygon '+a.id);}
- for(const y of [Math.max(610,a.from),Math.min(1299,a.to-1)])assert(history.get(a.entry,y),'Area persists without active society: '+a.entry);
+ for(const y of [Math.max(610,a.from),Math.min(MAX,a.to-1)])assert(history.get(a.entry,y),'Area persists without active society: '+a.entry);
  assert(history.areasAt(a.from).some(x=>x.id===a.id));assert(!history.areasAt(a.to).some(x=>x.id===a.id));
 }
 assert.equal(used.size,Object.keys(catalog.sources).length,'Unused source: '+Object.keys(catalog.sources).filter(k=>!used.has(k)).join(','));
-for(let y=610;y<=1299;y++){
+for(let y=610;y<=MAX;y++){
  const all=history.at(y);assert.equal(new Set(all.map(i=>i.entry.id)).size,all.length);
  const areas=history.areasAt(y);assert.equal(new Set(areas.map(a=>a.entry)).size,areas.length,'Overlapping frames in '+y);
  for(const r of catalog.regions){const subset=history.at(y,r.id);assert(subset.length,'Empty region '+r.id+' in '+y);assert(subset.every(i=>i.entry.region===r.id));}
@@ -67,4 +71,4 @@ assert(html.includes('.future-mode #worldTerritoryLayer'));assert(html.includes(
 assert(!html.includes("if(f.properties.name==='Antarctica') return;"));assert(/LAT_MIN\s*=\s*-90/.test(html));
 const payload=JSON.parse(html.match(/const WORLD_HISTORY=(.*);/)[1]);assert.equal(payload.events.filter(e=>e.base).length,63);assert(!JSON.stringify(payload.sources).includes('https://'));
 for(const e of payload.events){assert(e.title[1]&&!/[А-Яа-яЁё]/.test(e.title[1]),'Untranslated event '+e.id);assert(e.text[1]&&!/[А-Яа-яЁё]/.test(e.text[1]),'Untranslated description '+e.id);}
-console.log(JSON.stringify({status:'PASS',entries:catalog.entries.length,phases,events:payload.events.length,areas:catalog.areas.length,languages:3,textRows:languageRows.length,years:690,regions:catalog.regions.length,sources:used.size}));
+console.log(JSON.stringify({status:'PASS',entries:catalog.entries.length,phases,events:payload.events.length,areas:catalog.areas.length,languages:3,textRows:languageRows.length,years:MAX-609,regions:catalog.regions.length,sources:used.size}));

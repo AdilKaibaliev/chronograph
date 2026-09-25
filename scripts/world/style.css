@@ -1,4 +1,5 @@
 #mapCard{overflow:clip}
+#worldMap,#worldMap text{user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
 .world-header{position:sticky;top:-14px;z-index:3;background:#211e18;padding:10px 0 9px;border-bottom:1px solid #514733;box-shadow:0 5px 10px #211e1840}
 .world-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.world-heading h3{font:18px/1.2 Georgia,serif;margin:0;color:#f1dfb7}.world-heading>span{font:12px Georgia,serif;white-space:nowrap;color:#d8bd80;padding-top:4px}
 .world-card-actions button,#worldYearApply{font:11px/1.3 system-ui;border:1px solid #62563e;background:#2c281f;color:#ddceb1;border-radius:8px;padding:7px 9px;cursor:pointer}

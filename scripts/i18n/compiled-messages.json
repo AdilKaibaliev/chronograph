@@ -745,6 +745,21 @@
     "Кыргыздардын өлкөсү"
   ],
   [
+    "Формирование государства",
+    "Formation of a state",
+    "Мамлекеттин калыптанышы"
+  ],
+  [
+    "Географический ориентир",
+    "Geographical reference",
+    "Географиялык багыт"
+  ],
+  [
+    "Османская столица",
+    "Ottoman capital",
+    "Осмон борбору"
+  ],
+  [
     "Абу Бакр ас-Сиддик",
     "Abu Bakr al-Siddiq",
     "Абу Бакр ас-Сиддик"
@@ -5990,6 +6005,121 @@
     "Саякатчылар жана географтар"
   ],
   [
+    "Ибн Каййим аль-Джаузия",
+    "Ibn Qayyim al-Jawziyya",
+    "Ибн Каййим аль-Жавзия"
+  ],
+  [
+    "Ибн Касир",
+    "Ibn Kathir",
+    "Ибн Касир"
+  ],
+  [
+    "Ибн Халдун",
+    "Ibn Khaldun",
+    "Ибн Халдун"
+  ],
+  [
+    "аль-Макризи",
+    "al-Maqrizi",
+    "аль-Макризи"
+  ],
+  [
+    "Ибн Хаджар аль-Аскаляни",
+    "Ibn Hajar al-Asqalani",
+    "Ибн Хажар аль-Аскалани"
+  ],
+  [
+    "ас-Сахави",
+    "al-Sakhawi",
+    "ас-Сахави"
+  ],
+  [
+    "ас-Суюти",
+    "al-Suyuti",
+    "ас-Суюти"
+  ],
+  [
+    "Закария аль-Ансари",
+    "Zakariyya al-Ansari",
+    "Закария аль-Ансари"
+  ],
+  [
+    "Ибн Хаджар аль-Хайтами",
+    "Ibn Hajar al-Haytami",
+    "Ибн Хажар аль-Хайтами"
+  ],
+  [
+    "Эбуссууд-эфенди",
+    "Ebussuud Efendi",
+    "Эбуссууд эфенди"
+  ],
+  [
+    "Ташкёпрюзаде Ахмед",
+    "Taşköprizade Ahmed",
+    "Ташкөпүрүзаде Ахмед"
+  ],
+  [
+    "Зайн ад-Дин Ибн Нуджайм",
+    "Zayn al-Din Ibn Nujaym",
+    "Зайн ад-Дин Ибн Нужайм"
+  ],
+  [
+    "Абд аль-Хакк ад-Дихлави",
+    "Abd al-Haqq al-Dihlawi",
+    "Абд аль-Хакк ад-Дихлави"
+  ],
+  [
+    "Ахмад Баба ат-Тимбукти",
+    "Ahmad Baba al-Timbukti",
+    "Ахмад Баба ат-Тимбукти"
+  ],
+  [
+    "Ахмад Сирхинди",
+    "Ahmad Sirhindi",
+    "Ахмад Сирхинди"
+  ],
+  [
+    "Кятиб Челеби",
+    "Kâtib Çelebi",
+    "Катиб Челеби"
+  ],
+  [
+    "Абд аль-Гани ан-Набулуси",
+    "Abd al-Ghani al-Nabulusi",
+    "Абд аль-Гани ан-Набулуси"
+  ],
+  [
+    "Исмаил Хаккы Бурсеви",
+    "Ismail Hakki Bursevi",
+    "Исмаил Хаккы Бурсеви"
+  ],
+  [
+    "Мустафа Наима",
+    "Mustafa Naima",
+    "Мустафа Наима"
+  ],
+  [
+    "Шах Валиуллах ад-Дихлави",
+    "Shah Wali Allah al-Dihlawi",
+    "Шах Валиуллах ад-Дихлави"
+  ],
+  [
+    "Ахмад ад-Дардир",
+    "Ahmad al-Dardir",
+    "Ахмад ад-Дардир"
+  ],
+  [
+    "Муртада аз-Забиди",
+    "Murtada al-Zabidi",
+    "Муртада аз-Забиди"
+  ],
+  [
+    "Шах Абд аль-Азиз ад-Дихлави",
+    "Shah Abd al-Aziz al-Dihlawi",
+    "Шах Абд аль-Азиз ад-Дихлави"
+  ],
+  [
     "Сподвижник из йеменского племени даус, присоединившийся к Пророку Мухаммаду ﷺ в мединский период. Посвятил себя запоминанию и передаче хадисов; от него учились многие сподвижники и табиины. Его сообщения занимают значительное место в основных хадисных сборниках.",
     "A companion from the Yemeni Daws tribe who joined Prophet Muhammad ﷺ during the Medinan period. He devoted himself to remembering and transmitting hadith; many companions and successors learned from him. His reports have a prominent place in the main hadith collections.",
     "Мединалык мезгилде Мухаммад пайгамбарга ﷺ кошулган йемендик даус уруусунун сахабасы. Хадистерди жаттоого жана риваят кылууга өмүрүн арнаган; андан көптөгөн сахабалар менен табииндер билим алышкан. Негизги хадис жыйнактарында анын риваяттары чоң орун ээлейт."
@@ -6520,6 +6650,236 @@
     "TDV İslâm Ansiklopedisi, «Zehebî» макаласы."
   ],
   [
+    "Ханбалитский правовед и преподаватель из Дамаска, ученик Ибн Таймии. Писал о праве, хадисах и нравственном воспитании. Среди его сочинений — «Зад аль-маад» и «Мадаридж ас-саликин».",
+    "A Hanbali jurist and teacher in Damascus, and a student of Ibn Taymiyya. He wrote on law, hadith and ethical cultivation. His works include Zad al-maad and Madarij al-salikin.",
+    "Дамаскта иштеген ханбалий укук таануучу жана мугалим, Ибн Таймиянын шакирти. Укук, хадис жана адеп-ахлак тууралуу жазган. Эмгектеринин арасында «Зад аль-маад» жана «Мадаридж ас-саликин» бар."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «İBN KAYYİM el-CEVZİYYE».",
+    "TDV İslâm Ansiklopedisi, article “İBN KAYYİM el-CEVZİYYE”.",
+    "TDV İslâm Ansiklopedisi, «İBN KAYYİM el-CEVZİYYE» макаласы."
+  ],
+  [
+    "Шафиитский учёный, толкователь Корана и историк, работавший в Дамаске. Автор «Тафсир аль-Куран аль-азым» и исторического труда «Аль-Бидая ва-н-нихая». Обучался у аль-Миззи и других учёных своего времени. Родился около 1301 года.",
+    "A Shafii scholar, Quran commentator and historian active in Damascus. He wrote Tafsir al-Quran al-azim and the history al-Bidaya wa-l-nihaya. He studied with al-Mizzi and other scholars of his time. He was born around 1301.",
+    "Дамаскта иштеген шафиий аалым, Куранды чечмелөөчү жана тарыхчы. «Тафсир аль-Куран аль-азым» жана «Аль-Бидая ва-н-нихая» эмгектерин жазган. Аль-Миззи жана өз доорунун башка аалымдарынан билим алган. Болжол менен 1301-жылы туулган."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «İBN KESÎR, Ebü’l-Fidâ».",
+    "TDV İslâm Ansiklopedisi, article “İBN KESÎR, Ebü’l-Fidâ”.",
+    "TDV İslâm Ansiklopedisi, «İBN KESÎR, Ebü’l-Fidâ» макаласы."
+  ],
+  [
+    "Историк и мыслитель из Туниса, служивший при дворах Магриба, позднее — маликитский судья в Каире. В «Мукаддиме» исследовал возникновение государств, общественную солидарность, хозяйство и проверку исторических сообщений. Она стала введением к его «Китаб аль-Ибар».",
+    "A historian and thinker born in Tunis who served Maghrebi courts and later became a Maliki judge in Cairo. His Muqaddima examines the rise of states, social solidarity, economic life and the assessment of historical reports. It introduces his Kitab al-Ibar.",
+    "Тунисте туулган тарыхчы жана ойчул. Магриб сарайларында кызмат кылып, кийин Каирде маликий казы болгон. «Мукаддимада» мамлекеттердин түзүлүшүн, коомдук ынтымакты, чарбаны жана тарыхый кабарларды текшерүүнү изилдеген. Ал «Китаб аль-Ибар» эмгегинин кириш сөзү."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «İBN HALDÛN».",
+    "TDV İslâm Ansiklopedisi, article “İBN HALDÛN”.",
+    "TDV İslâm Ansiklopedisi, «İBN HALDÛN» макаласы."
+  ],
+  [
+    "Египетский историк из Каира, занимавший административные и преподавательские должности. Описывал города, памятники, цены и политическую жизнь Египта. «Аль-Хитат» посвящена его исторической топографии, а «Ас-Сулюк» — истории правителей.",
+    "An Egyptian historian from Cairo who held administrative and teaching posts. He described Egypt’s towns, monuments, prices and political life. Al-Khitat addresses its historical topography; al-Suluk recounts the history of its rulers.",
+    "Каирлик египет тарыхчысы, башкаруу жана окутуу кызматтарын аткарган. Египеттин шаарларын, эстеликтерин, бааларын жана саясий турмушун сүрөттөгөн. «Аль-Хитат» тарыхый топографияга, «Ас-Сулюк» башкаруучулардын тарыхына арналган."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «MAKRÎZÎ».",
+    "TDV İslâm Ansiklopedisi, article “MAKRÎZÎ”.",
+    "TDV İslâm Ansiklopedisi, «MAKRÎZÎ» макаласы."
+  ],
+  [
+    "Египетский хадисовед и шафиитский судья. Учился у аль-Ираки, путешествовал ради знания, преподавал в Каире. Автор «Фатх аль-Бари» — комментария к «Сахиху» аль-Бухари, а также трудов о передатчиках хадисов и современниках.",
+    "An Egyptian hadith scholar and Shafii judge. He studied with al-Iraqi, travelled in pursuit of learning and taught in Cairo. His Fath al-Bari comments on Sahih al-Bukhari; he also wrote works on hadith transmitters and his contemporaries.",
+    "Египеттик хадис аалымы жана шафиий казы. Аль-Иракиден окуп, билим издеп сапарга чыккан, Каирде сабак берген. Аль-Бухаринин «Сахихине» жазылган «Фатх аль-Бари» түшүндүрмөсүнүн, хадис жеткирүүчүлөр жана замандаштар тууралуу эмгектердин автору."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «İBN HACER el-ASKALÂNÎ».",
+    "TDV İslâm Ansiklopedisi, article “İBN HACER el-ASKALÂNÎ”.",
+    "TDV İslâm Ansiklopedisi, «İBN HACER el-ASKALÂNÎ» макаласы."
+  ],
+  [
+    "Каирский хадисовед и историк, ученик Ибн Хаджара аль-Аскаляни. Посещал его занятия с детства, позднее путешествовал по Египту, Хиджазу и аш-Шаму. Автор биографического свода «Ад-Дау аль-лами», посвящённого людям IX века хиджры.",
+    "A Cairo hadith scholar and historian, and a student of Ibn Hajar al-Asqalani. He attended his teacher’s lessons from childhood and later travelled through Egypt, the Hijaz and al-Sham. His al-Daw al-lami is a biographical collection for the ninth Hijri century.",
+    "Каирлик хадис аалымы жана тарыхчы, Ибн Хажар аль-Аскаланинин шакирти. Бала кезинен анын сабактарына катышып, кийин Египет, Хижаз жана аш-Шамды кыдырган. Хижранын IX кылымындагы адамдарга арналган «Ад-Дау аль-лами» өмүр баяндар жыйнагынын автору."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «SEHÂVÎ, Şemseddin».",
+    "TDV İslâm Ansiklopedisi, article “SEHÂVÎ, Şemseddin”.",
+    "TDV İslâm Ansiklopedisi, «SEHÂVÎ, Şemseddin» макаласы."
+  ],
+  [
+    "Каирский учёный, писавший о Коране, хадисах, арабском языке и истории. Продолжил начатый аль-Махалли «Тафсир аль-Джалалайн»; составил «Аль-Иткан» и «Тарих аль-хулафа».",
+    "A Cairo scholar who wrote on the Quran, hadith, Arabic and history. He completed al-Mahalli’s Tafsir al-Jalalayn and compiled al-Itqan and Tarikh al-khulafa.",
+    "Куран, хадис, араб тили жана тарых тууралуу жазган каирлик аалым. Аль-Махалли баштаган «Тафсир аль-Жалалайнды» аяктап, «Аль-Иткан» менен «Тарих аль-хулафаны» түзгөн."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «SÜYÛTÎ».",
+    "TDV İslâm Ansiklopedisi, article “SÜYÛTÎ”.",
+    "TDV İslâm Ansiklopedisi, «SÜYÛTÎ» макаласы."
+  ],
+  [
+    "Египетский шафиитский правовед, преподаватель и главный судья. Обучал нескольких поколений учёных Каира, писал о праве, хадисах и логике. Год рождения передаётся по-разному: около 1421 года.",
+    "An Egyptian Shafii jurist, teacher and chief judge. He taught generations of Cairo scholars and wrote on law, hadith and logic. Accounts differ on his birth year, placed here around 1421.",
+    "Египеттик шафиий укук таануучу, мугалим жана башкы казы. Каир аалымдарынын бир нече муунун окутуп, укук, хадис жана логика боюнча жазган. Туулган жылы ар башка берилет: бул жерде болжол менен 1421-жыл."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «ZEKERİYYÂ el-ENSÂRÎ».",
+    "TDV İslâm Ansiklopedisi, article “ZEKERİYYÂ el-ENSÂRÎ”.",
+    "TDV İslâm Ansiklopedisi, «ZEKERİYYÂ el-ENSÂRÎ» макаласы."
+  ],
+  [
+    "Шафиитский правовед, родившийся в Египте и работавший в Мекке. Автор правовых сочинений и ответов на вопросы, в том числе «Тухфат аль-мухтадж». Его следует отличать от хадисоведа Ибн Хаджара аль-Аскаляни, умершего в 1449 году.",
+    "A Shafii jurist born in Egypt and active in Mecca. He wrote legal works and responses, including Tuhfat al-muhtaj. He is distinct from the hadith scholar Ibn Hajar al-Asqalani, who died in 1449.",
+    "Египетте туулуп, Меккеде иштеген шафиий укук таануучу. Укуктук эмгектерди жана суроолорго жоопторду, анын ичинде «Тухфат аль-мухтажды» жазган. Ал 1449-жылы каза болгон хадис аалымы Ибн Хажар аль-Аскаланиден башка адам."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «İBN HACER el-HEYTEMÎ».",
+    "TDV İslâm Ansiklopedisi, article “İBN HACER el-HEYTEMÎ”.",
+    "TDV İslâm Ansiklopedisi, «İBN HACER el-HEYTEMÎ» макаласы."
+  ],
+  [
+    "Османский ханафитский правовед и толкователь Корана. С 1545 года занимал должность шейх-уль-ислама. Его фетвы и работа с султанскими установлениями влияли на правовую практику; написал тафсир «Иршад аль-акль ас-салим».",
+    "An Ottoman Hanafi jurist and Quran commentator, serving as chief mufti from 1545. His legal opinions and work with sultanic regulations shaped legal practice. He wrote the commentary Irshad al-aql al-salim.",
+    "Осмондук ханафий укук таануучу жана Куран чечмелөөчүсү. 1545-жылдан шейх-уль-ислам болгон. Фатвалары жана султандын эрежелери менен иштөөсү укуктук тажрыйбага таасир эткен. «Иршад аль-акль ас-салим» тафсирин жазган."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «EBÜSSUÛD EFENDİ».",
+    "TDV İslâm Ansiklopedisi, article “EBÜSSUÛD EFENDİ”.",
+    "TDV İslâm Ansiklopedisi, «EBÜSSUÛD EFENDİ» макаласы."
+  ],
+  [
+    "Османский учёный, преподаватель и судья. В «Аш-Шакаик ан-нуманийя» собрал биографии османских учёных, а в «Мифтах ас-саада» систематизировал отрасли знания. Писал также о богословии, языке и логике.",
+    "An Ottoman scholar, teacher and judge. Al-Shaqaiq al-numaniyya collects biographies of Ottoman scholars, while Miftah al-saada classifies branches of learning. He also wrote on theology, language and logic.",
+    "Осмондук аалым, мугалим жана казы. «Аш-Шакаик ан-нуманийяда» Осмон аалымдарынын өмүр баяндарын чогултуп, «Мифтах ас-саадада» билим тармактарын иреттеген. Теология, тил жана логика тууралуу да жазган."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «TAŞKÖPRİZÂDE AHMED EFENDİ».",
+    "TDV İslâm Ansiklopedisi, article “TAŞKÖPRİZÂDE AHMED EFENDİ”.",
+    "TDV İslâm Ansiklopedisi, «TAŞKÖPRİZÂDE AHMED EFENDİ» макаласы."
+  ],
+  [
+    "Ханафитский правовед из Каира. Преподавал и составлял правовые труды. «Аль-Бахр ар-раик» — его комментарий к правовому своду ан-Насафи; «Аль-Ашбах ва-н-назаир» рассматривает общие правила и связанные правовые случаи.",
+    "A Hanafi jurist from Cairo who taught and compiled legal works. Al-Bahr al-raiq comments on al-Nasafi’s legal compendium; al-Ashbah wa-l-nazair examines general legal rules and related cases.",
+    "Каирлик ханафий укук таануучу. Сабак берип, укуктук эмгектерди түзгөн. «Аль-Бахр ар-раик» ан-Насафинин укук жыйнагына түшүндүрмө берет; «Аль-Ашбах ва-н-назаир» жалпы укуктук эрежелерди жана байланышкан учурларды карайт."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «İBN NÜCEYM, Zeynüddin».",
+    "TDV İslâm Ansiklopedisi, article “İBN NÜCEYM, Zeynüddin”.",
+    "TDV İslâm Ansiklopedisi, «İBN NÜCEYM, Zeynüddin» макаласы."
+  ],
+  [
+    "Хадисовед из Дели. Учился в Индии и Хиджазе, затем преподавал в Дели. Его труды и ученики способствовали распространению изучения хадисов в Южной Азии; писал на арабском и персидском языках.",
+    "A hadith scholar from Delhi. He studied in India and the Hijaz, then taught in Delhi. His writings and students helped expand hadith scholarship in South Asia. He wrote in Arabic and Persian.",
+    "Делилик хадис аалымы. Индияда жана Хижазда окуп, кийин Делиде сабак берген. Эмгектери менен шакирттери Түштүк Азияда хадис илимин жайылтууга салым кошкон. Арабча жана персче жазган."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «DİHLEVÎ, Abdülhak b. Seyfeddin».",
+    "TDV İslâm Ansiklopedisi, article “DİHLEVÎ, Abdülhak b. Seyfeddin”.",
+    "TDV İslâm Ansiklopedisi, «DİHLEVÎ, Abdülhak b. Seyfeddin» макаласы."
+  ],
+  [
+    "Маликитский правовед и биограф учёных из Тимбукту. После марокканского завоевания был увезён в Марракеш, где продолжал преподавать и писать. Его сочинения сохраняют сведения об учёных Западной Африки и Магриба.",
+    "A Maliki jurist and biographer of scholars from Timbuktu. After the Moroccan conquest he was taken to Marrakesh, where he continued teaching and writing. His works preserve accounts of scholars in West Africa and the Maghreb.",
+    "Тимбуктулук маликий укук таануучу жана аалымдардын өмүр баянын жазуучу. Марокко басып алгандан кийин Марракешке алып кетилип, ал жерде окутуп, жазууну уланткан. Эмгектери Батыш Африка жана Магриб аалымдары тууралуу маалымат сактайт."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «AHMED BÂBÂ et-TİNBÜKTÎ».",
+    "TDV İslâm Ansiklopedisi, article “AHMED BÂBÂ et-TİNBÜKTÎ”.",
+    "TDV İslâm Ansiklopedisi, «AHMED BÂBÂ et-TİNBÜKTÎ» макаласы."
+  ],
+  [
+    "Индийский ханафитский учёный и наставник накшбандийской традиции из Сирхинда. Учился у отца и других преподавателей, писал о богословии и духовном воспитании. Его письма собраны в «Мактубат»; значительная часть деятельности относится к XVII веку.",
+    "An Indian Hanafi scholar and Naqshbandi teacher from Sirhind. He studied with his father and other teachers and wrote on theology and spiritual education. His letters form the Maktubat; much of his activity belongs to the seventeenth century.",
+    "Сирхиндден чыккан индиялык ханафий аалым жана накшбандий насаатчы. Атасы жана башка мугалимдерден билим алып, теология жана руханий тарбия тууралуу жазган. Каттары «Мактубатка» жыйналган; ишмердигинин кыйла бөлүгү XVII кылымга таандык."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «İMÂM-ı RABBÂNÎ».",
+    "TDV İslâm Ansiklopedisi, article “İMÂM-ı RABBÂNÎ”.",
+    "TDV İslâm Ansiklopedisi, «İMÂM-ı RABBÂNÎ» макаласы."
+  ],
+  [
+    "Османский историк, географ и библиограф из Стамбула. Служил писцом, участвовал в походах, затем посвятил себя изучению книг. Составил библиографический свод «Кашф аз-зунун» и географический труд «Джиханнюма», сопоставляя восточные и европейские сведения.",
+    "An Ottoman historian, geographer and bibliographer from Istanbul. After working as a clerk and joining campaigns, he devoted himself to scholarship. His works include the bibliography Kashf al-zunun and the geography Cihannüma, comparing eastern and European knowledge.",
+    "Стамбулдук Осмон тарыхчысы, географ жана библиограф. Катчы болуп иштеп, жортуулдарга катышкандан кийин китеп изилдөөгө берилген. Чыгыш жана Европа маалыматтарын салыштырып, «Кашф аз-зунун» библиографиялык жыйнагын жана «Жиханнума» географиялык эмгегин түзгөн."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «KÂTİB ÇELEBİ».",
+    "TDV İslâm Ansiklopedisi, article “KÂTİB ÇELEBİ”.",
+    "TDV İslâm Ansiklopedisi, «KÂTİB ÇELEBİ» макаласы."
+  ],
+  [
+    "Дамасский ханафитский учёный, поэт и суфийский наставник. Преподавал, писал о праве, богословии и духовной жизни. Оставил описания путешествий по аш-Шаму, Египту и Хиджазу, содержащие сведения о городах и обществах Османской эпохи.",
+    "A Damascene Hanafi scholar, poet and Sufi teacher. He taught and wrote on law, theology and spiritual life. Accounts of his travels through al-Sham, Egypt and the Hijaz preserve observations of Ottoman cities and societies.",
+    "Дамасктык ханафий аалым, акын жана суфий насаатчы. Укук, теология жана руханий жашоо тууралуу жазып, сабак берген. Аш-Шам, Египет жана Хижаздагы саякаттарынын баяндары Осмон доорунун шаарлары менен коомдору тууралуу маалымат сактайт."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «NABLUSÎ, Abdülganî b. İsmâil».",
+    "TDV İslâm Ansiklopedisi, article “NABLUSÎ, Abdülganî b. İsmâil”.",
+    "TDV İslâm Ansiklopedisi, «NABLUSÎ, Abdülganî b. İsmâil» макаласы."
+  ],
+  [
+    "Османский толкователь Корана, проповедник и поэт, долго живший в Бурсе. Принадлежал к джалватийской суфийской традиции. Его «Рух аль-баян» вырос из последовательного толкования Корана на проповедях; писал на арабском и турецком языках.",
+    "An Ottoman Quran commentator, preacher and poet who lived for many years in Bursa. He belonged to the Jalwati Sufi tradition. His Ruh al-bayan developed from sequential Quran exposition in sermons; he wrote in Arabic and Turkish.",
+    "Бурсада узак жашаган Осмон Куран чечмелөөчүсү, дааватчы жана акын. Жалватий суфий салтына таандык болгон. «Рух аль-баян» эмгеги Куранды баяндарда иреттүү чечмелөөдөн жаралган; арабча жана түркчө жазган."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «İSMÂİL HAKKI BURSEVÎ».",
+    "TDV İslâm Ansiklopedisi, article “İSMÂİL HAKKI BURSEVÎ”.",
+    "TDV İslâm Ansiklopedisi, «İSMÂİL HAKKI BURSEVÎ» макаласы."
+  ],
+  [
+    "Османский историк, родившийся около 1655 года в Халебе. Служил в канцеляриях и стал официальным хронистом. Его «История Наимы» соединяет более ранние записи с анализом государственных дел, войн и общественных противоречий.",
+    "An Ottoman historian born around 1655 in Aleppo. He served in government offices and became an official chronicler. His History of Naima combines earlier records with analysis of government, warfare and social tensions.",
+    "Болжол менен 1655-жылы Халебде туулган Осмон тарыхчысы. Кеңселерде иштеп, расмий жылнаамачы болгон. «Наима тарыхы» мурдагы жазууларды мамлекеттик иштердин, согуштардын жана коомдук карама-каршылыктардын талдоосу менен бириктирет."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «NAÎMÂ».",
+    "TDV İslâm Ansiklopedisi, article “NAÎMÂ”.",
+    "TDV İslâm Ansiklopedisi, «NAÎMÂ» макаласы."
+  ],
+  [
+    "Индийский учёный, хадисовед и преподаватель медресе Рахимийя в Дели. Учился также в Хиджазе. Перевёл Коран на персидский язык и написал «Худжжат Аллах аль-балига», рассматривая смысл религиозных установлений и устройство общественной жизни.",
+    "An Indian scholar, hadith specialist and teacher at Delhi’s Rahimiyya madrasa who also studied in the Hijaz. He translated the Quran into Persian and wrote Hujjat Allah al-baligha on the purposes of religious prescriptions and social life.",
+    "Индиялык аалым, хадис таануучу жана Делидеги Рахимийя медресесинин мугалими. Хижазда да билим алган. Куранды перс тилине которуп, диний көрсөтмөлөрдүн мааниси жана коомдук жашоо тууралуу «Хужжат Аллах аль-балига» эмгегин жазган."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «ŞAH VELİYYULLAH».",
+    "TDV İslâm Ansiklopedisi, article “ŞAH VELİYYULLAH”.",
+    "TDV İslâm Ansiklopedisi, «ŞAH VELİYYULLAH» макаласы."
+  ],
+  [
+    "Египетский маликитский правовед и преподаватель аль-Азхара. Руководил обучением маликитов, писал о праве и вероучении. Среди его трудов — «Акраб аль-масалик». Выступал в защиту жителей Каира от злоупотреблений местных правителей.",
+    "An Egyptian Maliki jurist and teacher at al-Azhar. He led Maliki instruction and wrote on law and belief, including Aqrab al-masalik. He also defended Cairo’s inhabitants against abuses by local rulers.",
+    "Египеттик маликий укук таануучу жана аль-Азхардын мугалими. Маликий окутууну жетектеп, укук жана ишеним тууралуу жазган. Эмгектеринин бири — «Акраб аль-масалик». Каир тургундарын жергиликтүү башкаруучулардын кыянаттыгынан коргогон."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «DERDÎR».",
+    "TDV İslâm Ansiklopedisi, article “DERDÎR”.",
+    "TDV İslâm Ansiklopedisi, «DERDÎR» макаласы."
+  ],
+  [
+    "Лексикограф и хадисовед, родившийся в Бильграме в Индии. Учился в Йемене и Хиджазе, затем жил и преподавал в Каире. Создал обширный арабский словарь «Тадж аль-арус» и комментарий к «Ихья улюм ад-дин» аль-Газали.",
+    "A lexicographer and hadith scholar born in Bilgram, India. He studied in Yemen and the Hijaz before settling and teaching in Cairo. He compiled the extensive Arabic dictionary Taj al-arus and a commentary on al-Ghazali’s Ihya ulum al-din.",
+    "Индиянын Бильграм шаарында туулган сөздүк түзүүчү жана хадис аалымы. Йеменде жана Хижазда окуп, кийин Каирде жашап, сабак берген. Кеңири араб сөздүгү «Таж аль-арусту» жана аль-Газалинин «Ихья улюм ад-дин» эмгегине түшүндүрмө жазган."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «ZEBÎDÎ, Muhammed Murtazâ».",
+    "TDV İslâm Ansiklopedisi, article “ZEBÎDÎ, Muhammed Murtazâ”.",
+    "TDV İslâm Ansiklopedisi, «ZEBÎDÎ, Muhammed Murtazâ» макаласы."
+  ],
+  [
+    "Учёный из Дели, сын и ученик Шаха Валиуллаха. После смерти отца в 1762 году продолжил преподавание в медресе Рахимийя. Занимался толкованием Корана, хадисами и правовыми вопросами; его ученики продолжили традицию религиозного образования в Индии.",
+    "A Delhi scholar, son and student of Shah Wali Allah. After his father’s death in 1762, he continued teaching at the Rahimiyya madrasa. His work covered Quran commentary, hadith and legal questions; his students carried on religious education in India.",
+    "Делилик аалым, Шах Валиуллахтын уулу жана шакирти. Атасы 1762-жылы каза болгондон кийин Рахимийя медресесинде сабак берүүнү уланткан. Куран чечмелөө, хадис жана укук маселелери менен иштеген; шакирттери Индияда диний билим берүү салтын улантышкан."
+  ],
+  [
+    "TDV İslâm Ansiklopedisi, статья «ABDÜLAZÎZ ed-DİHLEVÎ».",
+    "TDV İslâm Ansiklopedisi, article “ABDÜLAZÎZ ed-DİHLEVÎ”.",
+    "TDV İslâm Ansiklopedisi, «ABDÜLAZÎZ ed-DİHLEVÎ» макаласы."
+  ],
+  [
     "Приняты даты около 592–675 по биографической статье; год смерти — 55 г. х. Дата рождения по хиджре указана приблизительно.",
     "Dates of approximately 592–675 follow the biography article; death is dated to 55 AH. The pre-Hijra birth date is approximate.",
     "Биографиялык макала боюнча болжол менен 592–675-жылдар алынды; каза болгон жылы — 55 х. ж. Хижрага чейинки туулган жылы болжолдуу."
@@ -6998,5 +7358,20 @@
     "Географический ориентир.",
     "Geographic reference.",
     "Географиялык багыт белгиси."
+  ],
+  [
+    "Государства и общества мира",
+    "States and societies of the world",
+    "Дүйнөнүн мамлекеттери жана коомдору"
+  ],
+  [
+    "610–1789 · выберите год или исторический рубеж",
+    "610–1789 · choose a year or historical milestone",
+    "610–1789 · жылды же тарыхый окуяны тандаңыз"
+  ],
+  [
+    "«Хронограф» показывает историю мира 610–1789 годов. Современные границы служат географическими ориентирами. Исторические контуры отображают приблизительные владения, области влияния и расселения для указанного периода.",
+    "Chronograph presents world history from 610 to 1789. Modern borders serve as geographical references. Historical outlines represent approximate domains, spheres of influence and settlement for the stated period.",
+    "«Хронограф» 610–1789-жылдардагы дүйнө тарыхын көрсөтөт. Азыркы чек аралар географиялык багыт берет. Тарыхый контурлар көрсөтүлгөн мезгилдеги болжолдуу ээликтерди, таасир жана конуш аймактарын чагылдырат."
   ]
 ]

@@ -67,7 +67,7 @@ localeSelect.addEventListener('change',()=>{
 });
 // Restore only validated display state from a shared address.
 const initialYear=stateParams.get('year');
-if(initialYear!==null&&/^\d{3,4}$/.test(initialYear)&&+initialYear>=610&&+initialYear<=1299)renderYear(+initialYear);
+if(initialYear!==null&&/^\d{3,4}$/.test(initialYear)&&+initialYear>=610&&+initialYear<=TIMELINE_MAX)renderYear(+initialYear);
 const initialView=(stateParams.get('view')||'').split(',').map(Number);
 if(initialView.length===3&&initialView.every(Number.isFinite)&&initialView[0]>=.75&&initialView[0]<=24&&Math.abs(initialView[1])<=40000&&Math.abs(initialView[2])<=40000){[mapState.scale,mapState.tx,mapState.ty]=initialView;setViewport();}
 const initialPanel=stateParams.get('tab');

@@ -43,7 +43,7 @@ const context={
  layerState:{empires:true,places:true},overlayOpacity:.5,
  worldTerritoryLayer:new SvgNode('g'),worldTerritoryLabels:new SvgNode('g'),worldLayer:new SvgNode('g'),
  document:{createElementNS:(_,name)=>new SvgNode(name)},svg:{namespaceURI:'http://www.w3.org/2000/svg'},
- SVG_W:1440,SVG_H:720,
+ SVG_W:1440,SVG_H:720,TIMELINE_MAX:catalog.range?.max??1299,
  project:([x,y])=>[x,y],polygonPath:rings=>rings.map(ring=>'M'+ring.map(p=>p.join(' ')).join('L')+'Z').join(''),
  wl:row=>row[0],wt:key=>key,hideTooltip:()=>{},updateWorldMarkerScale:()=>{}
 };
@@ -80,13 +80,13 @@ function checkRender(year,region){
 // The reported URL selected Arctic in 1299: the map must still contain every
 // active American and African feature, just as it retains the Eurasian layer.
 const regions=['all',...catalog.regions.map(r=>r.id)];
-for(const year of [610,800,999,1000,1049,1050,1100,1199,1200,1229,1230,1250,1269,1299]){
+for(const year of [610,800,999,1000,1049,1050,1100,1199,1200,1229,1230,1250,1269,1299,1300,1335,1368,1402,1428,1438,1453,1492,1517,1521,1526,1552,1572,1600,1601,1644,1648,1683,1701,1757,1763,1776,1788,1789]){
  for(const region of regions)checkRender(year,region);
 }
 
 // Repeated redraws over the entire supported span catch stale DOM left behind
 // by ended frames, and premature areas or places from a later period.
-for(let year=610;year<=1299;year++)checkRender(year,'arctic');
+for(let year=610;year<=(catalog.range?.max??1299);year++)checkRender(year,'arctic');
 const idsAt=year=>new Set(checkRender(year,'arctic').map(g=>g.getAttribute('data-world-area')));
 assert(idsAt(999).has('wari'));assert(!idsAt(1000).has('wari'));
 assert(!idsAt(1229).has('mali'));assert(idsAt(1230).has('mali'));
@@ -108,4 +108,4 @@ assert(!context.worldTerritoryLayer.classList.contains('hidden-layer'));
 assert(!context.worldTerritoryLabels.classList.contains('hidden-layer'));
 assert(!context.worldLayer.classList.contains('hidden-layer'));
 
-console.log(JSON.stringify({status:'PASS',renderers:2,renders,regions:regions.length,years:690,territoriesIn1299:expectedAreas(1299).length,placesIn1299:expectedPlaces(1299).length}));
+console.log(JSON.stringify({status:'PASS',renderers:2,renders,regions:regions.length,years:(catalog.range?.max??1299)-609,territoriesIn1299:expectedAreas(1299).length,placesIn1299:expectedPlaces(1299).length}));

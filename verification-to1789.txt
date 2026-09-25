@@ -1,0 +1,34 @@
+Running scripts/i18n/build.cjs
+{"messages":1475,"eventTitles":64,"eventDescriptions":64,"bytes":5574689}
+Running scripts/world/test.cjs
+{"status":"PASS","entries":333,"phases":1264,"events":336,"areas":1270,"languages":3,"textRows":10686,"years":1180,"regions":8,"sources":376}
+Running scripts/world/render-test.cjs
+{"status":"PASS","renderers":2,"renders":1532,"regions":9,"years":1180,"territoriesIn1299":58,"placesIn1299":64}
+Running scripts/world/content-audit-test.cjs
+PASS: Sicán / Túcume continues through 1299; Copán remains a separate political core after 738 and contains its documented site coordinate.
+Running scripts/world/education-test.cjs
+PASS: educational expansion chronology, differentiated territorial categories, source-backed learning, cultural events and political transitions.
+Running scripts/world/maghreb-outline-test.cjs
+PASS: dissolved Maghreb outlines preserve 78384 coverage samples, remove internal seams, and retain separate Andalus.
+Running scripts/late/test.cjs
+PASS: 610–1453 bounds; all 154 added years agree with the built atlas; dated Eurasian, American, African and Arctic transitions; Oceanic settlement types; no legacy empire/sidebar leakage; retained contemporaries with verified life-date boundaries.
+Running scripts/early/test.cjs
+PASS: 610–1600 interface bounds; preserved 610–1453 phase/geometry fingerprint; all 147 new years in eight regions; Oceanic contact and Arctic continuity; preserved 72 biographies from the preceding release.
+Running scripts/to1789/test.cjs
+PASS: 610–1789 interface; preserved 610–1600 fingerprint; all 189 added years in eight regions; playback stops at all new dates; Oceanic colonial distinctions; current coordinates in territorial chronology; 80 delivered biographies.
+Running scripts/future/test.cjs
+{"events":82,"majorSigns":10,"references":70,"places":33,"sequences":4,"status":"PASS: schema, translations, sequence graph, filters, uncertain places, calendar preservation, syntax, sources"}
+{"status":"PASS: sourced geography, Sasanian polygon, complete excerpts","mapped":38,"unlocated":44}
+Running scripts/future/illustrations-test.cjs
+{"status":"PASS: complete multilingual scenes, animation frames, count, monotonic growth, syntax","events":82,"sceneFamilies":29,"frames":492}
+Running scripts/i18n/test.cjs
+PASS: 1475 message pairs, Russian preservation, calendar and dynamic labels, explicit Russian fallback.
+PASS: original historical states, geometry, events and person dates preserved from source; plain-text sources.
+Running scripts/support/test.cjs
+PASS: English default, URL priority, saved language, blocked storage, RU/EN/KY support copy, both timelines paused, no payment destination.
+Running scripts/biographies-test.cjs
+PASS: 80 individual biographies and plain-text sources in 3 languages; all contemporary buttons, dates, scroll reset and focus transitions.
+Running scripts/history-test.cjs
+PASS: 2522 coordinate checks; 690-year data, dated Kyrgyz status, Mongol conquest milestones, dependent territories, migration semantics and JS syntax.
+Running scripts/unified-map-test.cjs
+PASS: unified/detailed modes across 690 years, dated extent preserved, consistent winding, no duplicate ulus paths, post-1260 label, Kyrgyz core/influence distinction, RU/EN/KY.
