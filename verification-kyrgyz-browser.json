@@ -1,0 +1,22 @@
+{
+  "version": "1.14.2",
+  "date": "2026-10-01",
+  "pass": true,
+  "local": true,
+  "url": "http://127.0.0.1:8773/?lang=ru&year=840&tab=regions&view=6.881%2C-6904.458%2C-588.437",
+  "ruStages": [610,648,758,820,840,847,860,924,1207,1218,1270,1273,1293,1295],
+  "languages": ["ru","en","ky"],
+  "newCardTranslations": {"en":[840,860,924,1207,1218,1270,1273,1293],"ky":[840,860,924,1207,1218,1270,1273,1293]},
+  "englishCardsHaveNoCyrillicProse": true,
+  "diplomacyRouteRemovedIn875": true,
+  "desktop": {"viewport":[1280,720],"document":[1280,720]},
+  "mobile": {"viewport":[390,844],"document":[390,844],"playButtonTop":744.1875,"playButtonBottom":780.1875},
+  "viewportOverrideReset": true,
+  "selectedTerritoryCardEnglish": "Kyrgyz Khaganate",
+  "clickAndEnterOpenCard": true,
+  "drag": {"before":"translate(-3933.60 -218.88) scale(4.2000)","after":"translate(-3820.36 -181.70) scale(4.2000)","tabRemained":"Regions"},
+  "consoleErrorsAfterFinalReload": 0,
+  "fixedDuringVerification": ["Preserved PEOPLE and PLACES while synchronizing event data", "Kyrgyz pointer capture now distinguishes selection from drag", "Screen-sized route labels and markers"],
+  "screenshots": ["outputs/chronograph_kyrgyz_desktop_2026_10_01.png","outputs/chronograph_kyrgyz_mobile_2026_10_01.png"],
+  "automated": {"fullSuites":31,"finalAdditional":["world/kyrgyz-test","history-test","i18n/test","world/labels-test","unified-map-test"]}
+}

@@ -15,7 +15,7 @@ for(const y of [1683,1750,1800,1850,1900]){
  for(const p of [[126.98,37.57],[139.69,35.68],[85.32,27.72],[94.45,51.72]])point('1789-qing',y,p,false,'Core extends into another polity/dependency');
 }
 point('1789-qing',1690,[106.91,47.92],false,'Khalkha premature');point('1789-qing',1691,[106.91,47.92],true,'Khalkha missing');point('1789-qing',1911,[106.91,47.92],false,'Khalkha separation missing');
-point('1789-qing',1758,[87.62,43.82],false,'Xinjiang premature');point('1789-qing',1759,[87.62,43.82],true,'Xinjiang campaign');
+point('1789-qing',1754,[87.62,43.82],false,'Dzungaria premature');point('1789-qing',1755,[87.62,43.82],true,'Dzungaria conquest');point('1789-qing',1758,[75.99,39.47],false,'Tarim premature');point('1789-qing',1759,[87.62,43.82],true,'Xinjiang campaign');
 point('1789-qing',1857,[127.5,50.28],true,'Amur before treaty');point('1789-qing',1858,[127.5,50.28],false,'Amur after treaty');
 point('1789-qing',1859,[131.89,43.12],true,'Primorye before treaty');point('1789-qing',1860,[131.89,43.12],false,'Primorye after treaty');
 point('1789-qing',1881,[81.33,43.92],false,'Ili still occupied');point('1789-qing',1882,[81.33,43.92],true,'Ili return implemented');point('1789-russian-empire',1881,[81.33,43.92],false,'Occupation presented as annexation');assert.equal(at('1914-ili',1881).relationship,'occupation');
@@ -44,7 +44,7 @@ for(let y=610;y<=1918;y++){
  years++;
 }
 const legacy=require('./continuity.cjs').legacyData(),table=require('./cartography-legacy.cjs')(legacy);
-for(const e of legacy)for(const f of e.keyframes){const s=table.shapes[table.frames[e.id].find(row=>row[0]===f.year)[1]];for(const r of s)for(const p of r)assert(p.every(Number.isFinite));const pts=f.polys.flat();if(!pts.length||['chagatai','yuan'].includes(e.id))continue;for(const p of s.flat())for(let k=0;k<2;k++)assert(p[k]>=Math.min(...pts.map(p=>p[k]))-1e-7&&p[k]<=Math.max(...pts.map(p=>p[k]))+1e-7,'Dissolving enlarged a legacy extent');}
+for(const e of legacy)for(const f of e.keyframes){const s=table.shapes[table.frames[e.id].find(row=>row[0]===f.year)[1]];for(const r of s)for(const p of r)assert(p.every(Number.isFinite));const pts=f.polys.flat();if(!pts.length||require('./mongol-frontiers.cjs').reviewed.has(e.id))continue;for(const p of s.flat())for(let k=0;k<2;k++)assert(p[k]>=Math.min(...pts.map(p=>p[k]))-1e-7&&p[k]<=Math.max(...pts.map(p=>p[k]))+1e-7,'Dissolving enlarged a legacy extent');}
 assert(G.covers(table.shapes[table.frames.chagatai.at(-1)[1]],[66.97,39.65]));assert(G.covers(table.shapes[table.frames.chagatai.at(-1)[1]],[64.42,39.77]));
 const html=fs.readFileSync(path.join(__dirname,'../../index.html'),'utf8');
 assert(html.includes("polygonPath(empireCartographicPolys(emp.id,y,f.polys))"));assert(html.includes('countries:true,empires:true'));assert(html.includes("countryLayer.classList.toggle('modern-reference',layerState.countries)"));

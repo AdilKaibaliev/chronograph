@@ -5,8 +5,8 @@ const html=fs.readFileSync(require('node:path').join(__dirname,'../../index.html
 const delivered=JSON.parse(html.match(/const WORLD_HISTORY=(.*);/)[1]),dh=createWorldHistory(delivered);
 assert.equal(c.range.min,610);assert(c.range.max>=1848);
 // Cartographic additions have their own date/geometry tests; preserve the original-data hash.
-const old={entries:c.entries.filter(e=>!e.id.startsWith('cartography-')).map(e=>({...e,phases:e.phases.filter(p=>p.from<1816)})).filter(e=>e.phases.length),areas:c.areas.filter(a=>!a.entry.startsWith('cartography-')).filter(a=>a.from<1816),events:c.events.filter(e=>e.from<1816),sources:Object.fromEntries(Object.entries(c.sources).filter(([id])=>!id.startsWith("to1939")).filter(([id])=>!id.startsWith('cartography')).filter(([id])=>!/^to(?:1848|1914|1918)/.test(id)))};
-assert.equal(crypto.createHash('sha256').update(JSON.stringify(old)).digest('hex'),'ef69981bc749dd23713b5e34cd9c080218527af337204c80d6adec771d1c56d5','Previous 610–1815 catalogue changed');
+const old={entries:c.entries.filter(e=>!e.id.startsWith('cartography-')).map(e=>({...e,phases:e.phases.filter(p=>p.from<1816)})).filter(e=>e.phases.length),areas:c.areas.filter(a=>!a.entry.startsWith('cartography-')).filter(a=>a.from<1816),events:c.events.filter(e=>e.from<1816),sources:Object.fromEntries(Object.entries(c.sources).filter(([id])=>!id.startsWith("to1939")&&!id.startsWith("to1945")).filter(([id])=>!id.startsWith('cartography')).filter(([id])=>!/^to(?:1848|1914|1918)/.test(id)))};
+assert.equal(crypto.createHash('sha256').update(JSON.stringify(require('../world/kyrgyz-baseline.cjs')(old))).digest('hex'),'ef69981bc749dd23713b5e34cd9c080218527af337204c80d6adec771d1c56d5','Previous 610–1815 catalogue changed');
 for(const key of ['entries','areas','range'])assert.deepEqual(delivered[key],c[key]);
 assert(html.includes('TIMELINE_MAX='+c.range.max+';'));assert(html.includes('name="chronograph-version"')); 
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+c.range.max+'"').test(html));

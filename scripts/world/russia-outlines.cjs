@@ -18,6 +18,8 @@ module.exports=c=>{
  const northSakhalin=[[[141,50],[144.7,50],[144,54.5],[141.5,54.5]]],southSakhalin=[[[141,50],[144.7,50],[145.2,48],[143,45.8],[141,46]]];
  const kurils=[[[155.1,50.5],[156.5,50.5],[156.8,51.2],[155.2,51.2]],[[153.2,49.1],[155.8,49.8],[156.2,50.9],[154.8,50.8]],[[150,46.2],[153.3,47.7],[154.8,49.2],[153.9,49.9],[151.8,48.7],[149.8,47.2]]];
  function west(y){
+  if(y>=1710&&y<1721)return west(1721);
+  if(y>=1667&&y<1721)return [[34,70],[31,68],[33,65],[34,62],[33,60],[31,59.3],[28,58],[28.5,56],[31,55.8],[31,53.8],[33,53],[31,52.2],[30.5,49.1],[34,49],[36,51],[39,52],[43,52],[45.5,49]];
   if(y<1721)return [[34,70],[31,68],[33,65],[34,62],[33,60],[31,59.3],[28,58],[28.5,56],[32,54],[33,53],[34,52],[36,51],[39,52],[43,52],[45.5,49]];
   const fin=y>=1809?[[34,70],[29,69.5],[27.8,70.1],[25.8,69.6],[20.5,69.1],[21.8,68.1],[23.4,67.6],[23.7,66.2],[24.2,65.7],[24.8,65],[23.5,63.5],[20,62.5],[19.5,60],[22,59.2]]:[[34,70],[29,69],[31,66],[32,63],[y>=1743?27.2:28.7,61.5],[y>=1743?26.5:28.2,60.4],[27.5,59.4],[22,59.5]];
   const pol=y>=1815?[[20.9,56.4],[21,55.7],[22.6,55.2],[22.8,54.5],[23.7,53.9],[21.6,53.8],[20,53.5],[18.3,53],[18.1,52],[17.8,51.2],[19.3,50.5],[20,50.2],[22,50.5],[23.7,50.5],[24.1,50.1],[25,50.4],[26.2,50.5],[26.5,48.6]]:y>=1795?[[20.9,56.4],[21,55.7],[22.6,55.2],[23.7,53.9],[23.5,52],[23.7,51.4],[25,50.4],[26.2,50.5],[26.5,48.6]]:y>=1793?[[23.1,56.6],[27,56],[27,54],[24.5,51.5],[26.2,50.5],[26.5,48.6]]:y>=1772?[[23.1,56.6],[28.2,56],[29,54],[30,52],[31,51],[31,49.5]]:[[23.1,56.6],[28.2,56],[31.8,54],[31.2,52],[30.5,51.1],[31.3,49.9],[34,49],[36,50]];
@@ -41,8 +43,9 @@ module.exports=c=>{
   return [...transbaikal,...amur,...pacific,...coastNorth];
  }
  function rings(y){
+  if(y<1556){const front=[[34,70],[31,68],[33,65],[34,62],[33,60],[29,59],[28,58],[30,56],[34,54],[36,52],[40,53],[43,54]];return require('./cartography-geometry.cjs').union([[...front,...(y>=1552?[[49,53.8],[54,55],[59,57]]:[[46,55],[51,56],[56,58]]),[60,65],[60,71],[54,72],[45,71],[34,70]]]);}
   // Before trans-Ural expansion the southern edge ends at the Urals.
-  const s=y<1587?[[46.5,49],[48,45.5],[50,47],[53,54],[59,56]]:south(y);
+  const s=y<1587?[[46.5,49],[48,45.5],[50,47],[53,54],[59,56]]:y<1619?[[48,45.5],[50,47],[55,54],[63,56],[70,56],[77,56]]:y<1632?[[48,45.5],[50,47],[55,54],[63,56],[73,54.7],[83,55],[90,56]]:y<1649?[[48,45.5],[50,47],[55,54],[63,56],[73,54.7],[83,54.5],[92,55.5],[98,54]]:south(y);
   const out=[[...west(y),...s,...east(y)]];
   if(y>=1649)out.push(chukotka);
   if(y>=1784&&y<1799){const a=c.areas.find(a=>a.entry==='1789-kodiak'&&a.from<=y&&a.to>y);if(a)out.push(...a.polygons);}
@@ -54,14 +57,14 @@ module.exports=c=>{
   if(y>=1884)out.push([[59.5,40.8],[61,39],[60.5,37.5],[61.8,36.7],[63.5,37.5],[64.5,38.4],[63.3,39.2],[61.5,40.5]]);
   return structuredClone(out).map(r=>{const signed=r.reduce((sum,p,i)=>{const q=r[(i+1)%r.length];return sum+p[0]*q[1]-q[0]*p[1];},0);return signed<0?r.reverse():r;});
  }
- const cuts=[1556,1587,1619,1632,1649,1667,1689,1697,1721,1743,1772,1774,1783,1784,1792,1793,1795,1799,1801,1809,1812,1813,1815,1822,1825,1828,1855,1856,1858,1860,1862,1865,1867,1868,1875,1876,1878,1881,1884,1895,1905,1914,1915,end].filter((y,i,a)=>y>=1721&&y<=end&&a.indexOf(y)===i).sort((a,b)=>a-b);
+ const cuts=[1478,1547,1552,1556,1587,1619,1632,1649,1667,1689,1697,1703,1710,1721,1743,1772,1774,1783,1784,1792,1793,1795,1799,1801,1809,1812,1813,1815,1822,1825,1828,1855,1856,1858,1860,1862,1865,1867,1868,1875,1876,1878,1881,1884,1895,1905,1914,1915,end].filter((y,i,a)=>y>=1478&&y<=end&&a.indexOf(y)===i).sort((a,b)=>a-b);
  c.outlines=[];
  for(let i=0;i<cuts.length-1;i++){
-  const from=cuts[i],to=cuts[i+1],entry=from<1721?'early-russia':'1789-russian-empire';
+  const from=cuts[i],to=cuts[i+1],entry=from<1547?'late-moscow':from<1721?'early-russia':'1789-russian-empire';
   if(!c.entries.find(e=>e.id===entry)?.phases.some(p=>p.from<=from&&p.to>from))continue;
-  const name=T(from<1721?'Русское царство|Tsardom of Russia|Орус падышалыгы':'Российская империя|Russian Empire|Россия империясы');
+  const name=T(from<1547?'Великое княжество Московское|Grand Principality of Moscow|Москва Улуу княздыгы':from<1721?'Русское царство|Tsardom of Russia|Орус падышалыгы':'Российская империя|Russian Empire|Россия империясы');
   const text=T(from<1697?'Царство расширяется за Урал через речные пути и остроги. Местные общества сохраняют собственные формы жизни и сопротивляются завоеванию.|The tsardom expands beyond the Urals along rivers and through forts. Local societies retain their ways of life and resist conquest.|Падышалык дарыя жолдору жана чептер аркылуу Уралдан ары кеңейет. Жергиликтүү коомдор жашоо салттарын сактап, басып алууга каршылык көрсөтөт.':from<1867?'Европейские и сибирские владения показаны в составе одного государства. Камчатка включена после похода Атласова; с конца XVIII века появляются колониальные владения в Русской Америке. Управление опирается на города, остроги и местные соглашения.|European and Siberian possessions form one state. Kamchatka enters after Atlasov’s expedition; colonial possessions in Russian America appear from the late eighteenth century. Administration rests on towns, forts and local agreements.|Европадагы жана Сибирдеги ээликтер бир мамлекеттин курамында көрсөтүлөт. Камчатка Атласовдун жортуулунан кийин кошулат; XVIII кылымдын аягынан Орус Америкасында колониялык ээликтер пайда болот. Башкаруу шаарларга, чептерге жана жергиликтүү келишимдерге таянат.':'Империя простирается от Восточной Европы через Сибирь до Тихого океана. Аляска передана США 18 октября 1867 года. Среднеазиатские приобретения и изменения на Сахалине показаны по датам.|The empire extends from Eastern Europe across Siberia to the Pacific. Alaska was transferred to the USA on 18 October 1867. Central Asian acquisitions and changes on Sakhalin follow their dates.|Империя Чыгыш Европадан Сибирь аркылуу Тынч океанга чейин созулат. Аляска 1867-жылдын 18-октябрында АКШга өткөрүлгөн. Борбордук Азиядагы ээликтер жана Сахалиндеги өзгөрүүлөр даталары боюнча көрсөтүлөт.');
-  c.outlines.push({id:'russia-extent-'+from,entry,from,to,name,short:name,title:name,text,polygons:rings(from),kind:'polity',color:blue,label:[75,62],coord:[37.62,55.75],members:members.filter(([,a,b])=>from>=a&&from<b).map(([id])=>id),sources:['to1918RussianAtlas','to1918RussianTreaties','to1918Kamchatka',...(from>=1784?['to1918RussianAmerica']:[]),...(from>=1855?['to1918PacificTreaties']:[])],approx:true,worldFocus:true});
+  c.outlines.push({id:'russia-extent-'+from,entry,from,to,name,short:name,title:name,text,polygons:rings(from),kind:'polity',color:blue,label:[from>=1721?75:from<1619?48:from<1649?80:100,62],coord:[37.62,55.75],members:members.filter(([,a,b])=>from>=a&&from<b).map(([id])=>id),sources:['to1918RussianAtlas','to1918RussianTreaties','to1918Kamchatka',...(from>=1784?['to1918RussianAmerica']:[]),...(from>=1855?['to1918PacificTreaties']:[])],approx:true,worldFocus:true});
  }
  // Keep the geographical context through the revolutionary year; new national
  // governments and occupied regions are drawn above this sphere-of-influence layer.

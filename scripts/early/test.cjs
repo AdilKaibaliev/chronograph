@@ -30,7 +30,7 @@ for(const e of c.events.filter(e=>e.from>=1454&&e.from<=1600))assert(visited.has
 // This guards historical phases and map outlines against accidental rewriting
 // while continuations are attached to the same entry IDs.
 const old={entries:c.entries.map(e=>({id:e.id,region:e.region,kind:e.kind,coord:e.coord,name:e.name,phases:e.phases.filter(p=>p.from<1454)})).filter(e=>e.phases.length),areas:c.areas.filter(a=>a.from<1454)};
-assert.equal(crypto.createHash('sha256').update(JSON.stringify(old)).digest('hex'),'0cc4a875d45722eb1833723895ef76dd40383b9d73996159691b4b3b566cc160','Reviewed continuity baseline changed');
+assert.equal(crypto.createHash('sha256').update(JSON.stringify(require('../world/kyrgyz-baseline.cjs')(old))).digest('hex'),'0cc4a875d45722eb1833723895ef76dd40383b9d73996159691b4b3b566cc160','Reviewed continuity baseline changed');
 
 for(let y=1454;y<=1600;y++){
  const profiles=h.at(y),areas=h.areasAt(y);
@@ -88,7 +88,7 @@ assert.equal(c.events.find(e=>e.id==='early-frobisher-1576').from,1576);
 // Inspect the actual shipped people, not just the biography input module.
 const start=html.indexOf('const ISLAM_STARS = ['),end=html.indexOf('const STAR_DETAILS=');
 const people=vm.runInNewContext(html.slice(start,end)+';ISLAM_STARS');
-assert.equal(people.length,72+require('../to1789/biographies.cjs').length+require('../to1815/biographies.cjs').length+require('../to1848/biographies.cjs').length+require('../to1914/biographies.cjs').length+require('../to1918/biographies.cjs').length+require('../to1939/biographies.cjs').length);
+assert.equal(people.length,72+require('../to1789/biographies.cjs').length+require('../to1815/biographies.cjs').length+require('../to1848/biographies.cjs').length+require('../to1914/biographies.cjs').length+require('../to1918/biographies.cjs').length+require('../to1939/biographies.cjs').length+require('../to1945/biographies.cjs').length);
 for(const [name,birth,death,approx] of [
  ['Закария аль-Ансари',1421,1520,true],['Ибн Хаджар аль-Хайтами',1504,1567,true],
  ['Эбуссууд-эфенди',1490,1574,false],['Ташкёпрюзаде Ахмед',1495,1561,false],

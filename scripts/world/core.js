@@ -6,7 +6,8 @@ function createWorldHistory(catalog){
  // so playback does not retain every profile snapshot for the entire atlas.
  const snapshots=new Map(),memo=(cache,key,build)=>{if(!cache.has(key)){if(cache.size>=12)cache.delete(cache.keys().next().value);cache.set(key,build());}return cache.get(key);};
  const phaseAt=(entry,year)=>entry.phases.find(p=>year>=p.from&&year<p.to)||null;
- const snapshot=year=>memo(snapshots,year,()=>{const items=catalog.entries.flatMap(entry=>{const phase=phaseAt(entry,year);return phase?[{entry:phase.name||phase.kind?{...entry,name:phase.name||entry.name,kind:phase.kind||entry.kind}:entry,phase,coord:phase.coord||entry.coord}]:[];});return {items,byId:new Map(items.map(item=>[item.entry.id,item])),areas:(catalog.areas||[]).filter(a=>year>=a.from&&year<a.to)};});
+ const anchor=(entry,year,phase)=>catalog.mapAnchors?.[entry.id]?.find(r=>r[0]<=year&&year<r[1])?.[2]||phase?.coord||entry.coord;
+ const snapshot=year=>memo(snapshots,year,()=>{const items=catalog.entries.flatMap(entry=>{const phase=phaseAt(entry,year);return phase?[{entry:phase.name||phase.kind?{...entry,name:phase.name||entry.name,kind:phase.kind||entry.kind}:entry,phase,coord:anchor(entry,year,phase)}]:[];});return {items,byId:new Map(items.map(item=>[item.entry.id,item])),areas:(catalog.areas||[]).filter(a=>year>=a.from&&year<a.to)};});
  const mapped=new Map();
  const mapAreasAt=(year,region='all')=>memo(mapped,year,()=>{
   const outlines=(catalog.outlines||[]).filter(a=>year>=a.from&&year<a.to&&snapshot(year).byId.has(a.entry)),byEntry=new Map(outlines.map(a=>[a.entry,a])),members=new Map(outlines.flatMap(a=>(a.members||[]).map(id=>[id,a]))),dependencies=new Map(outlines.flatMap(a=>Object.entries(a.dependencies||{}).map(([id,relationship])=>[id,{owner:a,relationship}])));
@@ -16,21 +17,23 @@ function createWorldHistory(catalog){
   return snapshot(year).areas.map(original=>{
    const shape=catalog.cartography?.shapes[catalog.cartography?.areas[original.id]],outline=byEntry.get(original.entry);
    const unified=original.mongolGroup&&catalog.cartography?.mongol?.find(f=>f.from<=year&&year<f.to);
+   const occupation=dependencies.get(original.entry)?.relationship==='occupation';
    let a=shape?{...original,polygons:shape,points:shape[0],...(unified?{mongolUnion:catalog.cartography.shapes[unified.shape],mongolUnionId:unified.from}:{})}:original;
-   if(outline)a={...a,...outline,id:original.id+'@'+outline.id,from:Math.max(original.from,outline.from),to:Math.min(original.to,outline.to),points:outline.polygons[0],politicalOutline:true};
+   a={...a,geometryId:original.id,politicalOutline:original.kind==='polity'};
+   if(outline&&!occupation)a={...a,...outline,geometryId:outline.id,id:original.id+'@'+outline.id,from:Math.max(original.from,outline.from),to:Math.min(original.to,outline.to),points:outline.polygons[0],politicalOutline:true};
    const owner=parent(a.entry),dep=dependencies.get(a.entry);
-   if(owner){const outer=dependencies.get(owner.entry)?.owner||owner,span=membershipSpan(original);return {...a,...span,id:original.id+'@member-'+owner.entry+'-'+span.from+'-'+outer.color,politicalOutline:false,sovereign:owner.entry,sovereignName:owner.name,color:outer.color,...(a.entry==='1789-kodiak'&&year>=1799?{overviewLabel:true,label:[-151,64],labelWidth:100,short:['Русская Америка','Russian America','Орус Америкасы']}: {})};}
+   if(owner){const ownerDependency=dependencies.get(owner.entry),detachedProvince=ownerDependency?.relationship==='occupation',outer=detachedProvince?owner:ownerDependency?.owner||owner,span=membershipSpan(original);return {...a,...span,id:original.id+'@member-'+owner.entry+'-'+span.from+'-'+outer.color,politicalOutline:false,detachedProvince,sovereign:owner.entry,sovereignName:owner.name,color:outer.color,...(a.entry==='1789-kodiak'&&year>=1799?{overviewLabel:true,label:[-151,64],labelWidth:100,short:['Русская Америка','Russian America','Орус Америкасы']}: {})};}
    if(dep){const span=membershipSpan(original);return {...a,...span,id:original.id+'@dependent-'+dep.owner.entry+'-'+span.from+'-'+dep.owner.color,politicalOutline:false,dependencyOutline:true,overlord:dep.owner.entry,relationship:dep.relationship,sovereignName:dep.owner.name,color:dep.owner.color,kind:'influence'};}
    return a;
-  });
+  }).map(a=>{const display=catalog.displayCartography;if(!display)return a;const polygons=display.shapes[display.areas[a.geometryId]],mongolUnion=a.mongolUnion&&display.shapes[display.mongol[a.mongolUnionId]];return {...a,polygons,points:polygons[0],label:a.overviewLabel?a.label:display.labels?.[a.geometryId]||a.label,coastClipped:true,...(mongolUnion?{mongolUnion}:{})};});
  }).filter(a=>region==='all'||entries.get(a.entry)?.region===region);
  const at=(year,region='all')=>snapshot(year).items.filter(item=>region==='all'||item.entry.region===region);
  const get=(id,year)=>snapshot(year).byId.get(id)||null;
  const records=[
   ...(catalog.events||[]).filter(e=>e.to>=min&&e.from<=max).map(e=>({...e,record:'event',year:e.year??Math.max(min,Math.min(max,Math.round((e.from+e.to)/2)))})),
-  ...(catalog.areas||[]).filter(a=>a.to>min&&a.from<=max).map(a=>{const entry=entries.get(a.entry),phase=phaseAt(entry,a.from);return {id:'area-'+a.id,entry:a.entry,region:entry.region,kind:'territory',record:'territory',from:Math.max(min,a.from),to:Math.min(max,a.to-1),year:Math.max(min,a.from),coord:phase?.coord||entry.coord,title:a.title,text:a.text,sources:a.sources,name:a.name,approx:a.approx};}),
+  ...(catalog.areas||[]).filter(a=>a.to>min&&a.from<=max).map(a=>{const entry=entries.get(a.entry),phase=phaseAt(entry,a.from);return {id:'area-'+a.id,entry:a.entry,region:entry.region,kind:'territory',record:'territory',from:Math.max(min,a.from),to:Math.min(max,a.to-1),year:Math.max(min,a.from),coord:anchor(entry,Math.max(min,a.from),phase),title:a.title,text:a.text,sources:a.sources,name:a.name,approx:a.approx};}),
   ...(catalog.outlines||[]).filter(a=>a.from<=max).map(a=>({...a,id:'outline-'+a.id,region:entries.get(a.entry).region,record:'territory',kind:'territory',to:Math.min(max,a.to-1),year:a.from})),
-  ...catalog.entries.flatMap(entry=>entry.phases.filter(p=>p.to>min&&p.from<=max).map(p=>({id:'phase-'+entry.id+'-'+p.from,entry:entry.id,region:entry.region,kind:'period',record:'period',from:Math.max(min,p.from),to:Math.min(max,p.to-1),year:Math.max(min,p.from),coord:p.coord||entry.coord,title:p.title,text:p.text,sources:p.sources,period:p.period,name:p.name||entry.name,approx:p.approx??true})))
+  ...catalog.entries.flatMap(entry=>entry.phases.filter(p=>p.to>min&&p.from<=max).map(p=>({id:'phase-'+entry.id+'-'+p.from,entry:entry.id,region:entry.region,kind:'period',record:'period',from:Math.max(min,p.from),to:Math.min(max,p.to-1),year:Math.max(min,p.from),coord:anchor(entry,Math.max(min,p.from),p),title:p.title,text:p.text,sources:p.sources,period:p.period,name:p.name||entry.name,approx:p.approx??true})))
  ].sort((a,b)=>a.from-b.from||a.to-b.to||a.id.localeCompare(b.id));
  const recordsById=new Map(records.map(e=>[e.id,e])),regionalRecords=new Map([['all',records]]);
  const timeline=(region='all')=>{if(!regionalRecords.has(region))regionalRecords.set(region,records.filter(e=>e.region===region));return regionalRecords.get(region).slice();};

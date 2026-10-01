@@ -28,7 +28,7 @@
 @media(max-width:700px){.world-map-steps{margin-top:6px}.world-territories-toggle{font-size:9px}.world-territory-chip{padding:7px;scroll-margin-top:12px}.world-territory-chip strong{font-size:11px}}
 
 .world-territory-guide{stroke:#605239;stroke-width:.8;stroke-opacity:.65;vector-effect:non-scaling-stroke;pointer-events:none}.world-territory.influence>path:first-child{fill-opacity:calc(var(--area-opacity,.51)*.82)}
-.world-territory.political-outline>path:first-child{fill-rule:nonzero}.world-territory.sovereign-part:not(.selected)>path{fill:none;stroke:none;pointer-events:none}
+.world-territory.political-outline>path:first-child{fill-rule:nonzero}.world-territory.sovereign-part:not(.selected):not(.detached-province)>path{fill:none;stroke:none;pointer-events:none}
 .world-territory.mongol-unified-member>path{fill:none;stroke:none;pointer-events:none}
 .world-territory.imperial-dependency>path:first-child{stroke-dasharray:4 3;fill-opacity:calc(var(--area-opacity)*.55)}
 .world-imperial-parent{font:inherit;font-size:11px;text-align:left;color:#e4ca95;background:#302c23;border:1px solid #75633f;border-radius:6px;padding:6px 9px;margin:5px 0;cursor:pointer}.world-imperial-parent:focus-visible{outline:2px solid #dfbe79}
@@ -45,3 +45,18 @@
 .world-pager button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
 .world-territory-index{margin:8px 0 12px;border-block:1px solid #514733;padding:10px 0}.world-territory-index>summary{cursor:pointer;color:#e2c68e;font-size:12px}.world-territory-index>summary:focus-visible{outline:2px solid #ddbc78;outline-offset:3px}
+
+/* Historic boundaries take precedence over the modern reference grid. */
+.empire-path{stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-width:1.25;fill-rule:nonzero}.empire-dependency{stroke-width:1.1;stroke-dasharray:5 3;stroke-linejoin:round;vector-effect:non-scaling-stroke;cursor:pointer}.country-layer.modern-reference .country{stroke-opacity:.28}
+.world-territory>path{fill-rule:nonzero;stroke-linecap:round}
+.world-territory.military-occupation>path:first-child{fill-opacity:calc(var(--area-opacity,.5)*1.3);stroke-width:1.4;stroke-dasharray:none}
+.world-territory>path.world-occupation-hatch{stroke:none;fill-opacity:1;pointer-events:none}
+.world-territory.related-selected>path:first-child{stroke:#513238;stroke-width:1.8}
+.world-war-years{display:flex;gap:4px;flex-wrap:wrap;margin:8px 0 12px}
+.world-war-years button{font:11px system-ui;border:1px solid #80694e;border-radius:5px;background:#30271f;color:#e9d4b2;min-height:30px;padding:5px 7px;cursor:pointer}
+.world-war-years button[aria-pressed=true]{background:#805c60;border-color:#dfb79d;color:#fff1db}
+.world-war-years button:focus-visible,.world-war-key:focus-visible{outline:2px solid #f3d99d;outline-offset:2px}
+.world-war-note{font:11px/1.5 system-ui;color:#dbc4a1}
+.world-war-key{position:absolute;right:12px;bottom:12px;z-index:4;padding:10px 12px;border:1px solid #927f69;border-radius:9px;background:#30271feb;color:#eddbc0;font:11px system-ui;cursor:pointer}
+.world-war-key[hidden],.future-mode .world-war-key{display:none}
+@media(max-width:700px){.world-war-key{right:7px;bottom:52px;padding:7px 9px;max-width:180px;font-size:10px}}

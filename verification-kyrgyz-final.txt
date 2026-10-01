@@ -1,0 +1,7 @@
+{"messages":1572,"eventTitles":67,"eventDescriptions":67,"bytes":15048329}
+{"pass":true,"stages":14,"coreVertices":35,"checks":"regional control points, connected outline, influence separated, dated status, primary attribution, bilingual translations, event sync, 1299–1300 continuity, unrelated legacy preserved"}
+PASS: 4291 coordinate checks; 690-year data, dated Kyrgyz status, Mongol conquest milestones, dependent territories, migration semantics and JS syntax.
+PASS: 1572 message pairs, Russian preservation, calendar and dynamic labels, explicit Russian fallback.
+PASS: original historical states, geometry, events and person dates preserved from source; plain-text sources.
+PASS: overview names shrink, overlapping and tiny labels hide, selection stays available, zoom restores deterministically, letterboxing is included.
+PASS: unified/detailed modes across 690 years, dated extent preserved, consistent winding, no duplicate ulus paths, post-1260 label, Kyrgyz core/influence distinction, RU/EN/KY.

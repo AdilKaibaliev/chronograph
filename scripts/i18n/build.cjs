@@ -2,7 +2,7 @@ const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
 const root=__dirname;
 const repositoryBuild=fs.existsSync('src/atlas.html');
 const source=fs.readFileSync(repositoryBuild?'src/atlas.html':'publish/index.html','utf8');
-const latePeople=[...require('../late/biographies.cjs'),...require('../early/biographies.cjs'),...require('../to1789/biographies.cjs'),...require('../to1815/biographies.cjs'),...require('../to1848/biographies.cjs'),...require('../to1914/biographies.cjs'),...require('../to1918/biographies.cjs'),...require('../to1939/biographies.cjs')];
+const latePeople=[...require('../late/biographies.cjs'),...require('../early/biographies.cjs'),...require('../to1789/biographies.cjs'),...require('../to1815/biographies.cjs'),...require('../to1848/biographies.cjs'),...require('../to1914/biographies.cjs'),...require('../to1918/biographies.cjs'),...require('../to1939/biographies.cjs'),...require('../to1945/biographies.cjs')];
 const events=vm.runInNewContext(source.slice(source.indexOf('const EVENTS = {'),source.indexOf('function ceToAHApprox'))+';EVENTS');
 const empires=vm.runInNewContext(source.slice(source.indexOf('const S ='),source.indexOf('function resampleRing'))+';EMPIRES');
 const rows=JSON.parse(fs.readFileSync(root+'/messages.json','utf8'));
@@ -11,7 +11,7 @@ rows.push(['Географический ориентир','Geographical referen
 rows.push(...Object.entries(JSON.parse(fs.readFileSync(root+'/names.json','utf8'))).map(([ru,en])=>[ru,en,ru]));
 rows.push(['Праведные халифы','Rashidun caliphs','Туура жолдогу халифтер'],['Осман I','Osman I','Осмон I'],['Звезды Ислама','Stars of Islam','Ислам жылдыздары']);
 const empireTexts={...JSON.parse(fs.readFileSync(root+'/empires-1.json','utf8')),...JSON.parse(fs.readFileSync(root+'/empires-2.json','utf8'))};
-for(const empire of empires){const d=empireTexts[empire.id];assert(d&&d.length===8,empire.id);['name','short','body','territories'].forEach((field,i)=>rows.push([empire[field],d[i*2],d[i*2+1]]));}
+for(const empire of empires){const d=empireTexts[empire.id];assert(d&&d.length===8,empire.id);['name','short','body','territories'].forEach((field,i)=>rows.push([...require('./kyrgyz-messages.json'),...require('./border-messages.json')].find(row=>row[0]===empire[field])||[empire[field],d[i*2],d[i*2+1]]));}
 const translatedEvents=JSON.parse(fs.readFileSync(root+'/events.json','utf8'));
 const additionalDescriptions=JSON.parse(fs.readFileSync(root+'/event-descriptions.json','utf8'));
 for(const [year,descriptions] of Object.entries(additionalDescriptions))translatedEvents[year]=[...translatedEvents[year].slice(0,2),...descriptions];
@@ -41,15 +41,17 @@ for(const row of require('../biography-notes.cjs')){details[row[0]].note=row[1];
 assert.equal(new Set(biographies.map(r=>r[0])).size,biographies.length,'Duplicate biography');
 assert.equal(Object.keys(details).length,stars.length);
 for(const p of stars)assert(details[p.name]?.text&&details[p.name]?.source,'Missing biography '+p.name);
+rows.push(...require('./border-messages.json'));
 rows.push(...require('../support/messages.json'));
 rows.push(...require('./history-messages.json')); 
+rows.push(...require('./kyrgyz-messages.json'));
 const {createChronographTranslator}=require('./core.js');createChronographTranslator(rows);
 rows.push(['Антарктида','Antarctica','Антарктида'],['Географический ориентир.','Geographic reference.','Географиялык багыт белгиси.']);
-let html=require('../late/prepare.cjs')(source).replaceAll('CHRONOGRAPH 1.0 RC3.8','CHRONOGRAPH 1.13.0');
+let html=require('../late/prepare.cjs')(source).replaceAll('CHRONOGRAPH 1.0 RC3.8','CHRONOGRAPH 1.15.0');
 html=html.slice(0,html.indexOf('const ISLAM_STARS = ['))+'const ISLAM_STARS = '+JSON.stringify(stars).replaceAll('<','\\u003c')+';\n'+html.slice(html.indexOf('const STAR_DETAILS='));
-rows.push(['Государства и общества мира','States and societies of the world','Дүйнөнүн мамлекеттери жана коомдору'],['610–1939 · выберите год или исторический рубеж','610–1939 · choose a year or historical milestone','610–1939 · жылды же тарыхый окуяны тандаңыз']);
-const oldMethod='«Хронография» синхронизирует исламскую историю с политической историей Евразии 610–1939 годов. Современные границы используются только как географический ориентир. Исторические области не следует понимать как современные юридически демаркированные границы.';
-const newMethod=['«Хронограф» показывает историю мира 610–1939 годов. Современные границы служат географическими ориентирами. Исторические контуры отображают приблизительные владения, области влияния и расселения для указанного периода.','Chronograph presents world history from 610 to 1939. Modern borders serve as geographical references. Historical outlines represent approximate domains, spheres of influence and settlement for the stated period.','«Хронограф» 610–1939-жылдардагы дүйнө тарыхын көрсөтөт. Азыркы чек аралар географиялык багыт берет. Тарыхый контурлар көрсөтүлгөн мезгилдеги болжолдуу ээликтерди, таасир жана конуш аймактарын чагылдырат.'];
+rows.push(['Государства и общества мира','States and societies of the world','Дүйнөнүн мамлекеттери жана коомдору'],['610–1945 · выберите год или исторический рубеж','610–1945 · choose a year or historical milestone','610–1945 · жылды же тарыхый окуяны тандаңыз']);
+const oldMethod='«Хронография» синхронизирует исламскую историю с политической историей Евразии 610–1945 годов. Современные границы используются только как географический ориентир. Исторические области не следует понимать как современные юридически демаркированные границы.';
+const newMethod=['«Хронограф» показывает историю мира 610–1945 годов. Современные границы служат географическими ориентирами. Исторические контуры отображают приблизительные владения, области влияния и расселения для указанного периода.','Chronograph presents world history from 610 to 1945. Modern borders serve as geographical references. Historical outlines represent approximate domains, spheres of influence and settlement for the stated period.','«Хронограф» 610–1945-жылдардагы дүйнө тарыхын көрсөтөт. Азыркы чек аралар географиялык багыт берет. Тарыхый контурлар көрсөтүлгөн мезгилдеги болжолдуу ээликтерди, таасир жана конуш аймактарын чагылдырат.'];
 html=html.replace(oldMethod,newMethod[0]);rows.push(newMethod);
 // Extend the existing geographic projection to the South Pole; all layers use project().
 html=html.replace('LAT_MIN=-60','LAT_MIN=-90').replace('LAT_MIN = -60','LAT_MIN = -90');
@@ -76,7 +78,7 @@ const worldCatalog=require('../world/catalog.cjs');
 const expansionCatalog=require('../expansion/catalog.cjs');
 const expansionPublic={...expansionCatalog,sources:Object.fromEntries(Object.entries(expansionCatalog.sources).map(([id,s])=>[id,{title:s.title}]))};
 const expansionRuntime=fs.readFileSync(root+'/../expansion/core.js','utf8').replace("if(typeof module!=='undefined')module.exports={expansionSnapshot,expansionSegments,expansionRoutesAt};",'')+'\nconst EXPANSION_CATALOG='+JSON.stringify(expansionPublic).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../expansion/runtime.js','utf8');
-const worldData={...worldCatalog,sources:Object.fromEntries(Object.entries(worldCatalog.sources).map(([id,s])=>[id,{title:s.title}]))};
+const worldData={...worldCatalog,displayCartography:require('../world/coastal-display.cjs')(worldCatalog),sources:Object.fromEntries(Object.entries(worldCatalog.sources).map(([id,s])=>[id,{title:s.title}]))};
 const worldTranslate=createChronographTranslator(rows);
 const worldTextRow=text=>[text,worldTranslate(text,'en'),worldTranslate(text,'ky')];
 worldData.events=[...worldData.events,...Object.entries(events).filter(([,e])=>e.coord).map(([y,e])=>({id:'atlas-'+y,from:+y,to:+y,year:+y,approx:false,region:['1171','1250'].includes(y)?'africa':'eurasia',kind:/Битва|Оборона|Поход|Экспансия/.test(e.type)?'war':/Дипломатия/.test(e.type)?'diplomacy':/Миграция/.test(e.type)?'migration':'politics',coord:e.coord,title:worldTextRow(e.title),text:worldTextRow(e.desc),sources:[],base:true}))];
@@ -85,11 +87,13 @@ html=html.slice(0,ending)+'let futureLocationHook=null,worldLocationHook=null;\n
 const legacyCartography=require('../world/cartography-legacy.cjs')(empires);
 html=html.replace('function morphPolys', 'const LEGACY_CARTOGRAPHY='+JSON.stringify(legacyCartography)+';\nfunction empireCartographicPolys(id,y,fallback){const f=LEGACY_CARTOGRAPHY.frames[id]?.filter(f=>f[0]<=y).at(-1);return f?LEGACY_CARTOGRAPHY.shapes[f[1]]:fallback;}\nfunction morphPolys');
 html=html.replace("p.setAttribute('d',polygonPath(f.polys))", "p.setAttribute('d',polygonPath(empireCartographicPolys(emp.id,y,f.polys)))");
-html=html.replace("polygonPath(emp.dependentPolys)","polygonPath(empireCartographicPolys('mongolDependencies',y,emp.dependentPolys))");
+html=html.replaceAll("polygonPath(emp.dependentPolys)","polygonPath(empireCartographicPolys(emp.id==='mongolRealm'?'mongolDependencies':emp.id+'Dependencies',y,emp.dependentPolys))");
+html=html.replaceAll("polygonPath(emp.corePolys)","polygonPath(empireCartographicPolys(emp.id+'Core',y,emp.corePolys))");
 // Modern borders are a requested reference overlay; the land remains visible
 // when the reference is off, so today's states cannot divide historical empires.
 html=html.replace("countryLayer.classList.toggle('hidden-layer',!layerState.countries)","countryLayer.classList.toggle('modern-reference',layerState.countries)");
 html=html.replace('</style>',fs.readFileSync(root+'/../world/style.css','utf8')+'\n</style>');
+html=html.replace('</style>',fs.readFileSync(root+'/../world/kyrgyz-style.css','utf8')+'\n</style>');
 html=html.replace('</style>',fs.readFileSync(root+'/../expansion/style.css','utf8')+'\n</style>');
 html=html.replace('</style>','\n.late-world-item{display:block;width:100%;color:inherit;text-align:left;font:inherit;background:transparent;cursor:pointer}.late-world-item:focus-visible{outline:2px solid #ddbc78;outline-offset:2px}.late-region h4{margin:14px 0 4px;color:#d9bd82;font:12px Georgia,serif}\n</style>');
 html=html.replace('if(layerState.autoCamera && playing && e.coord)',"if(layerState.autoCamera && playing && e.coord && (!document.body.classList.contains('world-comparison') || worldState.region==='eurasia'))");
@@ -99,7 +103,7 @@ html=html.replace('function frame(now){','function frame(now){\n    if(cameraVer
 html=html.replace("if(e.defaultPrevented || $('modal').classList.contains('show') || e.target.closest('input,button,a,summary", "if(document.body.classList.contains('future-mode') || e.defaultPrevented || $('modal').classList.contains('show') || e.target.closest('input,select,button,a,summary");
 for(const script of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(script[1]);
 assert(html.includes('const CHRONOGRAPH_MESSAGES='));assert(!/<a(?=\s|>)|\bhref=|window\.open\(/.test(html.replace(/<link rel="icon"[^>]*>/g,'').replace(/<a class="contact-email" href="mailto:lfc@legacyfidelity\.com\?subject=Chronograph">lfc@legacyfidelity\.com<\/a>/g,'')));
-html=html.replace('</head>','<meta name="chronograph-version" content="1.13.0">\n</head>');
+html=html.replace('</head>','<meta name="chronograph-version" content="1.15.0">\n</head>');
 fs.writeFileSync(repositoryBuild?'index.html':'outputs/chronograph_1_1.html',html);
 fs.writeFileSync(root+'/compiled-messages.json',JSON.stringify(rows,null,2));
 console.log(JSON.stringify({messages:rows.length,eventTitles:Object.keys(translatedEvents).length,eventDescriptions:Object.values(translatedEvents).filter(x=>x.length===4).length,bytes:Buffer.byteLength(html)}));

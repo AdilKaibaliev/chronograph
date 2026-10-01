@@ -1,0 +1,23 @@
+scripts/future/test.cjs
+{"events":82,"majorSigns":10,"references":70,"places":33,"sequences":4,"status":"PASS: schema, translations, sequence graph, filters, uncertain places, calendar preservation, syntax, sources"}
+{"status":"PASS: sourced geography, Sasanian polygon, complete excerpts","mapped":38,"unlocated":44}
+
+scripts/future/illustrations-test.cjs
+{"status":"PASS: complete multilingual scenes, animation frames, count, monotonic growth, syntax","events":82,"sceneFamilies":29,"frames":492}
+
+scripts/i18n/test.cjs
+PASS: 1400 message pairs, Russian preservation, calendar and dynamic labels, explicit Russian fallback.
+PASS: original historical states, geometry, events and person dates preserved from source; plain-text sources.
+
+scripts/support/test.cjs
+PASS: English default, URL priority, saved language, blocked storage, RU/EN/KY support copy, both timelines paused, no payment destination.
+
+scripts/biographies-test.cjs
+PASS: 57 individual biographies and plain-text sources in 3 languages; all contemporary buttons, dates, scroll reset and focus transitions.
+
+scripts/history-test.cjs
+PASS: 2522 coordinate checks; 690-year data, dated Kyrgyz status, Mongol conquest milestones, dependent territories, migration semantics and JS syntax.
+
+scripts/unified-map-test.cjs
+PASS: unified/detailed modes across 690 years, dated extent preserved, consistent winding, no duplicate ulus paths, post-1260 label, Kyrgyz core/influence distinction, RU/EN/KY.
+

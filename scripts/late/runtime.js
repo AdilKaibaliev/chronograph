@@ -19,7 +19,7 @@ lateEventHook=y=>{
 };
 function lateCard(item){
  const b=we('button','world-item late-world-item');b.type='button';b.dataset.latePlace=item.entry.id;
- b.append(we('b','',wl(item.entry.name)),we('p','',wl(item.phase.title)),we('span','',wt('show')+' →'));
+ b.append(we('b','',wl(item.phase.name||item.entry.name)),we('p','',wl(item.phase.title)),we('span','',wt('show')+' →'));
  b.onclick=()=>worldChoosePlace(item.entry.id,true);return b;
 }
 lateSideHook=(y,e)=>{
@@ -47,16 +47,16 @@ lateSideHook=(y,e)=>{
  $('shiftText').textContent=next?lt('next')+' · '+next.from+': '+wl(next.title):lt('current')+' · '+y;
  $('mapBanner').textContent=y+' '+wt('era')+' · '+lt('snapshot');
  $('compareIslam').textContent=e.desc;$('compareIslamMeta').textContent=e.place+' · '+translate(e.ah,language);
- $('compareWorld').textContent=live.filter(x=>x.entry.kind==='state').slice(0,8).map(x=>wl(x.entry.name)).join(' · ');
+ $('compareWorld').textContent=live.filter(x=>x.entry.kind==='state').slice(0,8).map(x=>wl(x.phase.name||x.entry.name)).join(' · ');
  $('compareWorldMeta').textContent=lt('current')+' · '+y;
  const ca=live.filter(x=>x.entry.centralAsia);
- $('caText').textContent=ca.map(x=>wl(x.entry.name)).join(' · ');
- $('caActions').replaceChildren(...ca.map(item=>{const b=we('button','',wl(item.entry.name));b.onclick=()=>worldChoosePlace(item.entry.id,true);return b;}));
+ $('caText').textContent=ca.map(x=>wl(x.phase.name||x.entry.name)).join(' · ');
+ $('caActions').replaceChildren(...ca.map(item=>{const b=we('button','',wl(item.phase.name||item.entry.name));b.onclick=()=>worldChoosePlace(item.entry.id,true);return b;}));
  $('caEraFacts').replaceChildren(...ca.map(item=>{const node=we('div','ca-fact');node.append(we('b','',wl(item.phase.title)),we('span','',wl(item.phase.text)));return node;}));
  $('caEraNote').textContent=wt('geography');
  const kyrgyz=live.filter(x=>x.entry.kyrgyzHistory);
  if(kyrgyz.length){
-  $('kyrgyzEraTitle').textContent=kyrgyz.map(x=>wl(x.entry.name)).join(' · ');$('kyrgyzEraText').textContent='';
+  $('kyrgyzEraTitle').textContent=kyrgyz.map(x=>wl(x.phase.name||x.entry.name)).join(' · ');$('kyrgyzEraText').textContent='';
   $('kyrgyzEraFacts').replaceChildren();
   for(const kg of kyrgyz){const fact=we('div','ca-fact');fact.append(we('b','',wl(kg.entry.name)),we('span','',wl(kg.phase.text)));const b=we('button','',wt('show'));b.onclick=()=>worldChoosePlace(kg.entry.id,true);fact.append(b);$('kyrgyzEraFacts').append(fact);}
   $('kyrgyzEraSource').textContent=[...new Set(kyrgyz.flatMap(x=>x.phase.sources))].map(id=>WORLD_HISTORY.sources[id]?.title||'').join(' · ');
@@ -67,7 +67,7 @@ lateSideHook=(y,e)=>{
 function lateFocusKyrgyz(){stopPlay();switchPanel('regions');renderYear(year);focusLonLat(85,48,2.7);}
 // Remove per-panel locale ownership when returning to the original atlas interval.
 const lateOriginalSide=renderSide;
-renderSide=function(y,e){if(y<1300)lateOwnedIds.forEach(id=>$(id)?.removeAttribute('data-locale-owned'));return lateOriginalSide(y,e);};
+renderSide=function(y,e){const heading=$('compareIslam').parentElement.querySelector('h4');heading.dataset.localeOwned='true';heading.textContent=y>=1300?lt('world'):translate('Исламская история',language);if(y<1300)lateOwnedIds.forEach(id=>$(id)?.removeAttribute('data-locale-owned'));return lateOriginalSide(y,e);};
 localeSelect.addEventListener('change',()=>{if(year>=1300)renderYear(year);});
 for(const id of ['tenochtitlan-foundation','late-ilkhan-1335','late-ming-1368','late-timur-1370','late-ankara-1402','triple-alliance','pachacuti-accession','late-constantinople-1453','early-timbuktu-1468','early-granada-1492','early-safavid-1501','early-cairo-1517','early-tenochtitlan-1521','early-panipat-1526','early-cusco-1533','early-kazan-1552','early-vilcabamba-1572','early-tondibi-1591','early-sekigahara-1600','1789-jamestown-1607','1789-gondar','1789-qing-beijing','1789-westphalia','1789-mbwila','1789-taiwan-conquest','1789-asante-union','1789-britain-union','1789-nystad','1789-plassey','1789-bengal-diwani','1789-independence-1776','1789-sydney-1788','1789-bastille','1815-event-republic','1815-event-haiti','1815-event-sokoto','1815-event-louisiana','1815-event-hawaii','1815-event-mexico','1815-event-vienna','1815-event-bathurst','1815-event-tambora']){
  const event=lateEvents().find(e=>e.id===id);if(!event)continue;const y=event.from;

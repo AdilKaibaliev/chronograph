@@ -1,0 +1,99 @@
+{
+  "pass": true,
+  "checks": [
+    {
+      "lang": "ru",
+      "year": "1299",
+      "fit": true,
+      "land": true,
+      "paths": 89,
+      "playVisible": true,
+      "version": "1.15.0"
+    },
+    {
+      "lang": "ru",
+      "year": "1300",
+      "fit": true,
+      "land": true,
+      "paths": 136,
+      "playVisible": true,
+      "version": "1.15.0"
+    },
+    {
+      "lang": "en",
+      "year": "1600",
+      "fit": true,
+      "land": true,
+      "paths": 198,
+      "playVisible": true,
+      "version": "1.15.0"
+    },
+    {
+      "lang": "ky",
+      "year": "860",
+      "fit": true,
+      "land": true,
+      "paths": 71,
+      "playVisible": true,
+      "version": "1.15.0"
+    },
+    {
+      "lang": "ru",
+      "year": "1468",
+      "world": "africa",
+      "fit": true,
+      "paths": 177,
+      "playVisible": true
+    },
+    {
+      "lang": "en",
+      "year": "1867",
+      "world": "north",
+      "fit": true,
+      "paths": 339,
+      "playVisible": true
+    },
+    {
+      "lang": "ru",
+      "year": "1533",
+      "world": "south",
+      "fit": true,
+      "paths": 192,
+      "playVisible": true
+    },
+    {
+      "lang": "en",
+      "year": "1900",
+      "world": "oceania",
+      "fit": true,
+      "paths": 339,
+      "playVisible": true
+    },
+    {
+      "lang": "ky",
+      "year": "1945",
+      "world": "eurasia",
+      "fit": true,
+      "paths": 352,
+      "playVisible": true
+    },
+    {
+      "mobile": true,
+      "fit": true,
+      "lang": "ru",
+      "playVisible": true,
+      "viewport": [
+        390,
+        844
+      ],
+      "year": "1279"
+    },
+    {
+      "keyboard": true,
+      "elapsedMs": 107,
+      "svgPaths": 298,
+      "year": "1280"
+    }
+  ],
+  "errors": []
+}

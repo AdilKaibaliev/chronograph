@@ -150,16 +150,22 @@
     "Жылнаама узак согушту жана 840-жылдагы жеңишке чейин кыргыз башкаруучусунун каган наамын алганын баяндайт. 820-жыл — жыйырма жылдык күрөштүн болжолдуу белгиси, мамлекеттин так түптөлгөн күнү эмес."
   ],
   "840": [
-    "840 · Victory and movement of the ruler’s camp",
-    "840 · Жеңиш жана ордонун көчүрүлүшү",
-    "The Kyrgyz defeated the Uyghur Khaganate. Xin Tang shu reports that the ruler moved his camp south of Laoshan / Duman. The arrow indicates the general direction into Mongolia; neither the exact route nor the camp site is reconstructed.",
-    "Кыргыздар Уйгур каганатын талкалаган. «Синь Тан шу» ордонун Лаошань / Думань тоолорунун түштүгүнө көчүрүлгөнүн баяндайт. Жебе Монголия тарапка жалпы багытты көрсөтөт; так жол жана ордо орду калыбына келтирилген эмес."
+    "840 · Defeat of the Uyghur Khaganate",
+    "840 · Уйгур каганатынын талкаланышы",
+    "The Kyrgyz army captured the Uyghur capital on the Orkhon. The Uyghur khagan was killed and the former state broke apart. The Chinese chronicle records the relocation of the Kyrgyz ruler’s camp south of Laoshan / Duman. The map marks the upper Yenisei region and Ordu-Baliq; the connecting line indicates the campaign’s general direction.",
+    "Кыргыз аскерлери Орхондогу уйгур борборун алган. Уйгур каганы өлүп, мурдагы мамлекет ыдыраган. Кытай жылнаамасында кыргыз ордосунун Лаошань / Думань тоолорунун түштүгүнө көчүрүлгөнү айтылат. Картада Жогорку Энесай аймагы менен Ордо-Балык белгиленип, алардын ортосундагы сызык жортуулдун жалпы багытын көрсөтөт."
   ],
   "847": [
     "847 · Title for the Kyrgyz khagan",
     "847 · Кыргыз каганына наам",
-    "Following the embassies of the 840s, Tang confirmed the title Yingwu Chengming Kehan. This was diplomatic recognition of the ruler, not evidence for a precisely bounded province.",
-    "840-жылдардагы элчиликтерден кийин Тан Инъу чэнмин кэхань наамын бекиткен. Бул башкаруучуну дипломатиялык таануу болгон; кеңири таасир аймагын так чектелген облус деп эсептөөгө болбойт."
+    "The Tang court confirmed the title Yingwu Chengming Kehan for the Kyrgyz ruler. Embassies maintained relations between the two courts after the Kyrgyz victory over the Uyghur Khaganate.",
+    "Тан ордосу кыргыз башкаруучусуна Инъу чэнмин кэхань наамын бекиткен. Элчиликтер кыргыздардын Уйгур каганатын жеңишинен кийин эки ордонун мамилесин бекемдеген."
+  ],
+  "860": [
+    "860–874 · Three embassies to Tang",
+    "860–874 · Танга үч элчилик",
+    "Xin Tang shu reports that Kyrgyz envoys visited the Tang court three times during the Xiantong era, 860–874. The chronicle confirms three visits within that period without giving each embassy’s year in this passage.",
+    "«Синь Тан шу» Сяньтун доорунда кыргыз элчилери Тан ордосуна үч жолу келгенин билдирет. Бул доор 860–874-жылдарды камтыйт. Жылнаама ушул мезгилдеги үч сапарды ырастайт, бирок бул үзүндүдө ар бир элчиликтин жылы өзүнчө көрсөтүлбөйт."
   ],
   "875": [
     "Rise of the Samanids",
@@ -268,8 +274,14 @@
   "1207": [
     "1207 · Mongol overlordship",
     "1207 · Монгол үстөмдүгү",
-    "Jochi’s campaign and Kyrgyz rulers’ recognition of Chinggis Khan changed the region’s political status. Kyrgyz people remained, but their settlement area is no longer filled as an independent state.",
-    "Жучунун жортуулу жана кыргыз башкаруучуларынын Чыңгыз хандын бийлигин таанышы аймактын саясий макамын өзгөрткөн. Кыргыз калкы сакталган, бирок анын аймагы өз алдынча мамлекет катары боёлбойт."
+    "The Secret History of the Mongols (§239) records Jochi’s expedition to the forest peoples and the submission of Kyrgyz rulers to Chinggis Khan. Rashid al-Din also describes their acknowledgement of Mongol authority. The Kyrgyz lands continued as an inhabited and administered region within the Mongol domains.",
+    "«Монголдордун жашыруун тарыхында» (§239) Жучунун токой элдерине жортуулу жана кыргыз башкаруучуларынын Чыңгыз ханга баш ийиши баяндалат. Рашид ад-Дин да монгол бийлигинин таанылышын сүрөттөйт. Кыргыз жерлери монгол ээликтеринин ичинде калкы жана башкаруусу бар аймак катары сакталган."
+  ],
+  "1218": [
+    "1218 · Revolt and Jochi’s campaign",
+    "1218 · Көтөрүлүш жана Жучунун жортуулу",
+    "According to Rashid al-Din, the Kyrgyz refused to supply troops for a campaign against the Tumat and rebelled. Jochi marched against them and restored Mongol authority. The event concerns the Kyrgyz lands of the upper Yenisei.",
+    "Рашид ад-Диндин маалыматы боюнча, кыргыздар туматтарга каршы жортуулга аскер берүүдөн баш тартып, көтөрүлүшкө чыккан. Жучу аларга каршы жортуул жасап, монгол бийлигин калыбына келтирген. Окуя Жогорку Энесайдагы кыргыз жерлерине тиешелүү."
   ],
   "1219": [
     "Beginning of the Mongol invasion of Khwarazm",
@@ -310,22 +322,28 @@
   "1270": [
     "1270 · Administration of northern regions",
     "1270 · Түндүк аймактарды башкаруу",
-    "Yuan shi records Liu Haoli’s appointment over Kyrgyz and neighbouring lands and the building of stores and stations at Yilanzhou. It also describes Chinese craftspeople previously relocated to Qianzhou.",
-    "«Юань ши» Лю Хаолинин кыргыз жана коңшу жерлерге башкаруучу-сот болуп дайындалышын, Иланьчжоуда кампалар жана бекеттер курулганын баяндайт. Цяньчжоуга мурда көчүрүлгөн кытай усталары да айтылат."
+    "In 1270 Khubilai appointed Liu Haoli to administer the Kyrgyz and neighbouring northern regions. Yuan shi describes supply arrangements and postal stations, as well as the artisan population of Qianzhou.",
+    "1270-жылы Хубилай Лю Хаолини кыргыз жана коңшу түндүк аймактарды башкарууга дайындаган. «Юань ши» камсыздоону жана почта бекеттерин уюштурууну, ошондой эле Цяньчжоунун кол өнөрчү калкын баяндайт."
   ],
   "1271": [
     "Proclamation of the Yuan dynasty",
     "Юань династиясынын жарыяланышы"
+  ],
+  "1273": [
+    "1273 · Revolt of the northern princes",
+    "1273 · Түндүктөгү төрөлөрдүн көтөрүлүшү",
+    "Liu Haoli’s biography in Yuan shi records a revolt of the northern princes. Some northern regions ceased to obey Khubilai. This was a struggle for power within the Mongol world; the passage does not establish the foundation of a new independent Kyrgyz Khaganate.",
+    "«Юань шидеги» Лю Хаолинин өмүр баянында түндүктөгү төрөлөрдүн көтөрүлүшү айтылат. Айрым түндүк аймактар Хубилайга баш ийбей калган. Бул монгол дүйнөсүндөгү бийлик үчүн күрөштүн окуясы; бул маалымат жаңы көз карандысыз Кыргыз каганаты түзүлгөнүн ырастабайт."
   ],
   "1279": [
     "End of Southern Song",
     "Түштүк Сундун аягы"
   ],
   "1293": [
-    "1293 · Tutugha’s campaign and relocation of 700 households",
-    "1293 · Тутуханын жортуулу жана 700 үй-бүлөнүн көчүрүлүшү",
-    "Yuan shi links Tutugha’s campaign to the struggle against Qaidu. A separate entry for 1293 assigns 700 Kyrgyz households to agricultural military settlement at Hesihe (合思合). Hesihe is not plotted because its identification needs further verification. This was not a relocation of all Kyrgyz people.",
-    "«Юань ши» Тутуханын жортуулун Хайдуга каршы күрөш менен байланыштырат. 1293-жылдагы өзүнчө жазуу 700 кыргыз үй-бүлөсүн Хэсыхэге (合思合) аскердик дыйканчылык конушка жөнөтөт. Жери кошумча текшерүүнү талап кылгандыктан Хэсыхэ картага коюлган жок. Бул бардык кыргыздардын көчүрүлүшү эмес."
+    "1293 · Tutukha on the Yenisei",
+    "1293 · Тутуха Энесайда",
+    "In spring 1293 Tutukha’s army travelled over the frozen Kem River, subdued five groups and left a garrison. Yuan shi separately reports the relocation of 700 Kyrgyz households to Hesihe. The campaign and the relocation are distinct reports in the chronicle.",
+    "1293-жылдын жазында Тутуханын аскерлери тоңгон Кэм дарыясынын үстү менен өтүп, беш топту баш ийдирип, гарнизон калтырган. «Юань ши» өзүнчө 700 кыргыз түтүнүнүн Хэсыхэге көчүрүлгөнүн билдирет. Жортуул менен көчүрүү — жылнаамадагы эки башка маалымат."
   ],
   "1295": [
     "1295 · From Jinshan to Shandong",

@@ -1,8 +1,8 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),crypto=require('node:crypto');
 const c=require('../world/catalog.cjs'),{createWorldHistory}=require('../world/core.js'),h=createWorldHistory(c),html=fs.readFileSync('index.html','utf8');
-assert.equal(c.range.min,610);assert(c.range.max>=1918);assert(html.includes('name="chronograph-version" content="1.13.0"'));
-for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="1939"').test(html));
+assert.equal(c.range.min,610);assert(c.range.max>=1918);assert(html.includes('name="chronograph-version" content="1.15.0"'));
+for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="1945"').test(html));
 const p=(id,y)=>h.get(id,y)?.phase,a=(id,y)=>h.mapAreasAt(y).find(a=>a.entry===id);
 for(let y=1915;y<=1918;y++){for(const r of c.regions)assert(h.at(y,r.id).length);const mapped=h.mapAreasAt(y);assert.equal(mapped.length,new Set(mapped.map(a=>a.entry)).size);for(const item of h.at(y))assert(mapped.some(a=>a.entry===item.entry.id),'Unmapped '+item.entry.id);}
 assert(p('1789-russian-empire',1916).name[1].includes('Empire'));assert(!p('1789-russian-empire',1917).name[1].includes('Empire'));assert(!p('1789-russian-empire',1918));
@@ -20,7 +20,7 @@ assert(delivered.outlines?.length,'Political outlines lost during build');
 for(const y of [1915,1916,1917,1918])assert(h.changes().includes(y));
 const biography=require('./biographies.cjs')[0];for(const t of biography.text)assert(t.length>150);for(const n of biography.name)assert(html.includes(n));assert(html.includes(biography.era));
 // Cartographic additions have their own date/geometry tests; preserve the original-data hash.
-const historic={entries:c.entries.filter(e=>!e.id.startsWith('cartography-')).map(e=>({...e,phases:e.phases.filter(p=>p.from<1915)})).filter(e=>e.phases.length),areas:c.areas.filter(a=>!a.entry.startsWith('cartography-')).filter(a=>a.from<1915),events:c.events.filter(e=>e.from<1915),sources:Object.fromEntries(Object.entries(c.sources).filter(([id])=>!id.startsWith("to1939")).filter(([id])=>!id.startsWith('cartography')).filter(([id])=>!id.startsWith('to1918')))};
-const hash=crypto.createHash('sha256').update(JSON.stringify(historic)).digest('hex');
+const historic={entries:c.entries.filter(e=>!e.id.startsWith('cartography-')).map(e=>({...e,phases:e.phases.filter(p=>p.from<1915)})).filter(e=>e.phases.length),areas:c.areas.filter(a=>!a.entry.startsWith('cartography-')).filter(a=>a.from<1915),events:c.events.filter(e=>e.from<1915),sources:Object.fromEntries(Object.entries(c.sources).filter(([id])=>!id.startsWith("to1939")&&!id.startsWith("to1945")).filter(([id])=>!id.startsWith('cartography')).filter(([id])=>!id.startsWith('to1918')))};
+const hash=crypto.createHash('sha256').update(JSON.stringify(require('../world/kyrgyz-baseline.cjs')(historic))).digest('hex');
 assert.equal(hash,'f8108f87d2359b444f54332f430af1c451815f7d3870efe19576d8f27db42e0f','Pre-1915 catalogue changed');
 console.log('PASS: 1915–1918, imperial collapses, occupation vs sovereignty, Urkun, global events, sources, complete biographies and preserved earlier catalogue.');

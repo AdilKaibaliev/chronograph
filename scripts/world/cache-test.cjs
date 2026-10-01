@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict');
 const c=require('./catalog.cjs'),{createWorldHistory}=require('./core.js'),h=createWorldHistory(c);
 for(let y=610;y<=c.range.max;y++){
- const expected=c.entries.flatMap(entry=>{const phase=entry.phases.find(p=>y>=p.from&&y<p.to);return phase?[{entry:phase.name||phase.kind?{...entry,name:phase.name||entry.name,kind:phase.kind||entry.kind}:entry,phase,coord:phase.coord||entry.coord}]:[];});
+ const expected=c.entries.flatMap(entry=>{const phase=entry.phases.find(p=>y>=p.from&&y<p.to);return phase?[{entry:phase.name||phase.kind?{...entry,name:phase.name||entry.name,kind:phase.kind||entry.kind}:entry,phase,coord:c.mapAnchors?.[entry.id]?.find(r=>r[0]<=y&&y<r[1])?.[2]||phase.coord||entry.coord}]:[];});
  assert.deepEqual(h.at(y),expected);
  assert.deepEqual(h.areasAt(y),c.areas.filter(a=>y>=a.from&&y<a.to));
  for(const item of expected)assert.deepEqual(h.get(item.entry.id,y),item);

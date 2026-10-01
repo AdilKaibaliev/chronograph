@@ -10,7 +10,7 @@ function union(rings){
  const out=input.length?clip.union(...input).flatMap(p=>p.map(r=>r.slice(0,-1).map(p=>p.map(v=>+v.toFixed(8))))):[];
  cache.set(key,out);return out;
 }
-const multi=rings=>{const out=[];for(const ring of rings){if(signed(ring)>0)out.push([ring]);else {const owner=out.find(p=>inside(p[0],ring[0]));if(owner)owner.push(ring);else throw Error('Unowned hole');}}return out;};
+const multi=rings=>{const out=[];for(const ring of rings){if(signed(ring)>0)out.push([ring]);else {const owner=out.find(p=>ring.some((v,i)=>inside(p[0],v)||inside(p[0],[(v[0]+ring[(i+1)%ring.length][0])/2,(v[1]+ring[(i+1)%ring.length][1])/2])));if(owner)owner.push(ring);else throw Error('Unowned hole');}}return out;};
 function difference(rings,cut){return clip.difference(multi(rings),cut.map(r=>[r])).flatMap(p=>p.map(r=>r.slice(0,-1).map(p=>p.map(v=>+v.toFixed(8)))));}
 function merge(geometries){const input=geometries.filter(g=>g.length).map(multi);return input.length?clip.union(...input).flatMap(p=>p.map(r=>r.slice(0,-1).map(p=>p.map(v=>+v.toFixed(8))))):[];}
 function signed(r){return r.reduce((a,p,i)=>{const q=r[(i+1)%r.length];return a+p[0]*q[1]-q[0]*p[1];},0)/2;}

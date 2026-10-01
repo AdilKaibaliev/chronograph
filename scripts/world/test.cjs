@@ -70,6 +70,6 @@ assert(html.includes('if(worldHistoryHook)worldHistoryHook()'));assert(html.incl
 assert(html.includes('.future-mode #worldHistoryLayer'));assert(html.includes('worldLocationHook(url)'));
 assert(html.includes('.future-mode #worldTerritoryLayer'));assert(html.includes("id='worldTerritoriesToggle'"));assert(html.includes("['wterritory',worldState.area]"));
 assert(!html.includes("if(f.properties.name==='Antarctica') return;"));assert(/LAT_MIN\s*=\s*-90/.test(html));
-const payload=JSON.parse(html.match(/const WORLD_HISTORY=(.*);/)[1]);assert.equal(payload.events.filter(e=>e.base).length,63);assert(!JSON.stringify(payload.sources).includes('https://'));
+const payload=JSON.parse(html.match(/const WORLD_HISTORY=(.*);/)[1]);assert.equal(payload.events.filter(e=>e.base).length,66);assert(!JSON.stringify(payload.sources).includes('https://'));
 for(const e of payload.events){assert(e.title[1]&&!/[А-Яа-яЁё]/.test(e.title[1]),'Untranslated event '+e.id);assert(e.text[1]&&!/[А-Яа-яЁё]/.test(e.text[1]),'Untranslated description '+e.id);}
 console.log(JSON.stringify({status:'PASS',entries:catalog.entries.length,phases,events:payload.events.length,areas:catalog.areas.length,languages:3,textRows:languageRows.length,years:MAX-609,regions:catalog.regions.length,sources:used.size}));

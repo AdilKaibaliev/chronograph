@@ -11,8 +11,8 @@ for(let y=610;y<=1299;y++){
  assert.equal(realm.name,y<1260?'Монгольская империя':'Монгольская империя и улусы');
 }
 vm.runInContext('showMongolUluses=true',ctx);assert(d.displayEmpiresForYear(1279).some(e=>e.id==='yuan'));assert(!d.displayEmpiresForYear(1279).some(e=>e.id==='mongolRealm'));
-const k=d.EMPIRES.find(e=>e.id==='kyrgyzKhaganate');assert.equal(k.to,923);assert(k.corePolys.length);const ring=k.keyframes[0].polys[0];assert(Math.min(...ring.map(p=>p[0]))<=83);assert(Math.max(...ring.map(p=>p[0]))>=116);assert.equal(k.type,'influence');
-assert(h.includes('.unified-mongol{stroke:none!important}'));assert(h.includes('body.future-mode #mongolScope'));assert(h.includes('fill-rule'));assert(h.includes('kyrgyz-core'));
+const k=d.EMPIRES.find(e=>e.id==='kyrgyzKhaganate');assert.equal(k.to,923);assert.equal(k.keyframes[0].polys.length,1);assert(k.keyframes[0].dependentPolys.length);const ring=k.keyframes[0].polys[0];assert(Math.min(...ring.map(p=>p[0]))>87);assert(Math.max(...ring.map(p=>p[0]))<100);assert.equal(k.type,'empire');
+assert(h.includes('.unified-mongol{stroke:#61483a;'));assert(h.includes('body.future-mode #mongolScope'));assert(h.includes('fill-rule'));assert(h.includes('kyrgyz-core'));
 const t=require('./i18n/core.js').createChronographTranslator(JSON.parse(fs.readFileSync('scripts/i18n/compiled-messages.json','utf8')));
 for(const s of [d.mongolRealmForYear(1258),d.mongolRealmForYear(1279),k])for(const key of ['name','short','body','territories']){assert(!/[А-Яа-яЁё]/.test(t(s[key],'en')),key);assert(t(s[key],'ky'));}
 console.log('PASS: unified/detailed modes across 690 years, dated extent preserved, consistent winding, no duplicate ulus paths, post-1260 label, Kyrgyz core/influence distinction, RU/EN/KY.');

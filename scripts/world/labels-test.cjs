@@ -24,3 +24,5 @@ assert.deepEqual(labels.filter(l=>l.style.display!=='none').map(l=>l.dataset.ent
 // A tall viewport adds vertical letterboxing; collision checks must use screen coordinates.
 ctx.svg.clientHeight=1000;assert.deepEqual(Array.from(ctx.worldLabelMetrics().point(100,100)),[100,240]);
 console.log('PASS: overview names shrink, overlapping and tiny labels hide, selection stays available, zoom restores deterministically, letterboxing is included.');
+
+assert(!fs.readFileSync('index.html','utf8').includes('#worldMap.city-mode .empire-label{display:none!important}'),'Close zoom hides all major legacy states');

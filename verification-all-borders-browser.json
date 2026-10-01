@@ -1,0 +1,100 @@
+{
+  "pass": true,
+  "version": "1.14.4",
+  "checks": [
+    {
+      "check": "1859 to 1860 changes actual territory",
+      "pass": true
+    },
+    {
+      "check": "English territory card",
+      "pass": true
+    },
+    {
+      "check": "Kyrgyz territory card",
+      "pass": true
+    },
+    {
+      "check": "390px mobile layout and visible play",
+      "pass": true
+    },
+    {
+      "check": "ru 1299",
+      "pass": true,
+      "observed": {
+        "height": 720,
+        "language": "ru",
+        "paths": 89,
+        "viewport": [
+          1280,
+          720
+        ],
+        "width": 1280,
+        "year": "1299"
+      }
+    },
+    {
+      "check": "ru 1300",
+      "pass": true,
+      "observed": {
+        "height": 720,
+        "language": "ru",
+        "paths": 136,
+        "viewport": [
+          1280,
+          720
+        ],
+        "width": 1280,
+        "year": "1300"
+      }
+    },
+    {
+      "check": "en 1945",
+      "pass": true,
+      "observed": {
+        "height": 720,
+        "language": "en",
+        "paths": 352,
+        "viewport": [
+          1280,
+          720
+        ],
+        "width": 1280,
+        "year": "1945"
+      }
+    },
+    {
+      "check": "ky 860",
+      "pass": true,
+      "observed": {
+        "height": 720,
+        "language": "ky",
+        "paths": 71,
+        "viewport": [
+          1280,
+          720
+        ],
+        "width": 1280,
+        "year": "860"
+      }
+    },
+    {
+      "check": "Final release reload",
+      "pass": true,
+      "observed": {
+        "page": [
+          1280,
+          720
+        ],
+        "title": "Сардинское королевство · объединение",
+        "version": "1.14.4",
+        "viewport": [
+          1280,
+          720
+        ],
+        "year": "1860"
+      }
+    }
+  ],
+  "errors": []
+}

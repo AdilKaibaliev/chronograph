@@ -1,0 +1,5 @@
+{"messages":1574,"eventTitles":67,"eventDescriptions":67,"bytes":15054170}
+{"pass":true,"stages":14,"coreVertices":35,"checks":"regional control points, connected outline, influence separated, dated status, primary attribution, bilingual translations, event sync, 1299–1300 continuity, unrelated legacy preserved"}
+PASS: 1574 message pairs, Russian preservation, calendar and dynamic labels, explicit Russian fallback.
+PASS: original historical states, geometry, events and person dates preserved from source; plain-text sources.
+PASS: 4291 coordinate checks; 690-year data, dated Kyrgyz status, Mongol conquest milestones, dependent territories, migration semantics and JS syntax.

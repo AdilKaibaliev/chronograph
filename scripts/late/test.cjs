@@ -166,7 +166,7 @@ assert(starStart>=0&&starEnd>starStart,'Missing delivered contemporaries');
 const starContext=vm.createContext({});
 vm.runInContext(html.slice(starStart,starEnd)+extractFunction('starsByGroupForYear')+extractFunction('starDates')+';globalThis.stars={people:ISLAM_STARS,living:starsByGroupForYear,dates:starDates};',starContext);
 const stars=starContext.stars;
-assert.equal(stars.people.length,64+require('../early/biographies.cjs').length+require('../to1789/biographies.cjs').length+require('../to1815/biographies.cjs').length+require('../to1848/biographies.cjs').length+require('../to1914/biographies.cjs').length+require('../to1918/biographies.cjs').length+require('../to1939/biographies.cjs').length,'The release must retain the original and all added biography sets');
+assert.equal(stars.people.length,64+require('../early/biographies.cjs').length+require('../to1789/biographies.cjs').length+require('../to1815/biographies.cjs').length+require('../to1848/biographies.cjs').length+require('../to1914/biographies.cjs').length+require('../to1918/biographies.cjs').length+require('../to1939/biographies.cjs').length+require('../to1945/biographies.cjs').length,'The release must retain the original and all added biography sets');
 const approvedPeople=[
  ['Ибн Каййим аль-Джаузия',1292,1350],['Ибн Касир',1301,1373],
  ['Ибн Халдун',1332,1406],['аль-Макризи',1364,1442],

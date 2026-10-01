@@ -10,7 +10,7 @@ for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>
 assert(html.includes("'XVI','XVII','XVIII'"));assert(html.includes("'culture','nature','territory'"));
 const old={entries:c.entries.map(e=>({id:e.id,region:e.region,kind:e.kind,coord:e.coord,name:e.name,phases:e.phases.filter(p=>p.from<1601)})).filter(e=>e.phases.length),areas:c.areas.filter(a=>a.from<1601)};
 // Explicitly revised for the audited 1300 continuity fix (continuity-test.cjs).
-assert.equal(crypto.createHash('sha256').update(JSON.stringify(old)).digest('hex'),'b164cde6276ba7b3d781bf4b56045c609eba2a70c223860d8014e3e5b2ecabf4','Reviewed 610–1600 continuity baseline changed');
+assert.equal(crypto.createHash('sha256').update(JSON.stringify(require('../world/kyrgyz-baseline.cjs')(old))).digest('hex'),'b164cde6276ba7b3d781bf4b56045c609eba2a70c223860d8014e3e5b2ecabf4','Reviewed 610–1600 continuity baseline changed');
 const dh=createWorldHistory(delivered);
 for(let y=1601;y<=1789;y++){
  assert.deepEqual(dh.at(y),h.at(y));assert.deepEqual(dh.areasAt(y),h.areasAt(y));
@@ -85,7 +85,7 @@ assert.equal(c.events.find(e=>e.id==='1789-laki-1783').kind,'nature');
 for(const e of c.events.filter(e=>e.id.startsWith('1789-'))){assert(e.from>=1601&&e.from<=1789);assert(e.coord.every(Number.isFinite));}
 // Inspect the actual delivered dates, sources and individual biographies.
 const people=vm.runInNewContext(html.slice(html.indexOf('const ISLAM_STARS = ['),html.indexOf('const STAR_DETAILS='))+';ISLAM_STARS');
-assert.equal(people.length,80+require('../to1815/biographies.cjs').length+require('../to1848/biographies.cjs').length+require('../to1914/biographies.cjs').length+require('../to1918/biographies.cjs').length+require('../to1939/biographies.cjs').length);
+assert.equal(people.length,80+require('../to1815/biographies.cjs').length+require('../to1848/biographies.cjs').length+require('../to1914/biographies.cjs').length+require('../to1918/biographies.cjs').length+require('../to1939/biographies.cjs').length+require('../to1945/biographies.cjs').length);
 for(const p of require('./biographies.cjs')){
  const star=people.find(x=>x.name===p.name[0]);assert(star,p.name[0]);assert.equal(star.birth,p.birth);assert.equal(star.death,p.death);assert.equal(star.era,p.era);assert.equal(Boolean(star.birthApprox),Boolean(p.approxBirth));
  for(const text of p.text)assert(text.length>100);assert(p.article);

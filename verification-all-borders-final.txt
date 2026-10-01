@@ -1,0 +1,21 @@
+Running scripts/i18n/build.cjs
+{"messages":1574,"eventTitles":67,"eventDescriptions":67,"bytes":15266777}
+Running scripts/world/all-borders-test.cjs
+{"pass":true,"profiles":483,"frames":4221,"years":1336,"yearlyStates":137997,"geographicControls":78,"checks":"coastal labels, valid holes, date intervals, owner continuity, 1860 transfer, dated anchors, preserved history"}
+Running scripts/world/cartography-test.cjs
+{"status":"PASS","years":1309,"datedOutlines":659,"relationships":523,"legacyPolities":73,"checks":"union, holes, separated possessions, dated transfers, imperial hierarchy, modern borders, delivered renderer"}
+Running scripts/world/coasts-occupation-test.cjs
+{"pass":true,"coastalShapes":1243,"coastalFrames":4221,"smallIslandVicinities":203,"checks":"all coastal frames, retained holes, WWII occupations by year, allies and colonies, earlier history preserved"}
+Running scripts/world/to1939-test.cjs
+{"pass":true,"years":21,"profiles":483,"interwarRevisions":108,"events":29,"checks":"timeline, state succession, dependencies, delivered data, earlier catalogue preserved"}
+Running scripts/world/to1945-test.cjs
+{"pass":true,"years":6,"revised":93,"events":14,"checks":"global coverage, occupation/province distinction, succession, delivered data, earlier content preserved"}
+Running scripts/i18n/test.cjs
+PASS: 1574 message pairs, Russian preservation, calendar and dynamic labels, explicit Russian fallback.
+PASS: original historical states, geometry, events and person dates preserved from source; plain-text sources.
+Running scripts/i18n/build.cjs
+{"messages":1574,"eventTitles":67,"eventDescriptions":67,"bytes":15266777}
+Running scripts/world/all-borders-test.cjs
+{"pass":true,"profiles":483,"frames":4221,"years":1336,"yearlyStates":137997,"geographicControls":78,"checks":"coastal labels, valid holes, date intervals, owner continuity, 1860 transfer, dated anchors, preserved history"}
+Running scripts/world/coasts-occupation-test.cjs
+{"pass":true,"coastalShapes":1243,"coastalFrames":4221,"smallIslandVicinities":203,"checks":"all coastal frames, retained holes, WWII occupations by year, allies and colonies, earlier history preserved"}

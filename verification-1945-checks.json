@@ -1,0 +1,8 @@
+{
+  "version": "1.14.0",
+  "build": "passed",
+  "automatedSuites": 29,
+  "log": "verification-1945.txt",
+  "borderControlPoints": 49,
+  "scope": "Implementation, geographic control points and specified date transitions; not exhaustive historical validation."
+}

@@ -1,0 +1,17 @@
+.kyrgyz-map-key{display:grid;gap:7px;padding:10px 0;margin:5px 0 10px;border-block:1px solid #514733}
+.kyrgyz-map-key>span{display:flex;gap:9px;align-items:center;font-size:11px;line-height:1.4;color:#e3caa0}
+.kyrgyz-map-key i{width:23px;height:11px;flex:none;background:#b08a5870;border:1px solid #b08a58;border-radius:2px}
+.kyrgyz-map-key i.influence{background:#b08a585c;border-style:dashed}
+.kyrgyz-map-key i.direction{height:0;border:0;border-top:2px dashed #f1ce83;border-radius:0}
+#kyrgyzEraFacts .kyrgyz-map-note{font-size:10px;line-height:1.5;color:#baab91}
+.kyrgyz-context #pulseLayer,.kyrgyz-context .place-dot.active .pulse{display:none}
+.kyrgyz-context .trade-label{font-size:var(--kyrgyz-trade-font);stroke-width:var(--kyrgyz-trade-stroke)}
+.empire-dependency[data-empire="kyrgyzKhaganate"]{stroke-width:1.6;stroke-dasharray:6 3;stroke-opacity:.95}
+.kyrgyz-heartland{stroke-width:.8;stroke-opacity:.55}
+#kyrgyzScope{position:absolute;left:14px;bottom:63px;max-width:255px;display:grid;gap:5px;padding:9px 11px;background:rgba(33,29,22,.94);color:#eadcc3;border:1px solid #806d49;border-radius:9px;font:10px/1.4 system-ui;z-index:5;pointer-events:none}
+#kyrgyzScope strong{font-size:10px;font-weight:600;color:#f0cc85}
+#kyrgyzScope span{display:flex;align-items:center;gap:7px}
+#kyrgyzScope i{display:block;width:16px;height:8px;border:1px dashed #c5a06b;background:#b08a585c;flex:none}
+#kyrgyzScope i.core{border-style:solid;background:#b08a5899}
+#kyrgyzScope[hidden],body.future-mode #kyrgyzScope,.world-comparison.world-regional #kyrgyzScope{display:none!important}
+@media(max-width:700px){#kyrgyzScope{left:8px;bottom:48px;max-width:215px;font-size:9px;padding:6px 8px;gap:3px}#kyrgyzScope strong{font-size:9px}}

@@ -2,12 +2,14 @@
 const G=require('./cartography-geometry.cjs'),review=require('./cartography-reviewed.cjs');
 module.exports=c=>{
  const source=(id,title,urls)=>c.sources[id]={title,urls};
+ source('cartographySavoyNice','Paul Guichonnet. Histoire de l’Annexion de la Savoie à la France, 1998; Archives de la Savoie. La Savoie de l’Annexion, 1858–1860; Archives départementales des Alpes-Maritimes. Le XIXe siècle de 1860 à 1914; Atti del governo provvisorio delle Marche, 1860–1861; Giovanni Maioli. Il plebiscito dell’Emilia e delle Marche.',['https://patrimoines.savoie.fr/web/psp_9326/la-savoie-de-l-annexion','https://www.pedagogie.ac-nice.fr/histgeo/images/attachments/PPO-Rattachement_Nice.pdf','https://www.departement06.fr/le-xixe-siecle-de-1860-1914','https://www.giustizia.it/resources/cms/documents/Atti_Governo_Marche_parte_seconda_ridotta.pdf','https://www.bibliotecasalaborsa.it/bolognaonline/lang/en/cronologia-di-bologna/1860/plebiscito_di_annessione']);
  source('cartographyQing','大清萬年一統地理全圖 (Complete Geographical Map of the Great Qing Dynasty), 1796–1820; Columbia University, Asia for Educators. Late Imperial China; Mongolia: A Country Study, Library of Congress.',['https://www.loc.gov/resource/gdcwdl.wdl_17879/','https://afe.easia.columbia.edu/main_pop/kpct/kp_1450-1750.htm','https://tile.loc.gov/storage-services/public/gdcmassbookdig/mongoliacountrys00word_0/mongoliacountrys00word_0.pdf']);
  source('cartographyOttoman','The Metropolitan Museum of Art. The Greater Ottoman Empire, 1600–1800; The Eastern Mediterranean, 1400–1600; Manatū Taonga. Map of Ottoman Empire in 1914.',['https://www.metmuseum.org/essays/the-greater-ottoman-empire-1600-1800','https://82nd-and-fifth.metmuseum.org/toah/ht/08/wae.html','https://nzhistory.govt.nz/media/photo/map-ottoman-empire-1914']);
  source('cartographyMughal','The Metropolitan Museum of Art. South Asia, 1600–1800; Interwoven Globe; Library of Congress. India: A Country Study.',['https://82nd-and-fifth.metmuseum.org/toah/ht/09/ssa.html','https://www.metmuseum.org/exhibitions/listings/2013/interwoven-globe','https://tile.loc.gov/storage-services/master/frd/frdcstdy/in/indiacountrystud00heit/indiacountrystud00heit.pdf']);
  source('cartographyTuva','Национальный архив Республики Тыва. Управление амбын-нойона Танну-Урянхая, фонд 115; Президентская библиотека. Урянхайский край в период российского протектората: архивные документы 1914 года.',['https://guides.rusarchives.ru/node/13113','https://www.prlib.ru/section/1969701']);
  source('cartographyIslands','Foreign Office. Cyprus. Peace Handbooks, 1920; Foreign Relations of the United States, 1909, Crete; Region of Crete. Chronology of the Cretan State and Union.',['https://www.loc.gov/item/a22000924/','https://history.state.gov/historicaldocuments/frus1909/d302','https://www.crete.gov.gr/chronologio-periodoy/']);
  source('cartographyMongol','Encyclopaedia Iranica. Central Asia V: In the Mongol and Timurid Periods; Yuan shi (元史).',['https://www.iranicaonline.org/articles/central-asia-v/']);
+ source('cartographyMingViet','James A. Anderson. The Ming Invasion of Vietnam, 1407–1427. In East Asia in the World, 2020.',['https://www.cambridge.org/core/books/east-asia-in-the-world/ming-invasion-of-vietnam-14071427/AB93A264F96DF7CF884007D3BC5BB158']);
  const H=require('./late-helpers.cjs')(c,{max:1918}),T=s=>s.split('|');
  function profile(id,coord,sourceId,rows,poly){const phases=rows.map(([from,to,name,text])=>H.phase(from,to,T(name),T(text),[sourceId],{name:T(name)}));H.entry(id,'eurasia','region',coord,phases[0].name,phases);for(const p of phases)H.area(id,p.from,p.to,poly,{kind:'influence',name:p.name,color:'#96a185'});}
  profile('cartography-tibet',[91.13,29.65],'cartographyQing',[
@@ -37,7 +39,7 @@ module.exports=c=>{
  const byId=new Map(c.entries.map(e=>[e.id,e])),areas=new Map();for(const a of c.areas){if(!areas.has(a.entry))areas.set(a.entry,[]);areas.get(a.entry).push(a);}
  const active=(id,y)=>(areas.get(id)||[]).find(a=>a.from<=y&&a.to>y);
  const outline=(id,y)=>rawOutlines.find(a=>a.entry===id&&a.from<=y&&a.to>y);
- const extraSource=id=>id==='late-yuan'||id==='late-chagatai'?'cartographyMongol':id==='1789-qing'||id==='late-ming'?'cartographyQing':id==='late-ottoman'?'cartographyOttoman':id==='early-mughal'?'cartographyMughal':null;
+ const extraSource=id=>id==='late-yuan'||id==='late-chagatai'?'cartographyMongol':id==='late-ming'?'cartographyMingViet':id==='1789-qing'?'cartographyQing':id==='late-ottoman'?'cartographyOttoman':id==='early-mughal'?'cartographyMughal':null;
  const processed=new Map();function base(id,y){const a=active(id,y);if(!a)return null;const o=outline(id,y);const key=a.id+'|'+(o?.id||'')+'|'+review.cuts.filter(v=>v<=y).at(-1);if(!processed.has(key)){const value={...a,...o};processed.set(key,{...value,polygons:review.geometry(value,y)});}return processed.get(key);}
  for(const r of relations)if(!byId.has(r.owner)||!byId.has(r.member))throw Error('Unknown imperial relationship '+JSON.stringify(r));
  const groupedRelations=new Map();for(const r of relations){const key=[r.owner,r.member,r.relationship,r.extent].join('|');if(!groupedRelations.has(key))groupedRelations.set(key,[]);groupedRelations.get(key).push(r);}
@@ -60,6 +62,11 @@ module.exports=c=>{
    if(id==='1789-great-britain')name=T('Британская империя|British Empire|Британ империясы');
    const memberIds=[...new Set(direct.map(r=>r.member))],dep=Object.fromEntries(dependencies.map(r=>[r.member,r.relationship]));
    const row={...a,id:'cartography-'+id+'-'+from,from,to,name,short:name,label:a.label||e.coord,polygons,points:polygons[0],members:memberIds,dependencies:dep,sources:src,approx:true,worldFocus:a.worldFocus||id==='1789-great-britain'||id==='1789-spain'||id==='late-portugal'||id==='late-france'||id==='japan',cartographic:true};
+   if(['late-france','1914-italy'].includes(id)&&from>=1849&&from<1919){
+    row.sources=[...new Set([...row.sources,'cartographySavoyNice'])];
+    const note=T(from<1860?'Савойя и графство Ницца принадлежат Сардинскому королевству.|Savoy and the County of Nice belong to the Kingdom of Sardinia.|Савойя менен Ницца графтыгы Сардиния падышалыгына таандык.':'В 1860 году Савойя и графство Ницца переданы Франции. Танд и Ла-Бриг остаются за Италией.|In 1860 Savoy and the County of Nice are transferred to France. Tende and La Brigue remain with Italy.|1860-жылы Савойя менен Ницца графтыгы Францияга өткөрүлөт. Танд жана Ла-Бриг Италияда калат.');
+    row.text=row.text.map((t,i)=>t+' '+note[i]);
+   }
    const signature=v=>JSON.stringify({...v,id:null,from:null,to:null});const prev=out.at(-1);
    if(prev&&prev.entry===id&&prev.to===from&&signature(prev)===signature(row))prev.to=to;else out.push(row);
   }

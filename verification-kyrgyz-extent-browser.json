@@ -1,0 +1,117 @@
+{
+  "pass": true,
+  "version": "1.14.3",
+  "languages": [
+    {
+      "body": "After the victory over the Uyghur Khaganate in 840, Kyrgyz power extended far beyond the Yenisei. The lighter area reconstructs its military and political reach at the ninth-century high point: the Altai, upper Irtysh, Dzungaria, much of Mongolia and parts of Transbaikalia. The Yenisei–Sayan heartland is darker. Butanaev and Khudyakov and Astaykin’s map of about 860 present a broad reconstruction; Drompp examines the disputed duration of rule in outlying regions, especially the Orkhon.",
+      "caption": "Outer outline: the combined military and political reach of the ninth-century high point, compared with the reconstruction for about 860. Direct rule, tribute and political influence use different layer types.",
+      "document": [
+        1280,
+        720
+      ],
+      "lang": "en",
+      "scope": "Ninth-century high point · reconstructionYenisei–Sayan heartlandMilitary and political reach · 9th c.",
+      "title": "Kyrgyz Khaganate",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "body": "840-жылы Уйгур каганатын жеңгенден кийин кыргыз державасынын таасири Энесайдан кыйла алыска тараган. Ачык түстөгү аймак IX кылымдагы гүлдөп-өсүү мезгилинин аскердик-саясий таасир чөйрөсүн көрсөтөт: Алтай, Иртыштын жогорку агымы, Жуңгария, Монголиянын кыйла бөлүгү жана Байкалдын чыгышындагы айрым аймактар. Энесай–Саян өзөгү күңүрт түстө берилген. Кеңири реконструкция Бутанаев менен Худяковдун эмгегинде жана Астайкиндин болжол менен 860-жылга арналган картасында бар; четки аймактардагы, өзгөчө Орхондогу бийликтин узактыгы Дромпптун изилдөөсүндө талкууланат.",
+      "caption": "Сырткы контур: IX кылымдагы гүлдөп-өсүү мезгилинин жалпыланган аскердик-саясий таасир чөйрөсү; болжол менен 860-жылкы реконструкция менен салыштырылган. Түз бийлик, алым жана саясий таасир катмарлардын ар башка түрлөрү менен көрсөтүлөт.",
+      "document": [
+        1280,
+        720
+      ],
+      "lang": "ky",
+      "scope": "IX кылымдагы гүлдөп-өсүү · реконструкцияЭнесай–Саян өзөгүАскердик-саясий таасир · IX кылым",
+      "title": "Кыргыз каганаты",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "body": "После победы над Уйгурским каганатом в 840 году кыргызская держава вышла далеко за пределы Енисея. Светлая область показывает реконструкцию её военно-политического охвата в эпоху расцвета IX века: Алтай, Верхнее Прииртышье, Джунгарию, значительную часть Монголии и районы Забайкалья. Енисейско-Саянское ядро выделено темнее. Широкая реконструкция представлена у Бутанаева и Худякова и на карте Астайкина около 860 года; длительность власти в отдельных областях, особенно на Орхоне, обсуждается в исследованиях Дромппа.",
+      "caption": "Внешний контур: обобщённый военно-политический охват расцвета IX века; сопоставлен с реконструкцией около 860 года. Прямая власть, дань и политическое влияние показаны разными типами слоёв.",
+      "document": [
+        1280,
+        720
+      ],
+      "lang": "ru",
+      "scope": "Расцвет IX века · реконструкцияЕнисейско-Саянское ядроВоенно-политический охват · IX век",
+      "title": "Кыргызский каганат",
+      "viewport": [
+        1280,
+        720
+      ]
+    }
+  ],
+  "years": [
+    {
+      "khaganate": 0,
+      "late": "Енисейские кыргызы",
+      "scope": false,
+      "year": "839"
+    },
+    {
+      "khaganate": 1,
+      "scope": true,
+      "year": "840"
+    },
+    {
+      "khaganate": 1,
+      "scope": true,
+      "year": "923"
+    },
+    {
+      "khaganate": 0,
+      "late": "Кыргызские владения на Енисее",
+      "scope": false,
+      "year": "924"
+    }
+  ],
+  "mobile": {
+    "document": [
+      390,
+      844
+    ],
+    "map": {
+      "bottom": 396.921875,
+      "height": 304.921875,
+      "left": 8,
+      "right": 382,
+      "top": 92,
+      "width": 374,
+      "x": 8,
+      "y": 92
+    },
+    "play": {
+      "bottom": 782.984375,
+      "height": 36,
+      "left": 18,
+      "right": 54,
+      "top": 746.984375,
+      "width": 36,
+      "x": 18,
+      "y": 746.984375
+    },
+    "scope": {
+      "bottom": 348.921875,
+      "height": 57.78125,
+      "left": 16,
+      "right": 220.171875,
+      "top": 291.140625,
+      "width": 204.171875,
+      "x": 16,
+      "y": 291.140625
+    },
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "dependencyClick": true,
+  "errors": []
+}

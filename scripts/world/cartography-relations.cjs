@@ -65,5 +65,6 @@ module.exports=()=>{
  add('1789-usa','1848-texas',1845,1861);add('1789-usa','1848-texas',1865,1919);add('1789-usa','1815-louisiana-purchase',1803,1848);add('1789-usa','1848-oregon',1846,1848);
  add('1789-usa','hawaii',1898,1919);many('1789-usa','early-manila early-cebu',1898,1919);
  add('1914-italy','1914-eritrea',1890,1919);add('1914-italy','early-tripoli',1912,1919,'occupation');
+ add('late-ming','late-daiviet',1407,1428);
  return rows;
 };

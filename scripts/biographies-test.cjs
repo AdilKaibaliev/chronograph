@@ -7,7 +7,7 @@ const els={modal,modalBody:body,modalClose:{focus(){focused++;}}};
 const ctx=vm.createContext({$:id=>els[id],stopPlay(){},year:640});
 vm.runInContext(h.slice(h.indexOf('const ISLAM_STARS = ['),h.indexOf('function starsByGroupForYear'))+';globalThis.data={ISLAM_STARS,STAR_DETAILS,openStar,starDates};',ctx);
 const {ISLAM_STARS:people,STAR_DETAILS:details,openStar,starDates}=ctx.data;
-const expectedCount=57+require('./late/biographies.cjs').length+require('./early/biographies.cjs').length+require('./to1789/biographies.cjs').length+require('./to1815/biographies.cjs').length+require('./to1848/biographies.cjs').length+require('./to1914/biographies.cjs').length+require('./to1918/biographies.cjs').length+require('./to1939/biographies.cjs').length;
+const expectedCount=57+require('./late/biographies.cjs').length+require('./early/biographies.cjs').length+require('./to1789/biographies.cjs').length+require('./to1815/biographies.cjs').length+require('./to1848/biographies.cjs').length+require('./to1914/biographies.cjs').length+require('./to1918/biographies.cjs').length+require('./to1939/biographies.cjs').length+require('./to1945/biographies.cjs').length;
 assert.equal(people.length,expectedCount);assert.equal(new Set(people.map(p=>p.name)).size,expectedCount);assert.equal(Object.keys(details).length,expectedCount);
 for(const p of people){
  const d=details[p.name];assert(d.text.length>=70,p.name+' needs an individual biography');assert(d.source.includes('TDV İslâm Ansiklopedisi'),p.name+' source');

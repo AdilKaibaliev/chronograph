@@ -1,0 +1,11 @@
+{
+  "source": "Natural Earth 1:50m Land",
+  "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_land.geojson",
+  "license": "Public domain",
+  "retrieved": "2026-10-01",
+  "source_sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+  "full_geometry": "land-coasts.json",
+  "spatial_index": "land-coast-tiles.json",
+  "tile_degrees": 15,
+  "note": "Physical land only; contemporary country boundaries are not used to construct historic state borders."
+}

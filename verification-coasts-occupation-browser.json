@@ -1,0 +1,48 @@
+{
+  "version": "1.14.1",
+  "date": "2026-10-01",
+  "published": false,
+  "url": "http://127.0.0.1:8773/?lang=ru&year=1942&tab=compare&world=eurasia&wterritory=late-hre",
+  "languages": [
+    "ru",
+    "en",
+    "ky"
+  ],
+  "yearlyOccupationFeatures": {
+    "1939": 2,
+    "1940": 8,
+    "1941": 16,
+    "1943": 18,
+    "1944": 11,
+    "1945": 0
+  },
+  "legend1945": "Occupation ended / Allied administration verified",
+  "desktop": {
+    "viewport": [
+      1280,
+      720
+    ],
+    "document": [
+      1280,
+      720
+    ]
+  },
+  "mobile": {
+    "viewport": [
+      390,
+      844
+    ],
+    "document": [
+      390,
+      844
+    ],
+    "playVisible": true
+  },
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "screenshots": [
+    "chronograph_ww2_coasts_desktop.png",
+    "chronograph_ww2_coasts_mobile.png"
+  ],
+  "viewportReset": true
+}
