@@ -18,7 +18,7 @@ const vm=require('node:vm');
 const people=html=>JSON.parse(JSON.stringify(vm.runInNewContext(html.slice(html.indexOf('const ISLAM_STARS = ['),html.indexOf('const STAR_DETAILS='))+';ISLAM_STARS;')));
 const originalPeople=people(base),extendedPeople=people(built);
 assert.deepEqual(extendedPeople.slice(0,originalPeople.length),originalPeople,'Original biographies and dates preserved');
-assert.equal(extendedPeople.length,originalPeople.length+require('../late/biographies.cjs').length+require('../early/biographies.cjs').length+require('../to1789/biographies.cjs').length);
+assert.equal(extendedPeople.length,originalPeople.length+require('../late/biographies.cjs').length+require('../early/biographies.cjs').length+require('../to1789/biographies.cjs').length+require('../to1815/biographies.cjs').length+require('../to1848/biographies.cjs').length+require('../to1914/biographies.cjs').length+require('../to1918/biographies.cjs').length+require('../to1939/biographies.cjs').length);
 assert(!/<a(?=\s|>)|\bhref=|window\.open\(/.test(built.replace(/<link rel="icon"[^>]*>/g,'').replace(/<a class="contact-email" href="mailto:lfc@legacyfidelity\.com\?subject=Chronograph">lfc@legacyfidelity\.com<\/a>/g,'')),'Sources must remain plain text');
 assert(!built.includes('id="translationNotice"'),'Preview notice remains');
 console.log('PASS: '+rows.length+' message pairs, Russian preservation, calendar and dynamic labels, explicit Russian fallback.');

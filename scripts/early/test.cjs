@@ -88,7 +88,7 @@ assert.equal(c.events.find(e=>e.id==='early-frobisher-1576').from,1576);
 // Inspect the actual shipped people, not just the biography input module.
 const start=html.indexOf('const ISLAM_STARS = ['),end=html.indexOf('const STAR_DETAILS=');
 const people=vm.runInNewContext(html.slice(start,end)+';ISLAM_STARS');
-assert.equal(people.length,72+require('../to1789/biographies.cjs').length);
+assert.equal(people.length,72+require('../to1789/biographies.cjs').length+require('../to1815/biographies.cjs').length+require('../to1848/biographies.cjs').length+require('../to1914/biographies.cjs').length+require('../to1918/biographies.cjs').length+require('../to1939/biographies.cjs').length);
 for(const [name,birth,death,approx] of [
  ['Закария аль-Ансари',1421,1520,true],['Ибн Хаджар аль-Хайтами',1504,1567,true],
  ['Эбуссууд-эфенди',1490,1574,false],['Ташкёпрюзаде Ахмед',1495,1561,false],

@@ -33,6 +33,7 @@ for(const a of catalog.areas){
  for(const y of [Math.max(610,a.from),Math.min(MAX,a.to-1)])assert(history.get(a.entry,y),'Area persists without active society: '+a.entry);
  assert(history.areasAt(a.from).some(x=>x.id===a.id));assert(!history.areasAt(a.to).some(x=>x.id===a.id));
 }
+for(const a of catalog.outlines||[])for(const id of a.sources){assert(catalog.sources[id]);used.add(id);}
 assert.equal(used.size,Object.keys(catalog.sources).length,'Unused source: '+Object.keys(catalog.sources).filter(k=>!used.has(k)).join(','));
 for(let y=610;y<=MAX;y++){
  const all=history.at(y);assert.equal(new Set(all.map(i=>i.entry.id)).size,all.length);

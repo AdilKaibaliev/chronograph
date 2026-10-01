@@ -3,10 +3,10 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 const c=require('../world/catalog.cjs'),{createWorldHistory}=require('../world/core.js'),h=createWorldHistory(c);
 const html=fs.readFileSync(path.join(__dirname,'../../index.html'),'utf8');
 const delivered=JSON.parse(html.match(/const WORLD_HISTORY=(.*);/)[1]);
-assert.deepEqual(c.range,{min:610,max:1789});assert.deepEqual(delivered.range,c.range);
+assert.equal(c.range.min,610);assert(c.range.max>=1789);assert.deepEqual(delivered.range,c.range);
 assert.deepEqual(delivered.entries,c.entries);assert.deepEqual(delivered.areas,c.areas);
-assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX=1789;'));
-for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="1789"').test(html),'Unreachable years in '+id);
+assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+c.range.max+';'));
+for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+c.range.max+'"').test(html),'Unreachable years in '+id);
 assert(html.includes("'XVI','XVII','XVIII'"));assert(html.includes("'culture','nature','territory'"));
 const old={entries:c.entries.map(e=>({id:e.id,region:e.region,kind:e.kind,coord:e.coord,name:e.name,phases:e.phases.filter(p=>p.from<1601)})).filter(e=>e.phases.length),areas:c.areas.filter(a=>a.from<1601)};
 // Explicitly revised for the audited 1300 continuity fix (continuity-test.cjs).
@@ -20,8 +20,8 @@ for(let y=1601;y<=1789;y++){
 const ctx=vm.createContext({TIMELINE_MAX:1789,worldHistory:dh,WORLD_HISTORY:delivered});
 vm.runInContext(html.match(/const KEY_YEARS=\[[^;]+;/)[0]+html.match(/worldPlaybackYears=\[\.\.\.new Set[^;]+;/)[0]+html.match(/function nextPlaybackYear\(y\)\{[\s\S]*?\n\}/)[0]+';globalThis.next=nextPlaybackYear;',ctx);
 const visited=new Set([1600]);let y=1600;while(y<1789){const next=ctx.next(y);assert(next>y&&next<=1789);visited.add(next);y=next;}
-for(const e of c.events.filter(e=>e.from>=1601))assert(visited.has(e.from),'Playback skips '+e.id);
-for(const d of h.changes().filter(d=>d>=1601))assert(visited.has(d),'Playback skips territorial change '+d);
+for(const e of c.events.filter(e=>e.from>=1601&&e.from<=1789))assert(visited.has(e.from),'Playback skips '+e.id);
+for(const d of h.changes().filter(d=>d>=1601&&d<=1789))assert(visited.has(d),'Playback skips territorial change '+d);
 const area=(id,y)=>h.areasAt(y).find(a=>a.entry===id);
 function contains(ring,[x,y]){let inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const [xi,yi]=ring[i],[xj,yj]=ring[j];if((yi>y)!==(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi)inside=!inside;}return inside;}
 const covers=(id,y,p)=>area(id,y)?.polygons.some(r=>contains(r,p))||false;
@@ -85,7 +85,7 @@ assert.equal(c.events.find(e=>e.id==='1789-laki-1783').kind,'nature');
 for(const e of c.events.filter(e=>e.id.startsWith('1789-'))){assert(e.from>=1601&&e.from<=1789);assert(e.coord.every(Number.isFinite));}
 // Inspect the actual delivered dates, sources and individual biographies.
 const people=vm.runInNewContext(html.slice(html.indexOf('const ISLAM_STARS = ['),html.indexOf('const STAR_DETAILS='))+';ISLAM_STARS');
-assert.equal(people.length,80);
+assert.equal(people.length,80+require('../to1815/biographies.cjs').length+require('../to1848/biographies.cjs').length+require('../to1914/biographies.cjs').length+require('../to1918/biographies.cjs').length+require('../to1939/biographies.cjs').length);
 for(const p of require('./biographies.cjs')){
  const star=people.find(x=>x.name===p.name[0]);assert(star,p.name[0]);assert.equal(star.birth,p.birth);assert.equal(star.death,p.death);assert.equal(star.era,p.era);assert.equal(Boolean(star.birthApprox),Boolean(p.approxBirth));
  for(const text of p.text)assert(text.length>100);assert(p.article);

@@ -12,10 +12,10 @@ const worldText={
  eurasia:['Евразия · исламская история и современники','Eurasia · Islamic history and contemporaries','Евразия · ислам тарыхы жана замандаштар'],
  legend:['● Город / центр   ◇ Культура   ○ Ландшафт / область','● City / centre   ◇ Culture   ○ Landscape / region','● Шаар / борбор   ◇ Маданият   ○ Ландшафт / аймак'],
  empty:['В этой подборке нет центров для выбранного года.','No centres in this selection for the chosen year.','Бул топтомдо тандалган жылга тиешелүү борборлор жок.'],
- range:['610–1789 · годы нашей эры','610–1789 · Common Era','610–1789 · биздин заман'],
+ range:['610–1939 · годы нашей эры','610–1939 · Common Era','610–1939 · биздин заман'],
  dating:['Даты этапов округлены там, где хронология приблизительна.','Phase dates are rounded where the chronology is approximate.','Хронология болжолдуу болгон жерлерде этаптардын даталары тегеректелген.'],
  geography:['Обозначены города и культурные ландшафты.','Symbols locate cities and cultural landscapes.','Белгилер шаарларды жана маданий ландшафттарды көрсөтөт.'],
- invalid:['Введите год от 610 до 1789.','Enter a year from 610 to 1789.','610–1789 аралыгындагы жылды киргизиңиз.'],
+ invalid:['Введите год от 610 до 1939.','Enter a year from 610 to 1939.','610–1939 аралыгындагы жылды киргизиңиз.'],
  mapName:['Карта исторических государств, городов и культурных ландшафтов','Map of historical states, cities and cultural landscapes','Тарыхый мамлекеттердин, шаарлардын жана маданий ландшафттардын картасы'],
  city:['Город / центр','City / centre','Шаар / борбор'],community:['Поселения','Settlements','Конуштар'],culture:['Археологическая культура','Archaeological culture','Археологиялык маданият'],region:['Региональный ориентир','Regional reference point','Аймактык багыт белгиси'],landscape:['Культурный ландшафт','Cultural landscape','Маданий ландшафт']
 };
@@ -48,7 +48,7 @@ const wl=values=>values[supportedLanguages.indexOf(language)],wt=key=>wl(worldTe
 const worldState={region:WORLD_HISTORY.regions.some(r=>r.id===stateParams.get('world'))?stateParams.get('world'):'all',selected:stateParams.get('wplace')||'',area:stateParams.get('wterritory')||'',mode:['timeline','study'].includes(stateParams.get('wview'))?stateParams.get('wview'):'overview',event:stateParams.get('wevent')||'',type:'all',century:'all',search:'',studySearch:'',filters:!stateParams.has('wevent')};
 const we=(tag,className,text)=>{const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node;};
 const worldExplorer=we('section','world-explorer');worldExplorer.id='worldExplorer';worldExplorer.dataset.localeOwned='true';
-worldExplorer.innerHTML='<header class="world-header"><div class="world-heading"><h3 id="worldHeading"></h3><span id="worldCurrentYear"></span></div><form id="worldYearForm"><label class="world-sr" for="worldRegionSelect" id="worldRegionLabel"></label><select id="worldRegionSelect"></select><label class="world-sr" for="worldYearInput" id="worldYearLabel"></label><input id="worldYearInput" type="number" min="610" max="1789" step="1" required><button id="worldYearApply" type="submit"></button></form><p id="worldScope"></p></header><p class="world-legend" id="worldLegend"></p><div id="worldCards"></div><p class="world-dating" id="worldDating"></p>';
+worldExplorer.innerHTML='<header class="world-header"><div class="world-heading"><h3 id="worldHeading"></h3><span id="worldCurrentYear"></span></div><form id="worldYearForm"><label class="world-sr" for="worldRegionSelect" id="worldRegionLabel"></label><select id="worldRegionSelect"></select><label class="world-sr" for="worldYearInput" id="worldYearLabel"></label><input id="worldYearInput" type="number" min="610" max="1939" step="1" required><button id="worldYearApply" type="submit"></button></form><p id="worldScope"></p></header><p class="world-legend" id="worldLegend"></p><div id="worldCards"></div><p class="world-dating" id="worldDating"></p>';
 $('bottomGrid').prepend(worldExplorer);
 const worldModes=we('div','world-modes');worldModes.setAttribute('role','group');
 for(const [value,key] of [['overview','overview'],['timeline','chronology'],['study','study']]){const b=we('button');b.type='button';b.dataset.worldMode=value;b.dataset.worldLabel=key;b.onclick=()=>{worldState.mode=value;worldState.area='';worldState.event='';renderWorldHistory();$('panel-compare').scrollTop=0;queueLocationSave();};worldModes.append(b);}worldExplorer.querySelector('header').append(worldModes);
@@ -107,14 +107,16 @@ $('worldSearch').oninput=e=>{worldState.search=e.target.value;renderWorldChronol
 $('worldCentury').onchange=e=>{worldState.century=e.target.value;renderWorldChronology();};
 $('worldType').onchange=e=>{worldState.type=e.target.value;renderWorldChronology();};
 function worldEventDate(e){return e.record==='period'?wl(e.period):(e.approx?wl(['ок. ','c. ','болж. ']):'')+e.from+(e.to!==e.from?'–'+e.to:'')+' '+wt('era');}
-function worldRecords(){return worldHistory.timeline(worldState.region).filter(e=>{
+const worldSearchText=new Map();
+function worldRecords(){const q=worldState.search.trim().toLocaleLowerCase();return worldHistory.timeline(worldState.region).filter(e=>{
  const century=+worldState.century;
- const place=WORLD_HISTORY.entries.find(p=>p.id===e.entry);
- const q=worldState.search.trim().toLocaleLowerCase(),matchYear=/^\d{3,4}$/.test(q)&&+q>=e.from&&+q<=e.to;
- return (worldState.type==='all'||e.kind===worldState.type)&&(worldState.century==='all'||e.from<=century*100&&e.to>=(century-1)*100+1)&&(!q||matchYear||[...e.title,...e.text,...(e.name||[]),...(place?.name||[])].join(' ').toLocaleLowerCase().includes(q));
+ if(worldState.type!=='all'&&e.kind!==worldState.type||worldState.century!=='all'&&(e.from>century*100||e.to<(century-1)*100+1))return false;
+ if(!q||/^\d{3,4}$/.test(q)&&+q>=e.from&&+q<=e.to)return true;
+ if(!worldSearchText.has(e.id))worldSearchText.set(e.id,[...e.title,...e.text,...(e.name||[]),...(worldHistory.entry(e.entry)?.name||[])].join(' ').toLocaleLowerCase());
+ return worldSearchText.get(e.id).includes(q);
 });}
 function worldChooseEvent(id){
- const e=worldHistory.timeline().find(e=>e.id===id);if(!e)return;
+ const e=worldHistory.record(id);if(!e)return;
  if(e.record==='territory'){stopPlay();renderYear(e.year);worldChooseTerritory(e.entry);return;}
  stopPlay();worldShowLocations();worldState.area='';worldState.event=id;worldState.selected=e.entry||'';worldState.mode='timeline';worldState.filters=false;
  if(worldState.region!=='all'&&worldState.region!==e.region)worldState.region=e.region;
@@ -122,6 +124,7 @@ function worldChooseEvent(id){
  if(e.route?.length){const pts=e.route.map(project),xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]),cx=(Math.min(...xs)+Math.max(...xs))/2,cy=(Math.min(...ys)+Math.max(...ys))/2,s=Math.min(24,SVG_W*.72/Math.max(14,Math.max(...xs)-Math.min(...xs)),SVG_H*.65/Math.max(14,Math.max(...ys)-Math.min(...ys)));animateCamera({scale:s,tx:SVG_W/2-cx*s,ty:SVG_H/2-cy*s});}else focusLonLat(...e.coord,e.region==='antarctica'?1.3:4.2);
  $('panel-compare').scrollTop=0;$('worldEventTitle')?.focus({preventScroll:true});queueLocationSave();
 }
+let worldControlsKey='';
 function renderWorldControls(){
  svg.setAttribute('role','group');svg.setAttribute('aria-label',wt('mapName'));
  document.body.classList.toggle('world-regional',!['all','eurasia'].includes(worldState.region));
@@ -135,6 +138,8 @@ function renderWorldControls(){
  eurasiaSummary.textContent=wt('eurasia');
  worldEurasia.hidden=!['all','eurasia'].includes(worldState.region);if(worldState.region==='eurasia')worldEurasia.open=true;
  $('worldLegend').hidden=false;$('worldDating').hidden=false;
+ const controlsKey=[language,worldState.region,worldState.mode,worldState.filters,Boolean(worldState.event),worldState.search,worldState.studySearch,worldState.century,worldState.type,worldEpochForYear(year)].join('|');
+ if(worldControlsKey===controlsKey){updateWorldCaption();renderWorldAreaControls();return;}worldControlsKey=controlsKey;
  $('worldRegionLabel').textContent=wt('regionLabel');const nav=$('worldRegionSelect');nav.replaceChildren();
  for(const r of [{id:'all',name:worldText.all},...WORLD_HISTORY.regions]){
   const option=we('option','',wl(r.name));option.value=r.id;nav.append(option);
@@ -145,12 +150,13 @@ function renderWorldControls(){
  worldExplorer.classList.toggle('filters-expanded',worldState.mode==='timeline'&&worldState.filters);
  worldExplorer.classList.toggle('has-event',Boolean(worldState.event));worldExplorer.classList.toggle('studying',worldState.mode==='study');
  $('worldSearch').value=worldState.search;$('worldSearch').placeholder=wt('search');$('worldSearch').setAttribute('aria-label',wt('search'));
- for(const [id,items,value] of [['worldCentury',[['all',wt('allTime')],...[7,8,9,10,11,12,13,14,15,16,17,18].map(n=>[String(n),['VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII'][n-7]+wl([' век',' century',' кылым'])])],worldState.century],['worldType',[['all',wt('allTypes')],...['war','politics','diplomacy','migration','culture','nature','territory','period'].map(k=>[k,wt(k==='culture'?'cultureEvents':k)])],worldState.type]]){const s=$(id);s.replaceChildren();s.setAttribute('aria-label',id==='worldType'?wt('allTypes'):wt('allTime'));for(const [v,t] of items){const o=we('option','',t);o.value=v;s.append(o);}s.value=value;}
+ for(const [id,items,value] of [['worldCentury',[['all',wt('allTime')],...[7,8,9,10,11,12,13,14,15,16,17,18,19,20].map(n=>[String(n),['VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX'][n-7]+wl([' век',' century',' кылым'])])],worldState.century],['worldType',[['all',wt('allTypes')],...['war','politics','diplomacy','migration','culture','nature','territory','period'].map(k=>[k,wt(k==='culture'?'cultureEvents':k)])],worldState.type]]){const s=$(id);s.replaceChildren();s.setAttribute('aria-label',id==='worldType'?wt('allTypes'):wt('allTime'));for(const [v,t] of items){const o=we('option','',t);o.value=v;s.append(o);}s.value=value;}
  $('worldCards').hidden=worldState.mode==='timeline';worldChronology.hidden=worldState.mode!=='timeline';
  worldStudyTools.hidden=worldState.mode!=='study';$('worldStudyHint').textContent=wt('studyHint');$('worldStudySearch').placeholder=wt('studySearch');$('worldStudySearch').setAttribute('aria-label',wt('studySearch'));$('worldStudySearch').value=worldState.studySearch;
  worldEraStrip.replaceChildren();
- const preferred=worldState.region==='all'?(year>=1601?['1789-jamestown-1607','1789-gondar','1789-qing-beijing','1789-westphalia','1789-mbwila','1789-mombasa-oman','1789-asante-union','1789-plassey','1789-independence-1776','1789-sydney-1788','1789-bastille']:year>=1454?['early-timbuktu-1468','early-guanahani-1492','early-safavid-1501','early-cairo-1517','early-tenochtitlan-1521','early-panipat-1526','early-cusco-1533','early-kazan-1552','early-tondibi-1591','early-sekigahara-1600']:year>=1300?['late-musa-hajj','tenochtitlan-foundation','late-ilkhan-1335','late-ming-1368','late-timur-1370','late-ankara-1402','late-ceuta-capture','triple-alliance','pachacuti-accession','late-constantinople-1453']:['palenque-611','nubia-baqt','quirigua-738','greenland-norse','vinland-1021','hastings','chimu-expansion','maori-arrival','late-ming-1368','late-constantinople-1453']):null;
- let milestones=worldHistory.timeline(worldState.region).filter(e=>preferred?preferred.includes(e.id):e.record==='event');if(!milestones.length)milestones=worldHistory.timeline(worldState.region);
+ const preferred=worldState.region==='all'?(year>=1919?['1939-event-versailles','1939-event-ussr','1939-event-turkey','1939-event-kyrgyz','1939-event-depression','1939-event-mukden','1939-event-chaco','1939-event-ethiopia','1939-event-china-war','1939-event-poland']:year>=1915?['1918-event-gallipoli','1918-event-urkun','1918-event-arab-revolt','1918-event-mexico','1918-event-abdication','1918-event-us-entry','1918-event-armistice','1918-event-samoa']:year>=1849?['1914-event-india','1914-event-civil-war','1914-event-meiji','1914-event-germany','1914-event-kokand','1914-event-adwa','1914-event-australia','1914-event-china','1914-event-ww1']:year>=1816?['1848-event-tucuman','1848-event-brazil','1848-event-algiers','1848-event-pishpek','1848-event-waitangi','1848-event-nanjing','1848-event-guadalupe','1848-event-france-1848']:year>=1790?['1815-event-republic','1815-event-haiti','1815-event-sokoto','1815-event-louisiana','1815-event-hawaii','1815-event-mexico','1815-event-vienna','1815-event-bathurst','1815-event-tambora']:year>=1601?['1789-jamestown-1607','1789-gondar','1789-qing-beijing','1789-westphalia','1789-mbwila','1789-mombasa-oman','1789-asante-union','1789-plassey','1789-independence-1776','1789-sydney-1788','1789-bastille']:year>=1454?['early-timbuktu-1468','early-guanahani-1492','early-safavid-1501','early-cairo-1517','early-tenochtitlan-1521','early-panipat-1526','early-cusco-1533','early-kazan-1552','early-tondibi-1591','early-sekigahara-1600']:year>=1300?['late-musa-hajj','tenochtitlan-foundation','late-ilkhan-1335','late-ming-1368','late-timur-1370','late-ankara-1402','late-ceuta-capture','triple-alliance','pachacuti-accession','late-constantinople-1453']:['palenque-611','nubia-baqt','quirigua-738','greenland-norse','vinland-1021','hastings','chimu-expansion','maori-arrival','late-ming-1368','late-constantinople-1453']):null;
+ const records=worldHistory.timeline(worldState.region);
+ let milestones=preferred?records.filter(e=>preferred.includes(e.id)):worldRegionalMilestones(records,year);if(!milestones.length)milestones=records;
  milestones=milestones.filter((e,i,items)=>items.findIndex(x=>x.year===e.year&&wl(x.title)===wl(e.title))===i);
  if(milestones.length>10)milestones=Array.from({length:10},(_,i)=>milestones[Math.round(i*(milestones.length-1)/9)]);
  for(const e of milestones){const b=we('button','',e.year+' · '+wl(e.title));b.type='button';b.title=worldEventDate(e);b.onclick=()=>worldChooseEvent(e.id);worldEraStrip.append(b);}
@@ -158,7 +164,7 @@ function renderWorldControls(){
  renderWorldAreaControls();
 }
 function updateWorldCaption(){
- if(!$('panel-compare').hidden&&!document.body.classList.contains('future-mode')){const e=worldHistory.timeline().find(e=>e.id===worldState.event),r=WORLD_HISTORY.regions.find(r=>r.id===worldState.region);$('mapAh').textContent=$('timelineAh').textContent+' · '+(e?wl(e.title):r?wl(r.name):wt('title'));}
+ if(!$('panel-compare').hidden&&!document.body.classList.contains('future-mode')){const e=worldHistory.record(worldState.event),r=WORLD_HISTORY.regions.find(r=>r.id===worldState.region);$('mapAh').textContent=$('timelineAh').textContent+' · '+(e?wl(e.title):r?wl(r.name):wt('title'));}
  else {const e=activeEvent(year);$('mapAh').textContent=translate(`${e.ah} · ${e.title}`,language);}
 }
 function appendWorldSources(parent,ids,base=false){
@@ -166,10 +172,26 @@ function appendWorldSources(parent,ids,base=false){
  for(const id of ids)details.append(we('p','',WORLD_HISTORY.sources[id].title));
  if(base){const b=we('button','world-source-button',wt('baseSources'));b.type='button';b.onclick=()=>switchPanel('sources');details.append(b);}parent.append(details);
 }
+const worldCardPage={},worldChronologyPage={};
+function appendWorldPager(parent,window,state,render){
+ if(window.pages<2)return;
+ const nav=we('nav','world-pager');nav.setAttribute('aria-label',wl(['Страницы подборки','Selection pages','Топтомдун барактары']));
+ for(const [delta,label] of [[-1,wl(['Предыдущая страница','Previous page','Мурунку барак'])],[1,wl(['Следующая страница','Next page','Кийинки барак'])]]){
+  const b=we('button','',delta<0?'←':'→');b.type='button';b.setAttribute('aria-label',label);b.title=label;b.disabled=delta<0?window.page===0:window.page===window.pages-1;
+  b.onclick=()=>{state.page+=delta;render();const next=parent.querySelector('.world-pager');next?.scrollIntoView({block:'start'});next?.querySelector(delta<0?'button:first-child':'button:last-child')?.focus({preventScroll:true});};
+  nav.append(b);if(delta<0){const count=we('span','',`${window.from+1}–${window.to} / ${window.total}`);count.setAttribute('aria-live','polite');nav.append(count);}
+ }parent.append(nav);
+}
+function populateWorldDetails(details,build){
+ let populated=false;const fill=()=>{if(details.open&&!populated){populated=true;build();}};
+ details.addEventListener('toggle',fill);fill();
+}
 function renderWorldChronology(){
  worldChronology.replaceChildren();if(worldState.mode!=='timeline')return;
  const records=worldRecords();worldChronology.append(we('p','world-count',wt('results')+': '+records.length));
- for(const e of records){
+ const window=worldPageWindow(records,worldChronologyPage,[language,worldState.region,worldState.type,worldState.century,worldState.search].join('|'),worldState.event,60);
+ appendWorldPager(worldChronology,window,worldChronologyPage,renderWorldChronology);
+ for(const e of window.items){
   const item=we('article','world-timeline-item');item.dataset.worldEvent=e.id;item.classList.toggle('selected',e.id===worldState.event);item.classList.toggle('current',year>=e.from&&year<=e.to);
   const b=we('button','world-timeline-button');b.type='button';b.append(we('span','world-period',worldEventDate(e)),we('strong','',wl(e.title)));
   const r=WORLD_HISTORY.regions.find(r=>r.id===e.region);b.append(we('span','world-card-meta',(e.name?wl(e.name)+' · ':'')+wl(r.name)+' · '+wt(e.kind==='culture'?'cultureEvents':e.kind)));
@@ -178,7 +200,7 @@ function renderWorldChronology(){
  if(!records.length)worldChronology.append(we('p','world-empty',wt('noResults')));
 }
 function renderWorldEvent(){
- const e=worldHistory.timeline().find(e=>e.id===worldState.event);worldEventDetail.replaceChildren();worldEventDetail.hidden=!e;if(!e)return;
+ const e=worldHistory.record(worldState.event);worldEventDetail.replaceChildren();worldEventDetail.hidden=!e;if(!e)return;
  const title=we('h4','',wl(e.title));title.id='worldEventTitle';title.tabIndex=-1;
  worldEventDetail.append(we('p','world-card-meta',worldEventDate(e)+' · '+wt(e.approx?'approx':'exact')),title,we('p','world-description',wl(e.text)));
  appendWorldSources(worldEventDetail,e.sources,e.base);
@@ -189,7 +211,7 @@ function renderWorldEvent(){
 function appendWorldLearning(parent,phase,id,expanded=false){
  if(!phase.learning)return;
  const details=we('details','world-learning');details.id='world-learning-'+id;details.open=expanded;details.append(we('summary','',wt('learning')));
- const list=we('dl');for(const key of ['government','economy','society'])if(phase.learning[key]){list.append(we('dt','',wt(key)),we('dd','',wl(phase.learning[key])));}details.append(list);parent.append(details);
+ populateWorldDetails(details,()=>{const list=we('dl');for(const key of ['government','economy','society'])if(phase.learning[key]){list.append(we('dt','',wt(key)),we('dd','',wl(phase.learning[key])));}details.append(list);});parent.append(details);
 }
 let worldCardOpenIds=new Set();
 function renderWorldCards(){
@@ -199,12 +221,17 @@ function renderWorldCards(){
  const items=worldHistory.at(year,worldState.region).filter(({entry,phase})=>!query||[wl(entry.name),wl(phase.title),wl(phase.text),...Object.values(phase.learning||{}).map(wl)].join(' ').toLocaleLowerCase().includes(query));
  const openIds=worldCardOpenIds;
  container.replaceChildren();
- const areas=worldHistory.areasAt(year,worldState.region);
- if(areas.length&&!studying){const group=we('section','world-territory-list');group.append(we('h4','',wt('territories')+' · '+areas.length));for(const a of areas){const b=we('button','world-territory-chip');b.type='button';b.dataset.territory=a.entry;b.style.setProperty('--territory-color',a.color);b.setAttribute('aria-pressed',String(worldState.area===a.entry));b.append(we('strong','',wl(a.name)),we('small','',wt(a.kind)));b.onclick=()=>worldChooseTerritory(a.entry);group.append(b);}container.append(group);}
+ const areas=worldHistory.mapAreasAt(year,worldState.region);
+ if(areas.length&&!studying){
+  const group=we('details','world-territory-index');group.id='world-territory-index';group.open=openIds.has(group.id);group.append(we('summary','',wt('territories')+' · '+areas.length));
+  populateWorldDetails(group,()=>{const list=we('div','world-territory-list');for(const a of areas){const b=we('button','world-territory-chip');b.type='button';b.dataset.territory=a.entry;b.style.setProperty('--territory-color',a.color);b.setAttribute('aria-pressed',String(worldState.area===a.entry));b.append(we('strong','',wl(a.name)),we('small','',wt(a.kind)));b.onclick=()=>worldChooseTerritory(a.entry);list.append(b);}group.append(list);});container.append(group);
+ }
  const states=worldBasePolities().filter(s=>!query||translate(s.name,language).toLocaleLowerCase().includes(query)),showStates=states.length&&(!studying||worldState.region==='eurasia'||query);
  if(studying)container.append(we('p','world-count',wt('results')+': '+(items.length+(showStates?states.length:0))));
  if(showStates){const details=we('details','world-polities');details.id='world-polities';details.open=Boolean(query)||worldState.region==='eurasia'||openIds.has(details.id);details.append(we('summary','',wt('polities')+' · '+states.length));const list=we('div');for(const state of states){const b=we('button','',translate(state.name,language));b.type='button';b.onclick=()=>{stopPlay();worldState.event='';layerState.empires=true;$('toggleEmpires').checked=true;applyLayerState();selectEmpire(state.id,true,true);};list.append(b);}details.append(list);container.append(details);}
- for(const {entry,phase} of items){
+ const window=worldPageWindow(items,worldCardPage,[language,worldState.region,worldState.mode,query,items.map(i=>i.entry.id).join(',')].join('|'),worldState.selected,24,item=>item.entry.id);
+ appendWorldPager(container,window,worldCardPage,renderWorldCards);
+ for(const {entry,phase} of window.items){
   const region=WORLD_HISTORY.regions.find(r=>r.id===entry.region);
   const article=we('article','world-card');article.id='world-card-'+entry.id;article.dataset.worldEntry=entry.id;article.classList.toggle('selected',entry.id===worldState.selected);
   const top=we('div','world-card-meta',wl(region.name)+' · '+wt(entry.kind));article.append(top);
@@ -215,10 +242,10 @@ function renderWorldCards(){
   const history=we('button','',wt('chronology'));history.type='button';history.onclick=()=>{worldState.search=wl(entry.name).split(' · ')[0];worldState.mode='timeline';worldState.type='all';worldState.century='all';worldState.event='';worldState.filters=true;renderWorldHistory();$('panel-compare').scrollTop=0;queueLocationSave();};actions.append(history);
   if(entry.phases.length>1){
    const details=we('details','world-phases');details.id='world-phases-'+entry.id;details.open=openIds.has(details.id);details.append(we('summary','',wt('phases')));
-   for(const p of entry.phases){const b=we('button','',wl(p.period)+' · '+wl(p.title));b.type='button';b.setAttribute('aria-current',String(p===phase));b.onclick=()=>{stopPlay();worldState.selected=entry.id;renderYear(clamp(p.from,TIMELINE_MIN,TIMELINE_MAX));queueLocationSave();};details.append(b);}article.append(details);
+   populateWorldDetails(details,()=>{for(const p of entry.phases){const b=we('button','',wl(p.period)+' · '+wl(p.title));b.type='button';b.setAttribute('aria-current',String(p===phase));b.onclick=()=>{stopPlay();worldState.selected=entry.id;renderYear(clamp(p.from,TIMELINE_MIN,TIMELINE_MAX));queueLocationSave();};details.append(b);}});article.append(details);
   }
   const details=we('details','world-source');details.id='world-source-'+entry.id;details.open=openIds.has(details.id);details.append(we('summary','',wt('sources')));
-  for(const id of phase.sources)details.append(we('p','',WORLD_HISTORY.sources[id].title));article.append(details);container.append(article);
+  populateWorldDetails(details,()=>{for(const id of phase.sources)details.append(we('p','',WORLD_HISTORY.sources[id].title));});article.append(details);container.append(article);
  }
  if(!items.length&&!showStates)container.append(we('p','world-empty',wt(query?'noResults':'empty')));
 }
@@ -245,7 +272,7 @@ function renderWorldMap(){
   g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();worldChoosePlace(entry.id,true);}};
   worldLayer.append(g);
  }
- const event=worldHistory.timeline().find(e=>e.id===worldState.event);
+ const event=worldHistory.record(worldState.event);
  if(event){
   if(event.route?.length){const d=event.route.map((p,i)=>(i?'L':'M')+project(p).join(' ')).join(' ');const route=sn('path',{d,class:'world-event-route','marker-end':'url(#worldRouteArrow)'});route.append(sn('title'));route.firstChild.textContent=wt('route');worldLayer.append(route);}
   const [x,y]=project(event.coord),g=sn('g',{class:'world-marker world-event-marker selected',transform:`translate(${x} ${y})`,'data-px':x,'data-py':y,role:'button',tabindex:0,'aria-label':wl(event.title)}),inner=sn('g',{class:'world-marker-inner'});
@@ -254,20 +281,27 @@ function renderWorldMap(){
  updateWorldMarkerScale();
 }
 function updateWorldMarkerScale(){
- const ratio=Math.max(.1,Math.min(svg.clientWidth/SVG_W,svg.clientHeight/SVG_H)),scale=mapState.scale*ratio;
+ const metrics=worldLabelMetrics(),{ratio,scale,detail,width:mapWidth,height:mapHeight}=metrics;
  const priority=g=>g.classList.contains('world-event-marker')?2:Number(g.dataset.worldPlace===worldState.selected);
  const markers=[...worldLayer.querySelectorAll('.world-marker')].sort((a,b)=>priority(b)-priority(a));
- const territoryLabels=updateWorldTerritoryLabels(),occupied=[...territoryLabels.occupied];
+ const territoryLabels=updateWorldTerritoryLabels(metrics),occupied=[...territoryLabels.occupied];
+ updateAtlasPlaceLabels(metrics,occupied);
  for(const g of markers){
-  g.querySelector('.world-marker-inner').setAttribute('transform',`scale(${1/scale})`);
-  const label=g.querySelector('text'),x=(+g.dataset.px*mapState.scale+mapState.tx)*ratio,y=(+g.dataset.py*mapState.scale+mapState.ty)*ratio;
-  label.style.display='none';if(territoryLabels.entries.has(g.dataset.worldPlace)||x<0||y<0||x>SVG_W*ratio||y>SVG_H*ratio)continue;
-  const width=label.textContent.length*6.4+6;
+  const important=priority(g)>0,font=important?12:Math.min(11,8+2*Math.log2(Math.max(1,detail)));
+  g.querySelector('.world-marker-inner').setAttribute('transform',`scale(${Math.min(1,.55+detail*.18)/scale})`);
+  g.style.display=!important&&detail<1.15?'none':'';
+  const label=g.querySelector('text'),[x,y]=metrics.point(+g.dataset.px,+g.dataset.py);
+  label.style.display='none';if(territoryLabels.entries.has(g.dataset.worldPlace)||x<0||y<0||x>mapWidth||y>mapHeight)continue;
+  if(!important&&detail<2.4)continue;
+  // Text and collision boxes use the same screen size even as marker symbols shrink.
+  const markerScale=Math.min(1,.55+detail*.18);
+  label.style.fontSize=font/markerScale+'px';label.style.strokeWidth=2/markerScale+'px';
+  const width=worldLabelWidth(label.textContent,font)+6;
   for(const [dx,dy,anchor] of [[11,4,'start'],[11,-10,'start'],[-11,4,'end'],[11,19,'start']]){
    const left=x+dx-(anchor==='end'?width:0),rect=[left,y+dy-11,left+width,y+dy+3];
-   if(rect[0]<4||rect[2]>SVG_W*ratio-4||rect[1]<4||rect[3]>SVG_H*ratio-4)continue;
+   if(rect[0]<4||rect[2]>mapWidth-4||rect[1]<4||rect[3]>mapHeight-4)continue;
    if(occupied.some(r=>rect[0]<r[2]+4&&rect[2]>r[0]-4&&rect[1]<r[3]+3&&rect[3]>r[1]-3))continue;
-   label.setAttribute('x',dx);label.setAttribute('y',dy);label.setAttribute('text-anchor',anchor);label.style.display='';occupied.push(rect);break;
+   label.setAttribute('x',dx/markerScale);label.setAttribute('y',dy/markerScale);label.setAttribute('text-anchor',anchor);label.style.display='';occupied.push(rect);break;
   }
  }
 }
@@ -277,21 +311,25 @@ function renderWorldSources(){
 }
 function renderWorldLegend(){
  worldMapLegend.replaceChildren();
- const areas=worldHistory.areasAt(year);
+ const areas=worldHistory.mapAreasAt(year);
  const regions=[...WORLD_HISTORY.regions].sort((a,b)=>Number(b.id===worldState.region)-Number(a.id===worldState.region));
  for(const region of regions){
-  const items=areas.filter(a=>WORLD_HISTORY.entries.find(e=>e.id===a.entry).region===region.id);if(!items.length)continue;
+  const items=areas.filter(a=>worldHistory.entry(a.entry).region===region.id);if(!items.length)continue;
   const section=we('div','world-legend-region');section.append(we('h4','',wl(region.name)));
   for(const a of items){const b=we('button','legend-item');b.type='button';b.dataset.legendTerritory=a.entry;const swatch=we('span','swatch');swatch.style.background=a.color;b.append(swatch,we('span','',wl(a.name).split(' · ')[0]));b.title=wt(a.kind);b.onclick=()=>{worldMapLegend.closest('details').open=false;worldChooseTerritory(a.entry);};section.append(b);}
   worldMapLegend.append(section);
  }
 }
 const worldRenderCache={};
+const worldLegendDisclosure=worldMapLegend.closest('details');
+let worldLegendPending='';
+function refreshWorldLegend(){if(worldLegendDisclosure.open&&worldRenderCache.legend!==worldLegendPending){renderWorldLegend();worldRenderCache.legend=worldLegendPending;}}
+worldLegendDisclosure.addEventListener('toggle',refreshWorldLegend);
 function renderWorldHistory(){
  if(!worldHistory.get(worldState.selected,year))worldState.selected='';
- if(!worldHistory.areasAt(year).some(a=>a.entry===worldState.area))worldState.area='';
- const selected=worldHistory.timeline().find(e=>e.id===worldState.event);if(selected&&(year<selected.from||year>selected.to))worldState.event='';
- const areas=worldHistory.areasAt(year),items=worldHistory.at(year);
+ if(!worldHistory.mapAreasAt(year).some(a=>a.entry===worldState.area))worldState.area='';
+ const selected=worldHistory.record(worldState.event);if(selected&&(year<selected.from||year>selected.to))worldState.event='';
+ const areas=worldHistory.mapAreasAt(year),items=worldHistory.at(year);
  const snapshot=language+'|'+areas.map(a=>a.id).join(',')+'|'+items.map(i=>i.entry.id+':'+i.phase.from).join(',');
  const mapKey=[snapshot,worldState.area,worldState.selected,worldState.event,layerState.empires,layerState.places,overlayOpacity,showMongolUluses].join('|');
  const cardKey=[snapshot,worldState.region,worldState.mode,worldState.studySearch,worldState.selected,worldState.area,worldBasePolities().map(p=>p.id+':'+p.name).join(',')].join('|');
@@ -306,9 +344,8 @@ function renderWorldHistory(){
  renderWorldEvent();renderWorldAreaDetail();
  if(worldRenderCache.map!==mapKey){renderWorldMap();worldRenderCache.map=mapKey;}
  else if(year<1300)scheduleWorldLabels();
- const legendKey=snapshot+'|'+worldState.region;
- if(worldRenderCache.legend!==legendKey){renderWorldLegend();worldRenderCache.legend=legendKey;}
- if(year>=1300)$('mongolScope').hidden=worldHistory.areasAt(year).filter(a=>a.mongolGroup).length!==4;
+ worldLegendPending=snapshot+'|'+worldState.region;refreshWorldLegend();
+ if(year>=1300)$('mongolScope').hidden=worldHistory.mapAreasAt(year).filter(a=>a.mongolGroup).length!==4;
 }
 let worldLabelFrame=0;
 function scheduleWorldLabels(){if(!worldLabelFrame)worldLabelFrame=requestAnimationFrame(()=>{worldLabelFrame=0;updateWorldMarkerScale();});}

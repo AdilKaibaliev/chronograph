@@ -1,0 +1,89 @@
+{
+  "version": "1.13.0",
+  "date": "2026-10-01",
+  "local": true,
+  "viewportChecks": [
+    {
+      "width": 1280,
+      "height": 720,
+      "documentHeight": 720
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "documentHeight": 844,
+      "documentWidth": 390,
+      "playTop": 742.5,
+      "playBottom": 778.5
+    }
+  ],
+  "defaultModernBorders": true,
+  "standaloneExpansionModeRemoved": true,
+  "routes": [
+    {
+      "state": "Timur",
+      "year": 1402,
+      "locale": "ru",
+      "keyboardModal": true,
+      "pointerModal": true
+    },
+    {
+      "state": "Ottomans",
+      "year": 1517,
+      "locale": "en"
+    },
+    {
+      "state": "Russia",
+      "year": 1582,
+      "locale": "ru"
+    },
+    {
+      "state": "Qing",
+      "year": 1759,
+      "locale": "ky"
+    },
+    {
+      "state": "USA",
+      "year": 1848,
+      "locale": "en"
+    }
+  ],
+  "journeyToggle": {
+    "disabledPaths": 0,
+    "enabledRestore": true
+  },
+  "annualChanges": [
+    1918,
+    1919,
+    1924,
+    1936,
+    1939
+  ],
+  "newBiography": {
+    "name": "Abd al-Hamid ibn Badis",
+    "dates": "1889–1940 (1307–1359 AH)",
+    "fullTextVerified": true
+  },
+  "playback": {
+    "start": 1924,
+    "observed": 1938,
+    "stopped": true
+  },
+  "futureMode": {
+    "journeyLayerDisplay": "none",
+    "return": true
+  },
+  "consoleErrors": [],
+  "notes": [
+    "Fixed background pointer capture swallowing route clicks; normal locator click and keyboard activation verified.",
+    "A coordinate-based browser click did not trigger the target; semantic pointer click succeeded.",
+    "Viewport reset to default after responsive check.",
+    "Occasional browser-control timeout after viewport reset; year submitted with Enter and resulting 1939 verified."
+  ],
+  "routeDrag": {
+    "hitClass": "expansion-hit",
+    "before": "translate(-109.31 -218.55) scale(2.5130)",
+    "after": "translate(-24.80 -167.84) scale(2.5130)",
+    "modalOpened": false
+  }
+}

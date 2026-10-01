@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-30",
+  "browser": "Codex in-app browser",
+  "viewport": {"width": 1280, "height": 720},
+  "scenario": "Russian, all regions, compare overview, world camera: six alternating UI submissions for 1814 and 1815",
+  "measurement": "Synchronous renderYear execution with performance.now in temporary instrumented copies; excludes network, paint and browser-tool latency",
+  "baselineMs": [156.69999998807907,152.30000001192093,243.39999997615814,141.5,144.69999998807907,224.80000001192093],
+  "finalMs": [69.89999997615814,58.80000001192093,68.5,65.80000001192093,94.19999998807907,61.69999998807907],
+  "baselineMedianMs": 154.5,
+  "finalMedianMs": 67.15,
+  "medianReductionPercent": 56.54,
+  "baselineCards1815": 204,
+  "finalCardPageSize": 24,
+  "baselineChronologyRows": 3559,
+  "finalChronologyPageSize": 60,
+  "note": "Earlier 610–1815 catalogue unchanged; final version additionally contains 1816–1848. Small local sample, not a guarantee for all devices. Instrumentation excluded from release."
+}

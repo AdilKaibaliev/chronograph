@@ -1,13 +1,15 @@
 function worldAreaDate(a){const from=Math.max(610,a.from),to=Math.min(TIMELINE_MAX,a.to-1);return (a.approx?wl(['ок. ','c. ','болж. ']):'')+from+(from===to?'':'–'+to)+' '+wt('era');}
 function worldAreaCamera(a){
+ if(a.worldFocus){animateCamera({scale:1,tx:0,ty:0});return;}
  const pts=a.polygons.flat().map(project),xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]),x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
  const scale=Math.min(24,Math.max(1,Math.min(SVG_W*.7/Math.max(14,x1-x0),SVG_H*.62/Math.max(14,y1-y0))));
  animateCamera({scale,tx:SVG_W/2-(x0+x1)/2*scale,ty:SVG_H/2-(y0+y1)/2*scale});
 }
 function worldChooseTerritory(id,focus=true){
- const a=worldHistory.areasAt(year).find(a=>a.entry===id);if(!a)return;
+ const a=worldHistory.mapAreasAt(year).find(a=>a.entry===id);if(!a)return;
+ 
  stopPlay();worldShowLocations();worldState.area=id;worldState.selected=id;worldState.event='';worldState.mode='overview';worldState.filters=false;
- worldState.region=WORLD_HISTORY.entries.find(e=>e.id===id).region;switchPanel('compare');renderWorldHistory();
+ worldState.region=worldHistory.entry(id).region;switchPanel('compare');renderWorldHistory();
  if(focus)worldAreaCamera(a);$('panel-compare').scrollTop=0;$('worldAreaTitle')?.focus({preventScroll:true});queueLocationSave();
 }
 function renderWorldAreaControls(){
@@ -22,21 +24,25 @@ function renderWorldAreaControls(){
  if(changes.length===1)worldMapSteps.title=wt('continuity');else worldMapSteps.title=wt('territory');
 }
 function renderWorldAreaDetail(){
- worldAreaDetail.replaceChildren();const a=worldHistory.areasAt(year).find(a=>a.entry===worldState.area);worldAreaDetail.hidden=!a;
+ worldAreaDetail.replaceChildren();const a=worldHistory.mapAreasAt(year).find(a=>a.entry===worldState.area);worldAreaDetail.hidden=!a;
  worldExplorer.classList.toggle('has-area',Boolean(a));if(!a)return;
  worldAreaDetail.style.setProperty('--territory-color',a.color);
  const heading=we('h4','',wl(a.name));heading.id='worldAreaTitle';heading.tabIndex=-1;
  const close=we('button','world-area-close','×');close.type='button';close.setAttribute('aria-label',wt('closeArea'));close.title=wt('closeArea');close.onclick=()=>{worldState.area='';renderWorldHistory();queueLocationSave();};
  worldAreaDetail.append(close,we('p','world-card-meta',wt(a.kind)+' · '+worldAreaDate(a)),heading,we('h5','',wl(a.title)),we('p','world-description',wl(a.text)),we('p','world-dating',wt('geography')));
- const frames=WORLD_HISTORY.areas.filter(x=>x.entry===a.entry);
+ if(a.sovereign||a.overlord){const text=a.sovereign?['В составе: ','Part of: ','Курамында: ']:a.relationship==='administration'?['Под управлением: ','Administered by: ','Башкаруусунда: ']:a.relationship==='occupation'?['Военная оккупация: ','Military occupation: ','Аскердик оккупация: ']:['Зависимость от: ','Dependent on: ','Көз каранды: '];const b=we('button','world-imperial-parent',wl(text)+wl(a.sovereignName));b.type='button';b.onclick=()=>worldChooseTerritory(a.sovereign||a.overlord);heading.after(b);}
+ const frames=worldHistory.mapFrames(a.entry);
  if(frames.length>1){const phases=we('div','world-area-stages');phases.setAttribute('role','group');phases.setAttribute('aria-label',wt('areaStages'));
   for(const f of frames){const b=we('button','',(f.approx?'≈ ':'')+Math.max(610,f.from));b.type='button';b.setAttribute('aria-pressed',String(f.id===a.id));b.title=wl(f.title);b.onclick=()=>{stopPlay();renderYear(Math.max(610,f.from));worldChooseTerritory(f.entry);};phases.append(b);}worldAreaDetail.append(phases);
  }
  const phase=worldHistory.get(a.entry,year)?.phase;
  if(phase)appendWorldLearning(worldAreaDetail,phase,'area-'+a.entry,true);
  appendWorldSources(worldAreaDetail,[...new Set([...a.sources,...(phase?.sources||[])])]);
+ 
 }
 function worldAreaOpacity(){return Math.min(.9,Math.max(.16,overlayOpacity*1.35));}
+// Reuse immutable dated features. Bound retention while readers scrub the timeline.
+const worldTerritoryNodes=new Map();
 function renderWorldTerritories(){
  worldTerritoryLayer.replaceChildren();worldTerritoryLabels.replaceChildren();
  worldTerritoryLayer.classList.toggle('hidden-layer',!layerState.empires);worldTerritoryLabels.classList.toggle('hidden-layer',!layerState.empires);
@@ -45,16 +51,24 @@ function renderWorldTerritories(){
  const rank={uninhabited:0,cultural:1,landscape:2,influence:3,settlement:4,polity:5};
  // Like the original Eurasian layer, every active territory remains on the map.
  // A selected region filters the cards and chronology only.
- const areas=worldHistory.areasAt(year).sort((a,b)=>Number(a.entry===worldState.area)-Number(b.entry===worldState.area)||rank[a.kind]-rank[b.kind]);
+ const areas=worldHistory.mapAreasAt(year).sort((a,b)=>Number(a.entry===worldState.area)-Number(b.entry===worldState.area)||Number(Boolean(b.politicalOutline))-Number(Boolean(a.politicalOutline))||rank[a.kind]-rank[b.kind]);
  const unified=areas.filter(a=>a.mongolGroup).length===4&&!(typeof showMongolUluses!=='undefined'&&showMongolUluses);
  for(const a of areas){
-  const entry=WORLD_HISTORY.entries.find(e=>e.id===a.entry),selected=a.entry===worldState.area,grouped=unified&&a.mongolGroup;
+  const entry=worldHistory.entry(a.entry),selected=a.entry===worldState.area,grouped=unified&&a.mongolGroup;
+  const cacheKey=[a.id,wl(['ru','en','ky']),selected,Boolean(grouped),grouped?a.mongolUnionId:null,overlayOpacity].join('|');
+  const saved=worldTerritoryNodes.get(cacheKey);
+  if(saved){worldTerritoryNodes.delete(cacheKey);worldTerritoryNodes.set(cacheKey,saved);worldTerritoryLayer.append(saved.g);worldTerritoryLabels.append(saved.guide,saved.text);continue;}
   const g=sn('g',{'data-world-area':a.entry,'data-territory-frame':a.id,'data-territory-kind':a.kind,class:'world-territory '+a.kind+(selected?' selected':'')});
-  if(grouped)g.classList.toggle('mongol-unified',true);
+  if(a.politicalOutline)g.classList.toggle('political-outline',true);
+  if(a.dependencyOutline){g.classList.toggle('imperial-dependency',true);g.setAttribute('data-overlord',a.overlord);}
+  if(a.sovereign){g.classList.toggle('sovereign-part',true);g.setAttribute('data-sovereign',a.sovereign);}
+  if(grouped){g.classList.toggle('mongol-unified',true);if(a.entry!=='late-yuan'&&a.mongolUnion&&!selected){g.classList.toggle('mongol-unified-member',true);g.setAttribute('aria-hidden','true');}}
   // Tiny Pacific islands are below the base map's resolution: these outlines mark
   // their local settlement vicinity. They never connect islands into ocean empires.
   if(entry.region!=='oceania'&&entry.id!=='mabuyag')g.setAttribute('clip-path','url(#worldLandClip)');
-  const path=sn('path',{d:polygonPath(a.polygons),fill:grouped?'#785344':a.color,stroke:grouped?'none':a.color,role:'button',tabindex:0,'aria-label':wl(a.name)+' · '+wt(a.kind)+' · '+worldAreaDate(a)});
+  const path=sn('path',{d:polygonPath(grouped&&a.entry==='late-yuan'&&a.mongolUnion?a.mongolUnion:a.polygons),fill:grouped?'#785344':a.color,stroke:grouped?'none':a.color,role:'button',tabindex:0,'aria-label':wl(a.name)+' · '+wt(a.kind)+' · '+worldAreaDate(a)});
+  if(grouped&&a.entry!=='late-yuan'&&a.mongolUnion&&!selected)path.setAttribute('tabindex','-1');
+  if(a.sovereign&&!selected){g.setAttribute('aria-hidden','true');path.setAttribute('tabindex','-1');path.setAttribute('aria-hidden','true');}
   if(a.geometryYear!==undefined)path.style.setProperty('--area-opacity',String(overlayOpacity));
   const title=sn('title');title.textContent=wl(a.name)+' · '+wl(a.title);path.append(title);g.append(path);
   if(['cultural','settlement','landscape'].includes(a.kind))g.append(sn('path',{d:polygonPath(a.polygons),fill:'url(#worldRegionHatch)',class:'world-territory-hatch'}));
@@ -69,10 +83,13 @@ function renderWorldTerritories(){
   const ring=a.polygons.reduce((best,r)=>{const bounds=p=>{const xs=p.map(v=>v[0]),ys=p.map(v=>v[1]);return (Math.max(...xs)-Math.min(...xs))*(Math.max(...ys)-Math.min(...ys));};return bounds(r)>bounds(best)?r:best;});
   const xs=ring.map(p=>p[0]),ys=ring.map(p=>p[1]),lon=(Math.min(...xs)+Math.max(...xs))/2,lat=(Math.min(...ys)+Math.max(...ys))/2,[x,y]=project(grouped&&a.entry==='late-yuan'?[89,49]:a.label||[lon,lat]);
   const guide=sn('line',{class:'world-territory-guide','data-guide':a.entry,x1:x,y1:y,x2:x,y2:y});worldTerritoryLabels.append(guide);
-  const text=sn('text',{x,y,class:'world-territory-label'+(selected?' selected':''),'text-anchor':'middle','data-entry':a.entry,'data-kind':a.kind,'data-width':(Math.max(...xs)-Math.min(...xs))/360*SVG_W});
+  const text=sn('text',{x,y,class:'world-territory-label'+(selected?' selected':''),'text-anchor':'middle','data-entry':a.entry,'data-kind':a.overviewLabel?'polity':a.kind,'data-width':a.labelWidth||(Math.max(...xs)-Math.min(...xs))/360*SVG_W});
   text.textContent=grouped&&a.entry==='late-yuan'?wl(['Монгольская империя и улусы','Mongol Empire and uluses','Монгол империясы жана улустар']):wl(a.short||a.name).split(' · ')[0];
   if(grouped&&a.entry!=='late-yuan'&&!selected)text.dataset.groupHidden='true';
+  if(a.sovereign&&!a.overviewLabel)text.dataset.sovereign=a.sovereign;
   worldTerritoryLabels.append(text);
+  if(worldTerritoryNodes.size>=768)worldTerritoryNodes.delete(worldTerritoryNodes.keys().next().value);
+  worldTerritoryNodes.set(cacheKey,{g,guide,text});
  }
 }
 let worldLabelMeasureContext;
@@ -87,8 +104,37 @@ function worldLabelWidth(text,font){
  }
  return worldLabelWidths.get(key);
 }
-function updateWorldTerritoryLabels(){
+function worldLabelMetrics(){
  const ratio=Math.max(.1,Math.min(svg.clientWidth/SVG_W,svg.clientHeight/SVG_H)),scale=mapState.scale*ratio;
+ const offsetX=(svg.clientWidth-SVG_W*ratio)/2,offsetY=(svg.clientHeight-SVG_H*ratio)/2;
+ return {ratio,scale,detail:Math.max(.75,scale),width:svg.clientWidth,height:svg.clientHeight,
+  point:(x,y)=>[(x*mapState.scale+mapState.tx)*ratio+offsetX,(y*mapState.scale+mapState.ty)*ratio+offsetY]};
+}
+function updateAtlasReferenceLabels({scale,detail}){
+ for(const label of empireLabelLayer.querySelectorAll('text')){
+  const small=label.classList.contains('small'),font=Math.min(small?11.5:13.5,8+3*Math.log2(Math.max(1,detail)));
+  label.style.setProperty('font-size',font/scale+'px','important');
+  label.style.setProperty('stroke-width',2/scale+'px','important');
+ }
+}
+function updateAtlasPlaceLabels(metrics,occupied){
+ const {scale,detail,width,height}=metrics;
+ for(const group of placeLayer.querySelectorAll('.place-dot')){
+  const label=group.querySelector('text');if(!label)continue;
+  const major=group.classList.contains('major'),medium=group.classList.contains('medium');
+  label.style.setProperty('display','none','important');
+  if(detail<(major?2.1:medium?3:4))continue;
+  const match=group.getAttribute('transform').match(/translate\(([-.\d]+)[ ,]+([-.\d]+)\)/);if(!match)continue;
+  const [x,y]=metrics.point(+match[1],+match[2]),font=Math.min(11.5,8+2*Math.log2(detail));
+  const textWidth=worldLabelWidth(label.textContent,font)+8,rect=[x+8,y-font,x+8+textWidth,y+4];
+  if(rect[0]<3||rect[2]>width-3||rect[1]<3||rect[3]>height-3||occupied.some(r=>rect[0]<r[2]+4&&rect[2]>r[0]-4&&rect[1]<r[3]+3&&rect[3]>r[1]-3))continue;
+  label.style.setProperty('font-size',font/scale+'px','important');label.style.setProperty('stroke-width',2/scale+'px','important');
+  label.setAttribute('x',8/scale);label.setAttribute('y',3/scale);label.style.setProperty('display','block','important');occupied.push(rect);
+ }
+}
+function updateWorldTerritoryLabels(metrics=worldLabelMetrics()){
+ const {ratio,scale,detail,width:mapWidth,height:mapHeight}=metrics;
+ updateAtlasReferenceLabels(metrics);
  // Reserve labels of the original political layer as well as the new territories.
  const mapRect=svg.getBoundingClientRect(),occupied=[...empireLabelLayer.querySelectorAll('text')].filter(e=>getComputedStyle(e).display!=='none').map(e=>{const r=e.getBoundingClientRect();return [r.left-mapRect.left,r.top-mapRect.top,r.right-mapRect.left,r.bottom-mapRect.top];}).filter(r=>r[2]>r[0]&&r[3]>r[1]);
  const hatchStep=7/scale;worldPattern.setAttribute('width',hatchStep);worldPattern.setAttribute('height',hatchStep);worldHatchLine.setAttribute('d','M0 0V'+hatchStep);worldHatchLine.setAttribute('stroke-width',1/scale);
@@ -97,21 +143,24 @@ function updateWorldTerritoryLabels(){
  // Markers carry detailed site labels only when a territorial label cannot fit.
  const fit=new Set();
  for(const label of labels){
-  const selected=label.dataset.entry===worldState.area,political=['polity','influence'].includes(label.dataset.kind),font=selected?14:political?12.5:11;
-  const px=+label.getAttribute('x'),py=+label.getAttribute('y'),x=(px*mapState.scale+mapState.tx)*ratio,y=(py*mapState.scale+mapState.ty)*ratio;
+  const selected=label.dataset.entry===worldState.area,political=['polity','influence'].includes(label.dataset.kind);
+  const font=selected?13:Math.min(political?13:11.5,8+3*Math.log2(Math.max(1,detail)));
+  const px=+label.getAttribute('x'),py=+label.getAttribute('y'),[x,y]=metrics.point(px,py);
   const guide=worldTerritoryLabels.querySelector('[data-guide="'+label.dataset.entry+'"]');guide.style.display='none';label.style.display='none';
   if(label.dataset.groupHidden==='true'){fit.add(label.dataset.entry);continue;}
-  label.style.fontSize=font/scale+'px';label.style.strokeWidth=3.5/scale+'px';
-  if(x<0||y<0||x>SVG_W*ratio||y>SVG_H*ratio)continue;
-  // Small kingdoms still get a label; nearby callouts avoid hiding them for lack of width.
-  if(!selected&&!political&&+label.dataset.width*scale<9)continue;
+  if(label.dataset.sovereign&&!selected&&detail<3){fit.add(label.dataset.entry);continue;}
+  label.style.fontSize=font/scale+'px';label.style.strokeWidth=2/scale+'px';
+  if(x<0||y<0||x>mapWidth||y>mapHeight)continue;
   // Canvas metrics do not force layout of the whole SVG after every style write.
   const width=worldLabelWidth(label.textContent,font);
-  for(const [dx,dy] of [[0,-9],[0,-27],[0,22],[width/2+12,0],[-width/2-12,0],[0,-45],[0,40]]){
+  // Overview labels stay near their territory. Small territories become readable on zoom.
+  if(!selected&&(+label.dataset.width*scale<Math.max(12,width*.28)||(!political&&detail<1.8)))continue;
+  const offsets=selected||detail>=3?[[0,-7],[0,-22],[0,18]]:[[0,-4]];
+  for(const [dx,dy] of offsets){
    const rect=[x+dx-width/2,y+dy-font,x+dx+width/2,y+dy+3];
-   if(rect[0]<3||rect[2]>SVG_W*ratio-3||rect[1]<3||rect[3]>SVG_H*ratio-3||occupied.some(r=>rect[0]<r[2]+4&&rect[2]>r[0]-4&&rect[1]<r[3]+3&&rect[3]>r[1]-3))continue;
+   if(rect[0]<3||rect[2]>mapWidth-3||rect[1]<3||rect[3]>mapHeight-3||occupied.some(r=>rect[0]<r[2]+4&&rect[2]>r[0]-4&&rect[1]<r[3]+3&&rect[3]>r[1]-3))continue;
    label.setAttribute('dx',dx/scale);label.setAttribute('dy',dy/scale);label.style.display='';fit.add(label.dataset.entry);occupied.push(rect);
-   if(dx||dy!==-9){guide.setAttribute('x2',px+dx/scale);guide.setAttribute('y2',py+(dy-font/2)/scale);guide.style.display='';}
+   if(Math.abs(dy)>10){guide.setAttribute('x2',px+dx/scale);guide.setAttribute('y2',py+(dy-font/2)/scale);guide.style.display='';}
    break;
   }
  }

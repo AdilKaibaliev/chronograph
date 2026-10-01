@@ -1,0 +1,194 @@
+{
+  "version": "1.12.0",
+  "date": "2026-09-30",
+  "url": "http://127.0.0.1:8773/?lang=ru&year=1517&tab=compare&view=9.000%2C-6975.540%2C-1610.846&expansion=ottomans&xstage=ottomans-egypt&xhistory=1",
+  "states": [
+    {
+      "count": 1,
+      "current": "rashidun-egypt",
+      "route": "rashidun-egypt",
+      "state": "rashidun",
+      "title": "Палестина → Египет",
+      "year": 642
+    },
+    {
+      "count": 1,
+      "current": "umayyad-andalus",
+      "route": "umayyad-andalus",
+      "state": "umayyad",
+      "title": "Магриб → аль-Андалус",
+      "year": 714
+    },
+    {
+      "count": 1,
+      "current": "mongols-song",
+      "route": "mongols-song",
+      "state": "mongols",
+      "title": "Сянъян → Линьань → Ямынь",
+      "year": 1279
+    },
+    {
+      "count": 1,
+      "current": "ottomans-baghdad",
+      "route": "ottomans-baghdad",
+      "state": "ottomans",
+      "title": "Восточная Анатолия → Багдад",
+      "year": 1534
+    },
+    {
+      "count": 1,
+      "current": "russia-amur",
+      "route": "russia-amur",
+      "state": "russia",
+      "title": "Амур → Приморье",
+      "year": 1860
+    },
+    {
+      "count": 1,
+      "current": "qing-tarim",
+      "route": "qing-tarim",
+      "state": "qing",
+      "title": "Джунгария → Кашгар и Яркенд",
+      "year": 1759
+    },
+    {
+      "count": 1,
+      "current": "mughals-deccan",
+      "route": "mughals-deccan",
+      "state": "mughals",
+      "title": "Декан: Биджапур → Голконда",
+      "year": 1687
+    },
+    {
+      "count": 1,
+      "current": "britain-egypt",
+      "route": "britain-egypt",
+      "state": "britain",
+      "title": "Исмаилия → Тель-эль-Кебир → Каир",
+      "year": 1882
+    },
+    {
+      "count": 1,
+      "current": "france-algiers",
+      "route": "france-algiers",
+      "state": "france",
+      "title": "Тулон → Сиди-Ферруш → Алжир",
+      "year": 1830
+    },
+    {
+      "count": 1,
+      "current": "spain-manila",
+      "route": "spain-manila",
+      "state": "spain",
+      "title": "Себу → Манила",
+      "year": 1571
+    },
+    {
+      "count": 1,
+      "current": "portugal-malacca",
+      "route": "portugal-malacca",
+      "state": "portugal",
+      "title": "Гоа → Малакка",
+      "year": 1511
+    },
+    {
+      "count": 1,
+      "current": "usa-alaska",
+      "route": "usa-alaska",
+      "state": "usa",
+      "title": "США → Аляска",
+      "year": 1867
+    },
+    {
+      "count": 1,
+      "current": "inca-north",
+      "route": "inca-north",
+      "state": "inca",
+      "title": "Куско → Кито",
+      "year": 1527
+    }
+  ],
+  "desktop": {
+    "body": [
+      1280,
+      720
+    ],
+    "legend": false,
+    "paths": 4,
+    "region": "all",
+    "states": 13,
+    "version": "1.12.0",
+    "viewport": [
+      1280,
+      720
+    ],
+    "year": "1517"
+  },
+  "mobile": {
+    "body": [
+      390,
+      844
+    ],
+    "button": {
+      "bottom": 165,
+      "height": 30,
+      "left": 16,
+      "right": 103.5625,
+      "top": 135,
+      "width": 87.5625,
+      "x": 16,
+      "y": 135
+    },
+    "map": {
+      "bottom": 394.5,
+      "height": 303.5,
+      "left": 7,
+      "right": 383,
+      "top": 91,
+      "width": 376,
+      "x": 7,
+      "y": 91
+    },
+    "panel": {
+      "bottom": 720,
+      "height": 194.5,
+      "left": 8,
+      "right": 382,
+      "top": 525.5,
+      "width": 374,
+      "x": 8,
+      "y": 525.5
+    },
+    "play": {
+      "bottom": 778.5,
+      "height": 36,
+      "left": 18,
+      "right": 54,
+      "top": 742.5,
+      "width": 36,
+      "x": 18,
+      "y": 742.5
+    },
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "labelHeightBeforeZoom": 14,
+  "labelHeightAfterZoom": 13.999969482421877,
+  "checks": [
+    "RU/EN/KY",
+    "previous/next stage changes year",
+    "13 state selectors and final stages",
+    "earlier routes toggle",
+    "Alaska date-line split",
+    "URL restore with map fit",
+    "future mode hides route layer",
+    "world and legacy card shortcuts",
+    "normal comparison restored on World button",
+    "all-region context after switching state",
+    "legacy overlay dismissal",
+    "no outer scroll; Play visible on mobile"
+  ],
+  "logs": []
+}

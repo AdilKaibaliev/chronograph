@@ -1,4 +1,5 @@
 #mapCard{overflow:clip}
+#countryLayer:not(.modern-reference) .country:not(.kyrgyz-highlight){stroke:none;pointer-events:none}
 #worldMap,#worldMap text{user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
 .world-header{position:sticky;top:-14px;z-index:3;background:#211e18;padding:10px 0 9px;border-bottom:1px solid #514733;box-shadow:0 5px 10px #211e1840}
 .world-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.world-heading h3{font:18px/1.2 Georgia,serif;margin:0;color:#f1dfb7}.world-heading>span{font:12px Georgia,serif;white-space:nowrap;color:#d8bd80;padding-top:4px}
@@ -27,6 +28,10 @@
 @media(max-width:700px){.world-map-steps{margin-top:6px}.world-territories-toggle{font-size:9px}.world-territory-chip{padding:7px;scroll-margin-top:12px}.world-territory-chip strong{font-size:11px}}
 
 .world-territory-guide{stroke:#605239;stroke-width:.8;stroke-opacity:.65;vector-effect:non-scaling-stroke;pointer-events:none}.world-territory.influence>path:first-child{fill-opacity:calc(var(--area-opacity,.51)*.82)}
+.world-territory.political-outline>path:first-child{fill-rule:nonzero}.world-territory.sovereign-part:not(.selected)>path{fill:none;stroke:none;pointer-events:none}
+.world-territory.mongol-unified-member>path{fill:none;stroke:none;pointer-events:none}
+.world-territory.imperial-dependency>path:first-child{stroke-dasharray:4 3;fill-opacity:calc(var(--area-opacity)*.55)}
+.world-imperial-parent{font:inherit;font-size:11px;text-align:left;color:#e4ca95;background:#302c23;border:1px solid #75633f;border-radius:6px;padding:6px 9px;margin:5px 0;cursor:pointer}.world-imperial-parent:focus-visible{outline:2px solid #dfbe79}
 
 .world-legend-region{border-top:1px solid #63563d;margin-top:10px;padding-top:5px;display:flex;flex-wrap:wrap;gap:3px}.world-legend-region h4{width:100%;margin:4px 0;font:12px Georgia,serif;color:#e5cb91}.world-legend-region button{background:none;border:0;text-align:left}.world-legend-region button:focus-visible{outline:2px solid #e5cb91}.future-mode #worldMapLegend{display:none}
 .world-modes{grid-template-columns:1.25fr 1fr .8fr}
@@ -34,3 +39,9 @@
 .world-study-tools[hidden]{display:none}.world-study-tools{padding:4px 0 10px}.world-study-tools p{font:11px/1.6 system-ui;color:#ccbea1;margin:6px 0 9px}.world-study-tools input{box-sizing:border-box;width:100%;font:12px system-ui;color:#ead8b7;background:#191813;border:1px solid #62563e;border-radius:7px;padding:9px}
 .world-explorer.studying #worldMapSteps,.world-explorer.studying #worldLegend,.world-explorer.studying #worldDating,.world-explorer.studying #worldStudyHint{display:none}.world-explorer.studying .world-study-tools{padding-top:10px}
 @media(max-width:700px){.world-learning dd{font-size:11px}.world-learning summary{font-size:12px}.world-modes button{padding-inline:3px}}
+.world-pager{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;margin:6px 0 10px;border-block:1px solid var(--line);font-size:12px}
+.world-pager button{min-width:42px;min-height:36px;border:1px solid var(--line);border-radius:6px;background:transparent;color:inherit;cursor:pointer}
+.world-pager button:disabled{opacity:.3;cursor:default}
+.world-pager button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.world-territory-index{margin:8px 0 12px;border-block:1px solid #514733;padding:10px 0}.world-territory-index>summary{cursor:pointer;color:#e2c68e;font-size:12px}.world-territory-index>summary:focus-visible{outline:2px solid #ddbc78;outline-offset:3px}

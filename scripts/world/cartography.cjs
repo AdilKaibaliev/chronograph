@@ -1,0 +1,72 @@
+'use strict';
+const G=require('./cartography-geometry.cjs'),review=require('./cartography-reviewed.cjs');
+module.exports=c=>{
+ const source=(id,title,urls)=>c.sources[id]={title,urls};
+ source('cartographyQing','大清萬年一統地理全圖 (Complete Geographical Map of the Great Qing Dynasty), 1796–1820; Columbia University, Asia for Educators. Late Imperial China; Mongolia: A Country Study, Library of Congress.',['https://www.loc.gov/resource/gdcwdl.wdl_17879/','https://afe.easia.columbia.edu/main_pop/kpct/kp_1450-1750.htm','https://tile.loc.gov/storage-services/public/gdcmassbookdig/mongoliacountrys00word_0/mongoliacountrys00word_0.pdf']);
+ source('cartographyOttoman','The Metropolitan Museum of Art. The Greater Ottoman Empire, 1600–1800; The Eastern Mediterranean, 1400–1600; Manatū Taonga. Map of Ottoman Empire in 1914.',['https://www.metmuseum.org/essays/the-greater-ottoman-empire-1600-1800','https://82nd-and-fifth.metmuseum.org/toah/ht/08/wae.html','https://nzhistory.govt.nz/media/photo/map-ottoman-empire-1914']);
+ source('cartographyMughal','The Metropolitan Museum of Art. South Asia, 1600–1800; Interwoven Globe; Library of Congress. India: A Country Study.',['https://82nd-and-fifth.metmuseum.org/toah/ht/09/ssa.html','https://www.metmuseum.org/exhibitions/listings/2013/interwoven-globe','https://tile.loc.gov/storage-services/master/frd/frdcstdy/in/indiacountrystud00heit/indiacountrystud00heit.pdf']);
+ source('cartographyTuva','Национальный архив Республики Тыва. Управление амбын-нойона Танну-Урянхая, фонд 115; Президентская библиотека. Урянхайский край в период российского протектората: архивные документы 1914 года.',['https://guides.rusarchives.ru/node/13113','https://www.prlib.ru/section/1969701']);
+ source('cartographyIslands','Foreign Office. Cyprus. Peace Handbooks, 1920; Foreign Relations of the United States, 1909, Crete; Region of Crete. Chronology of the Cretan State and Union.',['https://www.loc.gov/item/a22000924/','https://history.state.gov/historicaldocuments/frus1909/d302','https://www.crete.gov.gr/chronologio-periodoy/']);
+ source('cartographyMongol','Encyclopaedia Iranica. Central Asia V: In the Mongol and Timurid Periods; Yuan shi (元史).',['https://www.iranicaonline.org/articles/central-asia-v/']);
+ const H=require('./late-helpers.cjs')(c,{max:1918}),T=s=>s.split('|');
+ function profile(id,coord,sourceId,rows,poly){const phases=rows.map(([from,to,name,text])=>H.phase(from,to,T(name),T(text),[sourceId],{name:T(name)}));H.entry(id,'eurasia','region',coord,phases[0].name,phases);for(const p of phases)H.area(id,p.from,p.to,poly,{kind:'influence',name:p.name,color:'#96a185'});}
+ profile('cartography-tibet',[91.13,29.65],'cartographyQing',[
+ [1720,1912,'Тибет · Ганден-Пходранг и цинское верховенство|Tibet · Ganden Phodrang and Qing overlordship|Тибет · Ганден-Пходранг жана Цин үстөмдүгү','После изгнания джунгар цинскими войсками в 1720 году в Тибете сохраняется местное правительство. Отношения с императорским двором включают покровительство, резидентов и военное присутствие; степень вмешательства меняется.|After Qing forces expel the Dzungars in 1720, Tibet retains its local government. Relations with the imperial court involve patronage, resident officials and a military presence; intervention varies over time.|1720-жылы Цин аскерлери жуңгарларды кууп чыккандан кийин Тибетте жергиликтүү өкмөт сакталат. Императордук сарай менен мамиле камкордукту, өкүлдөрдү жана аскердик катышууну камтыйт; кийлигишүүнүн деңгээли өзгөрүп турат.'],
+ [1912,1919,'Тибет · правительство в Лхасе|Tibet · government in Lhasa|Тибет · Лхасадагы өкмөт','После падения Цин правительство в Лхасе осуществляет самостоятельное управление. Китайская республика сохраняет притязания на Тибет; фактическое управление показано отдельно.|After the Qing fall, the Lhasa government exercises independent administration. The Republic of China maintains its claim to Tibet; actual administration is shown separately.|Цин кулагандан кийин Лхасадагы өкмөт өз алдынча башкарат. Кытай Республикасы Тибетке дооматын сактайт; иш жүзүндөгү башкаруу өзүнчө көрсөтүлөт.']
+ ],[review.tibet]);
+ profile('cartography-tuva',[94.45,51.72],'cartographyTuva',[
+ [1757,1912,'Тува · Урянхай под властью Цин|Tuva · Uriankhai under Qing rule|Тува · Цин бийлигиндеги Урянхай','Цинская власть опирается на хошуны и местных правителей. Урянхайские земли не являются российскими губерниями.|Qing authority works through banners and local rulers. Uriankhai lands are not Russian provinces.|Цин бийлиги хошундарга жана жергиликтүү башкаруучуларга таянат. Урянхай жерлери Россиянын губерниялары эмес.'],
+ [1912,1914,'Тува · местные правители после Цин|Tuva · local rulers after the Qing|Тува · Цинден кийинки жергиликтүү башкаруучулар','После падения Цин местные правители ищут новые политические связи; российский протекторат ещё не установлен.|After the Qing fall, local rulers seek new political ties; a Russian protectorate has not yet been established.|Цин кулагандан кийин жергиликтүү башкаруучулар жаңы саясий байланыштарды издейт; Россиянын протектораты али орной элек.'],
+ [1914,1917,'Тува · российский протекторат|Tuva · Russian protectorate|Тува · Россиянын протектораты','В 1914 году российское правительство объявляет покровительство Урянхайскому краю. Местное управление сохраняется; протекторат не превращает край в обычную губернию.|In 1914 the Russian government declares a protectorate over Uriankhai. Local administration remains; the protectorate does not turn the territory into an ordinary province.|1914-жылы орус өкмөтү Урянхай крайына протекторат жарыялайт. Жергиликтүү башкаруу сакталат; протекторат крайды кадимки губернияга айлантпайт.']
+ ,
+ [1917,1919,'Тува · местная и русская администрация|Tuva · local and Russian administrations|Тува · жергиликтүү жана орус башкаруусу','После революций 1917 года имперского правительства больше нет. В Урянхайском крае взаимодействуют местные власти и русская администрация; начинается борьба за власть в условиях Гражданской войны.|After the revolutions of 1917, the imperial government no longer exists. Local authorities and Russian administrations operate in Uriankhai amid the developing civil war.|1917-жылдагы революциялардан кийин императордук өкмөт жок болот. Урянхайда жергиликтүү бийлик жана орус администрациясы иштеп, Жарандык согуш шартында бийлик үчүн күрөш башталат.']
+ ],[review.tuva]);
+ profile('cartography-cyprus',[33.38,35.18],'cartographyIslands',[
+ [1878,1914,'Кипр · британское управление|Cyprus · British administration|Кипр · Британиянын башкаруусу','По конвенции 1878 года Британия получает управление Кипром. Формальное османское верховенство сохраняется до британской аннексии 1914 года.|Under the 1878 convention, Britain administers Cyprus while formal Ottoman sovereignty continues until British annexation in 1914.|1878-жылкы конвенция боюнча Британия Кипрди башкарат. Формалдуу Осмон үстөмдүгү Британия 1914-жылы аралды аннексиялаганга чейин сакталат.'],
+ [1914,1919,'Кипр · британская аннексия|Cyprus · British annexation|Кипр · Британиянын аннексиясы','5 ноября 1914 года Британия объявляет аннексию Кипра после вступления Османской империи в мировую войну.|Britain declares the annexation of Cyprus on 5 November 1914 after the Ottoman Empire enters the world war.|Осмон империясы дүйнөлүк согушка киргенден кийин, Британия 1914-жылдын 5-ноябрында Кипрди аннексиялаганын жарыялайт.']
+ ],[[[32,34.5],[34.8,34.5],[34.8,35.8],[32,35.8]]]);
+ profile('cartography-crete',[24.02,35.51],'cartographyIslands',[
+ [1898,1913,'Крит · автономное государство|Crete · autonomous state|Крит · автономиялуу мамлекет','С 1898 года Крит имеет автономное правительство под покровительством великих держав при формальном османском сюзеренитете. В 1908 году провозглашено объединение с Грецией; международное признание последовало в 1913 году.|From 1898 Crete has an autonomous government protected by the Great Powers under formal Ottoman suzerainty. Union with Greece is proclaimed in 1908 and internationally recognised in 1913.|1898-жылдан тартып Критте улуу державалардын камкордугунда автономиялуу өкмөт иштейт; формалдуу Осмон сюзеренитети сакталат. 1908-жылы Греция менен биригүү жарыяланып, 1913-жылы эл аралык таанууга ээ болот.'],
+ [1913,1919,'Крит · Греция|Crete · Greece|Крит · Греция','В 1913 году договорное урегулирование закрепляет объединение Крита с Грецией и прекращение османских прав на остров.|The treaty settlement of 1913 confirms Crete’s union with Greece and ends Ottoman rights over the island.|1913-жылкы келишимдер Криттин Греция менен биригишин бекитип, Осмон мамлекетинин аралга болгон укуктарын токтотот.']
+ ],[[[23.4,34.8],[26.5,34.8],[26.5,35.8],[23.4,35.8]]]);
+ const rawOutlines=c.outlines||[],relations=require('./cartography-relations.cjs')();
+ relations.push({owner:'1789-great-britain',member:'cartography-cyprus',from:1878,to:1914,relationship:'administration',extent:true},{owner:'1789-great-britain',member:'cartography-cyprus',from:1914,to:1919,relationship:'province',extent:true},{owner:'late-ottoman',member:'cartography-crete',from:1898,to:1913,relationship:'dependency',extent:true},{owner:'1848-greece',member:'cartography-crete',from:1913,to:1919,relationship:'province',extent:true});
+ relations.push({owner:'1789-qing',member:'cartography-tibet',from:1720,to:1912,relationship:'dependency',extent:true},{owner:'1789-qing',member:'cartography-tuva',from:1757,to:1912,relationship:'dependency',extent:true},{owner:'1789-russian-empire',member:'cartography-tuva',from:1914,to:1917,relationship:'dependency',extent:true});
+ // The old Russian grouping is converted to the same explicit ownership model.
+ for(const o of rawOutlines)for(const member of o.members||[])relations.push({owner:o.entry,member,from:o.from,to:o.to,relationship:'province',extent:false});
+ const byId=new Map(c.entries.map(e=>[e.id,e])),areas=new Map();for(const a of c.areas){if(!areas.has(a.entry))areas.set(a.entry,[]);areas.get(a.entry).push(a);}
+ const active=(id,y)=>(areas.get(id)||[]).find(a=>a.from<=y&&a.to>y);
+ const outline=(id,y)=>rawOutlines.find(a=>a.entry===id&&a.from<=y&&a.to>y);
+ const extraSource=id=>id==='late-yuan'||id==='late-chagatai'?'cartographyMongol':id==='1789-qing'||id==='late-ming'?'cartographyQing':id==='late-ottoman'?'cartographyOttoman':id==='early-mughal'?'cartographyMughal':null;
+ const processed=new Map();function base(id,y){const a=active(id,y);if(!a)return null;const o=outline(id,y);const key=a.id+'|'+(o?.id||'')+'|'+review.cuts.filter(v=>v<=y).at(-1);if(!processed.has(key)){const value={...a,...o};processed.set(key,{...value,polygons:review.geometry(value,y)});}return processed.get(key);}
+ for(const r of relations)if(!byId.has(r.owner)||!byId.has(r.member))throw Error('Unknown imperial relationship '+JSON.stringify(r));
+ const groupedRelations=new Map();for(const r of relations){const key=[r.owner,r.member,r.relationship,r.extent].join('|');if(!groupedRelations.has(key))groupedRelations.set(key,[]);groupedRelations.get(key).push(r);}
+ const valid=[];for(const group of groupedRelations.values()){let previous;for(const r of group.sort((a,b)=>a.from-b.from)){if(previous&&previous.to>=r.from)previous.to=Math.max(previous.to,r.to);else {previous={...r};valid.push(previous);}}}
+ const roots=new Set([...valid.map(r=>r.owner),...rawOutlines.map(o=>o.entry),'late-ming','early-mughal','1789-spain','1789-great-britain','late-ottoman','1789-qing','late-yuan','late-chagatai']);
+ const reviewGeometry={},shapes=[],shapeIds=new Map();function shape(rings){const key=JSON.stringify(rings);if(!shapeIds.has(key)){shapeIds.set(key,shapes.length);shapes.push(rings);}return shapeIds.get(key);}
+ for(const a of c.areas)reviewGeometry[a.id]=shape(G.union(a.polygons));
+ const out=[];
+ for(const id of roots){
+  const e=byId.get(id);if(!e)continue;
+  const rel=valid.filter(r=>r.owner===id),cuts=[...new Set([...review.cuts,...(areas.get(id)||[]).flatMap(a=>[a.from,a.to]),...rawOutlines.filter(o=>o.entry===id).flatMap(o=>[o.from,o.to]),...rel.flatMap(r=>[r.from,r.to,...(areas.get(r.member)||[]).flatMap(a=>[a.from,a.to])]),1919])].filter(y=>y>=610&&y<=1919).sort((a,b)=>a-b);
+  for(let i=0;i<cuts.length-1;i++){
+   const from=cuts[i],to=cuts[i+1],a=base(id,from);if(!a)continue;
+   const current=rel.filter(r=>r.from<=from&&r.to>from&&active(r.member,from));
+   const direct=current.filter(r=>r.relationship==='province'),dependencies=current.filter(r=>r.relationship!=='province');
+   // Rings already normalised by boolean union may contain deliberate holes.
+   const polygons=direct.some(r=>r.extent)?require('../vendor/polygon-clipping.cjs').union(G.multi(a.polygons),...direct.filter(r=>r.extent).map(r=>G.multi(base(r.member,from).polygons))).flatMap(p=>p.map(r=>r.slice(0,-1))):a.polygons;
+   const src=[...new Set([...a.sources,...direct.flatMap(r=>active(r.member,from).sources),...(extraSource(id)?[extraSource(id)]:[])])];
+   let name=a.name;if(id==='early-austria')name=T(from>=1867?'Австро-Венгрия|Austria-Hungary|Австро-Венгрия':from>=1804?'Австрийская империя|Austrian Empire|Австрия империясы':'Габсбургская монархия|Habsburg monarchy|Габсбург монархиясы');
+   if(id==='1789-great-britain')name=T('Британская империя|British Empire|Британ империясы');
+   const memberIds=[...new Set(direct.map(r=>r.member))],dep=Object.fromEntries(dependencies.map(r=>[r.member,r.relationship]));
+   const row={...a,id:'cartography-'+id+'-'+from,from,to,name,short:name,label:a.label||e.coord,polygons,points:polygons[0],members:memberIds,dependencies:dep,sources:src,approx:true,worldFocus:a.worldFocus||id==='1789-great-britain'||id==='1789-spain'||id==='late-portugal'||id==='late-france'||id==='japan',cartographic:true};
+   const signature=v=>JSON.stringify({...v,id:null,from:null,to:null});const prev=out.at(-1);
+   if(prev&&prev.entry===id&&prev.to===from&&signature(prev)===signature(row))prev.to=to;else out.push(row);
+  }
+ }
+ const mongolAreas=c.areas.filter(a=>a.mongolGroup),mongol=[];
+ const mongolCuts=[...new Set(mongolAreas.flatMap(a=>[a.from,a.to]))].sort((a,b)=>a-b);
+ for(let i=0;i<mongolCuts.length-1;i++){const from=mongolCuts[i],to=mongolCuts[i+1],parts=mongolAreas.filter(a=>a.from<=from&&a.to>from);if(parts.length===4)mongol.push({from,to,shape:shape(G.merge(parts.map(a=>review.geometry(a,from))))});}
+ c.outlines=out;c.cartography={version:1,shapes,areas:reviewGeometry,relations:valid,mongol};
+ return c;
+};

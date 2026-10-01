@@ -1,0 +1,12 @@
+{
+  "date": "2026-09-30",
+  "scenario": "Russian world overview, 1280x720, 1900 to 1901 and back, eight UI year submissions; first two warm-up samples excluded",
+  "measure": "Synchronous renderYear JavaScript duration in milliseconds; excludes browser painting and network loading",
+  "before": [100.9,110.2,85.7,89.4,81.1,116.2,78,118],
+  "after": [48.2,46.9,49.2,44.6,44,42,50.3,43.9],
+  "beforeMedian": 87.55,
+  "afterMedian": 44.3,
+  "reductionPercent": 49.4,
+  "changes": ["Bounded reuse of 768 dated territory SVG groups", "Collapsed map legend builds only when opened", "Indexed territory profiles and frame lists"],
+  "scope": "Small local benchmark in the same browser; not an end-to-end speed guarantee. Final editorial corrections and tick-label spacing were checked separately."
+}

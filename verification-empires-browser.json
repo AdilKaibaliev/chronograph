@@ -1,0 +1,41 @@
+{
+  "version": "1.11.1",
+  "date": "2026-09-30",
+  "published": false,
+  "languages": [
+    "ru",
+    "en",
+    "ky"
+  ],
+  "localConsoleErrors": 0,
+  "localConsoleWarnings": 0,
+  "ignoredConsoleOrigins": [
+    "challenges.cloudflare.com"
+  ],
+  "desktop": {
+    "width": 1280,
+    "height": 720,
+    "pageHeight": 720
+  },
+  "mobile": {
+    "width": 390,
+    "height": 796,
+    "scrollWidth": 390,
+    "scrollHeight": 796,
+    "playTop": 694.5,
+    "playBottom": 730.5
+  },
+  "viewportReset": true,
+  "flows": [
+    "Egypt occupation parent link by keyboard in EN and mouse in KY",
+    "Modern borders on/off without hiding land",
+    "Play 1800 to 1814 and Pause",
+    "Ottoman 1600 province silhouette hidden in common view",
+    "Qing 1800 unified contour"
+  ],
+  "screenshots": [
+    "chronograph_ottoman_audit_1600.jpg",
+    "chronograph_qing_audit_1800.jpg",
+    "chronograph_empire_audit_mobile.jpg"
+  ]
+}

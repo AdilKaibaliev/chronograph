@@ -51,7 +51,7 @@ vm.createContext(context);
 vm.runInContext(fs.readFileSync(path.join(__dirname,'territory-runtime.js'),'utf8'),context,{filename:'territory-runtime.js'});
 vm.runInContext(runtime.slice(start,end),context,{filename:'runtime.js:renderWorldMap'});
 
-const expectedAreas=year=>catalog.areas.filter(a=>year>=a.from&&year<a.to);
+const expectedAreas=year=>context.worldHistory.mapAreasAt(year);
 const expectedPlaces=year=>catalog.entries.filter(e=>e.phases.some(p=>year>=p.from&&year<p.to));
 const sorted=values=>[...values].sort();
 let renders=0;
@@ -107,5 +107,17 @@ checkRender(1299,'south');
 assert(!context.worldTerritoryLayer.classList.contains('hidden-layer'));
 assert(!context.worldTerritoryLabels.classList.contains('hidden-layer'));
 assert(!context.worldLayer.classList.contains('hidden-layer'));
+
+// Cached SVG must preserve identity for unchanged areas and replace dated or
+// translated features; reused labels still reflect current selection.
+context.worldState.area='';context.worldState.selected='';
+const findArea=(rows,id)=>rows.find(n=>n.dataset.worldArea===id);
+const nodes1900=checkRender(1900,'all'),germany1900=findArea(nodes1900,'late-hre');
+const nodes1901=checkRender(1901,'all');assert.strictEqual(findArea(nodes1901,'late-hre'),germany1900,'Unchanged geometry rebuilt');
+assert.notStrictEqual(findArea(nodes1900,'1914-australian-colonies'),findArea(nodes1901,'1914-australian-colonies'),'Federation did not replace the colonial frame');
+context.worldState.area='late-hre';const selectedGermany=findArea(checkRender(1901,'all'),'late-hre');assert.notStrictEqual(selectedGermany,germany1900);assert(selectedGermany.classList.contains('selected'));
+context.wl=row=>row[1];context.renderWorldMap();assert(findArea(context.worldTerritoryLayer.children,'late-hre').children[0].getAttribute('aria-label').includes('German Empire'));
+context.wl=row=>row[2];context.renderWorldMap();assert(findArea(context.worldTerritoryLayer.children,'late-hre').children[0].getAttribute('aria-label').includes('Герман империясы'));
+assert(vm.runInContext('worldTerritoryNodes.size<=768',context),'SVG retention is unbounded');
 
 console.log(JSON.stringify({status:'PASS',renderers:2,renders,regions:regions.length,years:(catalog.range?.max??1299)-609,territoriesIn1299:expectedAreas(1299).length,placesIn1299:expectedPlaces(1299).length}));

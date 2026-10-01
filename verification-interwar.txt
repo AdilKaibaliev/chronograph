@@ -1,0 +1,60 @@
+Running scripts/i18n/build.cjs
+{"messages":1502,"eventTitles":64,"eventDescriptions":64,"bytes":11767712}
+Running scripts/world/test.cjs
+{"status":"PASS","entries":463,"phases":3150,"events":478,"areas":3156,"languages":3,"textRows":25070,"years":1330,"regions":8,"sources":573}
+Running scripts/world/render-test.cjs
+{"status":"PASS","renderers":2,"renders":1685,"regions":9,"years":1330,"territoriesIn1299":58,"placesIn1299":64}
+Running scripts/world/continuity-test.cjs
+PASS: 12 legacy continuations keep dated geometry, colour and label anchors; 1300/1335 Mongol modes; Seljuk and Trebizond end dates; map selection prevention.
+Running scripts/world/cache-test.cjs
+PASS: cached queries equal direct catalogue queries for every year and region; bounded cache revisits and caller array mutation are safe.
+Running scripts/world/labels-test.cjs
+PASS: overview names shrink, overlapping and tiny labels hide, selection stays available, zoom restores deterministically, letterboxing is included.
+Running scripts/world/pagination-test.cjs
+PASS: bounded pages reach all records; deep selection, backward navigation, empty filters, selected cards and indexed lookups remain correct.
+Running scripts/world/content-audit-test.cjs
+PASS: Sicán / Túcume continues through 1299; Copán remains a separate political core after 738 and contains its documented site coordinate.
+Running scripts/world/education-test.cjs
+PASS: educational expansion chronology, differentiated territorial categories, source-backed learning, cultural events and political transitions.
+Running scripts/world/maghreb-outline-test.cjs
+PASS: dissolved Maghreb outlines preserve 78384 coverage samples, remove internal seams, and retain separate Andalus.
+Running scripts/late/test.cjs
+PASS: 610–1453 bounds; all 154 added years agree with the built atlas; dated Eurasian, American, African and Arctic transitions; Oceanic settlement types; no legacy empire/sidebar leakage; retained contemporaries with verified life-date boundaries.
+Running scripts/early/test.cjs
+PASS: 610–1600 interface bounds; preserved 610–1453 phase/geometry fingerprint; all 147 new years in eight regions; Oceanic contact and Arctic continuity; preserved 72 biographies from the preceding release.
+Running scripts/to1789/test.cjs
+PASS: 610–1789 interface; preserved 610–1600 fingerprint; all 189 added years in eight regions; playback stops at all new dates; Oceanic colonial distinctions; current coordinates in territorial chronology; 80 delivered biographies.
+Running scripts/to1815/test.cjs
+PASS: 610–1815 delivery; unchanged published catalogue; dated European, American and Pacific transfers; every new event reachable in playback; three-language biographies.
+Running scripts/to1848/test.cjs
+PASS: 1816–1848 in eight regions; unchanged 610–1815; mapped profiles, dated transfers, removals, breakups, all events in playback and biographies in three languages.
+Running scripts/to1914/test.cjs
+PASS: 1849–1914, eight regions, preserved earlier catalogue, dated unions and partitions, mapped profiles, playback and three-language biographies.
+Running scripts/to1918/test.cjs
+PASS: 1915–1918, imperial collapses, occupation vs sovereignty, Urkun, global events, sources, complete biographies and preserved earlier catalogue.
+Running scripts/world/to1939-test.cjs
+{"pass":true,"years":21,"profiles":463,"interwarRevisions":108,"events":15,"checks":"timeline, state succession, dependencies, delivered data, earlier catalogue preserved"}
+Running scripts/world/russia-outline-test.cjs
+PASS: Russian extent, dated Alaska/Amur/Primorye/Sakhalin transfers, regional membership, no crossed rings or dateline bridges.
+Running scripts/world/cartography-test.cjs
+{"status":"PASS","years":1309,"datedOutlines":565,"relationships":309,"legacyPolities":72,"checks":"union, holes, separated possessions, dated transfers, imperial hierarchy, modern borders, delivered renderer"}
+Running scripts/expansion/test.cjs
+{"states":14,"routes":58,"yearSnapshots":18326,"checks":"dates, translations, sources, date line, delivered runtime, future isolation","pass":true}
+Running scripts/future/test.cjs
+{"events":82,"majorSigns":10,"references":70,"places":33,"sequences":4,"status":"PASS: schema, translations, sequence graph, filters, uncertain places, calendar preservation, syntax, sources"}
+{"status":"PASS: sourced geography, Sasanian polygon, complete excerpts","mapped":38,"unlocated":44}
+Running scripts/future/illustrations-test.cjs
+{"status":"PASS: complete multilingual scenes, animation frames, count, monotonic growth, syntax","events":82,"sceneFamilies":29,"frames":492}
+Running scripts/i18n/test.cjs
+PASS: 1502 message pairs, Russian preservation, calendar and dynamic labels, explicit Russian fallback.
+PASS: original historical states, geometry, events and person dates preserved from source; plain-text sources.
+Running scripts/support/test.cjs
+PASS: English default, URL priority, saved language, blocked storage, RU/EN/KY support copy, both timelines paused, no payment destination.
+Running scripts/biographies-test.cjs
+PASS: 89 individual biographies and plain-text sources in 3 languages; all contemporary buttons, dates, scroll reset and focus transitions.
+Running scripts/history-test.cjs
+PASS: 2522 coordinate checks; 690-year data, dated Kyrgyz status, Mongol conquest milestones, dependent territories, migration semantics and JS syntax.
+Running scripts/unified-map-test.cjs
+PASS: unified/detailed modes across 690 years, dated extent preserved, consistent winding, no duplicate ulus paths, post-1260 label, Kyrgyz core/influence distinction, RU/EN/KY.
+{"pass":true,"years":21,"profiles":463,"interwarRevisions":108,"events":15,"checks":"timeline, state succession, dependencies, delivered data, earlier catalogue preserved"}
+{"states":14,"routes":58,"yearSnapshots":18326,"checks":"dates, translations, sources, date line, delivered runtime, future isolation","pass":true}

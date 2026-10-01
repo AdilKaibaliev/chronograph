@@ -1,0 +1,13 @@
+#expansionLayer{pointer-events:none}
+.expansion-route{--journey-color:#995624}
+.expansion-route.treaty{--journey-color:#246d73}
+.expansion-route.settlement,.expansion-route.voyage{--journey-color:#865c35}
+.expansion-route.occupation{--journey-color:#784e8c}
+.expansion-line,.expansion-hit{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.expansion-line{stroke:var(--journey-color);stroke-width:1.8;stroke-dasharray:6 5;opacity:.85}
+.expansion-hit{pointer-events:stroke;stroke:transparent;stroke-width:14;cursor:pointer}
+.expansion-route:hover .expansion-line,.expansion-route:focus-within .expansion-line{stroke-width:3;opacity:1}
+.expansion-hit:focus-visible{stroke:#fff;stroke-opacity:.22;outline:none}
+.expansion-symbol{pointer-events:none;fill:var(--journey-color);stroke:#262015;stroke-width:1}
+.route-kind{color:var(--gold);font-size:12px}.route-caption,.route-source{font-size:12px;line-height:1.5;color:var(--muted)}
+body.future-mode #expansionLayer{display:none!important}
