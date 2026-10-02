@@ -1,0 +1,139 @@
+{
+  "version": "1.16.0",
+  "checks": [
+    {
+      "cities": [
+        {
+          "id": "mecca",
+          "r": "3.2"
+        },
+        {
+          "id": "medina",
+          "r": "3.2"
+        },
+        {
+          "id": "constantinople",
+          "r": "3.2"
+        }
+      ],
+      "ghosts": 0,
+      "height": 720,
+      "lang": "ru",
+      "paths": 43,
+      "pulses": 0,
+      "viewport": 720,
+      "year": "632"
+    },
+    {
+      "cities": [
+        {
+          "id": "mecca",
+          "r": "3.2"
+        },
+        {
+          "id": "medina",
+          "r": "3.2"
+        },
+        {
+          "id": "constantinople",
+          "r": "3.2"
+        }
+      ],
+      "ghosts": 0,
+      "height": 720,
+      "lang": "en",
+      "paths": 352,
+      "pulses": 0,
+      "viewport": 720,
+      "year": "1918"
+    },
+    {
+      "cities": [
+        {
+          "id": "mecca",
+          "r": "3.2"
+        },
+        {
+          "id": "medina",
+          "r": "3.2"
+        },
+        {
+          "id": "constantinople",
+          "r": "3.2"
+        }
+      ],
+      "ghosts": 0,
+      "height": 720,
+      "lang": "ky",
+      "paths": 355,
+      "pulses": 0,
+      "viewport": 720,
+      "year": "1919"
+    },
+    {
+      "cities": [
+        {
+          "id": "mecca",
+          "r": "3.2"
+        },
+        {
+          "id": "medina",
+          "r": "3.2"
+        },
+        {
+          "id": "constantinople",
+          "r": "3.2"
+        }
+      ],
+      "ghosts": 0,
+      "height": 720,
+      "lang": "ru",
+      "paths": 339,
+      "pulses": 0,
+      "viewport": 720,
+      "year": "1877"
+    },
+    {
+      "cities": [
+        {
+          "id": "mecca",
+          "r": "3.2"
+        },
+        {
+          "id": "medina",
+          "r": "3.2"
+        },
+        {
+          "id": "constantinople",
+          "r": "3.2"
+        }
+      ],
+      "ghosts": 0,
+      "height": 720,
+      "lang": "ru",
+      "paths": 352,
+      "pulses": 0,
+      "viewport": 720,
+      "year": "1945"
+    }
+  ],
+  "transition": {
+    "duplicateIds": [],
+    "ghosts": 2,
+    "points": 7,
+    "year": "1919"
+  },
+  "afterPause": {
+    "button": "Проигрывать",
+    "ghosts": 0,
+    "year": "1930"
+  },
+  "mobile": {
+    "width": 390,
+    "height": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 844,
+    "playBottom": 788.5
+  },
+  "errors": []
+}

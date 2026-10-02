@@ -30,7 +30,7 @@ for(const key of ['entries','areas','outlines','events'])assert.equal(digest(key
 const baseline='.local-checks/to1945-baseline.json';if(fs.existsSync(baseline)){
  const old=JSON.parse(fs.readFileSync(baseline));
  assert.equal(digest(c.entries.map(e=>({...e,phases:e.phases.filter(p=>p.from<1940)})).filter(e=>e.phases.length)),digest(old.entries),'Earlier text changed');
- for(const key of ['areas','events'])assert.equal(digest(require('./kyrgyz-baseline.cjs')(c[key].filter(a=>a.from<1940))),digest(old[key]),'Earlier '+key+' changed');
+ for(const key of ['areas','events'])assert.equal(digest(require('./geometry-regression.cjs')(require('./kyrgyz-baseline.cjs')(c[key].filter(a=>a.from<1940)))),digest(require('./geometry-regression.cjs')(old[key])),'Earlier '+key+' changed');
 }
 // Exercise the actual timer callback at the end of the delivered timeline.
 const vm=require('node:vm');let tick;

@@ -9,7 +9,7 @@ assert.equal(c.range.min,610);assert(c.range.max>=1914);
 const old={entries:c.entries.filter(e=>!e.id.startsWith('cartography-')).map(e=>({...e,phases:e.phases.filter(p=>p.from<1849)})).filter(e=>e.phases.length&&e.id!=='pecos'),areas:c.areas.filter(a=>!a.entry.startsWith('cartography-')).filter(a=>a.from<1849&&a.entry!=='pecos'),events:c.events.filter(e=>e.from<1849),sources:Object.fromEntries(Object.entries(c.sources).filter(([id])=>!id.startsWith("to1939")&&!id.startsWith("to1945")).filter(([id])=>!id.startsWith('cartography')).filter(([id])=>!/^to(?:1914|1918)/.test(id)))};
 assert.equal(crypto.createHash('sha256').update(JSON.stringify(require('../world/kyrgyz-baseline.cjs')(old))).digest('hex'),'35cbb03b5319d4fcbfe78a2494611b5c5dc1915f50c4ab92182484f462a8d0cd','Previous catalogue outside the explicit Pecos correction changed');
 for(const key of ['entries','areas','range'])assert.deepEqual(delivered[key],c[key]);
-assert(html.includes('name="chronograph-version" content="1.15.0"'));
+assert(html.includes('name="chronograph-version" content="1.16.0"'));
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+c.range.max+'"').test(html));
 for(let y=1849;y<=1914;y++){
  assert.deepEqual(dh.at(y),h.at(y));assert.deepEqual(dh.areasAt(y),h.areasAt(y));

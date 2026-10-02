@@ -27,6 +27,7 @@ const checks = [
   'scripts/world/coasts-occupation-test.cjs',
   'scripts/world/all-borders-test.cjs',
   'scripts/world/universal-borders-test.cjs',
+  'scripts/world/map-stability-test.cjs',
   'scripts/world/border-review-test.cjs',
   'scripts/world/kyrgyz-test.cjs',
   'scripts/world/russia-outline-test.cjs',

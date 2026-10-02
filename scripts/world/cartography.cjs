@@ -46,7 +46,10 @@ module.exports=c=>{
  const valid=[];for(const group of groupedRelations.values()){let previous;for(const r of group.sort((a,b)=>a.from-b.from)){if(previous&&previous.to>=r.from)previous.to=Math.max(previous.to,r.to);else {previous={...r};valid.push(previous);}}}
  const roots=new Set([...valid.map(r=>r.owner),...rawOutlines.map(o=>o.entry),'late-ming','early-mughal','1789-spain','1789-great-britain','late-ottoman','1789-qing','late-yuan','late-chagatai']);
  const reviewGeometry={},shapes=[],shapeIds=new Map();function shape(rings){const key=JSON.stringify(rings);if(!shapeIds.has(key)){shapeIds.set(key,shapes.length);shapes.push(rings);}return shapeIds.get(key);}
- for(const a of c.areas)reviewGeometry[a.id]=shape(G.union(a.polygons));
+ // Later chronological modules must inherit the reviewed geometry, not the
+ // obsolete sketches that preceded the shared cartographic corrections.
+ for(const a of c.areas)reviewGeometry[a.id]=shape(review.geometry({...a,...outline(a.entry,a.from)},a.from));
+ source('cartographyQingStages','大清一統志, 哈密; 清史稿, 地理志; Jia Jianfei. Whose Xinjiang? The Transition in Chinese Intellectuals’ Imagination of the “New Dominion” during the Qing Dynasty, Harvard-Yenching working paper, 2011; Encyclopaedia Iranica. Khotan III: History in the Islamic Period.', ['https://www.shidianguji.com/book/SBCK350/chapter/1kgp2174cbvhh','https://www.harvard-yenching.org/sites/default/files/featurefiles/Jia%20Jianfei_Whose%20Xinjiang.pdf','https://www.iranicaonline.org/articles/khotan-parent/khotan-iii-history-in-the-islamic-period/']);
  const out=[];
  for(const id of roots){
   const e=byId.get(id);if(!e)continue;
@@ -66,6 +69,10 @@ module.exports=c=>{
     row.sources=[...new Set([...row.sources,'cartographySavoyNice'])];
     const note=T(from<1860?'Савойя и графство Ницца принадлежат Сардинскому королевству.|Savoy and the County of Nice belong to the Kingdom of Sardinia.|Савойя менен Ницца графтыгы Сардиния падышалыгына таандык.':'В 1860 году Савойя и графство Ницца переданы Франции. Танд и Ла-Бриг остаются за Италией.|In 1860 Savoy and the County of Nice are transferred to France. Tende and La Brigue remain with Italy.|1860-жылы Савойя менен Ницца графтыгы Францияга өткөрүлөт. Танд жана Ла-Бриг Италияда калат.');
     row.text=row.text.map((t,i)=>t+' '+note[i]);
+   }
+   if(id==='1789-qing'){
+    const note=require('./qing-stages.cjs').note(from);
+    if(note){row.text=row.text.map((t,i)=>t+' '+T(note)[i]);row.sources=[...new Set([...row.sources,'cartographyQingStages'])];}
    }
    const signature=v=>JSON.stringify({...v,id:null,from:null,to:null});const prev=out.at(-1);
    if(prev&&prev.entry===id&&prev.to===from&&signature(prev)===signature(row))prev.to=to;else out.push(row);

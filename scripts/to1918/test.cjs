@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),crypto=require('node:crypto');
 const c=require('../world/catalog.cjs'),{createWorldHistory}=require('../world/core.js'),h=createWorldHistory(c),html=fs.readFileSync('index.html','utf8');
-assert.equal(c.range.min,610);assert(c.range.max>=1918);assert(html.includes('name="chronograph-version" content="1.15.0"'));
+assert.equal(c.range.min,610);assert(c.range.max>=1918);assert(html.includes('name="chronograph-version" content="1.16.0"'));
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="1945"').test(html));
 const p=(id,y)=>h.get(id,y)?.phase,a=(id,y)=>h.mapAreasAt(y).find(a=>a.entry===id);
 for(let y=1915;y<=1918;y++){for(const r of c.regions)assert(h.at(y,r.id).length);const mapped=h.mapAreasAt(y);assert.equal(mapped.length,new Set(mapped.map(a=>a.entry)).size);for(const item of h.at(y))assert(mapped.some(a=>a.entry===item.entry.id),'Unmapped '+item.entry.id);}

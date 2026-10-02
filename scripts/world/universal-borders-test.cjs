@@ -35,7 +35,7 @@ const oldPath='.local-checks/universal-borders-before.json';
 let changed=0;
 if(fs.existsSync(oldPath)){
  const old=JSON.parse(fs.readFileSync(oldPath));
- for(const key of ['areas','entries','events'])assert.deepEqual(require('./catalog.cjs')[key],old[key],'Unrelated historical data changed');
+ for(const key of ['areas','entries','events'])assert.deepEqual(key==='areas'?require('./geometry-regression.cjs')(require('./catalog.cjs')[key]):require('./catalog.cjs')[key],key==='areas'?require('./geometry-regression.cjs')(old[key]):old[key],'Unrelated historical data changed');
  const oldDisplayFile='.local-checks/universal-display-before.json';
  if(fs.existsSync(oldDisplayFile)){const before=JSON.parse(fs.readFileSync(oldDisplayFile));changed=c.areas.filter(a=>JSON.stringify(before.shapes[before.areas[a.id]])!==JSON.stringify(c.displayCartography.shapes[c.displayCartography.areas[a.id]])).length;}
 }

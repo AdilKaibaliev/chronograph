@@ -47,7 +47,7 @@ rows.push(...require('./history-messages.json'));
 rows.push(...require('./kyrgyz-messages.json'));
 const {createChronographTranslator}=require('./core.js');createChronographTranslator(rows);
 rows.push(['Антарктида','Antarctica','Антарктида'],['Географический ориентир.','Geographic reference.','Географиялык багыт белгиси.']);
-let html=require('../late/prepare.cjs')(source).replaceAll('CHRONOGRAPH 1.0 RC3.8','CHRONOGRAPH 1.15.0');
+let html=require('../late/prepare.cjs')(source).replaceAll('CHRONOGRAPH 1.0 RC3.8','CHRONOGRAPH 1.16.0');
 html=html.slice(0,html.indexOf('const ISLAM_STARS = ['))+'const ISLAM_STARS = '+JSON.stringify(stars).replaceAll('<','\\u003c')+';\n'+html.slice(html.indexOf('const STAR_DETAILS='));
 rows.push(['Государства и общества мира','States and societies of the world','Дүйнөнүн мамлекеттери жана коомдору'],['610–1945 · выберите год или исторический рубеж','610–1945 · choose a year or historical milestone','610–1945 · жылды же тарыхый окуяны тандаңыз']);
 const oldMethod='«Хронография» синхронизирует исламскую историю с политической историей Евразии 610–1945 годов. Современные границы используются только как географический ориентир. Исторические области не следует понимать как современные юридически демаркированные границы.';
@@ -67,8 +67,9 @@ html=html.replace('${frameCaption(emp,year)} Прямая власть, дань
 html=html.replace('<div class="top-actions">','<div class="top-actions"><select id="languageSelect" aria-label="Язык сайта"><option value="en" lang="en" selected>English</option><option value="ru" lang="ru">Русский</option><option value="ky" lang="ky">Кыргызча</option></select>');
 html=html.replace('</style>',`\n#languageSelect{font:inherit;color:#eadbc1;background:#252218;border:1px solid #675b40;border-radius:8px;max-width:112px;padding:6px}#languageSelect:focus-visible{outline:2px solid #dfbe79}#translationNotice{flex:none;margin:0;padding:5px 12px;font-size:10px;line-height:1.3;color:#e3c994;background:#302a1e}html[lang=en] .brand-sub,html[lang=ky] .brand-sub{font-size:9px}@media(max-width:700px){.top-actions{gap:3px}#languageSelect{max-width:87px;padding:4px;font-size:10px}.top-actions .btn{font-size:9px;padding:5px 7px}#translationNotice{font-size:9px;padding:3px 10px}}\n</style>`);
 const core=fs.readFileSync(root+'/core.js','utf8').replace("if(typeof module!=='undefined')module.exports={createChronographTranslator};",'');
-html=html.replace('// Init\n',core+'\nconst CHRONOGRAPH_MESSAGES='+JSON.stringify(rows).replaceAll('<','\\u003c')+';\nlet worldHistoryHook=null;\n// Init\n');
-html=html.replace('  if(layerState.autoCamera && playing && e.coord)', '  if(worldHistoryHook)worldHistoryHook();\n  if(layerState.autoCamera && playing && e.coord)');
+html=html.replace('// Init\n',core+'\nconst CHRONOGRAPH_MESSAGES='+JSON.stringify(rows).replaceAll('<','\\u003c')+';\nlet worldHistoryHook=null,worldMapBefore=null,worldMapAfter=null;\n// Init\n');
+html=html.replace('function renderYear(y){','function renderYear(y){\n  if(worldMapBefore)worldMapBefore(Number(y));');
+html=html.replace('  if(layerState.autoCamera && playing && e.coord)', '  if(worldHistoryHook)worldHistoryHook();\n  if(worldMapAfter)worldMapAfter();\n  if(layerState.autoCamera && playing && e.coord)');
 const ending=html.lastIndexOf('})();');assert(ending>0);
 const future=require('../future/catalog.cjs');
 const illustrations=require('../future/illustrations.cjs');
@@ -82,7 +83,7 @@ const worldData={...worldCatalog,displayCartography:require('../world/coastal-di
 const worldTranslate=createChronographTranslator(rows);
 const worldTextRow=text=>[text,worldTranslate(text,'en'),worldTranslate(text,'ky')];
 worldData.events=[...worldData.events,...Object.entries(events).filter(([,e])=>e.coord).map(([y,e])=>({id:'atlas-'+y,from:+y,to:+y,year:+y,approx:false,region:['1171','1250'].includes(y)?'africa':'eurasia',kind:/Битва|Оборона|Поход|Экспансия/.test(e.type)?'war':/Дипломатия/.test(e.type)?'diplomacy':/Миграция/.test(e.type)?'migration':'politics',coord:e.coord,title:worldTextRow(e.title),text:worldTextRow(e.desc),sources:[],base:true}))];
-const worldRuntime=fs.readFileSync(root+'/../world/core.js','utf8').replace("if(typeof module!=='undefined')module.exports={createWorldHistory};",'')+'\nconst WORLD_HISTORY='+JSON.stringify(worldData).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../world/runtime.js','utf8').replace('// TERRITORIES_RUNTIME',fs.readFileSync(root+'/../world/territory-runtime.js','utf8'))+'\n'+fs.readFileSync(root+'/../late/runtime.js','utf8');
+const worldRuntime=fs.readFileSync(root+'/../world/core.js','utf8').replace("if(typeof module!=='undefined')module.exports={createWorldHistory};",'')+'\nconst WORLD_HISTORY='+JSON.stringify(worldData).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../world/runtime.js','utf8').replace('// TERRITORIES_RUNTIME',fs.readFileSync(root+'/../world/territory-runtime.js','utf8'))+'\n'+fs.readFileSync(root+'/../late/runtime.js','utf8')+'\n'+fs.readFileSync(root+'/../world/map-transition.js','utf8');
 html=html.slice(0,ending)+'let futureLocationHook=null,worldLocationHook=null;\n'+fs.readFileSync(root+'/runtime.js','utf8')+'\n'+worldRuntime+'\nconst FUTURE_CATALOG='+JSON.stringify(future).replaceAll('<','\\u003c')+';\nconst FUTURE_ILLUSTRATIONS='+JSON.stringify(illustrations).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../future/illustration-art.js','utf8')+'\n'+futureRuntime+'\n'+fs.readFileSync(root+'/../support/runtime.js','utf8')+'\n'+expansionRuntime+'\n'+html.slice(ending);
 const legacyCartography=require('../world/cartography-legacy.cjs')(empires);
 html=html.replace('function morphPolys', 'const LEGACY_CARTOGRAPHY='+JSON.stringify(legacyCartography)+';\nfunction empireCartographicPolys(id,y,fallback){const f=LEGACY_CARTOGRAPHY.frames[id]?.filter(f=>f[0]<=y).at(-1);return f?LEGACY_CARTOGRAPHY.shapes[f[1]]:fallback;}\nfunction morphPolys');
@@ -103,7 +104,7 @@ html=html.replace('function frame(now){','function frame(now){\n    if(cameraVer
 html=html.replace("if(e.defaultPrevented || $('modal').classList.contains('show') || e.target.closest('input,button,a,summary", "if(document.body.classList.contains('future-mode') || e.defaultPrevented || $('modal').classList.contains('show') || e.target.closest('input,select,button,a,summary");
 for(const script of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(script[1]);
 assert(html.includes('const CHRONOGRAPH_MESSAGES='));assert(!/<a(?=\s|>)|\bhref=|window\.open\(/.test(html.replace(/<link rel="icon"[^>]*>/g,'').replace(/<a class="contact-email" href="mailto:lfc@legacyfidelity\.com\?subject=Chronograph">lfc@legacyfidelity\.com<\/a>/g,'')));
-html=html.replace('</head>','<meta name="chronograph-version" content="1.15.0">\n</head>');
+html=html.replace('</head>','<meta name="chronograph-version" content="1.16.0">\n</head>');
 fs.writeFileSync(repositoryBuild?'index.html':'outputs/chronograph_1_1.html',html);
 fs.writeFileSync(root+'/compiled-messages.json',JSON.stringify(rows,null,2));
 console.log(JSON.stringify({messages:rows.length,eventTitles:Object.keys(translatedEvents).length,eventDescriptions:Object.values(translatedEvents).filter(x=>x.length===4).length,bytes:Buffer.byteLength(html)}));

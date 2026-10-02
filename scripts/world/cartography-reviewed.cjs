@@ -25,13 +25,13 @@ const mewar=[[73,24],[74.6,24],[74.7,25.4],[73,25.5]];
 const ili=[[80,43.3],[82,43.3],[82,44.5],[80,44.5]];
 const mawarannahr=[[62.5,40.2],[66.5,38.2],[70,39],[71,43],[65,44]];
 function legacyGeometry(id,y,polys){return require('./mongol-frontiers.cjs').geometry(id,y,polys)||union(polys);}
-module.exports={tuva,tibet,xinjiang,legacyGeometry,cuts:[1382,1515,1516,1517,1534,1538,1541,1571,1581,1586,1591,1592,1601,1615,1624,1638,1644,1645,1650,1659,1662,1669,1683,1687,1691,1699,1707,1715,1720,1755,1759,1801,1809,1825,1830,1831,1841,1856,1858,1860,1864,1865,1867,1868,1871,1875,1878,1881,1882,1884,1895,1898,1905,1911,1912,1913,1914,1917,1918],
+module.exports={tuva,tibet,xinjiang,legacyGeometry,cuts:[1382,1515,1516,1517,1534,1538,1541,1571,1581,1586,1591,1592,1601,1615,1624,1638,1644,1645,1650,1659,1662,1669,1683,1687,1691,1696,1699,1707,1715,1720,1755,1759,1801,1809,1825,1830,1831,1841,1856,1858,1860,1864,1865,1867,1868,1871,1875,1876,1877,1878,1881,1882,1884,1895,1898,1905,1911,1912,1913,1914,1917,1918],
  geometry(a,y){
   const mongol=require('./mongol-frontiers.cjs').geometry(a.entry,y,a.polygons);if(mongol)return mongol;
   const european=require('./europe-border-review.cjs')(a,y);if(european)return european;
   if(a.entry==='late-yuan'&&y<1368)return legacyGeometry('yuan',y,a.polygons);
   if(a.entry==='late-chagatai'&&y<1347)return legacyGeometry('chagatai',y,a.polygons);
-  if(a.entry==='1789-qing'&&y>=1662){let out=[china,innerMongolia,manchuria(y)];if(y>=1691&&y<1911)out.push(khalkha);if(y>=1755&&y<1911)out.push(westMongolia);if(y>=1755&&y<1759)out.push([[80,44.6],[82,45.2],[85,47],[87,49],[90,46],[94,43],[96,41],[90,42],[85,42],[80,43.4]]);if(y>=1759&&(y<1864||y>=1878))out.push(xinjiang(y));return difference(union(out),[tuva,tibet,...(y>=1871&&y<1882?[ili]:[])]);}
+  if(a.entry==='1789-qing'&&y>=1662){let out=[china,innerMongolia,manchuria(y)];if(y>=1691&&y<1911)out.push(khalkha);if(y>=1755&&y<1911)out.push(westMongolia);if(y>=1755&&y<1759)out.push([[80,44.6],[82,45.2],[85,47],[87,49],[90,46],[94,43],[96,41],[90,42],[85,42],[80,43.4]]);if(y>=1759&&(y<1864||y>=1878))out.push(xinjiang(y));return difference(require('./cartography-geometry.cjs').merge([union(out),require('./qing-stages.cjs')(y,xinjiang)]),[tuva,tibet,...(y>=1871&&y<1882?[ili]:[])]);}
   if(a.entry==='1789-qing'&&y>=1644){const pieces=a.polygons.filter((_,i)=>i>1);return union([manchuria(y),innerMongolia,...pieces]);}
   if(a.entry==='late-ming'&&y>=1382)return union([china]);
   if(a.entry==='late-ottoman'&&y>=1515&&y<1918){let out=[anatolia(y),balkans(y)];if(y<1830)out.push(greece);if(y>=1830&&y<1881)out.push([[20.5,39.25],[22,38.95],[23.25,39.05],[23.15,40.1],[21.2,40.2]]);if(y>=1534&&!(y>=1624&&y<1638))out.push(iraq);else if(y>=1534)out.push(mosul,[[46,31],[48.4,29.5],[48.6,30.3],[47,31.8]]);if(y>=1541&&y<1686)out.push([[17.8,45.6],[20.7,45.6],[21.4,47.4],[19.2,48.3],[17.6,47.4]]);if(y>=1571&&y<1878)out.push(cyprus);if(y>=1669&&y<1898)out.push(crete);out=union(out);if(y>=1687&&y<1715)out=difference(out,[morea]);if(y>=1534&&y<1538)out=difference(out,[[[44,29],[49,29],[49,31.5],[44,31.5]]]);return out;}

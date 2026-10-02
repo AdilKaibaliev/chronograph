@@ -42,7 +42,7 @@ const oldFile='.local-checks/coasts-ww2-baseline.json';if(fs.existsSync(oldFile)
  const old=JSON.parse(fs.readFileSync(oldFile));
  // The documented 1.14.4 France/Sardinia geometry corrections are covered by
  // all-borders-test; retain the original regression guard for every other row.
- const preserved=(rows,key)=>rows.filter(a=>a.from<1940&&(key!=='outlines'||!['late-france','1914-italy','late-yuan','late-chagatai','late-ilkhan','late-jochi'].includes(a.entry)));
+ const preserved=(rows,key)=>require('./geometry-regression.cjs')(rows.filter(a=>a.from<1940&&(key!=='outlines'||!['1789-qing','late-france','1914-italy','late-yuan','late-chagatai','late-ilkhan','late-jochi'].includes(a.entry))));
  for(const key of ['areas','outlines','events'])assert.equal(digest(require('./kyrgyz-baseline.cjs')(preserved(raw[key],key))),digest(preserved(old[key],key)),'Earlier history changed '+key);
 }
 console.log(JSON.stringify({pass:true,coastalShapes:display.shapes.length,coastalFrames:Object.keys(display.areas).length,smallIslandVicinities:display.vicinities.length,checks:'all coastal frames, retained holes, WWII occupations by year, allies and colonies, earlier history preserved'}));

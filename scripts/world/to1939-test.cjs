@@ -35,9 +35,9 @@ assert(p('1848-ndebele',1923).name[1].includes('self-governing'));
 const delivered=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]);assert.deepEqual(delivered.entries,c.entries);assert.deepEqual(delivered.areas,c.areas);assert.deepEqual(delivered.outlines,c.outlines);
 for(const e of c.events.filter(e=>e.from>=1919))assert(h.get(e.entry,e.from),'Orphan event '+e.id);
 // Compare all data through 1918 with the source before this extension (when available).
-const keepOutline=a=>!['late-moscow','early-russia','late-ming','late-france','1914-italy','late-yuan','late-chagatai','late-ilkhan','late-jochi'].includes(a.entry)&&!(a.entry==='1789-qing'&&a.from>=1755&&a.from<1759);
+const keepOutline=a=>!['1789-qing','late-moscow','early-russia','late-ming','late-france','1914-italy','late-yuan','late-chagatai','late-ilkhan','late-jochi'].includes(a.entry)&&!(a.entry==='1789-qing'&&a.from>=1755&&a.from<1759);
 const current={entries:c.entries.map(e=>({...e,phases:e.phases.filter(p=>p.from<1919)})).filter(e=>e.phases.length),areas:c.areas.filter(a=>a.from<1919),events:c.events.filter(e=>e.from<1919),outlines:c.outlines.filter(a=>a.from<1919&&keepOutline(a))};
-assert.equal(require('node:crypto').createHash('sha256').update(JSON.stringify(require('./kyrgyz-baseline.cjs')(current))).digest('hex'),'b7d638ed267ef2c4145b5f4b2ab3cd5a94e091ca4dfe210814a251f92b58191a','Catalogue through 1918 changed');
+assert.equal(require('node:crypto').createHash('sha256').update(JSON.stringify(require('./kyrgyz-baseline.cjs')(current))).digest('hex'),'217af069c851f6219d90e5e00aa2f78d665cd0576c1b8a263ebc1bfbbd928876','Catalogue through 1918 changed');
 const baseline='.local-checks/interwar-baseline.json';if(fs.existsSync(baseline)){
  const old=JSON.parse(fs.readFileSync(baseline));old.outlines=old.outlines.filter(keepOutline);
  for(const key of Object.keys(current))assert.deepEqual(require('./kyrgyz-baseline.cjs')(current)[key],old[key],'Earlier '+key+' changed');

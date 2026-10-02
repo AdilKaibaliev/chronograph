@@ -6,7 +6,7 @@ const {prepare}=require('./outline-policy.cjs');
 // or bridges two separated possessions. The source reconstructions stay intact.
 module.exports=empires=>{
  const fs=require('node:fs'),path=require('node:path'),hash=require('node:crypto').createHash('sha256').update(JSON.stringify(empires));
- for(const file of ['cartography-legacy.cjs','cartography-reviewed.cjs','mongol-frontiers.cjs','coast-geometry.cjs','cartography-geometry.cjs','outline-policy.cjs','land-coasts.json','land-coast-tiles.json'])hash.update(fs.readFileSync(path.join(__dirname,file)));
+ for(const file of ['cartography-legacy.cjs','cartography-reviewed.cjs','qing-stages.cjs','mongol-frontiers.cjs','coast-geometry.cjs','cartography-geometry.cjs','outline-policy.cjs','land-coasts.json','land-coast-tiles.json'])hash.update(fs.readFileSync(path.join(__dirname,file)));
  const key=hash.digest('hex'),cachePath=path.join(__dirname,'../../.local-checks/legacy-cartography-cache.json');
  if(empires.length>1&&fs.existsSync(cachePath)){const saved=JSON.parse(fs.readFileSync(cachePath));if(saved.key===key)return saved.value;}
  const shapes=[],ids=new Map(),frames={};

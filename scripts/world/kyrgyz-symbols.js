@@ -14,7 +14,7 @@ function updateKyrgyzSymbols(){
  // In the focused regional story, keep city and event markers smaller than the
  // polity name. Restore the ordinary sizes when the context layer is closed.
  for(const node of placeLayer.querySelectorAll('circle.core')){
-  const ordinary=node.parentNode.classList.contains('active')?4.5:3.2;
+  const ordinary=3.2;
   node.setAttribute('r',focused?Math.min(ordinary,4/scale):ordinary);
  }
  for(const node of placeLayer.querySelectorAll('circle.pulse'))node.setAttribute('r',focused?Math.min(5,8/scale):5);

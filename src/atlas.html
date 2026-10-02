@@ -48,7 +48,7 @@ button{color:inherit}
 #worldMap{display:block;width:100%;height:620px;background:linear-gradient(180deg,#cfc5ae,#bcb29c);touch-action:none;cursor:grab}.map-card.dragging #worldMap{cursor:grabbing}
 .sea{fill:#bdb39b}.graticule line{stroke:#8c826f;stroke-width:.45;opacity:.25;vector-effect:non-scaling-stroke}.country{fill:#d8cfbc;stroke:#7e7564;stroke-width:.62;vector-effect:non-scaling-stroke;transition:fill .18s,stroke .18s,opacity .18s}.country:hover{fill:#ded5c4}.country.kyrgyz-highlight{fill:#e9dcc0;stroke:#3f4d3e;stroke-width:2.2;filter:url(#countryGlow)}
 .empire-path{vector-effect:non-scaling-stroke;stroke-width:1.4;stroke-linejoin:round;stroke-linecap:round;transition:filter .2s,opacity .25s;cursor:pointer}.empire-path:hover,.empire-path.selected{filter:url(#empireGlow);stroke-width:2.2}.empire-path.local{stroke-dasharray:5 4}.empire-path.fuzzy{stroke-dasharray:8 5}.empire-label{font:600 11px Georgia,serif;letter-spacing:.04em;fill:#211f1a;paint-order:stroke;stroke:rgba(232,222,199,.66);stroke-width:3px;stroke-linejoin:round;pointer-events:none;opacity:.72}.empire-label.small{font-size:9px}.modern-label{font:600 10px Inter,sans-serif;fill:#27241e;paint-order:stroke;stroke:#e1d8c6;stroke-width:3px;pointer-events:none}
-.place-dot{cursor:pointer}.place-dot circle.core{fill:#27231c;stroke:#f1dfaa;stroke-width:1.4;vector-effect:non-scaling-stroke}.place-dot text{font:10px Inter,sans-serif;fill:#28251f;paint-order:stroke;stroke:rgba(224,215,196,.9);stroke-width:3px;pointer-events:none}.place-dot.active circle.core{fill:#5b3f31;stroke:#f3d796}.pulse{fill:none;stroke:#705943;stroke-width:1.2;vector-effect:non-scaling-stroke;transform-origin:center;animation:pulse 2.1s ease-out infinite}.route{fill:none;stroke:#6a4937;stroke-width:2.5;stroke-dasharray:10 8;vector-effect:non-scaling-stroke;animation:dash 5s linear infinite;filter:url(#routeGlow)}@keyframes dash{to{stroke-dashoffset:-72}}@keyframes pulse{0%{r:5;opacity:.78}100%{r:20;opacity:0}}
+.place-dot{cursor:pointer}.place-dot circle.core{fill:#27231c;stroke:#f1dfaa;stroke-width:1.4;vector-effect:non-scaling-stroke}.place-dot text{font:10px Inter,sans-serif;fill:#28251f;paint-order:stroke;stroke:rgba(224,215,196,.9);stroke-width:3px;pointer-events:none}.place-dot.active circle.core{fill:#5b3f31;stroke:#f3d796}.route{fill:none;stroke:#6a4937;stroke-width:2.5;stroke-dasharray:10 8;vector-effect:non-scaling-stroke;animation:dash 5s linear infinite;filter:url(#routeGlow)}@keyframes dash{to{stroke-dashoffset:-72}}
 .empire-group.enter{opacity:0}.empire-group{transition:opacity .62s ease}.empire-group.enter.show{opacity:1}.empire-group.leave{opacity:0}
 .map-legend{position:absolute;left:16px;bottom:16px;z-index:12;width:min(380px,calc(100% - 32px));background:rgba(28,26,22,.90);border:1px solid rgba(214,192,137,.22);border-radius:14px;padding:11px 12px 12px;backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(0,0,0,.2)}.legend-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.legend-top b{font:13px Georgia,serif}.legend-top span{font-size:9px;color:#aaa18e}.legend-items{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.legend-item{display:flex;align-items:center;gap:6px;font-size:10px;color:#d6cdb9;cursor:pointer;padding:4px 6px;border-radius:7px}.legend-item:hover{background:rgba(255,255,255,.04)}.swatch{width:12px;height:8px;border-radius:2px;border:1px solid rgba(255,255,255,.24)}
 .opacity-control{position:absolute;right:16px;bottom:16px;z-index:12;background:rgba(28,26,22,.90);border:1px solid rgba(214,192,137,.22);border-radius:14px;padding:10px 12px;width:210px;backdrop-filter:blur(12px)}.opacity-control label{display:flex;justify-content:space-between;font-size:9px;color:#c9bea8;margin-bottom:6px}.opacity-control input{width:100%;accent-color:#a78954}
@@ -72,7 +72,7 @@ button{color:inherit}
 .layer-panel.show{display:block;animation:panelIn .2s ease-out}.layer-panel h4{font:14px Georgia,serif;margin:0 0 8px;color:#eadfc8}.layer-panel p{font-size:9px;color:#908674;line-height:1.4;margin:0 0 9px}.layer-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 0;border-top:1px solid rgba(255,255,255,.05);font-size:10px;color:#cfc5b2}.layer-row:first-of-type{border-top:0}.switch{position:relative;width:34px;height:18px;flex:none}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;border-radius:999px;background:#49443a;border:1px solid rgba(255,255,255,.08);cursor:pointer;transition:.2s}.slider:before{content:"";position:absolute;width:12px;height:12px;left:2px;top:2px;border-radius:50%;background:#c8bda5;transition:.2s}.switch input:checked + .slider{background:#667565}.switch input:checked + .slider:before{transform:translateX(16px);background:#efe4cd}
 @keyframes panelIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
 .trade-route{fill:none;stroke:#705f48;stroke-width:1.25;stroke-dasharray:4 6;opacity:.56;vector-effect:non-scaling-stroke;animation:tradeDash 10s linear infinite}.trade-route.major{stroke-width:1.7;opacity:.7}.trade-label{font:italic 9px Georgia,serif;fill:#5b5142;paint-order:stroke;stroke:#ddd2ba;stroke-width:3px;pointer-events:none;opacity:.75}@keyframes tradeDash{to{stroke-dashoffset:-80}}
-.time-pulse{fill:none;stroke:#70533e;stroke-width:2;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:center;animation:eventPulse 1.4s ease-out forwards;pointer-events:none}@keyframes eventPulse{0%{opacity:.9;transform:scale(.25)}75%{opacity:.32}100%{opacity:0;transform:scale(4.5)}}
+
 .ca-facts{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px}.ca-fact{border:1px solid rgba(238,229,212,.08);background:rgba(0,0,0,.08);border-radius:9px;padding:8px}.ca-fact b{display:block;font:11px Georgia,serif;color:#dcc895;margin-bottom:3px}.ca-fact span{font-size:8.5px;color:#aaa08e;line-height:1.35;display:block}.ca-note{margin-top:10px;padding:9px 10px;border-left:2px solid rgba(185,155,93,.5);background:rgba(185,155,93,.05);font-size:9px;line-height:1.5;color:#bcb19e}
 .empire-path.fuzzy{filter:saturate(.86)}.empire-path.local{fill-opacity:.30!important}.country-layer-muted .country{opacity:.22}.hidden-layer{display:none!important}
 @media(max-width:760px){.layer-panel{right:9px;top:92px;width:min(250px,calc(100% - 18px))}.ca-facts{grid-template-columns:1fr}}
@@ -812,11 +812,7 @@ function renderTradeRoutes(y){
     if(r.major){const [x,yy]=project(r.label);const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',x);t.setAttribute('y',yy);t.setAttribute('class','trade-label');t.textContent=r.name;tradeLayer.appendChild(t);}
   });
 }
-function pulseEvent(e){
-  pulseLayer.innerHTML=''; if(!e||!e.coord)return;
-  const [x,y]=project(e.coord); const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
-  c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r','12');c.setAttribute('class','time-pulse');pulseLayer.appendChild(c);
-}
+function pulseEvent(){pulseLayer.replaceChildren();}
 function applyLayerState(){
   countryLayer.classList.toggle('hidden-layer',!layerState.countries);
   $('kyrgyzScope').hidden=year<840||year>=924||!layerState.empires;
@@ -1087,12 +1083,17 @@ function renderPlaces(y,e){
     const p=PLACES[id];if(!p)return;const [x,yy]=project(p.c);const g=document.createElementNS('http://www.w3.org/2000/svg','g');
     const majorPlaces=new Set(['mecca','medina','constantinople','baghdad','damascus','changan','kaifeng','hangzhou','cairo','sogut']);
     const mediumPlaces=new Set(['suyab','samarkand','bukhara','balasagun','kashgar','karakorum','jerusalem','ctesiphon']);
-    g.setAttribute('class',`place-dot ${majorPlaces.has(id)?'major':mediumPlaces.has(id)?'medium':'minor'}`);g.setAttribute('transform',`translate(${x} ${yy})`);
+    g.setAttribute('class',`place-dot ${majorPlaces.has(id)?'major':mediumPlaces.has(id)?'medium':'minor'}`);g.dataset.place=id;g.setAttribute('transform',`translate(${x} ${yy})`);
     g.innerHTML=`<circle class="core" r="3.2"/><text x="7" y="3">${p.name}</text>`;
     g.addEventListener('mouseenter',ev=>showTooltip(ev,`<b>${p.name}</b><small>${p.kind}</small>`));g.addEventListener('mousemove',moveTooltip);g.addEventListener('mouseleave',hideTooltip);g.addEventListener('click',()=>focusLonLat(p.c[0],p.c[1],4.1));
     placeLayer.appendChild(g);
   });
-  if(e.coord){const [x,yy]=project(e.coord);const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','place-dot active');g.setAttribute('transform',`translate(${x} ${yy})`);g.innerHTML=`<circle class="pulse" r="5"/><circle class="core" r="4.5"/>`;g.addEventListener('click',()=>focusLonLat(e.coord[0],e.coord[1],e.zoom||4.2));placeLayer.appendChild(g);}
+  if(e.coord){
+    // Reuse the city marker: no expanding halo and no overlapping large dot.
+    const existing=[...placeLayer.children].find(g=>{const p=PLACES[g.dataset.place];return p&&Math.hypot(p.c[0]-e.coord[0],p.c[1]-e.coord[1])<.15;});
+    if(existing)existing.classList.add('active');
+    else {const [x,yy]=project(e.coord),g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','place-dot active');g.setAttribute('transform',`translate(${x} ${yy})`);g.innerHTML='<circle class="core" r="3.2"/>';g.addEventListener('click',()=>focusLonLat(e.coord[0],e.coord[1],e.zoom||4.2));placeLayer.appendChild(g);}
+  }
 }
 
 function curvedPath(a,b){
@@ -1338,7 +1339,7 @@ function updateKyrgyzSymbols(){
  // In the focused regional story, keep city and event markers smaller than the
  // polity name. Restore the ordinary sizes when the context layer is closed.
  for(const node of placeLayer.querySelectorAll('circle.core')){
-  const ordinary=node.parentNode.classList.contains('active')?4.5:3.2;
+  const ordinary=3.2;
   node.setAttribute('r',focused?Math.min(ordinary,4/scale):ordinary);
  }
  for(const node of placeLayer.querySelectorAll('circle.pulse'))node.setAttribute('r',focused?Math.min(5,8/scale):5);

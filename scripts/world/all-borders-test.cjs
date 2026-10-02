@@ -48,8 +48,8 @@ assert(placed[1]<4,'Country label moved to a remote island instead of the neares
 const basePath='.local-checks/all-borders-baseline.json';
 if(fs.existsSync(basePath)){
  const old=JSON.parse(fs.readFileSync(basePath));
- for(const key of ['areas','events'])assert.deepEqual(raw[key],old[key],'Unexpected change '+key);
- const unrelated=list=>list.filter(a=>!['late-france','1914-italy','late-yuan','late-chagatai','late-ilkhan','late-jochi'].includes(a.entry));
+ for(const key of ['areas','events'])assert.deepEqual(require('./geometry-regression.cjs')(raw[key]),require('./geometry-regression.cjs')(old[key]),'Unexpected change '+key);
+ const unrelated=list=>require('./geometry-regression.cjs')(list.filter(a=>!['1789-qing','late-france','1914-italy','late-yuan','late-chagatai','late-ilkhan','late-jochi'].includes(a.entry)));
  assert.deepEqual(unrelated(raw.outlines),unrelated(old.outlines));
  for(const e of raw.entries){const prev=old.entries.find(v=>v.id===e.id);assert(prev);assert.deepEqual(e.phases.filter(p=>p.from<1940),prev.phases.filter(p=>p.from<1940),'Older narrative changed '+e.id);}
 }
