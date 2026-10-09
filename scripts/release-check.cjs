@@ -28,6 +28,7 @@ const checks = [
   'scripts/world/to1991-test.cjs',
   'scripts/world/arctic-test.cjs',
   'scripts/world/to2000-test.cjs',
+  'scripts/world/to2010-test.cjs',
   'scripts/world/coasts-occupation-test.cjs',
   'scripts/world/all-borders-test.cjs',
   'scripts/world/universal-borders-test.cjs',

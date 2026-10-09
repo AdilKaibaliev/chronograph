@@ -5,7 +5,7 @@ const html=fs.readFileSync(require('node:path').join(__dirname,'../../index.html
 const delivered=JSON.parse(html.match(/const WORLD_HISTORY=(.*);/)[1]),dh=createWorldHistory(delivered);
 assert.equal(c.range.min,610);assert(c.range.max>=1815);
 for(const key of ['range','entries','areas'])assert(JSON.stringify(delivered[key])===JSON.stringify(c[key]),'Delivered '+key+' differs');
-for(const [id,source] of Object.entries(c.sources).filter(([id])=>!id.startsWith("to1939")&&!id.startsWith("to1945")&&!id.startsWith("to1960")&&!id.startsWith("to1991")&&!id.startsWith("to2000"))){assert.equal(delivered.sources[id].title,source.title);assert(!delivered.sources[id].urls,'Public sources must remain plain text');}
+for(const [id,source] of Object.entries(c.sources).filter(([id])=>!id.startsWith("to1939")&&!id.startsWith("to1945")&&!id.startsWith("to1960")&&!id.startsWith("to1991")&&!id.startsWith("to2000")&&!id.startsWith("to2010"))){assert.equal(delivered.sources[id].title,source.title);assert(!delivered.sources[id].urls,'Public sources must remain plain text');}
 assert.deepEqual(delivered.events.filter(e=>!e.base),c.events);
 assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+c.range.max+';'));
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+c.range.max+'"').test(html));

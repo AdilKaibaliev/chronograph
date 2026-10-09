@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),G=require('./cartography-geometry.cjs'),clip=require('../vendor/polygon-clipping.cjs'),raw=require('./catalog.cjs'),{createWorldHistory,worldEpochForYear}=require('./core.js');
 const html=fs.readFileSync('index.html','utf8'),c=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]),h=createWorldHistory(c),r=createWorldHistory(raw);
-assert.equal(c.range.max,2000);assert(html.includes('TIMELINE_MAX=2000;'));assert(html.includes('name="chronograph-version" content="1.19.0"'));
+assert(c.range.max>=2000);assert(html.includes('TIMELINE_MAX='+c.range.max+';'));assert(html.includes('name="chronograph-version" content="1.20.0"'));
 const area=(id,y)=>h.mapAreasAt(y).find(a=>a.entry===id),phase=(id,y)=>h.get(id,y)?.phase,has=(id,y,p)=>G.covers(area(id,y).polygons,p);
 for(let y=1992;y<=2000;y++){
  const a=h.mapAreasAt(y),ids=new Set(a.map(a=>a.entry));assert.equal(ids.size,a.length);
@@ -43,7 +43,7 @@ for(let y=1992;y<=2000;y++){
   assert(surface<.0001,'Intersecting political fills '+a.entry+' / '+b.entry+' in '+y+': '+surface);
  }
 }
-const events=raw.events.filter(e=>e.from>=1992);assert(events.length>=29);
+const events=raw.events.filter(e=>e.from>=1992&&e.from<2001);assert(events.length>=29);
 for(const e of events){assert(h.get(e.entry,e.year));assert(e.coord.length===2&&e.coord.every(Number.isFinite));assert(e.sources.every(s=>s.startsWith('to2000')&&raw.sources[s]?.urls.length));}
 const file='.local-checks/to2000-before.json';if(fs.existsSync(file)){
  const b=JSON.parse(fs.readFileSync(file)),past=require('./to2000-window.cjs')(raw);

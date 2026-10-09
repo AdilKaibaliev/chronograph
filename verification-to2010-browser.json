@@ -1,0 +1,49 @@
+{
+  "version": "1.20.0",
+  "htmlSha256": "98ac01b994e946cd6e1ea7e4a85d1ce33773d7a5ce2533e91ee02a28af3b9dfc",
+  "url": "http://127.0.0.1:8773/?lang=ru&year=2010&tab=compare",
+  "tool": "Codex in-app browser",
+  "checks": [
+    {
+      "id": "ru-en-ky",
+      "pass": true,
+      "detail": "Language selector, current year and new individual biography verified in Russian, English and Kyrgyz; Gregorian and Hijri lifespans and named bibliography."
+    },
+    {
+      "id": "balkan-transition",
+      "pass": true,
+      "detail": "2005 shows Serbia and Montenegro and no active Montenegro path; 2006 shows Serbia and Montenegro separately. Temporary inaccessible fade decorations excluded from active path count."
+    },
+    {
+      "id": "end-of-playback",
+      "pass": true,
+      "detail": "Playback at 2010 stops with aria-pressed=false; year remains 2010."
+    },
+    {
+      "id": "desktop",
+      "pass": true,
+      "detail": "1280×720; document exactly viewport height and width; timeline accessible."
+    },
+    {
+      "id": "mobile",
+      "pass": true,
+      "detail": "390×844; document exactly viewport height and width; play control at x18–54/y742.5–778.5."
+    },
+    {
+      "id": "future",
+      "pass": true,
+      "detail": "Future mode opens with Map pressed=true and Illustration=false; return preserves 2010."
+    },
+    {
+      "id": "final-contrast",
+      "pass": true,
+      "detail": "Final rebuilt file reloaded. Kyrgyz panel controls use btn class, rgb(221,211,192) on dark translucent background; document has no overflow."
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "chronograph_1_20_0_desktop.png",
+    "chronograph_1_20_0_mobile.png"
+  ],
+  "notes": "The final rebuild changes only the button styling in the late Kyrgyz panel. The unchanged flows were exercised before that rebuild; final styling checked after reload."
+}

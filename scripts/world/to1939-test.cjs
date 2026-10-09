@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict'),fs=require('fs');
 const c=require('./catalog.cjs'),{createWorldHistory}=require('./core.js'),h=createWorldHistory(c),html=fs.readFileSync('index.html','utf8');
 assert(c.range.max>=1945);assert(html.includes('TIMELINE_MAX='+c.range.max+';'));
-for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="2000"').test(html));
+for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="2010"').test(html));
 const p=(id,y)=>h.get(id,y)?.phase,a=(id,y)=>h.mapAreasAt(y).find(a=>a.entry===id);
 for(let y=1919;y<=1939;y++){
  for(const r of c.regions)assert(h.at(y,r.id).length,'Empty region '+r.id+' '+y);

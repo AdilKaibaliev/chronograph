@@ -1,0 +1,7 @@
+'use strict';
+module.exports=[{
+ name:['Вахба аз-Зухайли','Wahbah al-Zuhayli','Вахба аз-Зухайли'],birth:1932,death:2015,era:'1350–1436 г. х.',article:'Vehbe b. Mustafa ez-Zuhaylî',
+ source:['Hadis Tetkikleri Dergisi, «Vehbe b. Mustafa ez-Zuhaylî», 14(2), 2016, с. 175–178.','Hadis Tetkikleri Dergisi, “Vehbe b. Mustafa ez-Zuhaylî”, 14(2), 2016, pp. 175–178.','Hadis Tetkikleri Dergisi, «Vehbe b. Mustafa ez-Zuhaylî», 14(2), 2016, 175–178-б.'],
+ researchUrl:'https://dergipark.org.tr/tr/download/article-file/591856',
+ text:['Сирийский мусульманский правовед и преподаватель. Родился в Дейр-Атыйе, учился в Дамаске и Каире. В 1963 году защитил исследование об исламском праве войны и начал преподавать в Дамасском университете; с 1975 года — профессор. Специализировался на фикхе, его методологии и сравнительном праве.','A Syrian Muslim jurist and teacher, born in Deir Atiyya and educated in Damascus and Cairo. In 1963 he completed his doctorate on Islamic laws of war and began teaching at Damascus University, becoming a professor in 1975. He specialised in jurisprudence, its methodology and comparative law.','Дейр-Атыйяда туулган сириялык мусулман укук таануучу жана мугалим. Дамаскта жана Каирде билим алган. 1963-жылы исламдагы согуш укугу боюнча докторлук ишин жактап, Дамаск университетинде сабак бере баштаган; 1975-жылдан профессор. Фикх, анын методологиясы жана салыштырма укук боюнча адистешкен.']
+}];

@@ -59,7 +59,7 @@ lateSideHook=(y,e)=>{
  if(kyrgyz.length){
   $('kyrgyzEraTitle').textContent=kyrgyz.map(x=>wl(x.phase.name||x.entry.name)).join(' · ');$('kyrgyzEraText').textContent='';
   $('kyrgyzEraFacts').replaceChildren();
-  for(const kg of kyrgyz){const fact=we('div','ca-fact');fact.append(we('b','',wl(kg.entry.name)),we('span','',wl(kg.phase.text)));const b=we('button','',wt('show'));b.onclick=()=>worldChoosePlace(kg.entry.id,true);fact.append(b);$('kyrgyzEraFacts').append(fact);}
+  for(const kg of kyrgyz){const fact=we('div','ca-fact');fact.append(we('b','',wl(kg.entry.name)),we('span','',wl(kg.phase.text)));const b=we('button','btn',wt('show'));b.onclick=()=>worldChoosePlace(kg.entry.id,true);fact.append(b);$('kyrgyzEraFacts').append(fact);}
   $('kyrgyzEraSource').textContent=[...new Set(kyrgyz.flatMap(x=>x.phase.sources))].map(id=>WORLD_HISTORY.sources[id]?.title||'').join(' · ');
   $('focusKyrgyzHistory').onclick=lateFocusKyrgyz;
  }
