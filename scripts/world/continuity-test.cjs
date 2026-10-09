@@ -4,7 +4,8 @@ const catalog=require('./catalog.cjs'),{createWorldHistory}=require('./core.js')
 const {mappings,legacyData}=require('./continuity.cjs'),history=createWorldHistory(catalog);
 const old=new Map(legacyData().map(e=>[e.id,e]));
 // The correction does not back-project any new state into the original atlas.
-const originalPeriod={entries:catalog.entries.map(e=>({...e,phases:e.phases.filter(p=>p.from<1300)})).filter(e=>e.phases.length),areas:catalog.areas.filter(a=>a.from<1300)};
+const archived=require('./arctic-baseline.cjs')(catalog,undefined,1300);
+const originalPeriod={entries:archived.entries.map(e=>({...e,phases:e.phases.filter(p=>p.from<1300)})).filter(e=>e.phases.length),areas:archived.areas.filter(a=>a.from<1300)};
 assert.equal(require('node:crypto').createHash('sha256').update(JSON.stringify(originalPeriod)).digest('hex'),'2341270089d4f14fee424ae9f04bf236ef2a113aaa69f74c8eca81d32a813852');
 for(const [id,oldId] of Object.entries(mappings)){
  const area=history.areasAt(1300).find(a=>a.entry===id),prior=old.get(oldId),frame=prior.keyframes.filter(f=>f.year<=1299).at(-1);

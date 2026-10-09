@@ -56,11 +56,19 @@ function worldPageWindow(items,state,key,selected='',size=24,idOf=item=>item.id)
  const from=state.page*size,to=Math.min(items.length,from+size);
  return {items:items.slice(from,to),from,to,total:items.length,page:state.page,pages};
 }
-function worldEpochForYear(year){return [610,1300,1454,1601,1790,1816,1849,1915].filter(y=>y<=year).at(-1);}
+function worldEpochForYear(year){return [610,1300,1454,1601,1790,1816,1849,1915,1919,1940,1946,1961,1992].filter(y=>y<=year).at(-1);}
+// Keep modern political profiles ahead of inherited local-history cards.
+// Preserve catalogue order within each group and never mutate the cached query.
+function worldReadingOrder(items,areas,year){
+ if(year<1946)return items;
+ const byId=new Map(areas.map(a=>[a.entry,a]));
+ const rank=item=>{const a=byId.get(item.entry.id);return a?.politicalOutline&&!a.sovereign&&!a.overlord?0:a?.overlord?1:a?.sovereign?2:3;};
+ return items.slice().sort((a,b)=>rank(a)-rank(b));
+}
 function worldRegionalMilestones(records,year){
- const start=worldEpochForYear(year),end=[1300,1454,1601,1790,1816,1849,1915,Infinity].find(y=>y>start);
+ const start=worldEpochForYear(year),end=[1300,1454,1601,1790,1816,1849,1915,1919,1940,1946,1961,1992,Infinity].find(y=>y>start);
  const events=records.filter(e=>e.record==='event'),pool=events.length?events:records;
  const nearby=pool.filter(e=>e.year>=start&&e.year<end);
  return nearby.length?nearby:pool.slice().sort((a,b)=>Math.abs(a.year-year)-Math.abs(b.year-year)||a.year-b.year).slice(0,10).sort((a,b)=>a.year-b.year);
 }
-if(typeof module!=='undefined')module.exports={createWorldHistory,worldPageWindow,worldEpochForYear,worldRegionalMilestones};
+if(typeof module!=='undefined')module.exports={createWorldHistory,worldPageWindow,worldEpochForYear,worldRegionalMilestones,worldReadingOrder};

@@ -1,3 +1,6 @@
 .vercel/
 node_modules/
 .env*
+.local-checks/
+/index.html
+/scripts/i18n/compiled-messages.json

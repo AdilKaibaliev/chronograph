@@ -1,0 +1,31 @@
+{
+  "version": "1.19.0",
+  "htmlSha256": "ebc23dd57874ede31b5cbe86c48a46f4f0758f764870bbdfe699634d5abd3d42",
+  "checks": [
+    {
+      "check": "1991–1992 Russia, China, Kyrgyzstan and Mongolia SVG continuity",
+      "pass": true
+    },
+    {
+      "check": "Playback stops at 2000",
+      "pass": true
+    },
+    {
+      "check": "RU/EN/KY content and 1993 som / 1998 WTO economy filter",
+      "pass": true
+    },
+    {
+      "check": "1280x720 and 390x844 without page overflow; play visible",
+      "pass": true
+    },
+    {
+      "check": "Hamidullah individual biography, Gregorian/AH dates and plain-text source",
+      "pass": true
+    },
+    {
+      "check": "Kosovo 1999 UN administration card and selected map territory",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

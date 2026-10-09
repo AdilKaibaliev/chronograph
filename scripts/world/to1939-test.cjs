@@ -1,8 +1,8 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('fs');
 const c=require('./catalog.cjs'),{createWorldHistory}=require('./core.js'),h=createWorldHistory(c),html=fs.readFileSync('index.html','utf8');
-assert.equal(c.range.max,1945);assert(html.includes('TIMELINE_MAX=1945;'));
-for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="1945"').test(html));
+assert(c.range.max>=1945);assert(html.includes('TIMELINE_MAX='+c.range.max+';'));
+for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="2000"').test(html));
 const p=(id,y)=>h.get(id,y)?.phase,a=(id,y)=>h.mapAreasAt(y).find(a=>a.entry===id);
 for(let y=1919;y<=1939;y++){
  for(const r of c.regions)assert(h.at(y,r.id).length,'Empty region '+r.id+' '+y);
@@ -37,9 +37,9 @@ for(const e of c.events.filter(e=>e.from>=1919))assert(h.get(e.entry,e.from),'Or
 // Compare all data through 1918 with the source before this extension (when available).
 const keepOutline=a=>!['1789-qing','late-moscow','early-russia','late-ming','late-france','1914-italy','late-yuan','late-chagatai','late-ilkhan','late-jochi'].includes(a.entry)&&!(a.entry==='1789-qing'&&a.from>=1755&&a.from<1759);
 const current={entries:c.entries.map(e=>({...e,phases:e.phases.filter(p=>p.from<1919)})).filter(e=>e.phases.length),areas:c.areas.filter(a=>a.from<1919),events:c.events.filter(e=>e.from<1919),outlines:c.outlines.filter(a=>a.from<1919&&keepOutline(a))};
-assert.equal(require('node:crypto').createHash('sha256').update(JSON.stringify(require('./kyrgyz-baseline.cjs')(current))).digest('hex'),'217af069c851f6219d90e5e00aa2f78d665cd0576c1b8a263ebc1bfbbd928876','Catalogue through 1918 changed');
+assert.equal(require('node:crypto').createHash('sha256').update(JSON.stringify(require('./kyrgyz-baseline.cjs')(require('./arctic-baseline.cjs')(current,undefined,1919)))).digest('hex'),'217af069c851f6219d90e5e00aa2f78d665cd0576c1b8a263ebc1bfbbd928876','Catalogue through 1918 changed');
 const baseline='.local-checks/interwar-baseline.json';if(fs.existsSync(baseline)){
  const old=JSON.parse(fs.readFileSync(baseline));old.outlines=old.outlines.filter(keepOutline);
- for(const key of Object.keys(current))assert.deepEqual(require('./kyrgyz-baseline.cjs')(current)[key],old[key],'Earlier '+key+' changed');
+ for(const key of Object.keys(current))assert.deepEqual(require('./kyrgyz-baseline.cjs')(require('./arctic-baseline.cjs')(current,undefined,1919))[key],old[key],'Earlier '+key+' changed');
 }
 console.log(JSON.stringify({pass:true,years:21,profiles:c.entries.length,interwarRevisions:c.to1939Review.revised.length,events:c.events.filter(e=>e.from>=1919).length,checks:'timeline, state succession, dependencies, delivered data, earlier catalogue preserved'}));

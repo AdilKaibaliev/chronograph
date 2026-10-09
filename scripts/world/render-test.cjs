@@ -41,7 +41,7 @@ const context={
  WORLD_HISTORY:catalog,worldHistory:createWorldHistory(catalog),
  year:1299,worldState:{region:'arctic',area:'',selected:'',event:''},
  layerState:{empires:true,places:true},overlayOpacity:.5,
- worldTerritoryLayer:new SvgNode('g'),worldTerritoryLabels:new SvgNode('g'),worldLayer:new SvgNode('g'),
+ worldDefs:new SvgNode('defs'),worldTerritoryLayer:new SvgNode('g'),worldTerritoryLabels:new SvgNode('g'),worldLayer:new SvgNode('g'),
  document:{createElementNS:(_,name)=>new SvgNode(name)},svg:{namespaceURI:'http://www.w3.org/2000/svg'},
  SVG_W:1440,SVG_H:720,TIMELINE_MAX:catalog.range?.max??1299,
  project:([x,y])=>[x,y],polygonPath:rings=>rings.map(ring=>'M'+ring.map(p=>p.join(' ')).join('L')+'Z').join(''),
@@ -52,6 +52,19 @@ vm.runInContext(fs.readFileSync(path.join(__dirname,'territory-runtime.js'),'utf
 vm.runInContext(runtime.slice(start,end),context,{filename:'runtime.js:renderWorldMap'});
 
 const expectedAreas=year=>context.worldHistory.mapAreasAt(year);
+// The same cached selected province must receive the CURRENT parent outline.
+context.worldState.area='late-kyrgyz-tianshan';
+for(const y of [1960,1991,1960]){
+ context.year=y;context.renderWorldTerritories();
+ const group=context.worldTerritoryLayer.children.find(g=>g.dataset.worldArea==='late-kyrgyz-tianshan');
+ if(y===1960){
+  assert.equal(group.getAttribute('clip-path'),'url(#province-boundary-1939-ussr)');
+  const defs=context.worldDefs.children.find(g=>g.getAttribute('data-province-clips')==='true');
+  assert.equal(defs.children.length,1,'Do not rebuild invisible province clips');
+  assert.equal(defs.children[0].children[0].getAttribute('d'),context.polygonPath(context.worldHistory.mapAreasAt(y).find(a=>a.entry==='1939-ussr').polygons));
+ }else assert.notEqual(group.getAttribute('clip-path'),'url(#province-boundary-1939-ussr)','Independent country retains old clip');
+}
+context.worldState.area='';
 const expectedPlaces=year=>catalog.entries.filter(e=>e.phases.some(p=>year>=p.from&&year<p.to));
 const sorted=values=>[...values].sort();
 let renders=0;

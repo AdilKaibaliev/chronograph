@@ -22,7 +22,7 @@ for(const e of catalog.entries){
  }
 }
 for(const e of catalog.events){assert(e.from>=610&&e.from<=MAX&&e.to<=MAX+1&&e.from<=e.to);assert(!ids.has(e.id));ids.add(e.id);[e.title,e.text].forEach(text);assert(catalog.regions.some(r=>r.id===e.region));assert(e.coord.length===2);assert(e.sources.length);for(const id of e.sources){assert(catalog.sources[id]);used.add(id);}if(e.entry)assert(catalog.entries.some(p=>p.id===e.entry));if(e.route){assert(e.route.length>=2);for(const p of e.route)assert(p.length===2&&p.every(Number.isFinite));}}
-for(const e of catalog.events)assert(['war','politics','diplomacy','migration','culture','nature'].includes(e.kind),'Untranslated or unfilterable event topic: '+e.id+' / '+e.kind);
+for(const e of catalog.events)assert(['war','politics','diplomacy','migration','economy','culture','nature'].includes(e.kind),'Untranslated or unfilterable event topic: '+e.id+' / '+e.kind);
 const areaIds=new Set();
 for(const a of catalog.areas){
  assert(!areaIds.has(a.id),'Duplicate territorial frame '+a.id);areaIds.add(a.id);

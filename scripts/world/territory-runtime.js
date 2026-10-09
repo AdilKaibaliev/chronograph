@@ -50,6 +50,7 @@ function renderWorldAreaDetail(){
 function worldAreaOpacity(){return Math.min(.9,Math.max(.16,overlayOpacity*1.35));}
 // Reuse immutable dated features. Bound retention while readers scrub the timeline.
 const worldTerritoryNodes=new Map();
+let worldProvinceClips;
 function renderWorldTerritories(){
  worldTerritoryLayer.replaceChildren();worldTerritoryLabels.replaceChildren();
  worldTerritoryLayer.classList.toggle('hidden-layer',!layerState.empires);worldTerritoryLabels.classList.toggle('hidden-layer',!layerState.empires);
@@ -59,6 +60,17 @@ function renderWorldTerritories(){
  // Like the original Eurasian layer, every active territory remains on the map.
  // A selected region filters the cards and chronology only.
  const areas=worldHistory.mapAreasAt(year).sort((a,b)=>Number(a.relationship==='occupation')-Number(b.relationship==='occupation')||Number(a.entry===worldState.area)-Number(b.entry===worldState.area)||Number(Boolean(b.politicalOutline))-Number(Boolean(a.politicalOutline))||rank[a.kind]-rank[b.kind]);
+ // A highlighted province is bounded by its dated sovereign outline. Keep the
+ // clips outside the feature layer and replace them on every year change;
+ // cached feature nodes therefore cannot retain an obsolete parent frontier.
+ const parents=new Map(areas.map(a=>[a.entry,a]));
+ if(!worldProvinceClips){worldProvinceClips=sn('g',{'data-province-clips':'true'});worldDefs.append(worldProvinceClips);}
+ worldProvinceClips.replaceChildren();
+ for(const id of new Set(areas.filter(a=>a.sovereign&&!a.detachedProvince&&a.entry===worldState.area).map(a=>a.sovereign))){
+  const owner=parents.get(id);if(!owner)continue;
+  const clip=sn('clipPath',{id:'province-boundary-'+id,clipPathUnits:'userSpaceOnUse'});
+  clip.append(sn('path',{d:polygonPath(owner.polygons),'clip-rule':'nonzero'}));worldProvinceClips.append(clip);
+ }
  const unified=areas.filter(a=>a.mongolGroup).length===4&&!(typeof showMongolUluses!=='undefined'&&showMongolUluses);
  for(const a of areas){
   const entry=worldHistory.entry(a.entry),selected=a.entry===worldState.area,grouped=unified&&a.mongolGroup;
@@ -77,6 +89,7 @@ function renderWorldTerritories(){
   // their local settlement vicinity. They never connect islands into ocean empires.
   if(!a.coastClipped&&entry.region!=='oceania'&&entry.id!=='mabuyag')g.setAttribute('clip-path','url(#worldLandClip)');
   const path=sn('path',{d:polygonPath(grouped&&a.entry==='late-yuan'&&a.mongolUnion?a.mongolUnion:a.polygons),fill:grouped?'#785344':a.color,stroke:grouped?'#61483a':a.color,role:'button',tabindex:0,'aria-label':wl(a.name)+' · '+wt(a.kind)+' · '+worldAreaDate(a)});
+  if(selected&&a.sovereign&&!a.detachedProvince&&parents.has(a.sovereign))g.setAttribute('clip-path','url(#province-boundary-'+a.sovereign+')');
   if(grouped&&a.entry!=='late-yuan'&&a.mongolUnion&&!selected)path.setAttribute('tabindex','-1');
   if(a.sovereign&&!a.detachedProvince&&!selected){g.setAttribute('aria-hidden','true');path.setAttribute('tabindex','-1');path.setAttribute('aria-hidden','true');}
   if(a.geometryYear!==undefined)path.style.setProperty('--area-opacity',String(overlayOpacity));

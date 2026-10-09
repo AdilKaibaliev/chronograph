@@ -9,16 +9,17 @@ module.exports=c=>{
  const key=hash.digest('hex'),cachePath=path.join(__dirname,'../../.local-checks/coastal-display-cache.json');
  if(fs.existsSync(cachePath)){const saved=JSON.parse(fs.readFileSync(cachePath));if(saved.key===key)return saved.display;}
  const shapes=[],ids=new Map(),areas={},mongol={},vicinities=[];
- const smallIslands=new Set(['early-motutapu','1789-greenland-posts','mabuyag','tonga','nanmadol','eastpolynesia','rapanui','samoa','palau','early-guam','1789-zanzibar','madagascar','1815-rangihoua','1815-sitka','1789-tasmania','1848-tahiti','1914-western-samoa','1914-american-samoa','1914-riau']);
+ const smallIslands=new Set(['2000-macao','early-motutapu','1789-greenland-posts','mabuyag','tonga','nanmadol','eastpolynesia','rapanui','samoa','palau','early-guam','1789-zanzibar','madagascar','1815-rangihoua','1815-sitka','1789-tasmania','1848-tahiti','1914-western-samoa','1914-american-samoa','1914-riau']);
  const vicinityRings=new Map(),byEntry=new Map();
  const shape=(rings,id,allowVicinity=false,supplement=[])=>{
   rings=rings.filter(r=>Math.abs(G.signed(r))>0.000005);
   try{rings=require('./outline-policy.cjs').prepare(rings,{dissolved:!rings.length||G.signed(rings[0])>0});}catch(err){throw Error(id+': '+err.message);}
   if(rings.length&&G.signed(rings[0])<0)rings=G.union(rings);
-  let clipped=coast(rings).filter(r=>Math.abs(G.signed(r))>0.000005);
+  rings=rings.filter(r=>Math.abs(G.signed(r))>0.000005);
+  let clipped;try{clipped=coast(rings).filter(r=>Math.abs(G.signed(r))>0.000005);}catch(err){throw Error(id+': '+err.message);}
   // Islands smaller than the basemap resolution retain their local vicinity.
   // Never replace a mainland outline with an invented land bridge.
-  const missing=allowVicinity?G.multi(rings).filter(p=>Math.abs(G.signed(p[0]))<6&&!coast(p).length):[];
+  const missing=allowVicinity?G.multi(rings).filter(p=>Math.abs(G.signed(p[0]))<6&&!coast(p).some(r=>Math.abs(G.signed(r))>0.000005)):[];
   if(missing.length||supplement.length){clipped=G.merge([clipped,...missing,...supplement]);vicinities.push(id);vicinityRings.set(id,missing);}
   const key=JSON.stringify(clipped);if(!ids.has(key)){ids.set(key,shapes.length);shapes.push(clipped);}
   return ids.get(key);

@@ -1,0 +1,56 @@
+{
+  "version": "1.18.0",
+  "date": "2026-10-02",
+  "htmlSha256": "9202d65db84b39e9a80e10adb1a9f65ab27b9436412de71e2718e9f127a92f06",
+  "tool": "Codex in-app browser",
+  "url": "http://127.0.0.1:8773/?lang=ru&year=1991&tab=compare&world=eurasia&wplace=late-kyrgyz-tianshan",
+  "languages": [
+    "ru",
+    "en",
+    "ky"
+  ],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "checks": {
+    "loadedVersion": true,
+    "kyrgyzProvinceClip1960": true,
+    "kyrgyzProvinceClip1961": true,
+    "kyrgyzIndependentWithoutParentClip1991": true,
+    "chinaAndMongoliaRendered1961And1991": true,
+    "yemenTwoStates1989Union1990": true,
+    "germanyTwoStates1989Union1990": true,
+    "englishBiographyWithSource": true,
+    "kyrgyzInterface": true,
+    "playbackStopsAt1991": true,
+    "futureDefaultsToMap": true,
+    "futureArabicQuoteAndSourcePresent": true,
+    "returnToAtlas": true
+  },
+  "desktop": {
+    "width": 1280,
+    "height": 720,
+    "scrollWidth": 1280,
+    "scrollHeight": 720,
+    "year": 1991,
+    "language": "ru",
+    "playButton": {
+      "top": 611.5,
+      "bottom": 651.5
+    },
+    "screenshot": "chronograph_1_18_0_desktop.png"
+  },
+  "mobile": {
+    "width": 390,
+    "height": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 844,
+    "year": 1990,
+    "language": "ky",
+    "playButton": {
+      "top": 742.5,
+      "bottom": 778.5
+    },
+    "screenshot": "chronograph_1_18_0_mobile.png"
+  },
+  "scope": "UI smoke tests and layout checks; not an exhaustive browser matrix or historical certification."
+}

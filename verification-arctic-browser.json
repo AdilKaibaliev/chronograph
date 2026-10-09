@@ -1,0 +1,46 @@
+{
+  "version": "1.18.1",
+  "date": "2026-10-03",
+  "htmlSha256": "002c5d0375cecce906856a3478e45b91340a45652b9a6039b118e0fe3f0b1d74",
+  "tool": "Codex in-app browser",
+  "url": "http://127.0.0.1:8773/?lang=ru&year=1953&tab=compare&world=arctic&view=6.334%2C-1814.674%2C-97.577&wplace=thule&wview=timeline&wevent=arctic-review-grise",
+  "languages": [
+    "ru",
+    "en",
+    "ky"
+  ],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "checks": {
+    "loadedVersion": true,
+    "stageButtonsAndRenderedGeometry1600_1850_1925_1953": true,
+    "resoluteAndGriseEvents": true,
+    "routeVisible": true,
+    "schematicRouteLabelAllLanguages": true,
+    "plainTextSourceTitles": true,
+    "viewportOverrideReset": true
+  },
+  "renderedPathLengths": {
+    "1600": 91528,
+    "1850": 83115,
+    "1925": 83255,
+    "1953": 83849
+  },
+  "desktop": {
+    "width": 1280,
+    "height": 720,
+    "scrollWidth": 1280,
+    "scrollHeight": 720,
+    "playBottom": 661.5,
+    "screenshot": "chronograph_1_18_1_arctic_desktop.png"
+  },
+  "mobile": {
+    "width": 390,
+    "height": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 844,
+    "playBottom": 778.5,
+    "screenshot": "chronograph_1_18_1_arctic_mobile.png"
+  },
+  "scope": "Inuit stage selection, event routes, languages and responsive layout; not a historical certification of every atlas boundary."
+}

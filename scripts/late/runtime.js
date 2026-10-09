@@ -33,11 +33,11 @@ lateSideHook=(y,e)=>{
   b.append(we('b','',wl(event.title)),we('p','',wl(event.text)),we('span','',wt('show')+' →'));
   b.onclick=()=>worldChooseEvent(event.id);list.append(b);
  }
- const live=worldHistory.at(y);
+ const live=worldHistory.at(y),politicalIds=new Set(worldHistory.mapAreasAt(y).filter(a=>a.kind==='polity'&&!a.sovereign&&!a.overlord).map(a=>a.entry));
  // One regional heading and a small selection of current polities, with access to the full catalogue.
  for(const region of WORLD_HISTORY.regions){
   const items=live.filter(x=>x.entry.region===region.id);if(!items.length)continue;
-  const preferred=items.filter(x=>x.entry.kind==='state');
+  const preferred=items.filter(x=>politicalIds.has(x.entry.id));
   const eventEntries=new Set(sameYear.map(event=>event.entry));
   const choices=[...(preferred.length?preferred:items)].sort((a,b)=>Number(eventEntries.has(b.entry.id))-Number(eventEntries.has(a.entry.id))||b.phase.from-a.phase.from).slice(0,region.id==='eurasia'?4:2);
   const section=we('section','late-region');section.append(we('h4','',wl(region.name)));choices.forEach(item=>section.append(lateCard(item)));list.append(section);
@@ -47,7 +47,8 @@ lateSideHook=(y,e)=>{
  $('shiftText').textContent=next?lt('next')+' · '+next.from+': '+wl(next.title):lt('current')+' · '+y;
  $('mapBanner').textContent=y+' '+wt('era')+' · '+lt('snapshot');
  $('compareIslam').textContent=e.desc;$('compareIslamMeta').textContent=e.place+' · '+translate(e.ah,language);
- $('compareWorld').textContent=live.filter(x=>x.entry.kind==='state').slice(0,8).map(x=>wl(x.phase.name||x.entry.name)).join(' · ');
+ const outside=WORLD_HISTORY.regions.filter(r=>r.id!=='eurasia').flatMap(r=>live.filter(x=>x.entry.region===r.id&&politicalIds.has(x.entry.id)).slice(0,2));
+ $('compareWorld').textContent=outside.slice(0,8).map(x=>wl(x.phase.name||x.entry.name)).join(' · ');
  $('compareWorldMeta').textContent=lt('current')+' · '+y;
  const ca=live.filter(x=>x.entry.centralAsia);
  $('caText').textContent=ca.map(x=>wl(x.phase.name||x.entry.name)).join(' · ');

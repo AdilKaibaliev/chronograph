@@ -48,9 +48,9 @@ assert(placed[1]<4,'Country label moved to a remote island instead of the neares
 const basePath='.local-checks/all-borders-baseline.json';
 if(fs.existsSync(basePath)){
  const old=JSON.parse(fs.readFileSync(basePath));
- for(const key of ['areas','events'])assert.deepEqual(require('./geometry-regression.cjs')(raw[key]),require('./geometry-regression.cjs')(old[key]),'Unexpected change '+key);
- const unrelated=list=>require('./geometry-regression.cjs')(list.filter(a=>!['1789-qing','late-france','1914-italy','late-yuan','late-chagatai','late-ilkhan','late-jochi'].includes(a.entry)));
+ for(const key of ['areas','events'])assert.deepEqual(require('./geometry-regression.cjs')(require('./historical-window.cjs')(raw[key],key)),require('./geometry-regression.cjs')(old[key]),'Unexpected change '+key);
+ const unrelated=list=>require('./geometry-regression.cjs')(list.filter(a=>a.from<1946&&!['1789-qing','late-france','1914-italy','late-yuan','late-chagatai','late-ilkhan','late-jochi'].includes(a.entry)));
  assert.deepEqual(unrelated(raw.outlines),unrelated(old.outlines));
- for(const e of raw.entries){const prev=old.entries.find(v=>v.id===e.id);assert(prev);assert.deepEqual(e.phases.filter(p=>p.from<1940),prev.phases.filter(p=>p.from<1940),'Older narrative changed '+e.id);}
+ for(const prev of old.entries){const e=require('./arctic-baseline.cjs')(raw.entries,'entries',1940).find(v=>v.id===prev.id);assert(e);assert.deepEqual(e.phases.filter(p=>p.from<1940),prev.phases.filter(p=>p.from<1940),'Older narrative changed '+e.id);}
 }
 console.log(JSON.stringify({pass:true,profiles:c.entries.length,frames:frames.length,years:c.range.max-c.range.min+1,yearlyStates,geographicControls:controls.length+35,checks:'coastal labels, valid holes, date intervals, owner continuity, 1860 transfer, dated anchors, preserved history'}));

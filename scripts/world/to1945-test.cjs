@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),crypto=require('node:crypto');
 const c=require('./catalog.cjs'),h=require('./core.js').createWorldHistory(c),html=fs.readFileSync('index.html','utf8');
-assert.equal(c.range.max,1945);assert(html.includes('TIMELINE_MAX=1945;'));
+assert(c.range.max>=1945);assert(html.includes('TIMELINE_MAX='+c.range.max+';'));
 const a=(id,y)=>h.mapAreasAt(y).find(a=>a.entry===id),p=(id,y)=>h.get(id,y)?.phase;
 for(let y=1940;y<=1945;y++){
  for(const r of c.regions)assert(h.at(y,r.id).length,'Empty region '+r.id+' '+y);
@@ -28,9 +28,9 @@ const raw=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]);
 const digest=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex');
 for(const key of ['entries','areas','outlines','events'])assert.equal(digest(key==='events'?raw[key].filter(e=>!e.id.startsWith('atlas-')):raw[key]),digest(c[key]),'Delivered '+key);
 const baseline='.local-checks/to1945-baseline.json';if(fs.existsSync(baseline)){
- const old=JSON.parse(fs.readFileSync(baseline));
- assert.equal(digest(c.entries.map(e=>({...e,phases:e.phases.filter(p=>p.from<1940)})).filter(e=>e.phases.length)),digest(old.entries),'Earlier text changed');
- for(const key of ['areas','events'])assert.equal(digest(require('./geometry-regression.cjs')(require('./kyrgyz-baseline.cjs')(c[key].filter(a=>a.from<1940)))),digest(require('./geometry-regression.cjs')(old[key])),'Earlier '+key+' changed');
+ const old=JSON.parse(fs.readFileSync(baseline)),archived=require('./arctic-baseline.cjs')(c,undefined,1940);
+ assert.equal(digest(archived.entries.map(e=>({...e,phases:e.phases.filter(p=>p.from<1940)})).filter(e=>e.phases.length)),digest(old.entries),'Earlier text changed');
+ for(const key of ['areas','events'])assert.equal(digest(require('./geometry-regression.cjs')(require('./kyrgyz-baseline.cjs')(archived[key].filter(a=>a.from<1940)))),digest(require('./geometry-regression.cjs')(old[key])),'Earlier '+key+' changed');
 }
 // Exercise the actual timer callback at the end of the delivered timeline.
 const vm=require('node:vm');let tick;

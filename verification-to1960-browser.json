@@ -1,0 +1,61 @@
+{
+  "version": "1.17.0",
+  "date": "2026-10-02",
+  "deployment": "local only",
+  "htmlSha256": "9b1493954a42d85c509d4198f5e40355f2642654a78cbe6c5bac9c2236db469f",
+  "consoleErrors": [],
+  "checks": [
+    {
+      "name": "1945 to 1946",
+      "pass": true
+    },
+    {
+      "name": "1949 Germany and China in English",
+      "pass": true
+    },
+    {
+      "name": "1959 to 1960 Nigeria independence",
+      "pass": true
+    },
+    {
+      "name": "1960 Kyrgyz interface",
+      "pass": true
+    },
+    {
+      "name": "Playback stops at 1960",
+      "pass": true
+    },
+    {
+      "name": "Mali card and map selection",
+      "pass": true
+    },
+    {
+      "name": "Shaltut Russian biography and Ibn Ashur English biography",
+      "pass": true
+    },
+    {
+      "name": "Sources use titles without links",
+      "pass": true
+    }
+  ],
+  "viewports": [
+    {
+      "width": 1280,
+      "height": 720,
+      "scrollWidth": 1280,
+      "scrollHeight": 720
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "playBottom": 778.5
+    }
+  ],
+  "screenshots": [
+    "outputs/chronograph_1_17_0_preview.png",
+    "outputs/chronograph_1_17_0_mobile.png"
+  ],
+  "note": "Temporary browser viewport caused an input/capture timeout in an older test tab; a fresh tab and reload restored verification. No application JS error was reported."
+}
