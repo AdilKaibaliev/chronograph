@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const c=require('./catalog.cjs'),G=require('./cartography-geometry.cjs'),{createWorldHistory,worldRegionalMilestones,worldEpochForYear}=require('./core.js'),h=createWorldHistory(c),html=fs.readFileSync('index.html','utf8');
-assert(c.range.max>=1960);assert(html.includes('TIMELINE_MAX='+c.range.max+';'));
+assert(c.range.max>=1960);assert(html.includes('TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));
 const a=(id,y)=>h.mapAreasAt(y).find(a=>a.entry===id),p=(id,y)=>h.get(id,y)?.phase,has=(id,y,q)=>G.covers(a(id,y).polygons,q);
 for(let y=1946;y<=1960;y++){
  for(const r of c.regions)assert(h.at(y,r.id).length,'Empty region '+r.id+' '+y);

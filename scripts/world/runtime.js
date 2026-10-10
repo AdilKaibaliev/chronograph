@@ -12,10 +12,10 @@ const worldText={
  eurasia:['Евразия · исламская история и современники','Eurasia · Islamic history and contemporaries','Евразия · ислам тарыхы жана замандаштар'],
  legend:['● Город / центр   ◇ Культура   ○ Ландшафт / область','● City / centre   ◇ Culture   ○ Landscape / region','● Шаар / борбор   ◇ Маданият   ○ Ландшафт / аймак'],
  empty:['В этой подборке нет центров для выбранного года.','No centres in this selection for the chosen year.','Бул топтомдо тандалган жылга тиешелүү борборлор жок.'],
- range:['610–2010 · годы нашей эры','610–2010 · Common Era','610–2010 · биздин заман'],
+ range:['610–2026 · годы нашей эры','610–2026 · Common Era','610–2026 · биздин заман'],
  dating:['Даты этапов округлены там, где хронология приблизительна.','Phase dates are rounded where the chronology is approximate.','Хронология болжолдуу болгон жерлерде этаптардын даталары тегеректелген.'],
  geography:['Обозначены города и культурные ландшафты.','Symbols locate cities and cultural landscapes.','Белгилер шаарларды жана маданий ландшафттарды көрсөтөт.'],
- invalid:['Введите год от 610 до 2010.','Enter a year from 610 to 2010.','610–2010 аралыгындагы жылды киргизиңиз.'],
+ invalid:['Введите год от 610 до 2026.','Enter a year from 610 to 2026.','610–2026 аралыгындагы жылды киргизиңиз.'],
  mapName:['Карта исторических государств, городов и культурных ландшафтов','Map of historical states, cities and cultural landscapes','Тарыхый мамлекеттердин, шаарлардын жана маданий ландшафттардын картасы'],
  city:['Город / центр','City / centre','Шаар / борбор'],community:['Поселения','Settlements','Конуштар'],culture:['Археологическая культура','Archaeological culture','Археологиялык маданият'],region:['Региональный ориентир','Regional reference point','Аймактык багыт белгиси'],landscape:['Культурный ландшафт','Cultural landscape','Маданий ландшафт']
 };
@@ -48,7 +48,7 @@ const wl=values=>values[supportedLanguages.indexOf(language)],wt=key=>wl(worldTe
 const worldState={region:WORLD_HISTORY.regions.some(r=>r.id===stateParams.get('world'))?stateParams.get('world'):'all',selected:stateParams.get('wplace')||'',area:stateParams.get('wterritory')||'',mode:['timeline','study'].includes(stateParams.get('wview'))?stateParams.get('wview'):'overview',event:stateParams.get('wevent')||'',type:'all',century:'all',search:'',studySearch:'',filters:!stateParams.has('wevent')};
 const we=(tag,className,text)=>{const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node;};
 const worldExplorer=we('section','world-explorer');worldExplorer.id='worldExplorer';worldExplorer.dataset.localeOwned='true';
-worldExplorer.innerHTML='<header class="world-header"><div class="world-heading"><h3 id="worldHeading"></h3><span id="worldCurrentYear"></span></div><form id="worldYearForm"><label class="world-sr" for="worldRegionSelect" id="worldRegionLabel"></label><select id="worldRegionSelect"></select><label class="world-sr" for="worldYearInput" id="worldYearLabel"></label><input id="worldYearInput" type="number" min="610" max="2010" step="1" required><button id="worldYearApply" type="submit"></button></form><p id="worldScope"></p></header><p class="world-legend" id="worldLegend"></p><div id="worldCards"></div><p class="world-dating" id="worldDating"></p>';
+worldExplorer.innerHTML='<header class="world-header"><div class="world-heading"><h3 id="worldHeading"></h3><span id="worldCurrentYear"></span></div><form id="worldYearForm"><label class="world-sr" for="worldRegionSelect" id="worldRegionLabel"></label><select id="worldRegionSelect"></select><label class="world-sr" for="worldYearInput" id="worldYearLabel"></label><input id="worldYearInput" type="number" min="610" max="2026" step="1" required><button id="worldYearApply" type="submit"></button></form><p id="worldScope"></p></header><p class="world-legend" id="worldLegend"></p><div id="worldCards"></div><p class="world-dating" id="worldDating"></p>';
 $('bottomGrid').prepend(worldExplorer);
 const worldModes=we('div','world-modes');worldModes.setAttribute('role','group');
 for(const [value,key] of [['overview','overview'],['timeline','chronology'],['study','study']]){const b=we('button');b.type='button';b.dataset.worldMode=value;b.dataset.worldLabel=key;b.onclick=()=>{worldState.mode=value;worldState.area='';worldState.event='';renderWorldHistory();$('panel-compare').scrollTop=0;queueLocationSave();};worldModes.append(b);}worldExplorer.querySelector('header').append(worldModes);
@@ -110,7 +110,7 @@ $('worldYearInput').onfocus=stopPlay;
 $('worldSearch').oninput=e=>{worldState.search=e.target.value;renderWorldChronology();};
 $('worldCentury').onchange=e=>{worldState.century=e.target.value;renderWorldChronology();};
 $('worldType').onchange=e=>{worldState.type=e.target.value;renderWorldChronology();};
-function worldEventDate(e){return e.record==='period'?wl(e.period):(e.approx?wl(['ок. ','c. ','болж. ']):'')+e.from+(e.to!==e.from?'–'+e.to:'')+' '+wt('era');}
+function worldEventDate(e){if(e.date){const [y,m,d]=e.date.split('-');return language==='en'?m+'/'+d+'/'+y:d+'.'+m+'.'+y;}return e.record==='period'?wl(e.period):(e.approx?wl(['ок. ','c. ','болж. ']):'')+e.from+(e.to!==e.from?'–'+e.to:'')+' '+wt('era');}
 const worldSearchText=new Map();
 function worldRecords(){const q=worldState.search.trim().toLocaleLowerCase();return worldHistory.timeline(worldState.region).filter(e=>{
  const century=+worldState.century;

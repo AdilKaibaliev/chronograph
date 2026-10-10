@@ -11,11 +11,11 @@ const html=fs.readFileSync(path.join(__dirname,'../../index.html'),'utf8');
 const delivered=JSON.parse(html.match(/const WORLD_HISTORY=(.*);/)[1]);
 const dh=createWorldHistory(delivered);
 assert.equal(c.range.min,610);assert(c.range.max>=1600);
-assert.deepEqual(delivered.range,c.range);
+assert.deepEqual(delivered.range,{...c.range,max:require('../incidents/integrate.cjs').timelineMax});
 assert.deepEqual(delivered.entries,c.entries);
 assert.deepEqual(delivered.areas,c.areas);
-assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+c.range.max+';'));
-for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+c.range.max+'"').test(html),'Unreachable new years in '+id);
+assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));
+for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html),'Unreachable new years in '+id);
 assert(html.includes("'XIV','XV','XVI'"),'Sixteenth-century filter is unavailable');
 // Playback must actually visit the new milestones instead of stepping over
 // one-year events with the old fixed five-year increments.

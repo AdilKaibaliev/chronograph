@@ -1,0 +1,168 @@
+{
+  "version": "1.21.1",
+  "checks": [
+    {
+      "name": "ru 1991",
+      "pass": true,
+      "accents": [
+        "ГКЧП · август 1991 · Начало попытки",
+        "Независимость Кыргызстана",
+        "Освобождение Кувейта"
+      ],
+      "banner": "1991 н. э. · Государства и общества",
+      "pageOverflow": false,
+      "separateMode": false,
+      "title": "ГКЧП · август 1991 · Начало попытки",
+      "year": 1991
+    },
+    {
+      "name": "en 2005",
+      "pass": true,
+      "accents": [
+        "Kyrgyzstan · Tulip Revolution · Second round of elections",
+        "Kyrgyzstan · Tulip Revolution · Resignation letter",
+        "Myanmar moves its capital",
+        "Sudan Comprehensive Peace Agreement",
+        "Bougainville autonomous government"
+      ],
+      "banner": "2005 CE · States and societies",
+      "pageOverflow": false,
+      "separateMode": false,
+      "title": "Kyrgyzstan · Tulip Revolution · Second round of elections",
+      "year": 2005
+    },
+    {
+      "name": "ky 2010",
+      "pass": true,
+      "accents": [
+        "Кыргызстан · Апрель окуялары · Бишкектеги кан төгүү",
+        "Гаитидеги жер титирөө",
+        "Чилидеги Мауле жер титирөөсү"
+      ],
+      "banner": "2010 б. з. · Мамлекеттер жана коомдор",
+      "pageOverflow": false,
+      "separateMode": false,
+      "title": "Кыргызстан · Апрель окуялары · Бишкектеги кан төгүү",
+      "year": 2010
+    },
+    {
+      "name": "ru 2020",
+      "pass": true,
+      "accents": [
+        "Кыргызстан · Октябрьские события · Парламентские выборы"
+      ],
+      "banner": "2020 · События года · современные границы — географический ориентир",
+      "pageOverflow": false,
+      "separateMode": false,
+      "title": "Кыргызстан · Октябрьские события · Парламентские выборы",
+      "year": 2020
+    },
+    {
+      "name": "ru 2022",
+      "pass": true,
+      "accents": [
+        "Казахстан · январь 2022 и ОДКБ · Начало протестов",
+        "Казахстан · январь 2022 и ОДКБ · Насилие в Алматы"
+      ],
+      "banner": "2022 · События года · современные границы — географический ориентир",
+      "pageOverflow": false,
+      "separateMode": false,
+      "title": "Казахстан · январь 2022 и ОДКБ · Начало протестов",
+      "year": 2022
+    },
+    {
+      "name": "fixed-size pulse on zoom",
+      "pass": true,
+      "dots": [
+        "4",
+        "4"
+      ],
+      "rings": [
+        {
+          "r": "13",
+          "width": 26
+        },
+        {
+          "r": "13",
+          "width": 25.99993896484375
+        }
+      ]
+    },
+    {
+      "name": "mobile main layout",
+      "pass": true,
+      "future": false,
+      "height": 844,
+      "panel": {
+        "bottom": 723,
+        "height": 320.515625,
+        "left": 7,
+        "right": 383,
+        "top": 402.484375,
+        "width": 376,
+        "x": 7,
+        "y": 402.484375
+      },
+      "scrollHeight": 844,
+      "scrollWidth": 390,
+      "timeline": {
+        "bottom": 837,
+        "height": 107,
+        "left": 7,
+        "right": 383,
+        "top": 730,
+        "width": 376,
+        "x": 7,
+        "y": 730
+      },
+      "width": 390,
+      "year": "2022"
+    },
+    {
+      "name": "legacy link restores main year",
+      "pass": true,
+      "max": "2026",
+      "mode": "event-geography-reference",
+      "note": "Современные границы · ориентир",
+      "search": "?lang=ru&mode=incidents&incident=kazakhstan-2022&istep=2&year=2010&ilist=stories&ikind=all&iq=old",
+      "title": "Казахстан · январь 2022 и ОДКБ · Начало протестов",
+      "year": "2022",
+      "savedUrl": "http://127.0.0.1:8773/?lang=ru&year=2022&view=1.700%2C-946.000%2C-140.457&tab=events"
+    },
+    {
+      "name": "last available year and country references",
+      "pass": true,
+      "max": "2026",
+      "pulses": 0,
+      "records": 2,
+      "year": "2026"
+    },
+    {
+      "name": "final build main atlas and event blink",
+      "pass": true,
+      "animation": [
+        "year-event-blink",
+        "year-event-blink",
+        "year-event-blink"
+      ],
+      "note": "Границы приблизительны · дата среза в карточке",
+      "oldControls": 0,
+      "ringCount": 3,
+      "title": "ГКЧП · август 1991 · Начало попытки",
+      "year": "1991"
+    },
+    {
+      "name": "final mobile kyrgyz and reference caption",
+      "pass": true,
+      "note": "Азыркы чек аралар · багыт",
+      "scrollHeight": 844,
+      "timelineBottom": 837,
+      "title": "Казакстан · 2022-жылдын январы жана ЖККУ · Нааразылыктын башталышы",
+      "width": 390,
+      "year": "2022"
+    }
+  ],
+  "errors": [],
+  "verifiedAtUtc": "2026-10-10T07:44:48.670Z",
+  "htmlSha256": "a05c078eec12bc65a8b85d722e54c44168bbbbc73bfd08514ebb6f09156a4f67"
+}

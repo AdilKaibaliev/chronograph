@@ -13,6 +13,7 @@ assert.equal(t('Непереведённая историческая справ
 assert.equal(t('Атлас','invalid'),'Атлас');
 const base=fs.readFileSync(fs.existsSync('src/atlas.html')?'src/atlas.html':'publish/index.html','utf8');
 const built=fs.readFileSync(fs.existsSync('src/atlas.html')?'index.html':'outputs/chronograph_1_1.html','utf8');
+createChronographTranslator(JSON.parse(built.match(/const CHRONOGRAPH_MESSAGES=([\s\S]*?);\n/)[1]));
 for(const [start,end] of [['const S =','function resampleRing'],['const EVENTS = {','function ceToAHApprox']])assert.equal(built.slice(built.indexOf(start),built.indexOf(end)),base.slice(base.indexOf(start),base.indexOf(end)),'Historical data changed: '+start);
 const vm=require('node:vm');
 const people=html=>JSON.parse(JSON.stringify(vm.runInNewContext(html.slice(html.indexOf('const ISLAM_STARS = ['),html.indexOf('const STAR_DETAILS='))+';ISLAM_STARS;')));

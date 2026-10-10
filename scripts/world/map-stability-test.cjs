@@ -30,7 +30,8 @@ for(const[y,p,want]of [
 const baseline='.local-checks/release115-baseline.json';
 if(fs.existsSync(baseline)){
  const before=JSON.parse(fs.readFileSync(baseline));
- for(const key of ['entries','events'])assert.deepEqual(require('./historical-window.cjs')(c[key],key),before[key],'Narratives changed '+key);
+ const integratedIds=new Set(require('../incidents/integrate.cjs').events.map(e=>e.id));
+ for(const key of ['entries','events'])assert.deepEqual(require('./historical-window.cjs')(key==='events'?c[key].filter(e=>!integratedIds.has(e.id)):c[key],key),before[key],'Earlier narratives changed '+key);
  assert.deepEqual(require('./geometry-regression.cjs')(require('./historical-window.cjs')(c.areas,'areas')),require('./geometry-regression.cjs')(before.areas),'Unexpected historical change');
 }
 // Exercise cancellation and cleanup of the actual map transition implementation.

@@ -3,10 +3,10 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 const c=require('../world/catalog.cjs'),{createWorldHistory}=require('../world/core.js'),h=createWorldHistory(c);
 const html=fs.readFileSync(path.join(__dirname,'../../index.html'),'utf8');
 const delivered=JSON.parse(html.match(/const WORLD_HISTORY=(.*);/)[1]);
-assert.equal(c.range.min,610);assert(c.range.max>=1789);assert.deepEqual(delivered.range,c.range);
+assert.equal(c.range.min,610);assert(c.range.max>=1789);assert.deepEqual(delivered.range,{...c.range,max:require('../incidents/integrate.cjs').timelineMax});
 assert.deepEqual(delivered.entries,c.entries);assert.deepEqual(delivered.areas,c.areas);
-assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+c.range.max+';'));
-for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+c.range.max+'"').test(html),'Unreachable years in '+id);
+assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));
+for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html),'Unreachable years in '+id);
 assert(html.includes("'XVI','XVII','XVIII'"));assert(html.includes("'culture','nature','territory'"));
 const old={entries:c.entries.map(e=>({id:e.id,region:e.region,kind:e.kind,coord:e.coord,name:e.name,phases:e.phases.filter(p=>p.from<1601)})).filter(e=>e.phases.length),areas:c.areas.filter(a=>a.from<1601)};
 // Explicitly revised for the audited 1300 continuity fix (continuity-test.cjs).

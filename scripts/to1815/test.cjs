@@ -4,11 +4,13 @@ const c=require('../world/catalog.cjs'),{createWorldHistory}=require('../world/c
 const html=fs.readFileSync(require('node:path').join(__dirname,'../../index.html'),'utf8');
 const delivered=JSON.parse(html.match(/const WORLD_HISTORY=(.*);/)[1]),dh=createWorldHistory(delivered);
 assert.equal(c.range.min,610);assert(c.range.max>=1815);
-for(const key of ['range','entries','areas'])assert(JSON.stringify(delivered[key])===JSON.stringify(c[key]),'Delivered '+key+' differs');
+for(const key of ['entries','areas'])assert(JSON.stringify(delivered[key])===JSON.stringify(c[key]),'Delivered '+key+' differs');
+assert.deepEqual(delivered.range,{...c.range,max:require('../incidents/integrate.cjs').timelineMax});
 for(const [id,source] of Object.entries(c.sources).filter(([id])=>!id.startsWith("to1939")&&!id.startsWith("to1945")&&!id.startsWith("to1960")&&!id.startsWith("to1991")&&!id.startsWith("to2000")&&!id.startsWith("to2010"))){assert.equal(delivered.sources[id].title,source.title);assert(!delivered.sources[id].urls,'Public sources must remain plain text');}
-assert.deepEqual(delivered.events.filter(e=>!e.base),c.events);
-assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+c.range.max+';'));
-for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+c.range.max+'"').test(html));
+const addedEventIds=new Set(require('../incidents/integrate.cjs').events.map(e=>e.id));
+assert.deepEqual(delivered.events.filter(e=>!e.base&&!addedEventIds.has(e.id)),c.events);
+assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));
+for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html));
 assert(html.includes("'XVIII','XIX'"),'The nineteenth-century filter is missing');
 // Cartographic additions have their own date/geometry tests; preserve the original-data hash.
 const old={entries:c.entries.filter(e=>!e.id.startsWith('cartography-')).map(e=>({...e,phases:e.phases.filter(p=>p.from<1790)})).filter(e=>e.phases.length),areas:c.areas.filter(a=>!a.entry.startsWith('cartography-')).filter(a=>a.from<1790)};

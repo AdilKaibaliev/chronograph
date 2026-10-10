@@ -16,14 +16,14 @@ const delivered=JSON.parse(payloadMatch[1]);
 const publishedHistory=createWorldHistory(delivered);
 const MIN=610,MAX=1453;
 assert.equal(catalog.range.min,MIN);assert(catalog.range.max>=MAX);
-assert.deepEqual(delivered.range,catalog.range,'The built atlas has stale year limits');
+assert.deepEqual(delivered.range,{...catalog.range,max:require('../incidents/integrate.cjs').timelineMax},'The built atlas has stale event year limits');
 assert.deepEqual(delivered.entries,catalog.entries,'The built profile text or phases are stale');
 assert.deepEqual(delivered.areas,catalog.areas,'The built territorial geometry or text is stale');
 const rangeTag=html.match(/<input\b[^>]*\bid="yearRange"[^>]*>/)?.[0];
 assert(rangeTag,'Missing main timeline');
 assert.equal(rangeTag.match(/\bmin="(\d+)"/)?.[1],String(MIN));
-assert.equal(rangeTag.match(/\bmax="(\d+)"/)?.[1],String(catalog.range.max));
-assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+catalog.range.max+';'));
+assert.equal(rangeTag.match(/\bmax="(\d+)"/)?.[1],String(require('../incidents/integrate.cjs').timelineMax));
+assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));
 
 const territory=(id,y)=>history.areasAt(y).find(a=>a.entry===id);
 const active=(id,y)=>history.get(id,y);

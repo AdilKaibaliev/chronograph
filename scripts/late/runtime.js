@@ -10,12 +10,13 @@ const lateText={
  central:['Центральная Азия · государства и общества','Central Asia · states and societies','Борбордук Азия · мамлекеттер жана коомдор']
 };
 const lt=key=>wl(lateText[key]);
-const lateEventRecords=WORLD_HISTORY.events.filter(e=>e.from>=1300).sort((a,b)=>a.from-b.from||a.id.localeCompare(b.id));
+const lateEventPriority=e=>e.id.startsWith('incident-')?0:e.sourceRecord?2:1;
+const lateEventRecords=WORLD_HISTORY.events.filter(e=>e.from>=1300).sort((a,b)=>a.from-b.from||lateEventPriority(a)-lateEventPriority(b)||(a.date||'').localeCompare(b.date||'')||a.id.localeCompare(b.id));
 const lateEvents=()=>lateEventRecords;
 const lateOwnedIds=['sideKicker','eventTitle','eventDesc','eventPlace','eventAh','eventType','worldList','shiftText','caText','caActions','caEraFacts','caEraNote','kyrgyzEraTitle','kyrgyzEraText','kyrgyzEraFacts','kyrgyzEraSource','compareIslam','compareIslamMeta','compareWorld','compareWorldMeta','mapBanner'];
 lateEventHook=y=>{
  const exact=lateEvents().find(e=>y>=e.from&&y<=e.to),region=exact&&WORLD_HISTORY.regions.find(r=>r.id===exact.region);
- return {ah:ceToAHApprox(y),title:exact?wl(exact.title):lt('snapshot')+' · '+y,desc:exact?wl(exact.text):lt('snapshotBody'),place:region?wl(region.name):lt('world'),type:exact?wt(exact.kind==='culture'?'cultureEvents':exact.kind):lt('period'),coord:exact?.coord||null,zoom:3,world:[],lateEvent:exact};
+ return {ah:ceToAHApprox(y),title:exact?wl(exact.title):lt('snapshot')+' · '+y,desc:exact?wl(exact.text):lt('snapshotBody'),place:exact?.place?wl(exact.place):region?wl(region.name):lt('world'),type:exact?wt(exact.kind==='culture'?'cultureEvents':exact.kind):lt('period'),coord:exact?.coord||null,zoom:3,world:[],lateEvent:exact};
 };
 function lateCard(item){
  const b=we('button','world-item late-world-item');b.type='button';b.dataset.latePlace=item.entry.id;
@@ -30,7 +31,7 @@ lateSideHook=(y,e)=>{
  const sameYear=lateEvents().filter(event=>y>=event.from&&y<=event.to);
  for(const event of sameYear){
   const b=we('button','world-item late-world-item');b.type='button';b.dataset.lateEvent=event.id;
-  b.append(we('b','',wl(event.title)),we('p','',wl(event.text)),we('span','',wt('show')+' →'));
+  b.append(...(event.date?[we('span','world-period',worldEventDate(event))]:[]),we('b','',wl(event.title)),we('p','',wl(event.text)),we('span','',wt('show')+' →'));
   b.onclick=()=>worldChooseEvent(event.id);list.append(b);
  }
  const live=worldHistory.at(y),politicalIds=new Set(worldHistory.mapAreasAt(y).filter(a=>a.kind==='polity'&&!a.sovereign&&!a.overlord).map(a=>a.entry));
