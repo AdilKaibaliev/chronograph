@@ -1,0 +1,23 @@
+Cline Center Coup d'État Project Dataset, version 2.2.2 (17 February 2026).
+Peyton, Buddy; Bajjalieh, Joseph; Martin, Michael; Gerald, Andrea (2026).
+University of Illinois Urbana-Champaign.
+DOI: 10.13012/B2IDB-9651987_V10
+Dataset: https://databank.illinois.edu/datasets/IDB-7095878
+License reported by the repository: Creative Commons Attribution (CC BY).
+License information: https://creativecommons.org/licenses/by/4.0/
+
+cline-2.2.2.csv is the unmodified source download. Its SHA-256 appears in
+registry.json. The atlas preserves source record IDs, dates, outcome categories
+and non-exclusive typology flags. Country names are localized. Map coordinates
+are added by the atlas as country-level reference anchors, derived from the
+atlas's Natural Earth geography, with separate anchors for historic entities and
+small islands. They are not event-site coordinates supplied by Cline Center.
+The dataset's latest event date is 3 January 2026. This release does not claim a
+complete inventory through the end of 2026. The source's classification is
+attributed explicitly; curated stories have their own chronology and sources.
+Registry import, localization and presentation modifications: Chronograph, 2026.
+
+Detailed stories are original short summaries. Bibliography and research URLs
+are in catalog.cjs. The public interface displays source names as plain text,
+in accordance with the project owner's preference. No external source is used
+to infer a precise troop route or a change of sovereign borders.

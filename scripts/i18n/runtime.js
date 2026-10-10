@@ -56,6 +56,7 @@ function saveLocation(){
   if(tab)url.searchParams.set('tab',tab.id.replace('tab-',''));
   if(worldLocationHook)worldLocationHook(url);
   if(futureLocationHook)futureLocationHook(url);
+  if(incidentsLocationHook)incidentsLocationHook(url);
   try{history.replaceState(null,'',url);}catch{/* Local file browsers may restrict URL replacement. */}
 }
 let saveTimer;

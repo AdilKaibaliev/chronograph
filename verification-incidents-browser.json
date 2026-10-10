@@ -1,0 +1,52 @@
+{
+  "version": "1.21.0",
+  "htmlSha256": "c0b7420c5db09d4887c23a50432b105471ecfebb8de673bcd482e7c55c2cc1f5",
+  "tool": "Codex in-app browser",
+  "checks": [
+    {
+      "id": "stories",
+      "pass": true,
+      "detail": "All 12 stories reached their last stage with a selected map marker and disabled Next control."
+    },
+    {
+      "id": "locales",
+      "pass": true,
+      "detail": "RU and EN interface and stage text verified; KY uses explicit Kyrgyz month names without browser English fallback."
+    },
+    {
+      "id": "filters",
+      "pass": true,
+      "detail": "Kazakhstan + 2022 returns both source records separately; self-coup vs attempted-coup typologies are visible. Empty search disables playback and clears the map."
+    },
+    {
+      "id": "playback",
+      "pass": true,
+      "detail": "GKChP playback stops at step 3/3, 21 August 1991. Effects-off removes animated accents."
+    },
+    {
+      "id": "mode-return",
+      "pass": true,
+      "detail": "Leaving incidents restores year 1991 and historical camera. Entering Future hides incidents; return remains functional."
+    },
+    {
+      "id": "desktop",
+      "pass": true,
+      "detail": "1280x720, no document overflow; play control remains at y657–697. Historical territory layer hidden in incident mode."
+    },
+    {
+      "id": "mobile",
+      "pass": true,
+      "detail": "390x844, no document overflow; back button visible, Play at y774–810, internal panel scrolling."
+    },
+    {
+      "id": "deep-link",
+      "pass": true,
+      "detail": "Reload restored the selected story, language and stage; malformed state is bounded by validated catalog IDs and numeric intervals."
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "chronograph_1_21_0_desktop.png",
+    "chronograph_1_21_0_mobile.png"
+  ]
+}
