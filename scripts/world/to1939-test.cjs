@@ -32,7 +32,7 @@ for(const[id,y,point,expected]of [
 ])assert.equal(geo.covers(a(id,y).polygons,point),expected,id+' '+y+' '+point);
 assert.equal(p('1914-namibia',1920).from,1920);
 assert(p('1848-ndebele',1923).name[1].includes('self-governing'));
-const delivered=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]);assert.deepEqual(delivered.entries,c.entries);assert.deepEqual(delivered.areas,c.areas);assert.deepEqual(delivered.outlines,c.outlines);
+const delivered=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]);assert.deepEqual(delivered.entries,require('./published-catalog.cjs').entries);assert.deepEqual(delivered.areas,require('./published-catalog.cjs').areas);assert.deepEqual(delivered.outlines,require('./published-catalog.cjs').outlines);
 for(const e of c.events.filter(e=>e.from>=1919))assert(h.get(e.entry,e.from),'Orphan event '+e.id);
 // Compare all data through 1918 with the source before this extension (when available).
 const keepOutline=a=>!['1789-qing','late-moscow','early-russia','late-ming','late-france','1914-italy','late-yuan','late-chagatai','late-ilkhan','late-jochi'].includes(a.entry)&&!(a.entry==='1789-qing'&&a.from>=1755&&a.from<1759);

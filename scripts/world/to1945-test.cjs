@@ -27,7 +27,7 @@ assert(!/DPRK|Republic of Korea/.test(p('late-joseon',1945).name[1]),'1948 state
 const raw=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]);
 const digest=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex');
 const integratedIds=new Set(require('../incidents/integrate.cjs').events.map(e=>e.id));
-for(const key of ['entries','areas','outlines','events'])assert.equal(digest(key==='events'?raw[key].filter(e=>!e.id.startsWith('atlas-')&&!integratedIds.has(e.id)):raw[key]),digest(c[key]),'Delivered '+key);
+for(const key of ['entries','areas','outlines','events'])assert.equal(digest(key==='events'?raw[key].filter(e=>!e.id.startsWith('atlas-')&&!integratedIds.has(e.id)):raw[key]),digest(require('./published-catalog.cjs')[key]),'Delivered '+key);
 const baseline='.local-checks/to1945-baseline.json';if(fs.existsSync(baseline)){
  const old=JSON.parse(fs.readFileSync(baseline)),archived=require('./arctic-baseline.cjs')(c,undefined,1940);
  assert.equal(digest(archived.entries.map(e=>({...e,phases:e.phases.filter(p=>p.from<1940)})).filter(e=>e.phases.length)),digest(old.entries),'Earlier text changed');

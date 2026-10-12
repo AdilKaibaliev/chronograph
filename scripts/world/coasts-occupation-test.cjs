@@ -3,7 +3,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),crypto=require(
 const html=fs.readFileSync('index.html','utf8'),raw=require('./catalog.cjs'),c=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]);
 const h=require('./core.js').createWorldHistory(c),G=require('./cartography-geometry.cjs'),display=c.displayCartography;
 const digest=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex');
-for(const key of ['areas','outlines','entries'])assert.equal(digest(c[key]),digest(raw[key]),'Display compiler mutated source '+key);
+for(const key of ['areas','outlines','entries'])assert.equal(digest(c[key]),digest(require('./published-catalog.cjs')[key]),'Display compiler mutated source '+key);
 assert(display&&display.shapes.length>100);
 for(const a of [...c.areas,...c.outlines]){
  const rings=display.shapes[display.areas[a.id]];assert(rings?.length,'Empty coastal area '+a.id);

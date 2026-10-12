@@ -35,14 +35,7 @@ const eventMapSliceNote=document.querySelector('.map-slice-note');
 eventMapSliceNote.dataset.localeOwned='true';
 worldHistoryHook=()=>{
  eventPreviousHistoryHook?.();
- const reference=year>2010;
- document.body.classList.toggle('event-geography-reference',reference);
- eventMapSliceNote.textContent=reference?wl(['Современные границы · ориентир','Modern borders · reference','Азыркы чек аралар · багыт']):translate('Границы приблизительны · дата среза в карточке',language);
- if(reference){
-  const caption=wl(['События года · современные границы — географический ориентир','Events of the year · modern borders are a geographic reference','Жылдын окуялары · азыркы чек аралар — географиялык багыт']);
-  $('mapBanner').textContent=year+' · '+caption;
-  for(const id of ['kyrgyzEraTitle','kyrgyzEraText','kyrgyzEraFacts','kyrgyzEraSource'])$(id)?.replaceChildren();
- }
+ eventMapSliceNote.textContent=year>=2011?wl(['Государственные границы · события года','State boundaries · events of the year','Мамлекеттик чек аралар · жылдын окуялары']):translate('Границы приблизительны · дата среза в карточке',language);
  if(year!==eventAccentYear){eventAccentYear=year;if(!document.body.classList.contains('future-mode'))showYearEventAccents(year);}
 };
 // Old shared links to the removed mode now open the corresponding ordinary year.

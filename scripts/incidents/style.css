@@ -6,8 +6,3 @@
 @keyframes year-event-blink{0%,100%{opacity:1}50%{opacity:.15}}
 @media(prefers-reduced-motion:reduce){.year-event-blink{animation:none}}
 body.future-mode .year-event-accent{display:none}
-body.event-geography-reference:not(.future-mode) #countryLayer path{fill:#383b30;stroke:#8f8e76;stroke-width:.55;vector-effect:non-scaling-stroke}
-body.event-geography-reference:not(.future-mode) #empireLayer,
-body.event-geography-reference:not(.future-mode) #empireLabelLayer,
-body.event-geography-reference:not(.future-mode) #worldTerritoryLayer,
-body.event-geography-reference:not(.future-mode) #worldTerritoryLabels{display:none}

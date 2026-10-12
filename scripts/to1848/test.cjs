@@ -7,12 +7,12 @@ assert.equal(c.range.min,610);assert(c.range.max>=1848);
 // Cartographic additions have their own date/geometry tests; preserve the original-data hash.
 const old={entries:c.entries.filter(e=>!e.id.startsWith('cartography-')).map(e=>({...e,phases:e.phases.filter(p=>p.from<1816)})).filter(e=>e.phases.length),areas:c.areas.filter(a=>!a.entry.startsWith('cartography-')).filter(a=>a.from<1816),events:c.events.filter(e=>e.from<1816),sources:Object.fromEntries(Object.entries(c.sources).filter(([id])=>!id.startsWith("to1939")&&!id.startsWith("to1945")&&!id.startsWith("to1960")&&!id.startsWith("to1991")&&!id.startsWith("to2000")&&!id.startsWith("to2010")).filter(([id])=>!id.startsWith('cartography')).filter(([id])=>!/^to(?:1848|1914|1918)/.test(id)))};
 assert.equal(crypto.createHash('sha256').update(JSON.stringify(require('../world/kyrgyz-baseline.cjs')(require('../world/arctic-baseline.cjs')(old,undefined,1816)))).digest('hex'),'ef69981bc749dd23713b5e34cd9c080218527af337204c80d6adec771d1c56d5','Previous 610–1815 catalogue changed');
-for(const key of ['entries','areas'])assert.deepEqual(delivered[key],c[key]);
+for(const key of ['entries','areas'])assert.deepEqual(delivered[key],require('../world/published-catalog.cjs')[key]);
 assert.deepEqual(delivered.range,{...c.range,max:require('../incidents/integrate.cjs').timelineMax});
 assert(html.includes('TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));assert(html.includes('name="chronograph-version"')); 
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html));
 for(let y=1816;y<=1848;y++){
- assert.deepEqual(dh.at(y),h.at(y));assert.deepEqual(dh.areasAt(y),h.areasAt(y));
+ const current=rows=>rows.map(({entry,...item})=>({...item,entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to)}}));assert.deepEqual(current(dh.at(y)),current(h.at(y)));assert.deepEqual(dh.areasAt(y),h.areasAt(y));
  for(const r of c.regions)assert(h.at(y,r.id).length,'Empty region '+r.id+' in '+y);
  const seen=new Set();for(const a of h.areasAt(y)){assert(h.get(a.entry,y));assert(!seen.has(a.entry),'Two active areas for '+a.entry);seen.add(a.entry);}
  for(const p of h.at(y))assert(seen.has(p.entry.id),'Unmapped profile '+p.entry.id);

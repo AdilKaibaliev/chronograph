@@ -19,4 +19,4 @@ for(const record of registry.records){
   record.date+' · '+country.name[2]+'. Cline Center классификациясы: '+label[2].toLowerCase()+'. Жазуу '+record.id+'. Картада өлкөнүн багыт белгиси берилген; реестрде так жер көрсөтүлгөн эмес.'
  ],sources:['incident-cline'],approx:false,referenceOnly:true,sourceRecord:record.id});
 }
-module.exports={events,sources,timelineMax:2026,politicalMax:2010};
+module.exports={events,sources,timelineMax:2026,politicalMax:2026};

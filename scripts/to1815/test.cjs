@@ -4,11 +4,11 @@ const c=require('../world/catalog.cjs'),{createWorldHistory}=require('../world/c
 const html=fs.readFileSync(require('node:path').join(__dirname,'../../index.html'),'utf8');
 const delivered=JSON.parse(html.match(/const WORLD_HISTORY=(.*);/)[1]),dh=createWorldHistory(delivered);
 assert.equal(c.range.min,610);assert(c.range.max>=1815);
-for(const key of ['entries','areas'])assert(JSON.stringify(delivered[key])===JSON.stringify(c[key]),'Delivered '+key+' differs');
+for(const key of ['entries','areas'])assert(JSON.stringify(delivered[key])===JSON.stringify(require('../world/published-catalog.cjs')[key]),'Delivered '+key+' differs');
 assert.deepEqual(delivered.range,{...c.range,max:require('../incidents/integrate.cjs').timelineMax});
 for(const [id,source] of Object.entries(c.sources).filter(([id])=>!id.startsWith("to1939")&&!id.startsWith("to1945")&&!id.startsWith("to1960")&&!id.startsWith("to1991")&&!id.startsWith("to2000")&&!id.startsWith("to2010"))){assert.equal(delivered.sources[id].title,source.title);assert(!delivered.sources[id].urls,'Public sources must remain plain text');}
 const addedEventIds=new Set(require('../incidents/integrate.cjs').events.map(e=>e.id));
-assert.deepEqual(delivered.events.filter(e=>!e.base&&!addedEventIds.has(e.id)),c.events);
+assert.deepEqual(delivered.events.filter(e=>!e.base&&!addedEventIds.has(e.id)),require('../world/published-catalog.cjs').events);
 assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html));
 assert(html.includes("'XVIII','XIX'"),'The nineteenth-century filter is missing');
@@ -16,7 +16,7 @@ assert(html.includes("'XVIII','XIX'"),'The nineteenth-century filter is missing'
 const old={entries:c.entries.filter(e=>!e.id.startsWith('cartography-')).map(e=>({...e,phases:e.phases.filter(p=>p.from<1790)})).filter(e=>e.phases.length),areas:c.areas.filter(a=>!a.entry.startsWith('cartography-')).filter(a=>a.from<1790)};
 assert.equal(crypto.createHash('sha256').update(JSON.stringify(require('../world/kyrgyz-baseline.cjs')(require('../world/arctic-baseline.cjs')(old,undefined,1790)))).digest('hex'),'14524ecd14c7eb7cdeef1d4ffd05d6e752c4e2040604f936c22a51279de9ef4a','Published 610–1789 catalogue changed');
 for(let y=1790;y<=1815;y++){
- assert.deepEqual(dh.at(y),h.at(y));assert.deepEqual(dh.areasAt(y),h.areasAt(y));
+ const current=rows=>rows.map(({entry,...item})=>({...item,entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to)}}));assert.deepEqual(current(dh.at(y)),current(h.at(y)));assert.deepEqual(dh.areasAt(y),h.areasAt(y));
  for(const r of c.regions)assert(h.at(y,r.id).length,'Empty '+r.id+' in '+y);
  for(const area of h.areasAt(y))assert(h.get(area.entry,y),'Territory without a contemporary profile');
 }

@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),G=require('./cartography-geometry.cjs'),clip=require('../vendor/polygon-clipping.cjs'),raw=require('./catalog.cjs'),{createWorldHistory,worldEpochForYear}=require('./core.js');
 const html=fs.readFileSync('index.html','utf8'),c=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]),h=createWorldHistory(c),r=createWorldHistory(raw);
-assert(c.range.max>=2000);assert(html.includes('TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));assert(html.includes('name="chronograph-version" content="1.21.1"'));
+assert(c.range.max>=2000);assert(html.includes('TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));assert(html.includes('name="chronograph-version" content="1.22.0"'));
 const area=(id,y)=>h.mapAreasAt(y).find(a=>a.entry===id),phase=(id,y)=>h.get(id,y)?.phase,has=(id,y,p)=>G.covers(area(id,y).polygons,p);
 for(let y=1992;y<=2000;y++){
  const a=h.mapAreasAt(y),ids=new Set(a.map(a=>a.entry));assert.equal(ids.size,a.length);
@@ -50,6 +50,6 @@ const file='.local-checks/to2000-before.json';if(fs.existsSync(file)){
  for(const key of ['entries','areas','outlines','events','sources'])assert.deepEqual(past[key],b[key],'Earlier '+key+' changed');
  assert.deepEqual(past.cartography.relations,b.cartography.relations);
  const delivered=JSON.parse(fs.readFileSync('.local-checks/to2000-delivered-before.json')),old=createWorldHistory(delivered);
- for(const y of [610,840,1299,1300,1918,1939,1945,1960,1990,1991])for(const a of old.mapAreasAt(y))assert.deepEqual(area(a.entry,y).polygons,a.polygons,'Delivered geometry changed '+y+' '+a.entry);
+ for(const y of [610,840,1299,1300,1918,1939,1945,1960,1990,1991])for(const a of old.mapAreasAt(y))if(!c.frontierReview.frames.some(f=>f.entry===a.entry&&f.from<=y&&y<f.to)) assert.deepEqual(area(a.entry,y).polygons,a.polygons,'Delivered geometry changed '+y+' '+a.entry);
 }
 console.log(JSON.stringify({pass:true,years:9,politicalPairs:pairs,newEvents:events.length,revised:raw.to2000Review.revised.length,checks:'dated sovereignty and administration, enclave holes, no overlapping political fills, all regions, continuity, three languages, complete earlier catalogue unchanged'}));

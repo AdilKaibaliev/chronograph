@@ -19,10 +19,10 @@ for(const s of c.stories){for(const v of [s.title,s.summary]){assert.equal(v.len
 assert.equal(c.stories.find(s=>s.id==='gkchp').kind,'attempt');assert.equal(c.stories.find(s=>s.id==='orange-2004').kind,'protest');
 assert.deepEqual(c.stories.find(s=>s.id==='kazakhstan-2022').steps.slice(-3).map(s=>s.date),['2022-01-06','2022-01-13','2022-01-19']);
 assert.equal(c.stories.find(s=>s.id==='nato-afghanistan').steps[0].date,'2003-08-11');
-const html=fs.readFileSync('index.html','utf8');assert(html.includes('name="chronograph-version" content="1.21.1"'));
+const html=fs.readFileSync('index.html','utf8');assert(html.includes('name="chronograph-version" content="1.22.0"'));
 for(const name of ['runtime.js','core.js'])new vm.Script(fs.readFileSync(__dirname+'/'+name,'utf8'));
 const delivered=JSON.parse(html.match(/const INCIDENT_CATALOG=([\s\S]*?);\n/)[1]);assert.deepEqual(delivered.stories,c.stories);assert(Object.values(delivered.sources).every(s=>Object.keys(s).join()==='title'));
-const integrated=require('./integrate.cjs'),world=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]),originalWorld=require('../world/catalog.cjs');
+const integrated=require('./integrate.cjs'),world=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]),originalWorld=require('../world/published-catalog.cjs');
 assert.equal(world.range.max,2026);assert.equal(integrated.events.length,1202);
 for(const key of ['entries','areas','outlines','cartography'])assert.deepEqual(world[key],originalWorld[key],key+' preserved');
 for(const e of integrated.events){assert(world.events.some(w=>w.id===e.id));assert.equal(e.year,+e.date.slice(0,4));}
@@ -37,4 +37,4 @@ const runtime=fs.readFileSync(__dirname+'/runtime.js','utf8'),style=fs.readFileS
 assert(runtime.includes('year!==eventAccentYear'));assert(runtime.includes('setTimeout(clearEventAccent,2800)'));assert(runtime.includes('e.referenceOnly'));assert(runtime.includes('pulseLayer.append(g)'));assert(!runtime.includes('viewport.append'));
 assert(style.includes('1.2s ease-in-out 2'));assert(style.includes('prefers-reduced-motion'));assert(!style.includes('scale('));
 assert.deepEqual(JSON.parse(html.match(/const FUTURE_CATALOG=([\s\S]*?);\n/)[1]),require('../future/catalog.cjs'));
-console.log('PASS: integrated main chronology, 1202 dated records; original political data and future catalogue preserved; brief fixed-size epicentre accents.');
+console.log('PASS: integrated main chronology, 1202 dated records; reviewed political data and future catalogue preserved; brief fixed-size epicentre accents.');

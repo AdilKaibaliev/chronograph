@@ -26,7 +26,7 @@ for(const a of catalog.areas.filter(a=>a.to===1300)){
 }
 // Rendered geometry is authoritative in the delivered single-file build too.
 const html=fs.readFileSync('index.html','utf8'),delivered=JSON.parse(html.match(/const WORLD_HISTORY=(.*);/)[1]);
-assert.deepEqual(delivered.areas,catalog.areas);
+assert.deepEqual(delivered.areas,require('./published-catalog.cjs').areas);
 const runtime=fs.readFileSync('scripts/world/runtime.js','utf8');
 assert(runtime.includes('worldRenderCache.map!==mapKey'));assert(runtime.includes('else if(year<1300)scheduleWorldLabels()'));
 const territory=fs.readFileSync('scripts/world/territory-runtime.js','utf8');

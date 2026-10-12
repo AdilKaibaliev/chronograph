@@ -1,0 +1,52 @@
+{
+  "version": "1.22.0",
+  "checkedAt": "2026-10-12T04:44:45.234Z",
+  "checks": [
+    {
+      "name": "RU: 2010 → 2011 using chronology control, political fills visible; viewport remains 720px",
+      "pass": true
+    },
+    {
+      "name": "RU: year 2026 has 313 visible map areas",
+      "pass": true
+    },
+    {
+      "name": "KY 1942: filled Iran/Afghanistan, aligned Mongolia/China/USSR borders, Nepal/Bhutan mapped, timeline accessible",
+      "pass": true
+    },
+    {
+      "name": "EN: 2026 playback stops at limit; milestone strip shows 2021–2024 rather than 2001–2010",
+      "pass": true
+    },
+    {
+      "name": "EN: XXI-century filter available and applied to chronology",
+      "pass": true
+    },
+    {
+      "name": "Mobile 390×844: no document overflow; map and play control stay in viewport",
+      "pass": true
+    },
+    {
+      "name": "Future events default to map, illustration opens on click, return restores year 2026",
+      "pass": true
+    },
+    {
+      "name": "RU 1942: Nepal polygon opens the dated Nepal profile",
+      "pass": true
+    },
+    {
+      "name": "Final build: 2010 → 2011 → 2026 preserves visible political layers and 312/313/313 records",
+      "pass": true
+    },
+    {
+      "name": "Final build: 1299 → 1300 map remains visible and document height stays within viewport",
+      "pass": true
+    },
+    {
+      "name": "Year 610 retained; no browser console errors in checked flows",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "htmlSha256": "14ece06ee313690af5e79d750f2492cb4c8b1f0476210489a8ce7e53fc4e9496"
+}

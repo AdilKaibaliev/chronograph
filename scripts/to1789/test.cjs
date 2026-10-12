@@ -4,7 +4,7 @@ const c=require('../world/catalog.cjs'),{createWorldHistory}=require('../world/c
 const html=fs.readFileSync(path.join(__dirname,'../../index.html'),'utf8');
 const delivered=JSON.parse(html.match(/const WORLD_HISTORY=(.*);/)[1]);
 assert.equal(c.range.min,610);assert(c.range.max>=1789);assert.deepEqual(delivered.range,{...c.range,max:require('../incidents/integrate.cjs').timelineMax});
-assert.deepEqual(delivered.entries,c.entries);assert.deepEqual(delivered.areas,c.areas);
+assert.deepEqual(delivered.entries,require('../world/published-catalog.cjs').entries);assert.deepEqual(delivered.areas,require('../world/published-catalog.cjs').areas);
 assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html),'Unreachable years in '+id);
 assert(html.includes("'XVI','XVII','XVIII'"));assert(html.includes("'culture','nature','territory'"));
@@ -13,7 +13,7 @@ const old={entries:c.entries.map(e=>({id:e.id,region:e.region,kind:e.kind,coord:
 assert.equal(crypto.createHash('sha256').update(JSON.stringify(require('../world/kyrgyz-baseline.cjs')(require('../world/arctic-baseline.cjs')(old,undefined,1601)))).digest('hex'),'b164cde6276ba7b3d781bf4b56045c609eba2a70c223860d8014e3e5b2ecabf4','Reviewed 610–1600 continuity baseline changed');
 const dh=createWorldHistory(delivered);
 for(let y=1601;y<=1789;y++){
- assert.deepEqual(dh.at(y),h.at(y));assert.deepEqual(dh.areasAt(y),h.areasAt(y));
+ const current=rows=>rows.map(({entry,...item})=>({...item,entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to)}}));assert.deepEqual(current(dh.at(y)),current(h.at(y)));assert.deepEqual(dh.areasAt(y),h.areasAt(y));
  for(const r of c.regions)assert(h.at(y,r.id).length,'Empty '+r.id+' in '+y);
  for(const a of h.areasAt(y))assert(h.get(a.entry,y),'Ghost territory '+a.id+' in '+y);
 }

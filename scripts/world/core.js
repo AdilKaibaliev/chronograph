@@ -19,7 +19,7 @@ function createWorldHistory(catalog){
    const unified=original.mongolGroup&&catalog.cartography?.mongol?.find(f=>f.from<=year&&year<f.to);
    const occupation=dependencies.get(original.entry)?.relationship==='occupation';
    let a=shape?{...original,polygons:shape,points:shape[0],...(unified?{mongolUnion:catalog.cartography.shapes[unified.shape],mongolUnionId:unified.from}:{})}:original;
-   a={...a,geometryId:original.id,politicalOutline:original.kind==='polity'};
+   a={...a,kind:catalog.cartography?.kinds?.[original.id]||a.kind,geometryId:original.id,politicalOutline:original.kind==='polity'};
    if(outline&&!occupation)a={...a,...outline,geometryId:outline.id,id:original.id+'@'+outline.id,from:Math.max(original.from,outline.from),to:Math.min(original.to,outline.to),points:outline.polygons[0],politicalOutline:true};
    const owner=parent(a.entry),dep=dependencies.get(a.entry);
    if(owner){const ownerDependency=dependencies.get(owner.entry),detachedProvince=ownerDependency?.relationship==='occupation',outer=detachedProvince?owner:ownerDependency?.owner||owner,span=membershipSpan(original);return {...a,...span,id:original.id+'@member-'+owner.entry+'-'+span.from+'-'+outer.color,politicalOutline:false,detachedProvince,sovereign:owner.entry,sovereignName:owner.name,color:outer.color,...(a.entry==='1789-kodiak'&&year>=1799?{overviewLabel:true,label:[-151,64],labelWidth:100,short:['Русская Америка','Russian America','Орус Америкасы']}: {})};}
@@ -56,7 +56,7 @@ function worldPageWindow(items,state,key,selected='',size=24,idOf=item=>item.id)
  const from=state.page*size,to=Math.min(items.length,from+size);
  return {items:items.slice(from,to),from,to,total:items.length,page:state.page,pages};
 }
-function worldEpochForYear(year){return [610,1300,1454,1601,1790,1816,1849,1915,1919,1940,1946,1961,1992,2001].filter(y=>y<=year).at(-1);}
+function worldEpochForYear(year){return [610,1300,1454,1601,1790,1816,1849,1915,1919,1940,1946,1961,1992,2001,2011,2021].filter(y=>y<=year).at(-1);}
 // Keep modern political profiles ahead of inherited local-history cards.
 // Preserve catalogue order within each group and never mutate the cached query.
 function worldReadingOrder(items,areas,year){
@@ -66,7 +66,7 @@ function worldReadingOrder(items,areas,year){
  return items.slice().sort((a,b)=>rank(a)-rank(b));
 }
 function worldRegionalMilestones(records,year){
- const start=worldEpochForYear(year),end=[1300,1454,1601,1790,1816,1849,1915,1919,1940,1946,1961,1992,2001,Infinity].find(y=>y>start);
+ const start=worldEpochForYear(year),end=[1300,1454,1601,1790,1816,1849,1915,1919,1940,1946,1961,1992,2001,2011,2021,Infinity].find(y=>y>start);
  const events=records.filter(e=>e.record==='event'),pool=events.length?events:records;
  const nearby=pool.filter(e=>e.year>=start&&e.year<end);
  return nearby.length?nearby:pool.slice().sort((a,b)=>Math.abs(a.year-year)-Math.abs(b.year-year)||a.year-b.year).slice(0,10).sort((a,b)=>a.year-b.year);
