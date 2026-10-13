@@ -4,14 +4,17 @@ const repositoryBuild=fs.existsSync('src/atlas.html');
 const source=fs.readFileSync(repositoryBuild?'src/atlas.html':'publish/index.html','utf8');
 const latePeople=[...require('../late/biographies.cjs'),...require('../early/biographies.cjs'),...require('../to1789/biographies.cjs'),...require('../to1815/biographies.cjs'),...require('../to1848/biographies.cjs'),...require('../to1914/biographies.cjs'),...require('../to1918/biographies.cjs'),...require('../to1939/biographies.cjs'),...require('../to1945/biographies.cjs'),...require('../to1960/biographies.cjs'),...require('../to1991/biographies.cjs'),...require('../to2000/biographies.cjs'),...require('../to2010/biographies.cjs')];
 const events=vm.runInNewContext(source.slice(source.indexOf('const EVENTS = {'),source.indexOf('function ceToAHApprox'))+';EVENTS');
-const empires=vm.runInNewContext(source.slice(source.indexOf('const S ='),source.indexOf('function resampleRing'))+';EMPIRES');
+const originalEmpires=vm.runInNewContext(source.slice(source.indexOf('const S ='),source.indexOf('function resampleRing'))+';EMPIRES');
+const earlyFrontiers=require('../world/legacy-frontiers.cjs');
+const empires=earlyFrontiers.prepare(originalEmpires);
 const rows=JSON.parse(fs.readFileSync(root+'/messages.json','utf8'));
 rows.push(['Формирование государства','Formation of a state','Мамлекеттин калыптанышы']);
 rows.push(['Географический ориентир','Geographical reference','Географиялык багыт'],['Османская столица','Ottoman capital','Осмон борбору']);
 rows.push(...Object.entries(JSON.parse(fs.readFileSync(root+'/names.json','utf8'))).map(([ru,en])=>[ru,en,ru]));
 rows.push(['Праведные халифы','Rashidun caliphs','Туура жолдогу халифтер'],['Осман I','Osman I','Осмон I'],['Звезды Ислама','Stars of Islam','Ислам жылдыздары']);
 const empireTexts={...JSON.parse(fs.readFileSync(root+'/empires-1.json','utf8')),...JSON.parse(fs.readFileSync(root+'/empires-2.json','utf8'))};
-for(const empire of empires){const d=empireTexts[empire.id];assert(d&&d.length===8,empire.id);['name','short','body','territories'].forEach((field,i)=>rows.push([...require('./kyrgyz-messages.json'),...require('./border-messages.json')].find(row=>row[0]===empire[field])||[empire[field],d[i*2],d[i*2+1]]));}
+for(const empire of originalEmpires){const d=empireTexts[empire.id];assert(d&&d.length===8,empire.id);['name','short','body','territories'].forEach((field,i)=>rows.push([...require('./kyrgyz-messages.json'),...require('./border-messages.json')].find(row=>row[0]===empire[field])||[empire[field],d[i*2],d[i*2+1]]));}
+rows.push(...earlyFrontiers.messages);
 const translatedEvents=JSON.parse(fs.readFileSync(root+'/events.json','utf8'));
 const additionalDescriptions=JSON.parse(fs.readFileSync(root+'/event-descriptions.json','utf8'));
 for(const [year,descriptions] of Object.entries(additionalDescriptions))translatedEvents[year]=[...translatedEvents[year].slice(0,2),...descriptions];
@@ -47,8 +50,11 @@ rows.push(...require('../support/messages.json'));
 rows.push(...require('./history-messages.json')); 
 rows.push(...require('./kyrgyz-messages.json'));
 const {createChronographTranslator}=require('./core.js');createChronographTranslator(rows);
+const originalSourceTranslator=createChronographTranslator(rows);
+for(const e of empires){const old=originalEmpires.find(o=>o.id===e.id);if(e.source!==old.source){const added=e.source.slice(old.source.length);rows.push([e.source,originalSourceTranslator(old.source,'en')+added,originalSourceTranslator(old.source,'ky')+added]);}}
 rows.push(['Антарктида','Antarctica','Антарктида'],['Географический ориентир.','Geographic reference.','Географиялык багыт белгиси.']);
-let html=require('../late/prepare.cjs')(source).replaceAll('CHRONOGRAPH 1.0 RC3.8','CHRONOGRAPH 1.22.0');
+let html=require('../late/prepare.cjs')(source).replaceAll('CHRONOGRAPH 1.0 RC3.8','CHRONOGRAPH 1.23.0');
+html=html.replace(/const EMPIRES=\[[^\n]+;/,'const EMPIRES='+JSON.stringify(empires).replaceAll('<','\\u003c')+';');
 html=html.slice(0,html.indexOf('const ISLAM_STARS = ['))+'const ISLAM_STARS = '+JSON.stringify(stars).replaceAll('<','\\u003c')+';\n'+html.slice(html.indexOf('const STAR_DETAILS='));
 rows.push(['610–2026 · выберите год или исторический рубеж','610–2026 · choose a year or historical milestone','610–2026 · жылды же тарыхый окуяны тандаңыз']);
 rows.push(['Государства и общества мира','States and societies of the world','Дүйнөнүн мамлекеттери жана коомдору'],['610–2010 · выберите год или исторический рубеж','610–2010 · choose a year or historical milestone','610–2010 · жылды же тарыхый окуяны тандаңыз']);
@@ -98,7 +104,9 @@ const incidentPublic={...incidentCatalog,sources:Object.fromEntries(Object.entri
 const incidentRegistryPublic={...incidentRegistry,provenance:{...incidentRegistry.provenance,source:undefined}};
 const incidentRuntime=fs.readFileSync(root+'/../incidents/core.js','utf8').replace("if(typeof module!=='undefined')module.exports={incidentRecords,incidentGroups,incidentStep};",'')+'\nconst INCIDENT_CATALOG='+JSON.stringify(incidentPublic).replaceAll('<','\\u003c')+';\nconst INCIDENT_REGISTRY='+JSON.stringify(incidentRegistryPublic).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../incidents/runtime.js','utf8');
 html=html.slice(0,ending)+'let futureLocationHook=null,worldLocationHook=null,incidentsLocationHook=null;\n'+fs.readFileSync(root+'/runtime.js','utf8')+'\n'+worldRuntime+'\nconst FUTURE_CATALOG='+JSON.stringify(future).replaceAll('<','\\u003c')+';\nconst FUTURE_ILLUSTRATIONS='+JSON.stringify(illustrations).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../future/illustration-art.js','utf8')+'\n'+futureRuntime+'\n'+fs.readFileSync(root+'/../support/runtime.js','utf8')+'\n'+expansionRuntime+'\n'+incidentRuntime+'\n'+html.slice(ending);
+html=html.replace('p.dataset.empire=emp.id;', 'p.dataset.empire=emp.id;p.dataset.empireType=emp.legacyContext?"context":emp.type;if(emp.legacyContext){p.setAttribute("fill-opacity","0");p.setAttribute("stroke-dasharray","4 3");}');
 const legacyCartography=require('../world/cartography-legacy.cjs')(empires);
+html=html.replace('function empireStatesForYear(y){return EMPIRES.flatMap',fs.readFileSync(root+'/../world/legacy-presentation.js','utf8')+'\nfunction empireStatesForYear(y){return EMPIRES.filter(e=>legacyStateVisible(e.id,y)).flatMap');
 html=html.replace('function morphPolys', 'const LEGACY_CARTOGRAPHY='+JSON.stringify(legacyCartography)+';\nfunction empireCartographicPolys(id,y,fallback){const f=LEGACY_CARTOGRAPHY.frames[id]?.filter(f=>f[0]<=y).at(-1);return f?LEGACY_CARTOGRAPHY.shapes[f[1]]:fallback;}\nfunction morphPolys');
 html=html.replace("p.setAttribute('d',polygonPath(f.polys))", "p.setAttribute('d',polygonPath(empireCartographicPolys(emp.id,y,f.polys)))");
 html=html.replaceAll("polygonPath(emp.dependentPolys)","polygonPath(empireCartographicPolys(emp.id==='mongolRealm'?'mongolDependencies':emp.id+'Dependencies',y,emp.dependentPolys))");
@@ -118,7 +126,7 @@ html=html.replace('function frame(now){','function frame(now){\n    if(cameraVer
 html=html.replace("if(e.defaultPrevented || $('modal').classList.contains('show') || e.target.closest('input,button,a,summary", "if(document.body.classList.contains('future-mode') || e.defaultPrevented || $('modal').classList.contains('show') || e.target.closest('input,select,button,a,summary");
 for(const script of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(script[1]);
 assert(html.includes('const CHRONOGRAPH_MESSAGES='));assert(!/<a(?=\s|>)|\bhref=|window\.open\(/.test(html.replace(/<link rel="icon"[^>]*>/g,'').replace(/<a class="contact-email" href="mailto:lfc@legacyfidelity\.com\?subject=Chronograph">lfc@legacyfidelity\.com<\/a>/g,'')));
-html=html.replace('</head>','<meta name="chronograph-version" content="1.22.0">\n</head>');
+html=html.replace('</head>','<meta name="chronograph-version" content="1.23.0">\n</head>');
 fs.writeFileSync(repositoryBuild?'index.html':'outputs/chronograph_1_1.html',html);
 fs.writeFileSync(root+'/compiled-messages.json',JSON.stringify(rows,null,2));
 console.log(JSON.stringify({messages:rows.length,eventTitles:Object.keys(translatedEvents).length,eventDescriptions:Object.values(translatedEvents).filter(x=>x.length===4).length,bytes:Buffer.byteLength(html)}));

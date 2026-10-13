@@ -14,7 +14,11 @@ assert.equal(t('Атлас','invalid'),'Атлас');
 const base=fs.readFileSync(fs.existsSync('src/atlas.html')?'src/atlas.html':'publish/index.html','utf8');
 const built=fs.readFileSync(fs.existsSync('src/atlas.html')?'index.html':'outputs/chronograph_1_1.html','utf8');
 createChronographTranslator(JSON.parse(built.match(/const CHRONOGRAPH_MESSAGES=([\s\S]*?);\n/)[1]));
-for(const [start,end] of [['const S =','function resampleRing'],['const EVENTS = {','function ceToAHApprox']])assert.equal(built.slice(built.indexOf(start),built.indexOf(end)),base.slice(base.indexOf(start),base.indexOf(end)),'Historical data changed: '+start);
+for(const [start,end] of [['const EVENTS = {','function ceToAHApprox']])assert.equal(built.slice(built.indexOf(start),built.indexOf(end)),base.slice(base.indexOf(start),base.indexOf(end)),'Historical events changed: '+start);
+const expectedEmpires=require('../world/legacy-frontiers.cjs').prepare(require('../world/continuity.cjs').legacyData());
+const deliveredEmpires=JSON.parse(built.match(/const EMPIRES=([^\n]+);/)[1]);
+assert.equal(deliveredEmpires.length,expectedEmpires.length);
+for(let i=0;i<expectedEmpires.length;i++)assert.deepEqual(deliveredEmpires[i],expectedEmpires[i],'Undeclared early atlas change '+expectedEmpires[i].id);
 const vm=require('node:vm');
 const people=html=>JSON.parse(JSON.stringify(vm.runInNewContext(html.slice(html.indexOf('const ISLAM_STARS = ['),html.indexOf('const STAR_DETAILS='))+';ISLAM_STARS;')));
 const originalPeople=people(base),extendedPeople=people(built);
@@ -23,4 +27,4 @@ assert.equal(extendedPeople.length,originalPeople.length+require('../late/biogra
 assert(!/<a(?=\s|>)|\bhref=|window\.open\(/.test(built.replace(/<link rel="icon"[^>]*>/g,'').replace(/<a class="contact-email" href="mailto:lfc@legacyfidelity\.com\?subject=Chronograph">lfc@legacyfidelity\.com<\/a>/g,'')),'Sources must remain plain text');
 assert(!built.includes('id="translationNotice"'),'Preview notice remains');
 console.log('PASS: '+rows.length+' message pairs, Russian preservation, calendar and dynamic labels, explicit Russian fallback.');
-console.log('PASS: original historical states, geometry, events and person dates preserved from source; plain-text sources.');
+console.log('PASS: delivered early states match the documented frontier review; original events and person dates preserved; plain-text sources.');

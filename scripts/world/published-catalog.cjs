@@ -3,6 +3,7 @@
 // Corrections are explicit, dated transformations, checked against that baseline.
 let c=structuredClone(require('./catalog.cjs'));
 c=require('./frontier-review.cjs')(c);
+c=require('./shared-frontiers.cjs')(c);
 c=require('./to2026.cjs')(c);
 const G=require('./cartography-geometry.cjs');
 for(const a of c.areas)if(c.cartography.areas[a.id]===undefined){

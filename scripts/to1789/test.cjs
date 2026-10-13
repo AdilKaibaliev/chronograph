@@ -13,7 +13,7 @@ const old={entries:c.entries.map(e=>({id:e.id,region:e.region,kind:e.kind,coord:
 assert.equal(crypto.createHash('sha256').update(JSON.stringify(require('../world/kyrgyz-baseline.cjs')(require('../world/arctic-baseline.cjs')(old,undefined,1601)))).digest('hex'),'b164cde6276ba7b3d781bf4b56045c609eba2a70c223860d8014e3e5b2ecabf4','Reviewed 610–1600 continuity baseline changed');
 const dh=createWorldHistory(delivered);
 for(let y=1601;y<=1789;y++){
- const current=rows=>rows.map(({entry,...item})=>({...item,entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to)}}));assert.deepEqual(current(dh.at(y)),current(h.at(y)));assert.deepEqual(dh.areasAt(y),h.areasAt(y));
+ const current=rows=>rows.map(({entry,...item})=>({...item,entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to)}}));assert.deepEqual(current(dh.at(y)),current(h.at(y)));assert.deepEqual(dh.areasAt(y).map(a=>a.entry),h.areasAt(y).map(a=>a.entry),'Dated map selection '+y);
  for(const r of c.regions)assert(h.at(y,r.id).length,'Empty '+r.id+' in '+y);
  for(const a of h.areasAt(y))assert(h.get(a.entry,y),'Ghost territory '+a.id+' in '+y);
 }

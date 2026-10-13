@@ -1,6 +1,6 @@
 // Self-localized world comparison; historical polities and future-event data stay independent.
 const worldHistory=createWorldHistory(WORLD_HISTORY);
-worldPlaybackYears=[...new Set([...worldHistory.changes(),...WORLD_HISTORY.events.map(e=>e.from)].filter(y=>y>=1300))].sort((a,b)=>a-b);
+worldPlaybackYears=[...new Set([...worldHistory.changes(),...WORLD_HISTORY.events.map(e=>e.from),...(typeof LEGACY_CARTOGRAPHY==='undefined'?[]:Object.values(LEGACY_CARTOGRAPHY.frames).flatMap(f=>f.map(x=>x[0]))),...(typeof EMPIRES==='undefined'?[]:EMPIRES.flatMap(e=>[e.from,e.to+1]))].filter(y=>y>=610&&y<=TIMELINE_MAX))].sort((a,b)=>a-b);
 const worldText={
  title:['Параллельная история мира','Parallel world history','Дүйнөнүн параллелдүү тарыхы'],
  explore:['Мир','World','Дүйнө'],all:['Все регионы','All regions','Бардык аймактар'],
@@ -337,7 +337,7 @@ function renderWorldHistory(){
  const selected=worldHistory.record(worldState.event);if(selected&&(year<selected.from||year>selected.to))worldState.event='';
  const areas=worldHistory.mapAreasAt(year),items=worldHistory.at(year);
  const snapshot=language+'|'+areas.map(a=>a.id).join(',')+'|'+items.map(i=>i.entry.id+':'+i.phase.from).join(',');
- const mapKey=[snapshot,worldState.area,worldState.selected,worldState.event,layerState.empires,layerState.places,overlayOpacity,showMongolUluses].join('|');
+ const mapKey=[snapshot,year<1300?year:'',worldState.area,worldState.selected,worldState.event,layerState.empires,layerState.places,overlayOpacity,showMongolUluses].join('|');
  const cardKey=[snapshot,worldState.region,worldState.mode,worldState.studySearch,worldState.selected,worldState.area,worldBasePolities().map(p=>p.id+':'+p.name).join(',')].join('|');
  const chronologyKey=[language,worldState.region,worldState.mode,worldState.type,worldState.century,worldState.search,worldState.event].join('|');
  renderWorldControls();
@@ -349,7 +349,9 @@ function renderWorldHistory(){
  }
  renderWorldEvent();renderWorldAreaDetail();
  if(worldRenderCache.map!==mapKey){renderWorldMap();worldRenderCache.map=mapKey;}
- else if(year<1300)scheduleWorldLabels();
+ // renderPlaces recreates the city nodes even when political geometry is cached.
+ // Scale and declutter those fresh labels on every render, including 1300+.
+ else updateWorldMarkerScale();
  worldLegendPending=snapshot+'|'+worldState.region;refreshWorldLegend();
  if(year>=1300)$('mongolScope').hidden=worldHistory.mapAreasAt(year).filter(a=>a.mongolGroup).length!==4;
 }

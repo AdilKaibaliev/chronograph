@@ -17,7 +17,7 @@ function renderWorldAreaControls(){
  worldMapSteps.replaceChildren();
  const label=we('label','world-territories-toggle'),input=we('input');input.type='checkbox';input.checked=layerState.empires;input.id='worldTerritoriesToggle';
  input.onchange=()=>{layerState.empires=input.checked;$('toggleEmpires').checked=input.checked;applyLayerState();worldTerritoryLayer.classList.toggle('hidden-layer',!input.checked);worldTerritoryLabels.classList.toggle('hidden-layer',!input.checked);updateWorldMarkerScale();};label.append(input,we('span','',wt('territories')));worldMapSteps.append(label);
- const changes=worldHistory.changes(worldState.region),prev=changes.filter(y=>y<year).at(-1),next=changes.find(y=>y>year);
+ const changes=[...new Set([...worldHistory.changes(worldState.region),...(['all','eurasia'].includes(worldState.region)?worldPlaybackYears.filter(y=>y<1300):[])])].sort((a,b)=>a-b),prev=changes.filter(y=>y<year).at(-1),next=changes.find(y=>y>year);
  for(const [id,key,value,arrow] of [['worldMapPrevious','territoryPrevious',prev,'←'],['worldMapNext','territoryNext',next,'→']]){
   const b=we('button','',arrow+(value?' '+value:''));b.type='button';b.id=id;b.title=wt(key);b.setAttribute('aria-label',wt(key)+(value?' · '+value:''));b.disabled=value===undefined;
   b.onclick=()=>{stopPlay();renderYear(value);$(id)?.focus({preventScroll:true});queueLocationSave();};worldMapSteps.append(b);
@@ -31,7 +31,7 @@ function renderWorldAreaDetail(){
  const heading=we('h4','',wl(a.name));heading.id='worldAreaTitle';heading.tabIndex=-1;
  const close=we('button','world-area-close','×');close.type='button';close.setAttribute('aria-label',wt('closeArea'));close.title=wt('closeArea');close.onclick=()=>{worldState.area='';renderWorldHistory();queueLocationSave();};
  worldAreaDetail.append(close,we('p','world-card-meta',wt(a.kind)+' · '+worldAreaDate(a)),heading,we('h5','',wl(a.title)),we('p','world-description',wl(a.text)),we('p','world-dating',wt('geography')));
- if(a.sovereign||a.overlord){const text=a.sovereign?['В составе: ','Part of: ','Курамында: ']:a.relationship==='administration'?['Под управлением: ','Administered by: ','Башкаруусунда: ']:a.relationship==='occupation'?['Военная оккупация: ','Military occupation: ','Аскердик оккупация: ']:['Зависимость от: ','Dependent on: ','Көз каранды: '];const b=we('button','world-imperial-parent',wl(text)+wl(a.sovereignName));b.type='button';b.onclick=()=>worldChooseTerritory(a.sovereign||a.overlord);heading.after(b);}
+ if(a.sovereign||a.overlord){const text=a.sovereign?['В составе: ','Part of: ','Курамында: ']:a.relationship==='administration'?['Под управлением: ','Administered by: ','Башкаруусунда: ']:a.relationship==='occupation'?['Военная оккупация: ','Military occupation: ','Аскердик оккупация: ']:a.relationship==='association'?['В союзе с: ','Associated with: ','Союздаш: ']:['Зависимость от: ','Dependent on: ','Көз каранды: '];const b=we('button','world-imperial-parent',wl(text)+wl(a.sovereignName));b.type='button';b.onclick=()=>worldChooseTerritory(a.sovereign||a.overlord);heading.after(b);}
  if(a.entry==='late-hre'&&year>=1939&&year<=1945){
   const nav=we('div','world-war-years');nav.setAttribute('aria-label',wl(['Вторая мировая война по годам','World War II by year','Экинчи дүйнөлүк согуш жылдар боюнча']));
   const legend=we('p','world-war-note',wl(year===1945?['Германская оккупация завершена. Германия находится под управлением союзников.','German occupation has ended. Germany is under Allied administration.','Немис оккупациясы аяктады. Германия союздаштардын башкаруусунда.']:['Сплошной цвет — рейх · косая штриховка — оккупация · пунктир — зависимые режимы','Solid colour: Reich · diagonal hatching: occupation · dashed: dependent regimes','Туташ түс — рейх · кыйгач штрих — оккупация · пунктир — көз каранды режимдер']));
@@ -50,7 +50,7 @@ function renderWorldAreaDetail(){
 function worldAreaOpacity(){return Math.min(.9,Math.max(.16,overlayOpacity*1.35));}
 // Reuse immutable dated features. Bound retention while readers scrub the timeline.
 const worldTerritoryNodes=new Map();
-let worldProvinceClips;
+let worldProvinceClips,worldContextMask;
 function renderWorldTerritories(){
  worldTerritoryLayer.replaceChildren();worldTerritoryLabels.replaceChildren();
  worldTerritoryLayer.classList.toggle('hidden-layer',!layerState.empires);worldTerritoryLabels.classList.toggle('hidden-layer',!layerState.empires);
@@ -64,6 +64,14 @@ function renderWorldTerritories(){
  // clips outside the feature layer and replace them on every year change;
  // cached feature nodes therefore cannot retain an obsolete parent frontier.
  const parents=new Map(areas.map(a=>[a.entry,a]));
+ // Contextual regions and associations may cross political borders, but must
+ // not paint a second country colour on top. Their hatching and outlines stay
+ // visible; their area tint appears only on land without a political fill.
+ if(!worldContextMask){worldContextMask=sn('mask',{id:'worldContextFill',maskUnits:'userSpaceOnUse',x:0,y:0,width:SVG_W,height:SVG_H,'mask-type':'luminance'});worldDefs.append(worldContextMask);}
+ worldContextMask.replaceChildren(sn('rect',{x:0,y:0,width:SVG_W,height:SVG_H,fill:'white'}));
+ const covered=areas.filter(a=>!a.sovereign&&!a.overlord&&!a.cartographicOverlay&&['polity','influence'].includes(a.kind));
+ for(const a of covered)worldContextMask.append(sn('path',{d:polygonPath(a.polygons),fill:'black','fill-rule':'nonzero'}));
+ if(year<1300)for(const p of empireLayer.querySelectorAll('.empire-path[data-empire-type=empire],.empire-path[data-empire-type=local],.empire-path[data-empire-type=fuzzy]'))worldContextMask.append(sn('path',{d:p.getAttribute('d'),fill:'black','fill-rule':'nonzero'}));
  if(!worldProvinceClips){worldProvinceClips=sn('g',{'data-province-clips':'true'});worldDefs.append(worldProvinceClips);}
  worldProvinceClips.replaceChildren();
  for(const id of new Set(areas.filter(a=>a.sovereign&&!a.detachedProvince&&a.entry===worldState.area).map(a=>a.sovereign))){
@@ -74,13 +82,14 @@ function renderWorldTerritories(){
  const unified=areas.filter(a=>a.mongolGroup).length===4&&!(typeof showMongolUluses!=='undefined'&&showMongolUluses);
  for(const a of areas){
   const entry=worldHistory.entry(a.entry),selected=a.entry===worldState.area,grouped=unified&&a.mongolGroup;
-  const cacheKey=[a.id,wl(['ru','en','ky']),selected,Boolean(grouped),a.overlord===worldState.area,grouped?a.mongolUnionId:null,overlayOpacity].join('|');
+  const cacheKey=[a.id,wl(['ru','en','ky']),selected,Boolean(grouped),a.overlord===worldState.area,grouped?a.mongolUnionId:null,a.cartographicOverlay,overlayOpacity].join('|');
   const saved=worldTerritoryNodes.get(cacheKey);
   if(saved){worldTerritoryNodes.delete(cacheKey);worldTerritoryNodes.set(cacheKey,saved);worldTerritoryLayer.append(saved.g);worldTerritoryLabels.append(saved.guide,saved.text);continue;}
   const g=sn('g',{'data-world-area':a.entry,'data-territory-frame':a.id,'data-territory-kind':a.kind,class:'world-territory '+a.kind+(selected?' selected':'')});
   if(a.politicalOutline)g.classList.toggle('political-outline',true);
   if(a.dependencyOutline){g.classList.toggle('imperial-dependency',true);g.setAttribute('data-overlord',a.overlord);}
   if(a.relationship==='occupation')g.classList.toggle('military-occupation',true);
+  if(a.cartographicOverlay)g.classList.add('context-'+a.cartographicOverlay);
   if(a.overlord===worldState.area)g.classList.toggle('related-selected',true);
   if(a.detachedProvince)g.classList.toggle('detached-province',true);
   if(a.sovereign){g.classList.toggle('sovereign-part',true);g.setAttribute('data-sovereign',a.sovereign);}
@@ -89,12 +98,20 @@ function renderWorldTerritories(){
   // their local settlement vicinity. They never connect islands into ocean empires.
   if(!a.coastClipped&&entry.region!=='oceania'&&entry.id!=='mabuyag')g.setAttribute('clip-path','url(#worldLandClip)');
   const path=sn('path',{d:polygonPath(grouped&&a.entry==='late-yuan'&&a.mongolUnion?a.mongolUnion:a.polygons),fill:grouped?'#785344':a.color,stroke:grouped?'#61483a':a.color,role:'button',tabindex:0,'aria-label':wl(a.name)+' · '+wt(a.kind)+' · '+worldAreaDate(a)});
+  const contextual=['cultural','landscape','settlement'].includes(a.kind)||Boolean(a.cartographicOverlay)||Boolean(a.overlord);
+  let tint=null;
+  if(contextual){
+   g.classList.add('contextual-fill');
+   tint=sn('path',{d:path.getAttribute('d'),fill:a.color,stroke:'none',mask:'url(#worldContextFill)',class:'world-context-tint','aria-hidden':'true'});
+   path.classList.add('world-context-outline');
+  }
   if(selected&&a.sovereign&&!a.detachedProvince&&parents.has(a.sovereign))g.setAttribute('clip-path','url(#province-boundary-'+a.sovereign+')');
   if(grouped&&a.entry!=='late-yuan'&&a.mongolUnion&&!selected)path.setAttribute('tabindex','-1');
   if(a.sovereign&&!a.detachedProvince&&!selected){g.setAttribute('aria-hidden','true');path.setAttribute('tabindex','-1');path.setAttribute('aria-hidden','true');}
   if(a.geometryYear!==undefined)path.style.setProperty('--area-opacity',String(overlayOpacity));
-  const title=sn('title');title.textContent=wl(a.name)+' · '+wl(a.title);path.append(title);g.append(path);
+  const title=sn('title');title.textContent=wl(a.name)+' · '+wl(a.title);path.append(title);g.append(path);if(tint)g.append(tint);
   if(a.relationship==='occupation')g.append(sn('path',{d:polygonPath(a.polygons),fill:'url(#worldOccupationHatch)',class:'world-occupation-hatch'}));
+  if(a.cartographicOverlay==='resistance')g.append(sn('path',{d:polygonPath(a.polygons),fill:'url(#worldOccupationHatch)',class:'world-occupation-hatch'}));
   if(['cultural','settlement','landscape'].includes(a.kind))g.append(sn('path',{d:polygonPath(a.polygons),fill:'url(#worldRegionHatch)',class:'world-territory-hatch'}));
   let pointer=null;
   path.onpointerenter=hideTooltip;

@@ -2,7 +2,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const vm=require('node:vm');
-const catalog=require('./catalog.cjs');
+const catalog=JSON.parse(fs.readFileSync('index.html','utf8').match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]);
 const {createWorldHistory}=require('./core.js');
 
 // Exercise the production renderers against a small SVG DOM. Geometry, layout and
@@ -13,6 +13,7 @@ class SvgNode {
   this.nodeName=name;this.children=[];this.attributes={};this.dataset={};this.textContent='';
   this.style={setProperty:(name,value)=>{this.style[name]=String(value);}};
   this.classList={
+   add:(...names)=>names.forEach(name=>this.classList.toggle(name,true)),
    contains:name=>(this.attributes.class||'').split(/\s+/).includes(name),
    toggle:(name,force)=>{
     const values=new Set((this.attributes.class||'').split(/\s+/).filter(Boolean));
@@ -41,6 +42,7 @@ const context={
  WORLD_HISTORY:catalog,worldHistory:createWorldHistory(catalog),
  year:1299,worldState:{region:'arctic',area:'',selected:'',event:''},
  layerState:{empires:true,places:true},overlayOpacity:.5,
+ empireLayer:{querySelectorAll:()=>[{getAttribute:()=> 'M0 0L10 0L10 10Z'}]},
  worldDefs:new SvgNode('defs'),worldTerritoryLayer:new SvgNode('g'),worldTerritoryLabels:new SvgNode('g'),worldLayer:new SvgNode('g'),
  document:{createElementNS:(_,name)=>new SvgNode(name)},svg:{namespaceURI:'http://www.w3.org/2000/svg'},
  SVG_W:1440,SVG_H:720,TIMELINE_MAX:catalog.range?.max??1299,
@@ -82,6 +84,12 @@ function checkRender(year,region){
   assert(group.children[0].getAttribute('d'),'Territory has no SVG path');
   assert.equal(group.children[0].getAttribute('role'),'button');
   assert(group.children[0].getAttribute('aria-label').includes(frame.name[0]),'Missing territory name');
+  if(group.classList.contains('contextual-fill')){
+   assert(group.children[0].classList.contains('world-context-outline'),'Context keeps a competing fill');
+   const tint=group.children.find(p=>p.classList.contains('world-context-tint'));
+   assert(tint,'Uncovered contextual land disappeared');assert.equal(tint.getAttribute('mask'),'url(#worldContextFill)');
+  }
+  if(frame.relationship==='occupation')assert(group.children.some(p=>p.classList.contains('world-occupation-hatch')),'Occupation hatch lost');
  }
  const labels=context.worldTerritoryLabels.children.filter(n=>n.nodeName==='text');
  assert.deepEqual(sorted(labels.map(n=>n.getAttribute('data-entry'))),sorted(expected.map(a=>a.entry)),`Lost territory labels: ${year}, ${region}`);

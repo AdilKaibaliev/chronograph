@@ -12,7 +12,7 @@ assert.deepEqual(delivered.range,{...c.range,max:require('../incidents/integrate
 assert(html.includes('TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));assert(html.includes('name="chronograph-version"')); 
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html));
 for(let y=1816;y<=1848;y++){
- const current=rows=>rows.map(({entry,...item})=>({...item,entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to)}}));assert.deepEqual(current(dh.at(y)),current(h.at(y)));assert.deepEqual(dh.areasAt(y),h.areasAt(y));
+ const current=rows=>rows.map(({entry,...item})=>({...item,entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to)}}));assert.deepEqual(current(dh.at(y)),current(h.at(y)));assert.deepEqual(dh.areasAt(y).map(a=>a.entry),h.areasAt(y).map(a=>a.entry),'Dated map selection '+y);
  for(const r of c.regions)assert(h.at(y,r.id).length,'Empty region '+r.id+' in '+y);
  const seen=new Set();for(const a of h.areasAt(y)){assert(h.get(a.entry,y));assert(!seen.has(a.entry),'Two active areas for '+a.entry);seen.add(a.entry);}
  for(const p of h.at(y))assert(seen.has(p.entry.id),'Unmapped profile '+p.entry.id);

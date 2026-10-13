@@ -11,8 +11,14 @@ function createWorldHistory(catalog){
  const mapped=new Map();
  const mapAreasAt=(year,region='all')=>memo(mapped,year,()=>{
   const outlines=(catalog.outlines||[]).filter(a=>year>=a.from&&year<a.to&&snapshot(year).byId.has(a.entry)),byEntry=new Map(outlines.map(a=>[a.entry,a])),members=new Map(outlines.flatMap(a=>(a.members||[]).map(id=>[id,a]))),dependencies=new Map(outlines.flatMap(a=>Object.entries(a.dependencies||{}).map(([id,relationship])=>[id,{owner:a,relationship}])));
+  for(const r of catalog.cartography?.frontierRelations||[]){
+   if(!(r.from<=year&&year<r.to&&snapshot(year).byId.has(r.owner)))continue;
+   const original=snapshot(year).areas.find(a=>a.entry===r.owner),owner=byEntry.get(r.owner)||original;if(!owner)continue;
+   members.delete(r.member);dependencies.delete(r.member);
+   if(r.relationship==='province')members.set(r.member,owner);else dependencies.set(r.member,{owner,relationship:r.relationship});
+  }
   const parent=id=>{let owner=members.get(id);const seen=new Set([id]);while(owner&&members.has(owner.entry)&&!seen.has(owner.entry)){seen.add(owner.entry);owner=members.get(owner.entry);}return owner;};
-  const activeRelations=new Map((catalog.cartography?.relations||[]).filter(r=>r.from<=year&&year<r.to&&snapshot(year).byId.has(r.owner)).map(r=>[r.member,r]));
+  const activeRelations=new Map([...(catalog.cartography?.relations||[]),...(catalog.cartography?.frontierRelations||[])].filter(r=>r.from<=year&&year<r.to&&snapshot(year).byId.has(r.owner)).map(r=>[r.member,r]));
   const membershipSpan=a=>{let from=a.from,to=a.to,id=a.entry;const seen=new Set();while(!seen.has(id)){seen.add(id);const r=activeRelations.get(id);if(!r)break;from=Math.max(from,r.from);to=Math.min(to,r.to);if(r.relationship!=='province')break;id=r.owner;}return {from,to};};
   return snapshot(year).areas.map(original=>{
    const shape=catalog.cartography?.shapes[catalog.cartography?.areas[original.id]],outline=byEntry.get(original.entry);
@@ -21,11 +27,17 @@ function createWorldHistory(catalog){
    let a=shape?{...original,polygons:shape,points:shape[0],...(unified?{mongolUnion:catalog.cartography.shapes[unified.shape],mongolUnionId:unified.from}:{})}:original;
    a={...a,kind:catalog.cartography?.kinds?.[original.id]||a.kind,geometryId:original.id,politicalOutline:original.kind==='polity'};
    if(outline&&!occupation)a={...a,...outline,geometryId:outline.id,id:original.id+'@'+outline.id,from:Math.max(original.from,outline.from),to:Math.min(original.to,outline.to),points:outline.polygons[0],politicalOutline:true};
+   const relationSource=activeRelations.get(a.entry)?.source;
+   if(relationSource)a={...a,sources:[...new Set([...a.sources,relationSource])]};
    const owner=parent(a.entry),dep=dependencies.get(a.entry);
    if(owner){const ownerDependency=dependencies.get(owner.entry),detachedProvince=ownerDependency?.relationship==='occupation',outer=detachedProvince?owner:ownerDependency?.owner||owner,span=membershipSpan(original);return {...a,...span,id:original.id+'@member-'+owner.entry+'-'+span.from+'-'+outer.color,politicalOutline:false,detachedProvince,sovereign:owner.entry,sovereignName:owner.name,color:outer.color,...(a.entry==='1789-kodiak'&&year>=1799?{overviewLabel:true,label:[-151,64],labelWidth:100,short:['Русская Америка','Russian America','Орус Америкасы']}: {})};}
    if(dep){const span=membershipSpan(original);return {...a,...span,id:original.id+'@dependent-'+dep.owner.entry+'-'+span.from+'-'+dep.owner.color,politicalOutline:false,dependencyOutline:true,overlord:dep.owner.entry,relationship:dep.relationship,sovereignName:dep.owner.name,color:dep.owner.color,kind:'influence'};}
    return a;
-  }).map(a=>{const display=catalog.displayCartography;if(!display)return a;const polygons=display.shapes[display.areas[a.geometryId]],mongolUnion=a.mongolUnion&&display.shapes[display.mongol[a.mongolUnionId]];return {...a,polygons,points:polygons[0],label:a.overviewLabel?a.label:display.labels?.[a.geometryId]||a.label,coastClipped:true,...(mongolUnion?{mongolUnion}:{})};});
+  }).map(a=>{
+   const presentation=catalog.cartography?.presentation?.find(p=>p.entry===a.entry&&p.from<=year&&year<p.to);
+   if(presentation)a={...a,cartographicOverlay:presentation.overlay};
+   const display=catalog.displayCartography;if(!display)return a;const polygons=display.shapes[display.areas[a.geometryId]],mongolUnion=a.mongolUnion&&display.shapes[display.mongol[a.mongolUnionId]];return {...a,polygons,points:polygons[0],label:a.overviewLabel?a.label:display.labels?.[a.geometryId]||a.label,coastClipped:true,...(mongolUnion?{mongolUnion}:{})};
+  });
  }).filter(a=>region==='all'||entries.get(a.entry)?.region===region);
  const at=(year,region='all')=>snapshot(year).items.filter(item=>region==='all'||item.entry.region===region);
  const get=(id,year)=>snapshot(year).byId.get(id)||null;
@@ -41,10 +53,11 @@ function createWorldHistory(catalog){
  const entry=id=>entries.get(id)||null;
  const frames=id=>(framesByEntry.get(id)||[]).slice();
  const mappedFrames=new Map();
- const mapFrames=id=>{if(!mappedFrames.has(id)){const years=[...new Set([...frames(id).map(a=>a.from),...(catalog.outlines||[]).filter(a=>a.entry===id||(a.members||[]).includes(id)||a.dependencies?.[id]).flatMap(a=>[a.from,a.to])])].sort((a,b)=>a-b);mappedFrames.set(id,[...new Map(years.map(y=>mapAreasAt(y).find(a=>a.entry===id)).filter(Boolean).map(a=>[a.id,a])).values()]);}return mappedFrames.get(id).slice();};
+ const relationFrames=(catalog.cartography?.frontierRelations||[]).map(r=>({...r,entry:r.member}));
+ const mapFrames=id=>{if(!mappedFrames.has(id)){const years=[...new Set([...frames(id).map(a=>a.from),...(catalog.outlines||[]).filter(a=>a.entry===id||(a.members||[]).includes(id)||a.dependencies?.[id]).flatMap(a=>[a.from,a.to]),...relationFrames.filter(r=>r.entry===id||r.owner===id).flatMap(r=>[r.from,r.to])])].sort((a,b)=>a-b);mappedFrames.set(id,[...new Map(years.map(y=>mapAreasAt(y).find(a=>a.entry===id)).filter(Boolean).map(a=>[a.id,a])).values()]);}return mappedFrames.get(id).slice();};
  const areasAt=(year,region='all')=>snapshot(year).areas.filter(a=>region==='all'||entries.get(a.entry)?.region===region);
  const changeCache=new Map();
- const changes=(region='all')=>memo(changeCache,region,()=>[...new Set([...(catalog.areas||[]),...(catalog.outlines||[])].filter(a=>region==='all'||entries.get(a.entry)?.region===region).flatMap(a=>[a.from,a.to]).filter(y=>y>=min&&y<=max))].sort((a,b)=>a-b)).slice();
+ const changes=(region='all')=>memo(changeCache,region,()=>[...new Set([...(catalog.areas||[]),...(catalog.outlines||[]),...relationFrames,...(catalog.cartography?.presentation||[])].filter(a=>region==='all'||entries.get(a.entry)?.region===region).flatMap(a=>[a.from,a.to]).filter(y=>y>=min&&y<=max))].sort((a,b)=>a-b)).slice();
  return {phaseAt,at,get,timeline,areasAt,mapAreasAt,mapFrames,changes,record,entry,frames};
 }
 // A bounded reading window. Selection opens its page once; readers can then move

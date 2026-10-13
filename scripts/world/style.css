@@ -52,6 +52,13 @@
 .world-territory.military-occupation>path:first-child{fill-opacity:calc(var(--area-opacity,.5)*1.3);stroke-width:1.4;stroke-dasharray:none}
 .world-territory>path.world-occupation-hatch{stroke:none;fill-opacity:1;pointer-events:none}
 .world-territory.related-selected>path:first-child{stroke:#513238;stroke-width:1.8}
+/* Context is not another sovereign colour. Preserve interactive hit areas and
+   meaningful occupation hatching without darkening the country underneath. */
+.world-territory>path.world-context-outline{fill-opacity:0!important}
+.empire-path[data-empire-type="context"]{fill-opacity:0!important}
+.world-territory>path.world-context-tint{pointer-events:none;stroke:none!important;fill-opacity:calc(var(--area-opacity,.5)*.55)}
+.world-territory.military-occupation>path.world-context-tint{fill-opacity:var(--area-opacity,.5)}
+.world-territory.selected>path[role=button],.world-territory>path[role=button]:hover,.world-territory>path[role=button]:focus-visible{stroke:#634725;stroke-width:2.4;outline:none}
 .world-war-years{display:flex;gap:4px;flex-wrap:wrap;margin:8px 0 12px}
 .world-war-years button{font:11px system-ui;border:1px solid #80694e;border-radius:5px;background:#30271f;color:#e9d4b2;min-height:30px;padding:5px 7px;cursor:pointer}
 .world-war-years button[aria-pressed=true]{background:#805c60;border-color:#dfb79d;color:#fff1db}

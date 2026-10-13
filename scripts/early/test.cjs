@@ -35,7 +35,7 @@ assert.equal(crypto.createHash('sha256').update(JSON.stringify(require('../world
 for(let y=1454;y<=1600;y++){
  const profiles=h.at(y),areas=h.areasAt(y);
  assert.deepEqual(dh.at(y).map(x=>x.entry.id),profiles.map(x=>x.entry.id),'Stale profile selection '+y);
- assert.deepEqual(dh.areasAt(y).map(x=>x.id),areas.map(x=>x.id),'Stale map selection '+y);
+ assert.deepEqual(dh.areasAt(y).map(x=>x.entry),areas.map(x=>x.entry),'Stale map selection '+y);
  for(const a of areas)assert(h.get(a.entry,y),'Orphan territory '+a.id+' in '+y);
  for(const region of c.regions)assert(profiles.some(x=>x.entry.region===region.id),'Empty region '+region.id+' in '+y);
  for(const id of ['budj','kakadu','kuk','mabuyag'])assert.equal(areas.find(a=>a.entry===id)?.kind,'landscape',id+' changed into a fictitious continent-wide state');

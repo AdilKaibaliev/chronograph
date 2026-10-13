@@ -32,7 +32,7 @@ if(fs.existsSync(baseline)){
  const before=JSON.parse(fs.readFileSync(baseline));
  const integratedIds=new Set(require('../incidents/integrate.cjs').events.map(e=>e.id));
  for(const key of ['entries','events'])assert.deepEqual(require('./historical-window.cjs')(key==='events'?c[key].filter(e=>!integratedIds.has(e.id)):c[key],key),before[key],'Earlier narratives changed '+key);
- assert.deepEqual(require('./geometry-regression.cjs')(require('./historical-window.cjs')(c.areas,'areas')),require('./geometry-regression.cjs')(before.areas),'Unexpected historical change');
+ assert.deepEqual(require('./geometry-regression.cjs')(require('./historical-window.cjs')(require('./catalog.cjs').areas,'areas')),require('./geometry-regression.cjs')(before.areas),'Unexpected historical change');
 }
 // Exercise cancellation and cleanup of the actual map transition implementation.
 let now=1000,reduced=false,nextTimer=1;const timers=new Map(),ghosts=new Set(),animations=new Set();
@@ -45,9 +45,9 @@ const context={year:1900,EMPIRES:[],LEGACY_CARTOGRAPHY:{frames:{}},worldHistory:
  empireLayer:layer(),worldTerritoryLayer:layer(),setTimeout:f=>{timers.set(nextTimer,f);return nextTimer++;},clearTimeout:id=>timers.delete(id),worldMapBefore:null,worldMapAfter:null};
 vm.createContext(context);vm.runInContext(fs.readFileSync('scripts/world/map-transition.js','utf8'),context);
 context.worldMapBefore(1901);context.worldMapAfter();assert.equal(ghosts.size,0,'Same geometry animated');
-now+=150;context.worldMapBefore(1902);context.worldMapAfter();assert.equal(ghosts.size,2);assert.equal(animations.size,4);
+now+=150;context.worldMapBefore(1902);context.worldMapAfter();assert.equal(ghosts.size,0,'Old and new frontiers must never be painted together');assert.equal(animations.size,2);
 for(const f of [...timers.values()])f();assert.equal(ghosts.size,0);assert.equal(animations.size,0);
-now+=150;context.worldMapBefore(1902);context.worldMapAfter();assert.equal(ghosts.size,2);
+now+=150;context.worldMapBefore(1902);context.worldMapAfter();assert.equal(ghosts.size,0);assert.equal(animations.size,2);
 now+=25;context.worldMapBefore(1903);context.worldMapAfter();assert.equal(ghosts.size,0,'Rapid input leaves a stale map');assert.equal(animations.size,0);
 now+=150;reduced=true;context.worldMapBefore(1902);context.worldMapAfter();assert.equal(ghosts.size,0,'Reduced motion ignored');
 assert(!/class=["'](?:pulse|time-pulse)["']/.test(html),'Pulsing city nodes remain');

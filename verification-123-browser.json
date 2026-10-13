@@ -1,0 +1,161 @@
+{
+  "version": "1.23.0",
+  "checkedAt": "2026-10-13T10:42:01.876Z",
+  "checks": [
+    {
+      "name": "1942 Nepal territory selection",
+      "pass": true
+    },
+    {
+      "name": "Year 610",
+      "pass": true,
+      "ghosts": 0,
+      "height": 884,
+      "legacyPaths": 17,
+      "overflow": false,
+      "playBottom": 815.5,
+      "worldAreas": 27,
+      "year": 610
+    },
+    {
+      "name": "Year 1096",
+      "pass": true,
+      "ghosts": 0,
+      "height": 884,
+      "legacyPaths": 16,
+      "overflow": false,
+      "playBottom": 815.5,
+      "worldAreas": 55,
+      "year": 1096
+    },
+    {
+      "name": "Year 1097",
+      "pass": true,
+      "ghosts": 0,
+      "height": 884,
+      "legacyPaths": 17,
+      "overflow": false,
+      "playBottom": 815.5,
+      "worldAreas": 55,
+      "year": 1097
+    },
+    {
+      "name": "Year 1251",
+      "pass": true,
+      "ghosts": 0,
+      "height": 884,
+      "legacyPaths": 16,
+      "overflow": false,
+      "playBottom": 815.5,
+      "worldAreas": 59,
+      "year": 1251
+    },
+    {
+      "name": "Year 1299",
+      "pass": true,
+      "ghosts": 0,
+      "height": 884,
+      "legacyPaths": 12,
+      "overflow": false,
+      "playBottom": 815.5,
+      "worldAreas": 58,
+      "year": 1299
+    },
+    {
+      "name": "Year 1300",
+      "pass": true,
+      "ghosts": 0,
+      "height": 884,
+      "legacyPaths": 0,
+      "overflow": false,
+      "playBottom": 815.5,
+      "worldAreas": 96,
+      "year": 1300
+    },
+    {
+      "name": "Year 1942",
+      "pass": true,
+      "ghosts": 0,
+      "height": 884,
+      "legacyPaths": 0,
+      "overflow": false,
+      "playBottom": 815.5,
+      "worldAreas": 284,
+      "year": 1942
+    },
+    {
+      "name": "Year 2010",
+      "pass": true,
+      "ghosts": 0,
+      "height": 884,
+      "legacyPaths": 0,
+      "overflow": false,
+      "playBottom": 815.5,
+      "worldAreas": 312,
+      "year": 2010
+    },
+    {
+      "name": "Year 2011",
+      "pass": true,
+      "ghosts": 0,
+      "height": 884,
+      "legacyPaths": 0,
+      "overflow": false,
+      "playBottom": 825.5,
+      "worldAreas": 313,
+      "year": 2011
+    },
+    {
+      "name": "Year 2026",
+      "pass": true,
+      "ghosts": 0,
+      "height": 884,
+      "legacyPaths": 0,
+      "overflow": false,
+      "playBottom": 815.5,
+      "worldAreas": 313,
+      "year": 2026
+    },
+    {
+      "name": "Language en",
+      "pass": true,
+      "areaCount": 284,
+      "lang": "en",
+      "year": "1942"
+    },
+    {
+      "name": "Language ky",
+      "pass": true,
+      "areaCount": 284,
+      "lang": "ky",
+      "year": "1942"
+    },
+    {
+      "name": "Language ru",
+      "pass": true,
+      "areaCount": 284,
+      "lang": "ru",
+      "year": "1942"
+    },
+    {
+      "name": "Future opens with map",
+      "pass": true
+    },
+    {
+      "name": "Future illustration by request",
+      "pass": true
+    },
+    {
+      "name": "Mobile 390x844 and return from future",
+      "pass": true,
+      "documentHeight": 844,
+      "documentWidth": 390,
+      "height": 844,
+      "playBottom": 778.5,
+      "width": 390,
+      "year": 1942
+    }
+  ],
+  "errors": [],
+  "htmlSha256": "8becd0629cf4bad1473a2c14d63e8c5140617d30693131ff3c5975cf36d133f4"
+}

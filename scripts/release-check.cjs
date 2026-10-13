@@ -30,6 +30,8 @@ const checks = [
   'scripts/world/to2000-test.cjs',
   'scripts/world/to2010-test.cjs',
   'scripts/world/frontier-review-test.cjs',
+  'scripts/world/shared-frontiers-test.cjs',
+  'scripts/world/legacy-frontiers-test.cjs',
   'scripts/incidents/test.cjs',
   'scripts/world/coasts-occupation-test.cjs',
   'scripts/world/all-borders-test.cjs',
