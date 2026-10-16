@@ -1,0 +1,245 @@
+{
+  "version": "1.24.0",
+  "htmlSha256": "fe841dce3176960a7c57f03c7e81ebbc2a3f97a4f3d2f323925c7737aee88577",
+  "checks": [
+    {
+      "name": "Buids selectable and type corrected",
+      "pass": true,
+      "body": "В 934 году Али ибн Буя закрепился в Ширазе. Владения династии расширялись поэтапно: Багдад — в 945 году, Басра — в 947-м, Керман — в 968-м.",
+      "selected": "true",
+      "source": "тип слоя: Политическое образованиеграница: Приблизительная реконструкцияисторическая реконструкция / вторичный ориентирИсточник: Ибн аль-Асир и Ибн Касир — исламские хроникальные ориентиры для Буидов и их отношений с аббасидскими халифами. Tilman Nagel. Buyids; C. E. Bosworth. Kerman V; Al-e Mohtaj; Kakuyids. Encyclopaedia Iranica.Ибн аль-Асир · al-Kāmil fī al-tārīkhИбн Касир · al-Bidāya wa-l-NihāyaКонтур: исторический срез 968 года. Прямая власть, дань и политическое влияние показаны разными типами слоёв.",
+      "title": "Буидские эмираты"
+    },
+    {
+      "name": "Year 610",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 289,
+      "year": 610
+    },
+    {
+      "name": "Year 628",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 292,
+      "year": 628
+    },
+    {
+      "name": "Year 892",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 334,
+      "year": 892
+    },
+    {
+      "name": "Year 893",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 334,
+      "year": 893
+    },
+    {
+      "name": "Year 934",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 347,
+      "year": 934
+    },
+    {
+      "name": "Year 945",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 343,
+      "year": 945
+    },
+    {
+      "name": "Year 947",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 343,
+      "year": 947
+    },
+    {
+      "name": "Year 962",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 345,
+      "year": 962
+    },
+    {
+      "name": "Year 967",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 345,
+      "year": 967
+    },
+    {
+      "name": "Year 968",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 347,
+      "year": 968
+    },
+    {
+      "name": "Year 987",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 353,
+      "year": 987
+    },
+    {
+      "name": "Year 999",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 352,
+      "year": 999
+    },
+    {
+      "name": "Year 1029",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 370,
+      "year": 1029
+    },
+    {
+      "name": "Year 1033",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 368,
+      "year": 1033
+    },
+    {
+      "name": "Year 1036",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 368,
+      "year": 1036
+    },
+    {
+      "name": "Year 1048",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 373,
+      "year": 1048
+    },
+    {
+      "name": "Year 1127",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 377,
+      "year": 1127
+    },
+    {
+      "name": "Year 1299",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 367,
+      "year": 1299
+    },
+    {
+      "name": "Year 1300",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 427,
+      "year": 1300
+    },
+    {
+      "name": "Year 1942",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 815,
+      "year": 1942
+    },
+    {
+      "name": "Year 2010",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 862,
+      "year": 2010
+    },
+    {
+      "name": "Year 2011",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 864,
+      "year": 2011
+    },
+    {
+      "name": "Year 2026",
+      "pass": true,
+      "invalid": false,
+      "overflow": false,
+      "paths": 864,
+      "year": 2026
+    },
+    {
+      "name": "Language en",
+      "pass": true,
+      "lang": "en",
+      "overflow": false,
+      "paths": 503,
+      "play": true
+    },
+    {
+      "name": "Language ky",
+      "pass": true,
+      "lang": "ky",
+      "overflow": false,
+      "paths": 503,
+      "play": true
+    },
+    {
+      "name": "Language ru",
+      "pass": true,
+      "lang": "ru",
+      "overflow": false,
+      "paths": 503,
+      "play": true
+    },
+    {
+      "name": "Mobile 390x844",
+      "pass": true,
+      "height": 844,
+      "mapHeight": 301.5,
+      "mapWidth": 374,
+      "overflow": false,
+      "playVisible": true,
+      "width": 390
+    },
+    {
+      "name": "Future defaults to map",
+      "pass": true
+    },
+    {
+      "name": "Future illustration selected",
+      "pass": true
+    },
+    {
+      "name": "Return to historical year",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

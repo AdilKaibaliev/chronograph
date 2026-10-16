@@ -1,0 +1,9 @@
+Running final scripts/world/early-boundary-review-test.cjs
+{"pass":true,"settlementControls":71,"distinctSharedEdges":56,"pointerProfiles":5,"scope":"Delivered boundaries and dated ownership; broader unreviewed medieval borders remain approximate."}
+Running final scripts/world/legacy-frontiers-test.cjs
+{"pass":true,"sharedEdges":197,"controlPoints":38,"profiles":73,"checks":"retreat, conquest dates, Syrian Ayyubids, pre-imperial Seljuks and Ghaznavids, dependencies, delivered geometry"}
+Running final scripts/i18n/test.cjs
+PASS: 1634 message pairs, Russian preservation, calendar and dynamic labels, explicit Russian fallback.
+PASS: delivered early states match the documented frontier review; original events and person dates preserved; plain-text sources.
+Running final scripts/world/kyrgyz-test.cjs
+{"pass":true,"stages":14,"coreVertices":35,"checks":"regional control points, connected outline, influence separated, dated status, primary attribution, bilingual translations, event sync, 1299–1300 continuity, unrelated legacy preserved"}
