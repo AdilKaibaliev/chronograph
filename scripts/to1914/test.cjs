@@ -10,7 +10,7 @@ const old={entries:c.entries.filter(e=>!e.id.startsWith('cartography-')).map(e=>
 assert.equal(crypto.createHash('sha256').update(JSON.stringify(require('../world/kyrgyz-baseline.cjs')(require('../world/arctic-baseline.cjs')(old,undefined,1849)))).digest('hex'),'35cbb03b5319d4fcbfe78a2494611b5c5dc1915f50c4ab92182484f462a8d0cd','Previous catalogue outside the explicit Pecos correction changed');
 for(const key of ['entries','areas'])assert.deepEqual(delivered[key],require('../world/published-catalog.cjs')[key]);
 assert.deepEqual(delivered.range,{...c.range,max:require('../incidents/integrate.cjs').timelineMax});
-assert(html.includes('name="chronograph-version" content="1.24.0"'));
+assert(html.includes('name="chronograph-version" content="1.25.0"'));
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html));
 for(let y=1849;y<=1914;y++){
  const current=rows=>rows.map(({entry,...item})=>({...item,entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to)}}));assert.deepEqual(current(dh.at(y)),current(h.at(y)));assert.deepEqual(dh.areasAt(y).map(a=>a.entry),h.areasAt(y).map(a=>a.entry),'Dated map selection '+y);

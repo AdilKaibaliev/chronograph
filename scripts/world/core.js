@@ -25,7 +25,7 @@ function createWorldHistory(catalog){
    const unified=original.mongolGroup&&catalog.cartography?.mongol?.find(f=>f.from<=year&&year<f.to);
    const occupation=dependencies.get(original.entry)?.relationship==='occupation';
    let a=shape?{...original,polygons:shape,points:shape[0],...(unified?{mongolUnion:catalog.cartography.shapes[unified.shape],mongolUnionId:unified.from}:{})}:original;
-   a={...a,kind:catalog.cartography?.kinds?.[original.id]||a.kind,geometryId:original.id,politicalOutline:original.kind==='polity'};
+   a={...a,kind:catalog.cartography?.kinds?.[original.id]||a.kind,geometryId:original.id,politicalOutline:original.kind==='polity'&&!a.overlord};
    if(outline&&!occupation)a={...a,...outline,geometryId:outline.id,id:original.id+'@'+outline.id,from:Math.max(original.from,outline.from),to:Math.min(original.to,outline.to),points:outline.polygons[0],politicalOutline:true};
    const relationSource=activeRelations.get(a.entry)?.source;
    if(relationSource)a={...a,sources:[...new Set([...a.sources,relationSource])]};

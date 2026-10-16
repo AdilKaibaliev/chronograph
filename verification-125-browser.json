@@ -1,0 +1,129 @@
+{
+  "version": "1.25.0",
+  "verifiedAtUtc": "2026-10-16T18:16:51.720Z",
+  "htmlSha256": "ece8f89762518887380e096e6c64a57c22937447e9b80620a99fc55e85d403fb",
+  "checks": [
+    {
+      "name": "Final timeline 773",
+      "pass": true
+    },
+    {
+      "name": "Final timeline 774",
+      "pass": true
+    },
+    {
+      "name": "Final timeline 784",
+      "pass": true
+    },
+    {
+      "name": "Final timeline 785",
+      "pass": true
+    },
+    {
+      "name": "Final timeline 799",
+      "pass": true
+    },
+    {
+      "name": "Final timeline 800",
+      "pass": true
+    },
+    {
+      "name": "Final timeline 801",
+      "pass": true
+    },
+    {
+      "name": "Final timeline 804",
+      "pass": true
+    },
+    {
+      "name": "Final timeline 1299",
+      "pass": true
+    },
+    {
+      "name": "Final timeline 1300",
+      "pass": true
+    },
+    {
+      "name": "Final timeline 1942",
+      "pass": true
+    },
+    {
+      "name": "Final timeline 2010",
+      "pass": true
+    },
+    {
+      "name": "Final timeline 2011",
+      "pass": true
+    },
+    {
+      "name": "Final timeline 2026",
+      "pass": true
+    },
+    {
+      "name": "773/774 Lombard succession",
+      "pass": true
+    },
+    {
+      "name": "784/785 dated frontier",
+      "pass": true
+    },
+    {
+      "name": "799/800 stable outline",
+      "pass": true
+    },
+    {
+      "name": "1047 parent navigation and dependent Ifriqiya",
+      "pass": true
+    },
+    {
+      "name": "1048 Fatimid text excludes Ifriqiya",
+      "pass": true
+    },
+    {
+      "name": "Zirid independence ru",
+      "pass": true
+    },
+    {
+      "name": "Zirid independence en",
+      "pass": true
+    },
+    {
+      "name": "Zirid independence ky",
+      "pass": true
+    },
+    {
+      "name": "Mobile 390×844 map and play visible",
+      "pass": true
+    },
+    {
+      "name": "Future opens map",
+      "pass": true
+    },
+    {
+      "name": "Future illustration opens on demand",
+      "pass": true
+    },
+    {
+      "name": "Future returns to historical year",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "mobile": {
+    "height": 844,
+    "map": [
+      91,
+      394.5
+    ],
+    "overflow": false,
+    "play": [
+      742.5,
+      778.5
+    ],
+    "timeline": [
+      728,
+      837
+    ],
+    "width": 390
+  }
+}

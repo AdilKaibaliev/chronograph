@@ -49,10 +49,16 @@ for(const r of c.sharedFrontiers.frames)assert(c.sources[r.source],'Missing geom
 // recoverable; approved added source IDs do not excuse other silent changes.
 const raw=require('./catalog.cjs'),byId=new Map(raw.areas.map(a=>[a.id,a]));
 const approvedSources=new Set(c.sharedFrontiers.frames.map(f=>f.source));
+assert.equal(c.mediterraneanReview.version,1);
+approvedSources.add('maghrebDependence');
+// The 1.25 historical review intentionally changes these two profiles.
+// Its dedicated test independently checks cities, dependency dates and shared
+// geometry; every other original field and unrelated record stays protected.
 for(const a of c.areas.filter(a=>a.from<2011&&!a.frontierAdded)){
- const old=byId.get(a.id.split('-edge-')[0]);assert(old,'Unrecorded historical frame '+a.id);
+ const old=byId.get(a.id==='zirid-1048'?'zirid-1014':a.id.split('-edge-')[0]);assert(old,'Unrecorded historical frame '+a.id);
  assert(a.from>=old.from&&a.to<=old.to,'Split extends original dates '+a.id);
- for(const key of Object.keys(old).filter(k=>!['id','from','to','sources'].includes(k)))assert.deepEqual(a[key],old[key],'Changed original field '+a.id+' '+key);
+ const reviewed=a.entry==='zirid'?['color','text','points','polygons']:a.entry==='hammadid'?['points','polygons']:[];
+ for(const key of Object.keys(old).filter(k=>!['id','from','to','sources',...reviewed].includes(k)))assert.deepEqual(a[key],old[key],'Changed original field '+a.id+' '+key);
  for(const id of old.sources)assert(a.sources.includes(id),'Lost source '+a.id);
  for(const id of a.sources)assert(old.sources.includes(id)||approvedSources.has(id),'Unreviewed source '+id);
 }

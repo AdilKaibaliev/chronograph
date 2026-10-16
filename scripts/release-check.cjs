@@ -33,6 +33,7 @@ const checks = [
   'scripts/world/shared-frontiers-test.cjs',
   'scripts/world/legacy-frontiers-test.cjs',
   'scripts/world/early-boundary-review-test.cjs',
+  'scripts/world/mediterranean-review-test.cjs',
   'scripts/incidents/test.cjs',
   'scripts/world/coasts-occupation-test.cjs',
   'scripts/world/all-borders-test.cjs',

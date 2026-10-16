@@ -2,6 +2,8 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),G=require('./cartography-geometry.cjs');
 const raw=require('./catalog.cjs'),html=fs.readFileSync('index.html','utf8');
 const c=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]),h=require('./core.js').createWorldHistory(c);
+const early=JSON.parse(html.match(/const EMPIRES=([^\n]+);/)[1]),earlyCartography=JSON.parse(html.match(/const LEGACY_CARTOGRAPHY=([^\n]+);/)[1]),earlyVisible=require('./legacy-presentation.js').legacyStateVisible;
+function hasEarlyOwner(id,y){const e=early.find(e=>e.id===id),f=earlyCartography.frames[id]?.filter(f=>f[0]<=y).at(-1);return y<1300&&e&&e.from<=y&&y<=e.to&&earlyVisible(id,y)&&f&&earlyCartography.shapes[f[1]]?.length;}
 const d=c.displayCartography,frames=[...c.areas,...c.outlines];
 for(const a of frames){
  const rings=d.shapes[d.areas[a.id]];
@@ -15,7 +17,7 @@ for(let y=c.range.min;y<=c.range.max;y++){
  const states=h.mapAreasAt(y),ids=new Set(states.map(a=>a.entry));assert.equal(ids.size,states.length,'Duplicate '+y);
  for(const a of states){
   assert(a.polygons?.length,'Empty visible state '+a.entry+' '+y);
-  if(a.sovereign||a.overlord)assert(ids.has(a.sovereign||a.overlord),'Missing owner '+a.entry+' '+y);
+  if(a.sovereign||a.overlord){const parent=a.sovereign||a.overlord;assert(ids.has(parent)||a.legacyOverlord&&hasEarlyOwner(parent,y),'Missing owner '+a.entry+' '+y);}
  }
  yearlyStates+=states.length;
 }

@@ -31,7 +31,11 @@ const baseline='.local-checks/release115-baseline.json';
 if(fs.existsSync(baseline)){
  const before=JSON.parse(fs.readFileSync(baseline));
  const integratedIds=new Set(require('../incidents/integrate.cjs').events.map(e=>e.id));
- for(const key of ['entries','events'])assert.deepEqual(require('./historical-window.cjs')(key==='events'?c[key].filter(e=>!integratedIds.has(e.id)):c[key],key),before[key],'Earlier narratives changed '+key);
+ // Only the documented Zirid phases were revised in 1.25 (972/1048/1057).
+ // The Mediterranean review checks these dates and their rendered geography;
+ // preserve the profile identity and all unrelated historical narratives here.
+ const preserved=(rows,key)=>key==='entries'?rows.map(e=>e.id==='zirid'?{...e,phases:[]}:e):rows;
+ for(const key of ['entries','events'])assert.deepEqual(preserved(require('./historical-window.cjs')(key==='events'?c[key].filter(e=>!integratedIds.has(e.id)):c[key],key),key),preserved(before[key],key),'Earlier narratives changed '+key);
  assert.deepEqual(require('./geometry-regression.cjs')(require('./historical-window.cjs')(require('./catalog.cjs').areas,'areas')),require('./geometry-regression.cjs')(before.areas),'Unexpected historical change');
 }
 // Exercise cancellation and cleanup of the actual map transition implementation.

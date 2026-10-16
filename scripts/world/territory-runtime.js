@@ -7,7 +7,10 @@ function worldAreaCamera(a){
  animateCamera({scale,tx:SVG_W/2-(x0+x1)/2*scale,ty:SVG_H/2-(y0+y1)/2*scale});
 }
 function worldChooseTerritory(id,focus=true){
- const a=worldHistory.mapAreasAt(year).find(a=>a.entry===id);if(!a)return;
+ const a=worldHistory.mapAreasAt(year).find(a=>a.entry===id);
+ // An early polity can be the overlord of a world-history profile. Resolve
+ // that parent in the original chronology instead of leaving a dead button.
+ if(!a){if(year<1300&&empireStatesForYear(year).some(e=>e.id===id)){stopPlay();selectEmpire(id);}return;}
  
  stopPlay();worldShowLocations();worldState.area=id;worldState.selected=id;worldState.event='';worldState.mode='overview';worldState.filters=false;
  worldState.region=worldHistory.entry(id).region;switchPanel('compare');renderWorldHistory();

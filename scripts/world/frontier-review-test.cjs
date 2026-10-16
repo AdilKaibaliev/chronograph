@@ -1,11 +1,13 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),G=require('./cartography-geometry.cjs'),clip=require('../vendor/polygon-clipping.cjs');
 const html=fs.readFileSync('index.html','utf8'),c=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]),h=require('./core.js').createWorldHistory(c);
+const early=JSON.parse(html.match(/const EMPIRES=([^\n]+);/)[1]),earlyCartography=JSON.parse(html.match(/const LEGACY_CARTOGRAPHY=([^\n]+);/)[1]),earlyVisible=require('./legacy-presentation.js').legacyStateVisible;
+function hasEarlyOwner(id,y){const e=early.find(e=>e.id===id),f=earlyCartography.frames[id]?.filter(f=>f[0]<=y).at(-1);return y<1300&&e&&e.from<=y&&y<=e.to&&earlyVisible(id,y)&&f&&earlyCartography.shapes[f[1]]?.length;}
 const at=(id,y)=>h.mapAreasAt(y).find(a=>a.entry===id),surface=m=>Math.abs(m.flat().reduce((n,r)=>n+G.signed(r),0));
 let years=0,checks=0;
 for(let y=610;y<=2026;y++){
  const rows=h.mapAreasAt(y);assert(rows.length,'Empty map '+y);const ids=new Set(rows.map(a=>a.entry));assert.equal(rows.length,ids.size,'Duplicate map identity '+y);
- for(const a of rows){assert(a.from<=y&&y<a.to);assert(a.polygons?.length,'Empty geometry '+a.entry+' '+y);if(a.sovereign||a.overlord)assert(ids.has(a.sovereign||a.overlord),'Missing owner '+y);}
+ for(const a of rows){assert(a.from<=y&&y<a.to);assert(a.polygons?.length,'Empty geometry '+a.entry+' '+y);if(a.sovereign||a.overlord){const parent=a.sovereign||a.overlord;assert(ids.has(parent)||a.legacyOverlord&&hasEarlyOwner(parent,y),'Missing owner '+parent+' '+y);}}
  for(const e of h.at(y))assert(ids.has(e.entry.id)||e.coord?.length===2,'Unmapped profile '+e.entry.id+' '+y);
  years++;
 }
