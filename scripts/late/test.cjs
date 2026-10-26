@@ -31,6 +31,10 @@ const event=id=>{const e=catalog.events.find(e=>e.id===id);assert(e,'Missing mil
 const present=(id,y)=>{assert(active(id,y),id+' must be present in '+y);assert(territory(id,y),id+' needs a mapped area in '+y);};
 const absent=(id,y)=>{assert(!active(id,y),id+' persists in '+y);assert(!territory(id,y),id+' leaves a stale map area in '+y);};
 const ids=items=>items.map(x=>x.entry.id).sort();
+// Reviewed acquisition dates split an existing record; the underlying
+// historical profile and its original interval must still be preserved.
+const reviewedIds=new Set(delivered.europeCentralReview.frames.map(f=>f.id));
+const originalAreaId=a=>reviewedIds.has(a.id)?a.id.split('-edge-')[0]:a.id;
 
 // A newly built page must agree with the source catalogue throughout the added
 // interval, not just at its two endpoints. Detect stale builds and orphan areas.
@@ -38,7 +42,7 @@ for(let y=1300;y<=MAX;y++){
  const live=history.at(y),areaRows=history.areasAt(y);
  for(const a of areaRows)assert(active(a.entry,y),a.id+' has no society in '+y);
  assert.deepEqual(ids(publishedHistory.at(y)),ids(live),'Built profile selection differs in '+y);
- assert.deepEqual(publishedHistory.areasAt(y).map(a=>a.id).sort(),areaRows.map(a=>a.id).sort(),'Built territory selection differs in '+y);
+ assert.deepEqual(publishedHistory.areasAt(y).map(originalAreaId).sort(),areaRows.map(a=>a.id).sort(),'Built territory selection differs in '+y);
 }
 const milestones=history.timeline().filter(e=>e.record==='event'&&e.from>=1300&&e.from<=MAX);
 assert(milestones.every(e=>e.year>=1300&&e.year<=MAX));

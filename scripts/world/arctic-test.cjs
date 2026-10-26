@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),G=require('./cartography-geometry.cjs'),c=require('./catalog.cjs'),{createWorldHistory}=require('./core.js');
 const html=fs.readFileSync('index.html','utf8'),d=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]),h=createWorldHistory(d),r=createWorldHistory(c);
 const area=(y,raw=false)=>(raw?r:h).mapAreasAt(y).find(a=>a.entry==='thule'),has=(y,p,raw=false)=>G.covers(area(y,raw).polygons,p);
-assert.equal(c.arcticReview.stages.length,12);assert(html.includes('content="1.26.0"'));
+assert.equal(c.arcticReview.stages.length,12);assert(html.includes('content="1.27.0"'));
 for(let y=610;y<=1991;y++){
  assert.equal(!!h.get('thule',y),y>=1000);
  if(y<1000)continue;
@@ -31,7 +31,7 @@ for(const id of ['resolute','grise']){const e=events.find(e=>e.id==='arctic-revi
 const base='.local-checks/arctic-before.json';if(fs.existsSync(base)){
  const b=JSON.parse(fs.readFileSync(base)),past=require('./to2000-window.cjs')(c);
  assert.deepEqual(past.entries.filter(e=>e.id!=='thule'),b.entries.filter(e=>e.id!=='thule'));
- for(const key of ['areas','outlines'])assert.deepEqual(past[key].filter(a=>a.entry!=='thule'),b[key].filter(a=>a.entry!=='thule'));
+ for(const key of ['areas','outlines'])assert.deepEqual(require('./semirechye-baseline.cjs')(past[key].filter(a=>a.entry!=='thule')),b[key].filter(a=>a.entry!=='thule'));
  assert.deepEqual(past.events.filter(e=>!e.id.startsWith('arctic-review-')),b.events);
  assert.deepEqual(Object.fromEntries(Object.entries(past.sources).filter(([id])=>!id.startsWith('arcticReview'))),b.sources);
  assert.deepEqual(past.cartography.relations,b.cartography.relations,'Political ownership changed');

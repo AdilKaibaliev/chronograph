@@ -51,6 +51,7 @@ const raw=require('./catalog.cjs'),byId=new Map(raw.areas.map(a=>[a.id,a]));
 const approvedSources=new Set(c.sharedFrontiers.frames.map(f=>f.source));
 assert.equal(c.mediterraneanReview.version,1);
 approvedSources.add('maghrebDependence');
+for(const id of Object.keys(require('./europe-central-review.cjs').sources))approvedSources.add(id);
 // The 1.25 historical review intentionally changes these two profiles.
 // Its dedicated test independently checks cities, dependency dates and shared
 // geometry; every other original field and unrelated record stays protected.

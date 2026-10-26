@@ -1,0 +1,190 @@
+{
+  "version": "1.27.0",
+  "htmlSha256": "55e478da0f5b90b0c0c11c40513199d1ebc98b2b709e6a100f79a4f8211c8fbc",
+  "checks": [
+    {
+      "name": "release and Burgundy 1000",
+      "burgundy": true,
+      "polities": 68,
+      "version": "1.27.0",
+      "year": "1000",
+      "pass": true
+    },
+    {
+      "name": "year 933",
+      "burgundy": true,
+      "paths": 60,
+      "playVisible": true,
+      "year": 933,
+      "pass": true
+    },
+    {
+      "name": "year 962",
+      "burgundy": true,
+      "paths": 61,
+      "playVisible": true,
+      "year": 962,
+      "pass": true
+    },
+    {
+      "name": "year 987",
+      "burgundy": true,
+      "paths": 65,
+      "playVisible": true,
+      "year": 987,
+      "pass": true
+    },
+    {
+      "name": "year 1031",
+      "burgundy": true,
+      "paths": 70,
+      "playVisible": true,
+      "year": 1031,
+      "pass": true
+    },
+    {
+      "name": "year 1032",
+      "burgundy": false,
+      "paths": 68,
+      "playVisible": true,
+      "year": 1032,
+      "pass": true
+    },
+    {
+      "name": "year 1299",
+      "burgundy": false,
+      "paths": 70,
+      "playVisible": true,
+      "year": 1299,
+      "pass": true
+    },
+    {
+      "name": "succession 1300",
+      "chagatai": true,
+      "moghul": false,
+      "paths": 96,
+      "view": "translate(-2481.61 -326.43) scale(4.3000)",
+      "year": 1300,
+      "pass": true
+    },
+    {
+      "name": "succession 1311",
+      "chagatai": true,
+      "moghul": false,
+      "paths": 95,
+      "view": "translate(-2481.61 -326.43) scale(4.3000)",
+      "year": 1311,
+      "pass": true
+    },
+    {
+      "name": "succession 1312",
+      "chagatai": true,
+      "moghul": false,
+      "paths": 95,
+      "view": "translate(-2481.61 -326.43) scale(4.3000)",
+      "year": 1312,
+      "pass": true
+    },
+    {
+      "name": "succession 1346",
+      "chagatai": true,
+      "moghul": false,
+      "paths": 96,
+      "view": "translate(-2481.61 -326.43) scale(4.3000)",
+      "year": 1346,
+      "pass": true
+    },
+    {
+      "name": "succession 1347",
+      "chagatai": false,
+      "moghul": true,
+      "paths": 97,
+      "view": "translate(-2481.61 -326.43) scale(4.3000)",
+      "year": 1347,
+      "pass": true
+    },
+    {
+      "name": "succession 1349",
+      "chagatai": false,
+      "moghul": true,
+      "paths": 99,
+      "view": "translate(-2481.61 -326.43) scale(4.3000)",
+      "year": 1349,
+      "pass": true
+    },
+    {
+      "name": "Moghulistan selection and focus",
+      "pass": true
+    },
+    {
+      "name": "regression 1359",
+      "paths": 101,
+      "play": true,
+      "year": 1359,
+      "pass": true
+    },
+    {
+      "name": "regression 1360",
+      "paths": 101,
+      "play": true,
+      "year": 1360,
+      "pass": true
+    },
+    {
+      "name": "regression 1942",
+      "paths": 284,
+      "play": true,
+      "year": 1942,
+      "pass": true
+    },
+    {
+      "name": "regression 2011",
+      "paths": 313,
+      "play": true,
+      "year": 2011,
+      "pass": true
+    },
+    {
+      "name": "regression 2026",
+      "paths": 313,
+      "play": true,
+      "year": 2026,
+      "pass": true
+    },
+    {
+      "name": "Burgundy language en",
+      "pass": true,
+      "excerpt": "Eurasia · State / political centre\nKingdom of Burgundy\nc. 933–1031\nThe Rudolfings between the Jura, Alps and Rhône\n\nIn the tenth c"
+    },
+    {
+      "name": "Burgundy language ky",
+      "pass": true,
+      "excerpt": "Евразия · Мамлекет / саясий борбор\nБургундия падышалыгы\nболж. 933–1031\nЮра, Альп жана Рона арасындагы Рудольф династиясы\n\nX кылымд"
+    },
+    {
+      "name": "Burgundy language ru",
+      "pass": true,
+      "excerpt": "Евразия · Государство / политический центр\nБургундское королевство\nок. 933–1031\nРодольфинги между Юрой, Альпами и Роной\n\nВ X веке "
+    },
+    {
+      "name": "future defaults to map",
+      "pass": true
+    },
+    {
+      "name": "future illustration selectable",
+      "pass": true
+    },
+    {
+      "name": "mobile 390x844",
+      "height": 844,
+      "mapHeight": 305.9375,
+      "playBottom": 780.984375,
+      "scrollHeight": 844,
+      "scrollWidth": 390,
+      "width": 390,
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "verifiedAtUtc": "2026-10-26T19:40:35.389Z"
+}

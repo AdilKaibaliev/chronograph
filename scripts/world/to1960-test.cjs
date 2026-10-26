@@ -54,7 +54,7 @@ assert.deepEqual(worldEpochForYear(1960),1946);assert(worldRegionalMilestones(h.
 // Earlier records are an independent saved snapshot, not regenerated expectations.
 const base='.local-checks/to1960-catalog-baseline.json';if(fs.existsSync(base)){
  const b=JSON.parse(fs.readFileSync(base,'utf8')),archived=require('./arctic-baseline.cjs')(c,undefined,1946);
- for(const field of ['areas','events','outlines'])assert.deepEqual(archived[field].filter(x=>x.from<1946),b[field],field+' before 1946 changed');
+ for(const field of ['areas','events','outlines'])assert.deepEqual(require('./semirechye-baseline.cjs')(archived[field].filter(x=>x.from<1946)),b[field],field+' before 1946 changed');
  for(const e of b.entries)assert.deepEqual(archived.entries.find(n=>n.id===e.id).phases.filter(p=>p.from<1946),e.phases,'Earlier phases '+e.id);
 }
 let tick;const ctx={year:1959,playing:false,playTimer:null,playDelay:100,TIMELINE_MAX:1960,TIMELINE_MIN:610,$:()=>({setAttribute(){},textContent:''}),clearInterval(){},setInterval(fn){tick=fn;return 1;},nextPlaybackYear:y=>Math.min(1960,y+1)};

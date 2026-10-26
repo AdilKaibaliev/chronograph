@@ -37,5 +37,6 @@ assert.deepEqual(F.prepare(es),es,'Preparation must be idempotent');
 // Every existing early profile is preserved and unchanged profiles retain
 // their records byte-for-byte (apart from the explicit review version).
 assert.deepEqual(es.map(e=>e.id),raw.map(e=>e.id));
-for(const id of ['kyrgyzKhaganate','yeniseiKyrgyz','kyrgyzMongol','tang','yuan','goldenHorde']){const{frontierReviewVersion,...e}=es.find(e=>e.id===id);assert.deepEqual(e,raw.find(e=>e.id===id),id);}
+for(const id of ['kyrgyzKhaganate','yeniseiKyrgyz','kyrgyzMongol','tang','yuan']){const{frontierReviewVersion,...e}=es.find(e=>e.id===id);assert.deepEqual(e,raw.find(e=>e.id===id),id);}
+{const{frontierReviewVersion,source,...e}=es.find(e=>e.id==='goldenHorde');const{source:prior,...r}=raw.find(e=>e.id==='goldenHorde');assert.deepEqual(e,r);assert.equal(source,prior+' '+F.sources.semirechyeFrontier);}
 console.log(JSON.stringify({pass:true,sharedEdges:frames,controlPoints:points,profiles:es.length,checks:'retreat, conquest dates, Syrian Ayyubids, pre-imperial Seljuks and Ghaznavids, dependencies, delivered geometry'}));

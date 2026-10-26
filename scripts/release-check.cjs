@@ -35,6 +35,7 @@ const checks = [
   'scripts/world/early-boundary-review-test.cjs',
   'scripts/world/mediterranean-review-test.cjs',
   'scripts/world/anatolian-review-test.cjs',
+  'scripts/world/europe-central-review-test.cjs',
   'scripts/incidents/test.cjs',
   'scripts/world/coasts-occupation-test.cjs',
   'scripts/world/all-borders-test.cjs',

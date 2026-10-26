@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),crypto=require('node:crypto'),G=require('./cartography-geometry.cjs'),clip=require('../vendor/polygon-clipping.cjs'),raw=require('./catalog.cjs'),{createWorldHistory,worldEpochForYear}=require('./core.js');
 const html=fs.readFileSync('index.html','utf8'),c=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]),h=createWorldHistory(c);
-assert.equal(raw.range.max,2010);assert.equal(c.range.max,2026);assert(html.includes('TIMELINE_MAX=2026;'));assert(html.includes('name="chronograph-version" content="1.26.0"'));
+assert.equal(raw.range.max,2010);assert.equal(c.range.max,2026);assert(html.includes('TIMELINE_MAX=2026;'));assert(html.includes('name="chronograph-version" content="1.27.0"'));
 const area=(id,y)=>h.mapAreasAt(y).find(a=>a.entry===id),phase=(id,y)=>h.get(id,y)?.phase,has=(id,y,p)=>G.covers(area(id,y).polygons,p);
 for(let y=2001;y<=2010;y++){
  const a=h.mapAreasAt(y),ids=new Set(a.map(a=>a.entry));assert.equal(ids.size,a.length);
@@ -50,10 +50,11 @@ assert.deepEqual(events.find(e=>e.id==='2010-event-chile').coord,[-72.898,-36.12
 assert(!events.some(e=>e.entry==='thule'),'Administration must not imply Inuit migration');
 const past={entries:raw.entries.map(e=>({...e,phases:e.phases.filter(p=>p.from<2001)})).filter(e=>e.phases.length),areas:raw.areas.filter(a=>a.from<2001),outlines:raw.outlines.filter(a=>a.from<2001),events:raw.events.filter(a=>a.from<2001),sources:Object.fromEntries(Object.entries(raw.sources).filter(([id])=>!id.startsWith('to2010'))),relations:raw.cartography.relations.filter(r=>r.from<2001)};
 const hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex');
+past.outlines=require('./semirechye-baseline.cjs')(past.outlines);
 const fingerprints=require('./to2010-baseline.json');for(const key of Object.keys(past))assert.equal(hash(past[key]),fingerprints[key],'Earlier data changed: '+key);
 const file='.local-checks/to2010-before.json';if(fs.existsSync(file)){
  const b=JSON.parse(fs.readFileSync(file));for(const key of ['entries','areas','outlines','events','sources'])assert.deepEqual(past[key],b[key]);assert.deepEqual(past.relations,b.cartography.relations);
  const delivered=JSON.parse(fs.readFileSync('.local-checks/to2010-delivered-before.json')),oldHistory=createWorldHistory(delivered);
- for(const y of [610,840,1299,1300,1918,1939,1945,1960,1990,1991,1993,1997,1999,2000])for(const a of oldHistory.mapAreasAt(y))if(!c.frontierReview.frames.some(f=>f.entry===a.entry&&f.from<=y&&y<f.to)) assert.deepEqual(area(a.entry,y).polygons,a.polygons,'Delivered geometry changed '+y+' '+a.entry);
+ for(const y of [610,840,1299,1300,1918,1939,1945,1960,1990,1991,1993,1997,1999,2000])for(const a of oldHistory.mapAreasAt(y))if(!c.frontierReview.frames.some(f=>f.entry===a.entry&&f.from<=y&&y<f.to)&&!c.europeCentralReview.frames.some(f=>f.entry===a.entry&&f.from<=y&&y<f.to)&&!((a.entry==='late-chagatai'&&y<1347||a.entry==='late-jochi'&&y<1360)&&y>=1300)) assert.deepEqual(area(a.entry,y).polygons,a.polygons,'Delivered geometry changed '+y+' '+a.entry);
 }
 console.log(JSON.stringify({pass:true,years:10,politicalPairs:pairs,newEvents:events.length,revised:raw.to2010Review.revised.length,checks:'all eight regions, dated status changes, no overlapping political fills, exact partition exterior, earlier independent fingerprints preserved, three languages'}));
