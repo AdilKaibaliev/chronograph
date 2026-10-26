@@ -1,6 +1,6 @@
 # Chronograph — исторический атлас
 
-Версия **1.25.0: франкское расширение и Магриб**, 17 октября 2026. История мира 610–2026, три языка. См. MEDITERRANEAN_REVIEW_1_25.md.
+Версия **1.26.0: анатолийские рубежи**, 27 октября 2026. История мира 610–2026, три языка. См. ANATOLIAN_REVIEW_1_26.md.
 
 ## Изменения
 
@@ -54,7 +54,7 @@
 
 [Поход Османов, 1517](http://127.0.0.1:8773/?lang=ru&year=1517&tab=compare).
 
-Сборка: node scripts/i18n/build.cjs. Полная проверка: node scripts/release-check.cjs — сборка и 38 наборов проверок. Журналы текущей проверки: verification-to2000.txt, verification-to2000-browser.json. Предыдущая проверка: verification-to1991.txt.
+Сборка: node scripts/i18n/build.cjs. Полная проверка: node scripts/release-check.cjs — сборка и 46 наборов проверок. Журналы текущей проверки: verification-126-release.txt, verification-126-browser.json. Предыдущая проверка: verification-125-release.txt.
 
 Запуск из этой папки: python -m http.server 8773 --bind 127.0.0.1. На рабочем компьютере сервер уже запущен.
 

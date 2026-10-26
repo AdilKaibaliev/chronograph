@@ -1,0 +1,113 @@
+{
+  "version": "1.26.0",
+  "htmlSha256": "d85008b275d2d0def66e5a9c060106c444d0af5521bad8162e094ec52a8921dd",
+  "checks": [
+    {
+      "name": "1214 Latin territory selection and treaty",
+      "pass": true
+    },
+    {
+      "name": "Successor map 1204",
+      "pass": true
+    },
+    {
+      "name": "Successor map 1214",
+      "pass": true
+    },
+    {
+      "name": "Successor map 1225",
+      "pass": true
+    },
+    {
+      "name": "Successor map 1234",
+      "pass": true
+    },
+    {
+      "name": "Successor map 1235",
+      "pass": true
+    },
+    {
+      "name": "Successor map 1260",
+      "pass": true
+    },
+    {
+      "name": "Successor map 1261",
+      "pass": true
+    },
+    {
+      "name": "Dated Latin retreat 1214/1225/1235",
+      "pass": true
+    },
+    {
+      "name": "Year, map and controls 1071",
+      "pass": true
+    },
+    {
+      "name": "Year, map and controls 1096",
+      "pass": true
+    },
+    {
+      "name": "Year, map and controls 1097",
+      "pass": true
+    },
+    {
+      "name": "Year, map and controls 1298",
+      "pass": true
+    },
+    {
+      "name": "Year, map and controls 1299",
+      "pass": true
+    },
+    {
+      "name": "Year, map and controls 1300",
+      "pass": true
+    },
+    {
+      "name": "Year, map and controls 1942",
+      "pass": true
+    },
+    {
+      "name": "Year, map and controls 2010",
+      "pass": true
+    },
+    {
+      "name": "Year, map and controls 2011",
+      "pass": true
+    },
+    {
+      "name": "Year, map and controls 2026",
+      "pass": true
+    },
+    {
+      "name": "Visible frontier card en",
+      "pass": true
+    },
+    {
+      "name": "Visible frontier card ky",
+      "pass": true
+    },
+    {
+      "name": "Visible frontier card ru",
+      "pass": true
+    },
+    {
+      "name": "Mobile 390×844: no page overflow and play visible",
+      "pass": true
+    },
+    {
+      "name": "Future events opens map first",
+      "pass": true
+    },
+    {
+      "name": "Future illustration opens on request",
+      "pass": true
+    },
+    {
+      "name": "Return from future events restores historical controls",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "url": "http://127.0.0.1:8773/?lang=ru&year=1235&tab=selection&world=eurasia&view=4.000%2C-2624.000%2C-364.114",
+  "verifiedAtUtc": "2026-10-26T18:44:31.440Z"
+}
