@@ -1,7 +1,7 @@
 {
   "version": "1.28.0",
   "htmlSha256": "b5f62588d7b40be04005dd7fa9d836eb57be23200d554d24feb6c4e7e87988c5",
-  "webHtmlSha256": "2b7102323980e4bb43359bf81ceaa8e6d6290857024813038850f5105de042a5",
+  "webHtmlSha256": "02ccdea4d7f9220afb89ed6bd26f8fcbe2a1f818addef4522e2f533d8480de2d",
   "checks": [
     {
       "case": "year 622",
@@ -214,7 +214,12 @@
     {
       "case": "early note ru",
       "pass": true
+    },
+    {
+      "case": "search verification metadata; unchanged atlas runtime",
+      "pass": true
     }
   ],
-  "errors": []
+  "errors": [],
+  "previousWebHtmlSha256": "2b7102323980e4bb43359bf81ceaa8e6d6290857024813038850f5105de042a5"
 }

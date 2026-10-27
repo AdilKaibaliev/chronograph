@@ -99,6 +99,6 @@ PASS: 4291 coordinate checks; 690-year data, dated Kyrgyz status, Mongol conques
 Running scripts/unified-map-test.cjs
 PASS: unified/detailed modes across 690 years, dated extent preserved, consistent winding, no duplicate ulus paths, post-1260 label, Kyrgyz core/influence distinction, RU/EN/KY.
 Running scripts/seo/build.cjs
-{"pass":true,"htmlBytes":28655,"pages":29,"assets":57,"largestAsset":900922,"dataRoundTrip":true}
+{"pass":true,"htmlBytes":28715,"pages":29,"assets":57,"largestAsset":900922,"dataRoundTrip":true}
 Running scripts/seo/test.cjs
-{"pass":true,"pages":29,"internalLinks":951,"htmlBytes":28655,"cachedAssets":57,"checks":"metadata, canonical URLs, language alternates, real internal links, sitemap, robots, ordered scripts, data integrity, social image"}
+{"pass":true,"pages":29,"internalLinks":951,"htmlBytes":28715,"cachedAssets":57,"checks":"metadata, canonical URLs, language alternates, real internal links, sitemap, robots, ordered scripts, data integrity, social image"}
