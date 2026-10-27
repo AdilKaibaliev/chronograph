@@ -36,6 +36,7 @@ const checks = [
   'scripts/world/mediterranean-review-test.cjs',
   'scripts/world/anatolian-review-test.cjs',
   'scripts/world/europe-central-review-test.cjs',
+  'scripts/world/arabia-khitai-review-test.cjs',
   'scripts/incidents/test.cjs',
   'scripts/world/coasts-occupation-test.cjs',
   'scripts/world/all-borders-test.cjs',
@@ -52,7 +53,9 @@ const checks = [
   'scripts/support/test.cjs',
   'scripts/biographies-test.cjs',
   'scripts/history-test.cjs',
-  'scripts/unified-map-test.cjs'
+  'scripts/unified-map-test.cjs',
+  'scripts/seo/build.cjs',
+  'scripts/seo/test.cjs'
 ];
 
 for (const file of checks) {

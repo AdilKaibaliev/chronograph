@@ -1,0 +1,326 @@
+{
+  "version": "1.28.0",
+  "sourceSha256": "b5f62588d7b40be04005dd7fa9d836eb57be23200d554d24feb6c4e7e87988c5",
+  "htmlSha256": "2b7102323980e4bb43359bf81ceaa8e6d6290857024813038850f5105de042a5",
+  "htmlBytes": 28655,
+  "assets": [
+    {
+      "url": "/assets/atlas-script.1b16e549b8f4e809.js",
+      "bytes": 430334,
+      "sha256": "1b16e549b8f4e809add7df60768192a265db15a3e5434bfb24ea9b2a05e6ed63"
+    },
+    {
+      "url": "/assets/atlas-script.60569f6c0ad869a4.js",
+      "bytes": 510412,
+      "sha256": "60569f6c0ad869a47cac75b98dcbe6d049727cf1fc042c3b0a5bd58f844ee93c"
+    },
+    {
+      "url": "/assets/atlas-data-000.39bc91a644a70fc2.js",
+      "bytes": 897036,
+      "sha256": "39bc91a644a70fc2aad3b608413e1d65b8cb17f69978a3ba70930da25a7bd6ad"
+    },
+    {
+      "url": "/assets/atlas-data-001.17d7983081eee00c.js",
+      "bytes": 898709,
+      "sha256": "17d7983081eee00c3ca2e586413d8ddbe58ba5fef98cdf100774b34154c0dae8"
+    },
+    {
+      "url": "/assets/atlas-data-002.f4f457cb0e93130a.js",
+      "bytes": 647820,
+      "sha256": "f4f457cb0e93130aaef49393e90a1d97c2f4adaeb9ef572fdcbce00329e0a147"
+    },
+    {
+      "url": "/assets/atlas-data-003.5f8d9dbd258831f7.js",
+      "bytes": 886274,
+      "sha256": "5f8d9dbd258831f7c3be4564f4f72b835f128ed7c3f7c741320c7736d561f9e1"
+    },
+    {
+      "url": "/assets/atlas-data-004.14e7abd1e47d648d.js",
+      "bytes": 869583,
+      "sha256": "14e7abd1e47d648d3bafb6177b370a58a702e1304bfb436d5d2c050ca027220f"
+    },
+    {
+      "url": "/assets/atlas-data-005.2a15faa96b2afae9.js",
+      "bytes": 889329,
+      "sha256": "2a15faa96b2afae95b3e0922c260f7c2d469e48171b8ee250d8e31c2c801d7fa"
+    },
+    {
+      "url": "/assets/atlas-data-006.5b96a342af187867.js",
+      "bytes": 899429,
+      "sha256": "5b96a342af18786713691ceb1033c29b3772dffed40c609f3ff298a344a397e8"
+    },
+    {
+      "url": "/assets/atlas-data-007.82a310b1080336a4.js",
+      "bytes": 899355,
+      "sha256": "82a310b1080336a417d4b828b9865fa4d7a463242d81aacf260db7bfc77ec785"
+    },
+    {
+      "url": "/assets/atlas-data-008.cf337c15f657f85b.js",
+      "bytes": 894538,
+      "sha256": "cf337c15f657f85b6fe60c3e38e258d25d806dfe819e1b0391f86dd892945476"
+    },
+    {
+      "url": "/assets/atlas-data-009.561db2e62c7afdd2.js",
+      "bytes": 891966,
+      "sha256": "561db2e62c7afdd2ee162b75aaf09bba3b26235530c23996a0ebfadb40dd0a0b"
+    },
+    {
+      "url": "/assets/atlas-data-010.55e63a879df5f588.js",
+      "bytes": 900396,
+      "sha256": "55e63a879df5f588c38c26dd98b2fc5db34d9fd524ce60dbdf99be603333920f"
+    },
+    {
+      "url": "/assets/atlas-data-011.e6190284676726fa.js",
+      "bytes": 900238,
+      "sha256": "e6190284676726fa9f3030df778f69179ffb71b5e6d86c2b48481651e0c3f72c"
+    },
+    {
+      "url": "/assets/atlas-data-012.f62b9150fc51e1ae.js",
+      "bytes": 900492,
+      "sha256": "f62b9150fc51e1ae7239130090d787971011acd2daf1c58cf9fdcf8a6c380f9d"
+    },
+    {
+      "url": "/assets/atlas-data-013.25ad72ef95844b0c.js",
+      "bytes": 900383,
+      "sha256": "25ad72ef95844b0cc8a027af0ab909eb81a6a16d84b18d871953f6e3ab37243e"
+    },
+    {
+      "url": "/assets/atlas-data-014.9d868bf8da9940c5.js",
+      "bytes": 899507,
+      "sha256": "9d868bf8da9940c579e7d2e722c20f4d4a7f7fcbf570af19aced3ec19359adbe"
+    },
+    {
+      "url": "/assets/atlas-data-015.f0bc8caaf60e0075.js",
+      "bytes": 900530,
+      "sha256": "f0bc8caaf60e00758807459d86e311384288eb43bb2b5f63316adaeb9e17d372"
+    },
+    {
+      "url": "/assets/atlas-data-016.a914f0e07af231e0.js",
+      "bytes": 900119,
+      "sha256": "a914f0e07af231e05eaa1e6e9528450d6e23661d7c46852128f53368818aee53"
+    },
+    {
+      "url": "/assets/atlas-data-017.2b7be5a384e296e6.js",
+      "bytes": 900092,
+      "sha256": "2b7be5a384e296e6bb44af3e300c58bb3ccf02ac0b5a6b256f363b921c126202"
+    },
+    {
+      "url": "/assets/atlas-data-018.02e2bf8b70f992c9.js",
+      "bytes": 899742,
+      "sha256": "02e2bf8b70f992c9743dea5a430765dea23b0fef98f3c9cb0fdea13a0cc5a6eb"
+    },
+    {
+      "url": "/assets/atlas-data-019.f9d877e7aa3c5724.js",
+      "bytes": 894504,
+      "sha256": "f9d877e7aa3c572477910d08f444d4de3bf5c8b6a78d7641a8d06e167074bbcc"
+    },
+    {
+      "url": "/assets/atlas-data-020.a7dbbd30902be4a4.js",
+      "bytes": 896623,
+      "sha256": "a7dbbd30902be4a4752cf735f36855b5fa4965f938a7b7f0fbf76e4a55a832a8"
+    },
+    {
+      "url": "/assets/atlas-data-021.c36c07a95a1e2d77.js",
+      "bytes": 887465,
+      "sha256": "c36c07a95a1e2d770fdc5c3647eb2f7092123ee8505a357dc77e3c050700e2df"
+    },
+    {
+      "url": "/assets/atlas-data-022.1b6ce0e3e9ab71cc.js",
+      "bytes": 897711,
+      "sha256": "1b6ce0e3e9ab71cc546a066604e72b7e792e848a8e34957e522f49871db56216"
+    },
+    {
+      "url": "/assets/atlas-data-023.8497aec4671b0019.js",
+      "bytes": 899258,
+      "sha256": "8497aec4671b0019841b01cd936d0ba29d66ec717ba6898999f3062b316a12e7"
+    },
+    {
+      "url": "/assets/atlas-data-024.ef3265281b8489f9.js",
+      "bytes": 897410,
+      "sha256": "ef3265281b8489f9cbf13c801650dab9c1d49f860f1b830af4e3c1f32f541269"
+    },
+    {
+      "url": "/assets/atlas-data-025.4d038d10e6aa62e2.js",
+      "bytes": 893306,
+      "sha256": "4d038d10e6aa62e29bbdc95f98997ba6ca82f65b8d8b47f3a0551b69fc2c31b0"
+    },
+    {
+      "url": "/assets/atlas-data-026.6e8ec6928e22761a.js",
+      "bytes": 899810,
+      "sha256": "6e8ec6928e22761a98220c0a865f1425993646fdf1185a98afd6b3ab91bffc16"
+    },
+    {
+      "url": "/assets/atlas-data-027.c168d92897d61b13.js",
+      "bytes": 885627,
+      "sha256": "c168d92897d61b13f005cbf61cb4e56b65979059d3e8a43ba2c35496747d6e73"
+    },
+    {
+      "url": "/assets/atlas-data-028.f7686cd0892c299a.js",
+      "bytes": 900922,
+      "sha256": "f7686cd0892c299ae5262cd0feb06a519e3ba05809dff8510382788cffb5a896"
+    },
+    {
+      "url": "/assets/atlas-data-029.985ef90d1fc8a935.js",
+      "bytes": 899806,
+      "sha256": "985ef90d1fc8a935711cda1a6f5f598842a2f44dcdfb9268a527185c604316a4"
+    },
+    {
+      "url": "/assets/atlas-data-030.1877ee0dc29937ec.js",
+      "bytes": 850607,
+      "sha256": "1877ee0dc29937ec04d696c98d0199917b2bed1ffdf29ac98e2e11c8fa4f311e"
+    },
+    {
+      "url": "/assets/atlas-data-031.047dea8f8fdac891.js",
+      "bytes": 891173,
+      "sha256": "047dea8f8fdac891958cc5b9af18522c34471cab7b23656607f6fa437e5ac37b"
+    },
+    {
+      "url": "/assets/atlas-data-032.1a00d8640b0d20f7.js",
+      "bytes": 894610,
+      "sha256": "1a00d8640b0d20f71a6516d25123745a1a94499162d1cceb120bfbaf1b6d0aac"
+    },
+    {
+      "url": "/assets/atlas-data-033.d1ef2e1c74e9285f.js",
+      "bytes": 892734,
+      "sha256": "d1ef2e1c74e9285febf816d5227f035eef7ef279d29ef036b12f6805eaf61b03"
+    },
+    {
+      "url": "/assets/atlas-data-034.0df95574f3145537.js",
+      "bytes": 868260,
+      "sha256": "0df95574f3145537a6a319417ad7c25e0aad94f269c5e2a99f55a76f536d80b2"
+    },
+    {
+      "url": "/assets/atlas-data-035.fc6284c8a327a7b2.js",
+      "bytes": 897250,
+      "sha256": "fc6284c8a327a7b21329db2dcbe94c63b63dfa4308770cc4c2187d3e03c8e806"
+    },
+    {
+      "url": "/assets/atlas-data-036.a4c4c1edf2c634dc.js",
+      "bytes": 895660,
+      "sha256": "a4c4c1edf2c634dc88f0fc11c3bcaaacbcdccdbc903d9910ea30e8e5c4235ed1"
+    },
+    {
+      "url": "/assets/atlas-data-037.c02c9d35101d04d6.js",
+      "bytes": 784827,
+      "sha256": "c02c9d35101d04d6a8bbcf2386aa5ec46c1efee531f4af4e555837c1b07c7b40"
+    },
+    {
+      "url": "/assets/atlas-data-038.e767986832cc9a78.js",
+      "bytes": 880156,
+      "sha256": "e767986832cc9a7887c7aaec54f3283cdafd08cc66b289c5566fc16721a767e5"
+    },
+    {
+      "url": "/assets/atlas-data-039.13a0f38c113e0e7c.js",
+      "bytes": 858520,
+      "sha256": "13a0f38c113e0e7c8ac88d3aee52fef839745e039ca75a9a696808ff4af878d3"
+    },
+    {
+      "url": "/assets/atlas-data-040.df49717fe7b626a1.js",
+      "bytes": 769065,
+      "sha256": "df49717fe7b626a16a2364b118679dea2fc602decac85d04fb3b24acb16c3f45"
+    },
+    {
+      "url": "/assets/atlas-data-041.6c5c8693eeb90afe.js",
+      "bytes": 813516,
+      "sha256": "6c5c8693eeb90afe71586c11db71e7403700301abca65b771916baf618df891f"
+    },
+    {
+      "url": "/assets/atlas-data-042.64aa4b98c0e6d43c.js",
+      "bytes": 790987,
+      "sha256": "64aa4b98c0e6d43c4071f87fd41c24e8cce8b00cebd41cd77d44fdf5357c10c8"
+    },
+    {
+      "url": "/assets/atlas-data-043.03942ce76ffcdc56.js",
+      "bytes": 792155,
+      "sha256": "03942ce76ffcdc5616523b8ff9df1a85e6ecf985520417736980d62f3bd821e4"
+    },
+    {
+      "url": "/assets/atlas-data-044.b87b2372e073daaf.js",
+      "bytes": 879661,
+      "sha256": "b87b2372e073daaf6af074c2ff66bae07a10127e2277d18d3ce947d9a7be6b0b"
+    },
+    {
+      "url": "/assets/atlas-data-045.19cee3e485e05be6.js",
+      "bytes": 862804,
+      "sha256": "19cee3e485e05be689d161c78c2d883961d2717d90058f153db7b6499f8b897c"
+    },
+    {
+      "url": "/assets/atlas-data-046.7195e289b81c9eca.js",
+      "bytes": 883666,
+      "sha256": "7195e289b81c9ecad28af0b5ca51c771e213921b79daa08748724398651808d2"
+    },
+    {
+      "url": "/assets/atlas-data-047.02507c97d28dded7.js",
+      "bytes": 893952,
+      "sha256": "02507c97d28dded7bc2fea4aec42312e7be92dccef53709ff1ad8b1ff0190678"
+    },
+    {
+      "url": "/assets/atlas-data-048.ef90ea33ca582736.js",
+      "bytes": 899802,
+      "sha256": "ef90ea33ca582736ccd1b27b940a6caf5774468c83641936a4e664d83d41f27c"
+    },
+    {
+      "url": "/assets/atlas-data-049.21d817b388673d4b.js",
+      "bytes": 700763,
+      "sha256": "21d817b388673d4b0972cf69a1586a84537bd385edad107a03a934b5bbcb76c4"
+    },
+    {
+      "url": "/assets/atlas-data-050.acf8ebd375b76f4a.js",
+      "bytes": 900538,
+      "sha256": "acf8ebd375b76f4a0cf8a0a154025b6ea20f8a692817664ebf83134b24aec5d2"
+    },
+    {
+      "url": "/assets/atlas-data-051.1cd1424be63d6923.js",
+      "bytes": 776140,
+      "sha256": "1cd1424be63d692377a28cf3fd07cae4f006e528ef64532504c03a4991113f61"
+    },
+    {
+      "url": "/assets/atlas-data-052.5aab848992bd1ff3.js",
+      "bytes": 136948,
+      "sha256": "5aab848992bd1ff3201ae999b7e1391560b55be6c81556723322e5ab27c41a01"
+    },
+    {
+      "url": "/assets/atlas.784fdd65b8a21894.css",
+      "bytes": 79945,
+      "sha256": "784fdd65b8a2189406df734141b622460db6c820c2825e73632f3564c03cf0de"
+    },
+    {
+      "url": "/assets/guide.d7798882c8801162.css",
+      "bytes": 1641,
+      "sha256": "d7798882c8801162185f7de34d55d060ba7c6861668e8e63a98073d3081fc548"
+    }
+  ],
+  "urls": [
+    "/",
+    "/en/guide",
+    "/ru/guide",
+    "/ky/guide",
+    "/zh/guide",
+    "/en/history/eurasia",
+    "/ru/history/eurasia",
+    "/ky/history/eurasia",
+    "/en/history/north",
+    "/ru/history/north",
+    "/ky/history/north",
+    "/en/history/south",
+    "/ru/history/south",
+    "/ky/history/south",
+    "/en/history/africa",
+    "/ru/history/africa",
+    "/ky/history/africa",
+    "/en/history/australia",
+    "/ru/history/australia",
+    "/ky/history/australia",
+    "/en/history/arctic",
+    "/ru/history/arctic",
+    "/ky/history/arctic",
+    "/en/history/oceania",
+    "/ru/history/oceania",
+    "/ky/history/oceania",
+    "/en/history/antarctica",
+    "/ru/history/antarctica",
+    "/ky/history/antarctica"
+  ],
+  "indexNowKey": "chronograph-atlas-7f39d2c6e0184b5ba96017cd4328fe10",
+  "dataRoundTrip": true
+}

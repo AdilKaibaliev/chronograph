@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),G=require('./cartography-geometry.cjs'),clip=require('../vendor/polygon-clipping.cjs'),raw=require('./catalog.cjs'),{createWorldHistory,worldEpochForYear}=require('./core.js');
 const html=fs.readFileSync('index.html','utf8'),c=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]),h=createWorldHistory(c),r=createWorldHistory(raw);
-assert(c.range.max>=2000);assert(html.includes('TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));assert(html.includes('name="chronograph-version" content="1.27.0"'));
+assert(c.range.max>=2000);assert(html.includes('TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));assert(html.includes('name="chronograph-version" content="1.28.0"'));
 const area=(id,y)=>h.mapAreasAt(y).find(a=>a.entry===id),phase=(id,y)=>h.get(id,y)?.phase,has=(id,y,p)=>G.covers(area(id,y).polygons,p);
 for(let y=1992;y<=2000;y++){
  const a=h.mapAreasAt(y),ids=new Set(a.map(a=>a.entry));assert.equal(ids.size,a.length);

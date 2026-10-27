@@ -6,6 +6,7 @@ const regionalReview=require('./early-boundary-review.cjs');
 const mediterraneanReview=require('./mediterranean-review.cjs');
 const anatolianReview=require('./anatolian-review.cjs');
 const europeCentralReview=require('./europe-central-review.cjs');
+const arabiaKhitaiReview=require('./arabia-khitai-review.cjs');
 const flat=m=>m.flatMap(p=>p.map(r=>r.slice(0,-1).map(p=>p.map(v=>+v.toFixed(8))))).filter(r=>Math.abs(G.signed(r))>1e-8);
 const I=(a,b)=>a.length&&b.length?flat(clip.intersection(G.multi(a),G.multi(b))):[];
 const D=(a,b)=>a.length&&b.length?flat(clip.difference(G.multi(a),G.multi(b))):a;
@@ -22,7 +23,7 @@ const sources={
  karluk:'Peter B. Golden. An Introduction to the History of the Turkic Peoples; E. A. Davidovich. The Karakhanids. History of Civilizations of Central Asia, Volume IV, Part One.',
  ayyubid:'R. Stephen Humphreys. From Saladin to the Mongols: The Ayyubids of Damascus, 1193–1260; Linda Komaroff and Suzan Yalman. The Art of the Ayyubid Period (ca. 1171–1260).',
  mongol:'Michal Biran and Hodong Kim (eds.). The Cambridge History of the Mongol Empire; Peter Jackson. The Mongols and the Islamic World.',
- ...regionalReview.sources,...mediterraneanReview.sources,...anatolianReview.sources,...europeCentralReview.sources
+ ...regionalReview.sources,...mediterraneanReview.sources,...anatolianReview.sources,...europeCentralReview.sources,...arabiaKhitaiReview.sources
 };
 const messages=[
  ['Айюбидские владения Сирии','Ayyubid domains in Syria','Сириядагы Айюбийлердин ээликтери'],
@@ -32,9 +33,9 @@ const messages=[
  ['Караханидские владения под верховной властью Каракитаев.','Qarakhanid domains under Qara Khitai overlordship.','Каракытайлардын үстөмдүгү алдындагы Караханий ээликтери.'],
  ['Местные владения западнотюркской политической системы.','Local domains within the Western Turkic political system.','Батыш Түрк саясий системасындагы жергиликтүү ээликтер.'],
  ['Формирование Каракитайского государства; продвижение Елюй Даши на запад.','Formation of the Qara Khitai state; Yelü Dashi’s movement westward.','Каракытай мамлекетинин калыптанышы; Елюй Дашинин батышка жылышы.']
- ,...regionalReview.messages,...mediterraneanReview.messages,...anatolianReview.messages,...europeCentralReview.messages];
+ ,...regionalReview.messages,...mediterraneanReview.messages,...anatolianReview.messages,...europeCentralReview.messages,...arabiaKhitaiReview.messages];
 function prepare(input){
- const es=structuredClone(input);if(es[0]?.frontierReviewVersion===5)return es;
+ const es=structuredClone(input);if(es[0]?.frontierReviewVersion===6)return es;
  const by=new Map(es.map(e=>[e.id,e])),at=(id,y)=>by.get(id)?.keyframes.filter(f=>f.year<=y).at(-1);
  // The generic geometry compiler also accepts stand-alone regional inputs.
  // Cross-state historical repairs require the complete chronological catalogue.
@@ -130,7 +131,8 @@ function prepare(input){
  mediterraneanReview.legacy(es,{frame,at,by,cite,I,D,B});
  anatolianReview.apply(es,{frame,at,by,cite,I,D,B});
  europeCentralReview.legacy(es,{frame,at,by,cite,I,D,B});
- for(const e of es)e.frontierReviewVersion=5;
+ arabiaKhitaiReview.apply(es,{frame,at,by,cite,I,D,B});
+ for(const e of es)e.frontierReviewVersion=6;
  return es;
 }
 // [losing/overextended outline, authority at the shared edge, from, until, source]
@@ -155,7 +157,7 @@ const rules=[
  ['khwarazmian','mongol',1218,1231,'mongol'],
  ['mongol','jinChina',1206,1215,'mongol'],['mongol','westernXia',1206,1227,'mongol'],['ilkhanate','abbasidIraq',1256,1258,'mongol'],
  ['jinChina','mongol',1215,1234,'mongol'],['southernSong','mongol',1235,1260,'mongol'],['southernSong','yuan',1260,1279,'mongol']
- ,...regionalReview.rules,...mediterraneanReview.rules,...anatolianReview.rules];
+ ,...regionalReview.rules,...mediterraneanReview.rules,...anatolianReview.rules,...arabiaKhitaiReview.rules];
 function compiler(input){
  const es=prepare(input),by=new Map(es.map(e=>[e.id,e])),memo=new Map();
  const raw=(id,y)=>{const e=by.get(id),f=e?.keyframes.filter(f=>f.year<=y).at(-1);return e&&y>=e.from&&y<=e.to&&f&&!f.hidden?require('./cartography-reviewed.cjs').legacyGeometry(id,y,f.polys):[];};

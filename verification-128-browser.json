@@ -1,0 +1,220 @@
+{
+  "version": "1.28.0",
+  "htmlSha256": "b5f62588d7b40be04005dd7fa9d836eb57be23200d554d24feb6c4e7e87988c5",
+  "webHtmlSha256": "2b7102323980e4bb43359bf81ceaa8e6d6290857024813038850f5105de042a5",
+  "checks": [
+    {
+      "case": "year 622",
+      "invalid": false,
+      "paths": 45,
+      "playVisible": true,
+      "year": "622",
+      "pass": true
+    },
+    {
+      "case": "year 624",
+      "invalid": false,
+      "paths": 45,
+      "playVisible": true,
+      "year": "624",
+      "pass": true
+    },
+    {
+      "case": "year 625",
+      "invalid": false,
+      "paths": 45,
+      "playVisible": true,
+      "year": "625",
+      "pass": true
+    },
+    {
+      "case": "year 628",
+      "invalid": false,
+      "paths": 45,
+      "playVisible": true,
+      "year": "628",
+      "pass": true
+    },
+    {
+      "case": "year 629",
+      "invalid": false,
+      "paths": 45,
+      "playVisible": true,
+      "year": "629",
+      "pass": true
+    },
+    {
+      "case": "year 630",
+      "invalid": false,
+      "paths": 44,
+      "playVisible": true,
+      "year": "630",
+      "pass": true
+    },
+    {
+      "case": "year 632",
+      "invalid": false,
+      "paths": 44,
+      "playVisible": true,
+      "year": "632",
+      "pass": true
+    },
+    {
+      "case": "year 1157",
+      "invalid": false,
+      "paths": 72,
+      "playVisible": true,
+      "year": "1157",
+      "pass": true
+    },
+    {
+      "case": "year 1194",
+      "invalid": false,
+      "paths": 69,
+      "playVisible": true,
+      "year": "1194",
+      "pass": true
+    },
+    {
+      "case": "year 1299",
+      "invalid": false,
+      "paths": 70,
+      "playVisible": true,
+      "year": "1299",
+      "pass": true
+    },
+    {
+      "case": "year 1300",
+      "invalid": false,
+      "paths": 96,
+      "playVisible": true,
+      "year": "1300",
+      "pass": true
+    },
+    {
+      "case": "year 1942",
+      "invalid": false,
+      "paths": 284,
+      "playVisible": true,
+      "year": "1942",
+      "pass": true
+    },
+    {
+      "case": "year 2010",
+      "invalid": false,
+      "paths": 312,
+      "playVisible": true,
+      "year": "2010",
+      "pass": true
+    },
+    {
+      "case": "year 2011",
+      "invalid": false,
+      "paths": 313,
+      "playVisible": true,
+      "year": "2011",
+      "pass": true
+    },
+    {
+      "case": "year 2026",
+      "invalid": false,
+      "paths": 313,
+      "playVisible": true,
+      "year": "2026",
+      "pass": true
+    },
+    {
+      "case": "language ky",
+      "guide": "/ky/guide",
+      "lang": "ky",
+      "note": "Мамлекеттик чек аралар · жылдын окуялары",
+      "pass": true
+    },
+    {
+      "case": "language ru",
+      "guide": "/ru/guide",
+      "lang": "ru",
+      "note": "Государственные границы · события года",
+      "pass": true
+    },
+    {
+      "case": "language en",
+      "guide": "/en/guide",
+      "lang": "en",
+      "note": "State boundaries · events of the year",
+      "pass": true
+    },
+    {
+      "case": "future default map",
+      "pass": true
+    },
+    {
+      "case": "future illustration",
+      "pass": true
+    },
+    {
+      "case": "historical return",
+      "pass": true
+    },
+    {
+      "case": "mobile atlas",
+      "height": 844,
+      "playVisible": true,
+      "scrollWidth": 390,
+      "width": 390,
+      "pass": true
+    },
+    {
+      "case": "guide en",
+      "h1": "World history, one year at a time",
+      "lang": "en",
+      "links": 16,
+      "overflow": false,
+      "pass": true
+    },
+    {
+      "case": "guide ru",
+      "h1": "История мира — год за годом",
+      "lang": "ru",
+      "links": 16,
+      "overflow": false,
+      "pass": true
+    },
+    {
+      "case": "guide ky",
+      "h1": "Дүйнө тарыхы — жылдан жылга",
+      "lang": "ky",
+      "links": 16,
+      "overflow": false,
+      "pass": true
+    },
+    {
+      "case": "guide zh",
+      "h1": "在地图上探索世界历史",
+      "lang": "zh",
+      "links": 16,
+      "overflow": false,
+      "pass": true
+    },
+    {
+      "case": "regional guide opens dated place",
+      "selected": "Африка · Государство / политический центр\nИфрикия · Кайруан\nок. 670–800\nБаза исламского Магриба\n\nКайруан становится опорным городом исламской власти в Ифрикии.\n\nПоказать на карте\nХронология\nЭтапы истории\nИсточники",
+      "version": "1.28.0",
+      "year": "670",
+      "pass": true
+    },
+    {
+      "case": "early note ky",
+      "pass": true
+    },
+    {
+      "case": "early note en",
+      "pass": true
+    },
+    {
+      "case": "early note ru",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

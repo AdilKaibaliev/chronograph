@@ -4,3 +4,4 @@ node_modules/
 .local-checks/
 /index.html
 /scripts/i18n/compiled-messages.json
+/public/

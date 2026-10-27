@@ -22,6 +22,10 @@ function localizePage(){
   document.documentElement.lang=language;
   const brand=({ru:['Хронограф','Исторический атлас'],en:['Chronograph','Historical Atlas'],ky:['Хронограф','Тарыхый атлас']})[language];
   document.title=brand.join(' — ');
+  const guideLink=document.getElementById('atlasGuideLink');
+  if(guideLink){guideLink.setAttribute('href','/'+language+'/guide');guideLink.setAttribute('aria-label',({en:'About Chronograph Atlas',ru:'Об атласе Хронограф',ky:'Хронограф атласы жөнүндө'})[language]);}
+  const sliceNote=document.querySelector('.map-slice-note[data-locale-owned]');
+  if(sliceNote)sliceNote.textContent=year>=2011?({ru:'Государственные границы · события года',en:'State boundaries · events of the year',ky:'Мамлекеттик чек аралар · жылдын окуялары'})[language]:translate('Границы приблизительны · дата среза в карточке',language);
   document.querySelector('.brand-title').textContent=brand[0];
   document.querySelector('.brand-sub').textContent=brand[1];
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
