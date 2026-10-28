@@ -1,0 +1,17 @@
+{
+  "version": "1.29.0",
+  "years": 1417,
+  "pairs": 12803,
+  "previousCandidates": 890,
+  "candidates": 884,
+  "previousFamilies": 142,
+  "families": 140,
+  "removed": [
+    "easternTurkic/westernTurkic",
+    "mongol/yeniseiKyrgyz"
+  ],
+  "added": [],
+  "empty": [],
+  "geometryErrors": [],
+  "scope": "Both engines and their cross-pairs; solid independent political areas only. Claims, dependencies, population and unified Mongol members excluded. Candidates are not automatically adjudicated historical errors."
+}

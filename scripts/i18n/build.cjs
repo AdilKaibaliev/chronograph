@@ -53,7 +53,7 @@ const {createChronographTranslator}=require('./core.js');createChronographTransl
 const originalSourceTranslator=createChronographTranslator(rows);
 for(const e of empires){const old=originalEmpires.find(o=>o.id===e.id);if(e.source!==old.source){const added=e.source.slice(old.source.length);rows.push([e.source,originalSourceTranslator(old.source,'en')+added,originalSourceTranslator(old.source,'ky')+added]);}}
 rows.push(['Антарктида','Antarctica','Антарктида'],['Географический ориентир.','Geographic reference.','Географиялык багыт белгиси.']);
-let html=require('../late/prepare.cjs')(source).replaceAll('CHRONOGRAPH 1.0 RC3.8','CHRONOGRAPH 1.28.0');
+let html=require('../late/prepare.cjs')(source).replaceAll('CHRONOGRAPH 1.0 RC3.8','CHRONOGRAPH 1.29.0');
 html=html.replace(/const EMPIRES=\[[^\n]+;/,'const EMPIRES='+JSON.stringify(empires).replaceAll('<','\\u003c')+';');
 html=html.slice(0,html.indexOf('const ISLAM_STARS = ['))+'const ISLAM_STARS = '+JSON.stringify(stars).replaceAll('<','\\u003c')+';\n'+html.slice(html.indexOf('const STAR_DETAILS='));
 rows.push(['610–2026 · выберите год или исторический рубеж','610–2026 · choose a year or historical milestone','610–2026 · жылды же тарыхый окуяны тандаңыз']);
@@ -134,7 +134,7 @@ html=html.replace('function frame(now){','function frame(now){\n    if(cameraVer
 html=html.replace("if(e.defaultPrevented || $('modal').classList.contains('show') || e.target.closest('input,button,a,summary", "if(document.body.classList.contains('future-mode') || e.defaultPrevented || $('modal').classList.contains('show') || e.target.closest('input,select,button,a,summary");
 for(const script of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(script[1]);
 assert(html.includes('const CHRONOGRAPH_MESSAGES='));assert(!/<a(?=\s|>)|\bhref=|window\.open\(/.test(html.replace(/<link rel="icon"[^>]*>/g,'').replace(/<a class="contact-email" href="mailto:lfc@legacyfidelity\.com\?subject=Chronograph">lfc@legacyfidelity\.com<\/a>/g,'')));
-html=html.replace('</head>','<meta name="chronograph-version" content="1.28.0">\n</head>');
+html=html.replace('</head>','<meta name="chronograph-version" content="1.29.0">\n</head>');
 fs.writeFileSync(repositoryBuild?'index.html':'outputs/chronograph_1_1.html',html);
 fs.writeFileSync(root+'/compiled-messages.json',JSON.stringify(rows,null,2));
 console.log(JSON.stringify({messages:rows.length,eventTitles:Object.keys(translatedEvents).length,eventDescriptions:Object.values(translatedEvents).filter(x=>x.length===4).length,bytes:Buffer.byteLength(html)}));

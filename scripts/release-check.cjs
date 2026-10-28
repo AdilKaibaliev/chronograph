@@ -37,6 +37,7 @@ const checks = [
   'scripts/world/anatolian-review-test.cjs',
   'scripts/world/europe-central-review-test.cjs',
   'scripts/world/arabia-khitai-review-test.cjs',
+  'scripts/world/altai-jochi-review-test.cjs',
   'scripts/incidents/test.cjs',
   'scripts/world/coasts-occupation-test.cjs',
   'scripts/world/all-borders-test.cjs',
