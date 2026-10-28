@@ -1,0 +1,17 @@
+{
+  "version": "1.30.0",
+  "years": 1417,
+  "pairs": 12815,
+  "previousCandidates": 884,
+  "candidates": 876,
+  "previousFamilies": 140,
+  "families": 138,
+  "removed": [
+    "abbasid/medievalByzantine",
+    "fiveDynasties/tenKingdoms"
+  ],
+  "added": [],
+  "empty": [],
+  "geometryErrors": [],
+  "scope": "Both engines and their cross-pairs; solid independent political areas only. Claims, dependencies, population and unified Mongol members excluded. Candidates are not automatically adjudicated historical errors."
+}
