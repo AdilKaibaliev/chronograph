@@ -7,6 +7,7 @@ c=require('./shared-frontiers.cjs')(c);
 c=require('./to2026.cjs')(c);
 c=require('./mediterranean-review.cjs').world(c);
 c=require('./europe-central-review.cjs').world(c);
+c=require('./maghreb-frontier-review.cjs')(c);
 const G=require('./cartography-geometry.cjs');
 for(const a of c.areas)if(c.cartography.areas[a.id]===undefined){
  const p=G.merge([a.polygons]);c.cartography.areas[a.id]=c.cartography.shapes.length;c.cartography.shapes.push(p);

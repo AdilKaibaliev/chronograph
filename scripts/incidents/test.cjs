@@ -19,7 +19,7 @@ for(const s of c.stories){for(const v of [s.title,s.summary]){assert.equal(v.len
 assert.equal(c.stories.find(s=>s.id==='gkchp').kind,'attempt');assert.equal(c.stories.find(s=>s.id==='orange-2004').kind,'protest');
 assert.deepEqual(c.stories.find(s=>s.id==='kazakhstan-2022').steps.slice(-3).map(s=>s.date),['2022-01-06','2022-01-13','2022-01-19']);
 assert.equal(c.stories.find(s=>s.id==='nato-afghanistan').steps[0].date,'2003-08-11');
-const html=fs.readFileSync('index.html','utf8');assert(html.includes('name="chronograph-version" content="1.30.0"'));
+const html=fs.readFileSync('index.html','utf8');assert(html.includes('name="chronograph-version" content="1.31.0"'));
 for(const name of ['runtime.js','core.js'])new vm.Script(fs.readFileSync(__dirname+'/'+name,'utf8'));
 const delivered=JSON.parse(html.match(/const INCIDENT_CATALOG=([\s\S]*?);\n/)[1]);assert.deepEqual(delivered.stories,c.stories);assert(Object.values(delivered.sources).every(s=>Object.keys(s).join()==='title'));
 const integrated=require('./integrate.cjs'),world=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]),originalWorld=require('../world/published-catalog.cjs');
