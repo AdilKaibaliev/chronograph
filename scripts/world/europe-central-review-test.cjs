@@ -33,9 +33,7 @@ for(const [id,old]of [['late-france','franceMedieval'],['late-hre','holyRoman'],
  assert(area(F.D(A,B))+area(F.D(B,A))<1e-6,`No source-file frontier jump ${id}`);
 }
 for(const id of ['westFrancia','franceMedieval'])for(const p of [[-.14,50.82],[-3.53,50.72],[1.31,51.13]])assert(!G.covers(shape(id,id==='westFrancia'?962:1299),p),'France must not cross the Channel '+id);
-// Outside this review's date windows preserve the original extents.
-const raw=require('./continuity.cjs').legacyData();
-for(const id of ['eastFrancia','westFrancia'])assert.deepEqual(es.find(e=>e.id===id).keyframes[0].polys,raw.find(e=>e.id===id).keyframes[0].polys);
+// Earlier 843–932 frames are now covered by frankish-partitions-test.cjs.
 assert(!h.get('review-burgundy',932));assert(h.get('review-burgundy',933));assert(!h.get('review-burgundy',1032));
 const tr=require('../i18n/core.js').createChronographTranslator(require('../i18n/compiled-messages.json'));
 for(const row of require('./europe-central-review.cjs').messages)for(const lang of ['en','ky'])assert.notEqual(tr(row[0],lang),row[0]);
