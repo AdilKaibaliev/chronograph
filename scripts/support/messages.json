@@ -28,5 +28,45 @@
     "Вопросы, предложения и уточнения к исторической карте:",
     "Questions, suggestions and corrections to the historical map:",
     "Тарыхый карта боюнча суроолор, сунуштар жана тактоолор:"
+  ],
+  [
+    "Ваше имя",
+    "Your name",
+    "Атыңыз"
+  ],
+  [
+    "Ваш email для ответа",
+    "Your email for a reply",
+    "Жооп алуу үчүн email дарегиңиз"
+  ],
+  [
+    "Сообщение",
+    "Message",
+    "Билдирүү"
+  ],
+  [
+    "Отправить обращение",
+    "Send message",
+    "Билдирүүнү жөнөтүү"
+  ],
+  [
+    "Нажимая кнопку, вы отправляете имя, email и сообщение команде Хронографа на lfc@legacyfidelity.com для ответа на обращение.",
+    "Submitting sends your name, email and message to the Chronograph team at lfc@legacyfidelity.com so we can reply.",
+    "Баскычты басканда, жооп алуу үчүн атыңызды, email дарегиңизди жана билдирүүңүздү Хронограф командасына lfc@legacyfidelity.com дарегине жөнөтөсүз."
+  ],
+  [
+    "Отправляем…",
+    "Sending…",
+    "Жөнөтүлүүдө…"
+  ],
+  [
+    "Сообщение отправлено. Спасибо за обращение!",
+    "Message sent. Thank you for contacting us!",
+    "Билдирүү жөнөтүлдү. Кайрылганыңыз үчүн рахмат!"
+  ],
+  [
+    "Не удалось отправить сообщение. Текст сохранён в форме — попробуйте позже.",
+    "Unable to send your message. Your text remains in the form — please try again later.",
+    "Билдирүү жөнөтүлгөн жок. Текст формада калды — кийинчерээк кайра аракет кылыңыз."
   ]
 ]

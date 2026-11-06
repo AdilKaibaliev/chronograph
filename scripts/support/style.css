@@ -21,3 +21,5 @@
  #futureBtn{grid-column:1}#supportBtn{grid-column:2}
  #contactBtn{grid-column:3;grid-row:2;min-width:0;width:100%;font-size:10px;padding:5px}
 }
+
+.contact-form{display:grid;gap:8px;margin-top:18px}.contact-form label{font-size:13px;color:var(--gold-soft)}.contact-form input:not([type=hidden]),.contact-form textarea{box-sizing:border-box;width:100%;min-width:0;padding:11px;border:1px solid #756342;border-radius:8px;background:#211f19;color:#f5ebd5;font:inherit}.contact-form textarea{resize:vertical;max-height:240px}.contact-form input:focus-visible,.contact-form textarea:focus-visible{outline:2px solid var(--gold-soft);outline-offset:2px}.contact-form .contact-honey{display:none!important}.contact-form .contact-note{font-size:12px;line-height:1.5}.contact-form button{justify-self:start;min-height:42px}
