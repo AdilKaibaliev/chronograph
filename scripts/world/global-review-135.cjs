@@ -209,8 +209,8 @@ function newGuinea(c,{revise,link,D,I}){
 // Newly created 2011 records carry the last verified political outlines.
 // These particular administrative areas store their geometry separately
 // from their narrative area records.
-function carryModern(c){
-  for(const id of ['1914-american-samoa','1914-western-samoa','1918-new-guinea','1789-batavia','early-dutch','1789-saint-domingue','1848-dominican']){
+function carryModern(c,additional=[]){
+  for(const id of ['1914-american-samoa','1914-western-samoa','1918-new-guinea','1789-batavia','early-dutch','1789-saint-domingue','1848-dominican',...additional]){
     const before=c.areas.find(a=>a.entry===id&&a.from<=2010&&a.to>2010);
     if(!before)continue;
     const shape=c.cartography.areas[before.id];

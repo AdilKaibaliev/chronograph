@@ -63,7 +63,8 @@ for(const a of c.areas.filter(a=>a.from<2011&&!a.frontierAdded)){
  // annual adjacency checks live in frankish-outer-frontiers-test.cjs.
  const outerReviewed=(['late-france','late-england'].includes(a.entry)&&a.from<1532)||(a.entry==='late-hre'&&a.from<1806);
  const partitionYear=['1914-american-samoa','1914-western-samoa'].includes(a.entry)&&a.from===1899;
- const reviewed=partitionYear?['name','title','text']:a.entry==='zirid'?['color','text','points','polygons']:a.entry==='hammadid'||outerReviewed?['points','polygons']:[];
+ const belizeName=a.entry==='1991-belize'&&a.from>=1961&&a.to<=1981;
+ const reviewed=partitionYear||belizeName?['name','title','text']:a.entry==='zirid'?['color','text','points','polygons']:a.entry==='hammadid'||outerReviewed?['points','polygons']:[];
  for(const key of Object.keys(old).filter(k=>!['id','from','to','sources',...reviewed].includes(k)))assert.deepEqual(a[key],old[key],'Changed original field '+a.id+' '+key);
  for(const id of old.sources)assert(a.sources.includes(id),'Lost source '+a.id);
  for(const id of a.sources)assert(old.sources.includes(id)||approvedSources.has(id),'Unreviewed source '+id);
