@@ -132,6 +132,7 @@ module.exports=c=>{
  const amurWindow=box(119,42,136,58),amurChina=I(U('China'),amurWindow),amurRussia=I(U('Russia'),amurWindow);
  revise(['1789-qing'],1860,1912,'post-peking-amur-edge','sharedAmur',p=>G.merge([D(p,amurWindow),amurChina]));
  revise(['1789-russian-empire'],1860,1919,'post-peking-russian-edge','sharedAmur',p=>G.merge([D(p,amurWindow),amurRussia]));
+ require('./treaty-frontiers.cjs').amur(c,{revise,source,D,I,U,box});
  // The northern Mongol profile already describes Khalkha after 1636. Remove
  // its inherited southern extent, which otherwise crosses the Qing frontier.
  subtract(['late-mongol'],1636,1691,['1789-jurchen','1789-qing'],'sharedQing','khalkha-after-inner-mongolia-submission');

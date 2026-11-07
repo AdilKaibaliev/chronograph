@@ -20,7 +20,7 @@ for(const[id,y,p,want]of [
  ['liao',916,[116.4,39.9],false],['liao',936,[116.4,39.9],true],
  ['rashidun',632,[31.24,30.04],false],['rashidun',642,[31.24,30.04],true],
  ['rashidun',637,[44.6,33.1],true],['umayyad',710,[-5.99,37.39],false],
- ['umayyad',711,[-5.99,37.39],true],['umayyad',711,[-.89,41.65],false],
+ ['umayyad',711,[-5.99,37.39],false],['umayyad',712,[-5.99,37.39],true],['umayyad',711,[-.89,41.65],false],
  ['umayyad',714,[-.89,41.65],true],['umayyad',714,[-5.85,43.36],false],
  ['abbasid',900,[59.6,36.3],false],['abbasid',945,[44.36,33.31],true],
  ['umayyad',714,[18,35],false],['umayyad',714,[39,20],false]

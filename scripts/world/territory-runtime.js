@@ -1,3 +1,4 @@
+function territoryStatus(area){ return area.statusLabel ? wl(area.statusLabel) : wt(area.kind); }
 function worldAreaDate(a){const from=Math.max(610,a.from),to=Math.min(TIMELINE_MAX,a.to-1);return (a.approx?wl(['ок. ','c. ','болж. ']):'')+from+(from===to?'':'–'+to)+' '+wt('era');}
 function worldAreaCamera(a){
  if(a.worldFocus){animateCamera({scale:1,tx:0,ty:0});return;}
@@ -33,7 +34,7 @@ function renderWorldAreaDetail(){
  worldAreaDetail.style.setProperty('--territory-color',a.color);
  const heading=we('h4','',wl(a.name));heading.id='worldAreaTitle';heading.tabIndex=-1;
  const close=we('button','world-area-close','×');close.type='button';close.setAttribute('aria-label',wt('closeArea'));close.title=wt('closeArea');close.onclick=()=>{worldState.area='';renderWorldHistory();queueLocationSave();};
- worldAreaDetail.append(close,we('p','world-card-meta',wt(a.kind)+' · '+worldAreaDate(a)),heading,we('h5','',wl(a.title)),we('p','world-description',wl(a.text)),we('p','world-dating',wt('geography')));
+ worldAreaDetail.append(close,we('p','world-card-meta',territoryStatus(a)+' · '+worldAreaDate(a)),heading,we('h5','',wl(a.title)),we('p','world-description',wl(a.text)),we('p','world-dating',wt('geography')));
  if(a.sovereign||a.overlord){const text=a.sovereign?['В составе: ','Part of: ','Курамында: ']:a.relationship==='administration'?['Под управлением: ','Administered by: ','Башкаруусунда: ']:a.relationship==='occupation'?['Военная оккупация: ','Military occupation: ','Аскердик оккупация: ']:a.relationship==='association'?['В союзе с: ','Associated with: ','Союздаш: ']:['Зависимость от: ','Dependent on: ','Көз каранды: '];const b=we('button','world-imperial-parent',wl(text)+wl(a.sovereignName));b.type='button';b.onclick=()=>worldChooseTerritory(a.sovereign||a.overlord);heading.after(b);}
  if(a.entry==='late-hre'&&year>=1939&&year<=1945){
   const nav=we('div','world-war-years');nav.setAttribute('aria-label',wl(['Вторая мировая война по годам','World War II by year','Экинчи дүйнөлүк согуш жылдар боюнча']));
@@ -100,7 +101,7 @@ function renderWorldTerritories(){
   // Tiny Pacific islands are below the base map's resolution: these outlines mark
   // their local settlement vicinity. They never connect islands into ocean empires.
   if(!a.coastClipped&&entry.region!=='oceania'&&entry.id!=='mabuyag')g.setAttribute('clip-path','url(#worldLandClip)');
-  const path=sn('path',{d:polygonPath(grouped&&a.entry==='late-yuan'&&a.mongolUnion?a.mongolUnion:a.polygons),fill:grouped?'#785344':a.color,stroke:grouped?'#61483a':a.color,role:'button',tabindex:0,'aria-label':wl(a.name)+' · '+wt(a.kind)+' · '+worldAreaDate(a)});
+  const path=sn('path',{d:polygonPath(grouped&&a.entry==='late-yuan'&&a.mongolUnion?a.mongolUnion:a.polygons),fill:grouped?'#785344':a.color,stroke:grouped?'#61483a':a.color,role:'button',tabindex:0,'aria-label':wl(a.name)+' · '+territoryStatus(a)+' · '+worldAreaDate(a)});
   const contextual=['cultural','landscape','settlement'].includes(a.kind)||Boolean(a.cartographicOverlay)||Boolean(a.overlord);
   let tint=null;
   if(contextual){

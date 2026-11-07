@@ -11,11 +11,13 @@ const altaiJochiReview=require('./altai-jochi-review.cjs');
 const taurusChinaReview=require('./taurus-china-review.cjs');
 const frankishPartitions=require('./frankish-partitions.cjs');
 const outerFrontiers=require('./frankish-outer-frontiers.cjs');
+const iberianConquest=require('./iberian-conquest.cjs');
 const flat=m=>m.flatMap(p=>p.map(r=>r.slice(0,-1).map(p=>p.map(v=>+v.toFixed(8))))).filter(r=>Math.abs(G.signed(r))>1e-8);
 const I=(a,b)=>a.length&&b.length?flat(clip.intersection(G.multi(a),G.multi(b))):[];
 const D=(a,b)=>a.length&&b.length?flat(clip.difference(G.multi(a),G.multi(b))):a;
 const B=(x0,y0,x1,y1)=>G.union([[[x0,y0],[x1,y0],[x1,y1],[x0,y1]]]);
 const sources={
+ iberianConquest:iberianConquest.source,
  conquest:'Michael G. Morony. Arab Conquest of Iran. Encyclopaedia Iranica; Hugh Kennedy. The Great Arab Conquests.',
  china:'Denis Twitchett and Paul Jakov Smith (eds.). The Cambridge History of China, Volume 5, Part 1: The Sung Dynasty and Its Precursors, 907–1279; Herbert Franke and Denis Twitchett (eds.). Volume 6: Alien Regimes and Border States, 907–1368.',
  ghaznavid:'C. E. Bosworth. The Ghaznavids: Their Empire in Afghanistan and Eastern Iran, 994–1040; Ghaznavids. Encyclopaedia Iranica.',
@@ -30,6 +32,7 @@ const sources={
  ...regionalReview.sources,...mediterraneanReview.sources,...anatolianReview.sources,...europeCentralReview.sources,...arabiaKhitaiReview.sources,...altaiJochiReview.sources,...taurusChinaReview.sources,...frankishPartitions.sources,...outerFrontiers.sources
 };
 const messages=[
+ ...Object.values(iberianConquest.texts),
  ['Айюбидские владения Сирии','Ayyubid domains in Syria','Сириядагы Айюбийлердин ээликтери'],
  ['В 1250 году мамлюки установили власть в Египте. Айюбидские княжества Сирии сохранились до монгольского вторжения 1260 года.','In 1250 the Mamluks took power in Egypt. The Ayyubid principalities of Syria survived until the Mongol invasion of 1260.','1250-жылы мамлюктар Египетте бийликке келген. Сириядагы Айюбий княздыктары 1260-жылкы монгол чабуулуна чейин сакталган.'],
  ['Газна и Буст; правители признают верховенство Саманидов.','Ghazna and Bust; the rulers acknowledge Samanid overlordship.','Газна жана Буст; башкаруучулар Саманийлердин үстөмдүгүн тааныган.'],
@@ -39,7 +42,7 @@ const messages=[
  ['Формирование Каракитайского государства; продвижение Елюй Даши на запад.','Formation of the Qara Khitai state; Yelü Dashi’s movement westward.','Каракытай мамлекетинин калыптанышы; Елюй Дашинин батышка жылышы.']
  ,...regionalReview.messages,...mediterraneanReview.messages,...anatolianReview.messages,...europeCentralReview.messages,...arabiaKhitaiReview.messages,...altaiJochiReview.messages,...taurusChinaReview.messages,...frankishPartitions.messages,...outerFrontiers.messages];
 function prepare(input){
- const es=structuredClone(input);if(es[0]?.frontierReviewVersion===10)return es;
+ const es=structuredClone(input);if(es[0]?.frontierReviewVersion===11)return es;
  const by=new Map(es.map(e=>[e.id,e])),at=(id,y)=>by.get(id)?.keyframes.filter(f=>f.year<=y).at(-1);
  // The generic geometry compiler also accepts stand-alone regional inputs.
  // Cross-state historical repairs require the complete chronological catalogue.
@@ -140,11 +143,13 @@ function prepare(input){
  taurusChinaReview.apply(es,{frame,at,by,cite,I,D,B});
  frankishPartitions.legacy(es,{frame,at,by,cite,I,D,B});
  outerFrontiers.legacy(es,{frame,at,by,cite,I,D,B});
- for(const e of es)e.frontierReviewVersion=10;
+ iberianConquest.apply(es,{frame,at,by,cite,I,D,B});
+ for(const e of es)e.frontierReviewVersion=11;
  return es;
 }
 // [losing/overextended outline, authority at the shared edge, from, until, source]
 const rules=[
+ ['visigoths','umayyad',711,720,'iberianConquest'],
  ['byzantine','sasanian',610,633,'conquest'],['medievalByzantine','sasanian',633,651,'conquest'],
  ['sasanian','earlyIslam',630,632,'conquest'],['sasanian','rashidun',632,651,'conquest'],
  ['medievalByzantine','rashidun',636,661,'conquest'],['medievalByzantine','umayyad',661,750,'conquest'],

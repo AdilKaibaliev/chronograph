@@ -230,7 +230,7 @@ function renderWorldCards(){
  container.replaceChildren();
  if(areas.length&&!studying){
   const group=we('details','world-territory-index');group.id='world-territory-index';group.open=openIds.has(group.id);group.append(we('summary','',wt('territories')+' · '+areas.length));
-  populateWorldDetails(group,()=>{const list=we('div','world-territory-list');for(const a of areas){const b=we('button','world-territory-chip');b.type='button';b.dataset.territory=a.entry;b.style.setProperty('--territory-color',a.color);b.setAttribute('aria-pressed',String(worldState.area===a.entry));b.append(we('strong','',wl(a.name)),we('small','',wt(a.kind)));b.onclick=()=>worldChooseTerritory(a.entry);list.append(b);}group.append(list);});container.append(group);
+  populateWorldDetails(group,()=>{const list=we('div','world-territory-list');for(const a of areas){const b=we('button','world-territory-chip');b.type='button';b.dataset.territory=a.entry;b.style.setProperty('--territory-color',a.color);b.setAttribute('aria-pressed',String(worldState.area===a.entry));b.append(we('strong','',wl(a.name)),we('small','',territoryStatus(a)));b.onclick=()=>worldChooseTerritory(a.entry);list.append(b);}group.append(list);});container.append(group);
  }
  const states=worldBasePolities().filter(s=>!query||translate(s.name,language).toLocaleLowerCase().includes(query)),showStates=states.length&&(!studying||worldState.region==='eurasia'||query);
  if(studying)container.append(we('p','world-count',wt('results')+': '+(items.length+(showStates?states.length:0))));
@@ -322,7 +322,7 @@ function renderWorldLegend(){
  for(const region of regions){
   const items=areas.filter(a=>worldHistory.entry(a.entry).region===region.id);if(!items.length)continue;
   const section=we('div','world-legend-region');section.append(we('h4','',wl(region.name)));
-  for(const a of items){const b=we('button','legend-item');b.type='button';b.dataset.legendTerritory=a.entry;const swatch=we('span','swatch');swatch.style.background=a.color;b.append(swatch,we('span','',wl(a.name).split(' · ')[0]));b.title=wt(a.kind);b.onclick=()=>{worldMapLegend.closest('details').open=false;worldChooseTerritory(a.entry);};section.append(b);}
+  for(const a of items){const b=we('button','legend-item');b.type='button';b.dataset.legendTerritory=a.entry;const swatch=we('span','swatch');swatch.style.background=a.color;b.append(swatch,we('span','',wl(a.name).split(' · ')[0]));b.title=territoryStatus(a);b.onclick=()=>{worldMapLegend.closest('details').open=false;worldChooseTerritory(a.entry);};section.append(b);}
   worldMapLegend.append(section);
  }
 }
