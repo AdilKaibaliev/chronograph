@@ -30,6 +30,7 @@ function createWorldHistory(catalog){
    const relationSource=activeRelations.get(a.entry)?.source;
    if(relationSource)a={...a,sources:[...new Set([...a.sources,relationSource])]};
    const owner=parent(a.entry),dep=dependencies.get(a.entry);
+   if(owner)a={...a,administrativeParent:members.get(a.entry).entry};
    if(owner){const ownerDependency=dependencies.get(owner.entry),detachedProvince=ownerDependency?.relationship==='occupation',outer=detachedProvince?owner:ownerDependency?.owner||owner,span=membershipSpan(original);return {...a,...span,id:original.id+'@member-'+owner.entry+'-'+span.from+'-'+outer.color,politicalOutline:false,detachedProvince,sovereign:owner.entry,sovereignName:owner.name,color:outer.color,...(a.entry==='1789-kodiak'&&year>=1799?{overviewLabel:true,label:[-151,64],labelWidth:100,short:['Русская Америка','Russian America','Орус Америкасы']}: {})};}
    if(dep){const span=membershipSpan(original);return {...a,...span,id:original.id+'@dependent-'+dep.owner.entry+'-'+span.from+'-'+dep.owner.color,politicalOutline:false,dependencyOutline:true,overlord:dep.owner.entry,relationship:dep.relationship,sovereignName:dep.owner.name,color:dep.owner.color,kind:'influence'};}
    return a;

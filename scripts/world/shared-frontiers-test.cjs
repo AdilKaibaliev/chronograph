@@ -36,7 +36,7 @@ for(let y=1926;y<=1945;y++){
 }
 for(const r of c.cartography.frontierRelations){
  assert(c.sources[r.source],'Missing relationship source');
- for(let y=r.from;y<r.to;y++){const a=at(r.member,y),owner=at(r.owner,y);if(!a||!owner)continue;assert.equal(a.sovereign||a.overlord,r.owner,`Dated owner ${r.member} ${y}`);assert(a.from<=y&&y<a.to);assert(a.from>=r.from&&a.to<=r.to,'Relationship interval escaped');}
+ for(let y=r.from;y<r.to;y++){const a=at(r.member,y),owner=at(r.owner,y);if(!a||!owner)continue;assert.equal(a.administrativeParent||a.overlord,r.owner,`Dated owner ${r.member} ${y}`);assert(a.from<=y&&y<a.to);assert(a.from>=r.from&&a.to<=r.to,'Relationship interval escaped');}
  assert(h.changes().includes(r.from));
 }
 assert.equal(at('1848-texas',1862).sovereign,'1914-confederacy');
@@ -62,7 +62,8 @@ for(const a of c.areas.filter(a=>a.from<2011&&!a.frontierAdded)){
  // 1.33 changes only these dated outer outlines; settlement controls and
  // annual adjacency checks live in frankish-outer-frontiers-test.cjs.
  const outerReviewed=(['late-france','late-england'].includes(a.entry)&&a.from<1532)||(a.entry==='late-hre'&&a.from<1806);
- const reviewed=a.entry==='zirid'?['color','text','points','polygons']:a.entry==='hammadid'||outerReviewed?['points','polygons']:[];
+ const partitionYear=['1914-american-samoa','1914-western-samoa'].includes(a.entry)&&a.from===1899;
+ const reviewed=partitionYear?['name','title','text']:a.entry==='zirid'?['color','text','points','polygons']:a.entry==='hammadid'||outerReviewed?['points','polygons']:[];
  for(const key of Object.keys(old).filter(k=>!['id','from','to','sources',...reviewed].includes(k)))assert.deepEqual(a[key],old[key],'Changed original field '+a.id+' '+key);
  for(const id of old.sources)assert(a.sources.includes(id),'Lost source '+a.id);
  for(const id of a.sources)assert(old.sources.includes(id)||approvedSources.has(id),'Unreviewed source '+id);

@@ -66,7 +66,9 @@ module.exports=c=>{
   for(const key of ['areas','outlines']){
    split(key,ids,[from,to]);
    for(const a of c[key].filter(a=>ids.includes(a.entry)&&from<=a.from&&a.to<=to)){
-    const old=key==='areas'?geometry(a):a.polygons,p=fn(old,a.from,a.entry);
+    const old=key==='areas'?geometry(a):a.polygons;
+    let p;
+    try{p=fn(old,a.from,a.entry);}catch(error){throw Error(rule+' '+key+' '+a.id+': '+error.message,{cause:error});}
     if(!p.length)throw Error('Empty shared frontier '+rule+' '+a.id);
     if(JSON.stringify(old)===JSON.stringify(p))continue;
     if(key==='areas'){c.cartography.areas[a.id]=c.cartography.shapes.length;c.cartography.shapes.push(p);}
@@ -183,6 +185,7 @@ module.exports=c=>{
   split('areas',[entry],[from]);
   for(const a of c.areas.filter(a=>a.entry===entry&&a.from>=from&&a.to<=1946))c.cartography.kinds[a.id]='cultural';
  }
+ require('./global-review-135.cjs').apply(c,{source,revise,split,link,visibleAt,D,I,box});
  c.cartography.frontierRelations=relations;c.cartography.presentation=presentation;
  for(const key of ['areas','outlines']){const ids=new Set();for(const a of c[key]){if(!(a.from<a.to)||ids.has(a.id))throw Error('Invalid split frontier '+a.id);ids.add(a.id);}}
  c.sharedFrontiers={version:1,frames:reviewed,relations,presentation};

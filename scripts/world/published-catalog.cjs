@@ -5,6 +5,7 @@ let c=structuredClone(require('./catalog.cjs'));
 c=require('./frontier-review.cjs')(c);
 c=require('./shared-frontiers.cjs')(c);
 c=require('./to2026.cjs')(c);
+c=require('./global-review-135.cjs').carryModern(c);
 c=require('./mediterranean-review.cjs').world(c);
 c=require('./europe-central-review.cjs').world(c);
 c=require('./maghreb-frontier-review.cjs')(c);
