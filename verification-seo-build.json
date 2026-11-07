@@ -1,7 +1,7 @@
 {
   "version": "1.28.0",
-  "sourceSha256": "884497c55d31d6034e32632fb8e354e28e16f3d46877f8677790d62ea6b2bd71",
-  "htmlSha256": "6895a5bb878071cd9933273de518a0a3bc7b7a3c72a8438403b34e47e8b4d353",
+  "sourceSha256": "19a8138ecf078ffaaa193173aa340eec943603a37668ba7a5b2681e3f1f45ade",
+  "htmlSha256": "04f335540b175c99d05a1f6ff4cf2018b3ec8806b691778e3045bb4bebd768ac",
   "htmlBytes": 28861,
   "assets": [
     {
@@ -10,9 +10,9 @@
       "sha256": "1b16e549b8f4e809add7df60768192a265db15a3e5434bfb24ea9b2a05e6ed63"
     },
     {
-      "url": "/assets/atlas-script.d9d1579cfa4013b3.js",
-      "bytes": 512706,
-      "sha256": "d9d1579cfa4013b3a5d38cdc232c3f680202593dbd322bf4c94379a2b6ba9d7c"
+      "url": "/assets/atlas-script.e5eb2f51437be338.js",
+      "bytes": 512994,
+      "sha256": "e5eb2f51437be338e106db8bf76e9e4593db89b428cd24691aa3e06ff460ea5a"
     },
     {
       "url": "/assets/atlas-data-000.e115b1c500d50fe8.js",
@@ -290,9 +290,9 @@
       "sha256": "87d0f812f6015bf2181e68c36acadbde15bb30840262393dc2e99715143e1044"
     },
     {
-      "url": "/assets/atlas.eec14b5a1f746598.css",
-      "bytes": 80613,
-      "sha256": "eec14b5a1f7465980a207f666b61ef8505ca63582baf9677a6f4f9b20b8ae16b"
+      "url": "/assets/atlas.3ee36f029e52a9f1.css",
+      "bytes": 80750,
+      "sha256": "3ee36f029e52a9f19d13870776d8c5836957aec181c0cd38b51c5e9fd6f88ad6"
     },
     {
       "url": "/assets/guide.d7798882c8801162.css",

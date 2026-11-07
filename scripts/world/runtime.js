@@ -288,6 +288,10 @@ function renderWorldMap(){
 }
 function updateWorldMarkerScale(){
  const metrics=worldLabelMetrics(),{ratio,scale,detail,width:mapWidth,height:mapHeight}=metrics;
+ // The legacy city and campaign layers use SVG circles directly in the
+ // zoomed viewport. Cap their visible radius in screen pixels.
+ svg.style.setProperty('--atlas-city-radius',Math.min(3.2,4/scale)+'px');
+ svg.style.setProperty('--atlas-campaign-radius',Math.min(3.3,4/scale)+'px');
  const priority=g=>g.classList.contains('world-event-marker')?2:Number(g.dataset.worldPlace===worldState.selected);
  const markers=[...worldLayer.querySelectorAll('.world-marker')].sort((a,b)=>priority(b)-priority(a));
  const territoryLabels=updateWorldTerritoryLabels(metrics),occupied=[...territoryLabels.occupied];
