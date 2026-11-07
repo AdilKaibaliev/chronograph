@@ -10,6 +10,7 @@ const arabiaKhitaiReview=require('./arabia-khitai-review.cjs');
 const altaiJochiReview=require('./altai-jochi-review.cjs');
 const taurusChinaReview=require('./taurus-china-review.cjs');
 const frankishPartitions=require('./frankish-partitions.cjs');
+const outerFrontiers=require('./frankish-outer-frontiers.cjs');
 const flat=m=>m.flatMap(p=>p.map(r=>r.slice(0,-1).map(p=>p.map(v=>+v.toFixed(8))))).filter(r=>Math.abs(G.signed(r))>1e-8);
 const I=(a,b)=>a.length&&b.length?flat(clip.intersection(G.multi(a),G.multi(b))):[];
 const D=(a,b)=>a.length&&b.length?flat(clip.difference(G.multi(a),G.multi(b))):a;
@@ -26,7 +27,7 @@ const sources={
  karluk:'Peter B. Golden. An Introduction to the History of the Turkic Peoples; E. A. Davidovich. The Karakhanids. History of Civilizations of Central Asia, Volume IV, Part One.',
  ayyubid:'R. Stephen Humphreys. From Saladin to the Mongols: The Ayyubids of Damascus, 1193–1260; Linda Komaroff and Suzan Yalman. The Art of the Ayyubid Period (ca. 1171–1260).',
  mongol:'Michal Biran and Hodong Kim (eds.). The Cambridge History of the Mongol Empire; Peter Jackson. The Mongols and the Islamic World.',
- ...regionalReview.sources,...mediterraneanReview.sources,...anatolianReview.sources,...europeCentralReview.sources,...arabiaKhitaiReview.sources,...altaiJochiReview.sources,...taurusChinaReview.sources,...frankishPartitions.sources
+ ...regionalReview.sources,...mediterraneanReview.sources,...anatolianReview.sources,...europeCentralReview.sources,...arabiaKhitaiReview.sources,...altaiJochiReview.sources,...taurusChinaReview.sources,...frankishPartitions.sources,...outerFrontiers.sources
 };
 const messages=[
  ['Айюбидские владения Сирии','Ayyubid domains in Syria','Сириядагы Айюбийлердин ээликтери'],
@@ -36,9 +37,9 @@ const messages=[
  ['Караханидские владения под верховной властью Каракитаев.','Qarakhanid domains under Qara Khitai overlordship.','Каракытайлардын үстөмдүгү алдындагы Караханий ээликтери.'],
  ['Местные владения западнотюркской политической системы.','Local domains within the Western Turkic political system.','Батыш Түрк саясий системасындагы жергиликтүү ээликтер.'],
  ['Формирование Каракитайского государства; продвижение Елюй Даши на запад.','Formation of the Qara Khitai state; Yelü Dashi’s movement westward.','Каракытай мамлекетинин калыптанышы; Елюй Дашинин батышка жылышы.']
- ,...regionalReview.messages,...mediterraneanReview.messages,...anatolianReview.messages,...europeCentralReview.messages,...arabiaKhitaiReview.messages,...altaiJochiReview.messages,...taurusChinaReview.messages,...frankishPartitions.messages];
+ ,...regionalReview.messages,...mediterraneanReview.messages,...anatolianReview.messages,...europeCentralReview.messages,...arabiaKhitaiReview.messages,...altaiJochiReview.messages,...taurusChinaReview.messages,...frankishPartitions.messages,...outerFrontiers.messages];
 function prepare(input){
- const es=structuredClone(input);if(es[0]?.frontierReviewVersion===9)return es;
+ const es=structuredClone(input);if(es[0]?.frontierReviewVersion===10)return es;
  const by=new Map(es.map(e=>[e.id,e])),at=(id,y)=>by.get(id)?.keyframes.filter(f=>f.year<=y).at(-1);
  // The generic geometry compiler also accepts stand-alone regional inputs.
  // Cross-state historical repairs require the complete chronological catalogue.
@@ -138,7 +139,8 @@ function prepare(input){
  altaiJochiReview.apply(es,{frame,at,by,cite,I,D,B});
  taurusChinaReview.apply(es,{frame,at,by,cite,I,D,B});
  frankishPartitions.legacy(es,{frame,at,by,cite,I,D,B});
- for(const e of es)e.frontierReviewVersion=9;
+ outerFrontiers.legacy(es,{frame,at,by,cite,I,D,B});
+ for(const e of es)e.frontierReviewVersion=10;
  return es;
 }
 // [losing/overextended outline, authority at the shared edge, from, until, source]

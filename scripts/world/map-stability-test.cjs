@@ -36,8 +36,8 @@ if(fs.existsSync(baseline)){
  // preserve the profile identity and all unrelated historical narratives here.
  // Added profiles/events have independent dated settlement and conservation
  // checks. Compare every pre-existing narrative without hiding other changes.
- const additions=new Set(['review-burgundy','review-middle-francia','review-lotharingia','review-provence','review-italy','review-upper-burgundy','review-lower-burgundy']);
- const addedEvents=new Set(c.frankishPartitions.years.map(y=>'frankish-partition-'+y));
+ const additions=new Set(['review-burgundy','review-middle-francia','review-lotharingia','review-provence','review-italy','review-upper-burgundy','review-lower-burgundy','review-brittany']);
+ const addedEvents=new Set([...c.frankishPartitions.years.map(y=>'frankish-partition-'+y),...c.outerFrontiers.events]);
  const preserved=(rows,key)=>key==='entries'?rows.filter(e=>!additions.has(e.id)).map(e=>e.id==='zirid'?{...e,phases:[]}:e):rows.filter(e=>!addedEvents.has(e.id));
  for(const key of ['entries','events'])assert.deepEqual(preserved(require('./historical-window.cjs')(key==='events'?c[key].filter(e=>!integratedIds.has(e.id)):c[key],key),key),preserved(before[key],key),'Earlier narratives changed '+key);
  assert.deepEqual(require('./geometry-regression.cjs')(require('./historical-window.cjs')(require('./catalog.cjs').areas,'areas')),require('./geometry-regression.cjs')(before.areas),'Unexpected historical change');

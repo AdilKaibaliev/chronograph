@@ -39,6 +39,7 @@ const checks = [
   'scripts/world/anatolian-review-test.cjs',
   'scripts/world/europe-central-review-test.cjs',
   'scripts/world/frankish-partitions-test.cjs',
+  'scripts/world/frankish-outer-frontiers-test.cjs',
   'scripts/world/arabia-khitai-review-test.cjs',
   'scripts/world/altai-jochi-review-test.cjs',
   'scripts/world/taurus-china-review-test.cjs',
