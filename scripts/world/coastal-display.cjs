@@ -7,6 +7,7 @@ module.exports=c=>{
  const hash=crypto.createHash('sha256').update(JSON.stringify([c.areas,c.outlines,c.cartography]));
  for(const file of [__filename,path.join(__dirname,'outline-policy.cjs'),path.join(__dirname,'label-placement.cjs'),path.join(__dirname,'coast-geometry.cjs'),path.join(__dirname,'cartography-geometry.cjs'),path.join(__dirname,'land-coasts.json'),path.join(__dirname,'land-coast-tiles.json')])hash.update(fs.readFileSync(file));
  hash.update(JSON.stringify(require('./pacific-land.cjs')));
+ hash.update(fs.readFileSync(path.join(__dirname,'estuary-coasts.cjs'))).update(JSON.stringify(require('./estuary-coasts.cjs').patches));
  const key=hash.digest('hex'),cachePath=path.join(__dirname,'../../.local-checks/coastal-display-cache.json');
  if(fs.existsSync(cachePath)){const saved=JSON.parse(fs.readFileSync(cachePath));if(saved.key===key)return saved.display;}
  const shapes=[],ids=new Map(),areas={},mongol={},vicinities=[];
@@ -37,5 +38,5 @@ module.exports=c=>{
   if(!labelCache.has(k))labelCache.set(k,placement(rings,preferred));
   labels[a.id]=labelCache.get(k);
  }
- const display={shapes,areas,mongol,vicinities,labels,land:[...require('./land-coasts.json'),...require('./pacific-land.cjs')]};fs.mkdirSync(path.dirname(cachePath),{recursive:true});fs.writeFileSync(cachePath,JSON.stringify({key,display}));return display;
+ const display={shapes,areas,mongol,vicinities,labels,land:[...require('./estuary-coasts.cjs').apply(require('./land-coasts.json')),...require('./pacific-land.cjs')]};fs.mkdirSync(path.dirname(cachePath),{recursive:true});fs.writeFileSync(cachePath,JSON.stringify({key,display}));return display;
 };

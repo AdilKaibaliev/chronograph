@@ -4,7 +4,8 @@
 const clip=require('../vendor/polygon-clipping.cjs'),G=require('./cartography-geometry.cjs');
 // Pre-cut geographic tiles are a spatial index, not political subdivisions.
 // Inland states intersect a few rectangles instead of all world coast vertices.
-const land=require('./land-coast-tiles.json').map(t=>({...t,multi:G.multi(t.rings)})),cache=new Map();
+const estuaries=require('./estuary-coasts.cjs');
+const land=require('./land-coast-tiles.json').map(t=>({...t,multi:G.multi(estuaries.apply(t.rings,t.bounds))})),cache=new Map();
 for(const ring of require('./pacific-land.cjs')){
  const xs=ring.map(p=>p[0]),ys=ring.map(p=>p[1]);
  land.push({bounds:[Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys)],multi:[[ring]]});

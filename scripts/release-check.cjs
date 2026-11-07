@@ -43,6 +43,7 @@ const checks = [
   'scripts/world/treaty-frontiers-test.cjs',
   'scripts/world/global-review-135-test.cjs',
   'scripts/world/survey-136-test.cjs',
+  'scripts/world/survey-137-test.cjs',
   'scripts/world/arabia-khitai-review-test.cjs',
   'scripts/world/altai-jochi-review-test.cjs',
   'scripts/world/taurus-china-review-test.cjs',

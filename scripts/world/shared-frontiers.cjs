@@ -187,6 +187,7 @@ module.exports=c=>{
  }
  require('./global-review-135.cjs').apply(c,{source,revise,split,link,visibleAt,D,I,box});
  require('./survey-136.cjs')(c,{source,revise,split,link,visibleAt,D,I,box});
+ require('./survey-137.cjs')(c,{source,revise,link,D,I,box});
  c.cartography.frontierRelations=relations;c.cartography.presentation=presentation;
  for(const key of ['areas','outlines']){const ids=new Set();for(const a of c[key]){if(!(a.from<a.to)||ids.has(a.id))throw Error('Invalid split frontier '+a.id);ids.add(a.id);}}
  c.sharedFrontiers={version:1,frames:reviewed,relations,presentation};
