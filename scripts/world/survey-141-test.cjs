@@ -14,6 +14,15 @@ for(const [iso,city,pt,id] of registered){
  assert.deepEqual(owners,[id],iso+' '+city);point(id,2026,pt);
 }
 for(const s of states){assert(h.get(s.id,s.from));point(s.id,s.from,s.coord);point(s.id,2026,s.coord);}
+// The 1862 friendship treaty did not establish the republic's territorial extent.
+for(const y of [1463,1475,1600,1815,1861,1862,2026]){
+ const owners=h.mapAreasAt(y).filter(a=>!a.sovereign&&!a.overlord&&!a.cartographicOverlay&&['polity','influence'].includes(a.kind)&&G.covers(a.polygons,[12.447,43.936]));
+ assert.deepEqual(owners.map(a=>a.entry),['survey141-smr'],'Monte Titano '+y);
+}
+for(const y of [1947,1950,1967,1968,2026]){
+ const island=at('survey141-nru',y);assert(island&&G.covers(island.polygons,[166.92,-.547]));
+ assert.equal(island.overlord||null,y<1968?'1914-australian-colonies':null,'Nauru administration '+y);
+}
 for(const y of [1190,1195,1231,1232,1236,1256,1257]){
  point('abbasidIraq',y,[44.36,33.31],true,true);point('abbasidIraq',y,[47.82,30.50],true,true);
  point('abbasidIraq',y,[43.68,34.60],y<1257,true);point('abbasidIraq',y,[44.01,36.19],y>=1232,true);

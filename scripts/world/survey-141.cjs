@@ -20,6 +20,10 @@ function apply(c,{source,revise,split,visibleAt,link,D,I,box}){
   c.sources[id].title+=' Paul Wessel and Walter H. F. Smith. A Global, Self-consistent, Hierarchical, High-resolution Shoreline Database. GSHHG 2.3.7.';
   c.sources[id].urls.push('https://doi.org/10.1029/96JB00104');
  }
+ c.sources.europe141.title+=' Republic of San Marino. The nine Castelli of San Marino.';
+ c.sources.europe141.urls.push('https://www.visitsanmarino.com/pub1/VisitSM/en/contenuto/About-San-Marino/I-NOVE-CASTELLI.html');
+ c.sources.states141.title+=' United Nations. Trusteeship Agreement for the Territory of Nauru (1947), article 4. General Assembly resolution 2347 (XXII).';
+ c.sources.states141.urls.push('https://treaties.un.org/doc/Publication/UNTS/Volume%2010/v10.pdf','https://mandates.un.org/mandate/A/RES/2347%28XXII%29');
  const cart=c.cartography;
  const fine=require('./gshhg/harbours-141.json').coast;
  function localCoast(p,name){
@@ -50,8 +54,13 @@ function apply(c,{source,revise,split,visibleAt,link,D,I,box}){
  for(const state of states){
   const {id,code,name,text,coord,region,from}=state,shape=data.areas[code],sourceId=['AND','LIE','CHE','SMR','MCO','VAT'].includes(code)?'europe141':'states141',periods=[];
   const protectedState=['BHR','BRN','MDV'].includes(code);
-  const start=associated[code]|| (protectedState?1946:from);
-  if(start<from){
+  const start=code==='NRU'?1947:associated[code]|| (protectedState?1946:from);
+  if(code==='NRU'){
+   const status=L('Подопечная территория ООН|UN trust territory|БУУнун камкордугундагы аймак');
+   const detail=L('Австралия управляла островом от имени трёх стран — Австралии, Новой Зеландии и Великобритании. Соглашение об опеке действовало до независимости Науру 31 января 1968 года.|Australia administered the island on behalf of Australia, New Zealand and the United Kingdom. Trusteeship ended with Nauru’s independence on 31 January 1968.|Австралия аралды Австралиянын, Жаңы Зеландиянын жана Улуу Британиянын атынан башкарган. Науру 1968-жылдын 31-январында көз карандысыздык алганда камкордук аяктаган.');
+   periods.push({from:start,to:from,text:detail,title:status,status,shape});
+   link(au,id,start,from,'dependency',sourceId);
+  }else if(start<from){
    const status=protectedState?L('Договорная связь с Великобританией|Treaty relationship with Britain|Британия менен келишимдик байланыш'):L('Ассоциированное государство|Associated state|Ассоциацияланган мамлекет');
    const detail=protectedState?L('Местный правитель сохранял внутреннее управление. Внешние отношения регулировались договорами с Великобританией.|The local ruler retained internal government. Treaties with Britain governed external relations.|Ички башкаруу жергиликтүү өкүмдардын колунда болгон. Тышкы мамилелер Британия менен түзүлгөн келишимдер аркылуу жөнгө салынган.'):L('Местное правительство ведало внутренними делами, а Великобритания отвечала за оборону и внешние отношения.|The local government managed internal affairs. Britain retained responsibility for defence and foreign relations.|Жергиликтүү өкмөт ички иштерди башкарган. Коргонуу жана тышкы мамилелер Британиянын карамагында калган.');
    periods.push({from:start,to:from,text:detail,title:status,status,shape});
@@ -178,6 +187,8 @@ register('survey141-erbil','eurasia',[44.01,36.19],L('Эрбиль|Erbil|Эрб�
  revise([br],1630,1654,'recife-under-the-west-india-company','ports141',s=>D(s,ports.recife.BRA));
  source('datedBorders141','Guy Schvitz, Seraina Rüegger, Luc Girardin, Lars-Erik Cederman, Nils Weidmann and Kristian Skrede Gleditsch. Mapping the International System, 1886–2017: The CShapes 2.0 Dataset. Lars-Erik Cederman, Luc Girardin, Carl Müller-Crepon and Yannick Pengl. Nationalism and the Transformation of the State. Natural Earth. Admin 0 – Countries.',[
  'https://icr.ethz.ch/data/cshapes/','https://icr.ethz.ch/data/cshapes/CShapes-2.0_Codebook.pdf']);
+ c.sources.datedBorders141.title+=' Treaty of Limits between Brazil and Paraguay (1872). Award on the Argentina–Brazil boundary (1895). Grænseforeningen. Grænsesten.';
+ c.sources.datedBorders141.urls.push('https://concordia.itamaraty.gov.br/ApiConcordia/Acordo/integra-acordo-html/134','https://legal.un.org/riaa/cases/vol_XXVIII/277-282.pdf','https://graenseforeningen.dk/leksikon/graensesten');
  const reviewed=require('./frontiers-141-reviewed.json');
  for(const id of new Set(reviewed.rules.map(r=>r.loser))){
   const rows=reviewed.rules.filter(r=>r.loser===id),years=[...new Set(rows.flatMap(r=>[r.from,r.to]))].sort((a,b)=>a-b);
