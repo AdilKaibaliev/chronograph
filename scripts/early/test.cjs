@@ -34,8 +34,8 @@ assert.equal(crypto.createHash('sha256').update(JSON.stringify(require('../world
 
 for(let y=1454;y<=1600;y++){
  const profiles=h.at(y),areas=h.areasAt(y);
- assert.deepEqual(dh.at(y).filter(x=>x.entry.id!=='review-brittany').map(x=>x.entry.id),profiles.map(x=>x.entry.id),'Stale profile selection '+y);
- assert.deepEqual(dh.areasAt(y).filter(a=>a.entry!=='review-brittany').map(x=>x.entry),areas.map(x=>x.entry),'Stale map selection '+y);
+ assert.deepEqual(dh.at(y).filter(x=>!['review-brittany',...require('../world/survey-141.cjs').ids].includes(x.entry.id)).map(x=>x.entry.id),profiles.map(x=>x.entry.id),'Stale profile selection '+y);
+ assert.deepEqual(dh.areasAt(y).filter(a=>!['review-brittany',...require('../world/survey-141.cjs').ids].includes(a.entry)).map(x=>x.entry),areas.map(x=>x.entry),'Stale map selection '+y);
  for(const a of areas)assert(h.get(a.entry,y),'Orphan territory '+a.id+' in '+y);
  for(const region of c.regions)assert(profiles.some(x=>x.entry.region===region.id),'Empty region '+region.id+' in '+y);
  for(const id of ['budj','kakadu','kuk','mabuyag'])assert.equal(areas.find(a=>a.entry===id)?.kind,'landscape',id+' changed into a fictitious continent-wide state');

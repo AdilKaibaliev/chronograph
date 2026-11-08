@@ -5,7 +5,10 @@ let c=structuredClone(require('./catalog.cjs'));
 c=require('./frontier-review.cjs')(c);
 c=require('./shared-frontiers.cjs')(c);
 c=require('./to2026.cjs')(c);
-c=require('./global-review-135.cjs').carryModern(c,[...require('./survey-140.cjs').modern,'early-portuguese-brazil','1815-paraguay','1789-chile','early-peru','1815-upper-peru','1789-rio-plata','1991-belize','1991-solomons','1848-central-america','early-new-spain','1789-great-britain','1848-honduras','1848-el-salvador','1848-nicaragua','1848-costa-rica','1914-panama']);
+// Preserve the political status of Greenland as well as its geometry across
+// the 2010/2011 catalogue transition.
+for(const a of c.areas.filter(a=>a.entry==='1789-greenland-posts'&&a.from>=2011))c.cartography.kinds[a.id]='polity';
+c=require('./global-review-135.cjs').carryModern(c,[...c.survey141Modern,...require('./survey-140.cjs').modern,'early-portuguese-brazil','1815-paraguay','1789-chile','early-peru','1815-upper-peru','1789-rio-plata','1991-belize','1991-solomons','1848-central-america','early-new-spain','1789-great-britain','1848-honduras','1848-el-salvador','1848-nicaragua','1848-costa-rica','1914-panama']);
 c=require('./mediterranean-review.cjs').world(c);
 c=require('./europe-central-review.cjs').world(c);
 c=require('./maghreb-frontier-review.cjs')(c);

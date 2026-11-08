@@ -48,8 +48,9 @@ const palaiologoi=require('./palaiologan-frontiers.cjs');
 for(const e of legacy)for(const f of e.keyframes){
  const shape=table.shapes[table.frames[e.id].find(row=>row[0]===f.year)[1]];
  const drawn=shape.flat();assert(drawn.every(pt=>pt.every(Number.isFinite)));
- const source=e.id==='lateByzantine'&&f.year>=1261?palaiologoi.roman(f.year):f.polys;
- const points=source.flat();if(!points.length||require('./mongol-frontiers.cjs').reviewed.has(e.id))continue;
+ const source=e.id==='lateByzantine'&&f.year>=1261?palaiologoi.roman(f.year):G.union(f.polys);
+ const reviewed=require('./iraq-jazira.cjs').revise(e.id,f.year,source,require('./legacy-frontiers.cjs').D);
+ const points=reviewed.flat();if(!points.length||require('./mongol-frontiers.cjs').reviewed.has(e.id))continue;
  for(let axis=0;axis<2;axis++){
   const values=points.map(p=>p[axis]),min=Math.min(...values),max=Math.max(...values);
   assert(drawn.every(p=>p[axis]>=min-1e-7&&p[axis]<=max+1e-7),'Dissolving enlarged '+e.id+' in '+f.year);

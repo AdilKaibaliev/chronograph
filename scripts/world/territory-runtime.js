@@ -60,6 +60,7 @@ function renderWorldTerritories(){
  worldTerritoryLayer.classList.toggle('hidden-layer',!layerState.empires);worldTerritoryLabels.classList.toggle('hidden-layer',!layerState.empires);
  worldTerritoryLayer.style.setProperty('--area-opacity',worldAreaOpacity());
  const sn=(name,attrs)=>{const n=document.createElementNS(svg.namespaceURI,name);for(const [k,v] of Object.entries(attrs||{}))n.setAttribute(k,v);return n;};
+ renderBoundaryAreas(sn,year);
  const rank={uninhabited:0,cultural:1,landscape:2,influence:3,settlement:4,polity:5};
  // Like the original Eurasian layer, every active territory remains on the map.
  // A selected region filters the cards and chronology only.
@@ -86,7 +87,8 @@ function renderWorldTerritories(){
  const unified=areas.filter(a=>a.mongolGroup).length===4&&!(typeof showMongolUluses!=='undefined'&&showMongolUluses);
  for(const a of areas){
   const entry=worldHistory.entry(a.entry),selected=a.entry===worldState.area,grouped=unified&&a.mongolGroup;
-  const cacheKey=[a.id,wl(['ru','en','ky']),selected,Boolean(grouped),a.overlord===worldState.area,grouped?a.mongolUnionId:null,a.cartographicOverlay,overlayOpacity].join('|');
+  const paintId=grouped&&a.entry==='late-yuan'&&a.mongolUnion?'worldMongolRealm':a.entry;
+  const cacheKey=[a.id,wl(['ru','en','ky']),selected,Boolean(grouped),a.overlord===worldState.area,grouped?a.mongolUnionId:null,a.cartographicOverlay,overlayOpacity,boundaryFrame(year).paint[paintId]].join('|');
   const saved=worldTerritoryNodes.get(cacheKey);
   if(saved){worldTerritoryNodes.delete(cacheKey);worldTerritoryNodes.set(cacheKey,saved);worldTerritoryLayer.append(saved.g);worldTerritoryLabels.append(saved.guide,saved.text);continue;}
   const g=sn('g',{'data-world-area':a.entry,'data-territory-frame':a.id,'data-territory-kind':a.kind,class:'world-territory '+a.kind+(selected?' selected':'')});
@@ -101,7 +103,8 @@ function renderWorldTerritories(){
   // Tiny Pacific islands are below the base map's resolution: these outlines mark
   // their local settlement vicinity. They never connect islands into ocean empires.
   if(!a.coastClipped&&entry.region!=='oceania'&&entry.id!=='mabuyag')g.setAttribute('clip-path','url(#worldLandClip)');
-  const path=sn('path',{d:polygonPath(grouped&&a.entry==='late-yuan'&&a.mongolUnion?a.mongolUnion:a.polygons),fill:grouped?'#785344':a.color,stroke:grouped?'#61483a':a.color,role:'button',tabindex:0,'aria-label':wl(a.name)+' · '+territoryStatus(a)+' · '+worldAreaDate(a)});
+  const path=sn('path',{d:polygonPath(paintId==='worldMongolRealm'?a.mongolUnion:a.polygons),fill:grouped?'#785344':a.color,stroke:grouped?'#61483a':a.color,role:'button',tabindex:0,'aria-label':wl(a.name)+' · '+territoryStatus(a)+' · '+worldAreaDate(a)});
+  clipPoliticalPath(path,paintId,year);
   const contextual=['cultural','landscape','settlement'].includes(a.kind)||Boolean(a.cartographicOverlay)||Boolean(a.overlord);
   let tint=null;
   if(contextual){
@@ -183,6 +186,7 @@ function updateWorldTerritoryLabels(metrics=worldLabelMetrics()){
  // Reserve labels of the original political layer as well as the new territories.
  const mapRect=svg.getBoundingClientRect(),occupied=[...empireLabelLayer.querySelectorAll('text')].filter(e=>getComputedStyle(e).display!=='none').map(e=>{const r=e.getBoundingClientRect();return [r.left-mapRect.left,r.top-mapRect.top,r.right-mapRect.left,r.bottom-mapRect.top];}).filter(r=>r[2]>r[0]&&r[3]>r[1]);
  const hatchStep=7/scale;worldPattern.setAttribute('width',hatchStep);worldPattern.setAttribute('height',hatchStep);worldHatchLine.setAttribute('d','M0 0V'+hatchStep);worldHatchLine.setAttribute('stroke-width',1/scale);
+ if(typeof frontierReviewPattern!=='undefined'&&frontierReviewPattern)frontierReviewPattern.setAttribute('patternTransform','scale('+(1/scale)+')');
  if(typeof worldOccupationPattern!=='undefined'){worldOccupationPattern.setAttribute('width',9/scale);worldOccupationPattern.setAttribute('height',9/scale);worldOccupationLine.setAttribute('d','M0 0V'+9/scale);worldOccupationLine.setAttribute('stroke-width',1/scale);}
  const priority={polity:6,influence:5,cultural:3,settlement:2,landscape:1,uninhabited:0};
  const labels=[...worldTerritoryLabels.querySelectorAll('.world-territory-label')].sort((a,b)=>Number(b.dataset.entry===worldState.area)-Number(a.dataset.entry===worldState.area)||priority[b.dataset.kind]-priority[a.dataset.kind]||+b.dataset.width-+a.dataset.width);

@@ -65,6 +65,11 @@ for(const a of c.areas.filter(a=>a.from<2011&&!a.frontierAdded)){
  const partitionYear=['1914-american-samoa','1914-western-samoa'].includes(a.entry)&&a.from===1899;
  const belizeName=a.entry==='1991-belize'&&a.from>=1961&&a.to<=1981;
  const reviewed=partitionYear||belizeName?['name','title','text']:a.entry==='zirid'?['color','text','points','polygons']:a.entry==='hammadid'||outerReviewed?['points','polygons']:[];
+ if(a.entry==='nanmadol'&&a.from>=1986){
+  const federation=['Федеративные Штаты Микронезии','Federated States of Micronesia','Микронезия Федеративдик Штаттары'];
+  assert.deepEqual(a.name,federation);assert.deepEqual(a.title,federation);
+  reviewed.push('name','title');
+ }
  for(const key of Object.keys(old).filter(k=>!['id','from','to','sources',...reviewed].includes(k)))assert.deepEqual(a[key],old[key],'Changed original field '+a.id+' '+key);
  for(const id of old.sources)assert(a.sources.includes(id),'Lost source '+a.id);
  for(const id of a.sources)assert(old.sources.includes(id)||approvedSources.has(id),'Unreviewed source '+id);

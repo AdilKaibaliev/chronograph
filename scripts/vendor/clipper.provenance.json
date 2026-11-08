@@ -1,0 +1,13 @@
+{
+  "package": "clipper-lib",
+  "version": "6.4.2",
+  "source": "https://registry.npmjs.org/clipper-lib/-/clipper-lib-6.4.2.tgz",
+  "tarballIntegrity": "sha512-knglhjQX5ihNj/XCIs6zCHrTemdvHY3LPZP9XB2nq2/3igyYMFueFXtfp84baJvEE+f8pO1ZS4UVeEgmLnAprQ==",
+  "file": "package/clipper.js",
+  "use": "Independent release verification of political fills. Not bundled into the visitor’s browser.",
+  "license": [
+    "Boost Software License 1.0",
+    "Tom Wu’s JSBN license"
+  ],
+  "documentation": "https://sourceforge.net/p/jsclipper/wiki/documentation/"
+}

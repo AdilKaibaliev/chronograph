@@ -17,6 +17,7 @@ const I=(a,b)=>a.length&&b.length?flat(clip.intersection(G.multi(a),G.multi(b)))
 const D=(a,b)=>a.length&&b.length?flat(clip.difference(G.multi(a),G.multi(b))):a;
 const B=(x0,y0,x1,y1)=>G.union([[[x0,y0],[x1,y0],[x1,y1],[x0,y1]]]);
 const sources={
+ iraqJazira:'Ibn al-Athīr. Al-Kāmil fī al-taʾrīkh. TDV İslâm Ansiklopedisi. Nâsır-Lidînillâh, Tikrît, Erbil, Bedreddin Lü’lü’.',
  iberianConquest:iberianConquest.source,
  conquest:'Michael G. Morony. Arab Conquest of Iran. Encyclopaedia Iranica; Hugh Kennedy. The Great Arab Conquests.',
  china:'Denis Twitchett and Paul Jakov Smith (eds.). The Cambridge History of China, Volume 5, Part 1: The Sung Dynasty and Its Precursors, 907–1279; Herbert Franke and Denis Twitchett (eds.). Volume 6: Alien Regimes and Border States, 907–1368.',
@@ -144,6 +145,7 @@ function prepare(input){
  frankishPartitions.legacy(es,{frame,at,by,cite,I,D,B});
  outerFrontiers.legacy(es,{frame,at,by,cite,I,D,B});
  iberianConquest.apply(es,{frame,at,by,cite,I,D,B});
+ for(const id of ['abbasidIraq','ayyubid','mongol','ilkhanate'])cite(id,'iraqJazira');
  for(const e of es)e.frontierReviewVersion=11;
  return es;
 }
@@ -174,7 +176,7 @@ const rules=[
 function compiler(input){
  const es=prepare(input),by=new Map(es.map(e=>[e.id,e])),memo=new Map();
  const raw=(id,y)=>{const e=by.get(id),f=e?.keyframes.filter(f=>f.year<=y).at(-1);return e&&y>=e.from&&y<=e.to&&f&&!f.hidden?require('./cartography-reviewed.cjs').legacyGeometry(id,y,f.polys):[];};
- function shape(id,y,chain=[]){const key=id+'|'+y;if(memo.has(key))return memo.get(key);if(chain.includes(id))throw Error('Cyclic dated border rule '+chain.concat(id));let p=taurusChinaReview.geometry(id,y,raw(id,y),D);if(y===1299){const map=require('./bithynia-frontiers.cjs');if(id==='ottoman')p=map.extent(y);if(id==='lateByzantine')p=map.roman(p,y);}if(y>=1261&&id==='lateByzantine')p=require('./palaiologan-frontiers.cjs').roman(y);if(y===1261&&id==='epirus')p=require('./palaiologan-frontiers.cjs').epirus;for(const[a,b,from,to]of rules)if(a===id&&y>=from&&y<to)p=D(p,shape(b,y,chain.concat(id)));memo.set(key,p);return p;}
+ function shape(id,y,chain=[]){const key=id+'|'+y;if(memo.has(key))return memo.get(key);if(chain.includes(id))throw Error('Cyclic dated border rule '+chain.concat(id));let p=taurusChinaReview.geometry(id,y,raw(id,y),D);if(y===1299){const map=require('./bithynia-frontiers.cjs');if(id==='ottoman')p=map.extent(y);if(id==='lateByzantine')p=map.roman(p,y);}if(y>=1261&&id==='lateByzantine')p=require('./palaiologan-frontiers.cjs').roman(y);if(y===1261&&id==='epirus')p=require('./palaiologan-frontiers.cjs').epirus;p=require('./iraq-jazira.cjs').revise(id,y,p,D);if(id==='franceMedieval'&&y>=1278)p=D(p,require('./frontiers-141.json').areas.AND);for(const[a,b,from,to]of rules)if(a===id&&y>=from&&y<to)p=D(p,shape(b,y,chain.concat(id)));memo.set(key,p);return p;}
  const years=new Set(es.flatMap(e=>[e.from,e.to+1,...e.keyframes.map(f=>f.year)]));for(const r of rules){years.add(r[2]);years.add(r[3]);}
  return {empires:es,shape,years:[...years].sort((a,b)=>a-b)};
 }

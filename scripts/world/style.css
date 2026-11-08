@@ -79,3 +79,5 @@
 .world-date-comparison .world-comparison-answer{margin:9px 0 0;color:#f4dfb5}
 .world-comparison-dot{fill:#fff2cc;stroke:#563716;stroke-width:1.8}
 .world-lesson-select{width:100%;min-width:0;background:#252118;color:#ead8b7;border:1px solid #84704c;border-radius:6px;padding:8px;font:13px system-ui}
+.frontier-review-zone{pointer-events:visiblePainted;cursor:pointer;stroke:none}
+.frontier-review-zone:focus-visible{outline:none;stroke:#5b4b30;stroke-width:1.3;vector-effect:non-scaling-stroke}

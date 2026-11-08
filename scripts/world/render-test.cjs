@@ -39,7 +39,7 @@ const start=runtime.indexOf('function renderWorldMap(){');
 const end=runtime.indexOf('function updateWorldMarkerScale(){',start);
 assert(start>=0&&end>start,'Cannot locate the production map renderer');
 const context={
- WORLD_HISTORY:catalog,worldHistory:createWorldHistory(catalog),
+ WORLD_HISTORY:catalog,worldHistory:createWorldHistory(catalog),EMPIRES:JSON.parse(fs.readFileSync('index.html','utf8').match(/const EMPIRES=([^\n]+);/)[1]),translate:s=>s,language:'ru',
  year:1299,worldState:{region:'arctic',area:'',selected:'',event:''},
  layerState:{empires:true,places:true},overlayOpacity:.5,
  empireLayer:{querySelectorAll:()=>[{getAttribute:()=> 'M0 0L10 0L10 10Z'}]},
@@ -50,6 +50,8 @@ const context={
  wl:row=>row[0],wt:key=>key,hideTooltip:()=>{},updateWorldMarkerScale:()=>{}
 };
 vm.createContext(context);
+vm.runInContext(fs.readFileSync(path.join(__dirname,'border-evidence.js'),'utf8'),context);
+context.frontierGeometryReady=true;
 vm.runInContext(fs.readFileSync(path.join(__dirname,'territory-runtime.js'),'utf8'),context,{filename:'territory-runtime.js'});
 vm.runInContext(runtime.slice(start,end),context,{filename:'runtime.js:renderWorldMap'});
 
@@ -73,7 +75,7 @@ let renders=0;
 function checkRender(year,region){
  context.year=year;context.worldState.region=region;
  context.renderWorldMap();renders++;
- const actual=context.worldTerritoryLayer.children;
+ const actual=context.worldTerritoryLayer.children.filter(g=>g.dataset.worldArea);
  const expected=expectedAreas(year);
  assert.deepEqual(sorted(actual.map(g=>g.getAttribute('data-territory-frame'))),sorted(expected.map(a=>a.id)),`Lost or stale territorial frames: ${year}, ${region}`);
  assert.deepEqual(sorted(actual.map(g=>g.getAttribute('data-world-area'))),sorted(expected.map(a=>a.entry)),`Region selection hid territory: ${year}, ${region}`);

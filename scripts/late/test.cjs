@@ -31,7 +31,7 @@ const event=id=>{const e=catalog.events.find(e=>e.id===id);assert(e,'Missing mil
 const present=(id,y)=>{assert(active(id,y),id+' must be present in '+y);assert(territory(id,y),id+' needs a mapped area in '+y);};
 const absent=(id,y)=>{assert(!active(id,y),id+' persists in '+y);assert(!territory(id,y),id+' leaves a stale map area in '+y);};
 // These separately tested profiles were added after this period baseline.
-const ids=items=>items.filter(x=>!['review-brittany','survey139-western-hafsids','survey140-epirus','survey140-venetian-salonika'].includes(x.entry.id)).map(x=>x.entry.id).sort();
+const ids=items=>items.filter(x=>!['review-brittany','survey139-western-hafsids','survey140-epirus','survey140-venetian-salonika',...require('../world/survey-141.cjs').ids].includes(x.entry.id)).map(x=>x.entry.id).sort();
 // Reviewed acquisition dates split an existing record; the underlying
 // historical profile and its original interval must still be preserved.
 const sourceAreas=new Map(catalog.areas.map(a=>[a.id,a]));
@@ -47,7 +47,7 @@ for(let y=1300;y<=MAX;y++){
  const live=history.at(y),areaRows=history.areasAt(y);
  for(const a of areaRows)assert(active(a.entry,y),a.id+' has no society in '+y);
  assert.deepEqual(ids(publishedHistory.at(y)),ids(live),'Built profile selection differs in '+y);
- assert.deepEqual(publishedHistory.areasAt(y).filter(a=>!['review-brittany','survey139-western-hafsids','survey140-epirus','survey140-venetian-salonika'].includes(a.entry)).map(originalAreaId).sort(),areaRows.map(a=>a.id).sort(),'Built territory selection differs in '+y);
+ assert.deepEqual(publishedHistory.areasAt(y).filter(a=>!['review-brittany','survey139-western-hafsids','survey140-epirus','survey140-venetian-salonika',...require('../world/survey-141.cjs').ids].includes(a.entry)).map(originalAreaId).sort(),areaRows.map(a=>a.id).sort(),'Built territory selection differs in '+y);
 }
 const milestones=history.timeline().filter(e=>e.record==='event'&&e.from>=1300&&e.from<=MAX);
 assert(milestones.every(e=>e.year>=1300&&e.year<=MAX));

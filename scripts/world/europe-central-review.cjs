@@ -69,7 +69,9 @@ function world(c){
    const n=dates.length===2?a:{...a,from,to:dates[i+1],id:a.id+'-edge-'+from};
    const oldId=a.entry==='late-france'?'franceMedieval':'holyRoman';
    const original=key==='areas'?c.cartography.shapes[c.cartography.areas[a.id]]||a.polygons:a.polygons;
-   const raw=a.from===1300?G.union(es.find(e=>e.id===oldId).keyframes.at(-1).polys):original;
+   const inherited=a.from===1300?G.union(es.find(e=>e.id===oldId).keyframes.at(-1).polys):original;
+   // The source handover in 1300 must preserve the co-principality of Andorra.
+   const raw=oldId==='franceMedieval'?D(inherited,require('./frontiers-141.json').areas.AND):inherited;
    const transfers=G.merge([...(from>=1312?[lyon]:[]),...(from>=1349?[dauphine]:[])]);
    const p=coast(a.entry==='late-france'?G.merge([I(I(raw,west),mainland),transfers]):D(G.merge([D(raw,west),burgundy]),G.merge([west,transfers])));
    if(key==='areas'){c.cartography.areas[n.id]=c.cartography.shapes.length;c.cartography.shapes.push(p);if(c.cartography.kinds?.[a.id])c.cartography.kinds[n.id]=c.cartography.kinds[a.id];}
