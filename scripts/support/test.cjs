@@ -7,8 +7,25 @@ for(const [lang,label] of [['ru','Будущие события'],['en','Future 
  const ctx={URLSearchParams,location:{search:'?lang='+lang},localStorage:{getItem(){return null}}};
  assert.equal(vm.runInNewContext(init+futureLabels+";ft('button')",ctx),label,'Future-mode language mapping');
 }
-for(const [query,saved,blocked,expected] of [['',null,false,'en'],['', 'ky',false,'ky'],['?lang=ru','en',false,'ru'],['?lang=en','ru',false,'en'],['?lang=xx','ky',false,'ky'],['','bad',false,'en'],['',null,true,'en']]){
- const ctx={URLSearchParams,location:{search:query},localStorage:{getItem(){if(blocked)throw Error('blocked');return saved;}}};
+const atlasLocale=require('../../api/atlas-locale.js');
+function regionScript(country,method='GET',handler=atlasLocale){
+ let status,headers,body;
+ handler({method,headers:{'x-vercel-ip-country':country}},{writeHead(s,h){status=s;headers=h;},end(s){body=s;}});
+ assert.equal(headers['Cache-Control'],'private, no-store');assert.equal(headers.Vary,'X-Vercel-IP-Country');
+ return {status,headers,body};
+}
+for(const [country,expected] of [['KG','ky'],...['AM','AZ','BY','KZ','RU','TJ','TM','UZ'].map(code=>[code,'ru']),...['US','CN','DE','GE','UA',undefined,'XX','ZZ";alert(1)'].map(code=>[code,'en'])]){
+ const {status,body}=regionScript(country);assert.equal(status,200);
+ assert.equal(vm.runInNewContext(body+'chronographRegionalLanguage'),expected,country);
+}
+const handlerCode=fs.readFileSync(require.resolve('../../api/atlas-locale.js'),'utf8');
+for(const [when,expected] of [['2027-04-07T23:59:59Z','ru'],['2027-04-08T00:00:00Z','en']]){
+ const context={module:{},Date:class extends Date{static now(){return Date.parse(when);}}};
+ vm.runInNewContext(handlerCode,context);assert.equal(vm.runInNewContext(regionScript('MD','GET',context.module.exports).body+'chronographRegionalLanguage'),expected);
+}
+assert.equal(regionScript('KG','HEAD').body,undefined);assert.equal(regionScript('RU','POST').status,405);
+for(const [query,saved,blocked,regional,expected] of [['',null,false,undefined,'en'],['','ky',false,'ru','ky'],['?lang=ru','en',false,'ky','ru'],['?lang=en','ru',false,'ky','en'],['?lang=xx','ky',false,'en','ky'],['','bad',false,'ky','ky'],['',null,true,'ru','ru'],['',null,true,'xx','en'],['?year=1475&tab=compare',null,false,'ky','ky'],['?lang=xx',null,false,'ru','ru']]){
+ const ctx={URLSearchParams,chronographRegionalLanguage:regional,location:{search:query},localStorage:{getItem(){if(blocked)throw Error('blocked');return saved;}}};
  assert.equal(vm.runInNewContext(init+';language',ctx),expected);
 }
 const support=fs.readFileSync(__dirname+'/runtime.js','utf8');
@@ -23,4 +40,4 @@ for(const field of ['name="name"','name="email" type="email"','name="message" re
 assert(!body.innerHTML.includes('mailto:'));assert(!body.innerHTML.includes('name="_captcha"'));
 const rows=require('../i18n/compiled-messages.json'),t=require('../i18n/core.js').createChronographTranslator(rows);
 for(const [ru,en,ky] of require('./messages.json')){assert.equal(t(ru,'en'),en);assert.equal(t(ru,'ky'),ky);}
-console.log('PASS: English default, URL priority, saved language, blocked storage, RU/EN/KY support copy, both timelines paused, no payment destination.');
+console.log('PASS: regional language defaults, URL and saved choice priority, blocked storage, RU/EN/KY support copy, both timelines paused, no payment destination.');

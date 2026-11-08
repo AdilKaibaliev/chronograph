@@ -23,6 +23,9 @@ html=html.replace(/<script\b[^>]*>([\s\S]*?)<\/script>/g,(_,script)=>{
 if(assignments.length)parts.push(assignments.join('\n'));
 const dataAssets=parts.map((s,i)=>asset('atlas-data-'+String(i).padStart(3,'0'),s));
 html=html.replace(/<script defer/,dataAssets.map(p=>'<script defer src="'+p+'"></script>').join('\n')+'\n<script defer');
+// Start the small regional lookup alongside the data downloads. Deferred
+// scripts execute in document order, so the first atlas render has its language.
+html=html.replace('</head>','<script defer src="/api/atlas-locale"></script></head>');
 // Prove that chunking did not discard or change even one historical coordinate.
 const context={window:{}};vm.createContext(context);for(const s of parts)vm.runInContext(s,context);assert.equal(JSON.stringify(context.window.CHRONOGRAPH_DATA),JSON.stringify(originals));
 html=html.replace(/<style\b[^>]*>([\s\S]*?)<\/style>/g,(_,css)=>'<link rel="stylesheet" href="'+asset('atlas',css,'css')+'">');

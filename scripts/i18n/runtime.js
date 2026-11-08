@@ -5,7 +5,7 @@ const stateParams=new URLSearchParams(location.search);
 const languageStorageKey='chronograph.language';
 let savedLanguage=null;
 try{savedLanguage=localStorage.getItem(languageStorageKey);}catch{/* Storage may be unavailable in private browsing. */}
-let language=supportedLanguages.includes(stateParams.get('lang'))?stateParams.get('lang'):(supportedLanguages.includes(savedLanguage)?savedLanguage:'en');
+let language=[stateParams.get('lang'),savedLanguage,globalThis.chronographRegionalLanguage].find(code=>supportedLanguages.includes(code))||'en';
 const originalText=new WeakMap(),originalAttributes=new WeakMap();
 const localeSelect=$('languageSelect');
 localeSelect.value=language;
