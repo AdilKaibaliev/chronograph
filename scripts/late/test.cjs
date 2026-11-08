@@ -30,12 +30,16 @@ const active=(id,y)=>history.get(id,y);
 const event=id=>{const e=catalog.events.find(e=>e.id===id);assert(e,'Missing milestone '+id);return e;};
 const present=(id,y)=>{assert(active(id,y),id+' must be present in '+y);assert(territory(id,y),id+' needs a mapped area in '+y);};
 const absent=(id,y)=>{assert(!active(id,y),id+' persists in '+y);assert(!territory(id,y),id+' leaves a stale map area in '+y);};
-// The separately tested Breton profile was added after this period baseline.
-const ids=items=>items.filter(x=>x.entry.id!=='review-brittany').map(x=>x.entry.id).sort();
+// These separately tested profiles were added after this period baseline.
+const ids=items=>items.filter(x=>!['review-brittany','survey139-western-hafsids'].includes(x.entry.id)).map(x=>x.entry.id).sort();
 // Reviewed acquisition dates split an existing record; the underlying
 // historical profile and its original interval must still be preserved.
-const reviewedIds=new Set(delivered.europeCentralReview.frames.map(f=>f.id));
-const originalAreaId=a=>reviewedIds.has(a.id)?a.id.split('-edge-')[0]:a.id;
+const sourceAreas=new Map(catalog.areas.map(a=>[a.id,a]));
+function originalAreaId(a){
+ if(sourceAreas.has(a.id))return a.id;
+ const id=a.id.split('-edge-')[0],original=sourceAreas.get(id);
+ return original&&a.entry===original.entry&&a.from>=original.from&&a.to<=original.to?id:a.id;
+}
 
 // A newly built page must agree with the source catalogue throughout the added
 // interval, not just at its two endpoints. Detect stale builds and orphan areas.
@@ -43,7 +47,7 @@ for(let y=1300;y<=MAX;y++){
  const live=history.at(y),areaRows=history.areasAt(y);
  for(const a of areaRows)assert(active(a.entry,y),a.id+' has no society in '+y);
  assert.deepEqual(ids(publishedHistory.at(y)),ids(live),'Built profile selection differs in '+y);
- assert.deepEqual(publishedHistory.areasAt(y).filter(a=>a.entry!=='review-brittany').map(originalAreaId).sort(),areaRows.map(a=>a.id).sort(),'Built territory selection differs in '+y);
+ assert.deepEqual(publishedHistory.areasAt(y).filter(a=>!['review-brittany','survey139-western-hafsids'].includes(a.entry)).map(originalAreaId).sort(),areaRows.map(a=>a.id).sort(),'Built territory selection differs in '+y);
 }
 const milestones=history.timeline().filter(e=>e.record==='event'&&e.from>=1300&&e.from<=MAX);
 assert(milestones.every(e=>e.year>=1300&&e.year<=MAX));

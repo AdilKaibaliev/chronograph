@@ -174,7 +174,7 @@ const rules=[
 function compiler(input){
  const es=prepare(input),by=new Map(es.map(e=>[e.id,e])),memo=new Map();
  const raw=(id,y)=>{const e=by.get(id),f=e?.keyframes.filter(f=>f.year<=y).at(-1);return e&&y>=e.from&&y<=e.to&&f&&!f.hidden?require('./cartography-reviewed.cjs').legacyGeometry(id,y,f.polys):[];};
- function shape(id,y,chain=[]){const key=id+'|'+y;if(memo.has(key))return memo.get(key);if(chain.includes(id))throw Error('Cyclic dated border rule '+chain.concat(id));let p=taurusChinaReview.geometry(id,y,raw(id,y),D);for(const[a,b,from,to]of rules)if(a===id&&y>=from&&y<to)p=D(p,shape(b,y,chain.concat(id)));memo.set(key,p);return p;}
+ function shape(id,y,chain=[]){const key=id+'|'+y;if(memo.has(key))return memo.get(key);if(chain.includes(id))throw Error('Cyclic dated border rule '+chain.concat(id));let p=taurusChinaReview.geometry(id,y,raw(id,y),D);if(y===1299){const map=require('./bithynia-frontiers.cjs');if(id==='ottoman')p=map.extent(y);if(id==='lateByzantine')p=map.roman(p,y);}for(const[a,b,from,to]of rules)if(a===id&&y>=from&&y<to)p=D(p,shape(b,y,chain.concat(id)));memo.set(key,p);return p;}
  const years=new Set(es.flatMap(e=>[e.from,e.to+1,...e.keyframes.map(f=>f.year)]));for(const r of rules){years.add(r[2]);years.add(r[3]);}
  return {empires:es,shape,years:[...years].sort((a,b)=>a-b)};
 }

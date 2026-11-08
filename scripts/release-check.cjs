@@ -45,6 +45,7 @@ const checks = [
   'scripts/world/survey-136-test.cjs',
   'scripts/world/survey-137-test.cjs',
   'scripts/world/survey-138-test.cjs',
+  'scripts/world/survey-139-test.cjs',
   'scripts/world/arabia-khitai-review-test.cjs',
   'scripts/world/altai-jochi-review-test.cjs',
   'scripts/world/taurus-china-review-test.cjs',
