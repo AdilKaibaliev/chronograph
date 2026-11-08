@@ -44,7 +44,17 @@ for(let y=610;y<=1918;y++){
  years++;
 }
 const legacy=require('./legacy-frontiers.cjs').prepare(require('./continuity.cjs').legacyData()),table=require('./cartography-legacy.cjs')(legacy);
-for(const e of legacy)for(const f of e.keyframes){const s=table.shapes[table.frames[e.id].find(row=>row[0]===f.year)[1]];for(const r of s)for(const p of r)assert(p.every(Number.isFinite));const pts=f.polys.flat();if(!pts.length||require('./mongol-frontiers.cjs').reviewed.has(e.id))continue;for(const p of s.flat())for(let k=0;k<2;k++)assert(p[k]>=Math.min(...pts.map(p=>p[k]))-1e-7&&p[k]<=Math.max(...pts.map(p=>p[k]))+1e-7,'Dissolving enlarged a legacy extent');}
+const palaiologoi=require('./palaiologan-frontiers.cjs');
+for(const e of legacy)for(const f of e.keyframes){
+ const shape=table.shapes[table.frames[e.id].find(row=>row[0]===f.year)[1]];
+ const drawn=shape.flat();assert(drawn.every(pt=>pt.every(Number.isFinite)));
+ const source=e.id==='lateByzantine'&&f.year>=1261?palaiologoi.roman(f.year):f.polys;
+ const points=source.flat();if(!points.length||require('./mongol-frontiers.cjs').reviewed.has(e.id))continue;
+ for(let axis=0;axis<2;axis++){
+  const values=points.map(p=>p[axis]),min=Math.min(...values),max=Math.max(...values);
+  assert(drawn.every(p=>p[axis]>=min-1e-7&&p[axis]<=max+1e-7),'Dissolving enlarged '+e.id+' in '+f.year);
+ }
+}
 assert(G.covers(table.shapes[table.frames.chagatai.at(-1)[1]],[66.97,39.65]));assert(G.covers(table.shapes[table.frames.chagatai.at(-1)[1]],[64.42,39.77]));
 const html=fs.readFileSync(path.join(__dirname,'../../index.html'),'utf8');
 assert(html.includes("polygonPath(empireCartographicPolys(emp.id,y,f.polys))"));assert(html.includes('countries:true,empires:true'));assert(html.includes("countryLayer.classList.toggle('modern-reference',layerState.countries)"));

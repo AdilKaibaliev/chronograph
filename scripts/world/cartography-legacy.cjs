@@ -7,7 +7,7 @@ const {prepare}=require('./outline-policy.cjs');
 module.exports=empires=>{
  const review=require('./legacy-frontiers.cjs').compiler(empires);empires=review.empires;
  const fs=require('node:fs'),path=require('node:path'),hash=require('node:crypto').createHash('sha256').update(JSON.stringify(empires));
- for(const file of ['cartography-legacy.cjs','legacy-frontiers.cjs','bithynia-frontiers.cjs','early-boundary-review.cjs','mediterranean-review.cjs','anatolian-review.cjs','europe-central-review.cjs','arabia-khitai-review.cjs','altai-jochi-review.cjs','taurus-china-review.cjs','cartography-reviewed.cjs','qing-stages.cjs','mongol-frontiers.cjs','coast-geometry.cjs','cartography-geometry.cjs','outline-policy.cjs','land-coasts.json','land-coast-tiles.json'])hash.update(fs.readFileSync(path.join(__dirname,file)));
+ for(const file of ['cartography-legacy.cjs','legacy-frontiers.cjs','bithynia-frontiers.cjs','palaiologan-frontiers.cjs','early-boundary-review.cjs','mediterranean-review.cjs','anatolian-review.cjs','europe-central-review.cjs','arabia-khitai-review.cjs','altai-jochi-review.cjs','taurus-china-review.cjs','cartography-reviewed.cjs','qing-stages.cjs','mongol-frontiers.cjs','coast-geometry.cjs','cartography-geometry.cjs','outline-policy.cjs','land-coasts.json','land-coast-tiles.json'])hash.update(fs.readFileSync(path.join(__dirname,file)));
  hash.update(JSON.stringify(require('./pacific-land.cjs')));
  hash.update(fs.readFileSync(path.join(__dirname,'estuary-coasts.cjs'))).update(JSON.stringify(require('./estuary-coasts.cjs').patches));
  const key=hash.digest('hex'),cachePath=path.join(__dirname,'../../.local-checks/legacy-cartography-cache.json');
@@ -17,7 +17,7 @@ module.exports=empires=>{
  const coast=require('./coast-geometry.cjs');
  for(const e of empires){
   const rules=require('./legacy-frontiers.cjs').rules.filter(r=>r[0]===e.id);
-  const dates=[...new Set([...e.keyframes.map(f=>f.year),...review.years.filter(y=>y>=e.from&&y<=e.to&&rules.some(r=>y>=r[2]&&y<=r[3]))])].sort((a,b)=>a-b);
+  const dates=[...new Set([...e.keyframes.map(f=>f.year),...(e.id==='lateByzantine'?require('./palaiologan-frontiers.cjs').dates.filter(y=>y>=e.from&&y<=e.to):[]),...review.years.filter(y=>y>=e.from&&y<=e.to&&rules.some(r=>y>=r[2]&&y<=r[3]))])].sort((a,b)=>a-b);
   frames[e.id]=dates.map(y=>{try{return[y,shape(coast(prepare(review.shape(e.id,y),{dissolved:true})))];}catch(error){throw Error(e.id+' '+y+': '+error.message);}});
   if(e.keyframes.some(f=>f.corePolys))frames[e.id+'Core']=e.keyframes.map(f=>[f.year,shape(coast(require('./cartography-geometry.cjs').union(f.corePolys||[])))]);
   if(e.keyframes.some(f=>f.dependentPolys))frames[e.id+'Dependencies']=e.keyframes.map(f=>[f.year,shape(coast(require('./cartography-geometry.cjs').merge([f.dependentPolys||[]])))]);

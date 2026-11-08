@@ -1,6 +1,6 @@
 'use strict';
 const G=require('./cartography-geometry.cjs'),clip=require('../vendor/polygon-clipping.cjs');
-const patches=[...require('./frontiers-137.json').coast,...require('./frontiers-138.json').coast];
+const patches=[...require('./frontiers-137.json').coast,...require('./frontiers-138.json').coast,...require('./frontiers-140.json').coast];
 const bounds=r=>r.reduce((b,[x,y])=>[Math.min(b[0],x),Math.min(b[1],y),Math.max(b[2],x),Math.max(b[3],y)],[Infinity,Infinity,-Infinity,-Infinity]);
 const overlaps=([x,y,X,Y],[u,v,U,V])=>x<U&&u<X&&y<V&&v<Y;
 const box=([w,s,e,n])=>[[[w,s],[e,s],[e,n],[w,n],[w,s]]];

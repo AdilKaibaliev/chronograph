@@ -1,6 +1,6 @@
 'use strict';
 const assert=require('node:assert/strict'),clip=require('../vendor/polygon-clipping.cjs'),G=require('./cartography-geometry.cjs');
-const coast=require('./frontiers-138.json').coast;
+const coast=[...require('./frontiers-138.json').coast,...require('./frontiers-140.json').coast];
 module.exports=function compareWithCoastRevision(previous,current){
  // Restrict admissible differences to land actually gained or lost inside
  // the surveyed shore window, including for a much earlier cultural outline.

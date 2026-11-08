@@ -10,7 +10,7 @@ const old={entries:c.entries.filter(e=>!e.id.startsWith('cartography-')).map(e=>
 assert.equal(crypto.createHash('sha256').update(JSON.stringify(require('../world/kyrgyz-baseline.cjs')(require('../world/arctic-baseline.cjs')(old,undefined,1849)))).digest('hex'),'35cbb03b5319d4fcbfe78a2494611b5c5dc1915f50c4ab92182484f462a8d0cd','Previous catalogue outside the explicit Pecos correction changed');
 for(const key of ['entries','areas'])assert.deepEqual(delivered[key],require('../world/published-catalog.cjs')[key]);
 assert.deepEqual(delivered.range,{...c.range,max:require('../incidents/integrate.cjs').timelineMax});
-assert(html.includes('name="chronograph-version" content="1.39.0"'));
+assert(html.includes('name="chronograph-version" content="1.40.0"'));
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html));
 for(let y=1849;y<=1914;y++){
  const additional=new Set(['review-ussuri-joint','review-acre-valley','review-manua','review-papuan-territory','review-kaiser-wilhelmsland','1991-belize','1991-solomons','survey-northern-solomons','survey137-mosquitia','survey138-tarapaca','survey138-tacna-coast','1939-chaco']);
