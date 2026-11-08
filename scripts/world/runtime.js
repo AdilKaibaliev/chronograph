@@ -53,6 +53,8 @@ $('bottomGrid').prepend(worldExplorer);
 const worldModes=we('div','world-modes');worldModes.setAttribute('role','group');
 for(const [value,key] of [['overview','overview'],['timeline','chronology'],['study','study']]){const b=we('button');b.type='button';b.dataset.worldMode=value;b.dataset.worldLabel=key;b.onclick=()=>{worldState.mode=value;worldState.area='';worldState.event='';renderWorldHistory();$('panel-compare').scrollTop=0;queueLocationSave();};worldModes.append(b);}worldExplorer.querySelector('header').append(worldModes);
 const worldStudyTools=we('div','world-study-tools');worldStudyTools.innerHTML='<p id="worldStudyHint"></p><input id="worldStudySearch" type="search">';$('worldCards').before(worldStudyTools);
+const worldLessonSelect=we('select','world-lesson-select');worldLessonSelect.id='worldLessonSelect';worldStudyTools.prepend(worldLessonSelect);
+worldLessonSelect.onchange=()=>{if(worldLessonSelect.value)worldChooseEvent(worldLessonSelect.value);};
 $('worldStudySearch').oninput=e=>{worldState.studySearch=e.target.value;renderWorldCards();};
 const worldFilters=we('div','world-filters');worldFilters.innerHTML='<input id="worldSearch" type="search"><div><select id="worldCentury"></select><select id="worldType"></select></div>';worldExplorer.querySelector('header').append(worldFilters);
 const worldFilterToggle=we('button','world-filter-toggle');worldFilterToggle.type='button';worldFilterToggle.id='worldFilterToggle';worldFilterToggle.setAttribute('aria-controls','worldSearch');worldFilters.before(worldFilterToggle);worldFilterToggle.onclick=()=>{worldState.filters=!worldState.filters;renderWorldControls();};
@@ -125,7 +127,8 @@ function worldChooseEvent(id){
  stopPlay();worldShowLocations();worldState.area='';worldState.event=id;worldState.selected=e.entry||'';worldState.mode='timeline';worldState.filters=false;
  if(worldState.region!=='all'&&worldState.region!==e.region)worldState.region=e.region;
  switchPanel('compare');renderYear(e.year);
- if(e.route?.length){const pts=e.route.map(project),xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]),cx=(Math.min(...xs)+Math.max(...xs))/2,cy=(Math.min(...ys)+Math.max(...ys))/2,s=Math.min(24,SVG_W*.72/Math.max(14,Math.max(...xs)-Math.min(...xs)),SVG_H*.65/Math.max(14,Math.max(...ys)-Math.min(...ys)));animateCamera({scale:s,tx:SVG_W/2-cx*s,ty:SVG_H/2-cy*s});}else focusLonLat(...e.coord,e.region==='antarctica'?1.3:4.2);
+ const lesson=WORLD_HISTORY.mapComparisons?.[id],focusPoints=lesson?lesson.places.map(p=>p[0]):e.route;
+ if(focusPoints?.length){const pts=focusPoints.map(project),xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]),cx=(Math.min(...xs)+Math.max(...xs))/2,cy=(Math.min(...ys)+Math.max(...ys))/2,s=Math.min(lesson?.scale||24,SVG_W*.72/Math.max(14,Math.max(...xs)-Math.min(...xs)),SVG_H*.65/Math.max(14,Math.max(...ys)-Math.min(...ys)));animateCamera({scale:s,tx:SVG_W/2-cx*s,ty:SVG_H/2-cy*s});}else focusLonLat(...e.coord,e.region==='antarctica'?1.3:4.2);
  $('panel-compare').scrollTop=0;$('worldEventTitle')?.focus({preventScroll:true});queueLocationSave();
 }
 let worldControlsKey='';
@@ -158,6 +161,12 @@ function renderWorldControls(){
  for(const [id,items,value] of [['worldCentury',[['all',wt('allTime')],...[7,8,9,10,11,12,13,14,15,16,17,18,19,20,21].map(n=>[String(n),['VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI'][n-7]+wl([' век',' century',' кылым'])])],worldState.century],['worldType',[['all',wt('allTypes')],...['war','politics','diplomacy','migration','economy','culture','nature','territory','period'].map(k=>[k,wt(k==='culture'?'cultureEvents':k)])],worldState.type]]){const s=$(id);s.replaceChildren();s.setAttribute('aria-label',id==='worldType'?wt('allTypes'):wt('allTime'));for(const [v,t] of items){const o=we('option','',t);o.value=v;s.append(o);}s.value=value;}
  $('worldCards').hidden=worldState.mode==='timeline';worldChronology.hidden=worldState.mode!=='timeline';
  worldStudyTools.hidden=worldState.mode!=='study';$('worldStudyHint').textContent=wt('studyHint');$('worldStudySearch').placeholder=wt('studySearch');$('worldStudySearch').setAttribute('aria-label',wt('studySearch'));$('worldStudySearch').value=worldState.studySearch;
+ const lessonLabel=wl(['Сравнить карты разных лет','Compare maps across years','Ар кайсы жылдардагы карталарды салыштыруу']);
+ worldLessonSelect.setAttribute('aria-label',lessonLabel);worldLessonSelect.replaceChildren(new Option(lessonLabel,''));
+ for(const id of Object.keys(WORLD_HISTORY.mapComparisons||{})){
+  const event=worldHistory.record(id);if(event&&(worldState.region==='all'||worldState.region===event.region))worldLessonSelect.append(new Option(event.year+' · '+wl(event.title),id));
+ }
+ worldLessonSelect.hidden=worldLessonSelect.length<2;
  worldEraStrip.replaceChildren();
  const preferred=worldState.region==='all'?(year>=2011?null:year>=2001?['2010-event-bonn','2010-event-timor','2010-event-au','2010-event-iraq-invasion','2010-event-indian-ocean','2010-event-sudan-cpa','2010-event-montenegro','2010-event-finance','2010-event-greenland','2010-event-kyrgyz-referendum']:year>=1992?['2000-event-bosnia','2000-event-som','2000-event-eritrea','2000-event-south-africa','2000-event-rwanda','2000-event-dayton','2000-event-hongkong','2000-event-congo-war','2000-event-kosovo','2000-event-nunavut','2000-event-timor','2000-event-batken']:year>=1961?['1991-event-berlin-wall','1991-event-cuban-crisis','1991-event-algeria','1991-event-six-day','1991-event-pakistan','1991-event-afghanistan','1991-event-germany','1991-event-yemen','1991-event-kyrgyz','1991-event-ussr']:year>=1946?['1960-event-partition','1960-event-germany','1960-event-china','1960-event-korea','1960-event-kyrgyz-academy','1960-event-bandung','1960-event-suez','1960-event-cuba','1960-event-brasilia','1960-event-nigeria']:year>=1940?['1945-event-pearl-harbor','1945-event-alamein','1945-event-singapore','1945-event-kohima','1945-event-surrender-japan','1945-event-un']:year>=1919?['1939-event-versailles','1939-event-ussr','1939-event-turkey','1939-event-kyrgyz','1939-event-depression','1939-event-mukden','1939-event-chaco','1939-event-ethiopia','1939-event-china-war','1939-event-poland']:year>=1915?['1918-event-gallipoli','1918-event-urkun','1918-event-arab-revolt','1918-event-mexico','1918-event-abdication','1918-event-us-entry','1918-event-armistice','1918-event-samoa']:year>=1849?['1914-event-india','1914-event-civil-war','1914-event-meiji','1914-event-germany','1914-event-kokand','1914-event-adwa','1914-event-australia','1914-event-china','1914-event-ww1']:year>=1816?['1848-event-tucuman','1848-event-brazil','1848-event-algiers','1848-event-pishpek','1848-event-waitangi','1848-event-nanjing','1848-event-guadalupe','1848-event-france-1848']:year>=1790?['1815-event-republic','1815-event-haiti','1815-event-sokoto','1815-event-louisiana','1815-event-hawaii','1815-event-mexico','1815-event-vienna','1815-event-bathurst','1815-event-tambora']:year>=1601?['1789-jamestown-1607','1789-gondar','1789-qing-beijing','1789-westphalia','1789-mbwila','1789-mombasa-oman','1789-asante-union','1789-plassey','1789-independence-1776','1789-sydney-1788','1789-bastille']:year>=1454?['early-timbuktu-1468','early-guanahani-1492','early-safavid-1501','early-cairo-1517','early-tenochtitlan-1521','early-panipat-1526','early-cusco-1533','early-kazan-1552','early-tondibi-1591','early-sekigahara-1600']:year>=1300?['late-musa-hajj','tenochtitlan-foundation','late-ilkhan-1335','late-ming-1368','late-timur-1370','late-ankara-1402','late-ceuta-capture','triple-alliance','pachacuti-accession','late-constantinople-1453']:['palenque-611','nubia-baqt','quirigua-738','greenland-norse','vinland-1021','hastings','chimu-expansion','maori-arrival','late-ming-1368','late-constantinople-1453']):null;
  const records=worldHistory.timeline(worldState.region);
@@ -169,7 +178,7 @@ function renderWorldControls(){
  renderWorldAreaControls();
 }
 function updateWorldCaption(){
- if(!$('panel-compare').hidden&&!document.body.classList.contains('future-mode')){const e=worldHistory.record(worldState.event),r=WORLD_HISTORY.regions.find(r=>r.id===worldState.region);$('mapAh').textContent=$('timelineAh').textContent+' · '+(e?wl(e.title):r?wl(r.name):wt('title'));}
+ if(!$('panel-compare').hidden&&!document.body.classList.contains('future-mode')){const e=worldHistory.record(worldState.event),r=WORLD_HISTORY.regions.find(r=>r.id===worldState.region);$('mapAh').textContent=$('timelineAh').textContent+' · '+(e?(year===e.year?wl(e.title):wl(WORLD_HISTORY.mapComparisons?.[e.id]?.question||e.title)):r?wl(r.name):wt('title'));}
  else {const e=activeEvent(year);$('mapAh').textContent=translate(`${e.ah} · ${e.title}`,language);}
 }
 function appendWorldSources(parent,ids,base=false){
@@ -204,12 +213,27 @@ function renderWorldChronology(){
  }
  if(!records.length)worldChronology.append(we('p','world-empty',wt('noResults')));
 }
+function renderWorldComparison(event){
+ const lesson=WORLD_HISTORY.mapComparisons?.[event.id];if(!lesson)return;
+ const group=we('fieldset','world-date-comparison'),buttons=we('div','world-comparison-years');
+ group.append(we('legend','',wl(['Сравнить карту','Compare the map','Картаны салыштыруу'])),we('p','',wl(lesson.question)),buttons);
+ for(const [frameYear,description] of lesson.frames){
+  const button=we('button','',String(frameYear));button.type='button';button.dataset.frameYear=frameYear;
+  button.setAttribute('aria-pressed',String(frameYear===year));button.onclick=()=>{
+   stopPlay();renderYear(frameYear);queueLocationSave();
+   worldEventDetail.querySelector('[data-frame-year="'+frameYear+'"]')?.focus({preventScroll:true});
+  };buttons.append(button);
+  if(frameYear===year){const answer=we('p','world-comparison-answer',wl(description));answer.setAttribute('aria-live','polite');group.append(answer);}
+ }
+ worldEventDetail.append(group);
+}
 function renderWorldEvent(){
  const e=worldHistory.record(worldState.event);worldEventDetail.replaceChildren();worldEventDetail.hidden=!e;if(!e)return;
  const title=we('h4','',wl(e.title));title.id='worldEventTitle';title.tabIndex=-1;
  worldEventDetail.append(we('p','world-card-meta',worldEventDate(e)+' · '+wt(e.approx?'approx':'exact')),title,we('p','world-description',wl(e.text)));
  if(e.routeApprox)worldEventDetail.append(we('p','world-card-meta',wl(['Схема переселения · места отправления и прибытия','Migration schematic · origins and destinations','Көчүүнүн схемасы · жөнөгөн жана келген жерлер'])));
  appendWorldSources(worldEventDetail,e.sources,e.base);
+ renderWorldComparison(e);
  const actions=we('div','world-event-actions'),records=worldRecords(),i=records.findIndex(r=>r.id===e.id);
  for(const [label,delta] of [['previous',-1],['next',1]]){const b=we('button','',delta<0?'←':'→');b.type='button';b.setAttribute('aria-label',wt(label));b.title=wt(label);const target=i>=0?records[i+delta]:null;b.disabled=!target;b.onclick=()=>worldChooseEvent(target.id);actions.append(b);}
  const close=we('button','',wt('close'));close.type='button';close.onclick=()=>{worldState.event='';renderWorldHistory();queueLocationSave();};actions.append(close);worldEventDetail.append(actions);
@@ -279,7 +303,12 @@ function renderWorldMap(){
   worldLayer.append(g);
  }
  const event=worldHistory.record(worldState.event);
- if(event){
+ const lesson=event&&WORLD_HISTORY.mapComparisons?.[event.id];
+ if(lesson)for(const [coord,name] of lesson.places){
+  const [x,y]=project(coord),group=sn('g',{class:'world-marker world-comparison-place',transform:'translate('+x+' '+y+')','data-px':x,'data-py':y}),inner=sn('g',{class:'world-marker-inner'}),label=sn('text'),title=sn('title');
+  label.textContent=wl(name);title.textContent=wl(name);inner.append(sn('circle',{r:4.5,class:'world-comparison-dot'}),label);group.append(inner,title);worldLayer.append(group);
+ }
+ if(event&&!lesson){
   if(event.route?.length){const d=event.route.map((p,i)=>(i?'L':'M')+project(p).join(' ')).join(' ');const route=sn('path',{d,class:'world-event-route','marker-end':'url(#worldRouteArrow)'});route.append(sn('title'));route.firstChild.textContent=wt('route');worldLayer.append(route);}
   const [x,y]=project(event.coord),g=sn('g',{class:'world-marker world-event-marker selected',transform:`translate(${x} ${y})`,'data-px':x,'data-py':y,role:'button',tabindex:0,'aria-label':wl(event.title)}),inner=sn('g',{class:'world-marker-inner'});
   inner.append(sn('circle',{r:12,class:'world-event-ring'}),sn('circle',{r:4,class:'world-event-dot'}));const label=sn('text');label.textContent=wl(event.title);inner.append(label);g.append(inner);g.onclick=()=>{switchPanel('compare');$('panel-compare').scrollTop=0;};g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();g.onclick();}};g.addEventListener('pointerdown',e=>e.stopPropagation());worldLayer.append(g);
@@ -292,7 +321,7 @@ function updateWorldMarkerScale(){
  // zoomed viewport. Cap their visible radius in screen pixels.
  svg.style.setProperty('--atlas-city-radius',Math.min(3.2,4/scale)+'px');
  svg.style.setProperty('--atlas-campaign-radius',Math.min(3.3,4/scale)+'px');
- const priority=g=>g.classList.contains('world-event-marker')?2:Number(g.dataset.worldPlace===worldState.selected);
+ const priority=g=>g.classList.contains('world-event-marker')||g.classList.contains('world-comparison-place')?2:Number(g.dataset.worldPlace===worldState.selected);
  const markers=[...worldLayer.querySelectorAll('.world-marker')].sort((a,b)=>priority(b)-priority(a));
  const territoryLabels=updateWorldTerritoryLabels(metrics),occupied=[...territoryLabels.occupied];
  updateAtlasPlaceLabels(metrics,occupied);
@@ -338,10 +367,11 @@ worldLegendDisclosure.addEventListener('toggle',refreshWorldLegend);
 function renderWorldHistory(){
  if(!worldHistory.get(worldState.selected,year))worldState.selected='';
  if(!worldHistory.mapAreasAt(year).some(a=>a.entry===worldState.area))worldState.area='';
- const selected=worldHistory.record(worldState.event);if(selected&&(year<selected.from||year>selected.to))worldState.event='';
+ const selected=worldHistory.record(worldState.event),lesson=selected&&WORLD_HISTORY.mapComparisons?.[selected.id];
+ if(selected&&(year<selected.from||year>selected.to)&&!lesson?.frames.some(([y])=>y===year))worldState.event='';
  const areas=worldHistory.mapAreasAt(year),items=worldHistory.at(year);
  const snapshot=language+'|'+areas.map(a=>a.id).join(',')+'|'+items.map(i=>i.entry.id+':'+i.phase.from).join(',');
- const mapKey=[snapshot,year<1300?year:'',worldState.area,worldState.selected,worldState.event,layerState.empires,layerState.places,overlayOpacity,showMongolUluses].join('|');
+ const mapKey=[snapshot,year<1300||lesson?year:'',worldState.area,worldState.selected,worldState.event,layerState.empires,layerState.places,overlayOpacity,showMongolUluses].join('|');
  const cardKey=[snapshot,worldState.region,worldState.mode,worldState.studySearch,worldState.selected,worldState.area,worldBasePolities().map(p=>p.id+':'+p.name).join(',')].join('|');
  const chronologyKey=[language,worldState.region,worldState.mode,worldState.type,worldState.century,worldState.search,worldState.event].join('|');
  renderWorldControls();

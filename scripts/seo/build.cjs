@@ -38,7 +38,16 @@ function page(l,url,title,description,body,alts){const t=copy[l];urls.push(url);
 for(const l of Object.keys(copy)){
  const t=copy[l],i=idx[l]??1;
  const tiles=c.regions.map(r=>`<div class="tile"><h3><a href="${region(l==='zh'?'en':l,r.id)}">${esc(r.name[i])}</a></h3><p>${esc(r.scope[i])}</p></div>`).join('');
- page(l,guide(l),t.title,t.description,`<p class="eyebrow">CHRONOGRAPH ATLAS · 610–2026</p><h1>${t.heading}</h1><p>${t.intro}</p><p><a class="cta" href="/?lang=${l==='zh'?'en':l}">${t.open}</a></p><h2>${t.regions}</h2><div class="grid">${tiles}</div><h2>${t.how}</h2><ol>${t.steps.map(x=>'<li>'+esc(x)+'</li>').join('')}</ol><h2>${t.method}</h2><p>${t.note}</p><p>${t.scope}</p>`,Object.fromEntries(Object.keys(copy).map(k=>[k,guide(k)])));
+ const lessons=Object.entries(c.mapComparisons||{}).map(([id,lesson])=>{
+  const event=c.events.find(e=>e.id===id),coords=lesson.places.map(place=>place[0]);
+  const longitude=coords.map(pt=>pt[0]),latitude=coords.map(pt=>pt[1]);
+  const mid=values=>(Math.max(...values)+Math.min(...values))/2;
+  const zoom=lesson.scale,view=[zoom,720-zoom*4*(mid(longitude)+180),360-zoom*720*(85-mid(latitude))/175].map(n=>n.toFixed(3)).join(',');
+  const params=new URLSearchParams({lang:l==='zh'?'en':l,year:event.year,tab:'compare',world:event.region,wview:'timeline',wevent:id,view});
+  return '<li><a href="/?'+esc(params.toString())+'">'+event.year+' · '+esc(lesson.question[i])+'</a></li>';
+ }).join('');
+ const lessonHeading={ru:'Сравнить карты разных лет',en:'Compare maps across years',ky:'Ар кайсы жылдардагы карталарды салыштыруу',zh:'比较不同年份的地图（英文地图）'}[l];
+ page(l,guide(l),t.title,t.description,`<p class="eyebrow">CHRONOGRAPH ATLAS · 610–2026</p><h1>${t.heading}</h1><p>${t.intro}</p><p><a class="cta" href="/?lang=${l==='zh'?'en':l}">${t.open}</a></p><h2>${t.regions}</h2><div class="grid">${tiles}</div><h2>${t.how}</h2><ol>${t.steps.map(x=>'<li>'+esc(x)+'</li>').join('')}</ol><h2>${lessonHeading}</h2><ul>${lessons}</ul><h2>${t.method}</h2><p>${t.note}</p><p>${t.scope}</p>`,Object.fromEntries(Object.keys(copy).map(k=>[k,guide(k)])));
 }
 // Curated sampling across chronological bands: no mass-generated thin entry pages.
 for(const r of c.regions){

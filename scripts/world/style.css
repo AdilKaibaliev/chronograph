@@ -10,8 +10,8 @@
 .world-marker{cursor:pointer}.world-marker-hit{fill:transparent;stroke:none}.world-marker-core{fill:#51452d;stroke:#fff1ce;stroke-width:1.6}.world-marker-core.culture{fill:#3a624d}.world-marker-core.landscape,.world-marker-core.region{fill:#fff4d5;fill-opacity:.5;stroke:#695036;stroke-width:2;stroke-dasharray:3 2}.world-marker text{font:11px system-ui;fill:#251f16;paint-order:stroke;stroke:#eee1bf;stroke-width:3px;stroke-linejoin:round;pointer-events:none}.world-marker.selected .world-marker-core,.world-marker:focus .world-marker-core{stroke:#2c1a0c;fill:#efd18a;stroke-width:2.5}.world-marker:focus{outline:none}.world-marker.selected text{font-weight:700}
 .future-mode #worldHistoryLayer,.future-mode #worldExploreBtn{display:none!important}
 .world-comparison.world-regional #mongolScope{display:none}
-.world-comparison #starsCard{max-height:24%;min-height:76px}
-.world-comparison #starsContent>.stars-note{display:none}
+.world-date-comparison #starsCard{max-height:24%;min-height:76px}
+.world-date-comparison #starsContent>.stars-note{display:none}
 @media(max-width:700px){.world-comparison #starsContent .star-group-title{display:none}.world-comparison #starsContent .star-group{margin-top:0}}
 @media(max-width:700px){.world-comparison #starsCard{max-height:88px;min-height:64px}.world-header{position:static;padding-top:7px}.world-heading h3{font-size:18px}.world-card{padding:10px}.world-card-title{font-size:17px}.world-description{font-size:11px}.world-legend{font-size:9px}#worldExploreBtn{padding:6px 8px}}
 @media(max-height:550px){.world-header{position:static}.world-comparison #starsCard{max-height:75px;min-height:64px}}
@@ -69,3 +69,13 @@
 @media(max-width:700px){.world-war-key{right:7px;bottom:52px;padding:7px 9px;max-width:180px;font-size:10px}}
 #placeLayer .place-dot circle.core{r:var(--atlas-city-radius,3.2px)}
 #campaignLayer .campaign-node{r:var(--atlas-campaign-radius,3.3px)}
+.world-date-comparison{margin:12px 0 5px;padding:9px 11px 10px;border:1px solid #796644;border-radius:7px;min-width:0}
+.world-date-comparison legend{padding:0 5px;color:#f4dfb5;font:600 13px system-ui}
+.world-date-comparison p{margin:3px 0 9px;font-size:13px;line-height:1.45}
+.world-comparison-years{display:flex;flex-wrap:wrap;gap:6px}
+.world-comparison-years button{min-height:32px;border:1px solid #867350;border-radius:6px;background:#2b251c;color:#efdfc4;padding:4px 10px;font:13px system-ui;cursor:pointer}
+.world-comparison-years button[aria-pressed=true]{background:#e1c591;color:#282115;border-color:#f7dfa9;font-weight:700}
+.world-comparison-years button:focus-visible{outline:2px solid #fbe5b7;outline-offset:2px}
+.world-date-comparison .world-comparison-answer{margin:9px 0 0;color:#f4dfb5}
+.world-comparison-dot{fill:#fff2cc;stroke:#563716;stroke-width:1.8}
+.world-lesson-select{width:100%;min-width:0;background:#252118;color:#ead8b7;border:1px solid #84704c;border-radius:6px;padding:8px;font:13px system-ui}

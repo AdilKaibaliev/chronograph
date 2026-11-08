@@ -10,10 +10,10 @@ const old={entries:c.entries.filter(e=>!e.id.startsWith('cartography-')).map(e=>
 assert.equal(crypto.createHash('sha256').update(JSON.stringify(require('../world/kyrgyz-baseline.cjs')(require('../world/arctic-baseline.cjs')(old,undefined,1849)))).digest('hex'),'35cbb03b5319d4fcbfe78a2494611b5c5dc1915f50c4ab92182484f462a8d0cd','Previous catalogue outside the explicit Pecos correction changed');
 for(const key of ['entries','areas'])assert.deepEqual(delivered[key],require('../world/published-catalog.cjs')[key]);
 assert.deepEqual(delivered.range,{...c.range,max:require('../incidents/integrate.cjs').timelineMax});
-assert(html.includes('name="chronograph-version" content="1.37.0"'));
+assert(html.includes('name="chronograph-version" content="1.38.0"'));
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html));
 for(let y=1849;y<=1914;y++){
- const additional=new Set(['review-ussuri-joint','review-acre-valley','review-manua','review-papuan-territory','review-kaiser-wilhelmsland','1991-belize','1991-solomons','survey-northern-solomons','survey137-mosquitia']);
+ const additional=new Set(['review-ussuri-joint','review-acre-valley','review-manua','review-papuan-territory','review-kaiser-wilhelmsland','1991-belize','1991-solomons','survey-northern-solomons','survey137-mosquitia','survey138-tarapaca','survey138-tacna-coast']);
  const changedSamoanPhase=row=>['1914-american-samoa','1914-western-samoa'].includes(row.entry.id)&&y<row.entry.phases.find(p=>p.from>=1914)?.from;
  const current=rows=>rows.filter(row=>!changedSamoanPhase(row)).map(({entry,...item})=>({...item,entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to)}}));assert.deepEqual(current(dh.at(y).filter(row=>!additional.has(row.entry.id))),current(h.at(y)));assert.deepEqual(dh.areasAt(y).filter(a=>!additional.has(a.entry)).map(a=>a.entry),h.areasAt(y).map(a=>a.entry),'Dated map selection '+y);
  for(const r of c.regions)assert(h.at(y,r.id).length,'Empty region '+r.id+' in '+y);
