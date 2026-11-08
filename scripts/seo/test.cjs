@@ -8,7 +8,7 @@ let links=0,pages=0;
 for(const url of m.urls){const p=resolve(url),s=fs.readFileSync(p,'utf8');pages++;assert(Buffer.byteLength(s)<1000000,p);assert(s.includes('rel="canonical" href="'+base+url+'"'),p);assert(s.includes('name="description"'),p);assert(s.includes('application/ld+json'),p);assert(!/noindex/.test(s),p);
  for(const j of s.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g))JSON.parse(j[1]);
  for(const a of s.matchAll(/(?:href|src)="([^"]+)"/g)){let target=a[1].replaceAll('&amp;','&');if(/^(data:|mailto:|#)/.test(target))continue;const f=resolve(target);if(f){assert(fs.existsSync(f),p+' broken link '+target);links++;}}
- if(url!=='/'){assert.equal((s.match(/<h1[ >]/g)||[]).length,1,p);assert(s.includes('hreflang="x-default"'),p);assert(!s.includes('[object Object]'),p);}
+ if(url!=='/'){const locale=url.split('/')[1],edition=require('./content.cjs')[locale].edition.replace('{version}',m.version);assert(s.includes('<footer>')&&s.slice(s.indexOf('<footer>')).includes(edition),'Guide edition '+url);assert.equal((s.match(/<h1[ >]/g)||[]).length,1,p);assert(s.includes('hreflang="x-default"'),p);assert(!s.includes('[object Object]'),p);}
 }
 for(const a of m.assets){const b=fs.readFileSync('public'+a.url);assert.equal(crypto.createHash('sha256').update(b).digest('hex'),a.sha256);assert(b.length<1000000);if(a.url.endsWith('.js'))new vm.Script(b.toString());}
 const scripts=[...html.matchAll(/<script defer src="([^"]+)"/g)].map(x=>x[1]);const firstRuntime=scripts.findIndex(x=>x.includes('/atlas-script.'));assert(firstRuntime>0);assert(scripts.slice(0,firstRuntime).every(x=>x.includes('/atlas-data-')));
