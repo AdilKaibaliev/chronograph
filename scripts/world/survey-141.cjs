@@ -1,7 +1,7 @@
 'use strict';
 const G=require('./cartography-geometry.cjs'),data=require('./frontiers-141.json'),states=require('./states-141.cjs');
 const uk='1789-great-britain',fr='late-france',pt='late-portugal',us='1789-usa',au='1914-australian-colonies';
-const ids=['survey141-erbil','survey141-cyprus-buffer',...states.map(s=>s.id)];
+const ids=['survey141-erbil','survey141-cyprus-buffer','review-basra-garrison','review-krakow-garrison',...states.map(s=>s.id)];
 const L=s=>s.split('|');
 function apply(c,{source,revise,split,visibleAt,link,D,I,box}){
  const H=require('./late-helpers.cjs')(c,{start:610,max:2026});
@@ -215,6 +215,7 @@ register('survey141-erbil','eurasia',[44.01,36.19],L('Эрбиль|Erbil|Эрб�
   'Почему столицы двух государств стоят на противоположных берегах Конго?|Why do two national capitals face each other across the Congo?|Эки өлкөнүн борборлору эмне үчүн Конго дарыясынын эки жээгинде жайгашкан?',
   [[[15.28,-4.25],'Браззавиль|Brazzaville|Браззавиль'],[[15.31,-4.32],'Леопольдвиль / Киншаса|Léopoldville / Kinshasa|Леопольдвиль / Киншаса']],
   [[1959,'Браззавиль находится на французской стороне, Леопольдвиль — на бельгийской.|Brazzaville is on the French side and Léopoldville on the Belgian side.|Браззавиль француз тарабында, Леопольдвиль бельгиялык тарапта.'],[1960,'Оба города стали столицами независимых республик.|Both cities have become capitals of independent republics.|Эки шаар тең эгемен республикалардын борборлору болду.']],24);
+ require('./three-frontiers.cjs')({source,revise,visibleAt,link,D,I,register,lesson});
  // Return precisely the edited continuing profiles. This preserves the
  // visible 2010 frontier through the catalogue transition in 2011.
  c.survey141Modern=[...new Set(c.frontierReview.frames.filter(f=>f.from<=2010&&2010<f.to&&['states141','europe141','frontiers141','greenland141','armistice141','ports141'].includes(f.source)).map(f=>f.entry).concat(ids))];

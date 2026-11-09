@@ -62,6 +62,26 @@ function overlay(op,left,right){
  return solution;
 }
 const visible=new Map(),rawIds=new WeakMap();let seq=0;
+for(const [coord,owner,other] of [
+ [[80.3595,44.82],'1789-qing','1789-russian-empire'],
+ [[82.0541,45.3588],'1789-russian-empire','1789-qing'],
+ [[73.8273,39.235],'1789-qing','1789-russian-empire']
+])for(const y of [1894,1900,1914,1916]){point(owner,y,coord);point(other,y,coord,false);}
+assert(h.record('pamir-post-murghab')?.year===1893);
+for(const [y,city,owner] of [
+ [1533,[44.36,33.31],'early-safavid'],[1534,[44.36,33.31],'late-ottoman'],
+ [1624,[44.36,33.31],'early-safavid'],[1638,[44.36,33.31],'late-ottoman'],
+ [1624,[43.13,36.34],'early-safavid'],[1625,[43.13,36.34],'late-ottoman'],
+ [1624,[44.39,35.47],'early-safavid'],[1630,[44.39,35.47],'late-ottoman'],
+ [1639,[44.03,36.19],'late-ottoman'],[1701,[47.82,30.50],'late-ottoman']
+]){point(owner,y,city);point(owner==='late-ottoman'?'early-safavid':'late-ottoman',y,city,false);}
+for(const [id,y,owner] of [['review-basra-garrison',1697,'early-safavid'],['review-krakow-garrison',1795,'1789-prussia']]){
+ const a=at(id,y);assert.equal(a.overlord,owner);assert.equal(a.relationship,'occupation');
+}
+for(const [y,id] of [[1796,'early-austria'],[1808,'early-austria'],[1809,'1815-warsaw']])point(id,y,[19.938,50.061]);
+for(const [p,owner,other] of [[[19.71,51.02],'1789-prussia','early-austria'],[[20.08,51.02],'early-austria','1789-prussia']]){
+ point(owner,1795,p);point(other,1795,p,false);point(owner,1805,p);point(other,1805,p,false);
+}
 function geometry(p,cut){
  if(!rawIds.has(p))rawIds.set(p,seq++);const key=rawIds.get(p)+'/'+(cut??'-');if(visible.has(key))return visible.get(key);
  const original=intRings(p),mask=cut===undefined?null:intRings(ev.shapes[cut]);
