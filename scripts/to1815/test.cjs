@@ -8,6 +8,7 @@ for(const key of ['entries','areas'])assert(JSON.stringify(delivered[key])===JSO
 assert.deepEqual(delivered.range,{...c.range,max:require('../incidents/integrate.cjs').timelineMax});
 for(const [id,source] of Object.entries(c.sources).filter(([id])=>!id.startsWith("to1939")&&!id.startsWith("to1945")&&!id.startsWith("to1960")&&!id.startsWith("to1991")&&!id.startsWith("to2000")&&!id.startsWith("to2010"))){assert.equal(delivered.sources[id].title,source.title);assert(!delivered.sources[id].urls,'Public sources must remain plain text');}
 const addedEventIds=new Set(require('../incidents/integrate.cjs').events.map(e=>e.id));
+for(const id of require('../world/witness-event-ids.cjs'))addedEventIds.add(id);
 assert.deepEqual(delivered.events.filter(e=>!e.base&&!addedEventIds.has(e.id)),require('../world/published-catalog.cjs').events);
 assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html));

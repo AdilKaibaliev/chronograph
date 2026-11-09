@@ -31,6 +31,7 @@ const baseline='.local-checks/release115-baseline.json';
 if(fs.existsSync(baseline)){
  const before=JSON.parse(fs.readFileSync(baseline));
  const integratedIds=new Set(require('../incidents/integrate.cjs').events.map(e=>e.id));
+ for(const id of require('./witness-event-ids.cjs'))integratedIds.add(id);
  // Only the documented Zirid phases were revised in 1.25 (972/1048/1057).
  // The Mediterranean review checks these dates and their rendered geography;
  // preserve the profile identity and all unrelated historical narratives here.
