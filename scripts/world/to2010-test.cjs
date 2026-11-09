@@ -51,6 +51,7 @@ assert(!events.some(e=>e.entry==='thule'),'Administration must not imply Inuit m
 const past={entries:raw.entries.map(e=>({...e,phases:e.phases.filter(p=>p.from<2001)})).filter(e=>e.phases.length),areas:raw.areas.filter(a=>a.from<2001),outlines:raw.outlines.filter(a=>a.from<2001),events:raw.events.filter(a=>a.from<2001),sources:Object.fromEntries(Object.entries(raw.sources).filter(([id])=>!id.startsWith('to2010'))),relations:raw.cartography.relations.filter(r=>r.from<2001)};
 const hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex');
 past.outlines=require('./semirechye-baseline.cjs')(past.outlines);
+for(const key of ['entries','areas','outlines','events','sources'])past[key]=require('./archived-source-ids.cjs')(past[key],key);
 const fingerprints=require('./to2010-baseline.json');for(const key of Object.keys(past))assert.equal(hash(past[key]),fingerprints[key],'Earlier data changed: '+key);
 const file='.local-checks/to2010-before.json';if(fs.existsSync(file)){
  const b=JSON.parse(fs.readFileSync(file));for(const key of ['entries','areas','outlines','events','sources'])assert.deepEqual(past[key],b[key]);assert.deepEqual(past.relations,b.cartography.relations);

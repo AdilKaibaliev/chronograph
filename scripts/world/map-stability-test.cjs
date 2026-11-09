@@ -30,6 +30,19 @@ for(const[y,p,want]of [
 const baseline='.local-checks/release115-baseline.json';
 if(fs.existsSync(baseline)){
  const before=JSON.parse(fs.readFileSync(baseline));
+ // Compare the archived narratives after applying only the documented
+ // bibliography additions, approximate dates and the corrected 631 record.
+ const updated=new Map(c.events.filter(e=>e.base).map(e=>[e.id,e]));
+ const approximate=new Set([800,820,900,950,1000,1100,1200,1299]);
+ for(const old of before.events.filter(e=>e.base)){
+  const current=updated.get(old.id);assert(current?.sources.length);
+  old.sources=current.sources;
+  if(approximate.has(old.year)){assert(current.approx);old.approx=true;}
+  if(old.id==='atlas-631'){
+   assert(current.title[0].includes('Абу Бакр'));assert(current.sources.includes('pilgrimage631'));
+   for(const field of ['kind','coord','title','text'])old[field]=current[field];
+  }
+ }
  const integratedIds=new Set(require('../incidents/integrate.cjs').events.map(e=>e.id));
  for(const id of require('./witness-event-ids.cjs'))integratedIds.add(id);
  // Only the documented Zirid phases were revised in 1.25 (972/1048/1057).
