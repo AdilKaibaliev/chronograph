@@ -72,4 +72,22 @@ assert(html.includes('.future-mode #worldTerritoryLayer'));assert(html.includes(
 assert(!html.includes("if(f.properties.name==='Antarctica') return;"));assert(/LAT_MIN\s*=\s*-90/.test(html));
 const payload=JSON.parse(html.match(/const WORLD_HISTORY=(.*);/)[1]);assert.equal(payload.events.filter(e=>e.base).length,66);assert(!JSON.stringify(payload.sources).includes('https://'));
 for(const e of payload.events){assert(e.title[1]&&!/[А-Яа-яЁё]/.test(e.title[1]),'Untranslated event '+e.id);assert(e.text[1]&&!/[А-Яа-яЁё]/.test(e.text[1]),'Untranslated description '+e.id);}
+const publishedHistory=createWorldHistory(payload);
+assert.match(payload.sources.to1789Central.title,/Central Asia/);
+assert.match(payload.sources.to1789CentralAfrica.title,/Central Africa/);
+assert.match(payload.sources.to1789DutchAmerica.title,/New Netherland/);
+const eventIds=new Set();
+for(const e of payload.events){
+ assert(!eventIds.has(e.id),'Duplicate published event '+e.id);eventIds.add(e.id);
+ assert(e.sources.length&&e.sources.every(id=>payload.sources[id]?.title),'Missing published source '+e.id);
+ const displayedYear=publishedHistory.record(e.id).year;
+ assert(e.from<=displayedYear&&displayedYear<=e.to,'Published event date '+e.id);
+ if(e.coord)assert(e.coord.length===2&&e.coord.every(Number.isFinite)&&Math.abs(e.coord[0])<=180&&Math.abs(e.coord[1])<=90,'Published event coordinate '+e.id);
+}
+for(const w of require('./kyrgyz-witnesses.json')){
+ text(w.title);text(w.text);assert(w.source);
+ if(!w.place)assert(!eventIds.has('kyrgyz-witness-'+w.from),'Unlocated account has a map pin');
+}
+for(let y=1300;y<=payload.range.max;y++)assert(publishedHistory.at(y,'eurasia').some(item=>item.entry.kyrgyzHistory),'Missing Kyrgyz history in '+y);
+assert.equal(publishedHistory.record('kyrgyz-witness-1517').kind,'war');
 console.log(JSON.stringify({status:'PASS',entries:catalog.entries.length,phases,events:payload.events.length,areas:catalog.areas.length,languages:3,textRows:languageRows.length,years:MAX-609,regions:catalog.regions.length,sources:used.size}));

@@ -112,4 +112,12 @@ story('nato-libya','intervention','НАТО · Ливия, 2011|NATO · Libya, 2
 stories.find(s=>s.id==='kyrgyzstan-2020').sources.push('kg21');
 const kz=stories.find(s=>s.id==='kazakhstan-2022');kz.sources.push('tokayev');
 kz.summary=T('Протесты, вооружённое насилие и операция ОДКБ показаны отдельными этапами. 10 января Токаев охарактеризовал кризис как попытку государственного переворота.|Protests, armed violence and the CSTO operation appear as distinct stages. On 10 January, Tokayev described the crisis as an attempted coup.|Нааразылыктар, куралдуу зомбулук жана ЖККУ операциясы өзүнчө баскычтарда көрсөтүлөт. 10-январда Токаев кризисти мамлекеттик төңкөрүш аракети деп мүнөздөгөн.');
+places.libya.region='africa';
+p('niamey',[2.12,13.51],'Ниамей|Niamey|Ниамей',6);
+places.niamey.region='africa';
+sources.niger2026={title:'Agence Nigérienne de Presse. Communiqué du Conseil des ministres, 4 septembre 2026.',url:'https://anp.ne/tentative-de-destabilisation-du-niger-une-documentation-consequente-constituee-et-le-pays-se-reserve-le-droit-dintenter-des-actions-devant-la-justice-internationale/'};
+sources.powell2026={title:'Jonathan Powell and Clayton Thyne. Global Instances of Coups. Update of 29 August 2026.',url:'https://jonathanmpowell.com/coups/'};
+story('niger-2026','attempt','Нигер · выступление военных в Ниамее|Niger · Military uprising in Niamey|Нигер · Ниамейдеги аскердик козголоң',
+ 'В ночь с 28 на 29 августа в столице произошли вооружённые столкновения.|Armed clashes occurred in the capital overnight on 28–29 August.|28-августтан 29-августка караган түнү борбордо куралдуу кагылышуулар болду.',
+ ['niger2026','powell2026'],[['2026-08-29','niamey','Столкновения в столице|Clashes in the capital|Борбордогу кагылышуулар','Правительство Нигера сообщило о выступлении военных на базе 101. Джонатан Пауэлл предварительно классифицировал событие как попытку переворота. На карте отмечен город Ниамей.|Niger’s government reported a military uprising at Base 101. Jonathan Powell provisionally classified the event as a coup attempt. The marker identifies the city of Niamey.|Нигердин өкмөтү 101-базада аскерлер козголоң чыгарганын билдирди. Жонатан Пауэлл окуяны алдын ала төңкөрүш аракети катары баалаган. Картада Ниамей шаары белгиленген.']]);
 module.exports={places,sources,stories};

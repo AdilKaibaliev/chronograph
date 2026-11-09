@@ -190,6 +190,8 @@ register('survey141-erbil','eurasia',[44.01,36.19],L('Эрбиль|Erbil|Эрб�
  c.sources.datedBorders141.title+=' Treaty of Limits between Brazil and Paraguay (1872). Award on the Argentina–Brazil boundary (1895). Grænseforeningen. Grænsesten.';
  c.sources.datedBorders141.urls.push('https://concordia.itamaraty.gov.br/ApiConcordia/Acordo/integra-acordo-html/134','https://legal.un.org/riaa/cases/vol_XXVIII/277-282.pdf','https://graenseforeningen.dk/leksikon/graensesten');
  const reviewed=require('./frontiers-141-reviewed.json');
+ c.sources.datedBorders141.title+=' Klaus-Dieter Klauser. Die Kreise Eupen und Malmedy zu preußischer Zeit.';
+ c.sources.datedBorders141.urls.push('https://www.zvs.be/wp-content/uploads/2016/08/DG-1815.pdf');
  for(const id of new Set(reviewed.rules.map(r=>r.loser))){
   const rows=reviewed.rules.filter(r=>r.loser===id),years=[...new Set(rows.flatMap(r=>[r.from,r.to]))].sort((a,b)=>a-b);
   for(let i=0;i<years.length-1;i++){

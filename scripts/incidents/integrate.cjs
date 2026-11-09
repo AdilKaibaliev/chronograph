@@ -9,7 +9,7 @@ sources['incident-cline']={title:registry.provenance.authors+'. '+registry.prove
 const events=catalogue.stories.flatMap(story=>story.steps.map((step,index)=>{
  const place=catalogue.places[step.place],year=+step.date.slice(0,4);
  const referenceOnly=['poland','ussr-west','kosovo','afghanistan','libya'].includes(step.place)||['kyrgyzstan-2005:0','kyrgyzstan-2010:2','kyrgyzstan-2020:0'].includes(story.id+':'+index);
- return {id:'incident-'+story.id+'-'+index,from:year,to:year,year,date:step.date,region:step.place==='libya'?'africa':'eurasia',kind:['war','intervention'].includes(story.kind)?'war':'politics',incidentKind:step.kind||story.kind,coord:place.coord,place:place.name,title:step.title.map((t,i)=>story.title[i]+' · '+t),text:step.text,sources:story.sources.map(id=>'incident-'+id),approx:false,epicentre:!referenceOnly,referenceOnly};
+ return {id:'incident-'+story.id+'-'+index,from:year,to:year,year,date:step.date,region:place.region||'eurasia',kind:['war','intervention'].includes(story.kind)?'war':'politics',incidentKind:step.kind||story.kind,coord:place.coord,place:place.name,title:step.title.map((t,i)=>story.title[i]+' · '+t),text:step.text,sources:story.sources.map(id=>'incident-'+id),approx:false,epicentre:!referenceOnly,referenceOnly};
 }));
 for(const record of registry.records){
  const country=registry.countries[record.country],year=+record.date.slice(0,4),label=labels[record.kind];

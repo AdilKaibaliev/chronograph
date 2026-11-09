@@ -97,6 +97,44 @@ const worldTranslate=createChronographTranslator(rows);
 const worldTextRow=text=>[text,worldTranslate(text,'en'),worldTranslate(text,'ky')];
 worldData.events=[...worldData.events,...Object.entries(events).filter(([,e])=>e.coord).map(([y,e])=>({id:'atlas-'+y,from:+y,to:+y,year:+y,approx:false,region:['1171','1250'].includes(y)?'africa':'eurasia',kind:/Битва|Оборона|Поход|Экспансия/.test(e.type)?'war':/Дипломатия/.test(e.type)?'diplomacy':/Миграция/.test(e.type)?'migration':'politics',coord:e.coord,title:worldTextRow(e.title),text:worldTextRow(e.desc),sources:[],base:true}))];
 Object.assign(worldData.sources,incidentData.sources);
+const witnessData=require('../world/kyrgyz-witnesses.json');
+const kyrgyzStages=JSON.parse(source.match(/const KYRGYZ_STAGES=([^\n]+);/)[1]);
+worldData.sources.earlySira={title:'Ibn Hishām. Al-Sīra al-nabawiyya. Ibn Isḥāq, The Life of Muhammad, trans. A. Guillaume.'};
+worldData.sources.tabuk630={title:'TDV İslâm Ansiklopedisi. Tebük Gazvesi.'};
+worldData.sources.pilgrimage631={title:'TDV İslâm Ansiklopedisi. Ebû Bekir.'};
+worldData.sources.hudud982={title:'Ḥudūd al-ʿĀlam. The Regions of the World, trans. V. Minorsky. Section on the country of the Qirghiz.'};
+worldData.sources.idrisi1154={title:'Al-Idrīsī. Nuzhat al-mushtāq fī ikhtirāq al-āfāq.'};
+for(const y of [610,619,622,624,625,626,627,628,629,630,631,982,1154]){
+ const event=worldData.events.find(e=>e.id==='atlas-'+y);
+ event.sources=[y===631?'pilgrimage631':y===982?'hudud982':y===1154?'idrisi1154':'earlySira'];
+}
+worldData.events.push({id:'tabuk-expedition-630',from:630,to:630,year:630,region:'eurasia',kind:'war',approx:false,coord:[36.555,28.3838],
+ title:['Поход на Табук','Expedition to Tabuk','Табук жортуулу'],text:['Осенью 630 года Пророк Мухаммад ﷺ возглавил поход из Медины к Табуку. В декабре войско вернулось в Медину.','In autumn 630 the Prophet Muhammad ﷺ led an expedition from Medina to Tabuk. The army returned to Medina in December.','630-жылдын күзүндө Мухаммад пайгамбар ﷺ Мединадан Табукка жортуулду жетектеген. Декабрда аскер Мединага кайткан.'],sources:['tabuk630']});
+for(const stage of kyrgyzStages){
+ const event=worldData.events.find(e=>e.id==='atlas-'+stage.year&&e.title[0]===stage.title);
+ if(!event||!stage.source)continue;
+ const key='kyrgyz-stage-'+stage.year;
+ worldData.sources[key]={title:stage.source};event.sources=[key];
+}
+for(const [years,title] of require('../world/early-event-sources.cjs')){
+ const key='early-reading-'+years[0];worldData.sources[key]={title};
+ for(const y of years){const event=worldData.events.find(e=>e.id==='atlas-'+y);assert(event,'Missing early event '+y);event.sources.push(key);}
+}
+for(const note of witnessData.filter(n=>n.place)){
+ const key='kyrgyz-witness-'+note.from;worldData.sources[key]={title:note.source};
+ const existing=worldData.events.find(e=>e.id==='atlas-'+note.from&&e.sources.some(id=>id.startsWith('kyrgyz-stage-')));
+ if(existing){
+  existing.sources.push(key);
+  if(existing.coord?.every((v,i)=>v===note.place[i]))continue;
+ }
+ worldData.events.push({id:key,year:note.from,from:note.from,to:note.from,approx:note.from!==note.to,region:'eurasia',
+  kind:note.kind||(note.from===950?'culture':'diplomacy'),coord:note.place,title:note.title,text:note.text,sources:[key],
+  ...(note.route?{route:note.route}:{})});
+}
+for(const event of worldData.events.filter(e=>e.base)){
+ assert(event.sources.length&&event.sources.every(id=>worldData.sources[id]),'Missing reference for '+event.id);
+ if([800,900,950,1000,1100,1200].includes(event.year)||/(?:^|[\s·])(?:около|ок\.)\s*\d|традиционная точка/i.test(event.title[0]))event.approx=true;
+}
 worldData.events=[...incidentData.events.filter(e=>!e.referenceOnly),...worldData.events,...incidentData.events.filter(e=>e.referenceOnly)];
 html=html.replace('TIMELINE_MAX=2010;','TIMELINE_MAX=2026;').replaceAll('max="2010"','max="2026"').replace('1789,2010];','1789,2026];');
 const worldRuntime=fs.readFileSync(root+'/../world/core.js','utf8').replace("if(typeof module!=='undefined')module.exports={createWorldHistory};",'')+'\nconst WORLD_HISTORY='+JSON.stringify(worldData).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../world/border-evidence.js','utf8')+'\n'+fs.readFileSync(root+'/../world/runtime.js','utf8').replace('// TERRITORIES_RUNTIME',fs.readFileSync(root+'/../world/territory-runtime.js','utf8'))+'\n'+fs.readFileSync(root+'/../late/runtime.js','utf8')+'\n'+fs.readFileSync(root+'/../world/map-transition.js','utf8');
@@ -105,7 +143,7 @@ const incidentRegistry=require('../incidents/registry.json');
 const incidentPublic={...incidentCatalog,sources:Object.fromEntries(Object.entries(incidentCatalog.sources).map(([id,s])=>[id,{title:s.title}]))};
 const incidentRegistryPublic={...incidentRegistry,provenance:{...incidentRegistry.provenance,source:undefined}};
 const incidentRuntime=fs.readFileSync(root+'/../incidents/core.js','utf8').replace("if(typeof module!=='undefined')module.exports={incidentRecords,incidentGroups,incidentStep};",'')+'\nconst INCIDENT_CATALOG='+JSON.stringify(incidentPublic).replaceAll('<','\\u003c')+';\nconst INCIDENT_REGISTRY='+JSON.stringify(incidentRegistryPublic).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../incidents/runtime.js','utf8');
-html=html.slice(0,ending)+'let futureLocationHook=null,worldLocationHook=null,incidentsLocationHook=null;\n'+fs.readFileSync(root+'/runtime.js','utf8')+'\n'+worldRuntime+'\nconst FUTURE_CATALOG='+JSON.stringify(future).replaceAll('<','\\u003c')+';\nconst FUTURE_ILLUSTRATIONS='+JSON.stringify(illustrations).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../future/illustration-art.js','utf8')+'\n'+futureRuntime+'\n'+fs.readFileSync(root+'/../support/runtime.js','utf8')+'\n'+expansionRuntime+'\n'+incidentRuntime+'\n'+html.slice(ending);
+html=html.slice(0,ending)+'let futureLocationHook=null,worldLocationHook=null,incidentsLocationHook=null;\n'+fs.readFileSync(root+'/runtime.js','utf8')+'\n'+worldRuntime+'\nconst FUTURE_CATALOG='+JSON.stringify(future).replaceAll('<','\\u003c')+';\nconst FUTURE_ILLUSTRATIONS='+JSON.stringify(illustrations).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../future/illustration-art.js','utf8')+'\n'+futureRuntime+'\n'+fs.readFileSync(root+'/../support/runtime.js','utf8')+'\n'+expansionRuntime+'\n'+incidentRuntime+'\nconst KYRGYZ_WITNESSES='+JSON.stringify(witnessData)+';\n'+fs.readFileSync(root+'/../world/kyrgyz-parallel.js','utf8')+'\n'+html.slice(ending);
 html=html.replace('p.dataset.empire=emp.id;', 'p.dataset.empire=emp.id;p.dataset.empireType=emp.legacyContext?"context":emp.type;if(emp.legacyContext){p.setAttribute("fill-opacity","0");p.setAttribute("stroke-dasharray","4 3");}');
 // SVG-level pointer capture otherwise retargets a polity click to the map.
 // Reuse the existing drag/click distinction and keyboard support for all
@@ -136,6 +174,8 @@ html=html.replace("if(e.defaultPrevented || $('modal').classList.contains('show'
 for(const script of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(script[1]);
 assert(html.includes('const CHRONOGRAPH_MESSAGES='));assert(!/<a(?=\s|>)|\bhref=|window\.open\(/.test(html.replace(/<link rel="icon"[^>]*>/g,'').replace(/<a class="contact-email" href="mailto:lfc@legacyfidelity\.com\?subject=Chronograph">lfc@legacyfidelity\.com<\/a>/g,'')));
 html=html.replace('</head>','<meta name="chronograph-version" content="1.41.0">\n</head>');
+const parallelStyle='#kyrgyzParallel{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:2px 6px;background:transparent;border:0;color:#dfcca3;cursor:pointer;text-align:left;font:inherit;font-size:12px}#kyrgyzParallel:hover,#kyrgyzParallel:focus-visible{color:#fff;text-decoration:underline}.future-mode #kyrgyzParallel{display:none}.modal-box select{max-width:100%}';
+html=html.replace('</style>',parallelStyle+'</style>');
 fs.writeFileSync(repositoryBuild?'index.html':'outputs/chronograph_1_1.html',html);
 fs.writeFileSync(root+'/compiled-messages.json',JSON.stringify(rows,null,2));
 console.log(JSON.stringify({messages:rows.length,eventTitles:Object.keys(translatedEvents).length,eventDescriptions:Object.values(translatedEvents).filter(x=>x.length===4).length,bytes:Buffer.byteLength(html)}));

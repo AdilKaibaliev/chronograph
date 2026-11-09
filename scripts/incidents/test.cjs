@@ -14,7 +14,7 @@ assert.deepEqual(core.incidentRecords(r,{country:'Kazakhstan',year:2022}).map(x=
 assert.equal(core.incidentRecords(r,{query:'Кыргызстан'}).length,4);
 assert.equal(core.incidentRecords(r,{query:'no-such-country',year:1991}).length,0);
 assert.equal(core.incidentGroups(r,r.records).length,143);assert.equal(core.incidentStep(0,-1,3),0);assert.equal(core.incidentStep(2,1,3),2);
-assert.equal(c.stories.length,12);assert.equal(new Set(c.stories.map(s=>s.id)).size,12);
+assert.equal(c.stories.length,13);assert.equal(new Set(c.stories.map(s=>s.id)).size,13);
 for(const s of c.stories){for(const v of [s.title,s.summary]){assert.equal(v.length,3);assert(v.every(Boolean));}assert(s.sources.length);s.sources.forEach(id=>assert(c.sources[id]?.title&&c.sources[id]?.url));let prev='';for(const step of s.steps){assert(step.date>=prev,s.id);prev=step.date;assert(c.places[step.place]);assert.equal(step.title.length,3);assert.equal(step.text.length,3);assert(step.title.every(Boolean)&&step.text.every(Boolean));assert.equal(new Date(step.date+'T00:00:00Z').toISOString().slice(0,10),step.date);}}
 assert.equal(c.stories.find(s=>s.id==='gkchp').kind,'attempt');assert.equal(c.stories.find(s=>s.id==='orange-2004').kind,'protest');
 assert.deepEqual(c.stories.find(s=>s.id==='kazakhstan-2022').steps.slice(-3).map(s=>s.date),['2022-01-06','2022-01-13','2022-01-19']);
@@ -23,7 +23,7 @@ const html=fs.readFileSync('index.html','utf8');assert(html.includes('name="chro
 for(const name of ['runtime.js','core.js'])new vm.Script(fs.readFileSync(__dirname+'/'+name,'utf8'));
 const delivered=JSON.parse(html.match(/const INCIDENT_CATALOG=([\s\S]*?);\n/)[1]);assert.deepEqual(delivered.stories,c.stories);assert(Object.values(delivered.sources).every(s=>Object.keys(s).join()==='title'));
 const integrated=require('./integrate.cjs'),world=JSON.parse(html.match(/const WORLD_HISTORY=([\s\S]*?);\n/)[1]),originalWorld=require('../world/published-catalog.cjs');
-assert.equal(world.range.max,2026);assert.equal(integrated.events.length,1202);
+assert.equal(world.range.max,2026);assert.equal(integrated.events.length,1203);
 for(const key of ['entries','areas','outlines','cartography'])assert.deepEqual(world[key],originalWorld[key],key+' preserved');
 for(const e of integrated.events){assert(world.events.some(w=>w.id===e.id));assert.equal(e.year,+e.date.slice(0,4));}
 assert.equal(integrated.events.filter(e=>e.sourceRecord).length,1161);
@@ -37,4 +37,4 @@ const runtime=fs.readFileSync(__dirname+'/runtime.js','utf8'),style=fs.readFileS
 assert(runtime.includes('year!==eventAccentYear'));assert(runtime.includes('setTimeout(clearEventAccent,2800)'));assert(runtime.includes('e.referenceOnly'));assert(runtime.includes('pulseLayer.append(g)'));assert(!runtime.includes('viewport.append'));
 assert(style.includes('1.2s ease-in-out 2'));assert(style.includes('prefers-reduced-motion'));assert(!style.includes('scale('));
 assert.deepEqual(JSON.parse(html.match(/const FUTURE_CATALOG=([\s\S]*?);\n/)[1]),require('../future/catalog.cjs'));
-console.log('PASS: integrated main chronology, 1202 dated records; reviewed political data and future catalogue preserved; brief fixed-size epicentre accents.');
+console.log('PASS: integrated main chronology, 1203 dated records; reviewed political data and future catalogue preserved; brief fixed-size epicentre accents.');
