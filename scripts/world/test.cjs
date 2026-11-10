@@ -90,4 +90,11 @@ for(const w of require('./kyrgyz-witnesses.json')){
 }
 for(let y=1300;y<=payload.range.max;y++)assert(publishedHistory.at(y,'eurasia').some(item=>item.entry.kyrgyzHistory),'Missing Kyrgyz history in '+y);
 assert.equal(publishedHistory.record('kyrgyz-witness-1517').kind,'war');
+const geography=publishedHistory.record('kyrgyz-witness-950');
+assert.deepEqual([geography.from,geography.year,geography.to],[901,950,1000]);
+assert(geography.approx&&geography.periodLabel.length===3);
+for(const id of ['late-timur-damascus','early-marjdabiq-1516']){
+ for(const region of ['all','eurasia','africa'])assert.equal(publishedHistory.timeline(region).filter(e=>e.id===id).length,1);
+}
+assert.equal(publishedHistory.record('kyrgyz-witness-1522').title[0].includes('Кочкоре'),true);
 console.log(JSON.stringify({status:'PASS',entries:catalog.entries.length,phases,events:payload.events.length,areas:catalog.areas.length,languages:3,textRows:languageRows.length,years:MAX-609,regions:catalog.regions.length,sources:used.size}));

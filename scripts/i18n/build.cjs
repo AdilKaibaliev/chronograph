@@ -54,6 +54,7 @@ const originalSourceTranslator=createChronographTranslator(rows);
 for(const e of empires){const old=originalEmpires.find(o=>o.id===e.id);if(e.source!==old.source){const added=e.source.slice(old.source.length);rows.push([e.source,originalSourceTranslator(old.source,'en')+added,originalSourceTranslator(old.source,'ky')+added]);}}
 rows.push(['Антарктида','Antarctica','Антарктида'],['Географический ориентир.','Geographic reference.','Географиялык багыт белгиси.']);
 let html=require('../late/prepare.cjs')(source).replaceAll('CHRONOGRAPH 1.0 RC3.8','CHRONOGRAPH 1.41.0');
+html=html.replace('Все ${groups.reduce((n,g)=>n+g.items.length,0)} современников из подборки','Современники в подборке · ${groups.reduce((n,g)=>n+g.items.length,0)}');
 html=html.replace(/const EMPIRES=\[[^\n]+;/,'const EMPIRES='+JSON.stringify(empires).replaceAll('<','\\u003c')+';');
 html=html.slice(0,html.indexOf('const ISLAM_STARS = ['))+'const ISLAM_STARS = '+JSON.stringify(stars).replaceAll('<','\\u003c')+';\n'+html.slice(html.indexOf('const STAR_DETAILS='));
 rows.push(['610–2026 · выберите год или исторический рубеж','610–2026 · choose a year or historical milestone','610–2026 · жылды же тарыхый окуяны тандаңыз']);
@@ -120,14 +121,16 @@ for(const [years,title] of require('../world/early-event-sources.cjs')){
  const key='early-reading-'+years[0];worldData.sources[key]={title};
  for(const y of years){const event=worldData.events.find(e=>e.id==='atlas-'+y);assert(event,'Missing early event '+y);event.sources.push(key);}
 }
-for(const note of witnessData.filter(n=>n.place)){
+worldData.eventRegions={'late-timur-damascus':['eurasia'],'early-marjdabiq-1516':['eurasia']};
+for(const note of witnessData.filter(n=>n.place&&!n.background)){
  const key='kyrgyz-witness-'+note.from;worldData.sources[key]={title:note.source};
  const existing=worldData.events.find(e=>e.id==='atlas-'+note.from&&e.sources.some(id=>id.startsWith('kyrgyz-stage-')));
  if(existing){
   existing.sources.push(key);
   if(existing.coord?.every((v,i)=>v===note.place[i]))continue;
  }
- worldData.events.push({id:key,year:note.from,from:note.from,to:note.from,approx:note.from!==note.to,region:'eurasia',
+ worldData.events.push({id:key,year:note.from,from:note.periodFrom??note.from,to:note.to,approx:note.from!==note.to,region:'eurasia',
+  ...(note.periodLabel?{periodLabel:note.periodLabel}:{}),
   kind:note.kind||(note.from===950?'culture':'diplomacy'),coord:note.place,title:note.title,text:note.text,sources:[key],
   ...(note.route?{route:note.route}:{})});
 }
@@ -174,7 +177,7 @@ html=html.replace("if(e.defaultPrevented || $('modal').classList.contains('show'
 for(const script of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(script[1]);
 assert(html.includes('const CHRONOGRAPH_MESSAGES='));assert(!/<a(?=\s|>)|\bhref=|window\.open\(/.test(html.replace(/<link rel="icon"[^>]*>/g,'').replace(/<a class="contact-email" href="mailto:lfc@legacyfidelity\.com\?subject=Chronograph">lfc@legacyfidelity\.com<\/a>/g,'')));
 html=html.replace('</head>','<meta name="chronograph-version" content="1.41.0">\n</head>');
-const parallelStyle='#kyrgyzParallel{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:2px 6px;background:transparent;border:0;color:#dfcca3;cursor:pointer;text-align:left;font:inherit;font-size:12px}#kyrgyzParallel:hover,#kyrgyzParallel:focus-visible{color:#fff;text-decoration:underline}.future-mode #kyrgyzParallel{display:none}.modal-box select{max-width:100%}';
+const parallelStyle='#kyrgyzParallel{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:2px 6px;background:transparent;border:0;color:#dfcca3;cursor:pointer;text-align:left;font:inherit;font-size:12px}#kyrgyzParallel:hover,#kyrgyzParallel:focus-visible{color:#fff;text-decoration:underline}.future-mode #kyrgyzParallel{display:none}.modal-box select{max-width:100%}.kyrgyz-period-nav{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0}';
 html=html.replace('</style>',parallelStyle+'</style>');
 fs.writeFileSync(repositoryBuild?'index.html':'outputs/chronograph_1_1.html',html);
 fs.writeFileSync(root+'/compiled-messages.json',JSON.stringify(rows,null,2));

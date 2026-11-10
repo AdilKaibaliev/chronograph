@@ -11,7 +11,7 @@ module.exports = html => {
   replace('scope.hidden=y<1206;','scope.hidden=y<1206||y>1299;');
   replace("const d=kyrgyzHistoryForYear(y),r=d.route;if(!r || (r.to && y>r.to))return;","const d=kyrgyzHistoryForYear(y),r=d.route;if(y>1299 || !r || (r.to && y>r.to))return;");
   replace('year=Number(y); const e=activeEvent(year);','year=clamp(Number(y),TIMELINE_MIN,TIMELINE_MAX); if(year>1299)selectedEmpire=null; const e=activeEvent(year);');
-  replace("$('kyrgyzHistoryBtn').addEventListener('click',()=>{stopPlay();", "$('kyrgyzHistoryBtn').addEventListener('click',()=>{if(year>=1300){lateFocusKyrgyz();return;}stopPlay();");
+  replace("$('kyrgyzHistoryBtn').addEventListener('click',()=>{stopPlay();showKyrgyzContext=true;switchPanel('regions');renderYear(year);$('panel-regions').scrollTop=0;focusLonLat(...kyrgyzHistoryForYear(year).view);});", "$('kyrgyzHistoryBtn').addEventListener('click',()=>$('kyrgyzParallel').click());");
   html=html.replaceAll('610–1299 годов','610–2010 годов').replaceAll('610–1299 · ранний исламский период сохранён в деталях · для дальних веков используйте кнопки эпох','610–2010 · выберите год или исторический рубеж');
   replace('Как меняется политическая структура Евразии','Государства и общества мира');
   replace('${p.name}</b><small>${p.kind}</small>', '${p.name}</b><small>${y>=1300?(id==="constantinople"&&y>=1453&&y<1923?"Османская столица":"Географический ориентир"):p.kind}</small>');

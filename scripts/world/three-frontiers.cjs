@@ -29,6 +29,20 @@ module.exports=function apply({source,revise,visibleAt,link,D,I,register,lesson}
   revise([owner],from,to,reason,src,p=>G.merge([p,shape]));
   revise([other],from,to,reason,src,p=>D(p,shape));
  }
+ source('semirechyeDistricts','Карта Нарынского края по рекогносцировкам в 1868 и 1869 годах. Памятные книжки Семиреченской области. Документальные материалы по истории г. Каракол.',['https://elib.rgo.ru/handle/123456789/236794','https://nlr.ru/elibrarypro/memo/RA6248/semirechenskaya-oblast','https://archive.kg/images/Putevoditel/Issiyk-kul_IRUA.pdf']);
+ // Only remove duplicate Chinese fill inside the Russian district interiors.
+ // The masks stop short of the international frontier, the Ili valley and the Pamir.
+ const districtInteriors=[
+  [1868,[[75.40,41.26],[75.80,41.15],[76.19,41.21],[76.40,41.37],[76.26,41.52],[75.75,41.58],[75.40,41.48]]],
+  [1870,[[76.52,42.18],[77.53,42.13],[78.10,42.22],[78.61,42.39],[78.71,42.59],[78.43,42.79],[77.75,42.82],[76.67,42.58]]]
+ ];
+ for(const [start,ring] of districtInteriors){
+  const mask=G.union([ring]);
+  datedShapes([q,r],start,1917,(from,to,[china,russia])=>{
+   const duplicate=I(I(mask,china),russia);
+   if(duplicate.length)revise([q],from,to,'semirechye-district-interior','semirechyeDistricts',p=>D(p,duplicate));
+  });
+ }
  // Regional reconstructions of the city and river approaches. Do not use
  // the modern Iraqi frontier or extend a city transfer across the mountains.
  const baghdad=G.union([[[44.25,33.51],[44.50,33.49],[44.59,33.27],[44.55,32.96],[44.42,32.45],[44.34,32.01],[44.28,31.96],[44.16,32.04],[44.14,32.46],[43.96,32.57],[43.98,32.68],[44.18,32.76],[44.27,33.15]]]);

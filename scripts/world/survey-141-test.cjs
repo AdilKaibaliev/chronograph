@@ -43,6 +43,9 @@ for(const [y,id,pt] of [[1630,'1789-dutch-brazil',[-34.88,-8.05]],[1654,'early-p
 for(const [owner,id,y] of [['early-austria','early-milan',1816],['early-austria','early-venice',1865],['early-milan','early-venice',1806],['late-france','early-netherlands',1800],['early-dutch','early-netherlands',1825],['1789-great-britain','1914-transvaal',1878]])assert.equal(at(id,y).sovereign,owner,id+' '+y);
 assert(!at('early-venice',1848).sovereign);assert(!at('early-netherlands',1831).sovereign);
 for(const [id,y] of [['survey141-erbil-transfer',1232],['survey141-brazzaville',1960]])assert(c.mapComparisons[id].frames.some(f=>f[0]===y)&&h.record(id)?.year===y);
+for(const y of [1877,1878,1881,1883])for(const pt of [[75.99,41.43],[78.39,42.49],[77.60,42.15]]){
+ point('1789-russian-empire',y,pt);point('1789-qing',y,pt,false);
+}
 for(const r of reference.rules){
  for(const y of new Set([r.from,r.to-1])){const a=at(r.winner,y),b=at(r.loser,y);if(!a||!b)continue;
   const left=area(clip.intersection(G.multi(a.polygons),G.multi(b.polygons),G.multi(reference.shapes[r.shape])));

@@ -27,9 +27,9 @@ function createChronographTranslator(rows) {
     else if (/^\d+ год$/.test(value)) out=value.replace(' год',pick(' CE','-жыл'));
     else if (/^Исламская история · \d+ н\. э\.$/.test(value)) out=value.replace('Исламская история',dict.get('Исламская история')).replace('н. э.',pick('CE','б. з.'));
     else if (/^Синхронно с \d+ н\. э\.$/.test(value)) out=value.replace('Синхронно с',pick('In the same year:','Ошол эле жыл:')).replace('н. э.',pick('CE','б. з.'));
-    else if (/^Все \d+ современников из подборки/.test(value)) {
+    else if (/^(?:Все \d+ современников из подборки|Современники в подборке · \d+)/.test(value)) {
       const n=value.match(/\d+/)[0];
-      out=pick('All '+n+' contemporaries in this collection · select a name. Dates: Gregorian (Hijri).','Топтомдогу бардык '+n+' замандаш · ысымды тандаңыз. Даталар: Григориан календары (хижрий).');
+      out=pick('Contemporaries in this collection · '+n+' · select a name. Dates: Gregorian (Hijri).','Топтомдогу замандаштар · '+n+' · ысымды тандаңыз. Даталар: Григориан календары (хижрий).');
     } else if (/^Современники в \d+ году$/.test(value)) {
       const n=value.match(/\d+/)[0];out=pick('Contemporaries in '+n,n+'-жылдагы замандаштар');
     } else if (/^Эпоха: /.test(value)) out=pick('Era: ','Доор: ')+translate(value.slice('Эпоха: '.length),lang);

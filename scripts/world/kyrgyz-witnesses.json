@@ -1,5 +1,65 @@
 [
   {
+    "from":1869,"to":1869,"place":[78.39,42.49],"kind":"politics",
+    "title":["Каракол становится уездным центром","Karakol becomes a district centre","Каракол уезддин борборуна айланат"],
+    "text":["В 1869 году на востоке Иссык-Кульской котловины заложили Каракол как военно-административный центр Семиреченской области Российской империи. До этого начальство и гарнизон размещались в укреплении Ак-Суу. В 1870 году перевод в Каракол утвердили официально. Город стоял на дороге из Чуйской долины в Кашгарию.","In 1869 Karakol was founded in the eastern Issyk-Kul basin as a military and administrative centre of the Russian Empire’s Semirechye province. The command and garrison had been based at the Ak-Suu fort. Their transfer to Karakol was officially confirmed in 1870. The town lay on the route from the Chuy valley to Kashgaria.","1869-жылы Ысык-Көл ойдуңунун чыгышында Каракол Россия империясынын Жети-Суу облусунун аскердик жана башкаруу борбору катары негизделген. Буга чейин аскер башчылыгы менен гарнизон Ак-Суу чебинде турган. Аларды Караколго которуу 1870-жылы расмий бекитилген. Шаар Чүй өрөөнүнөн Кашкарга баруучу жолдо жайгашкан."],
+    "source":"А. В. Каульбарс. О рождении города. Документальные материалы по истории г. Каракол. Памятные книжки Семиреченской области."
+  },
+  {
+    "from":1704,"to":1704,"place":[87.1,54.3],"kind":"migration",
+    "title":["Просьба о проводниках к Томи","A request for guides to the Tom River","Томь дарыясына жол көрсөтүү өтүнүчү"],
+    "text":["После принудительного переселения части енисейских кыргызов в Джунгарию отдельные семьи искали обратную дорогу. В донесении за август 1704 года записано свидетельство Митки Азбалыкова. Кыргызы просили провести их через лес к Томи между Томском и Кузнецком, чтобы вернуться в родные земли. На карте отмечен названный в донесении район реки.","After some Yenisei Kyrgyz were forcibly resettled in Dzungaria, individual families sought a way back. An August 1704 report records Mitka Azbalykov’s testimony. Kyrgyz travellers had asked for guides through the forest to the Tom River between Tomsk and Kuznetsk so they could return home. The map marks that stretch of the river.","Энесай кыргыздарынын бир бөлүгү Жуңгарияга күч менен көчүрүлгөндөн кийин айрым үй-бүлөлөр кайтар жол издешкен. 1704-жылдын августундагы билдирүүдө Митка Азбалыковдун айтканы жазылган. Кыргыздар мекенине кайтуу үчүн Томск менен Кузнецктин ортосундагы Томь дарыясына токой аркылуу жол көрсөтүүнү суранышкан. Картада дарыянын ушул бөлүгү белгиленген."],
+    "source":"А. Абдыкалыков. Переселение енисейских кыргызов в начале XVIII в. и их историческая судьба. Донесение Синявина, август 1704 г."
+  },
+  {
+    "from":1733,"to":1733,"place":[123.92,47.35],"kind":"migration","route":[[96.1,50.5],[123.92,47.35]],
+    "title":["Восточное переселение из бассейна Тэса","Resettlement east from the Tes basin","Тес дарыясынын алабынан чыгышка көчүрүү"],
+    "text":["Маньчжурские доклады цинских чиновников, исследованные У Юаньфэном, описывают переселение кыргызских семей на восток в 1733 году. Они покинули пастбища в бассейне Тэса. Часть переселённых включили в состав знамённых гарнизонов на территории Хэйлунцзяна. Линия соединяет район исхода с Цицикаром, одним из мест размещения.","Manchu official reports studied by Wu Yuanfeng describe the eastward relocation of Kyrgyz families in 1733. They left grazing lands in the Tes basin. Some were enrolled in Qing banner garrisons in Heilongjiang. The line connects their region of departure with Qiqihar, one of the garrison destinations.","У Юаньфэн изилдеген манжур тилиндеги Цин документтеринде кыргыз үй-бүлөлөрүнүн 1733-жылы чыгышка көчүрүлүшү баяндалат. Алар Тес дарыясынын алабындагы жайыттардан чыгышкан. Көчүрүлгөндөрдүн бир бөлүгү Хэйлунцзяндагы Циндин туу аскерлеринин гарнизондоруна киргизилген. Сызык чыккан аймак менен жайгаштырылган жерлердин бири Цицикарды байланыштырат."],
+    "source":"吴元丰. 柯尔克孜族东迁黑龙江地区考实. 黑龙江民族丛刊, 2001, № 1, pp. 69–74."
+  },
+  {
+    "from":1757,"to":1757,"place":[119.75,49.2],"kind":"migration",
+    "title":["Вторая группа переселенцев в Хулун-Буире и Бутхе","A second group of displaced families in Hulunbuir and Butha","Көчүрүлгөн экинчи топ Хулунбуирде жана Бутхада"],
+    "text":["У Юаньфэн различает две волны переселения по маньчжурским архивам. В 1757 году кыргызов и других бывших подданных Джунгарии распределили между Хулун-Буиром и Бутхой. Эти семьи отдали в подневольную службу военным. Группа 1733 года получила иной статус в знамённых гарнизонах. На карте отмечен район Хулун-Буира.","Wu Yuanfeng distinguishes two relocations in the Manchu archives. In 1757 Kyrgyz and other former Dzungar subjects were distributed between Hulunbuir and Butha and assigned to military households as slaves. The earlier group of 1733 had been given banner status. The map marks the Hulunbuir region.","У Юаньфэн манжур архивдеринде көчүрүүнүн эки толкунун ажыратат. 1757-жылы кыргыздар жана Жуңгариянын башка мурдагы букаралары Хулунбуир менен Бутхага бөлүштүрүлүп, аскер кызматкерлерине кулдукка берилген. 1733-жылы көчүрүлгөн топ туу аскерлеринин курамына киргизилген эле. Картада Хулунбуир аймагы көрсөтүлгөн."],
+    "source":"吴元丰. 柯尔克孜族东迁黑龙江地区考实. 黑龙江民族丛刊, 2001, № 1, pp. 69–74."
+  },
+  {
+    "from":1983,"to":1983,"place":[124.48,47.8],"kind":"culture",
+    "title":["Язык фуюйских кыргызов","The language of the Fuyu Kyrgyz","Фуюй кыргыздарынын тили"],
+    "text":["Китайский лингвист Ху Чжэньхуа описал речь кыргызов уезда Фуюй в провинции Хэйлунцзян и сопоставил её с речью кыргызов Синьцзяна. Карта показывает уезд Фуюй на северо-востоке Китая. Выбранный год относится к публикации исследования.","Chinese linguist Hu Zhenhua documented the speech of the Kyrgyz in Fuyu County, Heilongjiang, and compared it with that of the Kyrgyz in Xinjiang. The map shows Fuyu County in northeast China. The year refers to publication of the study.","Кытайлык тилчи Ху Чжэньхуа Хэйлунцзяндагы Фуюй уездинин кыргыздарынын тилин сүрөттөп, аны Шинжаң кыргыздарынын тили менен салыштырган. Картада Кытайдын түндүк-чыгышындагы Фуюй уезди көрсөтүлгөн. Жыл изилдөөнүн жарык көргөн учурун билдирет."],
+    "source":"胡振华. 黑龙江富裕县的柯尔克孜族及其语言特点. 中央民族学院学报, 1983, № 2, pp. 65–69."
+  },
+  {
+    "from":758,"to":840,"background":true,"place":null,
+    "title":["Связи с карлуками и Тибетом","Contacts with the Karluks and Tibet","Карлуктар жана Тибет менен байланыш"],
+    "text":["По «Синь Тан шу», после поражения от уйгуров кыргызы сохраняли связи с карлуками, Тибетом и Даши — так хроника называет арабо-мусульманский мир. Путники из Тибета останавливались у карлуков и ждали кыргызского сопровождения. В борьбе с уйгурами значение имели и родственные связи. Хроника называет женой кыргызского правителя дочь карлукского ябгу.","According to the New History of the Tang, after their defeat by the Uyghurs the Kyrgyz maintained ties with the Karluks, Tibet and Dashi, the chronicle’s name for the Arab Muslim world. Travellers from Tibet stayed with the Karluks while they awaited a Kyrgyz escort. Kinship also mattered in the struggle with the Uyghurs. The chronicle identifies the Kyrgyz ruler’s wife as a daughter of the Karluk yabghu.","«Синь Тан шу» боюнча, уйгурлардан жеңилгенден кийин кыргыздар карлуктар, Тибет жана араб-мусулман дүйнөсү менен байланышын сакташкан. Жылнаамада араб-мусулман дүйнөсү Даши деп аталат. Тибеттен келген жолоочулар карлуктарга токтоп, кыргыздардын коштоосун күтүшкөн. Жылнаама кыргыз башкаруучусунун жубайын карлук жабгусунун кызы деп атайт."],
+    "source":"Xin Tang shu (新唐書), juan 217, 黠戛斯."
+  },
+  {
+    "from":1916,"to":1916,"place":[78.41,41.41],"kind":"migration","route":[[78.39,42.49],[78.41,41.41],[79.23,41.22]],
+    "title":["Үркүн · через Бедель к Учтурпану","Ürkün · across Bedel towards Uch Turfan","Үркүн · Бедел аркылуу Үч-Турпанга"],
+    "text":["При подавлении восстания 1916 года кыргызские семьи бежали из Семиречья в Китай. Из района Пржевальска, нынешнего Каракола, беженцы уходили через Бедель и другие перевалы в сторону Учтурпана и Аксу. На карте соединены три ориентира одного из направлений бегства. Из Нарынского края семьи уходили и другим путём, через долину Ак-Сай к Торугарту.","During the suppression of the 1916 uprising, Kyrgyz families fled from Semirechye into China. Refugees from the Przhevalsk area, around present-day Karakol, crossed Bedel and other passes towards Uch Turfan and Aksu. The map connects three landmarks on one of these corridors. Families from the Naryn region also travelled through the Ak-Sai valley towards Torugart.","1916-жылдагы көтөрүлүш басылганда кыргыз үй-бүлөлөрү Жети-Суудан Кытайга качууга аргасыз болушкан. Пржевальск, азыркы Каракол, тараптан качкындар Бедел жана башка ашуулар аркылуу Үч-Турпан менен Ак-Сууну көздөй өтүшкөн. Картада бир багыттын үч жери туташтырылды. Нарын тараптан кеткен үй-бүлөлөр Ак-Сай өрөөнү аркылуу Торугартты да ашышкан."],
+    "source":"Восстание 1916 года. Сборник документов и материалов. Переосмысление восстания 1916 года в Центральной Азии. Сборник статей."
+  },
+  {
+    "from":618,"to":907,"background":true,"place":[91.7,53.6],
+    "title":["Земледелие и ремёсла на Енисее","Farming and crafts on the Yenisei","Энесайдагы дыйканчылык жана кол өнөрчүлүк"],
+    "text":["«Синь Тан шу» описывает хозяйство кыргызов танской эпохи. Наряду с конями, крупным рогатым скотом и овцами хроника упоминает просо, пшеницу и ячмень. Зерно мололи в муку. Из местного железа делали оружие, а железо поставляли тюркам. На карте показан район Верхнего Енисея.","The New History of the Tang describes Kyrgyz livelihoods in the Tang period. Alongside horses, cattle and sheep it mentions millet, wheat and barley. Grain was ground into flour. Local iron was used to make weapons and supplied to the Turks. The map shows the upper Yenisei region.","«Синь Тан шу» Тан доорундагы кыргыздардын чарбасын сүрөттөйт. Жылкы, бодо мал жана кой менен катар таруу, буудай жана арпа аталат. Эгинди тартып ун алышкан. Жергиликтүү темирден курал жасап, туюйцзюэ түрктөрүнө темир жеткиришкен. Картада Жогорку Энесай аймагы көрсөтүлгөн."],
+    "source":"Xin Tang shu (新唐書), juan 217, 黠戛斯."
+  },
+  {
+    "from":1072,"to":1077,"place":null,
+    "title":["Кыргызский язык в словаре Махмуда Кашгари","Kyrgyz speech in Mahmud al-Kashgari’s dictionary","Махмуд Кашгаринин сөздүгүндөгү кыргыз тили"],
+    "text":["В арабоязычном «Диван лугат ат-турк» Махмуд Кашгари называет кыргызов среди тюркоязычных народов рядом с кыпчаками, огузами и чигилями. Он сопоставляет речь этих народов для своих читателей. Это свидетельство о языке и названии кыргызов в XI веке.","In his Arabic Compendium of the Turkic Dialects, Mahmud al-Kashgari lists the Kyrgyz alongside the Kipchaks, Oghuz and Chigil among Turkic speakers. He compares their speech for his readers. The entry records the name and language of the Kyrgyz in the eleventh century.","Махмуд Кашгари арабча «Дивану лугат ат-түрк» эмгегинде кыргыздарды кыпчактар, огуздар жана чигилдер менен катар түрк тилдүү элдерге кошот. Автор окурмандар үчүн алардын тилин салыштырат. Бул маалымат XI кылымдагы кыргыз аталышы жана тили жөнүндө кабар берет."],
+    "source":"Maḥmūd al-Kāšġarī. Dīwān Luġāt at-Turk, On the Turkic Dialects. R. Dankoff and J. Kelly, vol. I, p. 83."
+  },
+  {
+    "from":1522,"to":1522,"place":[75.76,42.21],"kind":"politics",
+    "title":["Возвращение Мухаммада Кыргыза и зимовка в Кочкоре","Muhammad Kirghiz’s return and the winter at Kochkor","Мухаммад Кыргыздын кайтып келиши жана Кочкордогу кыштоо"],
+    "text":["Через пять лет после пленения у Иссык-Куля Мухаммада Кыргыза освободили и назначили эмиром кыргызов. Дуглат рассказывает, что он выступил впереди отряда Рашид-султана. Часть кыргызов присоединилась к нему, другие ушли в отдалённые районы Могулистана. На зиму отряд расположился в Кочкоре. На карте отмечена Кочкорская долина.","Five years after his capture at Issyk-Kul, Muhammad Kirghiz was released and appointed amir of the Kyrgyz. Dughlat says he went ahead of Rashid Sultan’s force. Some Kyrgyz joined him, while others withdrew to distant parts of Moghulistan. The force wintered at Kochkor. The map marks the Kochkor valley.","Ысык-Көлдө туткунга түшкөндөн беш жыл өткөн соң Мухаммад Кыргыз бошотулуп, кыргыздардын эмири болуп дайындалган. Дуглаттын жазышынча, ал Рашид султандын кошуунунан алдыда жүргөн. Кыргыздардын бир бөлүгү ага кошулса, башкалары Моголстандын алыскы аймактарына кетишкен. Кошуун Кочкордо кыштаган. Картада Кочкор өрөөнү көрсөтүлгөн."],
+    "source":"Mīrzā Muḥammad Ḥaydar Dūghlāt. Tārīkh-i Rashīdī, book II, ch. LXIX."
+  },
+  {
     "from":648,"to":648,"place":[108.94,34.26],
     "title":["Кыргызский правитель при дворе Тан","A Kyrgyz ruler at the Tang court","Кыргыз башкаруучусу Тан ордосунда"],
     "text":["В 22-й год Чжэньгуань кыргызский правитель лично прибыл ко двору Тан. Двор назвал его земли Цзянькунь и пожаловал ему должность. Запись описывает отношения двора с правителем Енисея.","In the 22nd year of Zhenguan the Kyrgyz ruler came to the Tang court in person. The court designated his lands Jiankun and granted him an office. The account describes the court’s relations with the Yenisei ruler.","Чжэньгуандын 22-жылында кыргыз башкаруучусу Тан ордосуна өзү келген. Тан анын жерин Цзянькунь деп атап, башкаруучуга кызмат берген. Бул маалымат Тан ордосунун Энесайдагы башкаруучу менен мамилесин көрсөтөт."],
@@ -18,7 +78,8 @@
     "source":"Sima Guang. Zizhi tongjian (資治通鑑), juan 250, 咸通七年十二月."
   },
   {
-    "from":950,"to":999,"place":[92,53.6],
+    "from":950,"periodFrom":901,"to":1000,"place":[92,53.6],
+    "periodLabel":["X век · географическое описание","10th century · geographical account","X кылым · географиялык баяндоо"],
     "title":["X век · Земли кыргызов у аль-Истахри","10th century · Kyrgyz lands in al-Istakhri","X кылым · Ал-Истахри сүрөттөгөн кыргыз жерлери"],
     "text":["Аль-Истахри называет кыргызов خرخيز и описывает их земли относительно тогузгузов и кимаков. По его словам, представители нескольких тюркских народов понимали друг друга. Географ описывает соседство народов. Верхний Енисей на карте служит региональным ориентиром.","Al-Istakhri calls the Kyrgyz خرخيز and locates their lands in relation to the Toghuzghuz and Kimeks. He reports that speakers from several Turkic peoples understood one another. His account describes neighbouring peoples. The upper Yenisei is a regional reference on the map.","Ал-Истахри кыргыздарды خرخيز деп атап, алардын жерин тогузгуздар менен кимактарга карата сүрөттөгөн. Анын жазышынча, бир нече түрк элинин өкүлдөрү бири-бирин түшүнө алышкан. Географ коңшу элдерди атаган. Картада Жогорку Энесай аймагы көрсөтүлөт."],
     "source":"Al-Istakhri. Kitāb al-Masālik wa-l-mamālik, ed. M. J. de Goeje, p. 9."

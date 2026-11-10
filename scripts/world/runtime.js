@@ -113,7 +113,7 @@ $('worldYearInput').onfocus=stopPlay;
 $('worldSearch').oninput=e=>{worldState.search=e.target.value;renderWorldChronology();};
 $('worldCentury').onchange=e=>{worldState.century=e.target.value;renderWorldChronology();};
 $('worldType').onchange=e=>{worldState.type=e.target.value;renderWorldChronology();};
-function worldEventDate(e){if(e.date){const [y,m,d]=e.date.split('-');return language==='en'?m+'/'+d+'/'+y:d+'.'+m+'.'+y;}return e.record==='period'?wl(e.period):(e.approx?wl(['ок. ','c. ','болж. ']):'')+e.from+(e.to!==e.from?'–'+e.to:'')+' '+wt('era');}
+function worldEventDate(e){if(e.periodLabel)return wl(e.periodLabel);if(e.date){const [y,m,d]=e.date.split('-');return language==='en'?m+'/'+d+'/'+y:d+'.'+m+'.'+y;}return e.record==='period'?wl(e.period):(e.approx?wl(['ок. ','c. ','болж. ']):'')+e.from+(e.to!==e.from?'–'+e.to:'')+' '+wt('era');}
 const worldSearchText=new Map();
 function worldRecords(){const q=worldState.search.trim().toLocaleLowerCase();return worldHistory.timeline(worldState.region).filter(e=>{
  const century=+worldState.century;
@@ -126,8 +126,8 @@ function worldChooseEvent(id){
  const e=worldHistory.record(id);if(!e)return;
  if(e.record==='territory'){stopPlay();renderYear(e.year);worldChooseTerritory(e.entry);return;}
  stopPlay();worldShowLocations();worldState.area='';worldState.event=id;worldState.selected=e.entry||'';worldState.mode='timeline';worldState.filters=false;
- if(worldState.region!=='all'&&worldState.region!==e.region)worldState.region=e.region;
- switchPanel('compare');renderYear(e.year);
+ if(worldState.region!=='all'&&worldState.region!==e.region&&!WORLD_HISTORY.eventRegions?.[id]?.includes(worldState.region))worldState.region=e.region;
+ switchPanel('compare');renderYear(e.periodLabel&&year>=e.from&&year<=e.to?year:e.year);
  const lesson=WORLD_HISTORY.mapComparisons?.[id],focusPoints=lesson?lesson.places.map(p=>p[0]):e.route;
  if(focusPoints?.length){const pts=focusPoints.map(project),xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]),cx=(Math.min(...xs)+Math.max(...xs))/2,cy=(Math.min(...ys)+Math.max(...ys))/2,s=Math.min(lesson?.scale||24,SVG_W*.72/Math.max(14,Math.max(...xs)-Math.min(...xs)),SVG_H*.65/Math.max(14,Math.max(...ys)-Math.min(...ys)));animateCamera({scale:s,tx:SVG_W/2-cx*s,ty:SVG_H/2-cy*s});}else focusLonLat(...e.coord,e.region==='antarctica'?1.3:4.2);
  $('panel-compare').scrollTop=0;$('worldEventTitle')?.focus({preventScroll:true});queueLocationSave();
@@ -209,7 +209,8 @@ function renderWorldChronology(){
  for(const e of window.items){
   const item=we('article','world-timeline-item');item.dataset.worldEvent=e.id;item.classList.toggle('selected',e.id===worldState.event);item.classList.toggle('current',year>=e.from&&year<=e.to);
   const b=we('button','world-timeline-button');b.type='button';b.append(we('span','world-period',worldEventDate(e)),we('strong','',wl(e.title)));
-  const r=WORLD_HISTORY.regions.find(r=>r.id===e.region);b.append(we('span','world-card-meta',(e.name?wl(e.name)+' · ':'')+wl(r.name)+' · '+wt(e.kind==='culture'?'cultureEvents':e.kind)));
+  const regionNames=[...(WORLD_HISTORY.eventRegions?.[e.id]||[]),e.region].map(id=>wl(WORLD_HISTORY.regions.find(r=>r.id===id).name));
+  b.append(we('span','world-card-meta',(e.name?wl(e.name)+' · ':'')+regionNames.join(' · ')+' · '+wt(e.kind==='culture'?'cultureEvents':e.kind)));
   b.onclick=()=>worldChooseEvent(e.id);item.append(b);worldChronology.append(item);
  }
  if(!records.length)worldChronology.append(we('p','world-empty',wt('noResults')));

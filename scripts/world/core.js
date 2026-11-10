@@ -49,7 +49,7 @@ function createWorldHistory(catalog){
   ...catalog.entries.flatMap(entry=>entry.phases.filter(p=>p.to>min&&p.from<=max).map(p=>({id:'phase-'+entry.id+'-'+p.from,entry:entry.id,region:entry.region,kind:'period',record:'period',from:Math.max(min,p.from),to:Math.min(max,p.to-1),year:Math.max(min,p.from),coord:anchor(entry,Math.max(min,p.from),p),title:p.title,text:p.text,sources:p.sources,period:p.period,name:p.name||entry.name,approx:p.approx??true})))
  ].sort((a,b)=>a.from-b.from||a.to-b.to||a.id.localeCompare(b.id));
  const recordsById=new Map(records.map(e=>[e.id,e])),regionalRecords=new Map([['all',records]]);
- const timeline=(region='all')=>{if(!regionalRecords.has(region))regionalRecords.set(region,records.filter(e=>e.region===region));return regionalRecords.get(region).slice();};
+ const timeline=(region='all')=>{if(!regionalRecords.has(region))regionalRecords.set(region,records.filter(e=>e.region===region||catalog.eventRegions?.[e.id]?.includes(region)));return regionalRecords.get(region).slice();};
  const record=id=>recordsById.get(id)||null;
  const entry=id=>entries.get(id)||null;
  const frames=id=>(framesByEntry.get(id)||[]).slice();
