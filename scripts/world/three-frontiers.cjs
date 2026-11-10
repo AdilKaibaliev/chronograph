@@ -29,6 +29,35 @@ module.exports=function apply({source,revise,visibleAt,link,D,I,register,lesson}
   revise([owner],from,to,reason,src,p=>G.merge([p,shape]));
   revise([other],from,to,reason,src,p=>D(p,shape));
  }
+ const interiors=require('./treaty-interiors.json');
+ source('coastTreaties','Treaty for the Exchange of Sakhalin for the Kurile Islands (1875), Article 2. Treaty of Nanking (1842), Article III. Natural Earth, Admin 0, 1:10m.',['https://www.mofa.go.jp/region/europe/russia/territory/edition92/period2.html','https://www.doj.gov.hk/en/publications/pdf/basiclaw/basic22.pdf','https://www.naturalearthdata.com/downloads/10m-cultural-vectors/']);
+ source('scaniaTreaty','Malmö stad. Malmö blir svenskt. Freden i Roskilde, 1658.',['https://malmo.se/Uppleva-och-gora/Arkitektur-och-kulturarv/Malmos-historia/Stadens-historia/Malmo-blir-svenskt.html']);
+ source('hartfordTreaty','New Netherland Papers. Articles of Agreement, Hartford, 1650.',['https://www.newnetherlandinstitute.org/application/files/9016/8416/7647/Bontemantel.pdf']);
+ source('kivuTreaty','Convention between Belgium and Germany, 11 August 1910. Goma demarcation protocol, 25 June 1911. International Boundary Study 52. Natural Earth, Admin 0, 1:10m.',['https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs052.pdf','https://www.naturalearthdata.com/downloads/10m-cultural-vectors/']);
+ const box=(w,s,e,n)=>G.union([[[w,s],[e,s],[e,n],[w,n]]]);
+ // Trim only the competing outline, and only where the independently
+ // attested owner already has a fill. Leave coastlines and other states alone.
+ function trimDuplicate(owner,other,start,end,mask,sourceId){
+  datedShapes([owner,other],start,end,(from,to,[own,competing])=>{
+   const duplicate=I(I(mask,own),competing);
+   if(duplicate.length)revise([other],from,to,'confirmed-treaty-interior',sourceId,p=>D(p,duplicate));
+  });
+ }
+ trimDuplicate(r,'japan',1875,1915,box(156.45,51,156.95,51.35),'coastTreaties');
+ trimDuplicate('1789-great-britain',q,1842,1912,interiors.hongKongIsland,'coastTreaties');
+ trimDuplicate('early-denmark-norway','early-sweden',1523,1601,box(11.75,55.4,13.18,56.14),'scaniaTreaty');
+ trimDuplicate('late-hre','1914-congo',1911,1914,interiors.kivuEast,'kivuTreaty');
+ source('masuriaReview','Treaty of Versailles, Articles 94–97. Allenstein Plebiscite Commission and Conference of Ambassadors decisions, 1920. Berlin Conference, 1945, protocol on Poland. CShapes 2.0 and European state boundaries.',['https://history.state.gov/historicaldocuments/frus1919Parisv13/ch12subch9','https://history.state.gov/historicaldocuments/frus1945Berlinv02/d1151','https://icr.ethz.ch/data/cshapes/']);
+ // Interior around Ortelsburg, Johannisburg and Lyck. Every overlapping
+ // German reference frame in both CShapes series contains the full mask.
+ const masuria=G.union([[[20.88,53.56],[21.72,53.55],[22.40,53.76],[22.40,53.89],[21.85,53.89],[20.88,53.78]]]);
+ trimDuplicate('late-hre',r,1872,1914,masuria,'masuriaReview');
+ trimDuplicate('late-hre','1939-ussr',1922,1938,masuria,'masuriaReview');
+ trimDuplicate('1945-poland','1939-ussr',1945,1946,masuria,'masuriaReview');
+ const soundTowns=G.merge([box(-73.56,41.047,-73.52,41.071),box(-73.44,41.093,-73.40,41.127)]);
+ // Stamford and Norwalk only. The reserved Dutch property at Hartford is outside this mask.
+ for(const [english,start,end] of [['1789-english-atlantic',1651,1655],['late-england',1655,1664],['late-england',1673,1674]])
+  trimDuplicate(english,'1789-new-netherland',start,end,soundTowns,'hartfordTreaty');
  source('semirechyeDistricts','Карта Нарынского края по рекогносцировкам в 1868 и 1869 годах. Памятные книжки Семиреченской области. Документальные материалы по истории г. Каракол.',['https://elib.rgo.ru/handle/123456789/236794','https://nlr.ru/elibrarypro/memo/RA6248/semirechenskaya-oblast','https://archive.kg/images/Putevoditel/Issiyk-kul_IRUA.pdf']);
  // Only remove duplicate Chinese fill inside the Russian district interiors.
  // The masks stop short of the international frontier, the Ili valley and the Pamir.

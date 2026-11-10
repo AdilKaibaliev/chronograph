@@ -1,5 +1,24 @@
 [
   {
+    "from":1978,"to":1978,"place":[74.31,35.92],"kind":"migration","route":[[74.20,37.20],[74.31,35.92]],
+    "title":["Из афганского Малого Памира в Гилгит","From Afghanistan’s Little Pamir to Gilgit","Афганстандын Кичи Памиринен Гилгитке"],
+    "text":["После апрельского переворота в Кабуле часть кыргызских семей Малого Памира вместе с Рахманкул-ханом ушла в северный Пакистан. Семьи оказались в районе Гилгита. Некоторые кыргызы остались на афганском Памире, другие позднее вернулись из Пакистана. Линия показывает общее направление переселения.","After the April coup in Kabul, families from the Little Pamir left with Rahmanqul Khan for northern Pakistan. They took refuge in the Gilgit region. Some Kyrgyz remained in the Afghan Pamir, and others later returned from Pakistan. The line shows the general direction of the migration.","Кабулдагы апрель төңкөрүшүнөн кийин Кичи Памирдеги кыргыз үй-бүлөлөрүнүн бир бөлүгү Рахманкул хан менен Пакистандын түндүгүнө өтүп, Гилгит аймагына баш калкалаган. Айрым кыргыздар Афганстандын Памиринде калган, кээ бирлери кийин Пакистандан кайтып келген. Сызык көчтүн жалпы багытын көрсөтөт."],
+    "source":"M. Nazif Shahrani. The Kirghiz and Wakhi of Afghanistan. Ted Callahan. The Kyrgyz of the Afghan Pamir Ride On."
+  },
+  {
+    "from":1982,"to":1982,"place":[35.32,37.00],"kind":"migration","route":[[74.31,35.92],[35.32,37.00]],
+    "title":["Из Пакистана в Турцию","From Pakistan to Turkey","Пакистандан Түркияга"],
+    "text":["После четырёх лет в Пакистане Турция приняла группу памирских кыргызов. Летом 1982 года переселенцев доставили самолётами в Адану. До переезда в постоянное селение семьи жили во временном жилье у Вана и в Малатье. На карте соединены район прежнего убежища и город прибытия.","After four years in Pakistan, a group of Pamir Kyrgyz was admitted to Turkey. In the summer of 1982 the refugees were flown to Adana. Families lived in temporary housing near Van and in Malatya before moving to a permanent village. The map links the former area of refuge and the city of arrival.","Пакистанда төрт жыл жашагандан кийин памирлик кыргыздардын бир тобун Түркия кабыл алган. 1982-жылдын жайында аларды учак менен Аданага алып барышкан. Туруктуу айылга көчкөнгө чейин үй-бүлөлөр Ванга жакын жерде жана Малатьяда убактылуу жашашкан. Картада баш калкалаган аймак менен Түркиядагы алгачкы келген шаар туташтырылган."],
+    "source":"M. Nazif Shahrani. Berlin Geographical Papers 45. The Kirghiz and Wakhi of Afghanistan."
+  },
+  {
+    "from":1987,"to":1988,"place":[43.284,39.193],"kind":"migration",
+    "periodLabel":["1987–1988 годы · заселение села","1987–1988 · settlement of the village","1987–1988-жылдар · айылга отурукташуу"],
+    "title":["Памирские кыргызы обживают Улупамир","Pamir Kyrgyz settle in Ulupamir","Памир кыргыздары Улупамирге отурукташат"],
+    "text":["Семьи переехали из временного жилья в построенное для них село в районе Эрджиш провинции Ван. Название Улупамир сохраняет память о Памире. Эта дата относится к заселению села, спустя несколько лет после приезда группы в Турцию.","Families moved from temporary housing to a village built for them in the Erciş district of Van province. Its name, Ulupamir, recalls the Pamir homeland. These dates mark settlement in the village several years after the group’s arrival in Turkey.","Үй-бүлөлөр убактылуу турак жайларынан Ван облусунун Эржиш районунда алар үчүн курулган айылга көчүшкөн. Улупамир деген ат Памир мекенин эске салат. Бул жылдар топ Түркияга келгенден бир нече жыл өткөндөн кийин айылга отурукташкан учурду билдирет."],
+    "source":"M. Nazif Shahrani. Berlin Geographical Papers 45. Baran. Pamir Yaylası’ndan Ulupamir Köyü’ne. Bilig 68."
+  },
+  {
     "from":1869,"to":1869,"place":[78.39,42.49],"kind":"politics",
     "title":["Каракол становится уездным центром","Karakol becomes a district centre","Каракол уезддин борборуна айланат"],
     "text":["В 1869 году на востоке Иссык-Кульской котловины заложили Каракол как военно-административный центр Семиреченской области Российской империи. До этого начальство и гарнизон размещались в укреплении Ак-Суу. В 1870 году перевод в Каракол утвердили официально. Город стоял на дороге из Чуйской долины в Кашгарию.","In 1869 Karakol was founded in the eastern Issyk-Kul basin as a military and administrative centre of the Russian Empire’s Semirechye province. The command and garrison had been based at the Ak-Suu fort. Their transfer to Karakol was officially confirmed in 1870. The town lay on the route from the Chuy valley to Kashgaria.","1869-жылы Ысык-Көл ойдуңунун чыгышында Каракол Россия империясынын Жети-Суу облусунун аскердик жана башкаруу борбору катары негизделген. Буга чейин аскер башчылыгы менен гарнизон Ак-Суу чебинде турган. Аларды Караколго которуу 1870-жылы расмий бекитилген. Шаар Чүй өрөөнүнөн Кашкарга баруучу жолдо жайгашкан."],

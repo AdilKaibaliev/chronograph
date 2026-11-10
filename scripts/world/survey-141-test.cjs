@@ -46,6 +46,16 @@ for(const [id,y] of [['survey141-erbil-transfer',1232],['survey141-brazzaville',
 for(const y of [1877,1878,1881,1883])for(const pt of [[75.99,41.43],[78.39,42.49],[77.60,42.15]]){
  point('1789-russian-empire',y,pt);point('1789-qing',y,pt,false);
 }
+for(const [owner,other,years,pt] of [
+ ['1789-russian-empire','japan',[1875,1904,1914],[156.73,51.1]],
+ ['1789-great-britain','1789-qing',[1843,1860,1911],[114.15,22.27]],
+ ['early-denmark-norway','early-sweden',[1523,1550,1600],[13.02,55.65]],
+ ['late-hre','1914-congo',[1911,1912,1913],[29.4,-1.7]],
+ ['late-england','1789-new-netherland',[1655,1660],[-73.54,41.054]],
+ ['late-hre','1789-russian-empire',[1872,1886,1913],[21.81,53.63]],
+ ['late-hre','1939-ussr',[1922,1925,1937],[22.36,53.83]],
+ ['1945-poland','1939-ussr',[1945],[20.99,53.57]]
+])for(const year of years){point(owner,year,pt);point(other,year,pt,false);}
 for(const r of reference.rules){
  for(const y of new Set([r.from,r.to-1])){const a=at(r.winner,y),b=at(r.loser,y);if(!a||!b)continue;
   const left=area(clip.intersection(G.multi(a.polygons),G.multi(b.polygons),G.multi(reference.shapes[r.shape])));
