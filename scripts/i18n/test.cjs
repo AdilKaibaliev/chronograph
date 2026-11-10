@@ -13,6 +13,19 @@ assert.equal(t('Непереведённая историческая справ
 assert.equal(t('Атлас','invalid'),'Атлас');
 const base=fs.readFileSync(fs.existsSync('src/atlas.html')?'src/atlas.html':'publish/index.html','utf8');
 const built=fs.readFileSync(fs.existsSync('src/atlas.html')?'index.html':'outputs/chronograph_1_1.html','utf8');
+for(const label of ['Ближайшее предшествующее событие','Ниже показаны государства','Следующий рубеж','Previous milestone —','The states and developments below','Мурунку маанилүү окуя —','Карта показывает государства, центры власти и общества выбранного года'])assert(!built.includes(label),label);
+const periodRows=require('./period-readings.cjs');
+assert.equal(periodRows[0][0],610);
+const earlyCards=JSON.parse(built.match(/const EVENTS = ([^\n]+);/)[1]);
+for(let y=610;y<1300;y++){
+ if(earlyCards[y])continue;
+ const [,heading,description]=periodRows.filter(r=>r[0]<=y).at(-1);
+ for(const lang of ['en','ky'])for(const row of [heading,description]){
+  const localized=t(row[0],lang);
+  assert(localized.trim()&&(lang!=='en'||!/[А-Яа-яЁё]/.test(localized)),'Missing period reading '+y+' '+lang);
+ }
+}
+assert(periodRows.filter(r=>r[0]<=1014).at(-1)[2][0].includes('Абу-ль-Футух'));
 createChronographTranslator(JSON.parse(built.match(/const CHRONOGRAPH_MESSAGES=([\s\S]*?);\n/)[1]));
 for(const [start,end] of [['const EVENTS = {','function ceToAHApprox']])assert.equal(built.slice(built.indexOf(start),built.indexOf(end)),base.slice(base.indexOf(start),base.indexOf(end)),'Historical events changed: '+start);
 const expectedEmpires=require('../world/legacy-frontiers.cjs').prepare(require('../world/continuity.cjs').legacyData());

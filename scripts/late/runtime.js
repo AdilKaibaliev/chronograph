@@ -2,9 +2,7 @@
 const lateText={
  world:['История мира','World history','Дүйнө тарыхы'],
  snapshot:['Государства и общества','States and societies','Мамлекеттер жана коомдор'],
- snapshotBody:['Карта показывает государства, центры власти и общества выбранного года. Выберите область, чтобы узнать о её устройстве и исторических изменениях.','The map shows states, centres of power and societies in the selected year. Select a region to explore its organisation and historical changes.','Карта тандалган жылдагы мамлекеттерди, бийлик борборлорун жана коомдорду көрсөтөт. Түзүлүшү менен тарыхый өзгөрүүлөрүн билүү үчүн аймакты тандаңыз.'],
  period:['Исторический срез','Historical snapshot','Тарыхый кесим'],
- next:['Следующий рубеж','Next milestone','Кийинки маанилүү окуя'],
  current:['Мир в выбранном году','The world in the selected year','Тандалган жылдагы дүйнө'],
  atlas:['Открыть общества на карте','Explore societies on the map','Картадагы коомдорду ачуу'],
  central:['Центральная Азия · государства и общества','Central Asia · states and societies','Борбордук Азия · мамлекеттер жана коомдор']
@@ -16,7 +14,13 @@ const lateEvents=()=>lateEventRecords;
 const lateOwnedIds=['sideKicker','eventTitle','eventDesc','eventPlace','eventAh','eventType','worldList','shiftText','caText','caActions','caEraFacts','caEraNote','kyrgyzEraTitle','kyrgyzEraText','kyrgyzEraFacts','kyrgyzEraSource','compareIslam','compareIslamMeta','compareWorld','compareWorldMeta','mapBanner'];
 lateEventHook=y=>{
  const exact=lateEvents().find(e=>y>=e.from&&y<=e.to),region=exact&&WORLD_HISTORY.regions.find(r=>r.id===exact.region);
- return {ah:ceToAHApprox(y),title:exact?wl(exact.title):lt('snapshot')+' · '+y,desc:exact?wl(exact.text):lt('snapshotBody'),place:exact?.place?wl(exact.place):region?wl(region.name):lt('world'),type:exact?wt(exact.kind==='culture'?'cultureEvents':exact.kind):lt('period'),coord:exact?.coord||null,zoom:3,world:[],lateEvent:exact};
+ if(!exact){
+  const local=worldHistory.at(y,worldState.region);
+  const items=local.length?local:worldHistory.at(y);
+  const item=items.reduce((a,b)=>b.phase.from>a.phase.from?b:a);
+  return {ah:ceToAHApprox(y),title:wl(item.phase.name||item.entry.name),desc:wl(item.phase.text),place:wl(WORLD_HISTORY.regions.find(r=>r.id===item.entry.region).name),type:lt('period'),coord:null,zoom:3,world:[],lateEvent:null};
+ }
+ return {ah:ceToAHApprox(y),title:wl(exact.title),desc:wl(exact.text),place:exact.place?wl(exact.place):wl(region.name),type:wt(exact.kind==='culture'?'cultureEvents':exact.kind),coord:exact.coord||null,zoom:3,world:[],lateEvent:exact};
 };
 function lateCard(item){
  const b=we('button','world-item late-world-item');b.type='button';b.dataset.latePlace=item.entry.id;
@@ -44,8 +48,7 @@ lateSideHook=(y,e)=>{
   const section=we('section','late-region');section.append(we('h4','',wl(region.name)));choices.forEach(item=>section.append(lateCard(item)));list.append(section);
  }
  const explore=we('button','btn',lt('atlas'));explore.onclick=()=>{switchPanel('compare');worldChooseRegion('all',false);};list.append(explore);
- const next=lateEvents().find(item=>item.from>y);
- $('shiftText').textContent=next?lt('next')+' · '+next.from+': '+wl(next.title):lt('current')+' · '+y;
+ $('shiftText').textContent='';
  $('mapBanner').textContent=y+' '+wt('era')+' · '+lt('snapshot');
  $('compareIslam').textContent=e.desc;$('compareIslamMeta').textContent=e.place+' · '+translate(e.ah,language);
  const outside=WORLD_HISTORY.regions.filter(r=>r.id!=='eurasia').flatMap(r=>live.filter(x=>x.entry.region===r.id&&politicalIds.has(x.entry.id)).slice(0,2));

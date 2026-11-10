@@ -56,6 +56,12 @@ for(const [owner,other,years,pt] of [
  ['late-hre','1939-ussr',[1922,1925,1937],[22.36,53.83]],
  ['1945-poland','1939-ussr',[1945],[20.99,53.57]]
 ])for(const year of years){point(owner,year,pt);point(other,year,pt,false);}
+for(const y of [1879,1890,1915]){
+ point('1914-romania',y,[28,46.91]);point('1789-russian-empire',y,[28,46.91],false);
+ point('1789-russian-empire',y,[27.88,47.75]);point('1914-romania',y,[27.88,47.75],false);
+}
+for(const [y,owner,other,pt] of [[1330,'late-granada','late-castile',[-3.93,37.46]],[1400,'late-castile','late-granada',[-3.93,37.46]],[1491,'late-castile','late-granada',[-3.79,37.77]],[1440,'late-daiviet','late-ming',[106.55,21.65]]]){point(owner,y,pt);point(other,y,pt,false);}
+for(const [owner,other,pt] of [['1848-el-salvador','1848-central-america',[-89.845,13.921]],['1848-central-america','1848-el-salvador',[-89.71,14.33]]]){point(owner,1900,pt);point(other,1900,pt,false);}
 for(const r of reference.rules){
  for(const y of new Set([r.from,r.to-1])){const a=at(r.winner,y),b=at(r.loser,y);if(!a||!b)continue;
   const left=area(clip.intersection(G.multi(a.polygons),G.multi(b.polygons),G.multi(reference.shapes[r.shape])));

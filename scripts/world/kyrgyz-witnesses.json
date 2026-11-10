@@ -1,5 +1,23 @@
 [
   {
+    "from":1922,"to":1926,"place":null,
+    "title":["Запись «Манаса» со слов Сагымбая Орозбакова","Recording Manas from Sagymbay Orozbakov","Сагымбай Орозбаков айткан «Манастын» жазылып алынышы"],
+    "text":["В 1922–1926 годах собиратели записывали исполнение манасчы Сагымбая Орозбакова. Его вариант составил десять рукописных книг. Детство Манаса записали на кыргызском языке арабским письмом.","Between 1922 and 1926 collectors transcribed the recitations of the manaschi Sagymbay Orozbakov. His version fills ten handwritten books. The account of Manas’s childhood was written in Kyrgyz in Arabic script.","1922–1926-жылдары жыйноочулар манасчы Сагымбай Орозбаковдун айтуусун кагазга түшүрүшкөн. Анын варианты он кол жазма китепти түзөт. Манастын балалык чагы кыргыз тилинде араб жазуусу менен жазылып алынган."],
+    "source":"Кыргызская Республика. Номинация в реестр ЮНЕСКО «Память мира». Рукопись эпоса «Манас» в варианте Сагымбая Орозбакова."
+  },
+  {
+    "from":2009,"to":2009,"place":[76.16,39.72],"kind":"culture",
+    "title":["Манасчы Синьцзяна","Manas tellers in Xinjiang","Шинжаңдын манасчылары"],
+    "text":["У кыргызов Синьцзяна манасчы исполняют эпос без инструментального сопровождения. Напев и ритм меняются вместе с героями и ходом рассказа. В 2009 году традиция вошла в список нематериального культурного наследия ЮНЕСКО по заявке Китая. На карте отмечен Кызылсу-Кыргызский автономный округ.","Among the Kyrgyz of Xinjiang, manaschi recite the epic without instrumental accompaniment. The melody and rhythm change with the characters and the story. UNESCO inscribed the tradition in 2009 following China’s nomination. The map marks the Kizilsu Kyrgyz Autonomous Prefecture.","Шинжаңдагы кыргыз манасчылары эпосту музыкалык аспапсыз айтышат. Обон менен ыргак каармандарга жана окуянын жүрүшүнө жараша өзгөрөт. 2009-жылы Кытай сунуштаган бул салт ЮНЕСКОнун материалдык эмес маданий мурастар тизмесине кирген. Картада Кызыл-Суу Кыргыз автономиялуу округу белгиленген."],
+    "source":"UNESCO. Manas. Nomination 00209, decision 4.COM 13.17."
+  },
+  {
+    "from":2013,"to":2013,"place":null,
+    "title":["«Манас», «Семетей», «Сейтек»","Manas, Semetey and Seytek","«Манас», «Семетей», «Сейтек»"],
+    "text":["В Кыргызстане сказители передают трилогию от мастера к ученику устно. Голосом, ритмом и жестами они различают героев и сцены. В 2013 году ЮНЕСКО включила традицию исполнения трилогии в свой список по заявке Кыргызстана.","In Kyrgyzstan narrators teach the trilogy orally, passing it from master to apprentice. Voice, rhythm and gesture distinguish characters and scenes. UNESCO inscribed the performance tradition in 2013 following Kyrgyzstan’s nomination.","Кыргызстанда манасчылар үчилтикти устаттан шакиртке оозеки өткөрүшөт. Алар каармандарды жана окуяларды үн, ыргак жана жаңсоо аркылуу айырмалашат. 2013-жылы Кыргызстандын сунушу менен үчилтикти айтуу өнөрү ЮНЕСКОнун тизмесине кирген."],
+    "source":"UNESCO. Kyrgyz epic trilogy: Manas, Semetey, Seytek. Nomination 00876, decision 8.COM 8.19."
+  },
+  {
     "from":1978,"to":1978,"place":[74.31,35.92],"kind":"migration","route":[[74.20,37.20],[74.31,35.92]],
     "title":["Из афганского Малого Памира в Гилгит","From Afghanistan’s Little Pamir to Gilgit","Афганстандын Кичи Памиринен Гилгитке"],
     "text":["После апрельского переворота в Кабуле часть кыргызских семей Малого Памира вместе с Рахманкул-ханом ушла в северный Пакистан. Семьи оказались в районе Гилгита. Некоторые кыргызы остались на афганском Памире, другие позднее вернулись из Пакистана. Линия показывает общее направление переселения.","After the April coup in Kabul, families from the Little Pamir left with Rahmanqul Khan for northern Pakistan. They took refuge in the Gilgit region. Some Kyrgyz remained in the Afghan Pamir, and others later returned from Pakistan. The line shows the general direction of the migration.","Кабулдагы апрель төңкөрүшүнөн кийин Кичи Памирдеги кыргыз үй-бүлөлөрүнүн бир бөлүгү Рахманкул хан менен Пакистандын түндүгүнө өтүп, Гилгит аймагына баш калкалаган. Айрым кыргыздар Афганстандын Памиринде калган, кээ бирлери кийин Пакистандан кайтып келген. Сызык көчтүн жалпы багытын көрсөтөт."],

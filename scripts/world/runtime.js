@@ -44,7 +44,7 @@ Object.assign(worldText,{
  government:['Власть и организация','Power and organisation','Бийлик жана уюшуу'],economy:['Хозяйство и обмен','Economy and exchange','Чарба жана алмашуу'],society:['Поселения и жизнь людей','Settlements and daily life','Конуштар жана күнүмдүк жашоо'],
  studySearch:['Найти общество или занятие…','Find a society or activity…','Коомду же кесипти издөө…'],studyHint:['Выберите год и регион: как люди управляли, трудились и жили.','Choose a year and region to explore how people governed, worked and lived.','Жыл менен аймакты тандаңыз: адамдар кантип башкарып, эмгектенип, жашаганын билиңиз.']
 });
-const wl=values=>values[supportedLanguages.indexOf(language)],wt=key=>wl(worldText[key]);
+const wl=values=>(NARRATIVE_EDITS[values[0]]||values)[supportedLanguages.indexOf(language)],wt=key=>wl(worldText[key]);
 const worldState={region:WORLD_HISTORY.regions.some(r=>r.id===stateParams.get('world'))?stateParams.get('world'):'all',selected:stateParams.get('wplace')||'',area:stateParams.get('wterritory')||'',mode:['timeline','study'].includes(stateParams.get('wview'))?stateParams.get('wview'):'overview',event:stateParams.get('wevent')||'',type:'all',century:'all',search:'',studySearch:'',filters:!stateParams.has('wevent')};
 const we=(tag,className,text)=>{const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node;};
 const worldExplorer=we('section','world-explorer');worldExplorer.id='worldExplorer';worldExplorer.dataset.localeOwned='true';

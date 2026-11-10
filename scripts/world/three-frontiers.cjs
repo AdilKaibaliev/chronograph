@@ -51,6 +51,22 @@ module.exports=function apply({source,revise,visibleAt,link,D,I,register,lesson}
  // Interior around Ortelsburg, Johannisburg and Lyck. Every overlapping
  // German reference frame in both CShapes series contains the full mask.
  const masuria=G.union([[[20.88,53.56],[21.72,53.55],[22.40,53.76],[22.40,53.89],[21.85,53.89],[20.88,53.78]]]);
+ const rivers=require('./river-interiors.json'),romania='1914-romania';
+ source('danubePrutReview','Treaty of Berlin (1878), Arts. II, XLV–XLVI. CShapes 2.0, European state boundaries and Natural Earth.',['https://content.ecf.org.il/files/M00935_TreatyOfBerlin1878ExcerptsEnglish.pdf','https://icr.ethz.ch/data/cshapes/']);
+ // Inland only. Exclude the changing delta, disputed islands, wartime
+ // occupation and the 1913 transfer in Southern Dobruja.
+ trimDuplicate(romania,r,1879,1916,rivers.prutWest,'danubePrutReview');
+ trimDuplicate(r,romania,1879,1916,rivers.prutEast,'danubePrutReview');
+ source('jaenFrontier','Junta de Andalucía. Decreto 272/2011, conjunto histórico de Jaén. Anuario Arqueológico de Andalucía, Aldea de Santa María (Alcalá la Real).',['https://www.juntadeandalucia.es/boja/2011/157/23','https://www.juntadeandalucia.es/cultura/tabula/bitstream/20.500.11947/6142/1/AAA_2010_345_moralesreyes_aldearibera_jaen_borrador.pdf']);
+ trimDuplicate('late-castile','late-granada',1300,1492,box(-3.82,37.75,-3.77,37.79),'jaenFrontier');
+ trimDuplicate('late-castile','late-granada',1342,1492,box(-3.945,37.45,-3.914,37.475),'jaenFrontier');
+ trimDuplicate('late-granada','late-castile',1300,1340,box(-3.945,37.45,-3.914,37.475),'jaenFrontier');
+ source('chiLangReview','Vietnam National Authority of Tourism. Chi Lăng – Xương Giang, 1427. Imperial Citadel of Thang Long. UNESCO nomination 1328.',['https://vietnamtourism.gov.vn/post/45878','https://whc.unesco.org/en/list/1328/']);
+ trimDuplicate('late-daiviet','late-ming',1428,1527,box(106.51,21.64,106.57,21.70),'chiLangReview');
+ source('centralAmericanTowns','El Salvador, Ministerio de Gobernación. Departamento de Ahuachapán, ley de 9 de febrero de 1869. Guatemala. Decreto de 8 de mayo de 1852.',['https://www.gobernacion.gob.sv/ahuachapan/','https://biblio.ingenieria.usac.edu.gt/tesis/T12212.pdf']);
+ const salvador='1848-el-salvador',guatemala='1848-central-america';
+ trimDuplicate(salvador,guatemala,1869,1938,G.merge([box(-89.86,13.91,-89.83,13.94),box(-89.77,13.96,-89.74,13.99)]),'centralAmericanTowns');
+ trimDuplicate(guatemala,salvador,1852,1938,box(-89.73,14.32,-89.69,14.35),'centralAmericanTowns');
  trimDuplicate('late-hre',r,1872,1914,masuria,'masuriaReview');
  trimDuplicate('late-hre','1939-ussr',1922,1938,masuria,'masuriaReview');
  trimDuplicate('1945-poland','1939-ussr',1945,1946,masuria,'masuriaReview');

@@ -18,10 +18,6 @@ function createChronographTranslator(rows) {
     else if (value.startsWith('граница: ')) out=pick('Boundary: ','Чек ара: ')+translate(value.slice(9),lang);
     else if (/^Контур: исторический срез \d+ года\.$/.test(value)) {const n=value.match(/\d+/)[0];out=pick('Boundary snapshot: '+n+' CE.', 'Чек аранын тарыхый кесими: '+n+'-жыл.');}
     else if (/^Контур: последний доступный срез/.test(value)) {const [f,y]=value.match(/\d+/g);out=pick('Latest available boundary snapshot: '+f+' CE; selected year: '+y+' CE. Changes between snapshots have not been reconstructed.','Акыркы жеткиликтүү чек ара кесими: '+f+'-жыл; тандалган жыл: '+y+'. Кесимдердин ортосундагы өзгөрүүлөр калыбына келтирилген эмес.');}
-    else if (value.startsWith('Ближайшее предшествующее событие — ')) {
-      const m=value.match(/^Ближайшее предшествующее событие — (\d+) год: (.*?) Следующий рубеж — (\d+) год: «(.*?)»\. Ниже показаны государства и процессы, относящиеся к выбранному году\.$/);
-      if(m)out=pick('Previous milestone — '+m[1]+' CE: '+translate(m[2],lang)+' Next milestone — '+m[3]+' CE: “'+translate(m[4],lang)+'”. The states and developments below relate to the selected year.','Мурунку маанилүү окуя — '+m[1]+'-жыл: '+translate(m[2],lang)+' Кийинки маанилүү окуя — '+m[3]+'-жыл: «'+translate(m[4],lang)+'». Төмөндө тандалган жылга тиешелүү мамлекеттер жана процесстер көрсөтүлгөн.');
-    }
     else if (/^≈\d+ г\. х\. · /.test(value)) {const at=value.indexOf(' · ');out=translate(value.slice(0,at),lang)+' · '+translate(value.slice(at+3),lang);}
     else if (/^≈\d+ г\. х\.$/.test(value)) out=value.replace('г. х.',pick('AH','х. ж.'));
     else if (/^\d+ год$/.test(value)) out=value.replace(' год',pick(' CE','-жыл'));

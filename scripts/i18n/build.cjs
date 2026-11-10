@@ -8,12 +8,9 @@ const originalEmpires=vm.runInNewContext(source.slice(source.indexOf('const S ='
 const earlyFrontiers=require('../world/legacy-frontiers.cjs');
 const empires=earlyFrontiers.prepare(originalEmpires);
 const rows=JSON.parse(fs.readFileSync(root+'/messages.json','utf8'));
-rows.push(['Формирование государства','Formation of a state','Мамлекеттин калыптанышы']);
-rows.push(['Географический ориентир','Geographical reference','Географиялык багыт'],['Османская столица','Ottoman capital','Осмон борбору']);
-rows.push(...Object.entries(JSON.parse(fs.readFileSync(root+'/names.json','utf8'))).map(([ru,en])=>[ru,en,ru]));
-rows.push(['Праведные халифы','Rashidun caliphs','Туура жолдогу халифтер'],['Осман I','Osman I','Осмон I'],['Звезды Ислама','Stars of Islam','Ислам жылдыздары']);
-const empireTexts={...JSON.parse(fs.readFileSync(root+'/empires-1.json','utf8')),...JSON.parse(fs.readFileSync(root+'/empires-2.json','utf8'))};
-for(const empire of originalEmpires){const d=empireTexts[empire.id];assert(d&&d.length===8,empire.id);['name','short','body','territories'].forEach((field,i)=>rows.push([...require('./kyrgyz-messages.json'),...require('./border-messages.json')].find(row=>row[0]===empire[field])||[empire[field],d[i*2],d[i*2+1]]));}
+const readings=require('./period-readings.cjs');
+const narrativeEdits=require('./narrative-edits.cjs');
+rows.push(...Object.values(narrativeEdits));
 rows.push(...earlyFrontiers.messages);
 const translatedEvents=JSON.parse(fs.readFileSync(root+'/events.json','utf8'));
 const additionalDescriptions=JSON.parse(fs.readFileSync(root+'/event-descriptions.json','utf8'));
@@ -49,11 +46,30 @@ rows.push(...require('./border-messages.json'));
 rows.push(...require('../support/messages.json'));
 rows.push(...require('./history-messages.json')); 
 rows.push(...require('./kyrgyz-messages.json'));
+for(const [,heading,body] of readings)for(const row of [heading,body]){
+ if(!rows.some(existing=>existing[0]===row[0]))rows.push(row);
+}
+rows.push(['Формирование государства','Formation of a state','Мамлекеттин калыптанышы']);
+rows.push(['Географический ориентир','Geographical reference','Географиялык багыт'],['Османская столица','Ottoman capital','Осмон борбору']);
+rows.push(...Object.entries(JSON.parse(fs.readFileSync(root+'/names.json','utf8'))).map(([ru,en])=>[ru,en,ru]));
+rows.push(['Праведные халифы','Rashidun caliphs','Туура жолдогу халифтер'],['Осман I','Osman I','Осмон I'],['Звезды Ислама','Stars of Islam','Ислам жылдыздары']);
+const empireTexts={...JSON.parse(fs.readFileSync(root+'/empires-1.json','utf8')),...JSON.parse(fs.readFileSync(root+'/empires-2.json','utf8'))};
+for(const empire of originalEmpires){const d=empireTexts[empire.id];assert(d&&d.length===8,empire.id);['name','short','body','territories'].forEach((field,i)=>rows.push([...require('./kyrgyz-messages.json'),...require('./border-messages.json')].find(row=>row[0]===empire[field])||[empire[field],d[i*2],d[i*2+1]]));}
 const {createChronographTranslator}=require('./core.js');createChronographTranslator(rows);
 const originalSourceTranslator=createChronographTranslator(rows);
 for(const e of empires){const old=originalEmpires.find(o=>o.id===e.id);if(e.source!==old.source){const added=e.source.slice(old.source.length);rows.push([e.source,originalSourceTranslator(old.source,'en')+added,originalSourceTranslator(old.source,'ky')+added]);}}
 rows.push(['Антарктида','Antarctica','Антарктида'],['Географический ориентир.','Geographic reference.','Географиялык багыт белгиси.']);
 let html=require('../late/prepare.cjs')(source).replaceAll('CHRONOGRAPH 1.0 RC3.8','CHRONOGRAPH 1.41.0');
+// Replace the archived inter-event narration in every view that uses activeEvent.
+const activeStart=html.indexOf('function activeEvent(y){');
+const previousStart=html.indexOf('  const keys=Object.keys(EVENTS)',activeStart);
+const activeEnd=html.indexOf('\n}',previousStart);
+assert(activeStart>=0&&previousStart>activeStart&&activeEnd>previousStart);
+html=html.slice(0,activeStart)+'const NARRATIVE_EDITS='+JSON.stringify(narrativeEdits)+';\nconst PERIOD_READINGS='+JSON.stringify(readings.map(([from,title,body])=>[from,title[0],body[0]]))+';\n'+html.slice(activeStart,previousStart).replace('if(EVENTS[y]) return EVENTS[y];','if(EVENTS[y]){const e=EVENTS[y];return NARRATIVE_EDITS[e.desc]?{...e,desc:NARRATIVE_EDITS[e.desc][0]}:e;}')+
+ '  const [,title,desc]=PERIOD_READINGS.filter(item=>item[0]<=y).at(-1);\n  return {ah:ceToAHApprox(y),title,desc,type:"Период",place:"",coord:null,zoom:2,world:worldStateForYear(y)};'+html.slice(activeEnd);
+html=html.replace("$('shiftText').innerHTML=getShiftText(y);","$('shiftText').textContent='';")
+ .replace("getShiftText(y).replace(/<[^>]+>/g,'')","e.title");
+html=html.replace('</style>','.shift-card:has(#shiftText:empty),#eventPlace:empty{display:none}</style>').replace('`\${e.place} · \${e.ah}`','[e.place,e.ah].filter(Boolean).join(" · ")');
 html=html.replace('Все ${groups.reduce((n,g)=>n+g.items.length,0)} современников из подборки','Современники в подборке · ${groups.reduce((n,g)=>n+g.items.length,0)}');
 html=html.replace(/const EMPIRES=\[[^\n]+;/,'const EMPIRES='+JSON.stringify(empires).replaceAll('<','\\u003c')+';');
 html=html.slice(0,html.indexOf('const ISLAM_STARS = ['))+'const ISLAM_STARS = '+JSON.stringify(stars).replaceAll('<','\\u003c')+';\n'+html.slice(html.indexOf('const STAR_DETAILS='));
@@ -101,6 +117,7 @@ Object.assign(worldData.sources,incidentData.sources);
 const witnessData=require('../world/kyrgyz-witnesses.json');
 const kyrgyzStages=JSON.parse(source.match(/const KYRGYZ_STAGES=([^\n]+);/)[1]);
 worldData.sources.earlySira={title:'Ibn Hishām. Al-Sīra al-nabawiyya. Ibn Isḥāq, The Life of Muhammad, trans. A. Guillaume.'};
+worldData.sources.periodReadings={title:'Hugh Kennedy. The Prophet and the Age of the Caliphates. TDV İslâm Ansiklopedisi. Ebü’l-Fütûh el-Mûsevî.'};
 worldData.sources.tabuk630={title:'TDV İslâm Ansiklopedisi. Tebük Gazvesi.'};
 worldData.sources.pilgrimage631={title:'TDV İslâm Ansiklopedisi. Ebû Bekir.'};
 worldData.sources.hudud982={title:'Ḥudūd al-ʿĀlam. The Regions of the World, trans. V. Minorsky. Section on the country of the Qirghiz.'};
