@@ -26,3 +26,24 @@ ctx.svg.clientHeight=1000;assert.deepEqual(Array.from(ctx.worldLabelMetrics().po
 console.log('PASS: overview names shrink, overlapping and tiny labels hide, selection stays available, zoom restores deterministically, letterboxing is included.');
 
 assert(!fs.readFileSync('index.html','utf8').includes('#worldMap.city-mode .empire-label{display:none!important}'),'Close zoom hides all major legacy states');
+
+// A selected event can use separately named landmarks instead of a duplicate
+// title on its central marker. Run the actual scaling pass with that DOM shape.
+function marker(x,label,kind){
+ const inner={setAttribute(k,v){this[k]=v;}};
+ return {dataset:{px:String(x),py:'400'},style:{},inner,
+  classList:{contains:k=>k===kind},
+  querySelector:s=>s==='text'?label:s==='.world-marker-inner'?inner:null};
+}
+const named=text('Shandong',1100,100),central=marker(1000,null,'world-event-marker'),landmark=marker(1100,named,'world-comparison-place');
+ctx.svg.style={setProperty(){}};ctx.worldLayer={querySelectorAll:()=>[central,landmark]};
+ctx.updateAtlasPlaceLabels=()=>{};ctx.worldState.selected='';
+const runtime=fs.readFileSync(require('node:path').join(__dirname,'runtime.js'),'utf8');
+vm.runInContext(runtime.slice(runtime.indexOf('function updateWorldMarkerScale(){'),runtime.indexOf('function renderWorldSources(){')),ctx);
+ctx.updateWorldMarkerScale();assert.equal(named.style.display,'','Named destination must remain visible beside an unlabelled event marker');
+for(const scale of [4.2,6,1]){
+ ctx.mapState={scale,tx:0,ty:0};assert.doesNotThrow(()=>ctx.updateWorldMarkerScale());
+ assert(central.inner.transform.startsWith('scale('),'Unlabelled event marker must still scale');
+}
+assert.equal(named.style.display,'','Landmark label must return when zooming back out');
+console.log('PASS: event markers without duplicate titles preserve landmark labels and zoom without interrupting map initialization.');

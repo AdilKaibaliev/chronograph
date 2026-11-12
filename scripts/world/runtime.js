@@ -333,7 +333,8 @@ function updateWorldMarkerScale(){
   const important=priority(g)>0,font=important?12:Math.min(11,8+2*Math.log2(Math.max(1,detail)));
   g.querySelector('.world-marker-inner').setAttribute('transform',`scale(${Math.min(1,.55+detail*.18)/scale})`);
   g.style.display=!important&&detail<1.15?'none':'';
-  const label=g.querySelector('text'),[x,y]=metrics.point(+g.dataset.px,+g.dataset.py);
+  const label=g.querySelector('text');if(!label)continue;
+  const [x,y]=metrics.point(+g.dataset.px,+g.dataset.py);
   label.style.display='none';if(territoryLabels.entries.has(g.dataset.worldPlace)||x<0||y<0||x>mapWidth||y>mapHeight)continue;
   if(!important&&detail<2.4)continue;
   // Text and collision boxes use the same screen size even as marker symbols shrink.
