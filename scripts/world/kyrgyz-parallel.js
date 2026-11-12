@@ -14,7 +14,9 @@
   eventsByYear.get(record.year).push(record);
  }
  function reading(y){
-  const notes=KYRGYZ_WITNESSES.filter(n=>(n.periodFrom??n.from)<=y&&y<=n.to);
+  const notes=KYRGYZ_WITNESSES.filter(n=>(n.periodFrom??n.from)<=y&&y<=n.to)
+   .sort((a,b)=>Number(!!a.background)-Number(!!b.background)
+    ||(a.to-(a.periodFrom??a.from))-(b.to-(b.periodFrom??b.from)));
   const note=notes.find(n=>!n.background);
   const early=y<1300?kyrgyzHistoryForYear(y):null;
   const later=y>=1300?worldHistory.at(y,'eurasia').filter(x=>x.entry.kyrgyzHistory):[];

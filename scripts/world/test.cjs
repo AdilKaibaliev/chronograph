@@ -88,6 +88,17 @@ for(const w of require('./kyrgyz-witnesses.json')){
  text(w.title);text(w.text);assert(w.source);
  if(!w.place)assert(!eventIds.has('kyrgyz-witness-'+w.from),'Unlocated account has a map pin');
 }
+// A broad source account must not hide a dated embassy in the Kyrgyz timeline.
+const parallelSource=fs.readFileSync('scripts/world/kyrgyz-parallel.js','utf8');
+const readPeriod=vm.runInNewContext(parallelSource.slice(parallelSource.indexOf(' function reading(y)'),parallelSource.indexOf(' function title(y)'))+';reading',{
+ KYRGYZ_WITNESSES:require('./kyrgyz-witnesses.json'),
+ kyrgyzHistoryForYear:()=>null,
+ worldHistory:{at:()=>[]}
+});
+for(const y of [843,844,866,1758,1759,1762])assert.equal(readPeriod(y).note.from,y,'Dated Kyrgyz account hidden by a broad period '+y);
+assert.equal(publishedHistory.record('kyrgyz-witness-1755').route.length,2);
+assert.equal(publishedHistory.record('kyrgyz-witness-1050').from,1050);
+assert.equal(publishedHistory.record('kyrgyz-witness-870').from,801);
 for(let y=1300;y<=payload.range.max;y++)assert(publishedHistory.at(y,'eurasia').some(item=>item.entry.kyrgyzHistory),'Missing Kyrgyz history in '+y);
 assert.equal(publishedHistory.record('kyrgyz-witness-1517').kind,'war');
 const geography=publishedHistory.record('kyrgyz-witness-950');

@@ -1,5 +1,57 @@
 [
   {
+    "from":870,"periodFrom":801,"to":900,"place":[91.7,53.6],"kind":"culture",
+    "periodLabel":["IX век · арабское географическое описание","9th century · Arabic geographical account","IX кылым · арабча географиялык баяндоо"],
+    "title":["Кыргызы в «Книге путей и стран»","The Kyrgyz in the Book of Roads and Kingdoms","«Жолдор жана өлкөлөр китебиндеги» кыргыздар"],
+    "text":["Ибн Хордадбех перечисляет кыргызов — хирхиз — среди народов тюркского мира и отмечает мускус в их стране. Это свидетельство знакомства арабской географии IX века с кыргызскими землями и их товарами. Отметка показывает енисейский регион; автор не называет конкретное поселение кыргызов.","Ibn Khordadbeh lists the Kyrgyz, Khirkhiz, among the peoples of the Turkic world and notes musk in their country. His account documents ninth-century Arabic geographical knowledge of Kyrgyz lands and their products. The marker shows the Yenisei region; he names no particular Kyrgyz settlement.","Ибн Хордадбех кыргыздарды — хирхиз — түрк дүйнөсүндөгү элдердин катарында атап, алардын өлкөсүндө жыпар бар экенин белгилейт. Бул маалымат IX кылымдагы араб географиясынын кыргыз жерлери жана товарлары тууралуу кабардар болгонун көрсөтөт. Белги Энесай аймагын көрсөтөт; автор кыргыздардын белгилүү бир конушун атабайт."],
+    "source":"Ибн Хордадбех. Китаб ал-масалик ва-л-мамалик (Книга путей и стран), §16. Перевод Н. Велихановой. Баку, 1986."
+  },
+  {
+    "from":844,"to":844,"place":[108.94,34.26],"kind":"culture",
+    "title":["Как в Чанъани записывали сведения о кыргызах","Recording Kyrgyz geography in Chang’an","Чанъанда кыргыздар жөнүндө маалыматтын жазылышы"],
+    "text":["Ли Дэюй сообщает, что Вэй Цзунцин и Люй Шу расспрашивали кыргызских послов о языке, горах, реках и обычаях их страны. На основе этих сведений подготовили иллюстрированное описание посольства. Его предисловие сохранилось в «Цюань Тан вэнь». Встреча происходила в Чанъани, нынешнем Сиане.","Li Deyu records that Wei Zongqing and Lü Shu interviewed Kyrgyz envoys about their language, mountains, rivers and customs. Their information informed an illustrated account of the embassy. Its preface survives in Quan Tang wen. The meeting took place in Chang’an, present-day Xi’an.","Ли Дэюйдун маалыматы боюнча, Вэй Цзунцин менен Люй Шу кыргыз элчилеринен алардын тили, тоолору, дарыялары жана каада-салты жөнүндө сурашкан. Бул маалыматтардын негизинде элчилик тууралуу сүрөттүү баяндама түзүлгөн. Анын баш сөзү «Цюань Тан вэнь» жыйнагында сакталган. Жолугушуу азыркы Сиань шаары болгон Чанъанда өткөн."],
+    "source":"Li Deyu (李德裕). 黠戛斯朝貢圖傳序. Quan Tang wen (全唐文), juan 707, Huichang 4 (844)."
+  },
+  {
+    "from":1050,"to":1053,"place":[91.7,53.6],"kind":"culture",
+    "periodLabel":["1050–1053 · запись более ранних географических сведений","1050–1053 · compilation of earlier geographical accounts","1050–1053 · мурдагы географиялык маалыматтардын жазылышы"],
+    "title":["Дороги к кыргызам у Гардизи","Routes to the Kyrgyz in Gardizi","Гардизи баяндаган кыргыздарга баруучу жолдор"],
+    "text":["Гардизи описывает путь через горы Көгмен к ставке кыргызского кагана. Оттуда дороги вели на юг к тогузогузам и на запад к кимакам и карлукам. Из кыргызских земель вывозили мускус и меха. Сочинение записано в XI веке по более ранним сведениям. Отметка обозначает Минусинскую котловину; местоположение ставки точно не установлено.","Gardizi describes a route across the Kögmen Mountains to the Kyrgyz khagan’s camp. Roads led south to the Toquz Oghuz and west to the Kimeks and Karluks. Musk and furs were exported. This eleventh-century account preserves earlier information. The marker indicates the Minusinsk Basin; the camp’s exact location remains uncertain.","Гардизи Көгмен тоолору аркылуу кыргыз каганынын ордосуна баруучу жолду сүрөттөйт. Андан түштүккө тогуз огуздарга, батышка кимактар менен карлуктарга жолдор кеткен. Кыргыз жеринен жыпар жана аң терилери чыгарылган. XI кылымдагы чыгарма мурдагы маалыматтарга таянат. Белги Минусин ойдуңун көрсөтөт; ордонун так орду аныктала элек."],
+    "source":"Абу Саид Гардизи. Зайн ал-ахбар. Извлечение, перевод В. В. Бартольда, раздел о пути к кыргызам."
+  },
+  {
+    "from":1271,"to":1368,"background":true,"place":[91.7,53.6],
+    "periodLabel":["Эпоха Юань · географическое описание","Yuan period · geographical account","Юань доору · географиялык баяндоо"],
+    "title":["Кэм, реки и хозяйство кыргызских земель","The Kem River and livelihoods in Kyrgyz lands","Кыргыз жерлериндеги Кем дарыясы жана чарбачылык"],
+    "text":["Географический раздел «Юань ши» описывает кыргызские земли вокруг реки Кэм — Енисея. Население содержало скот, обрабатывало землю и охотилось; зимой использовало лыжи, названные в хронике «деревянными конями». Власти Юань распределили население по девяти тысячным подразделениям. Отметка показывает енисейский район расселения.","The geographical section of Yuan shi describes Kyrgyz lands around the Kem, the Yenisei River. People herded livestock, cultivated fields and hunted, using skis described as ‘wooden horses’ in winter. Yuan authorities organised the population into nine thousand-household units. The marker shows the Yenisei settlement region.","«Юань ши» чыгармасынын географиялык бөлүмү кыргыз жерлерин Кем — Энесай дарыясынын айланасында сүрөттөйт. Эл мал багып, жер иштетип, аңчылык кылган; кышында жылнаамада «жыгач ат» деп аталган лыжа колдонгон. Юань бийлиги калкты тогуз миңдик бөлүккө бөлгөн. Белги Энесайдагы отурукташуу аймагын көрсөтөт."],
+    "source":"Yuan shi (元史), juan 63, 地理六, 吉利吉思、撼合納、謙州、益蘭州等處."
+  },
+  {
+    "from":1755,"to":1758,"place":[77.2,42.4],"kind":"migration","route":[[72.34,40.78],[77.2,42.4]],
+    "periodLabel":["Середина 1750-х · возвращение общин","Mid-1750s · returning communities","1750-жылдардын ортосу · жамааттардын кайтып келиши"],
+    "title":["Возвращение из Андижанского района к Иссык-Кулю","Return from the Andijan region to Issyk-Kul","Анжиян аймагынан Ысык-Көлгө кайтуу"],
+    "text":["«Цин ши гао» сообщает, что восточные кыргызские общины под давлением джунгар ушли в Андижанский район. После разгрома Джунгарии в 1755 году они смогли вернуться в прежние кочевья. Хроника связывает восточных кыргызов с окрестностями Иссык-Куля. Линия показывает общее направление возвращения; перевалы и промежуточные стоянки в этом сообщении не названы.","Qing shi gao reports that eastern Kyrgyz communities moved to the Andijan region under Dzungar pressure. After the defeat of Dzungaria in 1755, they could return to their former pastures. The chronicle places the eastern Kyrgyz around Issyk-Kul. The line shows the general direction of return; this account does not name passes or intermediate camps.","«Цин ши гао» боюнча, чыгыш кыргыз жамааттары жуңгарлардын кысымынан Анжиян аймагына кетишкен. 1755-жылы Жуңгария талкалангандан кийин алар мурдагы жайыттарына кайта алышкан. Жылнаама чыгыш кыргыздарды Ысык-Көлдүн айланасы менен байланыштырат. Сызык кайтуунун жалпы багытын көрсөтөт; бул маалыматта ашуулар менен аралык конуштар аталган эмес."],
+    "source":"Qing shi gao (清史稿), juan 529, 藩部傳十二, 布魯特."
+  },
+  {
+    "from":1759,"to":1759,"place":[72.8,40.53],"kind":"diplomacy",
+    "title":["Ажы бий и связи западных кыргызов с Цин","Ajy Biy and western Kyrgyz relations with the Qing","Ажы бий жана батыш кыргыздардын Цин менен байланышы"],
+    "text":["В 1759 году Ажы бий из адыгине направил обращение цинскому военачальнику Чжаохуэю и сообщил об отправке послов к императорскому двору. «Цин ши гао» перечисляет среди западных кыргызов адыгине, монолдор, чирик и басыз. Отметка показывает Ошский район, связанный в хронике с владениями Ажы бия.","In 1759 Ajy Biy of the Adygine sent a letter to the Qing commander Zhaohui and announced an embassy to the imperial court. Qing shi gao lists Adygine, Monoldor, Chirik and Basyz among the western Kyrgyz. The marker shows the Osh region, which the chronicle associates with Ajy Biy’s communities.","1759-жылы адыгине уруусунан Ажы бий Цин колбашчысы Чжаохуэйге кат жолдоп, императордун ордосуна элчи жөнөтөрүн билдирген. «Цин ши гао» батыш кыргыздардын арасында адыгине, монолдор, чирик жана басызды атайт. Белги жылнаамада Ажы бийдин жамааттары менен байланышкан Ош аймагын көрсөтөт."],
+    "source":"Qing shi gao (清史稿), juan 529, 布魯特, Qianlong 24 (1759)."
+  },
+  {
+    "from":1762,"to":1762,"place":[72.8,40.53],"kind":"politics",
+    "title":["Ошские кыргызские общины и Коканд","Kyrgyz communities around Osh and Kokand","Ош аймагындагы кыргыз жамааттары жана Кокон"],
+    "text":["«Цин ши гао» сообщает о вмешательстве Коканда в земли ошских общин, связанных с Ажы бием, в 1762 году. Цинские представители в Синьцзяне потребовали вернуть эти земли. Запись показывает соперничество Коканда и Цин за влияние на кыргызские общины Ферганской окраины.","Qing shi gao records Kokand’s interference in the lands of Osh communities associated with Ajy Biy in 1762. Qing representatives in Xinjiang called for the lands to be returned. The entry documents Kokand–Qing competition for influence over Kyrgyz communities on the margins of Fergana.","«Цин ши гао» 1762-жылы Кокондун Ажы бийге байланышкан Ош жамааттарынын жерлерине кийлигишкенин баяндайт. Шинжаңдагы Цин өкүлдөрү бул жерлерди кайтарып берүүнү талап кылган. Жазма Фергананын четиндеги кыргыз жамааттарына таасир этүү үчүн Кокон менен Циндин атаандаштыгын көрсөтөт."],
+    "source":"Qing shi gao (清史稿), juan 529, 布魯特, Qianlong 27 (1762)."
+  },
+  {
+    "from":1878,"to":1878,"place":[75.99,39.47],"kind":"diplomacy",
+    "title":["Кыргызские представители у Лю Цзиньтана в Кашгаре","Kyrgyz representatives meet Liu Jintang in Kashgar","Кыргыз өкүлдөрүнүн Кашкарда Лю Цзиньтанга жолугушуусу"],
+    "text":["После восстановления власти Цин в Кашгаре кыргызские представители встретились с Лю Цзиньтаном и сообщили о четырнадцати группах. «Цин ши гао» одновременно отмечает переход значительной части кыргызских общин под российскую власть. К концу XIX века кыргызское население жило по обе стороны российско-цинской границы.","After Qing rule was restored in Kashgar, Kyrgyz representatives met Liu Jintang and reported fourteen groups. Qing shi gao also records that many Kyrgyz communities had come under Russian rule. By the late nineteenth century, Kyrgyz populations lived on both sides of the Russian–Qing frontier.","Кашкарда Цин бийлиги калыбына келгенден кийин кыргыз өкүлдөрү Лю Цзиньтан менен жолугушуп, он төрт топ жөнүндө билдиришкен. «Цин ши гао» кыргыз жамааттарынын кыйла бөлүгү Россиянын бийлигине өткөнүн да белгилейт. XIX кылымдын аягында кыргыздар орус-цин чек арасынын эки тарабында жашаган."],
+    "source":"Qing shi gao (清史稿), juan 529, 布魯特, Guangxu 4 (1878)."
+  },
+  {
     "from":1922,"to":1926,"place":null,
     "title":["Запись «Манаса» со слов Сагымбая Орозбакова","Recording Manas from Sagymbay Orozbakov","Сагымбай Орозбаков айткан «Манастын» жазылып алынышы"],
     "text":["В 1922–1926 годах собиратели записывали исполнение манасчы Сагымбая Орозбакова. Его вариант составил десять рукописных книг. Детство Манаса записали на кыргызском языке арабским письмом.","Between 1922 and 1926 collectors transcribed the recitations of the manaschi Sagymbay Orozbakov. His version fills ten handwritten books. The account of Manas’s childhood was written in Kyrgyz in Arabic script.","1922–1926-жылдары жыйноочулар манасчы Сагымбай Орозбаковдун айтуусун кагазга түшүрүшкөн. Анын варианты он кол жазма китепти түзөт. Манастын балалык чагы кыргыз тилинде араб жазуусу менен жазылып алынган."],
