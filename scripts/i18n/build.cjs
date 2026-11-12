@@ -149,7 +149,10 @@ for(const note of witnessData.filter(n=>n.place&&!n.background)){
  worldData.events.push({id:key,year:note.from,from:note.periodFrom??note.from,to:note.to,approx:note.from!==note.to,region:'eurasia',
   ...(note.periodLabel?{periodLabel:note.periodLabel}:{}),
   kind:note.kind||(note.from===950?'culture':'diplomacy'),coord:note.place,title:note.title,text:note.text,sources:[key],
-  ...(note.route?{route:note.route}:{})});
+  ...(note.route?{route:note.route}:{}),
+  ...(note.places?{mapPlaces:note.places}:{}),
+  ...(note.mapScale?{mapScale:note.mapScale}:{}),
+  ...(note.geographyNote?{geographyNote:note.geographyNote}:{})});
 }
 for(const event of worldData.events.filter(e=>e.base)){
  assert(event.sources.length&&event.sources.every(id=>worldData.sources[id]),'Missing reference for '+event.id);

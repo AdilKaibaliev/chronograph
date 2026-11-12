@@ -86,6 +86,8 @@ for(const e of payload.events){
 }
 for(const w of require('./kyrgyz-witnesses.json')){
  text(w.title);text(w.text);assert(w.source);
+ if(w.geographyNote)text(w.geographyNote);
+ for(const [coord,name] of w.places||[]){text(name);assert(coord.length===2&&coord.every(Number.isFinite));assert(Math.abs(coord[0])<=180&&Math.abs(coord[1])<=90);}
  if(!w.place)assert(!eventIds.has('kyrgyz-witness-'+w.from),'Unlocated account has a map pin');
 }
 // A broad source account must not hide a dated embassy in the Kyrgyz timeline.
@@ -99,6 +101,12 @@ for(const y of [843,844,866,1758,1759,1762])assert.equal(readPeriod(y).note.from
 assert.equal(publishedHistory.record('kyrgyz-witness-1755').route.length,2);
 assert.equal(publishedHistory.record('kyrgyz-witness-1050').from,1050);
 assert.equal(publishedHistory.record('kyrgyz-witness-870').from,801);
+assert.deepEqual(publishedHistory.record('kyrgyz-witness-1295').route,[[116.15,40.53],[118,36.5]]);
+assert.equal(publishedHistory.record('kyrgyz-witness-1295').to,1296,'Lunar winter must not be silently confined to a Gregorian year');
+for(const y of [1050,1154,1295,1755,1758,1760]){
+ const w=require('./kyrgyz-witnesses.json').find(w=>w.from===y),event=publishedHistory.record('kyrgyz-witness-'+y);
+ assert(event,'Missing mapped witness '+y);assert.deepEqual(event.mapPlaces,w.places,'Named geography lost in build '+y);
+}
 for(let y=1300;y<=payload.range.max;y++)assert(publishedHistory.at(y,'eurasia').some(item=>item.entry.kyrgyzHistory),'Missing Kyrgyz history in '+y);
 assert.equal(publishedHistory.record('kyrgyz-witness-1517').kind,'war');
 const geography=publishedHistory.record('kyrgyz-witness-950');

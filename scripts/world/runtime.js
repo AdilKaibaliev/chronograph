@@ -128,8 +128,8 @@ function worldChooseEvent(id){
  stopPlay();worldShowLocations();worldState.area='';worldState.event=id;worldState.selected=e.entry||'';worldState.mode='timeline';worldState.filters=false;
  if(worldState.region!=='all'&&worldState.region!==e.region&&!WORLD_HISTORY.eventRegions?.[id]?.includes(worldState.region))worldState.region=e.region;
  switchPanel('compare');renderYear(e.periodLabel&&year>=e.from&&year<=e.to?year:e.year);
- const lesson=WORLD_HISTORY.mapComparisons?.[id],focusPoints=lesson?lesson.places.map(p=>p[0]):e.route;
- if(focusPoints?.length){const pts=focusPoints.map(project),xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]),cx=(Math.min(...xs)+Math.max(...xs))/2,cy=(Math.min(...ys)+Math.max(...ys))/2,s=Math.min(lesson?.scale||24,SVG_W*.72/Math.max(14,Math.max(...xs)-Math.min(...xs)),SVG_H*.65/Math.max(14,Math.max(...ys)-Math.min(...ys)));animateCamera({scale:s,tx:SVG_W/2-cx*s,ty:SVG_H/2-cy*s});}else focusLonLat(...e.coord,e.region==='antarctica'?1.3:4.2);
+ const lesson=WORLD_HISTORY.mapComparisons?.[id],focusPoints=lesson?lesson.places.map(p=>p[0]):[...(e.route||[]),...(e.mapPlaces||[]).map(p=>p[0])];
+ if(focusPoints?.length){const pts=focusPoints.map(project),xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]),cx=(Math.min(...xs)+Math.max(...xs))/2,cy=(Math.min(...ys)+Math.max(...ys))/2,s=Math.min(lesson?.scale||e.mapScale||24,SVG_W*.72/Math.max(14,Math.max(...xs)-Math.min(...xs)),SVG_H*.65/Math.max(14,Math.max(...ys)-Math.min(...ys)));animateCamera({scale:s,tx:SVG_W/2-cx*s,ty:SVG_H/2-cy*s});}else focusLonLat(...e.coord,e.region==='antarctica'?1.3:4.2);
  $('panel-compare').scrollTop=0;$('worldEventTitle')?.focus({preventScroll:true});queueLocationSave();
 }
 let worldControlsKey='';
@@ -234,6 +234,8 @@ function renderWorldEvent(){
  const title=we('h4','',wl(e.title));title.id='worldEventTitle';title.tabIndex=-1;
  worldEventDetail.append(we('p','world-card-meta',worldEventDate(e)+' · '+wt(e.approx?'approx':'exact')),title,we('p','world-description',wl(e.text)));
  if(e.routeApprox)worldEventDetail.append(we('p','world-card-meta',wl(['Схема переселения · места отправления и прибытия','Migration schematic · origins and destinations','Көчүүнүн схемасы · жөнөгөн жана келген жерлер'])));
+  if(e.geographyNote)worldEventDetail.append(we('p','world-card-meta',wl(e.geographyNote)));
+  if(e.mapPlaces?.length)worldEventDetail.append(we('p','world-card-meta',e.mapPlaces.map(p=>wl(p[1])).join(e.route?' → ':' · ')));
  appendWorldSources(worldEventDetail,e.sources,e.base);
  renderWorldComparison(e);
  const actions=we('div','world-event-actions'),records=worldRecords(),i=records.findIndex(r=>r.id===e.id);
@@ -306,14 +308,14 @@ function renderWorldMap(){
  }
  const event=worldHistory.record(worldState.event);
  const lesson=event&&WORLD_HISTORY.mapComparisons?.[event.id];
- if(lesson)for(const [coord,name] of lesson.places){
+ for(const [coord,name] of lesson?.places||event?.mapPlaces||[]){
   const [x,y]=project(coord),group=sn('g',{class:'world-marker world-comparison-place',transform:'translate('+x+' '+y+')','data-px':x,'data-py':y}),inner=sn('g',{class:'world-marker-inner'}),label=sn('text'),title=sn('title');
   label.textContent=wl(name);title.textContent=wl(name);inner.append(sn('circle',{r:4.5,class:'world-comparison-dot'}),label);group.append(inner,title);worldLayer.append(group);
  }
  if(event&&!lesson){
   if(event.route?.length){const d=event.route.map((p,i)=>(i?'L':'M')+project(p).join(' ')).join(' ');const route=sn('path',{d,class:'world-event-route','marker-end':'url(#worldRouteArrow)'});route.append(sn('title'));route.firstChild.textContent=wt('route');worldLayer.append(route);}
   const [x,y]=project(event.coord),g=sn('g',{class:'world-marker world-event-marker selected',transform:`translate(${x} ${y})`,'data-px':x,'data-py':y,role:'button',tabindex:0,'aria-label':wl(event.title)}),inner=sn('g',{class:'world-marker-inner'});
-  inner.append(sn('circle',{r:12,class:'world-event-ring'}),sn('circle',{r:4,class:'world-event-dot'}));const label=sn('text');label.textContent=wl(event.title);inner.append(label);g.append(inner);g.onclick=()=>{switchPanel('compare');$('panel-compare').scrollTop=0;};g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();g.onclick();}};g.addEventListener('pointerdown',e=>e.stopPropagation());worldLayer.append(g);
+  inner.append(sn('circle',{r:12,class:'world-event-ring'}),sn('circle',{r:4,class:'world-event-dot'}));if(!event.mapPlaces?.length){const label=sn('text');label.textContent=wl(event.title);inner.append(label);}g.append(inner);g.onclick=()=>{switchPanel('compare');$('panel-compare').scrollTop=0;};g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();g.onclick();}};g.addEventListener('pointerdown',e=>e.stopPropagation());worldLayer.append(g);
  }
  updateWorldMarkerScale();
 }

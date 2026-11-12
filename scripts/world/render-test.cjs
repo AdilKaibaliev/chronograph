@@ -143,4 +143,14 @@ context.wl=row=>row[1];context.renderWorldMap();assert(findArea(context.worldTer
 context.wl=row=>row[2];context.renderWorldMap();assert(findArea(context.worldTerritoryLayer.children,'late-hre').children[0].getAttribute('aria-label').includes('Герман империясы'));
 assert(vm.runInContext('worldTerritoryNodes.size<=768',context),'SVG retention is unbounded');
 
-console.log(JSON.stringify({status:'PASS',renderers:2,renders,regions:regions.length,years:(catalog.range?.max??1299)-609,territoriesIn1299:expectedAreas(1299).length,placesIn1299:expectedPlaces(1299).length}));
+// Selecting another account replaces every old route/landmark, in each locale.
+for(const lang of [0,1,2])for(const y of [1295,1760,1050,1758,1154,1755]){
+ context.wl=row=>row[lang];context.year=y;context.worldState.event='kyrgyz-witness-'+y;context.renderWorldMap();
+ const event=context.worldHistory.record(context.worldState.event);
+ const landmarks=context.worldLayer.children.filter(n=>n.classList.contains('world-comparison-place'));
+ assert.deepEqual(landmarks.map(n=>n.children[0].children[1].textContent),event.mapPlaces.map(p=>p[1][lang]));
+ assert.equal(context.worldLayer.children.filter(n=>n.classList.contains('world-event-route')).length,event.route?1:0);
+}
+context.worldState.event='';context.renderWorldMap();
+assert(!context.worldLayer.children.some(n=>n.classList.contains('world-comparison-place')||n.classList.contains('world-event-route')),'Old geography leaked into another selection');
+console.log(JSON.stringify({status:'PASS',renderers:2,renders,regions:regions.length,years:(catalog.range?.max??1299)-609,territoriesIn1299:expectedAreas(1299).length,placesIn1299:expectedPlaces(1299).length,kyrgyzGeographyChecks:18}));

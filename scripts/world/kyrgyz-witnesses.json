@@ -1,200 +1,1001 @@
 [
   {
-    "from":870,"periodFrom":801,"to":900,"place":[91.7,53.6],"kind":"culture",
-    "periodLabel":["IX век · арабское географическое описание","9th century · Arabic geographical account","IX кылым · арабча географиялык баяндоо"],
-    "title":["Кыргызы в «Книге путей и стран»","The Kyrgyz in the Book of Roads and Kingdoms","«Жолдор жана өлкөлөр китебиндеги» кыргыздар"],
-    "text":["Ибн Хордадбех перечисляет кыргызов — хирхиз — среди народов тюркского мира и отмечает мускус в их стране. Это свидетельство знакомства арабской географии IX века с кыргызскими землями и их товарами. Отметка показывает енисейский регион; автор не называет конкретное поселение кыргызов.","Ibn Khordadbeh lists the Kyrgyz, Khirkhiz, among the peoples of the Turkic world and notes musk in their country. His account documents ninth-century Arabic geographical knowledge of Kyrgyz lands and their products. The marker shows the Yenisei region; he names no particular Kyrgyz settlement.","Ибн Хордадбех кыргыздарды — хирхиз — түрк дүйнөсүндөгү элдердин катарында атап, алардын өлкөсүндө жыпар бар экенин белгилейт. Бул маалымат IX кылымдагы араб географиясынын кыргыз жерлери жана товарлары тууралуу кабардар болгонун көрсөтөт. Белги Энесай аймагын көрсөтөт; автор кыргыздардын белгилүү бир конушун атабайт."],
-    "source":"Ибн Хордадбех. Китаб ал-масалик ва-л-мамалик (Книга путей и стран), §16. Перевод Н. Велихановой. Баку, 1986."
+    "from": 870,
+    "periodFrom": 801,
+    "to": 900,
+    "place": [
+      91.7,
+      53.6
+    ],
+    "kind": "culture",
+    "periodLabel": [
+      "IX век · арабское географическое описание",
+      "9th century · Arabic geographical account",
+      "IX кылым · арабча географиялык баяндоо"
+    ],
+    "title": [
+      "Кыргызы в «Книге путей и стран»",
+      "The Kyrgyz in the Book of Roads and Kingdoms",
+      "«Жолдор жана өлкөлөр китебиндеги» кыргыздар"
+    ],
+    "text": [
+      "Ибн Хордадбех перечисляет кыргызов — хирхиз — среди народов тюркского мира и отмечает мускус в их стране. Это свидетельство знакомства арабской географии IX века с кыргызскими землями и их товарами. Отметка показывает енисейский регион; автор не называет конкретное поселение кыргызов.",
+      "Ibn Khordadbeh lists the Kyrgyz, Khirkhiz, among the peoples of the Turkic world and notes musk in their country. His account documents ninth-century Arabic geographical knowledge of Kyrgyz lands and their products. The marker shows the Yenisei region; he names no particular Kyrgyz settlement.",
+      "Ибн Хордадбех кыргыздарды — хирхиз — түрк дүйнөсүндөгү элдердин катарында атап, алардын өлкөсүндө жыпар бар экенин белгилейт. Бул маалымат IX кылымдагы араб географиясынын кыргыз жерлери жана товарлары тууралуу кабардар болгонун көрсөтөт. Белги Энесай аймагын көрсөтөт; автор кыргыздардын белгилүү бир конушун атабайт."
+    ],
+    "source": "Ибн Хордадбех. Китаб ал-масалик ва-л-мамалик (Книга путей и стран), §16. Перевод Н. Велихановой. Баку, 1986."
   },
   {
-    "from":844,"to":844,"place":[108.94,34.26],"kind":"culture",
-    "title":["Как в Чанъани записывали сведения о кыргызах","Recording Kyrgyz geography in Chang’an","Чанъанда кыргыздар жөнүндө маалыматтын жазылышы"],
-    "text":["Ли Дэюй сообщает, что Вэй Цзунцин и Люй Шу расспрашивали кыргызских послов о языке, горах, реках и обычаях их страны. На основе этих сведений подготовили иллюстрированное описание посольства. Его предисловие сохранилось в «Цюань Тан вэнь». Встреча происходила в Чанъани, нынешнем Сиане.","Li Deyu records that Wei Zongqing and Lü Shu interviewed Kyrgyz envoys about their language, mountains, rivers and customs. Their information informed an illustrated account of the embassy. Its preface survives in Quan Tang wen. The meeting took place in Chang’an, present-day Xi’an.","Ли Дэюйдун маалыматы боюнча, Вэй Цзунцин менен Люй Шу кыргыз элчилеринен алардын тили, тоолору, дарыялары жана каада-салты жөнүндө сурашкан. Бул маалыматтардын негизинде элчилик тууралуу сүрөттүү баяндама түзүлгөн. Анын баш сөзү «Цюань Тан вэнь» жыйнагында сакталган. Жолугушуу азыркы Сиань шаары болгон Чанъанда өткөн."],
-    "source":"Li Deyu (李德裕). 黠戛斯朝貢圖傳序. Quan Tang wen (全唐文), juan 707, Huichang 4 (844)."
+    "from": 844,
+    "to": 844,
+    "place": [
+      108.94,
+      34.26
+    ],
+    "kind": "culture",
+    "title": [
+      "Как в Чанъани записывали сведения о кыргызах",
+      "Recording Kyrgyz geography in Chang’an",
+      "Чанъанда кыргыздар жөнүндө маалыматтын жазылышы"
+    ],
+    "text": [
+      "Ли Дэюй сообщает, что Вэй Цзунцин и Люй Шу расспрашивали кыргызских послов о языке, горах, реках и обычаях их страны. На основе этих сведений подготовили иллюстрированное описание посольства. Его предисловие сохранилось в «Цюань Тан вэнь». Встреча происходила в Чанъани, нынешнем Сиане.",
+      "Li Deyu records that Wei Zongqing and Lü Shu interviewed Kyrgyz envoys about their language, mountains, rivers and customs. Their information informed an illustrated account of the embassy. Its preface survives in Quan Tang wen. The meeting took place in Chang’an, present-day Xi’an.",
+      "Ли Дэюйдун маалыматы боюнча, Вэй Цзунцин менен Люй Шу кыргыз элчилеринен алардын тили, тоолору, дарыялары жана каада-салты жөнүндө сурашкан. Бул маалыматтардын негизинде элчилик тууралуу сүрөттүү баяндама түзүлгөн. Анын баш сөзү «Цюань Тан вэнь» жыйнагында сакталган. Жолугушуу азыркы Сиань шаары болгон Чанъанда өткөн."
+    ],
+    "source": "Li Deyu (李德裕). 黠戛斯朝貢圖傳序. Quan Tang wen (全唐文), juan 707, Huichang 4 (844)."
   },
   {
-    "from":1050,"to":1053,"place":[91.7,53.6],"kind":"culture",
-    "periodLabel":["1050–1053 · запись более ранних географических сведений","1050–1053 · compilation of earlier geographical accounts","1050–1053 · мурдагы географиялык маалыматтардын жазылышы"],
-    "title":["Дороги к кыргызам у Гардизи","Routes to the Kyrgyz in Gardizi","Гардизи баяндаган кыргыздарга баруучу жолдор"],
-    "text":["Гардизи описывает путь через горы Көгмен к ставке кыргызского кагана. Оттуда дороги вели на юг к тогузогузам и на запад к кимакам и карлукам. Из кыргызских земель вывозили мускус и меха. Сочинение записано в XI веке по более ранним сведениям. Отметка обозначает Минусинскую котловину; местоположение ставки точно не установлено.","Gardizi describes a route across the Kögmen Mountains to the Kyrgyz khagan’s camp. Roads led south to the Toquz Oghuz and west to the Kimeks and Karluks. Musk and furs were exported. This eleventh-century account preserves earlier information. The marker indicates the Minusinsk Basin; the camp’s exact location remains uncertain.","Гардизи Көгмен тоолору аркылуу кыргыз каганынын ордосуна баруучу жолду сүрөттөйт. Андан түштүккө тогуз огуздарга, батышка кимактар менен карлуктарга жолдор кеткен. Кыргыз жеринен жыпар жана аң терилери чыгарылган. XI кылымдагы чыгарма мурдагы маалыматтарга таянат. Белги Минусин ойдуңун көрсөтөт; ордонун так орду аныктала элек."],
-    "source":"Абу Саид Гардизи. Зайн ал-ахбар. Извлечение, перевод В. В. Бартольда, раздел о пути к кыргызам."
+    "from": 1050,
+    "to": 1053,
+    "place": [
+      91.7,
+      53.6
+    ],
+    "kind": "culture",
+    "periodLabel": [
+      "1050–1053 · запись более ранних географических сведений",
+      "1050–1053 · compilation of earlier geographical accounts",
+      "1050–1053 · мурдагы географиялык маалыматтардын жазылышы"
+    ],
+    "title": [
+      "Дороги к кыргызам у Гардизи",
+      "Routes to the Kyrgyz in Gardizi",
+      "Гардизи баяндаган кыргыздарга баруучу жолдор"
+    ],
+    "text": [
+      "Гардизи описывает дорогу от Чинанджкета к кыргызскому кагану через горы Көгмен. Чинанджкет связывают с Кочо в Турфанском оазисе, а Көгмен — с Саянами. Схема через Алтай следует реконструкции Ю. Н. Есина. Из кыргызских земель вывозили мускус и меха. Дата относится к составлению книги, сохраняющей более ранние сведения.",
+      "Gardizi describes a road from Chinanjkath to the Kyrgyz khagan across the Kögmen Mountains. Chinanjkath is identified with Qocho in the Turfan oasis, and Kögmen with the Sayan Mountains. The schematic through the Altai follows Yu. N. Esin’s reconstruction. Kyrgyz lands exported musk and furs. The date marks compilation of earlier accounts.",
+      "Гардизи Чинанжкеттен Көгмен тоолору аркылуу кыргыз каганына баруучу жолду баяндайт. Чинанжкет Турпан оазисиндеги Кочо, Көгмен болсо Саян тоолору менен байланыштырылат. Алтай аркылуу өткөн схема Ю. Н. Есиндин реконструкциясына таянат. Кыргыз жеринен жыпар жана аң терилери чыгарылган. Дата мурдагы маалыматтарды камтыган китептин түзүлүшүнө тиешелүү."
+    ],
+    "source": "Абу Саид Гардизи. Зайн ал-ахбар. Извлечение, перевод В. В. Бартольда, раздел о пути к кыргызам. Ю. Н. Есин. Страна кыргызов на картах большого атласа ал-Идриси. Научное обозрение Саяно-Алтая, 2022, № 1 (33), с. 53–104. С. 83–84, рис. 9.",
+    "route": [
+      [
+        89.53,
+        42.85
+      ],
+      [
+        88.7,
+        48.5
+      ],
+      [
+        92.3,
+        52.7
+      ],
+      [
+        91.7,
+        53.6
+      ]
+    ],
+    "places": [
+      [
+        [
+          89.53,
+          42.85
+        ],
+        [
+          "Кочо · Турфан",
+          "Qocho · Turfan",
+          "Кочо · Турпан"
+        ]
+      ],
+      [
+        [
+          88.7,
+          48.5
+        ],
+        [
+          "Алтай · область перехода",
+          "Altai · crossing region",
+          "Алтай · өтүү аймагы"
+        ]
+      ],
+      [
+        [
+          92.3,
+          52.7
+        ],
+        [
+          "Саяны · Көгмен",
+          "Sayan Mountains · Kögmen",
+          "Саян · Көгмен"
+        ]
+      ],
+      [
+        [
+          91.7,
+          53.6
+        ],
+        [
+          "Минусинская котловина",
+          "Minusinsk Basin",
+          "Минусин ойдуңу"
+        ]
+      ]
+    ],
+    "mapScale": 5,
+    "geographyNote": [
+      "Реконструкция общего направления по дорожнику; точные перевалы и место ставки не установлены.",
+      "Reconstructed general direction from the itinerary; exact passes and the camp location are uncertain.",
+      "Жол баяны боюнча жалпы багыттын реконструкциясы; ашуулар менен ордонун так орду аныктала элек."
+    ]
   },
   {
-    "from":1271,"to":1368,"background":true,"place":[91.7,53.6],
-    "periodLabel":["Эпоха Юань · географическое описание","Yuan period · geographical account","Юань доору · географиялык баяндоо"],
-    "title":["Кэм, реки и хозяйство кыргызских земель","The Kem River and livelihoods in Kyrgyz lands","Кыргыз жерлериндеги Кем дарыясы жана чарбачылык"],
-    "text":["Географический раздел «Юань ши» описывает кыргызские земли вокруг реки Кэм — Енисея. Население содержало скот, обрабатывало землю и охотилось; зимой использовало лыжи, названные в хронике «деревянными конями». Власти Юань распределили население по девяти тысячным подразделениям. Отметка показывает енисейский район расселения.","The geographical section of Yuan shi describes Kyrgyz lands around the Kem, the Yenisei River. People herded livestock, cultivated fields and hunted, using skis described as ‘wooden horses’ in winter. Yuan authorities organised the population into nine thousand-household units. The marker shows the Yenisei settlement region.","«Юань ши» чыгармасынын географиялык бөлүмү кыргыз жерлерин Кем — Энесай дарыясынын айланасында сүрөттөйт. Эл мал багып, жер иштетип, аңчылык кылган; кышында жылнаамада «жыгач ат» деп аталган лыжа колдонгон. Юань бийлиги калкты тогуз миңдик бөлүккө бөлгөн. Белги Энесайдагы отурукташуу аймагын көрсөтөт."],
-    "source":"Yuan shi (元史), juan 63, 地理六, 吉利吉思、撼合納、謙州、益蘭州等處."
+    "from": 1271,
+    "to": 1368,
+    "background": true,
+    "place": [
+      91.7,
+      53.6
+    ],
+    "periodLabel": [
+      "Эпоха Юань · географическое описание",
+      "Yuan period · geographical account",
+      "Юань доору · географиялык баяндоо"
+    ],
+    "title": [
+      "Кэм, реки и хозяйство кыргызских земель",
+      "The Kem River and livelihoods in Kyrgyz lands",
+      "Кыргыз жерлериндеги Кем дарыясы жана чарбачылык"
+    ],
+    "text": [
+      "Географический раздел «Юань ши» описывает кыргызские земли вокруг реки Кэм — Енисея. Население содержало скот, обрабатывало землю и охотилось; зимой использовало лыжи, названные в хронике «деревянными конями». Власти Юань распределили население по девяти тысячным подразделениям. Отметка показывает енисейский район расселения.",
+      "The geographical section of Yuan shi describes Kyrgyz lands around the Kem, the Yenisei River. People herded livestock, cultivated fields and hunted, using skis described as ‘wooden horses’ in winter. Yuan authorities organised the population into nine thousand-household units. The marker shows the Yenisei settlement region.",
+      "«Юань ши» чыгармасынын географиялык бөлүмү кыргыз жерлерин Кем — Энесай дарыясынын айланасында сүрөттөйт. Эл мал багып, жер иштетип, аңчылык кылган; кышында жылнаамада «жыгач ат» деп аталган лыжа колдонгон. Юань бийлиги калкты тогуз миңдик бөлүккө бөлгөн. Белги Энесайдагы отурукташуу аймагын көрсөтөт."
+    ],
+    "source": "Yuan shi (元史), juan 63, 地理六, 吉利吉思、撼合納、謙州、益蘭州等處."
   },
   {
-    "from":1755,"to":1758,"place":[77.2,42.4],"kind":"migration","route":[[72.34,40.78],[77.2,42.4]],
-    "periodLabel":["Середина 1750-х · возвращение общин","Mid-1750s · returning communities","1750-жылдардын ортосу · жамааттардын кайтып келиши"],
-    "title":["Возвращение из Андижанского района к Иссык-Кулю","Return from the Andijan region to Issyk-Kul","Анжиян аймагынан Ысык-Көлгө кайтуу"],
-    "text":["«Цин ши гао» сообщает, что восточные кыргызские общины под давлением джунгар ушли в Андижанский район. После разгрома Джунгарии в 1755 году они смогли вернуться в прежние кочевья. Хроника связывает восточных кыргызов с окрестностями Иссык-Куля. Линия показывает общее направление возвращения; перевалы и промежуточные стоянки в этом сообщении не названы.","Qing shi gao reports that eastern Kyrgyz communities moved to the Andijan region under Dzungar pressure. After the defeat of Dzungaria in 1755, they could return to their former pastures. The chronicle places the eastern Kyrgyz around Issyk-Kul. The line shows the general direction of return; this account does not name passes or intermediate camps.","«Цин ши гао» боюнча, чыгыш кыргыз жамааттары жуңгарлардын кысымынан Анжиян аймагына кетишкен. 1755-жылы Жуңгария талкалангандан кийин алар мурдагы жайыттарына кайта алышкан. Жылнаама чыгыш кыргыздарды Ысык-Көлдүн айланасы менен байланыштырат. Сызык кайтуунун жалпы багытын көрсөтөт; бул маалыматта ашуулар менен аралык конуштар аталган эмес."],
-    "source":"Qing shi gao (清史稿), juan 529, 藩部傳十二, 布魯特."
+    "from": 1755,
+    "to": 1758,
+    "place": [
+      77.2,
+      42.4
+    ],
+    "kind": "migration",
+    "route": [
+      [
+        72.34,
+        40.78
+      ],
+      [
+        77.2,
+        42.4
+      ]
+    ],
+    "periodLabel": [
+      "Середина 1750-х · возвращение общин",
+      "Mid-1750s · returning communities",
+      "1750-жылдардын ортосу · жамааттардын кайтып келиши"
+    ],
+    "title": [
+      "Возвращение из Андижанского района к Иссык-Кулю",
+      "Return from the Andijan region to Issyk-Kul",
+      "Анжиян аймагынан Ысык-Көлгө кайтуу"
+    ],
+    "text": [
+      "«Цин ши гао» сообщает, что восточные кыргызские общины под давлением джунгар ушли в Андижанский район. После разгрома Джунгарии в 1755 году они смогли вернуться в прежние кочевья. Хроника связывает восточных кыргызов с окрестностями Иссык-Куля. Линия показывает общее направление возвращения; перевалы и промежуточные стоянки в этом сообщении не названы.",
+      "Qing shi gao reports that eastern Kyrgyz communities moved to the Andijan region under Dzungar pressure. After the defeat of Dzungaria in 1755, they could return to their former pastures. The chronicle places the eastern Kyrgyz around Issyk-Kul. The line shows the general direction of return; this account does not name passes or intermediate camps.",
+      "«Цин ши гао» боюнча, чыгыш кыргыз жамааттары жуңгарлардын кысымынан Анжиян аймагына кетишкен. 1755-жылы Жуңгария талкалангандан кийин алар мурдагы жайыттарына кайта алышкан. Жылнаама чыгыш кыргыздарды Ысык-Көлдүн айланасы менен байланыштырат. Сызык кайтуунун жалпы багытын көрсөтөт; бул маалыматта ашуулар менен аралык конуштар аталган эмес."
+    ],
+    "source": "Qing shi gao (清史稿), juan 529, 藩部傳十二, 布魯特.",
+    "places": [
+      [
+        [
+          72.34,
+          40.78
+        ],
+        [
+          "Андижан · район исхода",
+          "Andijan · departure region",
+          "Анжиян · чыккан аймак"
+        ]
+      ],
+      [
+        [
+          77.2,
+          42.4
+        ],
+        [
+          "Иссык-Куль · район возвращения",
+          "Issyk-Kul · return region",
+          "Ысык-Көл · кайтуу аймагы"
+        ]
+      ]
+    ],
+    "geographyNote": [
+      "Общее направление возвращения общин.",
+      "General direction of returning communities.",
+      "Жамааттардын кайтышынын жалпы багыты."
+    ]
   },
   {
-    "from":1759,"to":1759,"place":[72.8,40.53],"kind":"diplomacy",
-    "title":["Ажы бий и связи западных кыргызов с Цин","Ajy Biy and western Kyrgyz relations with the Qing","Ажы бий жана батыш кыргыздардын Цин менен байланышы"],
-    "text":["В 1759 году Ажы бий из адыгине направил обращение цинскому военачальнику Чжаохуэю и сообщил об отправке послов к императорскому двору. «Цин ши гао» перечисляет среди западных кыргызов адыгине, монолдор, чирик и басыз. Отметка показывает Ошский район, связанный в хронике с владениями Ажы бия.","In 1759 Ajy Biy of the Adygine sent a letter to the Qing commander Zhaohui and announced an embassy to the imperial court. Qing shi gao lists Adygine, Monoldor, Chirik and Basyz among the western Kyrgyz. The marker shows the Osh region, which the chronicle associates with Ajy Biy’s communities.","1759-жылы адыгине уруусунан Ажы бий Цин колбашчысы Чжаохуэйге кат жолдоп, императордун ордосуна элчи жөнөтөрүн билдирген. «Цин ши гао» батыш кыргыздардын арасында адыгине, монолдор, чирик жана басызды атайт. Белги жылнаамада Ажы бийдин жамааттары менен байланышкан Ош аймагын көрсөтөт."],
-    "source":"Qing shi gao (清史稿), juan 529, 布魯特, Qianlong 24 (1759)."
+    "from": 1759,
+    "to": 1759,
+    "place": [
+      72.8,
+      40.53
+    ],
+    "kind": "diplomacy",
+    "title": [
+      "Ажы бий и связи западных кыргызов с Цин",
+      "Ajy Biy and western Kyrgyz relations with the Qing",
+      "Ажы бий жана батыш кыргыздардын Цин менен байланышы"
+    ],
+    "text": [
+      "В 1759 году Ажы бий из адыгине направил обращение цинскому военачальнику Чжаохуэю и сообщил об отправке послов к императорскому двору. «Цин ши гао» перечисляет среди западных кыргызов адыгине, монолдор, чирик и басыз. Отметка показывает Ошский район, связанный в хронике с владениями Ажы бия.",
+      "In 1759 Ajy Biy of the Adygine sent a letter to the Qing commander Zhaohui and announced an embassy to the imperial court. Qing shi gao lists Adygine, Monoldor, Chirik and Basyz among the western Kyrgyz. The marker shows the Osh region, which the chronicle associates with Ajy Biy’s communities.",
+      "1759-жылы адыгине уруусунан Ажы бий Цин колбашчысы Чжаохуэйге кат жолдоп, императордун ордосуна элчи жөнөтөрүн билдирген. «Цин ши гао» батыш кыргыздардын арасында адыгине, монолдор, чирик жана басызды атайт. Белги жылнаамада Ажы бийдин жамааттары менен байланышкан Ош аймагын көрсөтөт."
+    ],
+    "source": "Qing shi gao (清史稿), juan 529, 布魯特, Qianlong 24 (1759)."
   },
   {
-    "from":1762,"to":1762,"place":[72.8,40.53],"kind":"politics",
-    "title":["Ошские кыргызские общины и Коканд","Kyrgyz communities around Osh and Kokand","Ош аймагындагы кыргыз жамааттары жана Кокон"],
-    "text":["«Цин ши гао» сообщает о вмешательстве Коканда в земли ошских общин, связанных с Ажы бием, в 1762 году. Цинские представители в Синьцзяне потребовали вернуть эти земли. Запись показывает соперничество Коканда и Цин за влияние на кыргызские общины Ферганской окраины.","Qing shi gao records Kokand’s interference in the lands of Osh communities associated with Ajy Biy in 1762. Qing representatives in Xinjiang called for the lands to be returned. The entry documents Kokand–Qing competition for influence over Kyrgyz communities on the margins of Fergana.","«Цин ши гао» 1762-жылы Кокондун Ажы бийге байланышкан Ош жамааттарынын жерлерине кийлигишкенин баяндайт. Шинжаңдагы Цин өкүлдөрү бул жерлерди кайтарып берүүнү талап кылган. Жазма Фергананын четиндеги кыргыз жамааттарына таасир этүү үчүн Кокон менен Циндин атаандаштыгын көрсөтөт."],
-    "source":"Qing shi gao (清史稿), juan 529, 布魯特, Qianlong 27 (1762)."
+    "from": 1762,
+    "to": 1762,
+    "place": [
+      72.8,
+      40.53
+    ],
+    "kind": "politics",
+    "title": [
+      "Ошские кыргызские общины и Коканд",
+      "Kyrgyz communities around Osh and Kokand",
+      "Ош аймагындагы кыргыз жамааттары жана Кокон"
+    ],
+    "text": [
+      "«Цин ши гао» сообщает о вмешательстве Коканда в земли ошских общин, связанных с Ажы бием, в 1762 году. Цинские представители в Синьцзяне потребовали вернуть эти земли. Запись показывает соперничество Коканда и Цин за влияние на кыргызские общины Ферганской окраины.",
+      "Qing shi gao records Kokand’s interference in the lands of Osh communities associated with Ajy Biy in 1762. Qing representatives in Xinjiang called for the lands to be returned. The entry documents Kokand–Qing competition for influence over Kyrgyz communities on the margins of Fergana.",
+      "«Цин ши гао» 1762-жылы Кокондун Ажы бийге байланышкан Ош жамааттарынын жерлерине кийлигишкенин баяндайт. Шинжаңдагы Цин өкүлдөрү бул жерлерди кайтарып берүүнү талап кылган. Жазма Фергананын четиндеги кыргыз жамааттарына таасир этүү үчүн Кокон менен Циндин атаандаштыгын көрсөтөт."
+    ],
+    "source": "Qing shi gao (清史稿), juan 529, 布魯特, Qianlong 27 (1762)."
   },
   {
-    "from":1878,"to":1878,"place":[75.99,39.47],"kind":"diplomacy",
-    "title":["Кыргызские представители у Лю Цзиньтана в Кашгаре","Kyrgyz representatives meet Liu Jintang in Kashgar","Кыргыз өкүлдөрүнүн Кашкарда Лю Цзиньтанга жолугушуусу"],
-    "text":["После восстановления власти Цин в Кашгаре кыргызские представители встретились с Лю Цзиньтаном и сообщили о четырнадцати группах. «Цин ши гао» одновременно отмечает переход значительной части кыргызских общин под российскую власть. К концу XIX века кыргызское население жило по обе стороны российско-цинской границы.","After Qing rule was restored in Kashgar, Kyrgyz representatives met Liu Jintang and reported fourteen groups. Qing shi gao also records that many Kyrgyz communities had come under Russian rule. By the late nineteenth century, Kyrgyz populations lived on both sides of the Russian–Qing frontier.","Кашкарда Цин бийлиги калыбына келгенден кийин кыргыз өкүлдөрү Лю Цзиньтан менен жолугушуп, он төрт топ жөнүндө билдиришкен. «Цин ши гао» кыргыз жамааттарынын кыйла бөлүгү Россиянын бийлигине өткөнүн да белгилейт. XIX кылымдын аягында кыргыздар орус-цин чек арасынын эки тарабында жашаган."],
-    "source":"Qing shi gao (清史稿), juan 529, 布魯特, Guangxu 4 (1878)."
+    "from": 1878,
+    "to": 1878,
+    "place": [
+      75.99,
+      39.47
+    ],
+    "kind": "diplomacy",
+    "title": [
+      "Кыргызские представители у Лю Цзиньтана в Кашгаре",
+      "Kyrgyz representatives meet Liu Jintang in Kashgar",
+      "Кыргыз өкүлдөрүнүн Кашкарда Лю Цзиньтанга жолугушуусу"
+    ],
+    "text": [
+      "После восстановления власти Цин в Кашгаре кыргызские представители встретились с Лю Цзиньтаном и сообщили о четырнадцати группах. «Цин ши гао» одновременно отмечает переход значительной части кыргызских общин под российскую власть. К концу XIX века кыргызское население жило по обе стороны российско-цинской границы.",
+      "After Qing rule was restored in Kashgar, Kyrgyz representatives met Liu Jintang and reported fourteen groups. Qing shi gao also records that many Kyrgyz communities had come under Russian rule. By the late nineteenth century, Kyrgyz populations lived on both sides of the Russian–Qing frontier.",
+      "Кашкарда Цин бийлиги калыбына келгенден кийин кыргыз өкүлдөрү Лю Цзиньтан менен жолугушуп, он төрт топ жөнүндө билдиришкен. «Цин ши гао» кыргыз жамааттарынын кыйла бөлүгү Россиянын бийлигине өткөнүн да белгилейт. XIX кылымдын аягында кыргыздар орус-цин чек арасынын эки тарабында жашаган."
+    ],
+    "source": "Qing shi gao (清史稿), juan 529, 布魯特, Guangxu 4 (1878)."
   },
   {
-    "from":1922,"to":1926,"place":null,
-    "title":["Запись «Манаса» со слов Сагымбая Орозбакова","Recording Manas from Sagymbay Orozbakov","Сагымбай Орозбаков айткан «Манастын» жазылып алынышы"],
-    "text":["В 1922–1926 годах собиратели записывали исполнение манасчы Сагымбая Орозбакова. Его вариант составил десять рукописных книг. Детство Манаса записали на кыргызском языке арабским письмом.","Between 1922 and 1926 collectors transcribed the recitations of the manaschi Sagymbay Orozbakov. His version fills ten handwritten books. The account of Manas’s childhood was written in Kyrgyz in Arabic script.","1922–1926-жылдары жыйноочулар манасчы Сагымбай Орозбаковдун айтуусун кагазга түшүрүшкөн. Анын варианты он кол жазма китепти түзөт. Манастын балалык чагы кыргыз тилинде араб жазуусу менен жазылып алынган."],
-    "source":"Кыргызская Республика. Номинация в реестр ЮНЕСКО «Память мира». Рукопись эпоса «Манас» в варианте Сагымбая Орозбакова."
+    "from": 1922,
+    "to": 1926,
+    "place": null,
+    "title": [
+      "Запись «Манаса» со слов Сагымбая Орозбакова",
+      "Recording Manas from Sagymbay Orozbakov",
+      "Сагымбай Орозбаков айткан «Манастын» жазылып алынышы"
+    ],
+    "text": [
+      "В 1922–1926 годах собиратели записывали исполнение манасчы Сагымбая Орозбакова. Его вариант составил десять рукописных книг. Детство Манаса записали на кыргызском языке арабским письмом.",
+      "Between 1922 and 1926 collectors transcribed the recitations of the manaschi Sagymbay Orozbakov. His version fills ten handwritten books. The account of Manas’s childhood was written in Kyrgyz in Arabic script.",
+      "1922–1926-жылдары жыйноочулар манасчы Сагымбай Орозбаковдун айтуусун кагазга түшүрүшкөн. Анын варианты он кол жазма китепти түзөт. Манастын балалык чагы кыргыз тилинде араб жазуусу менен жазылып алынган."
+    ],
+    "source": "Кыргызская Республика. Номинация в реестр ЮНЕСКО «Память мира». Рукопись эпоса «Манас» в варианте Сагымбая Орозбакова."
   },
   {
-    "from":2009,"to":2009,"place":[76.16,39.72],"kind":"culture",
-    "title":["Манасчы Синьцзяна","Manas tellers in Xinjiang","Шинжаңдын манасчылары"],
-    "text":["У кыргызов Синьцзяна манасчы исполняют эпос без инструментального сопровождения. Напев и ритм меняются вместе с героями и ходом рассказа. В 2009 году традиция вошла в список нематериального культурного наследия ЮНЕСКО по заявке Китая. На карте отмечен Кызылсу-Кыргызский автономный округ.","Among the Kyrgyz of Xinjiang, manaschi recite the epic without instrumental accompaniment. The melody and rhythm change with the characters and the story. UNESCO inscribed the tradition in 2009 following China’s nomination. The map marks the Kizilsu Kyrgyz Autonomous Prefecture.","Шинжаңдагы кыргыз манасчылары эпосту музыкалык аспапсыз айтышат. Обон менен ыргак каармандарга жана окуянын жүрүшүнө жараша өзгөрөт. 2009-жылы Кытай сунуштаган бул салт ЮНЕСКОнун материалдык эмес маданий мурастар тизмесине кирген. Картада Кызыл-Суу Кыргыз автономиялуу округу белгиленген."],
-    "source":"UNESCO. Manas. Nomination 00209, decision 4.COM 13.17."
+    "from": 2009,
+    "to": 2009,
+    "place": [
+      76.16,
+      39.72
+    ],
+    "kind": "culture",
+    "title": [
+      "Манасчы Синьцзяна",
+      "Manas tellers in Xinjiang",
+      "Шинжаңдын манасчылары"
+    ],
+    "text": [
+      "У кыргызов Синьцзяна манасчы исполняют эпос без инструментального сопровождения. Напев и ритм меняются вместе с героями и ходом рассказа. В 2009 году традиция вошла в список нематериального культурного наследия ЮНЕСКО по заявке Китая. На карте отмечен Кызылсу-Кыргызский автономный округ.",
+      "Among the Kyrgyz of Xinjiang, manaschi recite the epic without instrumental accompaniment. The melody and rhythm change with the characters and the story. UNESCO inscribed the tradition in 2009 following China’s nomination. The map marks the Kizilsu Kyrgyz Autonomous Prefecture.",
+      "Шинжаңдагы кыргыз манасчылары эпосту музыкалык аспапсыз айтышат. Обон менен ыргак каармандарга жана окуянын жүрүшүнө жараша өзгөрөт. 2009-жылы Кытай сунуштаган бул салт ЮНЕСКОнун материалдык эмес маданий мурастар тизмесине кирген. Картада Кызыл-Суу Кыргыз автономиялуу округу белгиленген."
+    ],
+    "source": "UNESCO. Manas. Nomination 00209, decision 4.COM 13.17."
   },
   {
-    "from":2013,"to":2013,"place":null,
-    "title":["«Манас», «Семетей», «Сейтек»","Manas, Semetey and Seytek","«Манас», «Семетей», «Сейтек»"],
-    "text":["В Кыргызстане сказители передают трилогию от мастера к ученику устно. Голосом, ритмом и жестами они различают героев и сцены. В 2013 году ЮНЕСКО включила традицию исполнения трилогии в свой список по заявке Кыргызстана.","In Kyrgyzstan narrators teach the trilogy orally, passing it from master to apprentice. Voice, rhythm and gesture distinguish characters and scenes. UNESCO inscribed the performance tradition in 2013 following Kyrgyzstan’s nomination.","Кыргызстанда манасчылар үчилтикти устаттан шакиртке оозеки өткөрүшөт. Алар каармандарды жана окуяларды үн, ыргак жана жаңсоо аркылуу айырмалашат. 2013-жылы Кыргызстандын сунушу менен үчилтикти айтуу өнөрү ЮНЕСКОнун тизмесине кирген."],
-    "source":"UNESCO. Kyrgyz epic trilogy: Manas, Semetey, Seytek. Nomination 00876, decision 8.COM 8.19."
+    "from": 2013,
+    "to": 2013,
+    "place": null,
+    "title": [
+      "«Манас», «Семетей», «Сейтек»",
+      "Manas, Semetey and Seytek",
+      "«Манас», «Семетей», «Сейтек»"
+    ],
+    "text": [
+      "В Кыргызстане сказители передают трилогию от мастера к ученику устно. Голосом, ритмом и жестами они различают героев и сцены. В 2013 году ЮНЕСКО включила традицию исполнения трилогии в свой список по заявке Кыргызстана.",
+      "In Kyrgyzstan narrators teach the trilogy orally, passing it from master to apprentice. Voice, rhythm and gesture distinguish characters and scenes. UNESCO inscribed the performance tradition in 2013 following Kyrgyzstan’s nomination.",
+      "Кыргызстанда манасчылар үчилтикти устаттан шакиртке оозеки өткөрүшөт. Алар каармандарды жана окуяларды үн, ыргак жана жаңсоо аркылуу айырмалашат. 2013-жылы Кыргызстандын сунушу менен үчилтикти айтуу өнөрү ЮНЕСКОнун тизмесине кирген."
+    ],
+    "source": "UNESCO. Kyrgyz epic trilogy: Manas, Semetey, Seytek. Nomination 00876, decision 8.COM 8.19."
   },
   {
-    "from":1978,"to":1978,"place":[74.31,35.92],"kind":"migration","route":[[74.20,37.20],[74.31,35.92]],
-    "title":["Из афганского Малого Памира в Гилгит","From Afghanistan’s Little Pamir to Gilgit","Афганстандын Кичи Памиринен Гилгитке"],
-    "text":["После апрельского переворота в Кабуле часть кыргызских семей Малого Памира вместе с Рахманкул-ханом ушла в северный Пакистан. Семьи оказались в районе Гилгита. Некоторые кыргызы остались на афганском Памире, другие позднее вернулись из Пакистана. Линия показывает общее направление переселения.","After the April coup in Kabul, families from the Little Pamir left with Rahmanqul Khan for northern Pakistan. They took refuge in the Gilgit region. Some Kyrgyz remained in the Afghan Pamir, and others later returned from Pakistan. The line shows the general direction of the migration.","Кабулдагы апрель төңкөрүшүнөн кийин Кичи Памирдеги кыргыз үй-бүлөлөрүнүн бир бөлүгү Рахманкул хан менен Пакистандын түндүгүнө өтүп, Гилгит аймагына баш калкалаган. Айрым кыргыздар Афганстандын Памиринде калган, кээ бирлери кийин Пакистандан кайтып келген. Сызык көчтүн жалпы багытын көрсөтөт."],
-    "source":"M. Nazif Shahrani. The Kirghiz and Wakhi of Afghanistan. Ted Callahan. The Kyrgyz of the Afghan Pamir Ride On."
+    "from": 1978,
+    "to": 1978,
+    "place": [
+      74.31,
+      35.92
+    ],
+    "kind": "migration",
+    "route": [
+      [
+        74.2,
+        37.2
+      ],
+      [
+        74.31,
+        35.92
+      ]
+    ],
+    "title": [
+      "Из афганского Малого Памира в Гилгит",
+      "From Afghanistan’s Little Pamir to Gilgit",
+      "Афганстандын Кичи Памиринен Гилгитке"
+    ],
+    "text": [
+      "После апрельского переворота в Кабуле часть кыргызских семей Малого Памира вместе с Рахманкул-ханом ушла в северный Пакистан. Семьи оказались в районе Гилгита. Некоторые кыргызы остались на афганском Памире, другие позднее вернулись из Пакистана. Линия показывает общее направление переселения.",
+      "After the April coup in Kabul, families from the Little Pamir left with Rahmanqul Khan for northern Pakistan. They took refuge in the Gilgit region. Some Kyrgyz remained in the Afghan Pamir, and others later returned from Pakistan. The line shows the general direction of the migration.",
+      "Кабулдагы апрель төңкөрүшүнөн кийин Кичи Памирдеги кыргыз үй-бүлөлөрүнүн бир бөлүгү Рахманкул хан менен Пакистандын түндүгүнө өтүп, Гилгит аймагына баш калкалаган. Айрым кыргыздар Афганстандын Памиринде калган, кээ бирлери кийин Пакистандан кайтып келген. Сызык көчтүн жалпы багытын көрсөтөт."
+    ],
+    "source": "M. Nazif Shahrani. The Kirghiz and Wakhi of Afghanistan. Ted Callahan. The Kyrgyz of the Afghan Pamir Ride On."
   },
   {
-    "from":1982,"to":1982,"place":[35.32,37.00],"kind":"migration","route":[[74.31,35.92],[35.32,37.00]],
-    "title":["Из Пакистана в Турцию","From Pakistan to Turkey","Пакистандан Түркияга"],
-    "text":["После четырёх лет в Пакистане Турция приняла группу памирских кыргызов. Летом 1982 года переселенцев доставили самолётами в Адану. До переезда в постоянное селение семьи жили во временном жилье у Вана и в Малатье. На карте соединены район прежнего убежища и город прибытия.","After four years in Pakistan, a group of Pamir Kyrgyz was admitted to Turkey. In the summer of 1982 the refugees were flown to Adana. Families lived in temporary housing near Van and in Malatya before moving to a permanent village. The map links the former area of refuge and the city of arrival.","Пакистанда төрт жыл жашагандан кийин памирлик кыргыздардын бир тобун Түркия кабыл алган. 1982-жылдын жайында аларды учак менен Аданага алып барышкан. Туруктуу айылга көчкөнгө чейин үй-бүлөлөр Ванга жакын жерде жана Малатьяда убактылуу жашашкан. Картада баш калкалаган аймак менен Түркиядагы алгачкы келген шаар туташтырылган."],
-    "source":"M. Nazif Shahrani. Berlin Geographical Papers 45. The Kirghiz and Wakhi of Afghanistan."
+    "from": 1982,
+    "to": 1982,
+    "place": [
+      35.32,
+      37
+    ],
+    "kind": "migration",
+    "route": [
+      [
+        74.31,
+        35.92
+      ],
+      [
+        35.32,
+        37
+      ]
+    ],
+    "title": [
+      "Из Пакистана в Турцию",
+      "From Pakistan to Turkey",
+      "Пакистандан Түркияга"
+    ],
+    "text": [
+      "После четырёх лет в Пакистане Турция приняла группу памирских кыргызов. Летом 1982 года переселенцев доставили самолётами в Адану. До переезда в постоянное селение семьи жили во временном жилье у Вана и в Малатье. На карте соединены район прежнего убежища и город прибытия.",
+      "After four years in Pakistan, a group of Pamir Kyrgyz was admitted to Turkey. In the summer of 1982 the refugees were flown to Adana. Families lived in temporary housing near Van and in Malatya before moving to a permanent village. The map links the former area of refuge and the city of arrival.",
+      "Пакистанда төрт жыл жашагандан кийин памирлик кыргыздардын бир тобун Түркия кабыл алган. 1982-жылдын жайында аларды учак менен Аданага алып барышкан. Туруктуу айылга көчкөнгө чейин үй-бүлөлөр Ванга жакын жерде жана Малатьяда убактылуу жашашкан. Картада баш калкалаган аймак менен Түркиядагы алгачкы келген шаар туташтырылган."
+    ],
+    "source": "M. Nazif Shahrani. Berlin Geographical Papers 45. The Kirghiz and Wakhi of Afghanistan."
   },
   {
-    "from":1987,"to":1988,"place":[43.284,39.193],"kind":"migration",
-    "periodLabel":["1987–1988 годы · заселение села","1987–1988 · settlement of the village","1987–1988-жылдар · айылга отурукташуу"],
-    "title":["Памирские кыргызы обживают Улупамир","Pamir Kyrgyz settle in Ulupamir","Памир кыргыздары Улупамирге отурукташат"],
-    "text":["Семьи переехали из временного жилья в построенное для них село в районе Эрджиш провинции Ван. Название Улупамир сохраняет память о Памире. Эта дата относится к заселению села, спустя несколько лет после приезда группы в Турцию.","Families moved from temporary housing to a village built for them in the Erciş district of Van province. Its name, Ulupamir, recalls the Pamir homeland. These dates mark settlement in the village several years after the group’s arrival in Turkey.","Үй-бүлөлөр убактылуу турак жайларынан Ван облусунун Эржиш районунда алар үчүн курулган айылга көчүшкөн. Улупамир деген ат Памир мекенин эске салат. Бул жылдар топ Түркияга келгенден бир нече жыл өткөндөн кийин айылга отурукташкан учурду билдирет."],
-    "source":"M. Nazif Shahrani. Berlin Geographical Papers 45. Baran. Pamir Yaylası’ndan Ulupamir Köyü’ne. Bilig 68."
+    "from": 1987,
+    "to": 1988,
+    "place": [
+      43.284,
+      39.193
+    ],
+    "kind": "migration",
+    "periodLabel": [
+      "1987–1988 годы · заселение села",
+      "1987–1988 · settlement of the village",
+      "1987–1988-жылдар · айылга отурукташуу"
+    ],
+    "title": [
+      "Памирские кыргызы обживают Улупамир",
+      "Pamir Kyrgyz settle in Ulupamir",
+      "Памир кыргыздары Улупамирге отурукташат"
+    ],
+    "text": [
+      "Семьи переехали из временного жилья в построенное для них село в районе Эрджиш провинции Ван. Название Улупамир сохраняет память о Памире. Эта дата относится к заселению села, спустя несколько лет после приезда группы в Турцию.",
+      "Families moved from temporary housing to a village built for them in the Erciş district of Van province. Its name, Ulupamir, recalls the Pamir homeland. These dates mark settlement in the village several years after the group’s arrival in Turkey.",
+      "Үй-бүлөлөр убактылуу турак жайларынан Ван облусунун Эржиш районунда алар үчүн курулган айылга көчүшкөн. Улупамир деген ат Памир мекенин эске салат. Бул жылдар топ Түркияга келгенден бир нече жыл өткөндөн кийин айылга отурукташкан учурду билдирет."
+    ],
+    "source": "M. Nazif Shahrani. Berlin Geographical Papers 45. Baran. Pamir Yaylası’ndan Ulupamir Köyü’ne. Bilig 68."
   },
   {
-    "from":1869,"to":1869,"place":[78.39,42.49],"kind":"politics",
-    "title":["Каракол становится уездным центром","Karakol becomes a district centre","Каракол уезддин борборуна айланат"],
-    "text":["В 1869 году на востоке Иссык-Кульской котловины заложили Каракол как военно-административный центр Семиреченской области Российской империи. До этого начальство и гарнизон размещались в укреплении Ак-Суу. В 1870 году перевод в Каракол утвердили официально. Город стоял на дороге из Чуйской долины в Кашгарию.","In 1869 Karakol was founded in the eastern Issyk-Kul basin as a military and administrative centre of the Russian Empire’s Semirechye province. The command and garrison had been based at the Ak-Suu fort. Their transfer to Karakol was officially confirmed in 1870. The town lay on the route from the Chuy valley to Kashgaria.","1869-жылы Ысык-Көл ойдуңунун чыгышында Каракол Россия империясынын Жети-Суу облусунун аскердик жана башкаруу борбору катары негизделген. Буга чейин аскер башчылыгы менен гарнизон Ак-Суу чебинде турган. Аларды Караколго которуу 1870-жылы расмий бекитилген. Шаар Чүй өрөөнүнөн Кашкарга баруучу жолдо жайгашкан."],
-    "source":"А. В. Каульбарс. О рождении города. Документальные материалы по истории г. Каракол. Памятные книжки Семиреченской области."
+    "from": 1869,
+    "to": 1869,
+    "place": [
+      78.39,
+      42.49
+    ],
+    "kind": "politics",
+    "title": [
+      "Каракол становится уездным центром",
+      "Karakol becomes a district centre",
+      "Каракол уезддин борборуна айланат"
+    ],
+    "text": [
+      "В 1869 году на востоке Иссык-Кульской котловины заложили Каракол как военно-административный центр Семиреченской области Российской империи. До этого начальство и гарнизон размещались в укреплении Ак-Суу. В 1870 году перевод в Каракол утвердили официально. Город стоял на дороге из Чуйской долины в Кашгарию.",
+      "In 1869 Karakol was founded in the eastern Issyk-Kul basin as a military and administrative centre of the Russian Empire’s Semirechye province. The command and garrison had been based at the Ak-Suu fort. Their transfer to Karakol was officially confirmed in 1870. The town lay on the route from the Chuy valley to Kashgaria.",
+      "1869-жылы Ысык-Көл ойдуңунун чыгышында Каракол Россия империясынын Жети-Суу облусунун аскердик жана башкаруу борбору катары негизделген. Буга чейин аскер башчылыгы менен гарнизон Ак-Суу чебинде турган. Аларды Караколго которуу 1870-жылы расмий бекитилген. Шаар Чүй өрөөнүнөн Кашкарга баруучу жолдо жайгашкан."
+    ],
+    "source": "А. В. Каульбарс. О рождении города. Документальные материалы по истории г. Каракол. Памятные книжки Семиреченской области."
   },
   {
-    "from":1704,"to":1704,"place":[87.1,54.3],"kind":"migration",
-    "title":["Просьба о проводниках к Томи","A request for guides to the Tom River","Томь дарыясына жол көрсөтүү өтүнүчү"],
-    "text":["После принудительного переселения части енисейских кыргызов в Джунгарию отдельные семьи искали обратную дорогу. В донесении за август 1704 года записано свидетельство Митки Азбалыкова. Кыргызы просили провести их через лес к Томи между Томском и Кузнецком, чтобы вернуться в родные земли. На карте отмечен названный в донесении район реки.","After some Yenisei Kyrgyz were forcibly resettled in Dzungaria, individual families sought a way back. An August 1704 report records Mitka Azbalykov’s testimony. Kyrgyz travellers had asked for guides through the forest to the Tom River between Tomsk and Kuznetsk so they could return home. The map marks that stretch of the river.","Энесай кыргыздарынын бир бөлүгү Жуңгарияга күч менен көчүрүлгөндөн кийин айрым үй-бүлөлөр кайтар жол издешкен. 1704-жылдын августундагы билдирүүдө Митка Азбалыковдун айтканы жазылган. Кыргыздар мекенине кайтуу үчүн Томск менен Кузнецктин ортосундагы Томь дарыясына токой аркылуу жол көрсөтүүнү суранышкан. Картада дарыянын ушул бөлүгү белгиленген."],
-    "source":"А. Абдыкалыков. Переселение енисейских кыргызов в начале XVIII в. и их историческая судьба. Донесение Синявина, август 1704 г."
+    "from": 1704,
+    "to": 1704,
+    "place": [
+      87.1,
+      54.3
+    ],
+    "kind": "migration",
+    "title": [
+      "Просьба о проводниках к Томи",
+      "A request for guides to the Tom River",
+      "Томь дарыясына жол көрсөтүү өтүнүчү"
+    ],
+    "text": [
+      "После принудительного переселения части енисейских кыргызов в Джунгарию отдельные семьи искали обратную дорогу. В донесении за август 1704 года записано свидетельство Митки Азбалыкова. Кыргызы просили провести их через лес к Томи между Томском и Кузнецком, чтобы вернуться в родные земли. На карте отмечен названный в донесении район реки.",
+      "After some Yenisei Kyrgyz were forcibly resettled in Dzungaria, individual families sought a way back. An August 1704 report records Mitka Azbalykov’s testimony. Kyrgyz travellers had asked for guides through the forest to the Tom River between Tomsk and Kuznetsk so they could return home. The map marks that stretch of the river.",
+      "Энесай кыргыздарынын бир бөлүгү Жуңгарияга күч менен көчүрүлгөндөн кийин айрым үй-бүлөлөр кайтар жол издешкен. 1704-жылдын августундагы билдирүүдө Митка Азбалыковдун айтканы жазылган. Кыргыздар мекенине кайтуу үчүн Томск менен Кузнецктин ортосундагы Томь дарыясына токой аркылуу жол көрсөтүүнү суранышкан. Картада дарыянын ушул бөлүгү белгиленген."
+    ],
+    "source": "А. Абдыкалыков. Переселение енисейских кыргызов в начале XVIII в. и их историческая судьба. Донесение Синявина, август 1704 г."
   },
   {
-    "from":1733,"to":1733,"place":[123.92,47.35],"kind":"migration","route":[[96.1,50.5],[123.92,47.35]],
-    "title":["Восточное переселение из бассейна Тэса","Resettlement east from the Tes basin","Тес дарыясынын алабынан чыгышка көчүрүү"],
-    "text":["Маньчжурские доклады цинских чиновников, исследованные У Юаньфэном, описывают переселение кыргызских семей на восток в 1733 году. Они покинули пастбища в бассейне Тэса. Часть переселённых включили в состав знамённых гарнизонов на территории Хэйлунцзяна. Линия соединяет район исхода с Цицикаром, одним из мест размещения.","Manchu official reports studied by Wu Yuanfeng describe the eastward relocation of Kyrgyz families in 1733. They left grazing lands in the Tes basin. Some were enrolled in Qing banner garrisons in Heilongjiang. The line connects their region of departure with Qiqihar, one of the garrison destinations.","У Юаньфэн изилдеген манжур тилиндеги Цин документтеринде кыргыз үй-бүлөлөрүнүн 1733-жылы чыгышка көчүрүлүшү баяндалат. Алар Тес дарыясынын алабындагы жайыттардан чыгышкан. Көчүрүлгөндөрдүн бир бөлүгү Хэйлунцзяндагы Циндин туу аскерлеринин гарнизондоруна киргизилген. Сызык чыккан аймак менен жайгаштырылган жерлердин бири Цицикарды байланыштырат."],
-    "source":"吴元丰. 柯尔克孜族东迁黑龙江地区考实. 黑龙江民族丛刊, 2001, № 1, pp. 69–74."
+    "from": 1733,
+    "to": 1733,
+    "place": [
+      123.92,
+      47.35
+    ],
+    "kind": "migration",
+    "route": [
+      [
+        96.1,
+        50.5
+      ],
+      [
+        123.92,
+        47.35
+      ]
+    ],
+    "title": [
+      "Восточное переселение из бассейна Тэса",
+      "Resettlement east from the Tes basin",
+      "Тес дарыясынын алабынан чыгышка көчүрүү"
+    ],
+    "text": [
+      "Маньчжурские доклады цинских чиновников, исследованные У Юаньфэном, описывают переселение кыргызских семей на восток в 1733 году. Они покинули пастбища в бассейне Тэса. Часть переселённых включили в состав знамённых гарнизонов на территории Хэйлунцзяна. Линия соединяет район исхода с Цицикаром, одним из мест размещения.",
+      "Manchu official reports studied by Wu Yuanfeng describe the eastward relocation of Kyrgyz families in 1733. They left grazing lands in the Tes basin. Some were enrolled in Qing banner garrisons in Heilongjiang. The line connects their region of departure with Qiqihar, one of the garrison destinations.",
+      "У Юаньфэн изилдеген манжур тилиндеги Цин документтеринде кыргыз үй-бүлөлөрүнүн 1733-жылы чыгышка көчүрүлүшү баяндалат. Алар Тес дарыясынын алабындагы жайыттардан чыгышкан. Көчүрүлгөндөрдүн бир бөлүгү Хэйлунцзяндагы Циндин туу аскерлеринин гарнизондоруна киргизилген. Сызык чыккан аймак менен жайгаштырылган жерлердин бири Цицикарды байланыштырат."
+    ],
+    "source": "吴元丰. 柯尔克孜族东迁黑龙江地区考实. 黑龙江民族丛刊, 2001, № 1, pp. 69–74."
   },
   {
-    "from":1757,"to":1757,"place":[119.75,49.2],"kind":"migration",
-    "title":["Вторая группа переселенцев в Хулун-Буире и Бутхе","A second group of displaced families in Hulunbuir and Butha","Көчүрүлгөн экинчи топ Хулунбуирде жана Бутхада"],
-    "text":["У Юаньфэн различает две волны переселения по маньчжурским архивам. В 1757 году кыргызов и других бывших подданных Джунгарии распределили между Хулун-Буиром и Бутхой. Эти семьи отдали в подневольную службу военным. Группа 1733 года получила иной статус в знамённых гарнизонах. На карте отмечен район Хулун-Буира.","Wu Yuanfeng distinguishes two relocations in the Manchu archives. In 1757 Kyrgyz and other former Dzungar subjects were distributed between Hulunbuir and Butha and assigned to military households as slaves. The earlier group of 1733 had been given banner status. The map marks the Hulunbuir region.","У Юаньфэн манжур архивдеринде көчүрүүнүн эки толкунун ажыратат. 1757-жылы кыргыздар жана Жуңгариянын башка мурдагы букаралары Хулунбуир менен Бутхага бөлүштүрүлүп, аскер кызматкерлерине кулдукка берилген. 1733-жылы көчүрүлгөн топ туу аскерлеринин курамына киргизилген эле. Картада Хулунбуир аймагы көрсөтүлгөн."],
-    "source":"吴元丰. 柯尔克孜族东迁黑龙江地区考实. 黑龙江民族丛刊, 2001, № 1, pp. 69–74."
+    "from": 1757,
+    "to": 1757,
+    "place": [
+      119.75,
+      49.2
+    ],
+    "kind": "migration",
+    "title": [
+      "Вторая группа переселенцев в Хулун-Буире и Бутхе",
+      "A second group of displaced families in Hulunbuir and Butha",
+      "Көчүрүлгөн экинчи топ Хулунбуирде жана Бутхада"
+    ],
+    "text": [
+      "У Юаньфэн различает две волны переселения по маньчжурским архивам. В 1757 году кыргызов и других бывших подданных Джунгарии распределили между Хулун-Буиром и Бутхой. Эти семьи отдали в подневольную службу военным. Группа 1733 года получила иной статус в знамённых гарнизонах. На карте отмечен район Хулун-Буира.",
+      "Wu Yuanfeng distinguishes two relocations in the Manchu archives. In 1757 Kyrgyz and other former Dzungar subjects were distributed between Hulunbuir and Butha and assigned to military households as slaves. The earlier group of 1733 had been given banner status. The map marks the Hulunbuir region.",
+      "У Юаньфэн манжур архивдеринде көчүрүүнүн эки толкунун ажыратат. 1757-жылы кыргыздар жана Жуңгариянын башка мурдагы букаралары Хулунбуир менен Бутхага бөлүштүрүлүп, аскер кызматкерлерине кулдукка берилген. 1733-жылы көчүрүлгөн топ туу аскерлеринин курамына киргизилген эле. Картада Хулунбуир аймагы көрсөтүлгөн."
+    ],
+    "source": "吴元丰. 柯尔克孜族东迁黑龙江地区考实. 黑龙江民族丛刊, 2001, № 1, pp. 69–74."
   },
   {
-    "from":1983,"to":1983,"place":[124.48,47.8],"kind":"culture",
-    "title":["Язык фуюйских кыргызов","The language of the Fuyu Kyrgyz","Фуюй кыргыздарынын тили"],
-    "text":["Китайский лингвист Ху Чжэньхуа описал речь кыргызов уезда Фуюй в провинции Хэйлунцзян и сопоставил её с речью кыргызов Синьцзяна. Карта показывает уезд Фуюй на северо-востоке Китая. Выбранный год относится к публикации исследования.","Chinese linguist Hu Zhenhua documented the speech of the Kyrgyz in Fuyu County, Heilongjiang, and compared it with that of the Kyrgyz in Xinjiang. The map shows Fuyu County in northeast China. The year refers to publication of the study.","Кытайлык тилчи Ху Чжэньхуа Хэйлунцзяндагы Фуюй уездинин кыргыздарынын тилин сүрөттөп, аны Шинжаң кыргыздарынын тили менен салыштырган. Картада Кытайдын түндүк-чыгышындагы Фуюй уезди көрсөтүлгөн. Жыл изилдөөнүн жарык көргөн учурун билдирет."],
-    "source":"胡振华. 黑龙江富裕县的柯尔克孜族及其语言特点. 中央民族学院学报, 1983, № 2, pp. 65–69."
+    "from": 1983,
+    "to": 1983,
+    "place": [
+      124.48,
+      47.8
+    ],
+    "kind": "culture",
+    "title": [
+      "Язык фуюйских кыргызов",
+      "The language of the Fuyu Kyrgyz",
+      "Фуюй кыргыздарынын тили"
+    ],
+    "text": [
+      "Китайский лингвист Ху Чжэньхуа описал речь кыргызов уезда Фуюй в провинции Хэйлунцзян и сопоставил её с речью кыргызов Синьцзяна. Карта показывает уезд Фуюй на северо-востоке Китая. Выбранный год относится к публикации исследования.",
+      "Chinese linguist Hu Zhenhua documented the speech of the Kyrgyz in Fuyu County, Heilongjiang, and compared it with that of the Kyrgyz in Xinjiang. The map shows Fuyu County in northeast China. The year refers to publication of the study.",
+      "Кытайлык тилчи Ху Чжэньхуа Хэйлунцзяндагы Фуюй уездинин кыргыздарынын тилин сүрөттөп, аны Шинжаң кыргыздарынын тили менен салыштырган. Картада Кытайдын түндүк-чыгышындагы Фуюй уезди көрсөтүлгөн. Жыл изилдөөнүн жарык көргөн учурун билдирет."
+    ],
+    "source": "胡振华. 黑龙江富裕县的柯尔克孜族及其语言特点. 中央民族学院学报, 1983, № 2, pp. 65–69."
   },
   {
-    "from":758,"to":840,"background":true,"place":null,
-    "title":["Связи с карлуками и Тибетом","Contacts with the Karluks and Tibet","Карлуктар жана Тибет менен байланыш"],
-    "text":["По «Синь Тан шу», после поражения от уйгуров кыргызы сохраняли связи с карлуками, Тибетом и Даши — так хроника называет арабо-мусульманский мир. Путники из Тибета останавливались у карлуков и ждали кыргызского сопровождения. В борьбе с уйгурами значение имели и родственные связи. Хроника называет женой кыргызского правителя дочь карлукского ябгу.","According to the New History of the Tang, after their defeat by the Uyghurs the Kyrgyz maintained ties with the Karluks, Tibet and Dashi, the chronicle’s name for the Arab Muslim world. Travellers from Tibet stayed with the Karluks while they awaited a Kyrgyz escort. Kinship also mattered in the struggle with the Uyghurs. The chronicle identifies the Kyrgyz ruler’s wife as a daughter of the Karluk yabghu.","«Синь Тан шу» боюнча, уйгурлардан жеңилгенден кийин кыргыздар карлуктар, Тибет жана араб-мусулман дүйнөсү менен байланышын сакташкан. Жылнаамада араб-мусулман дүйнөсү Даши деп аталат. Тибеттен келген жолоочулар карлуктарга токтоп, кыргыздардын коштоосун күтүшкөн. Жылнаама кыргыз башкаруучусунун жубайын карлук жабгусунун кызы деп атайт."],
-    "source":"Xin Tang shu (新唐書), juan 217, 黠戛斯."
+    "from": 758,
+    "to": 840,
+    "background": true,
+    "place": null,
+    "title": [
+      "Связи с карлуками и Тибетом",
+      "Contacts with the Karluks and Tibet",
+      "Карлуктар жана Тибет менен байланыш"
+    ],
+    "text": [
+      "По «Синь Тан шу», после поражения от уйгуров кыргызы сохраняли связи с карлуками, Тибетом и Даши — так хроника называет арабо-мусульманский мир. Путники из Тибета останавливались у карлуков и ждали кыргызского сопровождения. В борьбе с уйгурами значение имели и родственные связи. Хроника называет женой кыргызского правителя дочь карлукского ябгу.",
+      "According to the New History of the Tang, after their defeat by the Uyghurs the Kyrgyz maintained ties with the Karluks, Tibet and Dashi, the chronicle’s name for the Arab Muslim world. Travellers from Tibet stayed with the Karluks while they awaited a Kyrgyz escort. Kinship also mattered in the struggle with the Uyghurs. The chronicle identifies the Kyrgyz ruler’s wife as a daughter of the Karluk yabghu.",
+      "«Синь Тан шу» боюнча, уйгурлардан жеңилгенден кийин кыргыздар карлуктар, Тибет жана араб-мусулман дүйнөсү менен байланышын сакташкан. Жылнаамада араб-мусулман дүйнөсү Даши деп аталат. Тибеттен келген жолоочулар карлуктарга токтоп, кыргыздардын коштоосун күтүшкөн. Жылнаама кыргыз башкаруучусунун жубайын карлук жабгусунун кызы деп атайт."
+    ],
+    "source": "Xin Tang shu (新唐書), juan 217, 黠戛斯."
   },
   {
-    "from":1916,"to":1916,"place":[78.41,41.41],"kind":"migration","route":[[78.39,42.49],[78.41,41.41],[79.23,41.22]],
-    "title":["Үркүн · через Бедель к Учтурпану","Ürkün · across Bedel towards Uch Turfan","Үркүн · Бедел аркылуу Үч-Турпанга"],
-    "text":["При подавлении восстания 1916 года кыргызские семьи бежали из Семиречья в Китай. Из района Пржевальска, нынешнего Каракола, беженцы уходили через Бедель и другие перевалы в сторону Учтурпана и Аксу. На карте соединены три ориентира одного из направлений бегства. Из Нарынского края семьи уходили и другим путём, через долину Ак-Сай к Торугарту.","During the suppression of the 1916 uprising, Kyrgyz families fled from Semirechye into China. Refugees from the Przhevalsk area, around present-day Karakol, crossed Bedel and other passes towards Uch Turfan and Aksu. The map connects three landmarks on one of these corridors. Families from the Naryn region also travelled through the Ak-Sai valley towards Torugart.","1916-жылдагы көтөрүлүш басылганда кыргыз үй-бүлөлөрү Жети-Суудан Кытайга качууга аргасыз болушкан. Пржевальск, азыркы Каракол, тараптан качкындар Бедел жана башка ашуулар аркылуу Үч-Турпан менен Ак-Сууну көздөй өтүшкөн. Картада бир багыттын үч жери туташтырылды. Нарын тараптан кеткен үй-бүлөлөр Ак-Сай өрөөнү аркылуу Торугартты да ашышкан."],
-    "source":"Восстание 1916 года. Сборник документов и материалов. Переосмысление восстания 1916 года в Центральной Азии. Сборник статей."
+    "from": 1916,
+    "to": 1916,
+    "place": [
+      78.41,
+      41.41
+    ],
+    "kind": "migration",
+    "route": [
+      [
+        78.39,
+        42.49
+      ],
+      [
+        78.41,
+        41.41
+      ],
+      [
+        79.23,
+        41.22
+      ]
+    ],
+    "title": [
+      "Үркүн · через Бедель к Учтурпану",
+      "Ürkün · across Bedel towards Uch Turfan",
+      "Үркүн · Бедел аркылуу Үч-Турпанга"
+    ],
+    "text": [
+      "При подавлении восстания 1916 года кыргызские семьи бежали из Семиречья в Китай. Из района Пржевальска, нынешнего Каракола, беженцы уходили через Бедель и другие перевалы в сторону Учтурпана и Аксу. На карте соединены три ориентира одного из направлений бегства. Из Нарынского края семьи уходили и другим путём, через долину Ак-Сай к Торугарту.",
+      "During the suppression of the 1916 uprising, Kyrgyz families fled from Semirechye into China. Refugees from the Przhevalsk area, around present-day Karakol, crossed Bedel and other passes towards Uch Turfan and Aksu. The map connects three landmarks on one of these corridors. Families from the Naryn region also travelled through the Ak-Sai valley towards Torugart.",
+      "1916-жылдагы көтөрүлүш басылганда кыргыз үй-бүлөлөрү Жети-Суудан Кытайга качууга аргасыз болушкан. Пржевальск, азыркы Каракол, тараптан качкындар Бедел жана башка ашуулар аркылуу Үч-Турпан менен Ак-Сууну көздөй өтүшкөн. Картада бир багыттын үч жери туташтырылды. Нарын тараптан кеткен үй-бүлөлөр Ак-Сай өрөөнү аркылуу Торугартты да ашышкан."
+    ],
+    "source": "Восстание 1916 года. Сборник документов и материалов. Переосмысление восстания 1916 года в Центральной Азии. Сборник статей."
   },
   {
-    "from":618,"to":907,"background":true,"place":[91.7,53.6],
-    "title":["Земледелие и ремёсла на Енисее","Farming and crafts on the Yenisei","Энесайдагы дыйканчылык жана кол өнөрчүлүк"],
-    "text":["«Синь Тан шу» описывает хозяйство кыргызов танской эпохи. Наряду с конями, крупным рогатым скотом и овцами хроника упоминает просо, пшеницу и ячмень. Зерно мололи в муку. Из местного железа делали оружие, а железо поставляли тюркам. На карте показан район Верхнего Енисея.","The New History of the Tang describes Kyrgyz livelihoods in the Tang period. Alongside horses, cattle and sheep it mentions millet, wheat and barley. Grain was ground into flour. Local iron was used to make weapons and supplied to the Turks. The map shows the upper Yenisei region.","«Синь Тан шу» Тан доорундагы кыргыздардын чарбасын сүрөттөйт. Жылкы, бодо мал жана кой менен катар таруу, буудай жана арпа аталат. Эгинди тартып ун алышкан. Жергиликтүү темирден курал жасап, туюйцзюэ түрктөрүнө темир жеткиришкен. Картада Жогорку Энесай аймагы көрсөтүлгөн."],
-    "source":"Xin Tang shu (新唐書), juan 217, 黠戛斯."
+    "from": 618,
+    "to": 907,
+    "background": true,
+    "place": [
+      91.7,
+      53.6
+    ],
+    "title": [
+      "Земледелие и ремёсла на Енисее",
+      "Farming and crafts on the Yenisei",
+      "Энесайдагы дыйканчылык жана кол өнөрчүлүк"
+    ],
+    "text": [
+      "«Синь Тан шу» описывает хозяйство кыргызов танской эпохи. Наряду с конями, крупным рогатым скотом и овцами хроника упоминает просо, пшеницу и ячмень. Зерно мололи в муку. Из местного железа делали оружие, а железо поставляли тюркам. На карте показан район Верхнего Енисея.",
+      "The New History of the Tang describes Kyrgyz livelihoods in the Tang period. Alongside horses, cattle and sheep it mentions millet, wheat and barley. Grain was ground into flour. Local iron was used to make weapons and supplied to the Turks. The map shows the upper Yenisei region.",
+      "«Синь Тан шу» Тан доорундагы кыргыздардын чарбасын сүрөттөйт. Жылкы, бодо мал жана кой менен катар таруу, буудай жана арпа аталат. Эгинди тартып ун алышкан. Жергиликтүү темирден курал жасап, туюйцзюэ түрктөрүнө темир жеткиришкен. Картада Жогорку Энесай аймагы көрсөтүлгөн."
+    ],
+    "source": "Xin Tang shu (新唐書), juan 217, 黠戛斯."
   },
   {
-    "from":1072,"to":1077,"place":null,
-    "title":["Кыргызский язык в словаре Махмуда Кашгари","Kyrgyz speech in Mahmud al-Kashgari’s dictionary","Махмуд Кашгаринин сөздүгүндөгү кыргыз тили"],
-    "text":["В арабоязычном «Диван лугат ат-турк» Махмуд Кашгари называет кыргызов среди тюркоязычных народов рядом с кыпчаками, огузами и чигилями. Он сопоставляет речь этих народов для своих читателей. Это свидетельство о языке и названии кыргызов в XI веке.","In his Arabic Compendium of the Turkic Dialects, Mahmud al-Kashgari lists the Kyrgyz alongside the Kipchaks, Oghuz and Chigil among Turkic speakers. He compares their speech for his readers. The entry records the name and language of the Kyrgyz in the eleventh century.","Махмуд Кашгари арабча «Дивану лугат ат-түрк» эмгегинде кыргыздарды кыпчактар, огуздар жана чигилдер менен катар түрк тилдүү элдерге кошот. Автор окурмандар үчүн алардын тилин салыштырат. Бул маалымат XI кылымдагы кыргыз аталышы жана тили жөнүндө кабар берет."],
-    "source":"Maḥmūd al-Kāšġarī. Dīwān Luġāt at-Turk, On the Turkic Dialects. R. Dankoff and J. Kelly, vol. I, p. 83."
+    "from": 1072,
+    "to": 1077,
+    "place": null,
+    "title": [
+      "Кыргызский язык в словаре Махмуда Кашгари",
+      "Kyrgyz speech in Mahmud al-Kashgari’s dictionary",
+      "Махмуд Кашгаринин сөздүгүндөгү кыргыз тили"
+    ],
+    "text": [
+      "В арабоязычном «Диван лугат ат-турк» Махмуд Кашгари называет кыргызов среди тюркоязычных народов рядом с кыпчаками, огузами и чигилями. Он сопоставляет речь этих народов для своих читателей. Это свидетельство о языке и названии кыргызов в XI веке.",
+      "In his Arabic Compendium of the Turkic Dialects, Mahmud al-Kashgari lists the Kyrgyz alongside the Kipchaks, Oghuz and Chigil among Turkic speakers. He compares their speech for his readers. The entry records the name and language of the Kyrgyz in the eleventh century.",
+      "Махмуд Кашгари арабча «Дивану лугат ат-түрк» эмгегинде кыргыздарды кыпчактар, огуздар жана чигилдер менен катар түрк тилдүү элдерге кошот. Автор окурмандар үчүн алардын тилин салыштырат. Бул маалымат XI кылымдагы кыргыз аталышы жана тили жөнүндө кабар берет."
+    ],
+    "source": "Maḥmūd al-Kāšġarī. Dīwān Luġāt at-Turk, On the Turkic Dialects. R. Dankoff and J. Kelly, vol. I, p. 83."
   },
   {
-    "from":1522,"to":1522,"place":[75.76,42.21],"kind":"politics",
-    "title":["Возвращение Мухаммада Кыргыза и зимовка в Кочкоре","Muhammad Kirghiz’s return and the winter at Kochkor","Мухаммад Кыргыздын кайтып келиши жана Кочкордогу кыштоо"],
-    "text":["Через пять лет после пленения у Иссык-Куля Мухаммада Кыргыза освободили и назначили эмиром кыргызов. Дуглат рассказывает, что он выступил впереди отряда Рашид-султана. Часть кыргызов присоединилась к нему, другие ушли в отдалённые районы Могулистана. На зиму отряд расположился в Кочкоре. На карте отмечена Кочкорская долина.","Five years after his capture at Issyk-Kul, Muhammad Kirghiz was released and appointed amir of the Kyrgyz. Dughlat says he went ahead of Rashid Sultan’s force. Some Kyrgyz joined him, while others withdrew to distant parts of Moghulistan. The force wintered at Kochkor. The map marks the Kochkor valley.","Ысык-Көлдө туткунга түшкөндөн беш жыл өткөн соң Мухаммад Кыргыз бошотулуп, кыргыздардын эмири болуп дайындалган. Дуглаттын жазышынча, ал Рашид султандын кошуунунан алдыда жүргөн. Кыргыздардын бир бөлүгү ага кошулса, башкалары Моголстандын алыскы аймактарына кетишкен. Кошуун Кочкордо кыштаган. Картада Кочкор өрөөнү көрсөтүлгөн."],
-    "source":"Mīrzā Muḥammad Ḥaydar Dūghlāt. Tārīkh-i Rashīdī, book II, ch. LXIX."
+    "from": 1522,
+    "to": 1522,
+    "place": [
+      75.76,
+      42.21
+    ],
+    "kind": "politics",
+    "title": [
+      "Возвращение Мухаммада Кыргыза и зимовка в Кочкоре",
+      "Muhammad Kirghiz’s return and the winter at Kochkor",
+      "Мухаммад Кыргыздын кайтып келиши жана Кочкордогу кыштоо"
+    ],
+    "text": [
+      "Через пять лет после пленения у Иссык-Куля Мухаммада Кыргыза освободили и назначили эмиром кыргызов. Дуглат рассказывает, что он выступил впереди отряда Рашид-султана. Часть кыргызов присоединилась к нему, другие ушли в отдалённые районы Могулистана. На зиму отряд расположился в Кочкоре. На карте отмечена Кочкорская долина.",
+      "Five years after his capture at Issyk-Kul, Muhammad Kirghiz was released and appointed amir of the Kyrgyz. Dughlat says he went ahead of Rashid Sultan’s force. Some Kyrgyz joined him, while others withdrew to distant parts of Moghulistan. The force wintered at Kochkor. The map marks the Kochkor valley.",
+      "Ысык-Көлдө туткунга түшкөндөн беш жыл өткөн соң Мухаммад Кыргыз бошотулуп, кыргыздардын эмири болуп дайындалган. Дуглаттын жазышынча, ал Рашид султандын кошуунунан алдыда жүргөн. Кыргыздардын бир бөлүгү ага кошулса, башкалары Моголстандын алыскы аймактарына кетишкен. Кошуун Кочкордо кыштаган. Картада Кочкор өрөөнү көрсөтүлгөн."
+    ],
+    "source": "Mīrzā Muḥammad Ḥaydar Dūghlāt. Tārīkh-i Rashīdī, book II, ch. LXIX."
   },
   {
-    "from":648,"to":648,"place":[108.94,34.26],
-    "title":["Кыргызский правитель при дворе Тан","A Kyrgyz ruler at the Tang court","Кыргыз башкаруучусу Тан ордосунда"],
-    "text":["В 22-й год Чжэньгуань кыргызский правитель лично прибыл ко двору Тан. Двор назвал его земли Цзянькунь и пожаловал ему должность. Запись описывает отношения двора с правителем Енисея.","In the 22nd year of Zhenguan the Kyrgyz ruler came to the Tang court in person. The court designated his lands Jiankun and granted him an office. The account describes the court’s relations with the Yenisei ruler.","Чжэньгуандын 22-жылында кыргыз башкаруучусу Тан ордосуна өзү келген. Тан анын жерин Цзянькунь деп атап, башкаруучуга кызмат берген. Бул маалымат Тан ордосунун Энесайдагы башкаруучу менен мамилесин көрсөтөт."],
-    "source":"Xin Tang shu (新唐書), juan 217, 黠戛斯."
+    "from": 648,
+    "to": 648,
+    "place": [
+      108.94,
+      34.26
+    ],
+    "title": [
+      "Кыргызский правитель при дворе Тан",
+      "A Kyrgyz ruler at the Tang court",
+      "Кыргыз башкаруучусу Тан ордосунда"
+    ],
+    "text": [
+      "В 22-й год Чжэньгуань кыргызский правитель лично прибыл ко двору Тан. Двор назвал его земли Цзянькунь и пожаловал ему должность. Запись описывает отношения двора с правителем Енисея.",
+      "In the 22nd year of Zhenguan the Kyrgyz ruler came to the Tang court in person. The court designated his lands Jiankun and granted him an office. The account describes the court’s relations with the Yenisei ruler.",
+      "Чжэньгуандын 22-жылында кыргыз башкаруучусу Тан ордосуна өзү келген. Тан анын жерин Цзянькунь деп атап, башкаруучуга кызмат берген. Бул маалымат Тан ордосунун Энесайдагы башкаруучу менен мамилесин көрсөтөт."
+    ],
+    "source": "Xin Tang shu (新唐書), juan 217, 黠戛斯."
   },
   {
-    "from":843,"to":843,"place":[108.94,34.26],
-    "title":["Семь кыргызских посланников в Чанъани","Seven Kyrgyz envoys at Chang’an","Чанъандагы жети кыргыз элчиси"],
-    "text":["В третий год Хуэйчан ко двору Тан прибыли семь посланников во главе с Чжуу Хэсу (注吾合索). Они привели двух лошадей и просили утвердить титул правителя. На карте отмечено место приёма посольства.","In the third year of Huichang seven envoys led by Zhu Wu Hesu (注吾合索) came to the Tang court. They presented two horses and requested recognition of their ruler’s title. The map shows the place of the audience.","Хуэйчандын үчүнчү жылында Чжуу Хэсу (注吾合索) баштаган жети элчи Тан ордосуна келген. Алар эки жылкы тартуулап, башкаруучусунун наамын бекитүүнү өтүнүшкөн. Картада элчилер кабыл алынган жер көрсөтүлөт."],
-    "source":"Wang Pu. Tang huiyao (唐會要), juan 100, 黠戛斯."
+    "from": 843,
+    "to": 843,
+    "place": [
+      108.94,
+      34.26
+    ],
+    "title": [
+      "Семь кыргызских посланников в Чанъани",
+      "Seven Kyrgyz envoys at Chang’an",
+      "Чанъандагы жети кыргыз элчиси"
+    ],
+    "text": [
+      "В третий год Хуэйчан ко двору Тан прибыли семь посланников во главе с Чжуу Хэсу (注吾合索). Они привели двух лошадей и просили утвердить титул правителя. На карте отмечено место приёма посольства.",
+      "In the third year of Huichang seven envoys led by Zhu Wu Hesu (注吾合索) came to the Tang court. They presented two horses and requested recognition of their ruler’s title. The map shows the place of the audience.",
+      "Хуэйчандын үчүнчү жылында Чжуу Хэсу (注吾合索) баштаган жети элчи Тан ордосуна келген. Алар эки жылкы тартуулап, башкаруучусунун наамын бекитүүнү өтүнүшкөн. Картада элчилер кабыл алынган жер көрсөтүлөт."
+    ],
+    "source": "Wang Pu. Tang huiyao (唐會要), juan 100, 黠戛斯."
   },
   {
-    "from":866,"to":866,"place":[108.94,34.26],
-    "title":["Кыргызское посольство просит календарь Тан","Kyrgyz envoys request the Tang calendar","Кыргыз элчилери Тан жылнаамасын сурайт"],
-    "text":["Сыма Гуан датирует это посольство двенадцатым лунным месяцем седьмого года Сяньтун. Кыргызский военачальник, записанный как 乙支連幾, передал просьбу встретить посланника, которому поручено пожаловать титул, и получить календарь на год Свиньи. На шкале выбран год китайского летосчисления, соответствующий 866 году.","Sima Guang dates this embassy to the twelfth lunar month of the seventh Xiantong year. A Kyrgyz commander, recorded as 乙支連幾, requested that a party be allowed to meet the investiture envoy and asked for the calendar for the Year of the Pig. The timeline uses 866 for the Chinese regnal year.","Сыма Гуан элчилик Сяньтундун жетинчи жылынын он экинчи айында келгенин жазат. Ысымы 乙支連幾 деп жазылган кыргыз кол башчысы наам ыйгарууга келе турган элчини тосууга уруксат жана Доңуз жылынын календарын сураган. Убакыт тилкесинде кытай жыл эсебинин бул жылы 866-жылга туура келет."],
-    "source":"Sima Guang. Zizhi tongjian (資治通鑑), juan 250, 咸通七年十二月."
+    "from": 866,
+    "to": 866,
+    "place": [
+      108.94,
+      34.26
+    ],
+    "title": [
+      "Кыргызское посольство просит календарь Тан",
+      "Kyrgyz envoys request the Tang calendar",
+      "Кыргыз элчилери Тан жылнаамасын сурайт"
+    ],
+    "text": [
+      "Сыма Гуан датирует это посольство двенадцатым лунным месяцем седьмого года Сяньтун. Кыргызский военачальник, записанный как 乙支連幾, передал просьбу встретить посланника, которому поручено пожаловать титул, и получить календарь на год Свиньи. На шкале выбран год китайского летосчисления, соответствующий 866 году.",
+      "Sima Guang dates this embassy to the twelfth lunar month of the seventh Xiantong year. A Kyrgyz commander, recorded as 乙支連幾, requested that a party be allowed to meet the investiture envoy and asked for the calendar for the Year of the Pig. The timeline uses 866 for the Chinese regnal year.",
+      "Сыма Гуан элчилик Сяньтундун жетинчи жылынын он экинчи айында келгенин жазат. Ысымы 乙支連幾 деп жазылган кыргыз кол башчысы наам ыйгарууга келе турган элчини тосууга уруксат жана Доңуз жылынын календарын сураган. Убакыт тилкесинде кытай жыл эсебинин бул жылы 866-жылга туура келет."
+    ],
+    "source": "Sima Guang. Zizhi tongjian (資治通鑑), juan 250, 咸通七年十二月."
   },
   {
-    "from":950,"periodFrom":901,"to":1000,"place":[92,53.6],
-    "periodLabel":["X век · географическое описание","10th century · geographical account","X кылым · географиялык баяндоо"],
-    "title":["X век · Земли кыргызов у аль-Истахри","10th century · Kyrgyz lands in al-Istakhri","X кылым · Ал-Истахри сүрөттөгөн кыргыз жерлери"],
-    "text":["Аль-Истахри называет кыргызов خرخيز и описывает их земли относительно тогузгузов и кимаков. По его словам, представители нескольких тюркских народов понимали друг друга. Географ описывает соседство народов. Верхний Енисей на карте служит региональным ориентиром.","Al-Istakhri calls the Kyrgyz خرخيز and locates their lands in relation to the Toghuzghuz and Kimeks. He reports that speakers from several Turkic peoples understood one another. His account describes neighbouring peoples. The upper Yenisei is a regional reference on the map.","Ал-Истахри кыргыздарды خرخيز деп атап, алардын жерин тогузгуздар менен кимактарга карата сүрөттөгөн. Анын жазышынча, бир нече түрк элинин өкүлдөрү бири-бирин түшүнө алышкан. Географ коңшу элдерди атаган. Картада Жогорку Энесай аймагы көрсөтүлөт."],
-    "source":"Al-Istakhri. Kitāb al-Masālik wa-l-mamālik, ed. M. J. de Goeje, p. 9."
+    "from": 950,
+    "periodFrom": 901,
+    "to": 1000,
+    "place": [
+      92,
+      53.6
+    ],
+    "periodLabel": [
+      "X век · географическое описание",
+      "10th century · geographical account",
+      "X кылым · географиялык баяндоо"
+    ],
+    "title": [
+      "X век · Земли кыргызов у аль-Истахри",
+      "10th century · Kyrgyz lands in al-Istakhri",
+      "X кылым · Ал-Истахри сүрөттөгөн кыргыз жерлери"
+    ],
+    "text": [
+      "Аль-Истахри называет кыргызов خرخيز и описывает их земли относительно тогузгузов и кимаков. По его словам, представители нескольких тюркских народов понимали друг друга. Географ описывает соседство народов. Верхний Енисей на карте служит региональным ориентиром.",
+      "Al-Istakhri calls the Kyrgyz خرخيز and locates their lands in relation to the Toghuzghuz and Kimeks. He reports that speakers from several Turkic peoples understood one another. His account describes neighbouring peoples. The upper Yenisei is a regional reference on the map.",
+      "Ал-Истахри кыргыздарды خرخيز деп атап, алардын жерин тогузгуздар менен кимактарга карата сүрөттөгөн. Анын жазышынча, бир нече түрк элинин өкүлдөрү бири-бирин түшүнө алышкан. Географ коңшу элдерди атаган. Картада Жогорку Энесай аймагы көрсөтүлөт."
+    ],
+    "source": "Al-Istakhri. Kitāb al-Masālik wa-l-mamālik, ed. M. J. de Goeje, p. 9."
   },
   {
-    "from":1120,"to":1120,"place":null,
-    "title":["Аль-Марвази о погребальном обычае","Al-Marwazi on burial customs","Ал-Марвази сөөк коюу салты жөнүндө"],
-    "text":["Около 1120 года аль-Марвази записал рассказ о кыргызах, живших по соседству с мусульманами. По его сообщению, они стали погребать умерших в земле вместо сожжения. Автор не называет поселение или год перемены обычая.","Around 1120 al-Marwazi recorded an account of Kyrgyz living near Muslim communities. He reported that they had begun burying their dead in place of cremation. He gave neither a settlement nor a date for the change.","Болжол менен 1120-жылы ал-Марвази мусулмандарга коңшу жашаган кыргыздар жөнүндө маалымат жазган. Анын айтымында, алар маркумдарды өрттөөнүн ордуна жерге көмө башташкан. Автор конушту да, салт өзгөргөн жылды да атаган эмес."],
-    "source":"Sharaf al-Zamān Ṭāhir al-Marwazī. Ṭabāʾiʿ al-ḥayawān. V. Minorsky, Sharaf al-Zamān Ṭāhir Marvazī on China, the Turks and India."
+    "from": 1120,
+    "to": 1120,
+    "place": null,
+    "title": [
+      "Аль-Марвази о погребальном обычае",
+      "Al-Marwazi on burial customs",
+      "Ал-Марвази сөөк коюу салты жөнүндө"
+    ],
+    "text": [
+      "Около 1120 года аль-Марвази записал рассказ о кыргызах, живших по соседству с мусульманами. По его сообщению, они стали погребать умерших в земле вместо сожжения. Автор не называет поселение или год перемены обычая.",
+      "Around 1120 al-Marwazi recorded an account of Kyrgyz living near Muslim communities. He reported that they had begun burying their dead in place of cremation. He gave neither a settlement nor a date for the change.",
+      "Болжол менен 1120-жылы ал-Марвази мусулмандарга коңшу жашаган кыргыздар жөнүндө маалымат жазган. Анын айтымында, алар маркумдарды өрттөөнүн ордуна жерге көмө башташкан. Автор конушту да, салт өзгөргөн жылды да атаган эмес."
+    ],
+    "source": "Sharaf al-Zamān Ṭāhir al-Marwazī. Ṭabāʾiʿ al-ḥayawān. V. Minorsky, Sharaf al-Zamān Ṭāhir Marvazī on China, the Turks and India."
   },
   {
-    "from":1270,"to":1270,"place":[92,53.6],
-    "title":["Назначение Лю Хаоли на Енисее","Liu Haoli’s appointment on the Yenisei","Лю Хаолинин Энесайга дайындалышы"],
-    "text":["В седьмой год Чжиюань Лю Хаоли назначили разбирать дела кыргызов и соседних северных областей. В описании кыргызских земель хроника упоминает реку Кэм.","In the seventh year of Zhiyuan, Liu Haoli was appointed to hear cases concerning the Kyrgyz and neighbouring northern districts. The geographical account mentions the Kem River in the Kyrgyz lands.","Чжиюандын жетинчи жылында Лю Хаоли кыргыздардын жана коңшу түндүк аймактардын иштерин кароого дайындалган. Жылнаама кыргыз жерлерин сүрөттөгөндө Кем дарыясын атайт."],
-    "source":"Yuan shi (元史), juan 63, 吉利吉思; juan 167, Liu Haoli."
+    "from": 1270,
+    "to": 1270,
+    "place": [
+      92,
+      53.6
+    ],
+    "title": [
+      "Назначение Лю Хаоли на Енисее",
+      "Liu Haoli’s appointment on the Yenisei",
+      "Лю Хаолинин Энесайга дайындалышы"
+    ],
+    "text": [
+      "В седьмой год Чжиюань Лю Хаоли назначили разбирать дела кыргызов и соседних северных областей. В описании кыргызских земель хроника упоминает реку Кэм.",
+      "In the seventh year of Zhiyuan, Liu Haoli was appointed to hear cases concerning the Kyrgyz and neighbouring northern districts. The geographical account mentions the Kem River in the Kyrgyz lands.",
+      "Чжиюандын жетинчи жылында Лю Хаоли кыргыздардын жана коңшу түндүк аймактардын иштерин кароого дайындалган. Жылнаама кыргыз жерлерин сүрөттөгөндө Кем дарыясын атайт."
+    ],
+    "source": "Yuan shi (元史), juan 63, 吉利吉思; juan 167, Liu Haoli."
   },
   {
-    "from":1758,"to":1758,"place":[74.8,41.95],
-    "title":["Посольства восточных кыргызских общин к Цин","Eastern Kyrgyz communities send envoys to the Qing","Чыгыш кыргыз жамааттары Цинге элчи жөнөттү"],
-    "text":["В 23-й год Цяньлуна цинские посланники встретились с восточными кыргызскими общинами. В китайском тексте употреблено название буруты (布魯特). Описаны отдельные общины, их предводители и отправка послов ко двору. На карте показан район Тянь-Шаня.","In Qianlong’s 23rd year, Qing envoys met eastern Kyrgyz communities. The Chinese text calls them Burut (布魯特). It identifies distinct communities and leaders and records delegations sent to court. The map focuses on the Tian Shan region.","Цяньлундун 23-жылында Цин элчилери чыгыш кыргыз жамааттары менен жолугушкан. Кытайча текстте буруттар (布魯特) деген ат колдонулган. Булакта жамааттар менен башчылары өзүнчө аталып, ордого элчилер жөнөтүлгөнү баяндалат. Картада Теңир-Тоо аймагы көрсөтүлөт."],
-    "source":"Qing shi gao (清史稿), 藩部傳, 布魯特."
+    "from": 1758,
+    "to": 1758,
+    "place": [
+      74.8,
+      41.95
+    ],
+    "title": [
+      "Посольства восточных кыргызских общин к Цин",
+      "Eastern Kyrgyz communities send envoys to the Qing",
+      "Чыгыш кыргыз жамааттары Цинге элчи жөнөттү"
+    ],
+    "text": [
+      "В шестом лунном месяце 1758 года по календарю Цин посланники Ургин и Толунтай прибыли в кыргызские кочевья Чжумухань — Джумгал. «Цин ши гао» называет саяков и сарыбагышей и их старшего представителя Мамыккулду. В следующем месяце отдельное посольство принял глава саруу Акбай. Кыргызские представители отправились ко двору через города Восточного Туркестана. На карте отмечена Джумгальская долина, без привязки встречи к конкретному селу.",
+      "In the sixth lunar month of 1758, Qing envoys Urgin and Toluntai reached the Kyrgyz pastures of Zhumuhan, identified with Jumgal. Qing shi gao names the Sayak and Sarybagysh and their senior representative Mamyk-kul. In the following month Akbai of the Saruu received a separate embassy. Kyrgyz envoys travelled to court through Eastern Turkestan. The marker locates the Jumgal valley, not a particular village.",
+      "1758-жылдын Цин календары боюнча алтынчы айында Ургин менен Толунтай кыргыздардын Чжумухань — Жумгал жайлоолоруна келишкен. «Цин ши гао» саяк, сарыбагыш жана алардын улуу өкүлү Мамыккулду атайт. Кийинки айда саруулардын башчысы Акбай өзүнчө элчиликти кабыл алган. Кыргыз элчилери Чыгыш Түркстандын шаарлары аркылуу ордого жөнөшкөн. Белги белгилүү бир айылды эмес, Жумгал өрөөнүн көрсөтөт."
+    ],
+    "source": "Qing shi gao (清史稿), juan 529, 布魯特, Qianlong 23, sixth and seventh lunar months (1758).",
+    "places": [
+      [
+        [
+          74.8,
+          41.95
+        ],
+        [
+          "Джумгал · район встречи",
+          "Jumgal · meeting region",
+          "Жумгал · жолугушуу аймагы"
+        ]
+      ]
+    ]
   },
   {
-    "from":1517,"to":1517,"place":[77.6,42.19],"kind":"war","route":[[75.99,39.47],[77.6,42.19]],
-    "title":["Мухаммад Кыргыз на южном берегу Иссык-Куля","Muhammad Kirghiz on the southern shore of Issyk-Kul","Мухаммад Кыргыз Ысык-Көлдүн түштүк жээгинде"],
-    "text":["В персидской хронике Мухаммада Хайдара Дуглата описан поход осени 923 года хиджры. Войско султана Саид-хана выступило из Кашгара. У устья Барскоона, на берегу Иссык-Куля, находились шатры и пастбища людей Мухаммада Кыргыза. После нападения его взяли в плен. На карте отмечен район устья, названный в хронике.","Muhammad Haydar Dughlat’s Persian chronicle describes a campaign in the autumn of 923 AH. Sultan Said Khan’s army set out from Kashgar. The tents and pastures of Muhammad Kirghiz’s people lay by the mouth of the Barskoon River on Lake Issyk-Kul. He was taken prisoner in the attack. The map marks the approximate river mouth named in the chronicle.","Мухаммад Хайдар Дуглаттын персче жылнаамасында хижранын 923-жылы күзүндө болгон жортуул баяндалат. Султан Саид хандын аскери Кашкардан чыккан. Ысык-Көлдүн жээгинде, Барскоон суусунун куйган жеринде Мухаммад Кыргыздын элинин чатырлары жана жайыттары болгон. Кол салууда Мухаммад Кыргыз туткунга түшкөн. Картада жылнаамада аталган суунун куйган жери болжол менен көрсөтүлөт."],
-    "source":"Mīrzā Muḥammad Ḥaydar Dūghlāt. Tārīkh-i Rashīdī, book II, ch. LXI, pp. 349–351 (E. D. Ross)."
+    "from": 1517,
+    "to": 1517,
+    "place": [
+      77.6,
+      42.19
+    ],
+    "kind": "war",
+    "route": [
+      [
+        75.99,
+        39.47
+      ],
+      [
+        77.6,
+        42.19
+      ]
+    ],
+    "title": [
+      "Мухаммад Кыргыз на южном берегу Иссык-Куля",
+      "Muhammad Kirghiz on the southern shore of Issyk-Kul",
+      "Мухаммад Кыргыз Ысык-Көлдүн түштүк жээгинде"
+    ],
+    "text": [
+      "В персидской хронике Мухаммада Хайдара Дуглата описан поход осени 923 года хиджры. Войско султана Саид-хана выступило из Кашгара. У устья Барскоона, на берегу Иссык-Куля, находились шатры и пастбища людей Мухаммада Кыргыза. После нападения его взяли в плен. На карте отмечен район устья, названный в хронике.",
+      "Muhammad Haydar Dughlat’s Persian chronicle describes a campaign in the autumn of 923 AH. Sultan Said Khan’s army set out from Kashgar. The tents and pastures of Muhammad Kirghiz’s people lay by the mouth of the Barskoon River on Lake Issyk-Kul. He was taken prisoner in the attack. The map marks the approximate river mouth named in the chronicle.",
+      "Мухаммад Хайдар Дуглаттын персче жылнаамасында хижранын 923-жылы күзүндө болгон жортуул баяндалат. Султан Саид хандын аскери Кашкардан чыккан. Ысык-Көлдүн жээгинде, Барскоон суусунун куйган жеринде Мухаммад Кыргыздын элинин чатырлары жана жайыттары болгон. Кол салууда Мухаммад Кыргыз туткунга түшкөн. Картада жылнаамада аталган суунун куйган жери болжол менен көрсөтүлөт."
+    ],
+    "source": "Mīrzā Muḥammad Ḥaydar Dūghlāt. Tārīkh-i Rashīdī, book II, ch. LXI, pp. 349–351 (E. D. Ross)."
+  },
+  {
+    "from": 1154,
+    "to": 1154,
+    "place": [
+      91.7,
+      53.6
+    ],
+    "kind": "culture",
+    "periodLabel": [
+      "1154 · составление атласа",
+      "1154 · compilation of the atlas",
+      "1154 · атластын түзүлүшү"
+    ],
+    "title": [
+      "Кыргызские земли на картах аль-Идриси",
+      "Kyrgyz lands on al-Idrisi’s maps",
+      "Аль-Идрисинин карталарындагы кыргыз жерлери"
+    ],
+    "text": [
+      "Аль-Идриси описывает четыре города кыргызской страны. Ю. Н. Есин связывает её основную область с бассейном Енисея. Карты сохраняют разновременные сведения VIII–IX веков. На карте атласа обозначен регион; точное расположение четырёх городов остаётся предметом исследования.",
+      "Al-Idrisi describes four towns in the Kyrgyz country. Yu. N. Esin identifies its principal region with the Yenisei basin. The maps preserve accounts from different stages of the eighth and ninth centuries. The atlas marks the region; the towns’ precise locations remain under investigation.",
+      "Аль-Идриси кыргыз өлкөсүндөгү төрт шаарды сүрөттөйт. Ю. Н. Есин анын негизги аймагын Энесайдын алабы менен байланыштырат. Карталар VIII–IX кылымдардын ар башка мезгилдериндеги маалыматтарды сактаган. Атласта аймак белгиленди; төрт шаардын так орду дагы изилденүүдө."
+    ],
+    "source": "Al-Idrīsī. Nuzhat al-mushtāq fī ikhtirāq al-āfāq, section III.10. Ю. Н. Есин. Страна кыргызов на картах большого атласа ал-Идриси. Научное обозрение Саяно-Алтая, 2022, № 1 (33), с. 53–104.",
+    "places": [
+      [
+        [
+          91.7,
+          53.6
+        ],
+        [
+          "Енисей · регион кыргызских земель",
+          "Yenisei · Kyrgyz lands region",
+          "Энесай · кыргыз жерлеринин аймагы"
+        ]
+      ]
+    ]
+  },
+  {
+    "from": 1295,
+    "to": 1296,
+    "place": [
+      118,
+      36.5
+    ],
+    "kind": "migration",
+    "route": [
+      [
+        116.15,
+        40.53
+      ],
+      [
+        118,
+        36.5
+      ]
+    ],
+    "mapScale": 6,
+    "periodLabel": [
+      "Первый год Юаньчжэнь, 12-й месяц · зима 1295–1296",
+      "Yuanzhen 1, twelfth lunar month · winter 1295–1296",
+      "Юаньчжэнь доорунун биринчи жылы, 12-ай · 1295–1296-жылдардын кышы"
+    ],
+    "title": [
+      "Переселение кыргызских жителей из Цзиньшаня в Шаньдун",
+      "Relocation of Kyrgyz residents from Jinshan to Shandong",
+      "Кыргыз тургундарын Цзиньшандан Шаньдунга көчүрүү"
+    ],
+    "text": [
+      "«Юань ши» сообщает о переселении живших в Цзиньшане кыргызов и других жителей в Шаньдун. Власти выделили им землю, скот и семена. Цзиньшань находился в районе современного Яньцина к северо-западу от Пекина. Сообщение показывает размещение кыргызских групп внутри империи Юань; это не переселение всего народа. Конкретные поселения в Шаньдуне хроника не перечисляет.",
+      "Yuan shi records the relocation of Kyrgyz and other residents of Jinshan to Shandong. Authorities provided land, cattle and seed. Jinshan lay in the present Yanqing area northwest of Beijing. The account documents the settlement of Kyrgyz groups within the Yuan Empire, not the migration of an entire people. The chronicle does not name their individual destinations in Shandong.",
+      "«Юань ши» Цзиньшанда жашаган кыргыздар менен башка тургундардын Шаньдунга көчүрүлгөнүн билдирет. Бийлик аларга жер, мал жана үрөн берген. Цзиньшань азыркы Пекиндин түндүк-батышындагы Яньцин аймагында болгон. Маалымат бүт элдин көчүшүн эмес, кыргыз топторунун Юань империясынын ичинде жайгаштырылышын көрсөтөт. Шаньдундагы конкреттүү конуштар жылнаамада аталбайт."
+    ],
+    "source": "Yuan shi (元史), juan 18, 成宗一, 元貞元年十二月; juan 58, 地理一, 龍慶州.",
+    "geographyNote": [
+      "Цзиньшань → Шаньдун: направление между районами, без реконструкции промежуточных стоянок.",
+      "Jinshan → Shandong: direction between regions; intermediate stops are not reconstructed.",
+      "Цзиньшань → Шаньдун: аймактардын ортосундагы багыт; аралык конуштар көрсөтүлгөн эмес."
+    ],
+    "places": [
+      [
+        [
+          116.15,
+          40.53
+        ],
+        [
+          "Цзиньшань · район Яньцина",
+          "Jinshan · Yanqing area",
+          "Цзиньшань · Яньцин аймагы"
+        ]
+      ],
+      [
+        [
+          118,
+          36.5
+        ],
+        [
+          "Шаньдун · район назначения",
+          "Shandong · destination region",
+          "Шаньдун · көчүрүлгөн аймак"
+        ]
+      ]
+    ]
+  },
+  {
+    "from": 1760,
+    "periodFrom": 1758,
+    "to": 1763,
+    "place": [
+      75,
+      41.8
+    ],
+    "kind": "culture",
+    "mapScale": 7,
+    "periodLabel": [
+      "Середина XVIII века · география общин",
+      "Mid-18th century · geography of communities",
+      "XVIII кылымдын ортосу · жамааттардын географиясы"
+    ],
+    "title": [
+      "Иссык-Куль, Талас и Ош в цинском описании кыргызов",
+      "Issyk-Kul, Talas and Osh in the Qing account of the Kyrgyz",
+      "Цин баянындагы Ысык-Көл, Талас жана Ош кыргыздары"
+    ],
+    "text": [
+      "«Цин ши гао» различает восточные и западные кыргызские общины. Восточные связаны с Иссык-Кулем; среди их объединений названы саяк, сарыбагыш и талас. Западные описаны на путях к северо-западу от Кашгара через Ош; перечислены адыгине, монолдор, чирик и басыз. Это география общин и их связей. Отметки обозначают названные районы, а не границы отдельных государств.",
+      "Qing shi gao distinguishes eastern and western Kyrgyz communities. The eastern groups are associated with Issyk-Kul and include Sayak, Sarybagysh and Talas. Western groups are described on the routes northwest of Kashgar through Osh, with Adygine, Monoldor, Chirik and Basyz named. This is a geography of communities and connections. Markers identify the named regions rather than borders of separate states.",
+      "«Цин ши гао» чыгыш жана батыш кыргыз жамааттарын айырмалайт. Чыгыш жамааттары Ысык-Көл менен байланыштырылып, саяк, сарыбагыш жана талас аттары берилген. Батыш жамааттары Кашкардын түндүк-батышындагы Ош аркылуу өткөн жолдордо сүрөттөлүп, адыгине, монолдор, чирик жана басыз аталган. Бул жамааттар менен байланыштардын географиясы. Белгилер өзүнчө мамлекеттердин чек арасын эмес, аталган аймактарды көрсөтөт."
+    ],
+    "source": "Qing shi gao (清史稿), juan 529, 布魯特, opening geographical account and Qianlong 23–28.",
+    "places": [
+      [
+        [
+          77.2,
+          42.4
+        ],
+        [
+          "Иссык-Куль",
+          "Issyk-Kul",
+          "Ысык-Көл"
+        ]
+      ],
+      [
+        [
+          72.22,
+          42.52
+        ],
+        [
+          "Таласская долина",
+          "Talas valley",
+          "Талас өрөөнү"
+        ]
+      ],
+      [
+        [
+          72.8,
+          40.53
+        ],
+        [
+          "Ош",
+          "Osh",
+          "Ош"
+        ]
+      ],
+      [
+        [
+          75.99,
+          39.47
+        ],
+        [
+          "Кашгар · географический ориентир",
+          "Kashgar · geographical reference",
+          "Кашкар · географиялык багыт"
+        ]
+      ]
+    ]
   }
 ]
