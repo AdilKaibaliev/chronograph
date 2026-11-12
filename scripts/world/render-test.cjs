@@ -153,4 +153,15 @@ for(const lang of [0,1,2])for(const y of [1295,1760,1050,1758,1154,1755]){
 }
 context.worldState.event='';context.renderWorldMap();
 assert(!context.worldLayer.children.some(n=>n.classList.contains('world-comparison-place')||n.classList.contains('world-event-route')),'Old geography leaked into another selection');
+const cameraContext={WORLD_HISTORY:catalog,worldHistory:createWorldHistory(catalog),worldState:{region:'all'},year:1758,
+ stopPlay(){},worldShowLocations(){},switchPanel(){},renderYear(y){cameraContext.year=y;},queueLocationSave(){},
+ $:()=>({scrollTop:0,focus(){}}),project:([lon,lat])=>[(lon+180)*4,(90-lat)*4],SVG_W:1440,SVG_H:720,
+ animateCamera:t=>{cameraContext.camera=t;},focusLonLat:()=>{throw Error('Named geography lost its camera bounds');}};
+vm.createContext(cameraContext);vm.runInContext(runtime.slice(runtime.indexOf('function worldChooseEvent('),runtime.indexOf("let worldControlsKey=")),cameraContext);
+for(const y of [1050,1154,1295,1755,1758,1760]){
+ cameraContext.worldChooseEvent('kyrgyz-witness-'+y);
+ const e=cameraContext.worldHistory.record('kyrgyz-witness-'+y),cam=cameraContext.camera;
+ if(e.mapPlaces.length===1)assert(cam.scale<=7,'Single regional landmark zoomed beyond regional context');
+ for(const [coord] of e.mapPlaces){const [x,z]=cameraContext.project(coord);assert(x*cam.scale+cam.tx>0&&x*cam.scale+cam.tx<1440&&z*cam.scale+cam.ty>0&&z*cam.scale+cam.ty<720,'Named endpoint outside camera');}
+}
 console.log(JSON.stringify({status:'PASS',renderers:2,renders,regions:regions.length,years:(catalog.range?.max??1299)-609,territoriesIn1299:expectedAreas(1299).length,placesIn1299:expectedPlaces(1299).length,kyrgyzGeographyChecks:18}));

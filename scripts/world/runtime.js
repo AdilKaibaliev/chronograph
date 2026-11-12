@@ -129,7 +129,7 @@ function worldChooseEvent(id){
  if(worldState.region!=='all'&&worldState.region!==e.region&&!WORLD_HISTORY.eventRegions?.[id]?.includes(worldState.region))worldState.region=e.region;
  switchPanel('compare');renderYear(e.periodLabel&&year>=e.from&&year<=e.to?year:e.year);
  const lesson=WORLD_HISTORY.mapComparisons?.[id],focusPoints=lesson?lesson.places.map(p=>p[0]):[...(e.route||[]),...(e.mapPlaces||[]).map(p=>p[0])];
- if(focusPoints?.length){const pts=focusPoints.map(project),xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]),cx=(Math.min(...xs)+Math.max(...xs))/2,cy=(Math.min(...ys)+Math.max(...ys))/2,s=Math.min(lesson?.scale||e.mapScale||24,SVG_W*.72/Math.max(14,Math.max(...xs)-Math.min(...xs)),SVG_H*.65/Math.max(14,Math.max(...ys)-Math.min(...ys)));animateCamera({scale:s,tx:SVG_W/2-cx*s,ty:SVG_H/2-cy*s});}else focusLonLat(...e.coord,e.region==='antarctica'?1.3:4.2);
+ if(focusPoints?.length){const pts=focusPoints.map(project),xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]),cx=(Math.min(...xs)+Math.max(...xs))/2,cy=(Math.min(...ys)+Math.max(...ys))/2,s=Math.min(lesson?.scale||e.mapScale||(e.mapPlaces?.length===1?4.2:24),SVG_W*.72/Math.max(14,Math.max(...xs)-Math.min(...xs)),SVG_H*.65/Math.max(14,Math.max(...ys)-Math.min(...ys)));animateCamera({scale:s,tx:SVG_W/2-cx*s,ty:SVG_H/2-cy*s});}else focusLonLat(...e.coord,e.region==='antarctica'?1.3:4.2);
  $('panel-compare').scrollTop=0;$('worldEventTitle')?.focus({preventScroll:true});queueLocationSave();
 }
 let worldControlsKey='';
