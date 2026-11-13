@@ -164,4 +164,16 @@ for(const y of [800,843,984,988,1050,1154,1265,1295,1508,1514,1517,1522,1755,175
  if(e.mapPlaces.length===1)assert(cam.scale<=7,'Single regional landmark zoomed beyond regional context');
  for(const [coord] of e.mapPlaces){const [x,z]=cameraContext.project(coord);assert(x*cam.scale+cam.tx>0&&x*cam.scale+cam.tx<1440&&z*cam.scale+cam.ty>0&&z*cam.scale+cam.ty<720,'Named endpoint outside camera');}
 }
-console.log(JSON.stringify({status:'PASS',renderers:2,renders,regions:regions.length,years:(catalog.range?.max??1299)-609,territoriesIn1299:expectedAreas(1299).length,placesIn1299:expectedPlaces(1299).length,kyrgyzGeographyChecks:45}));
+// The 1508 source names Karashahr and Turfan as destinations without ordering
+// them. The card's location list must not invent an onward journey to Turfan.
+const cardContext={worldHistory:context.worldHistory,worldState:{event:'kyrgyz-witness-1508'},worldEventDetail:new SvgNode('section'),
+ we:(tag,cls,value)=>{const n=new SvgNode(tag);n.setAttribute('class',cls);n.textContent=value;return n;},
+ wt:k=>k,worldEventDate:e=>String(e.year),worldRecords:()=>[],appendWorldSources(){},renderWorldComparison(){}};
+vm.createContext(cardContext);vm.runInContext(runtime.slice(runtime.indexOf('function renderWorldEvent(){'),runtime.indexOf('function appendWorldLearning(')),cardContext);
+for(let lang=0;lang<3;lang++){
+ cardContext.wl=row=>row[lang];cardContext.renderWorldEvent();
+ const texts=cardContext.worldEventDetail.children.map(n=>n.textContent);
+ assert(texts.includes(['Чарын–Чилик · Чалыш · Карашар · Турфан','Charyn–Chilik · Chalish · Karashahr · Turfan','Чарын–Чилик · Чалыш · Карашаар · Турпан'][lang]),'Independent destinations became a sequential route');
+ assert(!texts.some(t=>t?.includes(' → ')),'Unsupported route sequence remains in the card');
+}
+console.log(JSON.stringify({status:'PASS',renderers:3,renders,regions:regions.length,years:(catalog.range?.max??1299)-609,territoriesIn1299:expectedAreas(1299).length,placesIn1299:expectedPlaces(1299).length,kyrgyzGeographyChecks:45,independentDestinationCards:3}));

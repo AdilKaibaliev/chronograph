@@ -237,7 +237,9 @@ function renderWorldEvent(){
  worldEventDetail.append(we('p','world-card-meta',worldEventDate(e)+' · '+wt(e.approx?'approx':'exact')),title,we('p','world-description',wl(e.text)));
  if(e.routeApprox)worldEventDetail.append(we('p','world-card-meta',wl(['Схема переселения · места отправления и прибытия','Migration schematic · origins and destinations','Көчүүнүн схемасы · жөнөгөн жана келген жерлер'])));
   if(e.geographyNote)worldEventDetail.append(we('p','world-card-meta',wl(e.geographyNote)));
-  if(e.mapPlaces?.length)worldEventDetail.append(we('p','world-card-meta',e.mapPlaces.map(p=>wl(p[1])).join(e.route?' → ':' · ')));
+  // Named places can include independent destinations outside the route.
+  // Their list must not assert an itinerary between every displayed marker.
+  if(e.mapPlaces?.length)worldEventDetail.append(we('p','world-card-meta',e.mapPlaces.map(p=>wl(p[1])).join(' · ')));
  appendWorldSources(worldEventDetail,e.sources,e.base);
  renderWorldComparison(e);
  const actions=we('div','world-event-actions'),records=worldRecords(),i=records.findIndex(r=>r.id===e.id);
