@@ -147,6 +147,8 @@ function renderWorldControls(){
  eurasiaSummary.textContent=year>=1300?wl(['Евразия · события и мировой контекст','Eurasia · events and world context','Евразия · окуялар жана дүйнөлүк контекст']):wt('eurasia');
  worldEurasia.hidden=!['all','eurasia'].includes(worldState.region);if(worldState.region==='eurasia')worldEurasia.open=true;
  $('worldLegend').hidden=false;$('worldDating').hidden=false;
+ const geographicEvent=worldHistory.record(worldState.event);
+ document.body.classList.toggle('world-selected-geography',Boolean(geographicEvent?.mapPlaces?.length||geographicEvent?.route?.length));
  const controlsKey=[language,worldState.region,worldState.mode,worldState.filters,Boolean(worldState.event),worldState.search,worldState.studySearch,worldState.century,worldState.type,worldEpochForYear(year)].join('|');
  if(worldControlsKey===controlsKey){updateWorldCaption();renderWorldAreaControls();return;}worldControlsKey=controlsKey;
  $('worldRegionLabel').textContent=wt('regionLabel');const nav=$('worldRegionSelect');nav.replaceChildren();

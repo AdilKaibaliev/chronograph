@@ -1812,5 +1812,226 @@
       "Schematic regional route; passes are not located.",
       "Аймактар аралык жолдун схемасы; ашуулар так белгиленген эмес."
     ]
+  },
+  {
+    "from": 863,
+    "to": 863,
+    "kind": "diplomacy",
+    "place": [
+      108.94,
+      34.26
+    ],
+    "mapScale": 5,
+    "title": [
+      "Кыргызское посольство: книги, календарь и предложение похода",
+      "Kyrgyz embassy: books, a calendar and a proposed campaign",
+      "Кыргыз элчилиги: китептер, календарь жана жортуул сунушу"
+    ],
+    "text": [
+      "«Цзычжи тунцзянь» сообщает: кыргызский посланник Хэ Инаньчжи (合伊難支) просил книги и ежегодное получение календаря Тан. Он также предложил выступить против уйгуров и вернуть Тан земли Анси. Двор не одобрил предложение. На карте показаны Чанъань и район Кучи — исторического центра Анси; запись не подтверждает совершённый поход или переселение.",
+      "Zizhi tongjian records that the Kyrgyz envoy He Yinanzhi (合伊難支) requested books and annual access to the Tang calendar. He also proposed attacking the Uyghurs and restoring Anxi lands to the Tang. The court did not approve. The map marks Chang’an and Kucha, the historical Anxi centre; the entry does not establish a completed campaign or migration.",
+      "«Цзычжи тунцзянь» боюнча, кыргыз элчиси Хэ Инаньчжи (合伊難支) китептерди жана Тан календарын жыл сайын алууну сураган. Ал уйгурларга каршы чыгып, Анси жерлерин Танга кайтарууну да сунуштаган. Ордо сунушту жактырган эмес. Картада Чанъань жана Ансинин тарыхый борбору Куча көрсөтүлөт; жазуу жортуулдун же көчүүнүн ишке ашканын ырастабайт."
+    ],
+    "source": "Sima Guang. Zizhi tongjian (資治通鑑), juan 250, Xiantong 4 (863), entry on 合伊難支.",
+    "places": [
+      [
+        [
+          108.94,
+          34.26
+        ],
+        [
+          "Чанъань · двор Тан",
+          "Chang’an · Tang court",
+          "Чанъань · Тан ордосу"
+        ]
+      ],
+      [
+        [
+          82.96,
+          41.72
+        ],
+        [
+          "Анси · район Кучи",
+          "Anxi · Kucha region",
+          "Анси · Куча аймагы"
+        ]
+      ]
+    ],
+    "geographyNote": [
+      "Места дипломатического сообщения; военный маршрут не указан.",
+      "Locations in a diplomatic report; no military itinerary is given.",
+      "Дипломатиялык кабарда аталган жерлер; аскердик жол көрсөтүлгөн эмес."
+    ]
+  },
+  {
+    "from": 885,
+    "periodFrom": 801,
+    "to": 900,
+    "kind": "economy",
+    "place": [
+      75.8,
+      41.17
+    ],
+    "mapScale": 14,
+    "periodLabel": [
+      "IX век · арабское описание пути",
+      "9th century · Arabic route description",
+      "IX кылым · жолдун арабча баяны"
+    ],
+    "title": [
+      "Ош — Узген — Ат-Башы у Ибн Хордадбеха",
+      "Osh–Uzgen–At-Bashy in Ibn Khordadbeh",
+      "Ибн Хордадбех баяндаган Ош — Өзгөн — Ат-Башы"
+    ],
+    "text": [
+      "Ибн Хордадбех описывает дорогу из Оша через Узген и горный перевал к Атбашу, затем к Верхнему Нушаджану. Карта соединяет Ош, Узген и Ат-Башинскую долину. Это география путей Тянь-Шаня IX века. Кыргызов автор упоминает отдельно; он не сообщает об их переселении по этой дороге.",
+      "Ibn Khordadbeh describes a road from Osh through Uzgen and a mountain pass to Atbash, continuing to Upper Nushajan. The map connects Osh, Uzgen and the At-Bashy valley. This is ninth-century Tian Shan route geography. He mentions the Kyrgyz separately, without reporting their migration along this road.",
+      "Ибн Хордадбех Оштон Өзгөн жана тоо ашуусу аркылуу Атбашка, андан Жогорку Нушажанга баруучу жолду сүрөттөйт. Карта Ош, Өзгөн жана Ат-Башы өрөөнүн бириктирет. Бул IX кылымдагы Теңир-Тоонун жол географиясы. Автор кыргыздарды өзүнчө атап, алардын бул жол менен көчкөнүн билдирбейт."
+    ],
+    "source": "Ибн Хордадбех. Китаб ал-масалик ва-л-мамалик (Книга путей и стран), §16 «Дорога из Замина до Фарганы». Перевод Н. Велихановой. Баку, 1986, с. 65–66.",
+    "route": [
+      [
+        72.8,
+        40.53
+      ],
+      [
+        73.3,
+        40.77
+      ],
+      [
+        75.8,
+        41.17
+      ]
+    ],
+    "places": [
+      [
+        [
+          72.8,
+          40.53
+        ],
+        [
+          "Ош",
+          "Osh",
+          "Ош"
+        ]
+      ],
+      [
+        [
+          73.3,
+          40.77
+        ],
+        [
+          "Узген",
+          "Uzgen",
+          "Өзгөн"
+        ]
+      ],
+      [
+        [
+          75.8,
+          41.17
+        ],
+        [
+          "Ат-Башинская долина",
+          "At-Bashy valley",
+          "Ат-Башы өрөөнү"
+        ]
+      ]
+    ],
+    "geographyNote": [
+      "Схема названных районов; точный перевал и положение средневекового Атбаша не заданы.",
+      "Schematic links between named regions; the exact pass and medieval Atbash site are not plotted.",
+      "Аталган аймактардын схемалык байланышы; так ашуу жана орто кылымдагы Атбаштын орду белгиленген эмес."
+    ]
+  },
+  {
+    "from": 1291,
+    "to": 1291,
+    "kind": "economy",
+    "place": [
+      91.7,
+      53.6
+    ],
+    "mapScale": 8,
+    "title": [
+      "Шесть почтовых станций к землям кыргызов",
+      "Six relay stations connecting Kyrgyz lands",
+      "Кыргыз жерлерин байланыштырган алты почта бекети"
+    ],
+    "text": [
+      "Документ 1291 года из «Цзинши дадянь», сохранённый в «Юнлэ дадянь», предписывает устроить шесть станций между кыргызскими и ойратскими землями. Усам отведены две станции. Каждая должна получить 40 лошадей и 50 овец. Схема связывает Енисей, Ус, верховья Большого Енисея и район ойратов у Малого Енисея и Дэлгэр-Мурэна. Это почтовая связь, а не переселение на Тянь-Шань.",
+      "A 1291 document from Jingshi dadian, preserved in Yongle dadian, orders six relay stations between Kyrgyz and Oirat lands, including two in the Us region. Each was to receive 40 horses and 50 sheep. The schematic connects the Yenisei, Us, upper Greater Yenisei and Oirat lands near the Lesser Yenisei and Delgermörön. This is a postal connection, not a Tian Shan migration.",
+      "«Юнлэ дадянь» сактаган «Цзинши дадяндагы» 1291-жылкы документ кыргыз жана ойрот жерлеринин арасына алты бекет уюштурууну буйруйт. Ус аймагына эки бекет бөлүнгөн. Ар бирине 40 жылкы, 50 кой берилмек. Схема Энесай, Ус, Чоң Энесайдын башаты жана Кичи Энесай–Дэлгэр-Мурэн аймагындагы ойрот жерлерин байланыштырат. Бул Теңир-Тоого көчүү эмес, почта байланышы."
+    ],
+    "source": "Jingshi dadian (經世大典), preserved in Yongle dadian (永樂大典), juan 19419, 站赤四, Zhiyuan 28, ninth month, day 20 (1291). Geographic identifications: 中国大百科全书·中国历史, «吉利吉思».",
+    "route": [
+      [
+        91.7,
+        53.6
+      ],
+      [
+        93.1,
+        52.2
+      ],
+      [
+        95.2,
+        52.5
+      ],
+      [
+        98.7,
+        50.7
+      ]
+    ],
+    "places": [
+      [
+        [
+          91.7,
+          53.6
+        ],
+        [
+          "Кыргызы · Енисей",
+          "Kyrgyz · Yenisei",
+          "Кыргыздар · Энесай"
+        ]
+      ],
+      [
+        [
+          93.1,
+          52.2
+        ],
+        [
+          "Ус · регион",
+          "Us · region",
+          "Ус · аймак"
+        ]
+      ],
+      [
+        [
+          95.2,
+          52.5
+        ],
+        [
+          "Большой Енисей · верховья",
+          "Upper Greater Yenisei",
+          "Чоң Энесайдын башаты"
+        ]
+      ],
+      [
+        [
+          98.7,
+          50.7
+        ],
+        [
+          "Ойратские земли · регион",
+          "Oirat lands · region",
+          "Ойрот жерлери · аймак"
+        ]
+      ]
+    ],
+    "geographyNote": [
+      "Обобщённая связь районов; точные места шести станций не установлены.",
+      "Generalized regional connection; the precise sites of the six stations are not established.",
+      "Аймактардын жалпыланган байланышы; алты бекеттин так орду аныкталган эмес."
+    ]
   }
 ]

@@ -4,8 +4,8 @@
  line.type='button';line.id='kyrgyzParallel';line.dataset.localeOwned='true';
  $('timelineCard').querySelector('.timeline-row').after(line);
  const label=()=>wl(['История кыргызов','Kyrgyz history','Кыргыз тарыхы']);
- const journeyYears=[800,870,984,1050,1154,1265,1295,1504,1508,1510,1514,1517,1522,1526,1527,1703,1755,1765];
- const journeyTypes={migration:['Переселение','Relocation','Көчүрүү'],war:['Военный поход','Military campaign','Аскердик жортуул'],economy:['Пути и связи','Routes and connections','Жолдор жана байланыштар'],politics:['Политическая история','Political history','Саясий тарых'],culture:['Письменное свидетельство','Written account','Жазма маалымат']};
+ const journeyYears=[800,863,870,885,984,1050,1154,1265,1291,1295,1504,1508,1510,1514,1517,1522,1526,1527,1703,1755,1765];
+ const journeyTypes={diplomacy:['Дипломатия','Diplomacy','Дипломатия'],migration:['Переселение','Relocation','Көчүрүү'],war:['Военный поход','Military campaign','Аскердик жортуул'],economy:['Пути и связи','Routes and connections','Жолдор жана байланыштар'],politics:['Политическая история','Political history','Саясий тарых'],culture:['Письменное свидетельство','Written account','Жазма маалымат']};
  let journeyExpanded=false;
  function showReading(d,view,territory,eventId){
   stopPlay();$('modalClose').click();showKyrgyzContext=true;renderYear(d);
@@ -46,7 +46,8 @@
  function reading(y){
   const notes=KYRGYZ_WITNESSES.filter(n=>(n.periodFrom??n.from)<=y&&y<=n.to)
    .sort((a,b)=>Number(!!a.background)-Number(!!b.background)
-    ||(a.to-(a.periodFrom??a.from))-(b.to-(b.periodFrom??b.from)));
+    ||(a.to-(a.periodFrom??a.from))-(b.to-(b.periodFrom??b.from))
+    ||Number(b.from===y)-Number(a.from===y));
   const note=notes.find(n=>!n.background);
   let early=y<1300?kyrgyzHistoryForYear(y):null;
   if(early&&notes.some(n=>n.replacesStage===early.year))early=null;

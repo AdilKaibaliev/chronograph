@@ -97,7 +97,7 @@ const readPeriod=vm.runInNewContext(parallelSource.slice(parallelSource.indexOf(
  kyrgyzHistoryForYear:()=>null,
  worldHistory:{at:()=>[]}
 });
-for(const y of [843,844,866,1265,1758,1759,1762])assert.equal(readPeriod(y).note.from,y,'Dated Kyrgyz account hidden by a broad period '+y);
+for(const y of [843,844,863,866,1265,1291,1758,1759,1762])assert.equal(readPeriod(y).note.from,y,'Dated Kyrgyz account hidden by a broad period '+y);
 const readWithStage=vm.runInNewContext(parallelSource.slice(parallelSource.indexOf(' function reading(y)'),parallelSource.indexOf(' function title(y)'))+';reading',{
  KYRGYZ_WITNESSES:require('./kyrgyz-witnesses.json'),kyrgyzHistoryForYear:y=>({year:y}),worldHistory:{at:()=>[]}
 });
@@ -161,6 +161,24 @@ assert.deepEqual([road1765.from,road1765.year,road1765.to],[1763,1765,1770]);
 assert.equal(road1765.kind,'economy','A geographical itinerary became a dated migration');
 assert(road1765.approx);assert.deepEqual(road1765.route,[[75.8,41.17],[75.76,42.21],[77.2,42.4]]);
 assert(!readPeriod(1762).notes.some(n=>n.from===1765));assert(!readPeriod(1771).notes.some(n=>n.from===1765));
+// A rejected proposal and administrative roads must not become migration evidence.
+const embassy863=publishedHistory.record('kyrgyz-witness-863');
+assert.equal(embassy863.kind,'diplomacy');assert(!embassy863.route);
+assert.equal(embassy863.mapPlaces.length,2);
+const road885=publishedHistory.record('kyrgyz-witness-885');
+assert.deepEqual([road885.from,road885.year,road885.to],[801,885,900]);
+assert(road885.approx);assert.equal(road885.kind,'economy');
+assert.deepEqual(road885.route,[[72.8,40.53],[73.3,40.77],[75.8,41.17]]);
+assert(!readPeriod(800).notes.some(n=>n.from===885));assert(!readPeriod(901).notes.some(n=>n.from===885));
+assert.equal(readPeriod(885).note.from,885,'Equal-length accounts hide the chosen source reading');
+const relay1291=publishedHistory.record('kyrgyz-witness-1291');
+assert.equal(relay1291.kind,'economy');assert.equal(relay1291.from,1291);assert.equal(relay1291.to,1291);
+assert.equal(relay1291.route.length,4);assert(relay1291.route.every(p=>p[1]>50),'The northern postal road acquired a Tian Shan destination');
+for(const y of [863,885,1291]){
+ const n=require('./kyrgyz-witnesses.json').find(n=>n.from===y),e=publishedHistory.record('kyrgyz-witness-'+y);
+ for(const field of ['title','text','geographyNote','mapScale'])assert.deepEqual(e[field],n[field]);
+ assert.deepEqual(e.mapPlaces,n.places);assert.equal(payload.sources[e.sources[0]].title,n.source);
+}
 // Trade accounts describe connected regions, not documented migration tracks.
 for(const y of [800,988]){
  const e=publishedHistory.record('kyrgyz-witness-'+y);
@@ -213,15 +231,15 @@ for(const lang of [0,1,2]){
  assert(box&&!box.open,'The long source guide opens expanded by default');
  box.open=true;box.ontoggle();
  const buttons=descendants(box).filter(n=>n.dataset.kyrgyzJourney);
- assert.equal(buttons.length,18);assert.equal(buttons.filter(n=>n.attrs['aria-current']==='step').length,1);
- const categories={1703:['Переселение','Relocation','Көчүрүү'],1765:['Пути и связи','Routes and connections','Жолдор жана байланыштар'],1514:['Военный поход','Military campaign','Аскердик жортуул']};
+ assert.equal(buttons.length,21);assert.equal(buttons.filter(n=>n.attrs['aria-current']==='step').length,1);
+ const categories={863:['Дипломатия','Diplomacy','Дипломатия'],885:['Пути и связи','Routes and connections','Жолдор жана байланыштар'],1291:['Пути и связи','Routes and connections','Жолдор жана байланыштар'],1703:['Переселение','Relocation','Көчүрүү'],1765:['Пути и связи','Routes and connections','Жолдор жана байланыштар'],1514:['Военный поход','Military campaign','Аскердик жортуул']};
  for(const [y,labels] of Object.entries(categories))assert(buttons.find(b=>b.dataset.kyrgyzJourney===y).children.some(n=>n.tag==='small'&&n.textContent.endsWith(labels[lang])),'Guide confuses roads, campaigns and relocations');
  for(const button of buttons){
   button.click();assert.equal(guide.year,Number(button.dataset.kyrgyzJourney));
   const note=guide.KYRGYZ_WITNESSES.find(n=>n.from===guide.year);
   assert.equal(chosen,note.replacesEvent||'kyrgyz-witness-'+guide.year);assert(guide.showKyrgyzContext);
  }
- assert.equal(closed,18);assert.equal(saved,18);
+ assert.equal(closed,21);assert.equal(saved,21);
  row.afterNode.click();box=descendants(get('modalBody')).find(n=>n.className==='kyrgyz-journey');
  assert(box.open,'The guide lost its expansion state after returning from the map');
 }

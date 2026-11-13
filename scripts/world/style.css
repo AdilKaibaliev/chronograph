@@ -2,7 +2,8 @@
 .world-explorer.has-event>.world-header{display:none}
 .world-explorer.has-event>.world-event-detail{margin-top:0}
 .world-event-close{float:right;margin:-3px -3px 2px 8px;min-width:32px;min-height:32px;border:1px solid #796644;border-radius:7px;color:#efdfc4;background:#2b251c;font:22px/1 system-ui;cursor:pointer}
-.world-landmark-obscured{display:none!important}
+.world-landmark-obscured,#worldMap.city-mode .empire-label.world-landmark-obscured{display:none!important}
+@media(max-width:700px),(max-height:550px){.world-comparison.world-selected-geography #mongolScope,.world-comparison.world-selected-geography #kyrgyzScope{display:none}}
 #countryLayer:not(.modern-reference) .country:not(.kyrgyz-highlight){stroke:none;pointer-events:none}
 #worldMap,#worldMap text{user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
 .world-header{position:sticky;top:-14px;z-index:3;background:#211e18;padding:10px 0 9px;border-bottom:1px solid #514733;box-shadow:0 5px 10px #211e1840}
