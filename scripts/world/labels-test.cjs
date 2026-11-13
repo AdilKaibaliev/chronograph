@@ -61,3 +61,20 @@ assert(legacyClasses.has('world-landmark-obscured'),'Political text overlaps the
 ctx.worldLayer.querySelectorAll=()=>[central];ctx.updateWorldMarkerScale();
 assert(!legacyClasses.has('world-landmark-obscured'),'Political name did not return after clearing landmarks');
 console.log('PASS: selected geographic labels take priority over political context; closing an event restores context.');
+
+// Real 1508 event geometry and camera from the browser: long explanatory
+// labels hid Turfan on desktop. All three destinations must fit in each locale.
+const relocation=require('./kyrgyz-witnesses.json').find(n=>n.from===1508);
+const relocationPoints=[[1035.6,170.53714285714287],[1066.28,176.66742857142856],[1076.8,173.00571428571428]];
+ctx.empireLabelLayer={querySelectorAll:()=>[]};ctx.worldTerritoryLabels={querySelectorAll:()=>[]};
+ctx.mapState={scale:7,tx:-6673.4,ty:-855.22};
+for(const [width,height] of [[938,669],[598,207]])for(let lang=0;lang<3;lang++){
+ ctx.svg.clientWidth=width;ctx.svg.clientHeight=height;
+ const places=relocation.places.map((p,i)=>{
+  const label=text(p[1][lang],0,0),g=marker(relocationPoints[i][0],label,'world-comparison-place');
+  g.dataset.py=String(relocationPoints[i][1]);return g;
+ });
+ ctx.worldLayer.querySelectorAll=()=>places;ctx.updateWorldMarkerScale();
+ for(const g of places)assert.equal(g.querySelector('text').style.display,'',`${width}px locale ${lang}: ${g.querySelector('text').textContent} is hidden`);
+}
+console.log('PASS: Charyn, Karashahr and Turfan remain labelled in three languages on desktop and compact maps.');
