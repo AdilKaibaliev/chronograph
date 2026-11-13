@@ -144,7 +144,7 @@ context.wl=row=>row[2];context.renderWorldMap();assert(findArea(context.worldTer
 assert(vm.runInContext('worldTerritoryNodes.size<=768',context),'SVG retention is unbounded');
 
 // Selecting another account replaces every old route/landmark, in each locale.
-for(const lang of [0,1,2])for(const y of [1295,800,1265,988,843,1760,1050,1758,1154,1755,984,1508,1514,1517,1522]){
+for(const lang of [0,1,2])for(const y of [1295,800,1265,988,843,1760,1050,1758,1154,1755,984,1504,1508,1514,1517,1522,1526,1527]){
  context.wl=row=>row[lang];context.year=y;context.worldState.event='kyrgyz-witness-'+y;context.renderWorldMap();
  const event=context.worldHistory.record(context.worldState.event);
  const landmarks=context.worldLayer.children.filter(n=>n.classList.contains('world-comparison-place'));
@@ -158,7 +158,7 @@ const cameraContext={WORLD_HISTORY:catalog,worldHistory:createWorldHistory(catal
  $:()=>({scrollTop:0,focus(){}}),project:([lon,lat])=>[(lon+180)*4,(90-lat)*4],SVG_W:1440,SVG_H:720,
  animateCamera:t=>{cameraContext.camera=t;},focusLonLat:()=>{throw Error('Named geography lost its camera bounds');}};
 vm.createContext(cameraContext);vm.runInContext(runtime.slice(runtime.indexOf('function worldChooseEvent('),runtime.indexOf("let worldControlsKey=")),cameraContext);
-for(const y of [800,843,984,988,1050,1154,1265,1295,1508,1514,1517,1522,1755,1758,1760]){
+for(const y of [800,843,984,988,1050,1154,1265,1295,1504,1508,1514,1517,1522,1526,1527,1755,1758,1760]){
  cameraContext.worldChooseEvent('kyrgyz-witness-'+y);
  const e=cameraContext.worldHistory.record('kyrgyz-witness-'+y),cam=cameraContext.camera;
  if(e.mapPlaces.length===1)assert(cam.scale<=7,'Single regional landmark zoomed beyond regional context');
@@ -176,4 +176,4 @@ for(let lang=0;lang<3;lang++){
  assert(texts.includes(['Чарын–Чилик · Чалыш · Карашар · Турфан','Charyn–Chilik · Chalish · Karashahr · Turfan','Чарын–Чилик · Чалыш · Карашаар · Турпан'][lang]),'Independent destinations became a sequential route');
  assert(!texts.some(t=>t?.includes(' → ')),'Unsupported route sequence remains in the card');
 }
-console.log(JSON.stringify({status:'PASS',renderers:3,renders,regions:regions.length,years:(catalog.range?.max??1299)-609,territoriesIn1299:expectedAreas(1299).length,placesIn1299:expectedPlaces(1299).length,kyrgyzGeographyChecks:45,independentDestinationCards:3}));
+console.log(JSON.stringify({status:'PASS',renderers:3,renders,regions:regions.length,years:(catalog.range?.max??1299)-609,territoriesIn1299:expectedAreas(1299).length,placesIn1299:expectedPlaces(1299).length,kyrgyzGeographyChecks:54,independentDestinationCards:3}));

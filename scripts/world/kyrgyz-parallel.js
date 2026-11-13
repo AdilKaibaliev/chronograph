@@ -4,7 +4,7 @@
  line.type='button';line.id='kyrgyzParallel';line.dataset.localeOwned='true';
  $('timelineCard').querySelector('.timeline-row').after(line);
  const label=()=>wl(['История кыргызов','Kyrgyz history','Кыргыз тарыхы']);
- const journeyYears=[800,870,984,1050,1154,1265,1295,1508,1514,1517,1522,1755];
+ const journeyYears=[800,870,984,1050,1154,1265,1295,1504,1508,1514,1517,1522,1526,1527,1755];
  let journeyExpanded=false;
  function showReading(d,view,territory,eventId){
   stopPlay();$('modalClose').click();showKyrgyzContext=true;renderYear(d);

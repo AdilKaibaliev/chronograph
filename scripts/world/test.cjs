@@ -108,7 +108,7 @@ assert.equal(publishedHistory.record('kyrgyz-witness-1050').from,1050);
 assert.equal(publishedHistory.record('kyrgyz-witness-870').from,801);
 assert.deepEqual(publishedHistory.record('kyrgyz-witness-1295').route,[[116.15,40.53],[118,36.5]]);
 assert.equal(publishedHistory.record('kyrgyz-witness-1295').to,1296,'Lunar winter must not be silently confined to a Gregorian year');
-for(const y of [800,843,984,988,1050,1154,1265,1295,1508,1514,1517,1522,1755,1758,1760]){
+for(const y of [800,843,984,988,1050,1154,1265,1295,1504,1508,1514,1517,1522,1526,1527,1755,1758,1760]){
  const w=require('./kyrgyz-witnesses.json').find(w=>w.from===y),event=publishedHistory.record('kyrgyz-witness-'+y);
  assert(event,'Missing mapped witness '+y);assert.deepEqual(event.mapPlaces,w.places,'Named geography lost in build '+y);
 }
@@ -122,6 +122,15 @@ assert.deepEqual(charyn.route,[[78.9,43.55],[86.57,42.06]],'An unsupported Karas
 assert.equal(charyn.mapPlaces.length,3);
 assert.equal(publishedHistory.record('kyrgyz-witness-1514').kind,'war','Military raid was classified as migration');
 assert(!publishedHistory.record('kyrgyz-witness-1522').route,'Winter quarters acquired an unsupported departure point');
+const kochkor=publishedHistory.record('kyrgyz-witness-1526');
+assert.deepEqual([kochkor.from,kochkor.year,kochkor.to],[1525,1526,1527]);
+assert(kochkor.approx,'Chronologically inferred relocation became an exact year');
+assert.deepEqual(kochkor.route,[[75.76,42.21],[75.8,41.17]]);
+assert(!readPeriod(1524).notes.some(n=>n.from===1526),'Relocation appears before its source interval');
+assert(!readPeriod(1528).notes.some(n=>n.from===1526),'Relocation persists after its source interval');
+assert.equal(readPeriod(1527).note.from,1527,'The dated departure is hidden by a broad relocation account');
+for(const y of [1504,1527])assert(!publishedHistory.record('kyrgyz-witness-'+y).route,'An unnamed destination acquired a route');
+assert.equal(publishedHistory.record('kyrgyz-witness-1527').mapPlaces.length,1);
 // Trade accounts describe connected regions, not documented migration tracks.
 for(const y of [800,988]){
  const e=publishedHistory.record('kyrgyz-witness-'+y);
@@ -174,12 +183,12 @@ for(const lang of [0,1,2]){
  assert(box&&!box.open,'The long source guide opens expanded by default');
  box.open=true;box.ontoggle();
  const buttons=descendants(box).filter(n=>n.dataset.kyrgyzJourney);
- assert.equal(buttons.length,12);assert.equal(buttons.filter(n=>n.attrs['aria-current']==='step').length,1);
+ assert.equal(buttons.length,15);assert.equal(buttons.filter(n=>n.attrs['aria-current']==='step').length,1);
  for(const button of buttons){
   button.click();assert.equal(guide.year,Number(button.dataset.kyrgyzJourney));
   assert.equal(chosen,'kyrgyz-witness-'+guide.year);assert(guide.showKyrgyzContext);
  }
- assert.equal(closed,12);assert.equal(saved,12);
+ assert.equal(closed,15);assert.equal(saved,15);
  row.afterNode.click();box=descendants(get('modalBody')).find(n=>n.className==='kyrgyz-journey');
  assert(box.open,'The guide lost its expansion state after returning from the map');
 }
