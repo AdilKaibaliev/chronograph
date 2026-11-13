@@ -51,7 +51,9 @@ if(fs.existsSync(baseline)){
  // Added profiles/events have independent dated settlement and conservation
  // checks. Compare every pre-existing narrative without hiding other changes.
  const additions=new Set(['review-burgundy','review-middle-francia','review-lotharingia','review-provence','review-italy','review-upper-burgundy','review-lower-burgundy','review-brittany']);
- const addedEvents=new Set([...c.frankishPartitions.years.map(y=>'frankish-partition-'+y),...c.outerFrontiers.events]);
+ // Explicitly reviewed source revisions have independent field-level checks.
+ const revisedWitnessIds=new Set(require('./kyrgyz-witnesses.json').filter(n=>n.replacesEvent).map(n=>n.replacesEvent));
+ const addedEvents=new Set([...c.frankishPartitions.years.map(y=>'frankish-partition-'+y),...c.outerFrontiers.events,...revisedWitnessIds]);
  const preserved=(rows,key)=>key==='entries'?rows.filter(e=>!additions.has(e.id)).map(e=>{if(e.id==='zirid')return {...e,phases:[]};if(!['1914-american-samoa','1914-western-samoa'].includes(e.id))return e;return {...e,phases:e.phases.filter(p=>!(p.from===1899&&p.to===1900)).map(p=>p.from===1900?{...p,from:1899,period:p.period.map(t=>t.replace('1900','1899'))}:p)};}):rows.filter(e=>!addedEvents.has(e.id));
  for(const key of ['entries','events'])assert.deepEqual(preserved(require('./historical-window.cjs')(key==='events'?c[key].filter(e=>!integratedIds.has(e.id)):c[key],key),key),preserved(before[key],key),'Earlier narratives changed '+key);
  assert.deepEqual(require('./geometry-regression.cjs')(require('./historical-window.cjs')(require('./catalog.cjs').areas,'areas')),require('./geometry-regression.cjs')(before.areas),'Unexpected historical change');

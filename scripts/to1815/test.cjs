@@ -9,7 +9,10 @@ assert.deepEqual(delivered.range,{...c.range,max:require('../incidents/integrate
 for(const [id,source] of Object.entries(c.sources).filter(([id])=>!id.startsWith("to1939")&&!id.startsWith("to1945")&&!id.startsWith("to1960")&&!id.startsWith("to1991")&&!id.startsWith("to2000")&&!id.startsWith("to2010"))){assert.equal(delivered.sources[id].title,source.title);assert(!delivered.sources[id].urls,'Public sources must remain plain text');}
 const addedEventIds=new Set(require('../incidents/integrate.cjs').events.map(e=>e.id));
 for(const id of require('../world/witness-event-ids.cjs'))addedEventIds.add(id);
-assert.deepEqual(delivered.events.filter(e=>!e.base&&!addedEventIds.has(e.id)),require('../world/published-catalog.cjs').events);
+// Source-backed revisions retain their public IDs; world/test.cjs checks every
+// revised field. Preserve all other events against the independent catalogue.
+const revisedWitnessIds=new Set(require('../world/kyrgyz-witnesses.json').filter(n=>n.replacesEvent).map(n=>n.replacesEvent));
+assert.deepEqual(delivered.events.filter(e=>!e.base&&!addedEventIds.has(e.id)),require('../world/published-catalog.cjs').events.filter(e=>!revisedWitnessIds.has(e.id)));
 assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html));
 assert(html.includes("'XVIII','XIX'"),'The nineteenth-century filter is missing');

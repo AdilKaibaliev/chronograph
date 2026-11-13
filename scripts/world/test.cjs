@@ -140,6 +140,20 @@ assert.deepEqual(emil1703.route.at(-1),[83.89,46.64],'The Dzungarian relocation 
 assert.equal(emil1703.mapPlaces.length,4);
 assert(!publishedHistory.record('kyrgyz-witness-1703'),'Old and enriched accounts duplicate the same event');
 assert.equal(payload.events.filter(e=>e.id==='1789-yenisei-kyrgyz-deportation').length,1,'Existing event link must open one enriched card');
+// A revised public ID is excluded only from the old-content fingerprint;
+// validate its complete replacement separately, including translations.
+const revisedWitnesses=require('./kyrgyz-witnesses.json').filter(n=>n.replacesEvent);
+assert.deepEqual(revisedWitnesses.map(n=>n.replacesEvent),['1789-yenisei-kyrgyz-deportation'],'Unreviewed event revision');
+for(const note of revisedWitnesses){
+ const e=payload.events.find(e=>e.id===note.replacesEvent);
+ assert(require('./catalog.cjs').events.some(old=>old.id===note.replacesEvent),'Revision lost its original event');
+ for(const field of ['title','text','kind','route','mapScale','periodLabel','geographyNote'])assert.deepEqual(e[field],note[field],'Enriched event field '+field);
+ assert.deepEqual(e.coord,note.place);assert.deepEqual(e.mapPlaces,note.places);
+ assert.deepEqual([e.from,e.year,e.to],[note.periodFrom??note.from,note.from,note.to]);
+ assert.equal(e.approx,(note.periodFrom??note.from)!==note.to);
+ assert.deepEqual(e.sources,['kyrgyz-witness-'+note.from]);
+ assert.equal(payload.sources[e.sources[0]].title,note.source);
+}
 assert(!readPeriod(1702).notes.some(n=>n.from===1703));
 assert(!readPeriod(1704).notes.some(n=>n.from===1703));
 const road1765=publishedHistory.record('kyrgyz-witness-1765');
