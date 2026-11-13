@@ -4,7 +4,8 @@
  line.type='button';line.id='kyrgyzParallel';line.dataset.localeOwned='true';
  $('timelineCard').querySelector('.timeline-row').after(line);
  const label=()=>wl(['История кыргызов','Kyrgyz history','Кыргыз тарыхы']);
- const journeyYears=[800,870,984,1050,1154,1265,1295,1504,1508,1514,1517,1522,1526,1527,1755];
+ const journeyYears=[800,870,984,1050,1154,1265,1295,1504,1508,1510,1514,1517,1522,1526,1527,1703,1755,1765];
+ const journeyTypes={migration:['Переселение','Relocation','Көчүрүү'],war:['Военный поход','Military campaign','Аскердик жортуул'],economy:['Пути и связи','Routes and connections','Жолдор жана байланыштар'],politics:['Политическая история','Political history','Саясий тарых'],culture:['Письменное свидетельство','Written account','Жазма маалымат']};
  let journeyExpanded=false;
  function showReading(d,view,territory,eventId){
   stopPlay();$('modalClose').click();showKyrgyzContext=true;renderYear(d);
@@ -23,10 +24,11 @@
   ])));
   const list=we('ol','');
   for(const d of journeyYears){
-   const note=KYRGYZ_WITNESSES.find(n=>n.from===d),eventId='kyrgyz-witness-'+d;
+   const note=KYRGYZ_WITNESSES.find(n=>n.from===d),eventId=note?.replacesEvent||'kyrgyz-witness-'+d;
    if(!note||!worldHistory.record(eventId))continue;
    const item=we('li',''),button=we('button','');button.type='button';button.dataset.kyrgyzJourney=String(d);
-   button.append(we('span','',wl(note.title)),we('small','',note.periodLabel?wl(note.periodLabel):String(d)));
+   const type=journeyTypes[note.kind]||journeyTypes.culture;
+   button.append(we('span','',wl(note.title)),we('small','',(note.periodLabel?wl(note.periodLabel):String(d))+' · '+wl(type)));
    if(year===d)button.setAttribute('aria-current','step');
    button.onclick=()=>showReading(d,null,null,eventId);item.append(button);list.append(item);
   }
@@ -91,7 +93,7 @@
     const actions=we('div','');actions.append(b);body.append(actions);}
   }
   for(const note of [...notes].sort((a,b)=>Number(!!a.background)-Number(!!b.background))){
-   const witness='kyrgyz-witness-'+note.from;
+   const witness=note.replacesEvent||'kyrgyz-witness-'+note.from;
    const eventId=note.background?null:worldHistory.record(witness)?witness:'atlas-'+note.from;
    section(wl(note.title),wl(note.text),(note.periodLabel?wl(note.periodLabel)+' · ':'')+note.source,note.place&&[...note.place,5],null,eventId);
   }

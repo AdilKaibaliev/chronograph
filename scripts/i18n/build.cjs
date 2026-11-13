@@ -141,12 +141,16 @@ for(const [years,title] of require('../world/early-event-sources.cjs')){
 worldData.eventRegions={'late-timur-damascus':['eurasia'],'early-marjdabiq-1516':['eurasia']};
 for(const note of witnessData.filter(n=>n.place&&!n.background)){
  const key='kyrgyz-witness-'+note.from;worldData.sources[key]={title:note.source};
+ if(note.replacesEvent){
+  assert(worldData.events.some(e=>e.id===note.replacesEvent),'Missing event to enrich: '+note.replacesEvent);
+  worldData.events=worldData.events.filter(e=>e.id!==note.replacesEvent);
+ }
  const existing=worldData.events.find(e=>e.id==='atlas-'+note.from&&e.sources.some(id=>id.startsWith('kyrgyz-stage-')));
  if(existing){
   existing.sources.push(key);
   if(existing.coord?.every((v,i)=>v===note.place[i]))continue;
  }
- worldData.events.push({id:key,year:note.from,from:note.periodFrom??note.from,to:note.to,approx:(note.periodFrom??note.from)!==note.to,region:'eurasia',
+ worldData.events.push({id:note.replacesEvent||key,year:note.from,from:note.periodFrom??note.from,to:note.to,approx:(note.periodFrom??note.from)!==note.to,region:'eurasia',
   ...(note.periodLabel?{periodLabel:note.periodLabel}:{}),
   kind:note.kind||(note.from===950?'culture':'diplomacy'),coord:note.place,title:note.title,text:note.text,sources:[key],
   ...(note.route?{route:note.route}:{}),
