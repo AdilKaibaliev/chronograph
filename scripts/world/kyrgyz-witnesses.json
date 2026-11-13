@@ -680,7 +680,21 @@
       "In the third year of Huichang seven envoys led by Zhu Wu Hesu (注吾合索) came to the Tang court. They presented two horses and requested recognition of their ruler’s title. The map shows the place of the audience.",
       "Хуэйчандын үчүнчү жылында Чжуу Хэсу (注吾合索) баштаган жети элчи Тан ордосуна келген. Алар эки жылкы тартуулап, башкаруучусунун наамын бекитүүнү өтүнүшкөн. Картада элчилер кабыл алынган жер көрсөтүлөт."
     ],
-    "source": "Wang Pu. Tang huiyao (唐會要), juan 100, 黠戛斯."
+    "source": "Wang Pu. Tang huiyao (唐會要), juan 100, 黠戛斯.",
+    "places": [
+      [
+        [
+          108.94,
+          34.26
+        ],
+        [
+          "Чанъань · двор Тан",
+          "Chang’an · Tang court",
+          "Чанъань · Тан ордосу"
+        ]
+      ]
+    ],
+    "mapScale": 7
   },
   {
     "from": 866,
@@ -999,6 +1013,189 @@
           "Кашкар · географиялык багыт"
         ]
       ]
+    ]
+  },
+  {
+    "from": 800,
+    "periodFrom": 701,
+    "to": 900,
+    "kind": "economy",
+    "place": [
+      91.7,
+      53.6
+    ],
+    "mapScale": 7,
+    "periodLabel": [
+      "VIII–IX века · торговая география",
+      "8th–9th centuries · trade geography",
+      "VIII–IX кылымдар · соода географиясы"
+    ],
+    "title": [
+      "Кыргызские земли, Анси и Бэйтин",
+      "Kyrgyz lands, Anxi and Beiting",
+      "Кыргыз жерлери, Аньси жана Бэйтин"
+    ],
+    "text": [
+      "«Синь Тан шу» сообщает, что ткани для одежды кыргызов поступали из Анси, Бэйтина и Даши — стран арабского мира. Это связывает енисейские земли с оазисами по обе стороны Тянь-Шаня. На карте отмечены кыргызский район Енисея, Кучинский оазис, где размещался протекторат Анси, и Бэйтин. Хроника называет торговые связи, но не перечисляет перевалы и остановки караванов.",
+      "Xin Tang shu records that textiles used in Kyrgyz clothing came from Anxi, Beiting and Dashi, the lands of the Arab world. This connects the Yenisei region with oases on both sides of the Tian Shan. The map marks the Kyrgyz Yenisei region, the Kucha oasis, which housed the Anxi protectorate, and Beiting. The chronicle identifies trading connections without listing caravan passes or stops.",
+      "«Синь Тан шу» кыргыздардын кийимине колдонулган кездемелер Аньсиден, Бэйтинден жана Дашиден — араб дүйнөсүнүн өлкөлөрүнөн келгенин баяндайт. Бул Энесай жерлеринин Теңир-Тоонун эки тарабындагы оазистер менен соода байланышын көрсөтөт. Картада кыргыздардын Энесай аймагы, Аньси протектораты жайгашкан Куча оазиси жана Бэйтин белгиленген. Жылнаама соода байланыштарын атайт, бирок кербен өткөн ашууларды жана токтоочу жайларды санабайт."
+    ],
+    "source": "Xin Tang shu (新唐書), juan 217b, 黠戛斯: clothing and trade. Encyclopaedia Iranica, Kucha. UNESCO, Silk Roads: the Routes Network of Chang’an–Tianshan Corridor, Beiting.",
+    "places": [
+      [
+        [
+          91.7,
+          53.6
+        ],
+        [
+          "Кыргызские земли · Енисей",
+          "Kyrgyz lands · Yenisei",
+          "Кыргыз жерлери · Энесай"
+        ]
+      ],
+      [
+        [
+          82.95,
+          41.72
+        ],
+        [
+          "Анси · Кучинский оазис",
+          "Anxi · Kucha oasis",
+          "Аньси · Куча оазиси"
+        ]
+      ],
+      [
+        [
+          89.21,
+          44.17
+        ],
+        [
+          "Бэйтин · Бешбалык",
+          "Beiting · Beshbaliq",
+          "Бэйтин · Бешбалык"
+        ]
+      ]
+    ],
+    "geographyNote": [
+      "Торговые центры и район расселения; границы владений этим сообщением не определяются.",
+      "Trading centres and a settlement region; this account does not define political boundaries.",
+      "Соода борборлору жана отурукташуу аймагы; бул маалымат саясий чек араларды аныктабайт."
+    ]
+  },
+  {
+    "from": 988,
+    "periodFrom": 951,
+    "to": 1000,
+    "kind": "economy",
+    "place": [
+      91.7,
+      53.6
+    ],
+    "mapScale": 7,
+    "periodLabel": [
+      "Вторая половина X века · Ибн Хаукаль",
+      "Later 10th century · Ibn Hawqal",
+      "X кылымдын экинчи жарымы · Ибн Хаукаль"
+    ],
+    "title": [
+      "Кыргызский мускус в торговле Мавераннахра",
+      "Kyrgyz musk in Transoxiana’s trade",
+      "Мавераннахр соодасындагы кыргыз жыпары"
+    ],
+    "text": [
+      "В «Сурат ал-ард» Ибн Хаукаль сообщает о мускусе, привозимом в Мавераннахр из Тибета и страны кыргызов — Хирхиз. Оттуда его отправляли в другие области и города; автор выделяет его высокое качество и цену. Карта связывает енисейский район кыргызов с Мавераннахром — землями между Амударьёй и Сырдарьёй. Это свидетельство обмена товарами, а не переселения населения.",
+      "In Surat al-ard, Ibn Hawqal describes musk brought into Transoxiana from Tibet and the land of the Kyrgyz, Khirkhiz. It was then exported to other regions and cities; he emphasises its quality and high price. The map relates the Kyrgyz Yenisei region to Transoxiana, between the Amu Darya and Syr Darya. The account documents the exchange of goods, rather than population movement.",
+      "Ибн Хаукаль «Сурат ал-ард» чыгармасында Мавераннахрга Тибеттен жана кыргыздардын — Хирхиздин — өлкөсүнөн алып келинген жыпар жөнүндө жазат. Ал жерден жыпар башка аймактарга жана шаарларга жөнөтүлгөн; автор анын сапатын жана жогору баасын белгилейт. Карта кыргыздардын Энесай аймагын Амударыя менен Сырдарыянын ортосундагы Мавераннахрга байланыштырат. Бул маалымат элдин көчүшүн эмес, товар алмашууну баяндайт."
+    ],
+    "source": "Ibn Hawqal. Kitab Surat al-ard (صورة الأرض), Mā warāʾ al-nahr, §3. Edition J. H. Kramers, Bibliotheca Geographorum Arabicorum II, 1938–1939.",
+    "places": [
+      [
+        [
+          91.7,
+          53.6
+        ],
+        [
+          "Кыргызские земли · Енисей",
+          "Kyrgyz lands · Yenisei",
+          "Кыргыз жерлери · Энесай"
+        ]
+      ],
+      [
+        [
+          66.5,
+          39.7
+        ],
+        [
+          "Мавераннахр · район торговли",
+          "Transoxiana · trading region",
+          "Мавераннахр · соода аймагы"
+        ]
+      ]
+    ],
+    "geographyNote": [
+      "Показаны регионы обмена. Точный караванный путь в этом отрывке не указан.",
+      "The markers show regions of exchange. This passage does not specify a caravan itinerary.",
+      "Белгилер товар алмашкан аймактарды көрсөтөт. Үзүндүдө кербендин так жолу айтылбайт."
+    ]
+  },
+  {
+    "from": 1265,
+    "to": 1265,
+    "kind": "migration",
+    "place": [
+      116.35,
+      39.87
+    ],
+    "mapScale": 7,
+    "title": [
+      "Ремесленники Кэм-Кэмджиута: переселение в Чжунду",
+      "Artisans of Kem-Kemjiut: relocation to Zhongdu",
+      "Кем-Кемжиут усталарынын Чжундуга көчүрүлүшү"
+    ],
+    "text": [
+      "Под 1265 годом «Юань ши» записывает указ о переселении ремесленных хозяйств из Чжэньхая, Байбалыка и Цяньчжоу в Чжунду — будущий Пекин. На дорогу выделили 15 000 лянов серебра для всей переселяемой группы. Цяньчжоу связывают с Кэм-Кэмджиутом на Верхнем Енисее, соседним с кыргызскими землями. На карте показано направление из этого района к Чжунду. В указе названа профессия переселенцев; их этнический состав не перечислен.",
+      "Under 1265, Yuan shi records an order to relocate artisan households from Zhenhai, Bay-Baliq and Qianzhou to Zhongdu, later Beijing. The entire group received 15,000 liang of silver for travel. Qianzhou is associated with Kem-Kemjiut on the Upper Yenisei, adjoining Kyrgyz lands. The map shows the direction from that region to Zhongdu. The order identifies the settlers by occupation and does not list their ethnic affiliations.",
+      "«Юань ши» 1265-жылдагы буйрукта Чжэньхайдан, Байбалыктан жана Цяньчжоудан усталардын үй-бүлөлөрүн Чжундуга — кийинки Пекинге — көчүрүү жөнүндө жазат. Көчүрүлгөн топтун баарына жол чыгымы үчүн 15 000 ляң күмүш бөлүнгөн. Цяньчжоу кыргыз жерлерине коңшу болгон Жогорку Энесайдагы Кем-Кемжиут менен байланыштырылат. Картада ушул аймактан Чжундуга карай багыт көрсөтүлгөн. Буйрук көчүрүлгөндөрдүн кесибин атайт, этностук курамын санабайт."
+    ],
+    "source": "Yuan shi (元史), juan 6, Shizu, Zhiyuan 2, first month. Moriyasu Takao and Ochir (eds.). Provisional Report of Researches on Historical Sites and Inscriptions in Mongolia from 1996 to 1998, Bay-Baliq, pp. 196–197.",
+    "route": [
+      [
+        94.45,
+        51.7
+      ],
+      [
+        116.35,
+        39.87
+      ]
+    ],
+    "places": [
+      [
+        [
+          94.45,
+          51.7
+        ],
+        [
+          "Кэм-Кэмджиут · Верхний Енисей",
+          "Kem-Kemjiut · Upper Yenisei",
+          "Кем-Кемжиут · Жогорку Энесай"
+        ]
+      ],
+      [
+        [
+          116.35,
+          39.87
+        ],
+        [
+          "Чжунду · нынешний Пекин",
+          "Zhongdu · present-day Beijing",
+          "Чжунду · азыркы Пекин"
+        ]
+      ]
+    ],
+    "geographyNote": [
+      "Линия соединяет район отправления и город назначения; промежуточные стоянки не установлены.",
+      "The line connects the departure region with the destination city; intermediate stops are not established.",
+      "Сызык чыккан аймакты жана барчу шаарды бириктирет; жолдогу токтоочу жайлар аныкталган эмес."
     ]
   }
 ]

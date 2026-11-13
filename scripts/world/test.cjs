@@ -97,7 +97,7 @@ const readPeriod=vm.runInNewContext(parallelSource.slice(parallelSource.indexOf(
  kyrgyzHistoryForYear:()=>null,
  worldHistory:{at:()=>[]}
 });
-for(const y of [843,844,866,1758,1759,1762])assert.equal(readPeriod(y).note.from,y,'Dated Kyrgyz account hidden by a broad period '+y);
+for(const y of [843,844,866,1265,1758,1759,1762])assert.equal(readPeriod(y).note.from,y,'Dated Kyrgyz account hidden by a broad period '+y);
 const readWithStage=vm.runInNewContext(parallelSource.slice(parallelSource.indexOf(' function reading(y)'),parallelSource.indexOf(' function title(y)'))+';reading',{
  KYRGYZ_WITNESSES:require('./kyrgyz-witnesses.json'),kyrgyzHistoryForYear:y=>({year:y}),worldHistory:{at:()=>[]}
 });
@@ -108,10 +108,21 @@ assert.equal(publishedHistory.record('kyrgyz-witness-1050').from,1050);
 assert.equal(publishedHistory.record('kyrgyz-witness-870').from,801);
 assert.deepEqual(publishedHistory.record('kyrgyz-witness-1295').route,[[116.15,40.53],[118,36.5]]);
 assert.equal(publishedHistory.record('kyrgyz-witness-1295').to,1296,'Lunar winter must not be silently confined to a Gregorian year');
-for(const y of [1050,1154,1295,1755,1758,1760]){
+for(const y of [800,843,988,1050,1154,1265,1295,1755,1758,1760]){
  const w=require('./kyrgyz-witnesses.json').find(w=>w.from===y),event=publishedHistory.record('kyrgyz-witness-'+y);
  assert(event,'Missing mapped witness '+y);assert.deepEqual(event.mapPlaces,w.places,'Named geography lost in build '+y);
 }
+// Trade accounts describe connected regions, not documented migration tracks.
+for(const y of [800,988]){
+ const e=publishedHistory.record('kyrgyz-witness-'+y);
+ assert.equal(e.kind,'economy');assert(!e.route,'Trade geography became a migration route');
+ assert(e.approx&&e.periodLabel.length===3,'Broad historical account has a false exact date');
+}
+const artisans=publishedHistory.record('kyrgyz-witness-1265');
+assert.equal(artisans.kind,'migration');assert(!artisans.approx);
+assert.deepEqual(artisans.route,[[94.45,51.7],[116.35,39.87]]);
+assert(!readPeriod(1264).notes.some(x=>x.from===1265),'Relocation appears before its order');
+assert(!readPeriod(1266).notes.some(x=>x.from===1265),'One-time relocation persists into another year');
 for(let y=1300;y<=payload.range.max;y++)assert(publishedHistory.at(y,'eurasia').some(item=>item.entry.kyrgyzHistory),'Missing Kyrgyz history in '+y);
 assert.equal(publishedHistory.record('kyrgyz-witness-1517').kind,'war');
 const geography=publishedHistory.record('kyrgyz-witness-950');
