@@ -4,6 +4,34 @@
  line.type='button';line.id='kyrgyzParallel';line.dataset.localeOwned='true';
  $('timelineCard').querySelector('.timeline-row').after(line);
  const label=()=>wl(['История кыргызов','Kyrgyz history','Кыргыз тарыхы']);
+ const journeyYears=[800,870,984,1050,1154,1265,1295,1508,1514,1517,1522,1755];
+ let journeyExpanded=false;
+ function showReading(d,view,territory,eventId){
+  stopPlay();$('modalClose').click();showKyrgyzContext=true;renderYear(d);
+  if(territory)worldChooseTerritory(territory);
+  else if(eventId&&worldHistory.record(eventId))worldChooseEvent(eventId);
+  else if(view)focusLonLat(...view);
+  queueLocationSave();
+ }
+ function journey(){
+  const box=we('details','kyrgyz-journey');box.open=journeyExpanded;
+  box.append(we('summary','',wl(['Енисей — Тянь-Шань: места и переселения','Yenisei — Tian Shan: places and migrations','Энесай — Теңир-Тоо: жерлер жана көчүүлөр'])));
+  box.append(we('p','',wl([
+   'Китайские хроники, арабская география и персидские описания сохраняют разные этапы истории кыргызов. Здесь собраны места проживания, торговые связи, походы и переселения. Единой даты и полного маршрута переселения с Енисея на Тянь-Шань эти источники не дают.',
+   'Chinese chronicles, Arabic geography and Persian accounts preserve different stages of Kyrgyz history. Explore places of residence, trade connections, campaigns and relocations. These sources do not provide a single date or a complete migration itinerary from the Yenisei to the Tian Shan.',
+   'Кытай жылнаамалары, араб географиясы жана перс баяндары кыргыз тарыхынын ар башка этаптарын сактаган. Бул жерде жашаган жерлер, соода байланыштары, жортуулдар жана көчүүлөр топтолгон. Бул булактар Энесайдан Теңир-Тоого көчүүнүн бирдиктүү датасын жана толук жолун бербейт.'
+  ])));
+  const list=we('ol','');
+  for(const d of journeyYears){
+   const note=KYRGYZ_WITNESSES.find(n=>n.from===d),eventId='kyrgyz-witness-'+d;
+   if(!note||!worldHistory.record(eventId))continue;
+   const item=we('li',''),button=we('button','');button.type='button';button.dataset.kyrgyzJourney=String(d);
+   button.append(we('span','',wl(note.title)),we('small','',note.periodLabel?wl(note.periodLabel):String(d)));
+   if(year===d)button.setAttribute('aria-current','step');
+   button.onclick=()=>showReading(d,null,null,eventId);item.append(button);list.append(item);
+  }
+  box.append(list);box.ontoggle=()=>{journeyExpanded=box.open;};return box;
+ }
  const groups=()=>WORLD_HISTORY.entries.filter(e=>e.kyrgyzHistory);
  const communities=new Set(groups().map(e=>e.id));
  const eventsByYear=new Map();
@@ -39,6 +67,7 @@
   stopPlay();
   const y=year,{notes,early,later}=reading(y),body=$('modalBody');body.replaceChildren();
   body.append(we('h2','',label()+' · '+y));
+  body.append(journey());
   const select=we('select','');
   select.setAttribute('aria-label',wl(['Перейти к этапу','Go to a period','Тарыхый этапка өтүү']));
   const dates=new Set([y,...eventsByYear.keys(),...KYRGYZ_STAGES.map(s=>s.year),...KYRGYZ_WITNESSES.filter(s=>!s.background).map(s=>s.from),...groups().flatMap(e=>e.phases.map(p=>p.from))]);
@@ -58,10 +87,7 @@
   function section(heading,detail,source,view,territory,eventId){
    body.append(we('h3','',heading),we('p','',detail),we('small','',source));
    if(view){const b=we('button','btn',wl(['Показать на карте','Show on map','Картадан көрсөтүү']));b.type='button';
-    b.onclick=()=>{$('modalClose').click();showKyrgyzContext=true;renderYear(year);
-     if(territory)worldChooseTerritory(territory);
-     else if(eventId&&worldHistory.record(eventId))worldChooseEvent(eventId);
-     else focusLonLat(...view);queueLocationSave();};
+    b.onclick=()=>showReading(year,view,territory,eventId);
     const actions=we('div','');actions.append(b);body.append(actions);}
   }
   for(const note of [...notes].sort((a,b)=>Number(!!a.background)-Number(!!b.background))){

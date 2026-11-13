@@ -108,10 +108,20 @@ assert.equal(publishedHistory.record('kyrgyz-witness-1050').from,1050);
 assert.equal(publishedHistory.record('kyrgyz-witness-870').from,801);
 assert.deepEqual(publishedHistory.record('kyrgyz-witness-1295').route,[[116.15,40.53],[118,36.5]]);
 assert.equal(publishedHistory.record('kyrgyz-witness-1295').to,1296,'Lunar winter must not be silently confined to a Gregorian year');
-for(const y of [800,843,988,1050,1154,1265,1295,1755,1758,1760]){
+for(const y of [800,843,984,988,1050,1154,1265,1295,1508,1514,1517,1522,1755,1758,1760]){
  const w=require('./kyrgyz-witnesses.json').find(w=>w.from===y),event=publishedHistory.record('kyrgyz-witness-'+y);
  assert(event,'Missing mapped witness '+y);assert.deepEqual(event.mapPlaces,w.places,'Named geography lost in build '+y);
 }
+const qocho=publishedHistory.record('kyrgyz-witness-984');
+assert.deepEqual([qocho.from,qocho.year,qocho.to],[981,984,984]);
+assert(qocho.approx&&qocho.periodLabel.length===3,'An embassy spanning several years became a single-year observation');
+assert(!qocho.route,'A list of peoples was turned into a migration itinerary');
+const charyn=publishedHistory.record('kyrgyz-witness-1508');
+assert.equal(charyn.kind,'migration');assert.equal(charyn.to,1509);
+assert.deepEqual(charyn.route,[[78.9,43.55],[86.57,42.06]],'An unsupported Karashahr–Turfan sequence was introduced');
+assert.equal(charyn.mapPlaces.length,3);
+assert.equal(publishedHistory.record('kyrgyz-witness-1514').kind,'war','Military raid was classified as migration');
+assert(!publishedHistory.record('kyrgyz-witness-1522').route,'Winter quarters acquired an unsupported departure point');
 // Trade accounts describe connected regions, not documented migration tracks.
 for(const y of [800,988]){
  const e=publishedHistory.record('kyrgyz-witness-'+y);
@@ -132,4 +142,45 @@ for(const id of ['late-timur-damascus','early-marjdabiq-1516']){
  for(const region of ['all','eurasia','africa'])assert.equal(publishedHistory.timeline(region).filter(e=>e.id===id).length,1);
 }
 assert.equal(publishedHistory.record('kyrgyz-witness-1522').title[0].includes('Кочкоре'),true);
+// Use the real guide handlers: every step must close the dialog, change the
+// historical year and select its own source account, in all three languages.
+class GuideNode{
+ constructor(tag){this.tag=tag;this.children=[];this.dataset={};this.attrs={};this.classList={add(){}};}
+ append(...nodes){this.children.push(...nodes);}
+ replaceChildren(...nodes){this.children=[...nodes];}
+ setAttribute(key,value){this.attrs[key]=value;}
+ querySelector(){return new GuideNode('div');}
+ after(node){this.afterNode=node;}
+ focus(){}
+ click(){this.onclick?.();}
+}
+const descendants=node=>[node,...node.children.flatMap(descendants)];
+for(const lang of [0,1,2]){
+ const dom={},get=id=>dom[id]??=new GuideNode('div');let closed=0,saved=0,chosen='';
+ get('modalClose').onclick=()=>closed++;
+ const guide={document:{createElement:tag=>new GuideNode(tag)},$:get,
+  we:(tag,cls='',text='')=>Object.assign(new GuideNode(tag),{className:cls,textContent:text}),
+  wl:row=>row[lang],WORLD_HISTORY:payload,worldHistory:publishedHistory,KYRGYZ_WITNESSES:require('./kyrgyz-witnesses.json'),
+  KYRGYZ_STAGES:[],TIMELINE_MAX:MAX,year:1508,language:['ru','en','ky'][lang],
+  kyrgyzHistoryForYear:()=>null,translate:s=>s,stopPlay(){},showKyrgyzContext:false,
+  renderYear:y=>{guide.year=y;},worldChooseEvent:id=>{chosen=id;},
+  queueLocationSave:()=>saved++,saveLocation(){},localeSelect:{addEventListener(){}},
+  MutationObserver:class{observe(){}}
+ };
+ // Use a stable insertion target to reach the actual history button.
+ const row=new GuideNode('div');get('timelineCard').querySelector=()=>row;
+ vm.runInNewContext(parallelSource,guide);row.afterNode.click();
+ let box=descendants(get('modalBody')).find(n=>n.className==='kyrgyz-journey');
+ assert(box&&!box.open,'The long source guide opens expanded by default');
+ box.open=true;box.ontoggle();
+ const buttons=descendants(box).filter(n=>n.dataset.kyrgyzJourney);
+ assert.equal(buttons.length,12);assert.equal(buttons.filter(n=>n.attrs['aria-current']==='step').length,1);
+ for(const button of buttons){
+  button.click();assert.equal(guide.year,Number(button.dataset.kyrgyzJourney));
+  assert.equal(chosen,'kyrgyz-witness-'+guide.year);assert(guide.showKyrgyzContext);
+ }
+ assert.equal(closed,12);assert.equal(saved,12);
+ row.afterNode.click();box=descendants(get('modalBody')).find(n=>n.className==='kyrgyz-journey');
+ assert(box.open,'The guide lost its expansion state after returning from the map');
+}
 console.log(JSON.stringify({status:'PASS',entries:catalog.entries.length,phases,events:payload.events.length,areas:catalog.areas.length,languages:3,textRows:languageRows.length,years:MAX-609,regions:catalog.regions.length,sources:used.size}));

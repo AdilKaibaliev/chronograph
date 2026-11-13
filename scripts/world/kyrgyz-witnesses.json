@@ -642,7 +642,21 @@
       "Five years after his capture at Issyk-Kul, Muhammad Kirghiz was released and appointed amir of the Kyrgyz. Dughlat says he went ahead of Rashid Sultan’s force. Some Kyrgyz joined him, while others withdrew to distant parts of Moghulistan. The force wintered at Kochkor. The map marks the Kochkor valley.",
       "Ысык-Көлдө туткунга түшкөндөн беш жыл өткөн соң Мухаммад Кыргыз бошотулуп, кыргыздардын эмири болуп дайындалган. Дуглаттын жазышынча, ал Рашид султандын кошуунунан алдыда жүргөн. Кыргыздардын бир бөлүгү ага кошулса, башкалары Моголстандын алыскы аймактарына кетишкен. Кошуун Кочкордо кыштаган. Картада Кочкор өрөөнү көрсөтүлгөн."
     ],
-    "source": "Mīrzā Muḥammad Ḥaydar Dūghlāt. Tārīkh-i Rashīdī, book II, ch. LXIX."
+    "source": "Mīrzā Muḥammad Ḥaydar Dūghlāt. Tārīkh-i Rashīdī, book II, ch. LXIX.",
+    "places": [
+      [
+        [
+          75.76,
+          42.21
+        ],
+        [
+          "Кочкорская долина · зимовка",
+          "Kochkor valley · winter quarters",
+          "Кочкор өрөөнү · кыштоо"
+        ]
+      ]
+    ],
+    "mapScale": 7
   },
   {
     "from": 648,
@@ -836,7 +850,37 @@
       "Muhammad Haydar Dughlat’s Persian chronicle describes a campaign in the autumn of 923 AH. Sultan Said Khan’s army set out from Kashgar. The tents and pastures of Muhammad Kirghiz’s people lay by the mouth of the Barskoon River on Lake Issyk-Kul. He was taken prisoner in the attack. The map marks the approximate river mouth named in the chronicle.",
       "Мухаммад Хайдар Дуглаттын персче жылнаамасында хижранын 923-жылы күзүндө болгон жортуул баяндалат. Султан Саид хандын аскери Кашкардан чыккан. Ысык-Көлдүн жээгинде, Барскоон суусунун куйган жеринде Мухаммад Кыргыздын элинин чатырлары жана жайыттары болгон. Кол салууда Мухаммад Кыргыз туткунга түшкөн. Картада жылнаамада аталган суунун куйган жери болжол менен көрсөтүлөт."
     ],
-    "source": "Mīrzā Muḥammad Ḥaydar Dūghlāt. Tārīkh-i Rashīdī, book II, ch. LXI, pp. 349–351 (E. D. Ross)."
+    "source": "Mīrzā Muḥammad Ḥaydar Dūghlāt. Tārīkh-i Rashīdī, book II, ch. LXI, pp. 349–351 (E. D. Ross).",
+    "places": [
+      [
+        [
+          75.99,
+          39.47
+        ],
+        [
+          "Кашгар · войско Саид-хана",
+          "Kashgar · Said Khan’s army",
+          "Кашкар · Саид-хандын аскери"
+        ]
+      ],
+      [
+        [
+          77.6,
+          42.19
+        ],
+        [
+          "Устье Барскоона · кыргызские кочевья",
+          "Barskoon river mouth · Kyrgyz camps",
+          "Барскоондун куймасы · кыргыз конуштары"
+        ]
+      ]
+    ],
+    "mapScale": 7,
+    "geographyNote": [
+      "Это поход войска Саид-хана к кыргызским кочевьям. Линия соединяет названные районы; полный путь через перевалы не восстановлен.",
+      "This was Said Khan’s campaign against Kyrgyz camps. The line connects the named regions; the complete itinerary through the passes has not been reconstructed.",
+      "Бул Саид-хандын аскеринин кыргыз конуштарына жортуулу. Сызык аталган аймактарды бириктирет; ашуулар аркылуу өткөн толук жол калыбына келтирилген эмес."
+    ]
   },
   {
     "from": 1154,
@@ -1196,6 +1240,198 @@
       "Линия соединяет район отправления и город назначения; промежуточные стоянки не установлены.",
       "The line connects the departure region with the destination city; intermediate stops are not established.",
       "Сызык чыккан аймакты жана барчу шаарды бириктирет; жолдогу токтоочу жайлар аныкталган эмес."
+    ]
+  },
+  {
+    "from": 984,
+    "periodFrom": 981,
+    "to": 984,
+    "kind": "culture",
+    "place": [
+      89.53,
+      42.85
+    ],
+    "mapScale": 7,
+    "periodLabel": [
+      "981–984 · посольство Ван Яньдэ",
+      "981–984 · Wang Yande’s embassy",
+      "981–984 · Ван Яньдэнин элчилиги"
+    ],
+    "title": [
+      "Кыргызы в описании государства Кочо",
+      "Kyrgyz in the account of Qocho",
+      "Кочо мамлекети тууралуу баяндагы кыргыздар"
+    ],
+    "text": [
+      "Ван Яньдэ отправился в государство Кочо в 981 году; «Сун ши» датирует его возвращение и представление рассказа 984 годом. Среди подвластных государству народов он перечисляет кыргызов — 黠戞司. Посланник описывает Кочо в Турфанском оазисе и поездку к правителю в Бэйтин. Это свидетельство присутствия кыргызских групп в политическом пространстве восточного Тянь-Шаня. Их отдельные поселения, время прибытия и путь с Енисея в этом рассказе не названы.",
+      "Wang Yande left for Qocho in 981; Song shi dates his return and presentation of his account to 984. He lists the Kyrgyz, 黠戞司, among the peoples under the state’s authority. The envoy describes Qocho in the Turfan oasis and his visit to the ruler at Beiting. This attests Kyrgyz groups within the political world of the eastern Tian Shan. The account does not name their individual settlements, arrival date or route from the Yenisei.",
+      "Ван Яньдэ 981-жылы Кочо мамлекетине жөнөгөн; «Сун ши» анын кайтып келип, сапары тууралуу маалымат бергенин 984-жылга таандык кылат. Мамлекетке баш ийген элдердин арасында кыргыздар — 黠戞司 — да аталат. Элчи Турпан оазисиндеги Кочону жана Бэйтиндеги өкүмдарга барганын сүрөттөйт. Бул чыгыш Теңир-Тоонун саясий мейкиндигинде кыргыз топтору болгонун күбөлөндүрөт. Алардын өзүнчө конуштары, келген убактысы жана Энесайдан өткөн жолу бул баянда айтылбайт."
+    ],
+    "source": "Song shi (宋史), juan 490, Gaochang (高昌): Wang Yande’s embassy, Taiping Xingguo 6–Yongxi 1.",
+    "places": [
+      [
+        [
+          89.53,
+          42.85
+        ],
+        [
+          "Кочо · Турфанский оазис",
+          "Qocho · Turfan oasis",
+          "Кочо · Турпан оазиси"
+        ]
+      ],
+      [
+        [
+          89.2075,
+          44.0969
+        ],
+        [
+          "Бэйтин · двор правителя",
+          "Beiting · ruler’s court",
+          "Бэйтин · өкүмдардын ордосу"
+        ]
+      ]
+    ],
+    "geographyNote": [
+      "Отмечены центры государства, описанного посланником; это не точные места кыргызских поселений.",
+      "The markers identify centres of the state described by the envoy, not individual Kyrgyz settlements.",
+      "Белгилер элчи сүрөттөгөн мамлекеттин борборлорун көрсөтөт; булар кыргыз конуштарынын так орду эмес."
+    ]
+  },
+  {
+    "from": 1508,
+    "to": 1509,
+    "kind": "migration",
+    "place": [
+      78.9,
+      43.55
+    ],
+    "mapScale": 7,
+    "periodLabel": [
+      "1508–1509 · начало XVI века",
+      "1508–1509 · early 16th century",
+      "1508–1509 · XVI кылымдын башы"
+    ],
+    "title": [
+      "Чарын — Карашар: принудительное переселение кыргызов",
+      "Charyn to Karashahr: forced relocation of Kyrgyz",
+      "Чарындан Карашаарга: кыргыздардын күч менен көчүрүлүшү"
+    ],
+    "text": [
+      "«Тарих-и Рашиди» описывает поражение Султана Саид-хана, Халил-султана и поддерживавших их кыргызов от Мансур-хана у Чарун-Чолака. Это название связывают с районом рек Чарын и Чилик в долине Или. После победы Мансур увёл кыргызов и другие могульские группы в Чалыш — Карашар — и Турфан. Хроника сообщает об убийстве многих переселённых кыргызов и бегстве части уцелевших обратно в Могулистан. Здесь уже засвидетельствованы кыргызы северного Тянь-Шаня; переселение направлено на восток.",
+      "Tarikh-i Rashidi describes Mansur Khan’s victory over Sultan Said Khan, Khalil Sultan and their Kyrgyz supporters at Charun-Chalak. The name is associated with the Charyn–Chilik area of the Ili valley. Mansur then removed Kyrgyz and other Moghul groups to Chalish, or Karashahr, and Turfan. The chronicle reports the killing of many of the relocated Kyrgyz and the escape of some survivors back to Moghulistan. Kyrgyz are already attested in the northern Tian Shan here; this forced movement was eastward.",
+      "«Тарих-и Рашиди» Чарун-Чолокто Султан Саид-хан, Халил-султан жана аларды колдогон кыргыздар Мансур-хандан жеңилгенин баяндайт. Бул аталыш Или өрөөнүндөгү Чарын менен Чилик дарыяларынын аймагына байланыштырылат. Жеңиштен кийин Мансур кыргыздарды жана башка могол топторун Чалышка — Карашаарга — жана Турпанга көчүргөн. Хроника көчүрүлгөн кыргыздардын көбү өлтүрүлүп, аман калгандардын бир бөлүгү Моголстанга кайра качканын кабарлайт. Бул учурда кыргыздар түндүк Теңир-Тоодо болгон; күч менен көчүрүү чыгышка багытталган."
+    ],
+    "source": "Mīrzā Muḥammad Ḥaydar Dūghlāt. Tārīkh-i Rashīdī (Persian chronicle), book I, ch. LXV; book II, ch. LIII. Введение в историю кыргызской государственности. Бишкек, 2003, извлечения из «Тарих-и Рашиди» и примечания 6, 8, 10.",
+    "route": [
+      [
+        78.9,
+        43.55
+      ],
+      [
+        86.57,
+        42.06
+      ]
+    ],
+    "places": [
+      [
+        [
+          78.9,
+          43.55
+        ],
+        [
+          "Чарын–Чилик · район сражения",
+          "Charyn–Chilik · battle region",
+          "Чарын–Чилик · салгылаш болгон аймак"
+        ]
+      ],
+      [
+        [
+          86.57,
+          42.06
+        ],
+        [
+          "Чалыш · Карашар",
+          "Chalish · Karashahr",
+          "Чалыш · Карашаар"
+        ]
+      ],
+      [
+        [
+          89.2,
+          42.95
+        ],
+        [
+          "Турфан · второй район переселения",
+          "Turfan · another relocation region",
+          "Турпан · көчүрүлгөн экинчи аймак"
+        ]
+      ]
+    ],
+    "geographyNote": [
+      "Линия показывает направление в Карашар. Турфан отмечен как другой названный пункт назначения; порядок движения между двумя оазисами и перевалы не установлены.",
+      "The line shows the direction to Karashahr. Turfan is marked as another named destination; the order of travel between the two oases and the passes used are not established.",
+      "Сызык Карашаарга карай багытты көрсөтөт. Турпан башка аталган багыт катары белгиленген; эки оазистин ортосундагы жүрүү кезеги жана ашуулар аныкталган эмес."
+    ]
+  },
+  {
+    "from": 1514,
+    "to": 1514,
+    "kind": "war",
+    "place": [
+      77.25,
+      38.42
+    ],
+    "mapScale": 7,
+    "title": [
+      "Мухаммад Кыргыз: поход к Яркенду",
+      "Muhammad Kyrgyz: expedition towards Yarkand",
+      "Мухаммед Кыргыздын Жаркентке жортуулу"
+    ],
+    "text": [
+      "Во время завоевания Кашгарии султаном Саид-ханом Мухаммад Кыргыз прибыл к нему из Могулистана. Дуглат рассказывает о его вылазке к Яркенду с людьми хана: отряд разорил Арслан-Баг в двух фарсахах от города и вернулся с добычей и сведениями об армии Абу Бакра. После завершения кампании Мухаммад Кыргыз вернулся в Могулистан, где, по хронике, кыргызы признали его власть. На карте показано направление военной вылазки из Кашгарского района к Яркенду.",
+      "During Sultan Said Khan’s conquest of Kashgaria, Muhammad Kyrgyz came to him from Moghulistan. Dughlat describes his raid towards Yarkand with the khan’s men: the party plundered Arslan Bagh, two farsakhs from the town, and returned with booty and information about Abu Bakr’s army. After the campaign Muhammad Kyrgyz returned to Moghulistan, where the chronicle says the Kyrgyz acknowledged his authority. The map shows the direction of the military expedition from the Kashgar region towards Yarkand.",
+      "Султан Саид-хан Кашкар аймагын каратып жатканда Мухаммед Кыргыз ага Моголстандан келген. Дуглат анын хандын кишилери менен Жаркентке жасаган жортуулун баяндайт: кошуун шаардан эки фарсах алыстагы Арслан-Багды талап, олжо жана Абу Бакрдын аскери жөнүндө кабар менен кайтып келген. Жортуул аяктагандан кийин Мухаммед Кыргыз Моголстанга кайтып, хроника боюнча, кыргыздар анын бийлигин тааныган. Картада Кашкар аймагынан Жаркентке карай аскердик жортуулдун багыты көрсөтүлгөн."
+    ],
+    "source": "Mīrzā Muḥammad Ḥaydar Dūghlāt. Tārīkh-i Rashīdī (Persian chronicle), book II, chs. XLIV–XLV, LXI.",
+    "route": [
+      [
+        75.99,
+        39.47
+      ],
+      [
+        77.25,
+        38.42
+      ]
+    ],
+    "places": [
+      [
+        [
+          75.99,
+          39.47
+        ],
+        [
+          "Кашгар · район выступления",
+          "Kashgar · departure region",
+          "Кашкар · чыккан аймак"
+        ]
+      ],
+      [
+        [
+          77.25,
+          38.42
+        ],
+        [
+          "Яркенд · район вылазки",
+          "Yarkand · raid region",
+          "Жаркент · жортуул аймагы"
+        ]
+      ]
+    ],
+    "geographyNote": [
+      "Показано общее направление похода. Арслан-Баг не приравнен к центру Яркенда; его точная локализация здесь не установлена.",
+      "The line shows the general direction of the expedition. Arslan Bagh is not equated with central Yarkand; its exact site is not established here.",
+      "Сызык жортуулдун жалпы багытын көрсөтөт. Арслан-Баг Жаркенттин борборуна теңелбейт; анын так орду бул жерде аныкталган эмес."
     ]
   }
 ]

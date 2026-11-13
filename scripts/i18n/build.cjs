@@ -146,7 +146,7 @@ for(const note of witnessData.filter(n=>n.place&&!n.background)){
   existing.sources.push(key);
   if(existing.coord?.every((v,i)=>v===note.place[i]))continue;
  }
- worldData.events.push({id:key,year:note.from,from:note.periodFrom??note.from,to:note.to,approx:note.from!==note.to,region:'eurasia',
+ worldData.events.push({id:key,year:note.from,from:note.periodFrom??note.from,to:note.to,approx:(note.periodFrom??note.from)!==note.to,region:'eurasia',
   ...(note.periodLabel?{periodLabel:note.periodLabel}:{}),
   kind:note.kind||(note.from===950?'culture':'diplomacy'),coord:note.place,title:note.title,text:note.text,sources:[key],
   ...(note.route?{route:note.route}:{}),
