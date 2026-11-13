@@ -231,6 +231,8 @@ function renderWorldComparison(event){
 }
 function renderWorldEvent(){
  const e=worldHistory.record(worldState.event);worldEventDetail.replaceChildren();worldEventDetail.hidden=!e;if(!e)return;
+ const dismiss=()=>{worldState.event='';renderWorldHistory();$('panel-compare').scrollTop=0;queueLocationSave();};
+ const dismissButton=we('button','world-event-close','×');dismissButton.type='button';dismissButton.title=wt('close');dismissButton.setAttribute('aria-label',wt('close'));dismissButton.onclick=dismiss;worldEventDetail.append(dismissButton);
  const title=we('h4','',wl(e.title));title.id='worldEventTitle';title.tabIndex=-1;
  worldEventDetail.append(we('p','world-card-meta',worldEventDate(e)+' · '+wt(e.approx?'approx':'exact')),title,we('p','world-description',wl(e.text)));
  if(e.routeApprox)worldEventDetail.append(we('p','world-card-meta',wl(['Схема переселения · места отправления и прибытия','Migration schematic · origins and destinations','Көчүүнүн схемасы · жөнөгөн жана келген жерлер'])));
@@ -240,7 +242,7 @@ function renderWorldEvent(){
  renderWorldComparison(e);
  const actions=we('div','world-event-actions'),records=worldRecords(),i=records.findIndex(r=>r.id===e.id);
  for(const [label,delta] of [['previous',-1],['next',1]]){const b=we('button','',delta<0?'←':'→');b.type='button';b.setAttribute('aria-label',wt(label));b.title=wt(label);const target=i>=0?records[i+delta]:null;b.disabled=!target;b.onclick=()=>worldChooseEvent(target.id);actions.append(b);}
- const close=we('button','',wt('close'));close.type='button';close.onclick=()=>{worldState.event='';renderWorldHistory();queueLocationSave();};actions.append(close);worldEventDetail.append(actions);
+ const close=we('button','',wt('close'));close.type='button';close.onclick=dismiss;actions.append(close);worldEventDetail.append(actions);
 }
 function appendWorldLearning(parent,phase,id,expanded=false){
  if(!phase.learning)return;
@@ -327,27 +329,33 @@ function updateWorldMarkerScale(){
  svg.style.setProperty('--atlas-campaign-radius',Math.min(3.3,4/scale)+'px');
  const priority=g=>g.classList.contains('world-event-marker')||g.classList.contains('world-comparison-place')?2:Number(g.dataset.worldPlace===worldState.selected);
  const markers=[...worldLayer.querySelectorAll('.world-marker')].sort((a,b)=>priority(b)-priority(a));
- const territoryLabels=updateWorldTerritoryLabels(metrics),occupied=[...territoryLabels.occupied];
- updateAtlasPlaceLabels(metrics,occupied);
- for(const g of markers){
+ let occupied=[];
+ function layoutMarker(g,entries){
   const important=priority(g)>0,font=important?12:Math.min(11,8+2*Math.log2(Math.max(1,detail)));
   g.querySelector('.world-marker-inner').setAttribute('transform',`scale(${Math.min(1,.55+detail*.18)/scale})`);
   g.style.display=!important&&detail<1.15?'none':'';
-  const label=g.querySelector('text');if(!label)continue;
+  const label=g.querySelector('text');if(!label)return;
   const [x,y]=metrics.point(+g.dataset.px,+g.dataset.py);
-  label.style.display='none';if(territoryLabels.entries.has(g.dataset.worldPlace)||x<0||y<0||x>mapWidth||y>mapHeight)continue;
-  if(!important&&detail<2.4)continue;
+  label.style.display='none';if(entries.has(g.dataset.worldPlace)||x<0||y<0||x>mapWidth||y>mapHeight)return;
+  if(!important&&detail<2.4)return;
   // Text and collision boxes use the same screen size even as marker symbols shrink.
   const markerScale=Math.min(1,.55+detail*.18);
   label.style.fontSize=font/markerScale+'px';label.style.strokeWidth=2/markerScale+'px';
   const width=worldLabelWidth(label.textContent,font)+6;
-  for(const [dx,dy,anchor] of [[11,4,'start'],[11,-10,'start'],[-11,4,'end'],[11,19,'start']]){
+  for(const [dx,dy,anchor] of [[11,4,'start'],[11,-10,'start'],[-11,4,'end'],[11,19,'start'],[-11,-10,'end'],[-11,19,'end'],[11,-24,'start'],[11,33,'start']]){
    const left=x+dx-(anchor==='end'?width:0),rect=[left,y+dy-11,left+width,y+dy+3];
    if(rect[0]<4||rect[2]>mapWidth-4||rect[1]<4||rect[3]>mapHeight-4)continue;
    if(occupied.some(r=>rect[0]<r[2]+4&&rect[2]>r[0]-4&&rect[1]<r[3]+3&&rect[3]>r[1]-3))continue;
    label.setAttribute('x',dx/markerScale);label.setAttribute('y',dy/markerScale);label.setAttribute('text-anchor',anchor);label.style.display='';occupied.push(rect);break;
   }
  }
+ // The named places of the selected event must survive collisions with
+ // political and city labels. Reserve their space before laying out the context.
+ const landmarks=markers.filter(g=>g.classList.contains('world-comparison-place'));
+ for(const g of landmarks)layoutMarker(g,new Set());
+ const territoryLabels=updateWorldTerritoryLabels(metrics,occupied);occupied=[...territoryLabels.occupied];
+ updateAtlasPlaceLabels(metrics,occupied);
+ for(const g of markers)if(!g.classList.contains('world-comparison-place'))layoutMarker(g,territoryLabels.entries);
 }
 function renderWorldSources(){
  worldSources.replaceChildren(we('h4','',wt('title')));

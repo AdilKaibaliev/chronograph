@@ -180,11 +180,19 @@ function updateAtlasPlaceLabels(metrics,occupied){
   label.setAttribute('x',8/scale);label.setAttribute('y',3/scale);label.style.setProperty('display','block','important');occupied.push(rect);
  }
 }
-function updateWorldTerritoryLabels(metrics=worldLabelMetrics()){
+function updateWorldTerritoryLabels(metrics=worldLabelMetrics(),reserved=[]){
  const {ratio,scale,detail,width:mapWidth,height:mapHeight}=metrics;
  updateAtlasReferenceLabels(metrics);
  // Reserve labels of the original political layer as well as the new territories.
- const mapRect=svg.getBoundingClientRect(),occupied=[...empireLabelLayer.querySelectorAll('text')].filter(e=>getComputedStyle(e).display!=='none').map(e=>{const r=e.getBoundingClientRect();return [r.left-mapRect.left,r.top-mapRect.top,r.right-mapRect.left,r.bottom-mapRect.top];}).filter(r=>r[2]>r[0]&&r[3]>r[1]);
+ const mapRect=svg.getBoundingClientRect(),occupied=[...reserved];
+ for(const label of empireLabelLayer.querySelectorAll('text')){
+  label.classList.remove('world-landmark-obscured');
+  if(getComputedStyle(label).display==='none')continue;
+  const r=label.getBoundingClientRect(),rect=[r.left-mapRect.left,r.top-mapRect.top,r.right-mapRect.left,r.bottom-mapRect.top];
+  if(rect[2]<=rect[0]||rect[3]<=rect[1])continue;
+  if(reserved.some(p=>rect[0]<p[2]+4&&rect[2]>p[0]-4&&rect[1]<p[3]+3&&rect[3]>p[1]-3))label.classList.add('world-landmark-obscured');
+  else occupied.push(rect);
+ }
  const hatchStep=7/scale;worldPattern.setAttribute('width',hatchStep);worldPattern.setAttribute('height',hatchStep);worldHatchLine.setAttribute('d','M0 0V'+hatchStep);worldHatchLine.setAttribute('stroke-width',1/scale);
  if(typeof frontierReviewPattern!=='undefined'&&frontierReviewPattern)frontierReviewPattern.setAttribute('patternTransform','scale('+(1/scale)+')');
  if(typeof worldOccupationPattern!=='undefined'){worldOccupationPattern.setAttribute('width',9/scale);worldOccupationPattern.setAttribute('height',9/scale);worldOccupationLine.setAttribute('d','M0 0V'+9/scale);worldOccupationLine.setAttribute('stroke-width',1/scale);}
@@ -214,5 +222,5 @@ function updateWorldTerritoryLabels(metrics=worldLabelMetrics()){
    break;
   }
  }
- return layerState.empires?{occupied,entries:fit}:{occupied:[],entries:new Set()};
+ return layerState.empires?{occupied,entries:fit}:{occupied:[...reserved],entries:new Set()};
 }

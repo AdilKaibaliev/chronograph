@@ -18,7 +18,8 @@
    .sort((a,b)=>Number(!!a.background)-Number(!!b.background)
     ||(a.to-(a.periodFrom??a.from))-(b.to-(b.periodFrom??b.from)));
   const note=notes.find(n=>!n.background);
-  const early=y<1300?kyrgyzHistoryForYear(y):null;
+  let early=y<1300?kyrgyzHistoryForYear(y):null;
+  if(early&&notes.some(n=>n.replacesStage===early.year))early=null;
   const later=y>=1300?worldHistory.at(y,'eurasia').filter(x=>x.entry.kyrgyzHistory):[];
   return {note,notes,early,later};
  }

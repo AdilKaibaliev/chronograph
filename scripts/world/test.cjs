@@ -98,6 +98,11 @@ const readPeriod=vm.runInNewContext(parallelSource.slice(parallelSource.indexOf(
  worldHistory:{at:()=>[]}
 });
 for(const y of [843,844,866,1758,1759,1762])assert.equal(readPeriod(y).note.from,y,'Dated Kyrgyz account hidden by a broad period '+y);
+const readWithStage=vm.runInNewContext(parallelSource.slice(parallelSource.indexOf(' function reading(y)'),parallelSource.indexOf(' function title(y)'))+';reading',{
+ KYRGYZ_WITNESSES:require('./kyrgyz-witnesses.json'),kyrgyzHistoryForYear:y=>({year:y}),worldHistory:{at:()=>[]}
+});
+assert.equal(readWithStage(1295).early,null,'Expanded source reading duplicated its earlier short account');
+assert.equal(readWithStage(1293).early.year,1293,'Unrelated early account was removed');
 assert.equal(publishedHistory.record('kyrgyz-witness-1755').route.length,2);
 assert.equal(publishedHistory.record('kyrgyz-witness-1050').from,1050);
 assert.equal(publishedHistory.record('kyrgyz-witness-870').from,801);

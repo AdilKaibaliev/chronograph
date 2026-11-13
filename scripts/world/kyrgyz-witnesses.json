@@ -227,7 +227,8 @@
       "Общее направление возвращения общин.",
       "General direction of returning communities.",
       "Жамааттардын кайтышынын жалпы багыты."
-    ]
+    ],
+    "mapScale": 12
   },
   {
     "from": 1759,
@@ -790,7 +791,8 @@
           "Жумгал · жолугушуу аймагы"
         ]
       ]
-    ]
+    ],
+    "mapScale": 7
   },
   {
     "from": 1517,
@@ -923,7 +925,8 @@
           "Шаньдун · көчүрүлгөн аймак"
         ]
       ]
-    ]
+    ],
+    "replacesStage": 1295
   },
   {
     "from": 1760,
@@ -934,7 +937,7 @@
       41.8
     ],
     "kind": "culture",
-    "mapScale": 7,
+    "mapScale": 12,
     "periodLabel": [
       "Середина XVIII века · география общин",
       "Mid-18th century · geography of communities",

@@ -47,3 +47,17 @@ for(const scale of [4.2,6,1]){
 }
 assert.equal(named.style.display,'','Landmark label must return when zooming back out');
 console.log('PASS: event markers without duplicate titles preserve landmark labels and zoom without interrupting map initialization.');
+
+// A political name directly over a migration endpoint used to hide the
+// endpoint. Keep the endpoint readable and restore the political name on close.
+const legacyClasses=new Set(),legacy=text('Political context',1100,200);
+legacy.classList={contains:k=>legacyClasses.has(k),add:k=>legacyClasses.add(k),remove:k=>legacyClasses.delete(k)};
+legacy.getBoundingClientRect=()=>({left:1100,top:533,right:1200,bottom:550});
+ctx.empireLabelLayer={querySelectorAll:()=>[legacy]};
+ctx.getComputedStyle=e=>({display:e.classList.contains('world-landmark-obscured')?'none':'block'});
+ctx.mapState={scale:1,tx:0,ty:0};ctx.updateWorldMarkerScale();
+assert.equal(named.style.display,'','Migration endpoint was displaced by a political name');
+assert(legacyClasses.has('world-landmark-obscured'),'Political text overlaps the selected endpoint');
+ctx.worldLayer.querySelectorAll=()=>[central];ctx.updateWorldMarkerScale();
+assert(!legacyClasses.has('world-landmark-obscured'),'Political name did not return after clearing landmarks');
+console.log('PASS: selected geographic labels take priority over political context; closing an event restores context.');
