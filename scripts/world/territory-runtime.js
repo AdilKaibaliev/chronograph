@@ -183,9 +183,10 @@ function updateAtlasPlaceLabels(metrics,occupied){
 function updateWorldTerritoryLabels(metrics=worldLabelMetrics(),reserved=[]){
  const {ratio,scale,detail,width:mapWidth,height:mapHeight}=metrics;
  updateAtlasReferenceLabels(metrics);
- // Reserve labels of the original political layer as well as the new territories.
+ // Selected geography takes priority over political and trade-route context.
  const mapRect=svg.getBoundingClientRect(),occupied=[...reserved];
- for(const label of empireLabelLayer.querySelectorAll('text')){
+ const referenceLabels=[...empireLabelLayer.querySelectorAll('text'),...(typeof tradeLayer!=='undefined'?tradeLayer.querySelectorAll('text'):[])];
+ for(const label of referenceLabels){
   label.classList.remove('world-landmark-obscured');
   if(getComputedStyle(label).display==='none')continue;
   const r=label.getBoundingClientRect(),rect=[r.left-mapRect.left,r.top-mapRect.top,r.right-mapRect.left,r.bottom-mapRect.top];

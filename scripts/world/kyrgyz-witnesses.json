@@ -743,16 +743,69 @@
       "X кылым · географиялык баяндоо"
     ],
     "title": [
-      "X век · Земли кыргызов у аль-Истахри",
-      "10th century · Kyrgyz lands in al-Istakhri",
-      "X кылым · Ал-Истахри сүрөттөгөн кыргыз жерлери"
+      "Кыргызские земли и горные области у аль-Истахри",
+      "Kyrgyz lands and mountain regions in al-Istakhri",
+      "Аль-Истахри баяндаган кыргыз жерлери жана тоолуу аймактар"
     ],
     "text": [
-      "Аль-Истахри называет кыргызов خرخيز и описывает их земли относительно тогузгузов и кимаков. По его словам, представители нескольких тюркских народов понимали друг друга. Географ описывает соседство народов. Верхний Енисей на карте служит региональным ориентиром.",
-      "Al-Istakhri calls the Kyrgyz خرخيز and locates their lands in relation to the Toghuzghuz and Kimeks. He reports that speakers from several Turkic peoples understood one another. His account describes neighbouring peoples. The upper Yenisei is a regional reference on the map.",
-      "Ал-Истахри кыргыздарды خرخيز деп атап, алардын жерин тогузгуздар менен кимактарга карата сүрөттөгөн. Анын жазышынча, бир нече түрк элинин өкүлдөрү бири-бирин түшүнө алышкан. Географ коңшу элдерди атаган. Картада Жогорку Энесай аймагы көрсөтүлөт."
+      "Аль-Истахри помещает кыргызов среди тюркских народов рядом с тогузгузами и кимаками. Описывая горы Центральной Азии, он связывает рудные области Ферганы, Илака и Шельджи с горной цепью, продолжающейся к стране кыргызов. На карте отмечены эти области и верхний Енисей как региональный ориентир кыргызских земель. Это географическое описание X века; даты и пути переселения автор здесь не сообщает.",
+      "Al-Istakhri places the Kyrgyz among Turkic peoples near the Toquz Oghuz and Kimaks. His account connects the mining regions of Fergana, Ilak and Shelji with mountains extending towards Kyrgyz lands. The map marks these regions and the upper Yenisei as a regional reference for Kyrgyz lands. This tenth-century geographic description provides no migration date or itinerary.",
+      "Аль-Истахри кыргыздарды тогуз-огуздарга жана кимактарга жакын түрк элдеринин арасында атайт. Ал Фергана, Илак жана Шелжи кен аймактарын кыргыз жерлерине уланган тоолор менен байланыштырат. Картада ушул аймактар жана кыргыз жерлеринин аймактык багыты катары Энесайдын жогорку агымы белгиленген. Бул X кылымдагы географиялык баян; автор бул жерде көчүүнүн датасын же жолун билдирбейт."
     ],
-    "source": "Al-Istakhri. Kitāb al-Masālik wa-l-mamālik, ed. M. J. de Goeje, p. 9."
+    "source": "Al-Istakhri. Kitāb al-Masālik wa-l-mamālik, ed. M. J. de Goeje, pp. 9, 281, 312–313. Русский перевод: Материалы по истории киргизов и Киргизии, вып. I, 1973, с. 16–18.",
+    "kind": "culture",
+    "mapScale": 5,
+    "places": [
+      [
+        [
+          92,
+          53.6
+        ],
+        [
+          "Верхний Енисей",
+          "Upper Yenisei",
+          "Жогорку Энесай"
+        ]
+      ],
+      [
+        [
+          71.8,
+          40.5
+        ],
+        [
+          "Фергана",
+          "Fergana",
+          "Фергана"
+        ]
+      ],
+      [
+        [
+          70.15,
+          41
+        ],
+        [
+          "Илак · регион",
+          "Ilak · region",
+          "Илак · аймак"
+        ]
+      ],
+      [
+        [
+          71.5,
+          42.5
+        ],
+        [
+          "Шельджи · Таласский регион",
+          "Shelji · Talas region",
+          "Шелжи · Талас аймагы"
+        ]
+      ]
+    ],
+    "geographyNote": [
+      "Области географического описания; границы расселения и миграционный путь здесь не установлены.",
+      "Regions in a geographic account; settlement boundaries and a migration route are not established here.",
+      "Географиялык баяндагы аймактар; бул маалыматта отурукташуу чектери жана көчүү жолу аныкталган эмес."
+    ]
   },
   {
     "from": 1120,
@@ -2032,6 +2085,66 @@
       "Обобщённая связь районов; точные места шести станций не установлены.",
       "Generalized regional connection; the precise sites of the six stations are not established.",
       "Аймактардын жалпыланган байланышы; алты бекеттин так орду аныкталган эмес."
+    ]
+  },
+  {
+    "from": 1293,
+    "to": 1293,
+    "kind": "migration",
+    "place": [
+      125.5,
+      45.8
+    ],
+    "mapScale": 5,
+    "title": [
+      "Переселение кыргызов в Чжаочжоу",
+      "Kyrgyz relocation to Zhaozhou",
+      "Кыргыздардын Чжаочжоуга көчүрүлүшү"
+    ],
+    "text": [
+      "«Юань ши» относит к 1293 году приказ Хубилая поселить кыргызов, усов и ханханасов в новом городе Чжаочжоу на бывших землях Наяна. Управлять поселением назначен Хара-Батур. Карта показывает общее направление из Енисейско-Саянского района к Сунгари на северо-востоке империи. Это отдельное переселение части кыргызов, не этап пути на Тянь-Шань.",
+      "Yuan shi dates to 1293 Kublai’s order to settle Kyrgyz, Us and Hankhanas people in the new city of Zhaozhou on Nayan’s former lands, under Hala Batur. The map shows a generalized connection from the Yenisei–Sayan region towards the Sungari in the empire’s northeast. This relocation of some Kyrgyz was separate from movement towards the Tian Shan.",
+      "«Юань ши» 1293-жылы Хубилай кыргыздарды, ус жана ханханас элдерин Наяндын мурдагы жерлериндеги жаңы Чжаочжоу шаарына жайгаштырууну буйруганын жазат. Конушту башкарууга Хара-Батур дайындалган. Карта Энесай–Саян аймагынан империянын түндүк-чыгышындагы Сунгариге карай жалпы багытты көрсөтөт. Бул кыргыздардын бир бөлүгүнүн өзүнчө көчүрүлүшү; Теңир-Тоого карай жолдун этабы эмес."
+    ],
+    "source": "Yuan shi (元史), juan 59, 肇州, Zhiyuan 30 (1293); juan 169, biography of 哈剌八都魯. Regional identification: 黑龙江史志网, «肇州»; В. Я. Бутанаев, Ю. С. Худяков. История енисейских кыргызов, 2000, с. 151–152.",
+    "route": [
+      [
+        91.7,
+        53.6
+      ],
+      [
+        125.5,
+        45.8
+      ]
+    ],
+    "places": [
+      [
+        [
+          91.7,
+          53.6
+        ],
+        [
+          "Енисейско-Саянский район",
+          "Yenisei–Sayan region",
+          "Энесай–Саян аймагы"
+        ]
+      ],
+      [
+        [
+          125.5,
+          45.8
+        ],
+        [
+          "Чжаочжоу · район Сунгари",
+          "Zhaozhou · Sungari region",
+          "Чжаочжоу · Сунгари аймагы"
+        ]
+      ]
+    ],
+    "geographyNote": [
+      "Обобщённое направление между районами. Чжаочжоу показан в районе Сунгари; точный путь и стоянки не установлены.",
+      "Generalized direction between regions. Zhaozhou is marked in the Sungari region; the exact itinerary and stopping places are not established.",
+      "Аймактардын ортосундагы жалпы багыт. Чжаочжоу Сунгари аймагында көрсөтүлгөн; так жол жана токтогон жерлер аныкталган эмес."
     ]
   }
 ]

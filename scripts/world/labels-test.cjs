@@ -62,6 +62,20 @@ ctx.worldLayer.querySelectorAll=()=>[central];ctx.updateWorldMarkerScale();
 assert(!legacyClasses.has('world-landmark-obscured'),'Political name did not return after clearing landmarks');
 console.log('PASS: selected geographic labels take priority over political context; closing an event restores context.');
 
+// The Silk Road caption can cross the Shelji label on compact maps. Hide only
+// the conflicting caption, restoring it when the source account is closed.
+const tradeClasses=new Set(),trade=text('Silk roads',1100,200);
+trade.classList={contains:k=>tradeClasses.has(k),add:k=>tradeClasses.add(k),remove:k=>tradeClasses.delete(k)};
+trade.getBoundingClientRect=legacy.getBoundingClientRect;
+ctx.tradeLayer={querySelectorAll:()=>[trade]};ctx.empireLabelLayer={querySelectorAll:()=>[]};
+ctx.worldLayer.querySelectorAll=()=>[central,landmark];ctx.updateWorldMarkerScale();
+assert(tradeClasses.has('world-landmark-obscured'),'Trade caption overlaps selected geography');
+assert.equal(named.style.display,'');
+ctx.worldLayer.querySelectorAll=()=>[central];ctx.updateWorldMarkerScale();
+assert(!tradeClasses.has('world-landmark-obscured'),'Trade caption did not return after closing the account');
+ctx.tradeLayer={querySelectorAll:()=>[]};
+console.log('PASS: conflicting trade captions yield to source landmarks and return after closing.');
+
 // Real 1508 event geometry and camera from the browser: long explanatory
 // labels hid Turfan on desktop. All three destinations must fit in each locale.
 const relocation=require('./kyrgyz-witnesses.json').find(n=>n.from===1508);
