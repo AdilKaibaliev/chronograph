@@ -182,11 +182,25 @@ assert(!readPeriod(1292).notes.some(n=>n.from===1293));
 assert.equal(readPeriod(1293).note.from,1293);
 assert(!readPeriod(1294).notes.some(n=>n.from===1293));
 assert(relocation1293.mapPlaces.every(([p])=>p[1]>45),'The northeastern relocation was moved to the Tian Shan');
-for(const y of [863,885,950,1291,1293]){
+for(const y of [863,885,950,1291,1293,1733,1755,1758,1983,2023]){
  const n=require('./kyrgyz-witnesses.json').find(n=>n.from===y),e=publishedHistory.record('kyrgyz-witness-'+y);
  for(const field of ['title','text','geographyNote','mapScale'])assert.deepEqual(e[field],n[field]);
  assert.deepEqual(e.mapPlaces,n.places);assert.equal(payload.sources[e.sources[0]].title,n.source);
 }
+const jumgal1758=publishedHistory.record('kyrgyz-witness-1758');
+assert.equal(jumgal1758.kind,'diplomacy','A diplomatic journey became a migration');
+assert.deepEqual(jumgal1758.route,[[74.8,41.95],[72.22,42.52]]);
+assert.equal(jumgal1758.mapPlaces.length,2);
+const east1733=publishedHistory.record('kyrgyz-witness-1733');
+assert.equal(east1733.kind,'migration');assert.equal(east1733.mapPlaces.length,2);
+assert.deepEqual(east1733.route.at(-1),[123.92,47.35]);
+const fuyu2023=publishedHistory.record('kyrgyz-witness-2023');
+assert.deepEqual([fuyu2023.from,fuyu2023.year,fuyu2023.to],[2023,2023,2023]);
+assert.equal(fuyu2023.kind,'culture');assert(!fuyu2023.route,'A modern community acquired an unsupported descent route');
+assert.equal(fuyu2023.mapPlaces.length,1);
+assert(!readPeriod(2022).notes.some(n=>n.from===2023));
+assert.equal(readPeriod(2023).note.from,2023);
+assert(!readPeriod(2024).notes.some(n=>n.from===2023));
 // Trade accounts describe connected regions, not documented migration tracks.
 for(const y of [800,988]){
  const e=publishedHistory.record('kyrgyz-witness-'+y);
@@ -241,7 +255,7 @@ for(const lang of [0,1,2]){
  assert(box&&!box.open,'The long source guide opens expanded by default');
  box.open=true;box.ontoggle();
  const buttons=descendants(box).filter(n=>n.dataset.kyrgyzJourney);
- assert.equal(buttons.length,23);assert.equal(buttons.filter(n=>n.attrs['aria-current']==='step').length,1);
+ assert.equal(buttons.length,27);assert.equal(buttons.filter(n=>n.attrs['aria-current']==='step').length,1);
  const categories={863:['Дипломатия','Diplomacy','Дипломатия'],885:['Пути и связи','Routes and connections','Жолдор жана байланыштар'],1291:['Пути и связи','Routes and connections','Жолдор жана байланыштар'],1703:['Переселение','Relocation','Көчүрүү'],1765:['Пути и связи','Routes and connections','Жолдор жана байланыштар'],1514:['Военный поход','Military campaign','Аскердик жортуул']};
  for(const [y,labels] of Object.entries(categories))assert(buttons.find(b=>b.dataset.kyrgyzJourney===y).children.some(n=>n.tag==='small'&&n.textContent.endsWith(labels[lang])),'Guide confuses roads, campaigns and relocations');
  for(const button of buttons){
@@ -249,7 +263,7 @@ for(const lang of [0,1,2]){
   const note=guide.KYRGYZ_WITNESSES.find(n=>n.from===guide.year);
   assert.equal(chosen,note.replacesEvent||'kyrgyz-witness-'+guide.year);assert(guide.showKyrgyzContext);
  }
- assert.equal(closed,23);assert.equal(saved,23);
+ assert.equal(closed,27);assert.equal(saved,27);
  row.afterNode.click();box=descendants(get('modalBody')).find(n=>n.className==='kyrgyz-journey');
  assert(box.open,'The guide lost its expansion state after returning from the map');
 }

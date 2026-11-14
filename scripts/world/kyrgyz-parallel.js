@@ -4,7 +4,7 @@
  line.type='button';line.id='kyrgyzParallel';line.dataset.localeOwned='true';
  $('timelineCard').querySelector('.timeline-row').after(line);
  const label=()=>wl(['История кыргызов','Kyrgyz history','Кыргыз тарыхы']);
- const journeyYears=[800,863,870,885,950,984,1050,1154,1265,1291,1293,1295,1504,1508,1510,1514,1517,1522,1526,1527,1703,1755,1765];
+ const journeyYears=[800,863,870,885,950,984,1050,1154,1265,1291,1293,1295,1504,1508,1510,1514,1517,1522,1526,1527,1703,1733,1755,1758,1765,1983,2023];
  const journeyTypes={diplomacy:['Дипломатия','Diplomacy','Дипломатия'],migration:['Переселение','Relocation','Көчүрүү'],war:['Военный поход','Military campaign','Аскердик жортуул'],economy:['Пути и связи','Routes and connections','Жолдор жана байланыштар'],politics:['Политическая история','Political history','Саясий тарых'],culture:['Письменное свидетельство','Written account','Жазма маалымат']};
  let journeyExpanded=false;
  function showReading(d,view,territory,eventId){
@@ -16,7 +16,7 @@
  }
  function journey(){
   const box=we('details','kyrgyz-journey');box.open=journeyExpanded;
-  box.append(we('summary','',wl(['Енисей — Тянь-Шань: места и переселения','Yenisei — Tian Shan: places and migrations','Энесай — Теңир-Тоо: жерлер жана көчүүлөр'])));
+  box.append(we('summary','',wl(['Енисей, Тянь-Шань и восточные переселения','Yenisei, Tian Shan and eastward relocations','Энесай, Теңир-Тоо жана чыгышка көчүүлөр'])));
   box.append(we('p','',wl([
    'Китайские хроники, арабская география и персидские описания сохраняют разные этапы истории кыргызов. Здесь собраны места проживания, торговые связи, походы и переселения. Единой даты и полного маршрута переселения с Енисея на Тянь-Шань эти источники не дают.',
    'Chinese chronicles, Arabic geography and Persian accounts preserve different stages of Kyrgyz history. Explore places of residence, trade connections, campaigns and relocations. These sources do not provide a single date or a complete migration itinerary from the Yenisei to the Tian Shan.',

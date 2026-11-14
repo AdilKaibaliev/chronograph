@@ -198,7 +198,7 @@
       "Qing shi gao reports that eastern Kyrgyz communities moved to the Andijan region under Dzungar pressure. After the defeat of Dzungaria in 1755, they could return to their former pastures. The chronicle places the eastern Kyrgyz around Issyk-Kul. The line shows the general direction of return; this account does not name passes or intermediate camps.",
       "«Цин ши гао» боюнча, чыгыш кыргыз жамааттары жуңгарлардын кысымынан Анжиян аймагына кетишкен. 1755-жылы Жуңгария талкалангандан кийин алар мурдагы жайыттарына кайта алышкан. Жылнаама чыгыш кыргыздарды Ысык-Көлдүн айланасы менен байланыштырат. Сызык кайтуунун жалпы багытын көрсөтөт; бул маалыматта ашуулар менен аралык конуштар аталган эмес."
     ],
-    "source": "Qing shi gao (清史稿), juan 529, 藩部傳十二, 布魯特.",
+    "source": "Qinding Huangyu Xiyu tuzhi (欽定皇輿西域圖志), juan 45, 東布魯特. Qing shi gao (清史稿), juan 529, 布魯特.",
     "places": [
       [
         [
@@ -495,7 +495,37 @@
       "Manchu official reports studied by Wu Yuanfeng describe the eastward relocation of Kyrgyz families in 1733. They left grazing lands in the Tes basin. Some were enrolled in Qing banner garrisons in Heilongjiang. The line connects their region of departure with Qiqihar, one of the garrison destinations.",
       "У Юаньфэн изилдеген манжур тилиндеги Цин документтеринде кыргыз үй-бүлөлөрүнүн 1733-жылы чыгышка көчүрүлүшү баяндалат. Алар Тес дарыясынын алабындагы жайыттардан чыгышкан. Көчүрүлгөндөрдүн бир бөлүгү Хэйлунцзяндагы Циндин туу аскерлеринин гарнизондоруна киргизилген. Сызык чыккан аймак менен жайгаштырылган жерлердин бири Цицикарды байланыштырат."
     ],
-    "source": "吴元丰. 柯尔克孜族东迁黑龙江地区考实. 黑龙江民族丛刊, 2001, № 1, pp. 69–74."
+    "source": "吴元丰. 柯尔克孜族东迁黑龙江地区考实. 黑龙江民族丛刊, 2001, № 1, pp. 69–74.",
+    "mapScale": 5,
+    "places": [
+      [
+        [
+          96.1,
+          50.5
+        ],
+        [
+          "Бассейн Тэса · район исхода",
+          "Tes basin · departure region",
+          "Тес алабы · чыккан аймак"
+        ]
+      ],
+      [
+        [
+          123.92,
+          47.35
+        ],
+        [
+          "Цицикар · место размещения",
+          "Qiqihar · settlement destination",
+          "Цицикар · жайгаштырылган жер"
+        ]
+      ]
+    ],
+    "geographyNote": [
+      "Общее направление переселения 1733 года. Цицикар — одно из мест размещения; промежуточные стоянки здесь не нанесены.",
+      "General direction of the 1733 relocation. Qiqihar was one of the settlement destinations; intermediate stops are not mapped here.",
+      "1733-жылкы көчүрүүнүн жалпы багыты. Цицикар — жайгаштырылган жерлердин бири; аралык конуштар бул жерде көрсөтүлгөн эмес."
+    ]
   },
   {
     "from": 1757,
@@ -535,7 +565,26 @@
       "Chinese linguist Hu Zhenhua documented the speech of the Kyrgyz in Fuyu County, Heilongjiang, and compared it with that of the Kyrgyz in Xinjiang. The map shows Fuyu County in northeast China. The year refers to publication of the study.",
       "Кытайлык тилчи Ху Чжэньхуа Хэйлунцзяндагы Фуюй уездинин кыргыздарынын тилин сүрөттөп, аны Шинжаң кыргыздарынын тили менен салыштырган. Картада Кытайдын түндүк-чыгышындагы Фуюй уезди көрсөтүлгөн. Жыл изилдөөнүн жарык көргөн учурун билдирет."
     ],
-    "source": "胡振华. 黑龙江富裕县的柯尔克孜族及其语言特点. 中央民族学院学报, 1983, № 2, pp. 65–69."
+    "source": "胡振华. 黑龙江富裕县的柯尔克孜族及其语言特点. 中央民族学院学报, 1983, № 2, pp. 65–69.",
+    "mapScale": 7,
+    "places": [
+      [
+        [
+          124.48,
+          47.8
+        ],
+        [
+          "Фуюй · район общины",
+          "Fuyu · community region",
+          "Фуюй · жамааттын аймагы"
+        ]
+      ]
+    ],
+    "geographyNote": [
+      "Уезд Фуюй показан как район исследования, без привязки к дому или конкретному селу.",
+      "Fuyu County is marked as the study region, not as a particular house or village.",
+      "Фуюй уезди белгилүү бир үй же айыл эмес, изилденген аймак катары көрсөтүлгөн."
+    ]
   },
   {
     "from": 758,
@@ -850,16 +899,16 @@
       41.95
     ],
     "title": [
-      "Посольства восточных кыргызских общин к Цин",
-      "Eastern Kyrgyz communities send envoys to the Qing",
-      "Чыгыш кыргыз жамааттары Цинге элчи жөнөттү"
+      "Джумгал — Талас: поездка посланников в 1758 году",
+      "Jumgal–Talas: an embassy journey in 1758",
+      "Жумгал — Талас: элчилердин 1758-жылкы сапары"
     ],
     "text": [
-      "В шестом лунном месяце 1758 года по календарю Цин посланники Ургин и Толунтай прибыли в кыргызские кочевья Чжумухань — Джумгал. «Цин ши гао» называет саяков и сарыбагышей и их старшего представителя Мамыккулду. В следующем месяце отдельное посольство принял глава саруу Акбай. Кыргызские представители отправились ко двору через города Восточного Туркестана. На карте отмечена Джумгальская долина, без привязки встречи к конкретному селу.",
-      "In the sixth lunar month of 1758, Qing envoys Urgin and Toluntai reached the Kyrgyz pastures of Zhumuhan, identified with Jumgal. Qing shi gao names the Sayak and Sarybagysh and their senior representative Mamyk-kul. In the following month Akbai of the Saruu received a separate embassy. Kyrgyz envoys travelled to court through Eastern Turkestan. The marker locates the Jumgal valley, not a particular village.",
-      "1758-жылдын Цин календары боюнча алтынчы айында Ургин менен Толунтай кыргыздардын Чжумухань — Жумгал жайлоолоруна келишкен. «Цин ши гао» саяк, сарыбагыш жана алардын улуу өкүлү Мамыккулду атайт. Кийинки айда саруулардын башчысы Акбай өзүнчө элчиликти кабыл алган. Кыргыз элчилери Чыгыш Түркстандын шаарлары аркылуу ордого жөнөшкөн. Белги белгилүү бир айылды эмес, Жумгал өрөөнүн көрсөтөт."
+      "В 1758 году цинские посланники прибыли в кочевья саяков и сарыбагышей в Джумгале. «Сиюй тучжи» сообщает, что находившийся там Эшболот, сын таласского предводителя Майтака, отправился с Толунтаем к своим общинам. Они достигли их земель за шесть дней. Затем кыргызские представители были направлены ко двору Цин. На карте показана поездка из Джумгала в Талас: она свидетельствует о связях кыргызских общин внутри Тянь-Шаня.",
+      "In 1758 Qing envoys reached Sayak and Sarybagysh pastures in Jumgal. Xiyu tuzhi reports that Eshbolot, son of the Talas leader Maitak, was there and accompanied Toluntai to his communities. They reached their lands after six days. Kyrgyz representatives were subsequently sent to the Qing court. The map shows the Jumgal–Talas journey, recording connections between Kyrgyz communities within the Tian Shan.",
+      "1758-жылы Цин элчилери Жумгалдагы саяк жана сарыбагыштардын жайыттарына келишкен. «Сиюй тучжи» ошол жерде болгон таластык башчы Майтактын уулу Эшболот Толунтай менен өз жамааттарына жөнөгөнүн баяндайт. Алар алты күндө жетишкен. Андан кийин кыргыз өкүлдөрү Цин ордосуна жөнөтүлгөн. Карта Жумгалдан Таласка болгон сапарды көрсөтөт: бул Теңир-Тоодогу кыргыз жамааттарынын өз ара байланыштары тууралуу күбөлүк."
     ],
-    "source": "Qing shi gao (清史稿), juan 529, 布魯特, Qianlong 23, sixth and seventh lunar months (1758).",
+    "source": "Qinding Huangyu Xiyu tuzhi (欽定皇輿西域圖志), juan 45, 東布魯特. Qianlong 23 (1758). Qing shi gao (清史稿), juan 529, 布魯特.",
     "places": [
       [
         [
@@ -867,13 +916,40 @@
           41.95
         ],
         [
-          "Джумгал · район встречи",
-          "Jumgal · meeting region",
-          "Жумгал · жолугушуу аймагы"
+          "Джумгал · кочевья",
+          "Jumgal · pastures",
+          "Жумгал · жайыттар"
+        ]
+      ],
+      [
+        [
+          72.22,
+          42.52
+        ],
+        [
+          "Талас · общины Майтака",
+          "Talas · Maitak’s communities",
+          "Талас · Майтактын жамааттары"
         ]
       ]
     ],
-    "mapScale": 7
+    "mapScale": 12,
+    "kind": "diplomacy",
+    "route": [
+      [
+        74.8,
+        41.95
+      ],
+      [
+        72.22,
+        42.52
+      ]
+    ],
+    "geographyNote": [
+      "Шесть дней пути по источнику; линия соединяет названные районы без реконструкции перевалов.",
+      "The source gives six days of travel; the line connects the named regions without reconstructing passes.",
+      "Булакта алты күндүк жол аталат; сызык аталган аймактарды ашууларды калыбына келтирбестен бириктирет."
+    ]
   },
   {
     "from": 1517,
@@ -2145,6 +2221,45 @@
       "Обобщённое направление между районами. Чжаочжоу показан в районе Сунгари; точный путь и стоянки не установлены.",
       "Generalized direction between regions. Zhaozhou is marked in the Sungari region; the exact itinerary and stopping places are not established.",
       "Аймактардын ортосундагы жалпы багыт. Чжаочжоу Сунгари аймагында көрсөтүлгөн; так жол жана токтогон жерлер аныкталган эмес."
+    ]
+  },
+  {
+    "from": 2023,
+    "to": 2023,
+    "kind": "culture",
+    "place": [
+      124.48,
+      47.8
+    ],
+    "mapScale": 7,
+    "title": [
+      "Фуюйские кыргызы: живая община в Хэйлунцзяне",
+      "Fuyu Kyrgyz: a living community in Heilongjiang",
+      "Фуюй кыргыздары: Хэйлунцзяндагы жамаат"
+    ],
+    "text": [
+      "7–8 декабря 2023 года представители Центрального университета национальностей Китая работали в уезде Фуюй по вопросам сохранения языков и культурного наследия. В отчёте названа кыргызская деревня Уцзяцзы. Исследования маньчжурских архивов связывают восточные переселения кыргызов с 1733 и 1757 годами. Эти свидетельства подтверждают более позднюю историю общины; её происхождение непосредственно от переселённых в Чжаочжоу в 1293 году ими не установлено.",
+      "On 7–8 December 2023, representatives of Minzu University of China visited Fuyu County to discuss language preservation and cultural heritage. Their report names the Kyrgyz village of Wujiazi. Research on Manchu archives documents eastward Kyrgyz relocations in 1733 and 1757. These accounts establish a later history of the community; they do not establish direct descent from the people moved to Zhaozhou in 1293.",
+      "2023-жылдын 7–8-декабрында Кытайдын Борбордук улуттар университетинин өкүлдөрү Фуюй уездинде тилдерди жана маданий мурасты сактоо маселелерин талкуулашкан. Отчётто кыргыздардын Уцзяцзы айылы аталат. Манжур архивдерин изилдөөлөр кыргыздардын чыгышка көчүрүлүшүн 1733 жана 1757-жылдар менен байланыштырат. Бул маалыматтар жамааттын кийинки тарыхын ырастайт; анын 1293-жылы Чжаочжоуга көчүрүлгөндөрдөн түз тараганын аныктабайт."
+    ],
+    "source": "中央民族大学中国少数民族语言文学学院. 赴黑龙江省富裕县开展校地合作调研并举行学生实习实训基地签约揭牌仪式, 15 December 2023. 吴元丰. 柯尔克孜族东迁黑龙江地区考实. 黑龙江民族丛刊, 2001, № 1, pp. 69–74.",
+    "places": [
+      [
+        [
+          124.48,
+          47.8
+        ],
+        [
+          "Фуюй · район Уцзяцзы",
+          "Fuyu · Wujiazi area",
+          "Фуюй · Уцзяцзы аймагы"
+        ]
+      ]
+    ],
+    "geographyNote": [
+      "Региональный ориентир в уезде Фуюй; не точная отметка деревни Уцзяцзы.",
+      "Regional reference within Fuyu County, not the exact site of Wujiazi village.",
+      "Фуюй уездиндеги аймактык белги; Уцзяцзы айылынын так орду эмес."
     ]
   }
 ]
