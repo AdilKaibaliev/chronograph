@@ -23,6 +23,8 @@
  const make=(tag,cls,text)=>{const e=document.createElement(tag);e.className=cls||'';if(text!==undefined)e.textContent=text;return e;};
  const button=(text,fn)=>{const b=make('button','btn',text);b.type='button';b.onclick=fn;return b;};
  const controls=make('div','ancient-controls');controls.id='ancientControls';controls.dataset.localeOwned='true';$('starsCard').before(controls);
+ const jump=make('div','timeline-jump');jump.id='timelineJump';jump.dataset.localeOwned='true';$('eraStrip').before(jump);
+ $('yearRange').min=String(catalog.range.min);$('yearRange').max=String(TIMELINE_MAX);
  const entrance=button('',()=>{stopPlay();renderYear(catalog.range.min);switchPanel('events');queueLocationSave();});entrance.id='ancientEntry';entrance.dataset.localeOwned='true';$('eraStrip').prepend(entrance);
  const territoryMap=document.createElementNS(svg.namespaceURI,'g');territoryMap.id='ancientTerritories';territoryMap.dataset.localeOwned='true';viewport.append(territoryMap);
  const map=document.createElementNS(svg.namespaceURI,'g');map.id='ancientLayer';map.dataset.localeOwned='true';viewport.append(map);
@@ -51,13 +53,18 @@
  function renderControls(){
   if(year<610&&$('worldExploreBtn')){$('worldExploreBtn').textContent=loc(['Мир','World','Дүйнө']);$('worldExploreBtn').title=loc(['Параллельная история мира','Parallel world history','Дүйнөнүн параллелдүү тарыхы']);}
   controls.replaceChildren(make('div','section-label',t('preview')));
-  const form=make('form','ancient-year-form'),label=make('label','',t('year')),input=make('input',''),era=make('select','');
+  const form=make('form','ancient-year-form unified-year-form'),label=make('label','',t('year')),input=make('input',''),era=make('select','');
   input.type='number';input.min='1';input.max='7000';input.step='1';input.value=String(Math.abs(year));input.id='ancientYear';label.htmlFor=input.id;
   era.id='ancientEra';era.setAttribute('aria-label',loc(['Эра','Era','Заман']));
   labels.era[li()].forEach((v,i)=>{const opt=make('option','',v);opt.value=i?'CE':'BCE';era.append(opt);});era.value=year<0?'BCE':'CE';
   const submit=make('button','btn',t('go'));submit.type='submit';const error=make('span','ancient-error');error.setAttribute('role','status');
   form.append(label,input,era,submit,error);form.onsubmit=e=>{e.preventDefault();const n=cal.parse(input.value),y=era.value==='BCE'?-n:n;if(n===null||n<1||y<catalog.range.min||y>TIMELINE_MAX){error.textContent=t('invalid');return;}stopPlay();renderYear(y);queueLocationSave();};
-  controls.append(form);
+  const step=delta=>{stopPlay();renderYear(cal.add(year,delta));const b=$(delta<0?'previousYear':'nextYear');(b.disabled?$('ancientYear'):b).focus({preventScroll:true});queueLocationSave();};
+  const previous=button('−',()=>step(-1)),next=button('+',()=>step(1));
+  previous.id='previousYear';next.id='nextYear';previous.disabled=year===catalog.range.min;next.disabled=year===TIMELINE_MAX;
+  previous.setAttribute('aria-label',loc(['Предыдущий год','Previous year','Мурунку жыл']));next.setAttribute('aria-label',loc(['Следующий год','Next year','Кийинки жыл']));
+  previous.title=previous.getAttribute('aria-label');next.title=next.getAttribute('aria-label');
+  form.prepend(previous);form.append(next);jump.replaceChildren(form);
   const nav=make('div','ancient-nav'),steps=catalog.milestones;
   for(const [y,label]of [[steps.filter(v=>v<year).at(-1),t('earlier')],[steps.find(v=>v>year),t('later')]])if(y!==undefined)nav.append(button(label+' · '+cal.format(y,language),()=>{stopPlay();renderYear(y);queueLocationSave();}));
   nav.append(button(t('kyrgyz'),showKyrgyz));controls.append(nav);
@@ -112,7 +119,6 @@
  renderYear=function(value){
   let target=Number(value);if(target===0)target=year<0?1:-1;if(!cal.valid(target))return;target=Math.max(catalog.range.min,Math.min(TIMELINE_MAX,target));
   const ancient=target<610;document.body.classList.toggle('ancient-mode',ancient);
-  $('yearRange').min=ancient?String(catalog.range.min):'610';$('yearRange').max=ancient?'610':String(TIMELINE_MAX);ticks(ancient);
   if(!ancient){$('yearRange').removeAttribute('aria-valuetext');for(const id of ['mapYear','timelineYear','mapAh','timelineAh']){delete $(id).dataset.localeOwned;$(id).removeAttribute('aria-label');}baseRender(target);renderControls();return;}
   if(typeof mapTransitionCleanup==='function')mapTransitionCleanup();selectedEmpire=null;year=target;
   $('yearRange').value=String(year);$('yearRange').setAttribute('aria-valuetext',cal.format(year,language));
@@ -122,9 +128,9 @@
   renderControls();renderPanels();draw();
  };
  nextPlaybackYear=function(y){if(y>=610)return baseNext(y);let step=y<-1000?100:y<1?25:y<500?10:1;let target=Math.min(610,cal.add(y,step));const next=catalog.milestones.find(v=>v>y);if(next!==undefined&&next<target)target=next;return target;};
- function ticks(ancient=year<610){entrance.textContent=cal.format(catalog.range.min,language)+' · '+t('title');const years=ancient?[catalog.range.min,-3000,-1,610]:[610,1000,1500,2026],min=ancient?catalog.range.min:610,max=ancient?610:2026;$('ticks').replaceChildren();for(const y of years){const e=make('span','tick-label',cal.format(y,language));e.style.left=((y-min)/(max-min)*100)+'%';$('ticks').append(e);}}
+ function ticks(){entrance.textContent=cal.format(catalog.range.min,language)+' · '+loc(['Неолит','Neolithic','Неолит']);const years=[catalog.range.min,-5000,-3000,-1000,1,1000,TIMELINE_MAX],min=catalog.range.min,max=TIMELINE_MAX;$('ticks').replaceChildren();for(const y of years){const e=make('span','tick-label',cal.format(y,language));e.style.left=((y-min)/(max-min)*100)+'%';$('ticks').append(e);}const hint=document.querySelector('.timeline-hint');if(hint){hint.dataset.localeOwned='true';hint.textContent=cal.format(min,language)+' — '+cal.format(max,language);}}
  localeSelect.addEventListener('change',()=>{renderYear(year);ticks();if($('modal').classList.contains('show')&&$('modalBody').querySelector('.ancient-card'))showKyrgyz();});
  $('modalClose').addEventListener('click',()=>{if($('modalBody').dataset.ancientOwned){delete $('modalBody').dataset.ancientOwned;delete $('modalBody').dataset.localeOwned;}});
  const incoming=cal.parse(new URLSearchParams(location.search).get('year'));
- if(incoming!==null&&incoming>=catalog.range.min&&incoming<610)renderYear(incoming);else {renderControls();$('yearRange').min='610';}ticks();
+ if(incoming!==null&&incoming>=catalog.range.min&&incoming<610)renderYear(incoming);else renderControls();ticks();
 })();
