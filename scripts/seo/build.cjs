@@ -53,6 +53,12 @@ for(const l of Object.keys(copy)){
  const lessonHeading={ru:'Сравнить карты разных лет',en:'Compare maps across years',ky:'Ар кайсы жылдардагы карталарды салыштыруу',zh:'比较不同年份的地图（英文地图）'}[l];
  page(l,guide(l),t.title,t.description,`<p class="eyebrow">CHRONOGRAPH ATLAS · 610–2026</p><h1>${t.heading}</h1><p>${t.intro}</p><p><a class="cta" href="/?lang=${l==='zh'?'en':l}">${t.open}</a></p><h2>${t.regions}</h2><div class="grid">${tiles}</div><h2>${t.how}</h2><ol>${t.steps.map(x=>'<li>'+esc(x)+'</li>').join('')}</ol><h2>${lessonHeading}</h2><ul>${lessons}</ul><h2>${t.method}</h2><p>${t.note}</p><p>${t.scope}</p>`,Object.fromEntries(Object.keys(copy).map(k=>[k,guide(k)])));
 }
+require('./ancient-pages.cjs')({page,esc,langs,idx,copy,world:c});
+for(const l of Object.keys(copy)){
+ const lang=l==='zh'?'en':l,p=path.join(out,l,'guide.html');
+ const title={ru:'Древний мир · 7000 до н. э. — 610 н. э.',en:'Ancient world · 7000 BCE–610 CE',ky:'Байыркы дүйнө · б. з. ч. 7000 — б. з. 610',zh:'古代世界：公元前7000年至公元610年（英文）'}[l];
+ fs.writeFileSync(p,fs.readFileSync(p,'utf8').replace('</main>',`<p><a class="cta" href="/${lang}/history/ancient">${title}</a></p></main>`));
+}
 // Curated sampling across chronological bands: no mass-generated thin entry pages.
 for(const r of c.regions){
  const entries=c.entries.filter(e=>e.region===r.id);const chosen=[];const used=new Set();
@@ -70,7 +76,7 @@ for(const r of c.regions){
 html=html.replace(/<title>[\s\S]*?<\/title>/,meta('en',copy.en.title,copy.en.description,'/',{en:'/'},'WebPage'));
 html=html.replace('<div class="brand">','<a class="brand" id="atlasGuideLink" href="/en/guide" aria-label="About Chronograph Atlas">').replace(/(<div class="brand-sub"[^>]*>[^<]*<\/div><\/div>\s*)<\/div>/,'$1</a>');
 html=html.replace('</head>','<style>.brand{text-decoration:none;color:inherit}.brand:focus-visible{outline:2px solid #c5a76c;outline-offset:4px}</style></head>');
-html=html.replace('<body>','<body><noscript><section style="padding:24px;background:#1e1c17;color:#eee"><h1>Chronograph Atlas</h1><p>Explore world history from 610 to 2026. Enable JavaScript for the interactive map or read our historical guides.</p><nav>'+nav('en')+'</nav></section></noscript>');
+html=html.replace('<body>','<body><noscript><section style="padding:24px;background:#1e1c17;color:#eee"><h1>Chronograph Atlas</h1><p>Explore world history from 7000 BCE to 2026 CE. Enable JavaScript for the interactive map or read our historical guides.</p><nav>'+nav('en')+'</nav><p><a href="/en/history/ancient">Ancient world · 7000 BCE–610 CE</a></p></section></noscript>');
 write('index.html',html);assert(Buffer.byteLength(html)<1000000,'Atlas HTML must stay below crawler limits');
 // Preserve previously published downloadable releases when building from GitHub.
 if(fs.existsSync(path.join(root,'downloads')))fs.cpSync(path.join(root,'downloads'),path.join(out,'downloads'),{recursive:true});

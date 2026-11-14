@@ -14,7 +14,7 @@ assert.equal(c.range.min,610);assert(c.range.max>=1600);
 assert.deepEqual(delivered.range,{...c.range,max:require('../incidents/integrate.cjs').timelineMax});
 assert.deepEqual(delivered.entries,require('../world/published-catalog.cjs').entries);
 assert.deepEqual(delivered.areas,require('../world/published-catalog.cjs').areas);
-assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));
+assert(html.includes('const TIMELINE_MIN=-7000,TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html),'Unreachable new years in '+id);
 assert(html.includes("'XIV','XV','XVI'"),'Sixteenth-century filter is unavailable');
 // Playback must actually visit the new milestones instead of stepping over

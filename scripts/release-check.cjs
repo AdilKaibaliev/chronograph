@@ -8,6 +8,8 @@ const checks = [
   'scripts/support/contact-test.cjs',
   'scripts/support/contact-ui-test.cjs',
   'scripts/i18n/build.cjs',
+  'scripts/ancient/test.cjs',
+  'scripts/ancient/boundary-test.cjs',
   'scripts/world/test.cjs',
   'scripts/world/render-test.cjs',
   'scripts/world/continuity-test.cjs',

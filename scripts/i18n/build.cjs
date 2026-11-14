@@ -203,6 +203,7 @@ assert(html.includes('const CHRONOGRAPH_MESSAGES='));assert(!/<a(?=\s|>)|\bhref=
 html=html.replace('</head>','<meta name="chronograph-version" content="1.41.0">\n</head>');
 const parallelStyle='#kyrgyzParallel{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:2px 6px;background:transparent;border:0;color:#dfcca3;cursor:pointer;text-align:left;font:inherit;font-size:12px}#kyrgyzParallel:hover,#kyrgyzParallel:focus-visible{color:#fff;text-decoration:underline}.future-mode #kyrgyzParallel{display:none}.modal-box select{max-width:100%}.kyrgyz-period-nav{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0}';
 html=html.replace('</style>',parallelStyle+'</style>');
+html=require('../ancient/integrate.cjs')(html);
 fs.writeFileSync(repositoryBuild?'index.html':'outputs/chronograph_1_1.html',html);
 fs.writeFileSync(root+'/compiled-messages.json',JSON.stringify(rows,null,2));
 console.log(JSON.stringify({messages:rows.length,eventTitles:Object.keys(translatedEvents).length,eventDescriptions:Object.values(translatedEvents).filter(x=>x.length===4).length,bytes:Buffer.byteLength(html)}));

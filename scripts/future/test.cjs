@@ -29,7 +29,7 @@ assert.equal(sandbox.futureItems().length,10);sandbox.futureState.filter='histor
 sandbox.futureState.filter='all';sandbox.futureState.query='Tiberias';assert(sandbox.futureItems().some(e=>e.id==='yajuj'));sandbox.futureState.query='__NO_MATCH__';assert.equal(sandbox.futureItems().length,0);
 sandbox.futureState.filter='seq:isa';sandbox.futureState.query='';assert.equal(sandbox.futureItems().map(e=>e.id).join(','),'dajjal,isa,ludd,yajuj,yajuj-end,wind');
 const html=fs.readFileSync('index.html','utf8');for(const script of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(script[1]);
-assert(html.includes("document.body.classList.contains('future-mode') || e.defaultPrevented"));assert(html.includes('if(cameraVersion!==cameraAnimationVersion)return;'));assert(!/<a(?=\s|>)|\bhref=|window\.open\(/.test(html.replace(/<link rel="icon"[^>]*>/g,'').replace(/<a class="contact-email" href="mailto:lfc@legacyfidelity\.com\?subject=Chronograph">lfc@legacyfidelity\.com<\/a>/g,'')));
+assert(html.includes("document.body.classList.contains('future-mode') || e.defaultPrevented"));assert(html.includes('if(cameraVersion!==cameraAnimationVersion)return;'));assert(!/<a(?=\s|>)|\bhref=|window\.open\(/.test(html.replace('license.href=boundaries.source.licenseUrl;','').replace(/<link rel="icon"[^>]*>/g,'').replace(/<a class="contact-email" href="mailto:lfc@legacyfidelity\.com\?subject=Chronograph">lfc@legacyfidelity\.com<\/a>/g,'')));
 const translate=require('../i18n/core.js').createChronographTranslator(require('../i18n/compiled-messages.json'));
 for(const lang of ['en','ky']){const result=translate('≈699 г. х. · Осман I · традиционная точка начала Османского государства',lang);assert(!result.includes('традиционная'),result);}
 console.log(JSON.stringify({events:ids.size,majorSigns:keys.size,references:refs.size,places:Object.keys(d.places).length,sequences:d.sequences.length,status:'PASS: schema, translations, sequence graph, filters, uncertain places, calendar preservation, syntax, sources'}));
@@ -64,3 +64,6 @@ for(const term of ['шесть','Байт-аль-Макдиса','мор','ст�
 const harsh=d.events.find(e=>e.id==='harshness').quote.translation.ru;assert(harsh.includes('женщин')||harsh.includes('женщины'));assert(/кнут|плеть/.test(harsh));
 assert(d.events.find(e=>e.id==='constantinople').quote.translation.en.includes('report is false'));
 console.log(JSON.stringify({status:'PASS: sourced geography, Sasanian polygon, complete excerpts',mapped:d.events.filter(e=>e.geography.mode!=='unlocated').length,unlocated:d.events.filter(e=>e.geography.mode==='unlocated').length}));
+
+// Dataset attribution is a narrowly scoped license link, not a source-book link.
+assert.equal(require('../ancient/load-boundaries.cjs').source.licenseUrl,'https://creativecommons.org/licenses/by/4.0/');

@@ -21,9 +21,9 @@ assert.deepEqual(delivered.entries,require('../world/published-catalog.cjs').ent
 assert.deepEqual(delivered.areas,require('../world/published-catalog.cjs').areas,'The built territorial geometry or text is stale');
 const rangeTag=html.match(/<input\b[^>]*\bid="yearRange"[^>]*>/)?.[0];
 assert(rangeTag,'Missing main timeline');
-assert.equal(rangeTag.match(/\bmin="(\d+)"/)?.[1],String(MIN));
+assert.equal(rangeTag.match(/\bmin="(-?\d+)"/)?.[1],String(require('../ancient/catalog.cjs').range.min));
 assert.equal(rangeTag.match(/\bmax="(\d+)"/)?.[1],String(require('../incidents/integrate.cjs').timelineMax));
-assert(html.includes('const TIMELINE_MIN=610,TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));
+assert(html.includes('const TIMELINE_MIN=-7000,TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));
 
 const territory=(id,y)=>history.areasAt(y).find(a=>a.entry===id);
 const active=(id,y)=>history.get(id,y);
