@@ -4,7 +4,7 @@
  line.type='button';line.id='kyrgyzParallel';line.dataset.localeOwned='true';
  $('timelineCard').querySelector('.timeline-row').after(line);
  const label=()=>wl(['История кыргызов','Kyrgyz history','Кыргыз тарыхы']);
- const journeyYears=[800,863,870,885,950,984,1050,1154,1265,1291,1293,1295,1504,1508,1510,1514,1517,1522,1526,1527,1703,1733,1755,1758,1765,1983,2023];
+ const journeyYears=[800,863,870,885,950,984,1050,1154,1265,1291,1293,1295,1307,1327,1504,1508,1510,1514,1517,1518,1522,1526,1527,1650,1703,1733,1755,1758,1765,1983,2023];
  const journeyTypes={diplomacy:['Дипломатия','Diplomacy','Дипломатия'],migration:['Переселение','Relocation','Көчүрүү'],war:['Военный поход','Military campaign','Аскердик жортуул'],economy:['Пути и связи','Routes and connections','Жолдор жана байланыштар'],politics:['Политическая история','Political history','Саясий тарых'],culture:['Письменное свидетельство','Written account','Жазма маалымат']};
  let journeyExpanded=false;
  function showReading(d,view,territory,eventId){
