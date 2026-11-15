@@ -1,6 +1,6 @@
 // Ancient overview. The existing renderer owns every year >=610.
 (()=>{
- const cal=ancientCalendar,scale=ancientTimeScale,catalog=ANCIENT_PREVIEW,boundaries=ANCIENT_BOUNDARIES,baseRender=renderYear,baseNext=nextPlaybackYear;
+ const cal=ancientCalendar,scale=ancientTimeScale,catalog=ANCIENT_PREVIEW,boundaries=ANCIENT_BOUNDARIES,continuity=ANCIENT_CONTINUITY,baseRender=renderYear,baseNext=nextPlaybackYear;
  const labels={
   title:['Древний мир','Ancient world','Байыркы дүйнө'],preview:['Древний мир · обзор по источникам','Ancient world · a source-based overview','Байыркы дүйнө · булактар боюнча сереп'],
   year:['Год','Year','Жыл'],go:['Перейти','Go','Өтүү'],era:[['до н. э.','н. э.'],['BCE','CE'],['б. з. ч.','б. з.']],
@@ -29,11 +29,14 @@
  range.addEventListener('input',e=>{e.stopImmediatePropagation();stopPlay();renderYear(scale.toYear(Number(range.value)));queueLocationSave();},true);
  range.addEventListener('keydown',e=>{let next;if(['ArrowLeft','ArrowDown'].includes(e.key))next=cal.add(year,-1);else if(['ArrowRight','ArrowUp'].includes(e.key))next=cal.add(year,1);else if(e.key==='Home')next=catalog.range.min;else if(e.key==='End')next=TIMELINE_MAX;else return;e.preventDefault();e.stopImmediatePropagation();stopPlay();renderYear(next);queueLocationSave();},true);
  const entrance=button('',()=>{stopPlay();renderYear(catalog.range.min);switchPanel('events');queueLocationSave();});entrance.id='ancientEntry';entrance.dataset.localeOwned='true';$('eraStrip').prepend(entrance);
- const territoryMap=document.createElementNS(svg.namespaceURI,'g');territoryMap.id='ancientTerritories';territoryMap.dataset.localeOwned='true';viewport.append(territoryMap);
+ const territoryMap=document.createElementNS(svg.namespaceURI,'g');territoryMap.id='ancientTerritories';territoryMap.dataset.localeOwned='true';viewport.insertBefore(territoryMap,empireLabelLayer);
  const map=document.createElementNS(svg.namespaceURI,'g');map.id='ancientLayer';map.dataset.localeOwned='true';viewport.append(map);
  const boundaryEntities=new Map(boundaries.entities.map(e=>[e.id,e])),boundaryPaths=new WeakMap();
+ const sharedStateIds={'roman-east':'byzantine',sasanian:'sasanian',sui:'sui','turk-west':'westernTurkic','turk-east':'easternTurkic',franks:'franks',visigoth:'visigoths',lombard:'lombards',aksum:'aksum'};
+ const sharedWorldIds={makuria:'dongola',alodia:'alwa'};
+ const ancientAppearance=id=>{const e=EMPIRES.find(e=>e.id===sharedStateIds[id]);if(e)return {color:e.color,title:translate(e.id==='easternTurkic'?e.name:e.short,language)};const a=WORLD_HISTORY.areas.find(a=>a.entry===sharedWorldIds[id]);return {color:a?.color,title:a?loc(a.name).split(' · ')[0]:null};};
  const pathFor=g=>{if(boundaryPaths.has(g))return boundaryPaths.get(g);const d=g.map(p=>p.map(r=>r.map((v,i)=>{const q=project(v);return(i?'L':'M')+q.map(n=>n.toFixed(3)).join(',');}).join('')+'Z').join('')).join('');boundaryPaths.set(g,d);return d;};
- const visibleTerritories=()=>environmentOnly?[]:boundaries.records.filter(r=>r.from<=year&&year<=r.to).sort((a,b)=>b.areaDegrees-a.areaDegrees);
+ const visibleTerritories=()=>environmentOnly&&year<610?[]:(year<610?boundaries.records.filter(r=>r.from<=year&&year<=r.to).map(r=>{const bridge=continuity.bridges.find(b=>b.id===r.id&&b.from<=year&&year<=b.to);return bridge?{...r,...bridge}:r;}):continuity.supplement.records.filter(r=>r.from<=year&&year<=r.to)).sort((a,b)=>b.areaDegrees-a.areaDegrees);
  let selected=null,region='all',environmentOnly=false;
  let deepModalMode=null,deepProfile=null;
  const movementMap=document.createElementNS(svg.namespaceURI,'g');movementMap.id='ancientMovements';viewport.append(movementMap);
@@ -119,6 +122,9 @@
   previous.title=previous.getAttribute('aria-label');next.title=next.getAttribute('aria-label');
   form.prepend(previous);form.append(next);jump.replaceChildren(form,make('small','timeline-scale-note',loc(['Единая шкала · неравномерный масштаб','One timeline · variable scale','Бирдиктүү шкала · өзгөрмө масштаб'])));
   origins.textContent=loc(['Истоки','Origins','Башаттар']);origins.title=loc(['Расселение, земледелие, пророки и народы','Dispersal, farming, prophets and peoples','Таралуу, дыйканчылык, пайгамбарлар жана элдер']);
+  // The parallel-history row is part of the timeline at every date. Removing
+  // it before 610 changed the SVG's physical scale despite an unchanged camera.
+  if(year<610){const line=$('kyrgyzParallel');line.textContent=loc(['История кыргызов · ранние свидетельства','Kyrgyz history · early evidence','Кыргыз тарыхы · алгачкы маалыматтар']);line.title=line.textContent;}
   const nav=make('div','ancient-nav'),steps=catalog.milestones;
   for(const [y,label]of [[steps.filter(v=>v<year).at(-1),t('earlier')],[steps.find(v=>v>year),t('later')]])if(y!==undefined)nav.append(button(label+' · '+cal.format(y,language),()=>{stopPlay();renderYear(y);queueLocationSave();}));
   nav.append(button(t('kyrgyz'),showKyrgyz));controls.append(nav);
@@ -127,18 +133,20 @@
  function draw(){
   map.replaceChildren();
   territoryMap.replaceChildren();
+  document.body.classList.toggle('continuity-map',year>=610&&visibleTerritories().length>0);
   for(const r of visibleTerritories()){
    const e=boundaryEntities.get(r.id),shape=document.createElementNS(svg.namespaceURI,'path');shape.setAttribute('d',pathFor(r.geometry));shape.setAttribute('fill-rule','evenodd');shape.setAttribute('vector-effect','non-scaling-stroke');shape.dataset.ancientTerritory=r.id;
-   const hue=[...r.id].reduce((n,c)=>n+c.charCodeAt(0),0)%360;shape.style.fill=`hsl(${hue} 25% 55%)`;shape.setAttribute('role','button');shape.setAttribute('tabindex','0');shape.setAttribute('aria-label',loc(e.title));
+   const appearance=ancientAppearance(r.id),hue=[...r.id].reduce((n,c)=>n+c.charCodeAt(0),0)%360;shape.style.fill=appearance.color||`hsl(${hue} 25% 55%)`;shape.style.setProperty('--ancient-stroke',appearance.color||'#615747');shape.style.setProperty('--ancient-opacity',String(overlayOpacity));shape.setAttribute('role','button');shape.setAttribute('tabindex','0');shape.setAttribute('aria-label',loc(e.title));
    const title=document.createElementNS(svg.namespaceURI,'title');title.textContent=loc(e.title);shape.append(title);
    shape.classList.toggle('ancient-territory-selected',selected==='territory:'+r.id);
-   const choose=()=>{selected='territory:'+r.id;renderPanels();draw();switchPanel('selection');};shape.addEventListener('pointerdown',e=>e.stopPropagation());shape.onclick=e=>{e.stopPropagation();choose();};shape.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}};territoryMap.append(shape);
+   if(r.legacyId)clipPoliticalPath(shape,r.legacyId,610);else if(r.entry)clipPoliticalPath(shape,r.entry,610);
+   const choose=()=>{selected='territory:'+r.id;document.body.classList.toggle('continuity-selection',year>=610);renderPanels();draw();switchPanel('selection');};bindMapAction(shape,choose);territoryMap.append(shape);
    const [x,y]=project(r.anchor),g=document.createElementNS(svg.namespaceURI,'g');g.setAttribute('transform',`translate(${x},${y})`);g.dataset.ancientLabel=r.id;
    const inner=document.createElementNS(svg.namespaceURI,'g');inner.classList.add('ancient-marker-content');inner.setAttribute('transform',`scale(${1/(mapState.scale*(svg.getScreenCTM()?.a||1))})`);
-   const text=document.createElementNS(svg.namespaceURI,'text');text.textContent=loc(e.title);text.setAttribute('text-anchor','middle');text.classList.add('ancient-territory-label');inner.append(text);g.append(inner);map.append(g);
+   const text=document.createElementNS(svg.namespaceURI,'text');text.textContent=appearance.title||loc(e.title);text.setAttribute('text-anchor','middle');text.classList.add('ancient-territory-label');inner.append(text);g.append(inner);map.append(g);
   }
   for(const s of boundaries.cartographicSeams.filter(s=>s.from<=year&&year<=s.to&&!environmentOnly)){const p=document.createElementNS(svg.namespaceURI,'path');p.setAttribute('d',pathFor(s.geometry));p.setAttribute('class','ancient-boundary-band');territoryMap.append(p);}
-  for(const r of active(year).filter(r=>r.coord)){
+  for(const r of (year<610?active(year):[]).filter(r=>r.coord)){
    const [x,y]=project(r.coord),g=document.createElementNS(svg.namespaceURI,'g');g.setAttribute('transform',`translate(${x},${y})`);g.setAttribute('role','button');g.setAttribute('tabindex','0');g.setAttribute('aria-label',loc(r.title));g.dataset.ancientMarker=r.id;g.dataset.ancientKind=r.kind;
    // Nested inverse scale keeps labels legible without growing over the atlas.
    const inner=document.createElementNS(svg.namespaceURI,'g');inner.classList.add('ancient-marker-content');inner.setAttribute('transform',`scale(${1/(mapState.scale*(svg.getScreenCTM()?.a||1))})`);
@@ -146,8 +154,26 @@
    const text=document.createElementNS(svg.namespaceURI,'text');text.setAttribute('x','8');text.setAttribute('y','4');text.textContent=loc(r.title);
    const title=document.createElementNS(svg.namespaceURI,'title');title.textContent=loc(r.title);inner.append(circle,text,title);g.append(inner);if(r.kind==='environment'){const ring=document.createElementNS(svg.namespaceURI,'circle');ring.setAttribute('r','11');ring.setAttribute('class','environment-halo');inner.prepend(ring);}
    const choose=()=>{selected=r.id;renderPanels();draw();switchPanel('selection');};g.addEventListener('pointerdown',e=>e.stopPropagation());g.onclick=e=>{e.stopPropagation();choose();};g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}};map.append(g);
-  }drawMovement();arrangeLabels();
+  }drawContinuityFrontiers();drawMovement();syncAncientLayers();arrangeLabels();
  }
+ function drawContinuityFrontiers(){
+  // Retain both reconstructions in a neutral shared band; never assign a
+  // disputed strip to whichever country's path happens to be painted last.
+  const ids=new Set(continuity.supplement.entities.map(e=>e.id)),extra=[...territoryMap.querySelectorAll('[data-ancient-territory]')].filter(p=>ids.has(p.dataset.ancientTerritory));if(!extra.length)return;
+  const ns=svg.namespaceURI,defs=document.createElementNS(ns,'defs'),mask=document.createElementNS(ns,'clipPath');mask.id='ancientContinuityMain';mask.setAttribute('clipPathUnits','userSpaceOnUse');
+  const primary=year<610?[...territoryMap.querySelectorAll('[data-ancient-territory]')].filter(p=>!ids.has(p.dataset.ancientTerritory)):[...empireLayer.querySelectorAll('.empire-path[data-empire-type=empire],.empire-path[data-empire-type=local],.empire-path[data-empire-type=fuzzy]'),...worldTerritoryLayer.querySelectorAll('.world-territory.polity:not(.sovereign-part) > path[role=button],.world-territory.influence:not(.imperial-dependency) > path[role=button]')];
+  for(const p of primary){const copy=document.createElementNS(ns,'path');copy.setAttribute('d',p.getAttribute('d'));copy.setAttribute('clip-rule',p.getAttribute('fill-rule')||'nonzero');if(p.hasAttribute('clip-path'))copy.setAttribute('clip-path',p.getAttribute('clip-path'));mask.append(copy);}defs.append(mask);const regionMask=document.createElementNS(ns,'mask');regionMask.id='ancientRegionalOutside';regionMask.setAttribute('maskUnits','userSpaceOnUse');for(const [k,v]of Object.entries({x:-1440,y:-720,width:4320,height:2160}))regionMask.setAttribute(k,v);const field=document.createElementNS(ns,'rect');for(const [k,v]of Object.entries({x:-1440,y:-720,width:4320,height:2160,fill:'white'}))field.setAttribute(k,v);regionMask.append(field);const cut=document.createElementNS(ns,'rect');for(const [k,v]of Object.entries({x:-1440,y:-720,width:4320,height:2160,fill:'black','clip-path':'url(#ancientContinuityMain)'}))cut.setAttribute(k,v);regionMask.append(cut);defs.append(regionMask);territoryMap.append(defs);for(const p of extra.filter(p=>boundaryEntities.get(p.dataset.ancientTerritory)?.kind==='polities'))p.setAttribute('mask','url(#ancientRegionalOutside)');
+  for(const p of extra.filter(p=>['avar','goguryeo','nobatia'].includes(p.dataset.ancientTerritory))){const band=document.createElementNS(ns,'path');band.setAttribute('d',p.getAttribute('d'));band.setAttribute('fill-rule','evenodd');band.setAttribute('clip-path','url(#ancientContinuityMain)');band.setAttribute('class','ancient-continuity-band');const title=document.createElementNS(ns,'title');title.textContent=loc(['Сопоставление контуров','Comparison of outlines','Контурларды салыштыруу'])+' · '+p.getAttribute('aria-label');band.append(title);band.setAttribute('role','button');band.setAttribute('tabindex','0');band.setAttribute('aria-label',title.textContent);
+   const explain=()=>{const body=$('modalBody');body.replaceChildren(make('h2','',title.textContent),make('p','',cal.format(year,language)),make('p','',loc(['Здесь различаются картографические реконструкции территорий. Этот участок показан отдельно от заливки государств; он не обозначает установленную по источникам границу или особое государство.','Territorial reconstructions differ in this area. It is displayed separately from state fills; it does not represent an established boundary or a separate state.','Бул жерде аймактык реконструкциялар айырмаланат. Тилке мамлекеттердин боёгунан өзүнчө көрсөтүлгөн; ал булактар менен аныкталган чек араны же өзүнчө мамлекетти билдирбейт.'])),...continuity.sources.map(s=>make('p','ancient-reference',s)));$('modal').classList.add('show');$('modalClose').focus();};bindMapAction(band,explain);territoryMap.append(band);}
+  // Apply the same reviewed frontier symbols on either side of the cut-off.
+  const sharedOwners=new Set(visibleTerritories().flatMap(r=>[r.legacyId,r.entry]).filter(Boolean));if(year<610)for(const [a,b,i] of boundaryFrame(610).zones.filter(z=>sharedOwners.has(z[0])&&sharedOwners.has(z[1]))){const p=document.createElementNS(ns,'path');p.setAttribute('d',polygonPath(WORLD_HISTORY.boundaryEvidence.shapes[i]));p.setAttribute('fill','url(#frontierReviewDots)');p.style.setProperty('--ancient-opacity',Math.min(1,overlayOpacity+.20));p.style.stroke='none';p.setAttribute('class','ancient-shared-frontier');p.setAttribute('role','button');p.setAttribute('tabindex','0');p.setAttribute('aria-label',boundaryName(a,610)+' / '+boundaryName(b,610));bindMapAction(p,()=>openBoundaryNote([a,b]));territoryMap.append(p);}
+ }
+ function bindMapAction(node,activate){let down=null;node.onclick=e=>{e.stopPropagation();if(e.detail===0)activate();};node.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}};node.onpointerdown=e=>{if(e.button!==0)return;e.stopPropagation();e.preventDefault();down={x:e.clientX,y:e.clientY,tx:mapState.tx,ty:mapState.ty,id:e.pointerId,moved:false};node.setPointerCapture(e.pointerId);};node.onpointermove=e=>{if(!down||down.id!==e.pointerId)return;down.moved ||= Math.hypot(e.clientX-down.x,e.clientY-down.y)>5;if(down.moved){const a=screenPoint(e.clientX,e.clientY),b=screenPoint(down.x,down.y);mapState.tx=down.tx+a.x-b.x;mapState.ty=down.ty+a.y-b.y;setViewport();}};node.onpointercancel=()=>{down=null;};node.onpointerup=e=>{if(!down||down.id!==e.pointerId)return;e.stopPropagation();const moved=down.moved;down=null;if(node.hasPointerCapture(e.pointerId))node.releasePointerCapture(e.pointerId);if(moved)queueLocationSave();else activate();};}
+ function syncAncientLayers(){territoryMap.classList.toggle('hidden-layer',!layerState.empires);for(const g of map.querySelectorAll('[data-ancient-label]'))g.classList.toggle('hidden-layer',!layerState.empires);for(const g of map.querySelectorAll('[data-ancient-marker]'))g.classList.toggle('hidden-layer',!layerState.places);}
+ $('opacityRange').addEventListener('input',()=>draw());
+ const originalSelectEmpire=selectEmpire;selectEmpire=function(...args){document.body.classList.remove('continuity-selection');return originalSelectEmpire(...args);};
+ const originalWorldChoose=worldChooseTerritory;worldChooseTerritory=function(...args){document.body.classList.remove('continuity-selection');return originalWorldChoose(...args);};
+ const originalLayerState=applyLayerState;applyLayerState=function(){originalLayerState();syncAncientLayers();};
  function drawMovement(){
   movementMap.replaceChildren();const m=catalog.movements.find(m=>m.record===selected&&m.from<=year&&year<m.to);if(!m||environmentOnly)return;
   const ns=svg.namespaceURI,[a,b]=m.endpoints.map(p=>project(p.coord)),defs=document.createElementNS(ns,'defs'),marker=document.createElementNS(ns,'marker');marker.id='ancientArrow';for(const [k,v]of Object.entries({viewBox:'0 0 10 10',refX:'9',refY:'5',markerWidth:'6',markerHeight:'6',orient:'auto'}))marker.setAttribute(k,v);const tip=document.createElementNS(ns,'path');tip.setAttribute('d','M0 0 L10 5 L0 10Z');tip.setAttribute('fill','#603c17');marker.append(tip);defs.append(marker);movementMap.append(defs);
@@ -155,7 +181,7 @@
   for(let i=0;i<2;i++){const g=document.createElementNS(ns,'g');g.setAttribute('transform',`translate(${i?b:a})`);const inner=document.createElementNS(ns,'g');inner.classList.add('ancient-movement-label');const dot=document.createElementNS(ns,'circle');dot.setAttribute('r','4');const label=document.createElementNS(ns,'text');label.setAttribute('x','8');label.setAttribute('y',i?'18':'-8');label.textContent=loc(m.endpoints[i].title);inner.append(dot,label);g.append(inner);movementMap.append(g);}resizeMovements();
  }
  function resizeMovements(){for(const g of movementMap.querySelectorAll('.ancient-movement-label'))g.setAttribute('transform',`scale(${1/(mapState.scale*(svg.getScreenCTM()?.a||1))})`);}
- function arrangeLabels(){const occupied=[...movementMap.querySelectorAll('text')].map(e=>e.getBoundingClientRect());const rect=svg.getBoundingClientRect();for(const g of map.querySelectorAll('[data-ancient-label],[data-ancient-marker]')){const label=g.querySelector('text');label.style.visibility='visible';const box=label.getBoundingClientRect();const visible=box.left>=rect.left+6&&box.right<=rect.right-6&&box.top>=rect.top+6&&box.bottom<=rect.bottom-6;const collision=occupied.some(b=>box.left<b.right+8&&box.right>b.left-8&&box.top<b.bottom+3&&box.bottom>b.top-3);if(!visible||collision)label.style.visibility='hidden';else occupied.push(box);}}
+ function arrangeLabels(){const occupied=[...movementMap.querySelectorAll('text'),...(year>=610?[...document.querySelectorAll('#empireLabelLayer text,#worldTerritoryLabels text,#placeLayer text')].filter(e=>getComputedStyle(e).visibility!=='hidden'&&e.getBoundingClientRect().width>0):[])].map(e=>e.getBoundingClientRect());const rect=svg.getBoundingClientRect(),detail=worldLabelMetrics().detail;for(const g of map.querySelectorAll('[data-ancient-label],[data-ancient-marker]')){const label=g.querySelector('text');label.style.fontSize=Math.min(g.dataset.ancientLabel?13.5:11,8+3*Math.log2(Math.max(1,detail)))+'px';label.style.strokeWidth='2px';label.style.visibility='visible';const box=label.getBoundingClientRect();const visible=box.left>=rect.left+6&&box.right<=rect.right-6&&box.top>=rect.top+6&&box.bottom<=rect.bottom-6;const collision=occupied.some(b=>box.left<b.right+8&&box.right>b.left-8&&box.top<b.bottom+3&&box.bottom>b.top-3);if(!visible||collision)label.style.visibility='hidden';else occupied.push(box);}}
  function renderPanels(){
   const events=panel('panel-events');events.append(make('h2','',environmentOnly?t('geography'):t('current')),make('p','ancient-muted',cal.format(year,language)),make('p','ancient-map-key',year<-7000?loc(['Точки — места свидетельств; интервалы древнейших дат округлены. Современная береговая линия служит ориентиром.','Dots locate evidence; the earliest dating windows are rounded. Modern coastlines provide a reference.','Чекиттер — далил табылган жерлер; эң байыркы даталардын аралыгы тегеректелген. Азыркы жээктер багыт берет.']):t('mapKey')));
   const records=active(year);if(!records.length)events.append(make('p','',t('empty')));for(const r of records)events.append(card(r));
@@ -168,33 +194,35 @@
   for(const book of new Set(boundaries.corrections.flatMap(c=>c.sources.map(s=>s.title))))sources.append(make('p','ancient-reference',book));
   const license=make('a','ancient-reference',boundaries.source.license);license.href=boundaries.source.licenseUrl;license.target='_blank';license.rel='noopener noreferrer';sources.append(license);
   const selection=panel('panel-selection'),record=catalog.records.find(r=>r.id===selected&&r.from<=year&&year<r.to),territory=visibleTerritories().find(r=>'territory:'+r.id===selected);
-  if(record)selection.append(card(record,true));else if(territory){const e=boundaryEntities.get(territory.id);selection.append(make('h2','',loc(e.title)),make('p','',e.kind==='culture'||e.kind==='polities'?t('societies'):t('territory')),make('p','',t('frame')+': '+cal.format(territory.controlEvent??territory.sourceFrom,language)),make('p','ancient-reference',boundaries.source.title));}else selection.append(make('p','',t('selected')));
+  if(record)selection.append(card(record,true));else if(territory){const e=boundaryEntities.get(territory.id);selection.append(make('h2','',loc(e.title)),make('p','',e.kind==='culture'||e.kind==='polities'?t('societies'):t('territory')),make('p','',t('frame')+': '+cal.format(territory.referenceYear?year:(territory.controlEvent??territory.sourceFrom),language)),make('p','ancient-reference',boundaries.source.title));}else selection.append(make('p','',t('selected')));
  }
  const baseViewport=setViewport;
  const baseWorldRender=renderWorldHistory;
  renderWorldHistory=function(){if(year>=610)return baseWorldRender();};
  const baseActiveEvent=activeEvent;
  activeEvent=function(y){if(y>=610)return baseActiveEvent(y);return {title:t('title'),desc:t('current'),ah:labels.era[li()][y<0?0:1],place:t('title'),type:t('title'),coord:null,world:[]};};
- setViewport=function(){baseViewport();if(year<610){for(const g of map.querySelectorAll('.ancient-marker-content'))g.setAttribute('transform',`scale(${1/(mapState.scale*(svg.getScreenCTM()?.a||1))})`);resizeMovements();arrangeLabels();}};
- window.addEventListener('resize',()=>{if(year<610)setViewport();});
+ setViewport=function(){baseViewport();for(const g of map.querySelectorAll('.ancient-marker-content'))g.setAttribute('transform',`scale(${1/(mapState.scale*(svg.getScreenCTM()?.a||1))})`);resizeMovements();arrangeLabels();};
+ window.addEventListener('resize',()=>setViewport());
  $('kyrgyzHistoryBtn').addEventListener('click',e=>{if(year<610){e.stopImmediatePropagation();showKyrgyz();}},true);
+ $('kyrgyzParallel').addEventListener('click',e=>{if(year<610){e.stopImmediatePropagation();showKyrgyz();}},true);
  renderYear=function(value){
   let target=Number(value);if(target===0)target=year<0?1:-1;if(!cal.valid(target))return;target=Math.max(catalog.range.min,Math.min(TIMELINE_MAX,target));
-  clearTextPlace();const ancient=target<610;document.body.classList.toggle('ancient-mode',ancient);
-  if(!ancient){for(const id of ['mapYear','timelineYear','mapAh','timelineAh']){delete $(id).dataset.localeOwned;$(id).removeAttribute('aria-label');}baseRender(target);renderControls();syncRange();return;}
+  clearTextPlace();document.body.classList.remove('continuity-selection');const ancient=target<610;document.body.classList.toggle('ancient-mode',ancient);
+  if(!ancient){for(const id of ['mapYear','timelineYear','mapAh','timelineAh']){delete $(id).dataset.localeOwned;$(id).removeAttribute('aria-label');}baseRender(target);renderControls();draw();syncRange();return;}
   if(typeof mapTransitionCleanup==='function')mapTransitionCleanup();selectedEmpire=null;year=target;
   $('yearRange').value=String(year);$('yearRange').setAttribute('aria-valuetext',cal.format(year,language));
   for(const id of ['mapYear','timelineYear']){$(id).dataset.localeOwned='true';$(id).textContent=String(Math.abs(year));$(id).setAttribute('aria-label',cal.format(year,language));}
-  for(const id of ['mapAh','timelineAh']){$(id).dataset.localeOwned='true';$(id).textContent=labels.era[li()][year<0?0:1]+' · '+t('title');}
+  for(const id of ['mapAh','timelineAh']){$(id).dataset.localeOwned='true';$(id).textContent=labels.era[li()][year<0?0:1]+(id==='mapAh'?' · '+t('title'):'');}
   const note=document.querySelector('.map-slice-note');if(note)note.textContent=t('places');
   renderControls();renderPanels();draw();syncRange();
  };
- nextPlaybackYear=function(y){if(y>=610)return baseNext(y);let step=y<-100000?10000:y<-20000?2000:y<-7000?500:y<-1000?100:y<1?25:y<500?10:1;let target=Math.min(610,cal.add(y,step));const next=catalog.milestones.find(v=>v>y);if(next!==undefined&&next<target)target=next;return target;};
+ const continuityYears=[...new Set(continuity.supplement.records.flatMap(r=>[r.from,r.to+1]))].sort((a,b)=>a-b);
+ nextPlaybackYear=function(y){if(y>=610){const target=baseNext(y),next=continuityYears.find(v=>v>y);return next!==undefined&&next<target?next:target;}let step=y<-100000?10000:y<-20000?2000:y<-7000?500:y<-1000?100:y<1?25:y<500?10:1;let target=Math.min(610,cal.add(y,step));const next=catalog.milestones.find(v=>v>y);if(next!==undefined&&next<target)target=next;return target;};
  function ticks(){entrance.textContent=cal.format(catalog.range.min,language)+' · '+loc(['Ранние люди','Early humans','Алгачкы адамдар']);$('ticks').replaceChildren();for(const y of [catalog.range.min,-100000,-20000,-7000,1,1300,TIMELINE_MAX]){const e=make('span','tick-label',cal.format(y,language));e.style.left=(scale.toPosition(y)/100000)+'%';$('ticks').append(e);}const hint=document.querySelector('.timeline-hint');if(hint){hint.dataset.localeOwned='true';hint.textContent=cal.format(catalog.range.min,language)+' — '+cal.format(TIMELINE_MAX,language);}}
  localeSelect.addEventListener('change',()=>{renderYear(year);ticks();if($('modal').classList.contains('show')){if(deepModalMode)showOrigins(deepModalMode,deepProfile);else if($('modalBody').querySelector('.ancient-card'))showKyrgyz();}});
  $('modalClose').addEventListener('click',()=>{deepModalMode=null;if($('modalBody').dataset.ancientOwned){delete $('modalBody').dataset.ancientOwned;delete $('modalBody').dataset.localeOwned;}});
  const incoming=cal.parse(new URLSearchParams(location.search).get('year'));
- if(incoming!==null&&incoming>=catalog.range.min&&incoming<610)renderYear(incoming);else renderControls();ticks();syncRange();
+ if(incoming!==null&&incoming>=catalog.range.min&&incoming<610)renderYear(incoming);else{renderControls();draw();}ticks();syncRange();
  const query=new URLSearchParams(location.search),requestedOrigins=query.get('origins');if(['prophets','dispersal','settlement','peoples'].includes(requestedOrigins))showOrigins(requestedOrigins,query.get('prophet'));
  const requestedRecord=catalog.records.find(r=>r.id===query.get('ancient')&&(incoming===null||(r.from<=incoming&&incoming<r.to)));if(requestedRecord)requestAnimationFrame(()=>openRecord(requestedRecord));
 })();

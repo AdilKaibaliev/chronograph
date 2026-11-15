@@ -6,20 +6,22 @@
 body:not(.ancient-mode) .ancient-controls{display:none}
 .ancient-panel{display:none}.ancient-mode .ancient-panel{display:block}.ancient-mode .side-panel>:not(.ancient-panel){display:none!important}
 .ancient-panel>h2{font:20px/1.35 Georgia,serif;color:#efdfbd;margin:10px 0}
-.ancient-mode #starsCard,.ancient-mode #kyrgyzParallel,.ancient-mode #westernRomeNote,.ancient-mode #mapBanner,.ancient-mode #mongolScope,.ancient-mode #kyrgyzScope{display:none!important}
+.ancient-mode #starsCard,.ancient-mode #westernRomeNote,.ancient-mode #mapBanner,.ancient-mode #mongolScope,.ancient-mode #kyrgyzScope{display:none!important}
 .ancient-mode #empireLayer,.ancient-mode #empireLabelLayer,.ancient-mode #tradeLayer,.ancient-mode #campaignLayer,.ancient-mode #kyrgyzRouteLayer,.ancient-mode #routeLayer,.ancient-mode #pulseLayer,.ancient-mode #placeLayer,.ancient-mode #worldHistoryLayer,.ancient-mode #worldTerritoryLayer,.ancient-mode #worldTerritoryLabels,.ancient-mode #incidentLayer,.ancient-mode #expansionLayer{display:none!important}
 #ancientLayer{display:none}.ancient-mode #ancientLayer{display:block}.future-mode #ancientLayer,.future-mode .ancient-controls{display:none!important}
 .ancient-card{border-bottom:1px solid #4f4738;padding:12px 0}.ancient-card h3{margin:5px 0;font:17px Georgia,serif;color:#eeddb8}.ancient-card p{line-height:1.65;margin:8px 0}.ancient-card small,.ancient-muted{color:#b6aa91;font-size:11px;line-height:1.5}.ancient-card small.ancient-muted{display:block;margin:3px 0}.ancient-reference{display:block;overflow-wrap:anywhere;font-size:11px;line-height:1.5}
 #ancientLayer circle{fill:#b98537;stroke:#fff5d9;stroke-width:1.4}#ancientLayer text{font:12px Georgia,serif;fill:#302819;paint-order:stroke;stroke:#efe2c6;stroke-width:3px;stroke-linejoin:round}#ancientLayer [role=button]{cursor:pointer}#ancientLayer [role=button]:focus circle{stroke:#322712;stroke-width:3}
-.ancient-mode .map-legend{display:none}.ancient-mode #timelineYear{font-size:clamp(17px,2vw,25px)}
+.ancient-mode .map-legend{display:none}
 .ancient-mode .map-slice-note{display:none}
 .ancient-map-key{font-size:11px;line-height:1.5;color:#b8c7c5;border-left:2px solid #6e9eaa;padding-left:8px}
 #ancientEnvironment[aria-pressed=true]{background:#355963;color:#fff}.ancient-nav .btn:last-child{flex-basis:auto}
 #ancientLayer [data-ancient-kind=environment] circle{fill:#367f93;stroke:#d5f1f3}
 #ancientLayer .environment-halo{fill:#68a6b2!important;fill-opacity:.15;stroke:#4c8797!important;stroke-dasharray:3 3;stroke-width:1}
 #ancientTerritories{display:none}.ancient-mode #ancientTerritories{display:block}.future-mode #ancientTerritories{display:none!important}
-#ancientTerritories path{fill-opacity:.55;stroke:#615747;stroke-width:.8;stroke-linejoin:round;cursor:pointer}#ancientTerritories path:hover,#ancientTerritories path:focus{fill-opacity:.8;stroke:#302819;stroke-width:1.5;outline:none}
+#ancientTerritories path{fill-opacity:var(--ancient-opacity,.55);stroke:var(--ancient-stroke,#615747);stroke-width:.8;stroke-linejoin:round;cursor:pointer}#ancientTerritories path:hover,#ancientTerritories path:focus{fill-opacity:.8;stroke:#302819;stroke-width:1.5;outline:none}
 #ancientTerritories .ancient-boundary-band{fill:#b4a98f;stroke:none;pointer-events:none}
+.continuity-map #ancientTerritories,.continuity-map #ancientLayer{display:block}.continuity-selection #panel-selection>.ancient-panel{display:block}.continuity-selection #panel-selection>:not(.ancient-panel){display:none!important}
+#ancientTerritories .ancient-continuity-band{fill:#cfc6b4;fill-opacity:1;stroke:none;cursor:pointer}
 #ancientLayer .ancient-territory-label{font-size:12px;font-weight:bold;pointer-events:none}
 @media(max-height:700px){.ancient-controls{padding:5px 9px}.ancient-controls .section-label{font-size:8px}.ancient-nav{margin-top:4px}.ancient-card h3{font-size:15px}}
 @media(max-width:760px){.ancient-nav .btn:nth-child(-n+2){display:none}.ancient-controls .section-label{display:none}.ancient-nav .btn{font-size:10px;padding:4px}.ancient-controls{padding:5px 8px}.ancient-map-key{font-size:10px}}

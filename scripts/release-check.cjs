@@ -10,6 +10,7 @@ const checks = [
   'scripts/i18n/build.cjs',
   'scripts/ancient/test.cjs',
   'scripts/ancient/boundary-test.cjs',
+  'scripts/ancient/continuity-test.cjs',
   'scripts/world/test.cjs',
   'scripts/world/render-test.cjs',
   'scripts/world/continuity-test.cjs',
