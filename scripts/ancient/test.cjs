@@ -2,6 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 require('./calendar-test.cjs');
 require('./deep-test.cjs');
+require('./paleogeography/test.cjs');
 const root=path.resolve(__dirname,'../..'),html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 function data(key){const start=html.indexOf(key)+key.length;assert(start>=key.length);return JSON.parse(html.slice(start,html.indexOf(';\n',start)));}
 const world=data('const WORLD_HISTORY='),legacy=data('const EMPIRES='),cartography=data('const LEGACY_CARTOGRAPHY='),cal=require('./calendar.js');

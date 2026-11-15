@@ -9,12 +9,14 @@ module.exports=function integrateAncient(html){
  const continuity=require('./continuity.cjs')(boundaries,read('LEGACY_CARTOGRAPHY'),read('EMPIRES'),world);
  assert(catalog.releaseReady&&boundaries.releaseReady,'Ancient overview has not passed release review');
  const publicCatalog={...catalog,sources:Object.fromEntries(Object.entries(catalog.sources).map(([id,s])=>[id,{title:s.title}])),scriptural:{...catalog.scriptural,sources:Object.fromEntries(Object.entries(catalog.scriptural.sources).map(([id,s])=>[id,{title:s.title}]))}};
+ const paleo=require('./paleogeography/load.cjs'),paleoGuide=require('./paleogeography/catalog.cjs');
+ const publicPaleoGuide={...paleoGuide,sources:Object.fromEntries(Object.entries(paleoGuide.sources).map(([id,s])=>[id,{title:s.title}]))};
  function replace(a,b){assert(html.includes(a),'Missing ancient integration point: '+a);html=html.replace(a,b);}
  replace('const TIMELINE_MIN=610,TIMELINE_MAX=2026;','const TIMELINE_MIN=-350000,TIMELINE_MAX=2026;');
  replace('id="yearRange" min="610"','id="yearRange" min="-350000"');
  const encode=x=>JSON.stringify(x).replaceAll('<','\\u003c');
- const script=fs.readFileSync(path.join(__dirname,'calendar.js'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'time-scale.js'),'utf8')+'\nconst ANCIENT_PREVIEW='+encode(publicCatalog)+';\nconst ANCIENT_BOUNDARIES='+encode(boundaries)+';\nconst ANCIENT_CONTINUITY='+encode(continuity)+';\n'+fs.readFileSync(path.join(__dirname,'preview-runtime.js'),'utf8');
+ const script=fs.readFileSync(path.join(__dirname,'calendar.js'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'time-scale.js'),'utf8')+'\nconst ANCIENT_PREVIEW='+encode(publicCatalog)+';\nconst ANCIENT_BOUNDARIES='+encode(boundaries)+';\nconst ANCIENT_CONTINUITY='+encode(continuity)+';\n'+fs.readFileSync(path.join(__dirname,'preview-runtime.js'),'utf8')+'\nconst ANCIENT_PALEOGEOGRAPHY='+encode(paleo)+';\nconst ANCIENT_PALEOGUIDE='+encode(publicPaleoGuide)+';\n'+fs.readFileSync(path.join(__dirname,'paleogeography/timeline.js'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'paleogeography/runtime.js'),'utf8');
  const end=html.lastIndexOf('})();');assert(end>0);html=html.slice(0,end)+'\n'+script+'\n'+html.slice(end);
- replace('</style>',fs.readFileSync(path.join(__dirname,'preview-style.css'),'utf8')+'\n</style>');
+ replace('</style>',fs.readFileSync(path.join(__dirname,'preview-style.css'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'paleogeography/style.css'),'utf8')+'\n</style>');
  return html;
 };

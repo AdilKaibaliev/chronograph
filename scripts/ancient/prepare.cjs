@@ -73,10 +73,13 @@ module.exports=function prepareAncient(world,kyrgyz){
  const budj=world.entries.find(e=>e.id==='budj');if(budj)c.records.find(r=>r.id==='budj-bim-early').coord=budj.coord;
  for(const r of c.records)if(r.id.startsWith('lapita-')||r.id.startsWith('kuk-'))r.region='oceania';
  const boundaries=require('./load-boundaries.cjs');
- c.milestones=[...new Set([c.range.min,-1,1,609,610,...c.records.flatMap(r=>[r.from,r.to]),...boundaries.records.flatMap(r=>[r.from,r.to===-1?1:r.to+1])])].filter(y=>y>=c.range.min&&y<=610&&y!==0).sort((a,b)=>a-b);
+ const paleo=require('./paleogeography/load.cjs');
+ for(const [id,s]of Object.entries(require('./paleogeography/catalog.cjs').sources))c.sources['paleo-'+id]=s;
+ c.milestones=[...new Set([c.range.min,-1,1,609,610,...paleo.frames.map(f=>f.year),...c.records.flatMap(r=>[r.from,r.to]),...boundaries.records.flatMap(r=>[r.from,r.to===-1?1:r.to+1])])].filter(y=>y>=c.range.min&&y<=610&&y!==0).sort((a,b)=>a-b);
  c.coverage={records:c.records.length,kyrgyz:c.records.filter(r=>r.kyrgyz).length,sites:c.records.filter(r=>r.coord).length,environmentRecords:c.records.filter(r=>r.kind==='environment').length,
   datedPoliticalGeometry:boundaries.records.length,territorialEntities:boundaries.entities.length,worldComplete:false,
   publicationScope:'Selected ancient societies and source-based territorial reconstructions, joined to the existing 610–2026 atlas.',
-  remainingResearch:['Ancient boundaries are reconstructions, not surveyed annual frontiers.','The modern coastline remains a reference; environmental change is annotated at sourced locations.','Pre-610 and post-610 territorial frames use independent sources and resolutions.']};
+  paleogeographyFrames:paleo.frames.length,paleogeographyRangeBP:[80000,2500],
+  remainingResearch:['Ancient boundaries are reconstructions, not surveyed annual frontiers.','PaleoMIST physical geography uses dated 2500-year model frames, without annual interpolation. Older periods retain the modern reference. River courses and inland lake levels are not reconstructed by this marine model.','Pre-610 and post-610 territorial frames use independent sources and resolutions.']};
  return c;
 };
