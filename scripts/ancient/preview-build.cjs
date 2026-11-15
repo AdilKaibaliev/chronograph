@@ -8,17 +8,7 @@ const start=html.indexOf('const WORLD_HISTORY=')+'const WORLD_HISTORY='.length,e
 assert(start>20&&end>start);const world=JSON.parse(html.slice(start,end));
 const catalog=require('./prepare.cjs')(world,require('../../research/kyrgyz-pre610.json'));
 function replace(a,b){assert(html.includes(a),'Missing integration point: '+a);html=html.replace(a,b);}
-if(!html.includes('const ANCIENT_BOUNDARIES=')){
-replace('const TIMELINE_MIN=610,TIMELINE_MAX=2026;','const TIMELINE_MIN=-7000,TIMELINE_MAX=2026;');
-replace('id="yearRange" min="610"','id="yearRange" min="-7000"');
-// The old playback arithmetic cannot cross BCE/CE. All entry points call the
-// runtime wrapper below; the unchanged renderer remains the sole owner of 610+.
-const publicCatalog={...catalog,sources:Object.fromEntries(Object.entries(catalog.sources).map(([id,s])=>[id,{title:s.title}]))};
-const boundaries=require('./load-boundaries.cjs');
-const injected=fs.readFileSync(path.join(__dirname,'calendar.js'),'utf8')+'\nconst ANCIENT_PREVIEW='+JSON.stringify(publicCatalog).replaceAll('<','\\u003c')+';\nconst ANCIENT_BOUNDARIES='+JSON.stringify(boundaries).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(path.join(__dirname,'preview-runtime.js'),'utf8');
-const ending=html.lastIndexOf('})();');assert(ending>0);html=html.slice(0,ending)+'\n'+injected+'\n'+html.slice(ending);
-replace('</style>',fs.readFileSync(path.join(__dirname,'preview-style.css'),'utf8')+'\n</style>');
-}
+if(!html.includes('const ANCIENT_BOUNDARIES='))html=require('./integrate.cjs')(html);
 replace('</head>','<meta name="robots" content="noindex,nofollow"><meta name="chronograph-build" content="ancient-local-review">\n</head>');
 for(const m of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))if(m[1].trim()&&!m[0].includes('application/ld+json'))new vm.Script(m[1]);
 const output=path.resolve(process.argv[2]||path.join(root,'../../../outputs/chronograph-ancient-preview.html'));

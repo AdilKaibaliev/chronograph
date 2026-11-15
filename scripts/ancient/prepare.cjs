@@ -2,6 +2,12 @@
 const calendar=require('./calendar.js');
 module.exports=function prepareAncient(world,kyrgyz){
  const c=structuredClone(require('./catalog.cjs'));
+ const deep=structuredClone(require('./prehistory.cjs'));Object.assign(c.sources,deep.sources);c.records.push(...deep.records);c.trails=deep.trails;
+ c.scriptural=structuredClone(require('./scriptural.cjs'));
+ for(const [id,source,from,to,coord,title,text]of [
+  ['marib-monuments','saba',-1000,631,[45.325,15.425],['Мариб · памятники Сабейского царства','Marib · monuments of the kingdom of Saba','Мариб · Саба падышалыгынын эстеликтери'],['Города, храмы и ирригационные сооружения района Мариба отражают развитие древней Южной Аравии. Этот интервал датирует комплекс памятников, а не непрерывное правление одной династии.','Cities, temples and irrigation works around Marib document ancient South Arabian development. This interval dates the monument complex, not the continuous rule of one dynasty.','Марибдин шаарлары, храмдары жана сугат курулуштары байыркы Түштүк Аравиянын өнүгүшүн көрсөтөт. Бул аралык бир династиянын үзгүлтүксүз бийлигин эмес, эстеликтер комплексин даталайт.']],
+  ['hegra-nabataean','hegra',-100,101,[37.954,26.783],['Хегра · набатейские памятники','Hegra · Nabataean monuments','Хегра · набатей эстеликтери'],['Монументальные гробницы относятся к I веку до н. э. — I веку н. э. Сохранились также более ранние надписи. Дата этих сооружений не является датой жизни пророка Салиха.','Monumental tombs date to the first century BCE–first century CE. Earlier inscriptions also survive. These structures do not date the life of the prophet Salih.','Ири мүрзөлөр б. з. ч. I — б. з. I кылымдарына таандык. Мурдагы жазуулар да сакталган. Бул курулуштар Салих пайгамбардын өмүрүн даталабайт.']]
+ ]){c.sources['text-place-'+source]=c.scriptural.sources[source];c.records.push({id,from,to,coord,title,text,region:'eurasia',kind:'site',approx:true,sources:['text-place-'+source]});}
  const early=structuredClone(require('./neolithic.cjs'));Object.assign(c.sources,early.sources);c.records.push(...early.records);
  const ancient=structuredClone(require('./antiquity.cjs'));Object.assign(c.sources,ancient.sources);c.records.push(...ancient.records);
  c.records.push(...structuredClone(require('./east-asia.cjs').records));

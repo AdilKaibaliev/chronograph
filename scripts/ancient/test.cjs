@@ -1,15 +1,18 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 require('./calendar-test.cjs');
+require('./deep-test.cjs');
 const root=path.resolve(__dirname,'../..'),html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 function data(key){const start=html.indexOf(key)+key.length;assert(start>=key.length);return JSON.parse(html.slice(start,html.indexOf(';\n',start)));}
 const world=data('const WORLD_HISTORY='),legacy=data('const EMPIRES='),cartography=data('const LEGACY_CARTOGRAPHY='),cal=require('./calendar.js');
 const baseline=JSON.stringify(world),kyrgyz=require('../../research/kyrgyz-pre610.json'),c=require('./prepare.cjs')(world,kyrgyz);
 assert.equal(JSON.stringify(world),baseline,'The ancient adapter mutated published data');assert.equal(c.releaseReady,true);
-assert.equal(c.range.min,-7000);assert.equal(c.range.cutoff,610);
+assert.equal(c.range.min,-350000);assert.equal(c.range.cutoff,610);
 const built=data('const ANCIENT_PREVIEW=');
 assert(html.includes(fs.readFileSync(path.join(__dirname,'preview-runtime.js'),'utf8')),'Built runtime differs from source');
 assert.deepEqual(built.records,c.records,'Built ancient cards differ from reviewed data');
+assert.deepEqual(built.scriptural.records,c.scriptural.records,'Built textual evidence differs from reviewed records');
+assert.deepEqual(built.trails,c.trails,'Reading trails differ from reviewed sequence');
 assert.deepEqual(built.milestones,c.milestones,'Built playback omits reviewed change dates');
 assert.equal(built.releaseReady,true);
 assert.deepEqual(data('const ANCIENT_BOUNDARIES='),require('./load-boundaries.cjs'),'Built territorial reconstruction differs from reviewed archive');
@@ -28,7 +31,7 @@ const continuity=[];for(const r of c.records.filter(r=>r.continuity)){
 }
 const queue=legacy.filter(e=>e.from<=610&&e.to>=610&&e.id!=='westernRomanRef').map(e=>({id:e.id,name:e.name,publishedStart:e.from,firstGeometryYear:cartography.frames[e.id]?.[0]?.[0]??null,status:'legacy-entry-at-610',action:'Ancient overview uses its own reviewed entities. No automatic backdating of this polygon.'}));
 assert(queue.length>10);assert(queue.some(e=>e.id==='sui'));assert(queue.some(e=>e.id==='yeniseiKyrgyz'));
-const result={status:'PASS-selected-ancient-overview',releaseReady:true,minimumYear:-7000,maximumPublishedYear:2026,records:c.records.length,kyrgyzCards:5,calendarYearsTested:9026,
+const result={status:'PASS-selected-ancient-overview',releaseReady:true,minimumYear:-350000,maximumPublishedYear:2026,records:c.records.length,kyrgyzCards:5,calendarYearsTested:352026,
  localBuildSha256:crypto.createHash('sha256').update(html).digest('hex'),continuity,legacyTransitionInventory:queue,
  remainingResearch:c.coverage.remainingResearch,notClaimed:['Complete world coverage','Survey-grade ancient state boundaries','Identical spatial resolution across 609/610']};
 const output=path.join(root,'verification-ancient.json');fs.writeFileSync(output,JSON.stringify(result,null,2));
