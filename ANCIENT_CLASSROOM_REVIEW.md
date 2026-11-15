@@ -4,7 +4,7 @@ This release expands the existing single timeline. It does not claim a complete 
 
 ## Historical additions
 
-China: Liangzhu, Yinxu, the Zhou court's eastward move, recognition of the three Jin successor houses, six dated Qin conquest cards, Chu–Han rivalry, and eight capital/centre records. Western Zhou now includes 771 BCE; Eastern Zhou starts in 770. Spring and Autumn / Warring States use the Met's 475 BCE periodisation. Dates identify events or periods of evidence, not an asserted founding year for every people.
+China: Liangzhu, Yinxu, the Zhou court's eastward move, recognition of the three Jin successor houses, six dated Qin conquest cards, Chu–Han rivalry, and twelve capital/centre records. Qi's court retreats to Ju in 284 BCE and returns to Linzi in 279. Chu moves from Ying to Chen in 278, to Juyang in 253 and to Shouchun in 241. Shiji chapter 15 supplies the chronology; chapters 46/82 describe Qi's recovery. The Juyang map marker is a Taihe regional reference, not an identified building. Western Zhou now includes 771 BCE; Eastern Zhou starts in 770. Spring and Autumn / Warring States use the Met's 475 BCE periodisation. Dates identify events or periods of evidence, not an asserted founding year for every people.
 
 The source-led Zhou court connector links the Feng–Hao area to Luoyang. It is a schematic connection, not an excavated road or a migration of all inhabitants.
 

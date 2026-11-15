@@ -19,7 +19,8 @@ assert.deepEqual(built.chinaTrail,c.chinaTrail,'China navigation differs');
 for(const id of c.chinaTrail)assert(c.records.some(r=>r.id===id),'Missing China card '+id);
 assert.deepEqual(built.chinaReference,c.chinaReference,'Reference map differs');
 assert(c.chinaReference.svg.startsWith('<svg')&&!/<script|foreignObject|\bon\w+=|(?:href|src)=/i.test(c.chinaReference.svg),'Reference SVG must remain inert');
-for(const id of ['qin-xianyang','qi-linzi','yan-ji','zhao-handan','wei-daliang','han-xinzheng','chu-chen'])assert(c.records.some(r=>r.id===id&&r.from<=-250&&r.to>-250&&r.coord),'Missing contemporary state centre '+id);
+for(const id of ['qin-xianyang','qi-linzi-restored','yan-ji','zhao-handan','wei-daliang','han-xinzheng','chu-juyang'])assert(c.records.some(r=>r.id===id&&r.from<=-250&&r.to>-250&&r.coord),'Missing contemporary state centre '+id);
+for(const [year,activeId,inactiveId]of [[-284,'qi-ju','qi-linzi'],[-279,'qi-linzi-restored','qi-ju'],[-278,'chu-chen','chu-ying'],[-253,'chu-juyang','chu-chen'],[-241,'chu-shouchun','chu-juyang']]){const current=c.records.filter(r=>r.from<=year&&year<r.to);assert(current.some(r=>r.id===activeId));assert(!current.some(r=>r.id===inactiveId),'Stale capital '+inactiveId+' in '+year);}
 assert.equal(c.records.find(r=>r.id==='western-zhou').to,c.records.find(r=>r.id==='spring-autumn').from);
 assert.equal(c.records.find(r=>r.id==='spring-autumn').to,c.records.find(r=>r.id==='warring-states').from);
 for(const m of c.movements){assert(c.records.some(r=>r.id===m.record&&r.movementId===m.id));assert(m.sources.every(id=>c.sources[id]));}
