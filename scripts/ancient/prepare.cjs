@@ -54,6 +54,9 @@ module.exports=function prepareAncient(world,kyrgyz){
    region:'eurasia',kind:'witness',kyrgyz:true,coord:null,sources:card.sources.map(id=>'ky-'+id),geographyReview:card.geography,
    passages:card.sources.filter(id=>kyrgyz.sources[id].type==='primary-text').map(id=>({source:'ky-'+id,text:kyrgyz.sources[id].passage,...(kyrgyz.sources[id].geographicPassage?{geography:kyrgyz.sources[id].geographicPassage}:{})})).filter(p=>p.text)};
  }));
+ const kyrgyzGeography=require('./kyrgyz-geography.cjs');
+ Object.assign(c.sources,kyrgyzGeography.sources);
+ for(const r of c.records){const g=kyrgyzGeography.records[r.id];if(g){r.geographicReferences=g.places;r.geographyCaption=g.caption;r.sources=[...new Set([...r.sources,...g.sources])];}}
  // Retain existing phase dates and descriptions, including periods that cross 610.
  // Existing 610 territory outlines are never backdated to the phase's start.
  for(const e of world.entries)for(const p of e.phases.filter(p=>p.from<610)){

@@ -16,7 +16,13 @@ The grid includes 33 frames at 2500-year spacing, from 80000 BP through 0 BP, on
 
 The grounded-ice mask uses the 10 m thickness contour to remove numerical edge noise. It does not represent seasonal snow, sea ice, or a complete inventory of mountain glaciers. Exposed shelf means ice-free model land outside the 0 BP reference. Outline simplification uses 0.035° tolerance; topology-preserving 0.0001° coordinate quantization prevents rounding from introducing self-intersections. Polygons below 0.008 square degrees are omitted from the display product. These are cartographic processing tolerances, not statements of historical accuracy.
 
-The browser displays the nearest dated frame, explicitly labels its age, and does not interpolate annual coastlines. Reconstructed geography is active only from 80000 to 2500 BP. Earlier prehistory and later historical periods retain the existing geographic reference. The 0 BP frame supplies the modern-coast comparison, not a claim about present-day glacier extent. The common map's southern latitude limit is preserved; Antarctica has a same-year polar inset in its regional card.
+The browser displays the nearest dated frame, explicitly labels its age, and does not interpolate annual coastlines. All 33 frames, from 80000 to 0 BP, are now available; the former artificial cutoff at 2500 BP is removed. After 1950 the last frame is explicitly labelled as a 1950 reference, not a present-day glacier survey. Before 80000 BP the map visibly states that the selected period has no reconstruction and uses a modern geographic base. No older ice sheet is extrapolated. The common map's southern latitude limit is preserved; Antarctica has a same-year polar inset in its regional card.
+
+The persistent on-map legend explains green as exposed land now under the sea and white as grounded ice sheets. An ice overlay above political fills, below labels and with pointer events disabled, prevents state colours from hiding the ice sheets. Disabling the reconstruction or opening future/undated textual-place modes removes both the overlay and its colour key.
+
+## Early Kyrgyz geographic references, 16 November 2026
+
+The ca. 201 BCE Gekun source card now locates the Yenisei–Abakan and Khyargas Nuur geographic references named in the Kyrgyz section of *中国少数民族*, as republished by China's State Ethnic Affairs Commission (https://www.neac.gov.cn/seac/ztzl/kekzz/lsyg.shtml). Hollow dashed symbols locate named regions, not capitals, exact state boundaries or simultaneous surveyed settlements. The Shiji passage itself supplies only a northern campaign direction; the secondary geographic interpretation is explicitly separated from it. The mid-sixth-century Qigu card similarly locates the Yenisei–Abakan region with attribution to the existing Savinov source. Neither entry receives a political polygon or an invented migration route, and their original source-date windows remain unchanged.
 
 ## Educational interpretation
 
@@ -33,7 +39,7 @@ Sediment-derived local flooding dates and global-model time slices are different
 
 ## Verification
 
-- Every historical year round-trips through the BP conversion; the range is never extrapolated.
+- Every historical year round-trips through the BP conversion; older-than-source years are unavailable and post-1950 years are explicitly marked as reference use.
 - All source frames have closed, bounded rings; antimeridian edges are checked, allowing only the legitimate polar closure.
 - Independent geographic controls check Beringia, the Torres and Bass straits, Doggerland, Chicago and Stockholm ice cover, and persistent sea in Wallacea.
 - A separate Shapely pass checks every exported polygon and re-tests control points after serialization.

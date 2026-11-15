@@ -95,17 +95,19 @@
  const period=r=>r.dateLabel?loc(r.dateLabel):(r.approx?loc(['ок. ','c. ','болж. ']):'')+cal.range(r.from,r.kind==='event'?r.from:r.to,language);
  function panel(id){let p=$(id).querySelector('.ancient-panel');if(!p){p=make('div','ancient-panel');p.dataset.localeOwned='true';$(id).append(p);}p.replaceChildren();return p;}
  function focusMovement(m){const [a,b]=m.endpoints.map(p=>p.coord);focusLonLat((a[0]+b[0])/2,(a[1]+b[1])/2,Math.abs(a[0]-b[0])>15?4:7);}
- function openRecord(r){stopPlay();clearTextPlace();selected=r.id;region='all';environmentOnly=false;if(!(r.from<=year&&year<r.to))renderYear(Math.max(catalog.range.min,r.from));else{renderPanels();draw();}switchPanel('selection');const movement=catalog.movements.find(m=>m.id===r.movementId);if(movement)focusMovement(movement);else if(r.coord)focusLonLat(...r.coord,r.kind==='environment'?3:5);queueLocationSave();}
+ function openRecord(r){stopPlay();clearTextPlace();selected=r.id;region='all';environmentOnly=false;if(!(r.from<=year&&year<r.to))renderYear(Math.max(catalog.range.min,r.from));else{renderPanels();draw();}switchPanel('selection');const movement=catalog.movements.find(m=>m.id===r.movementId);if(movement)focusMovement(movement);else if(r.coord)focusLonLat(...r.coord,r.kind==='environment'?3:5);else if(r.geographicReferences?.length){const ps=r.geographicReferences;focusLonLat(ps.reduce((s,p)=>s+p.coord[0],0)/ps.length,ps.reduce((s,p)=>s+p.coord[1],0)/ps.length,4);}queueLocationSave();}
  function card(r,details=false){
   const box=make('article','ancient-card');box.dataset.ancientRecord=r.id;box.dataset.localeOwned='true';
   box.append(make('small','',period(r)),make('h3','',loc(r.title)),make('p','',loc(r.text)));
   if(r.timeMeaning==='dating-window')box.append(make('small','ancient-muted',loc(['Интервал датировки находки','Dating window of the evidence','Табылган далилдин даталоо аралыгы'])));
   if(r.coordinatePrecision==='regional-reference')box.append(make('small','ancient-muted',loc(['На карте: ориентир в районе находки','Map: a reference in the find region','Картада: табылган аймактагы багыт'])));
+  if(details&&r.geographyCaption)box.append(make('p','ancient-map-key',loc(r.geographyCaption)));
   if(details){box.append(make('small','ancient-reference',r.sources.map(id=>catalog.sources[id].title).join(' · ')));
    for(const p of r.passages||[]){const quote=make('blockquote','ancient-primary-text',p.text+(p.geography?' '+p.geography:''));quote.lang='zh';box.append(quote,make('small','ancient-reference',catalog.sources[p.source].title));}
    if(r.movementId){const m=catalog.movements.find(m=>m.id===r.movementId);box.append(make('p','ancient-map-key',loc(m.caption)),button(loc(['Показать направление','Show connection','Багытты көрсөтүү']),()=>{selected=r.id;draw();focusMovement(m);}));}
    if(r.territoryId){const territory=visibleTerritories().find(t=>t.id===r.territoryId);if(territory)box.append(button(loc(['Выделить территорию','Highlight territory','Аймакты бөлүп көрсөтүү']),()=>{selected='territory:'+territory.id;renderPanels();draw();focusLonLat(...territory.anchor,4);}));}
-   if(r.coord)box.append(button(t('location'),()=>focusLonLat(...r.coord,5)));else box.append(make('p','ancient-muted',t('unmapped')));
+   if(r.geographicReferences?.length){for(const ref of r.geographicReferences){const b=button(loc(ref.title),()=>{$('modalClose').click();openRecord(r);focusLonLat(...ref.coord,4);});b.dataset.ancientGeographyTarget=ref.id;box.append(b);}}
+   else if(r.coord)box.append(button(t('location'),()=>focusLonLat(...r.coord,5)));else box.append(make('p','ancient-muted',t('unmapped')));
   }else box.append(button(t('view'),()=>openRecord(r)));
   return box;
  }
@@ -174,7 +176,16 @@
    const text=document.createElementNS(svg.namespaceURI,'text');text.setAttribute('x','8');text.setAttribute('y','4');text.textContent=loc(r.title);
    const title=document.createElementNS(svg.namespaceURI,'title');title.textContent=loc(r.title);inner.append(circle,text,title);g.append(inner);if(r.kind==='environment'){const ring=document.createElementNS(svg.namespaceURI,'circle');ring.setAttribute('r','11');ring.setAttribute('class','environment-halo');inner.prepend(ring);}
    const choose=()=>{selected=r.id;renderPanels();draw();switchPanel('selection');};g.addEventListener('pointerdown',e=>e.stopPropagation());g.onclick=e=>{e.stopPropagation();choose();};g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}};map.append(g);
-  }drawContinuityFrontiers();drawMovement();syncAncientLayers();arrangeLabels();
+  }
+  // Regional evidence uses hollow dashed symbols. It never acquires a state
+  // fill, a capital symbol or a migration arrow through geographic inference.
+  for(const r of year<610?active(year):[])for(const ref of r.geographicReferences||[]){
+   const ns=svg.namespaceURI,g=document.createElementNS(ns,'g');g.setAttribute('transform',`translate(${project(ref.coord)})`);g.setAttribute('role','button');g.setAttribute('tabindex','0');g.setAttribute('aria-label',loc(ref.label)+' · '+loc(ref.title));g.dataset.ancientGeography=ref.id;g.dataset.ancientMarker=r.id+':'+ref.id;
+   const inner=document.createElementNS(ns,'g');inner.classList.add('ancient-marker-content');inner.setAttribute('transform',`scale(${1/(mapState.scale*(svg.getScreenCTM()?.a||1))})`);
+   const ring=document.createElementNS(ns,'circle');ring.setAttribute('r','10');ring.setAttribute('class','ancient-regional-reference');
+   const text=document.createElementNS(ns,'text');text.setAttribute('x','15');text.setAttribute('y','4');text.textContent=loc(ref.label);const tip=document.createElementNS(ns,'title');tip.textContent=loc(r.geographyCaption);inner.append(ring,text,tip);g.append(inner);bindMapAction(g,()=>{selected=r.id;renderPanels();draw();switchPanel('selection');});map.append(g);
+  }
+  drawContinuityFrontiers();drawMovement();syncAncientLayers();arrangeLabels();
  }
  function drawContinuityFrontiers(){
   // Retain both reconstructions in a neutral shared band; never assign a
