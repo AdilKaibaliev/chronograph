@@ -140,7 +140,7 @@
    const title=document.createElementNS(svg.namespaceURI,'title');title.textContent=loc(e.title);shape.append(title);
    shape.classList.toggle('ancient-territory-selected',selected==='territory:'+r.id);
    if(r.legacyId)clipPoliticalPath(shape,r.legacyId,610);else if(r.entry)clipPoliticalPath(shape,r.entry,610);
-   const choose=()=>{selected='territory:'+r.id;document.body.classList.toggle('continuity-selection',year>=610);renderPanels();draw();switchPanel('selection');};bindMapAction(shape,choose);territoryMap.append(shape);
+   const choose=()=>{selectedEmpire=null;worldState.area='';worldState.selected='';for(const p of empireLayer.querySelectorAll('.selected'))p.classList.remove('selected');if(year>=610)renderWorldHistory();selected='territory:'+r.id;document.body.classList.toggle('continuity-selection',year>=610);renderPanels();draw();switchPanel('selection');};bindMapAction(shape,choose);territoryMap.append(shape);
    const [x,y]=project(r.anchor),g=document.createElementNS(svg.namespaceURI,'g');g.setAttribute('transform',`translate(${x},${y})`);g.dataset.ancientLabel=r.id;
    const inner=document.createElementNS(svg.namespaceURI,'g');inner.classList.add('ancient-marker-content');inner.setAttribute('transform',`scale(${1/(mapState.scale*(svg.getScreenCTM()?.a||1))})`);
    const text=document.createElementNS(svg.namespaceURI,'text');text.textContent=appearance.title||loc(e.title);text.setAttribute('text-anchor','middle');text.classList.add('ancient-territory-label');inner.append(text);g.append(inner);map.append(g);
@@ -171,8 +171,9 @@
  function bindMapAction(node,activate){let down=null;node.onclick=e=>{e.stopPropagation();if(e.detail===0)activate();};node.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}};node.onpointerdown=e=>{if(e.button!==0)return;e.stopPropagation();e.preventDefault();down={x:e.clientX,y:e.clientY,tx:mapState.tx,ty:mapState.ty,id:e.pointerId,moved:false};node.setPointerCapture(e.pointerId);};node.onpointermove=e=>{if(!down||down.id!==e.pointerId)return;down.moved ||= Math.hypot(e.clientX-down.x,e.clientY-down.y)>5;if(down.moved){const a=screenPoint(e.clientX,e.clientY),b=screenPoint(down.x,down.y);mapState.tx=down.tx+a.x-b.x;mapState.ty=down.ty+a.y-b.y;setViewport();}};node.onpointercancel=()=>{down=null;};node.onpointerup=e=>{if(!down||down.id!==e.pointerId)return;e.stopPropagation();const moved=down.moved;down=null;if(node.hasPointerCapture(e.pointerId))node.releasePointerCapture(e.pointerId);if(moved)queueLocationSave();else activate();};}
  function syncAncientLayers(){territoryMap.classList.toggle('hidden-layer',!layerState.empires);for(const g of map.querySelectorAll('[data-ancient-label]'))g.classList.toggle('hidden-layer',!layerState.empires);for(const g of map.querySelectorAll('[data-ancient-marker]'))g.classList.toggle('hidden-layer',!layerState.places);}
  $('opacityRange').addEventListener('input',()=>draw());
- const originalSelectEmpire=selectEmpire;selectEmpire=function(...args){document.body.classList.remove('continuity-selection');return originalSelectEmpire(...args);};
- const originalWorldChoose=worldChooseTerritory;worldChooseTerritory=function(...args){document.body.classList.remove('continuity-selection');return originalWorldChoose(...args);};
+ function clearContinuitySelection(){document.body.classList.remove('continuity-selection');if(selected?.startsWith('territory:'))selected=null;for(const p of territoryMap.querySelectorAll('.ancient-territory-selected'))p.classList.remove('ancient-territory-selected');}
+ const originalSelectEmpire=selectEmpire;selectEmpire=function(...args){clearContinuitySelection();return originalSelectEmpire(...args);};
+ const originalWorldChoose=worldChooseTerritory;worldChooseTerritory=function(...args){clearContinuitySelection();return originalWorldChoose(...args);};
  const originalLayerState=applyLayerState;applyLayerState=function(){originalLayerState();syncAncientLayers();};
  function drawMovement(){
   movementMap.replaceChildren();const m=catalog.movements.find(m=>m.record===selected&&m.from<=year&&year<m.to);if(!m||environmentOnly)return;
@@ -207,7 +208,7 @@
  $('kyrgyzParallel').addEventListener('click',e=>{if(year<610){e.stopImmediatePropagation();showKyrgyz();}},true);
  renderYear=function(value){
   let target=Number(value);if(target===0)target=year<0?1:-1;if(!cal.valid(target))return;target=Math.max(catalog.range.min,Math.min(TIMELINE_MAX,target));
-  clearTextPlace();document.body.classList.remove('continuity-selection');const ancient=target<610;document.body.classList.toggle('ancient-mode',ancient);
+  clearTextPlace();clearContinuitySelection();const ancient=target<610;document.body.classList.toggle('ancient-mode',ancient);
   if(!ancient){for(const id of ['mapYear','timelineYear','mapAh','timelineAh']){delete $(id).dataset.localeOwned;$(id).removeAttribute('aria-label');}baseRender(target);renderControls();draw();syncRange();return;}
   if(typeof mapTransitionCleanup==='function')mapTransitionCleanup();selectedEmpire=null;year=target;
   $('yearRange').value=String(year);$('yearRange').setAttribute('aria-valuetext',cal.format(year,language));
