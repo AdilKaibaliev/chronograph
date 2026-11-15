@@ -30,5 +30,5 @@ module.exports=function continuity(boundaries,legacy,empires,world){
  }
  const supplement=JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(__dirname,'../../research/ancient-continuity.json.gz'))));
  for(const r of supplement.records){const shell=r.geometry.reduce((a,p)=>Math.abs(G.signed(a[0]))>Math.abs(G.signed(p[0]))?a:p),xs=shell[0].map(p=>p[0]),ys=shell[0].map(p=>p[1]);r.areaDegrees=r.geometry.reduce((n,p)=>n+Math.abs(G.signed(p[0]))-p.slice(1).reduce((s,r)=>s+Math.abs(G.signed(r)),0),0);let anchor=null;for(let i=1;i<10&&!anchor;i++)for(let j=1;j<10&&!anchor;j++){const p=[Math.min(...xs)+(Math.max(...xs)-Math.min(...xs))*i/10,Math.min(...ys)+(Math.max(...ys)-Math.min(...ys))*j/10];if(G.inside(shell[0],p)&&!shell.slice(1).some(r=>G.inside(r,p)))anchor=p;}r.anchor=boundaries.records.find(a=>a.id===r.id&&a.sourceFrom===r.sourceFrom)?.anchor||anchor||shell[0][0];}
- return {bridges,supplement,sources:[boundaries.source.title,'James Howard-Johnston. Ḵosrow II. Encyclopaedia Iranica.','Yu Taishan. The Sui Dynasty and the Western Regions. Sino-Platonic Papers 247, 2014.']};
+ return {bridges,supplement,frontierEntities:['avar','goguryeo','nobatia','chalukya'],sources:[boundaries.source.title,'James Howard-Johnston. Ḵosrow II. Encyclopaedia Iranica.','Yu Taishan. The Sui Dynasty and the Western Regions. Sino-Platonic Papers 247, 2014.']};
 };
