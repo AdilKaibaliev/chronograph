@@ -13,7 +13,7 @@ for(const id of require('../world/witness-event-ids.cjs'))addedEventIds.add(id);
 // revised field. Preserve all other events against the independent catalogue.
 const revisedWitnessIds=new Set(require('../world/kyrgyz-witnesses.json').filter(n=>n.replacesEvent).map(n=>n.replacesEvent));
 assert.deepEqual(delivered.events.filter(e=>!e.base&&!addedEventIds.has(e.id)),require('../world/published-catalog.cjs').events.filter(e=>!revisedWitnessIds.has(e.id)));
-assert(html.includes('const TIMELINE_MIN=-7000,TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));
+assert(html.includes('const TIMELINE_MIN='+require('../ancient/catalog.cjs').range.min+',TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'),'Built timeline limits must match the ancient and modern catalogues');
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html));
 assert(html.includes("'XVIII','XIX'"),'The nineteenth-century filter is missing');
 // Cartographic additions have their own date/geometry tests; preserve the original-data hash.
