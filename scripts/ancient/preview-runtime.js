@@ -40,12 +40,15 @@
  const origins=button('',()=>showOrigins('dispersal'));origins.id='originsBtn';origins.dataset.localeOwned='true';$('kyrgyzHistoryBtn').after(origins);
  const textualMap=document.createElementNS(svg.namespaceURI,'g');textualMap.id='textualPlace';viewport.append(textualMap);
  const textualNote=make('div','textual-place-note');textualNote.id='textualPlaceNote';textualNote.hidden=true;$('mapCard').append(textualNote);
- function clearTextPlace(){textualMap.replaceChildren();textualNote.hidden=true;document.body.classList.remove('textual-place-mode');}
+ function clearTextPlace(){textualMap.replaceChildren();textualNote.hidden=true;document.body.classList.remove('textual-place-mode');for(const p of document.querySelectorAll('.scriptural-map-panel'))p.remove();}
  function locateText(r){
   const p=catalog.scriptural.places[r.place];if(!p)return;clearTextPlace();$('modalClose').click();stopPlay();document.body.classList.add('textual-place-mode');
   const [x,y]=project(p.coord),g=document.createElementNS(svg.namespaceURI,'g');g.setAttribute('transform',`translate(${x},${y})`);
   const circle=document.createElementNS(svg.namespaceURI,'circle');circle.setAttribute('r',p.precision==='region'?'16':'5');circle.setAttribute('vector-effect','non-scaling-stroke');circle.setAttribute('class',p.precision);g.append(circle);textualMap.append(g);
   textualNote.replaceChildren(make('strong','',loc(r.title)+' · '+loc(p.title)),make('small','',loc(r.dateLabel)),make('p','',loc(p.note)),button(loc(['Убрать отметку','Clear marker','Белгини алып салуу']),clearTextPlace));textualNote.hidden=false;focusLonLat(...p.coord,p.precision==='region'?3:5);
+  const info=make('div','scriptural-map-panel');info.dataset.localeOwned='true';info.append(make('h2','',loc(r.title)),make('p','ancient-muted',loc(r.dateLabel)),make('p','ancient-map-key',loc(p.title)+' · '+loc(p.note)),make('p','',loc(r.text)));
+  for(const d of r.details||[])info.append(make('p','',loc(d.text)),make('small','ancient-reference',d.sources.map(id=>catalog.scriptural.sources[id].title).join(' · ')));
+  info.append(button(loc(['Открыть карточку','Open profile','Карточканы ачуу']),()=>{clearTextPlace();showOrigins('prophets',r.id);}));$('panel-selection').append(info);switchPanel('selection');
  }
  function showOrigins(mode='dispersal',profileId=null){
   stopPlay();deepModalMode=mode;deepProfile=profileId;const body=$('modalBody');body.replaceChildren();body.dataset.ancientOwned='true';body.dataset.localeOwned='true';
