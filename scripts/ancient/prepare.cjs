@@ -12,11 +12,17 @@ module.exports=function prepareAncient(world,kyrgyz){
  const early=structuredClone(require('./neolithic.cjs'));Object.assign(c.sources,early.sources);c.records.push(...early.records);
  const ancient=structuredClone(require('./antiquity.cjs'));Object.assign(c.sources,ancient.sources);c.records.push(...ancient.records);
  c.records.push(...structuredClone(require('./east-asia.cjs').records));
+ const china=structuredClone(require('./china-steppe.cjs'));Object.assign(c.sources,china.sources);c.records.push(...china.records);c.movements.push(...china.movements);
  // Resolve chronology/location conflicts before records reach the renderer.
  c.sources['shang-zhou-chronology']={title:'The Metropolitan Museum of Art. China, 2000–1000 B.C. Heilbrunn Timeline of Art History.',urls:['https://www.metmuseum.org/de/toah/ht/03/eac.html']};
  c.sources['western-jin-chronology']={title:'Damien Chaussende. Western Jin. The Cambridge History of China, volume 2, 2019, pp. 79–95.',urls:['https://www.cambridge.org/core/books/abs/cambridge-history-of-china/western-jin/C26640110C74E0B6FA215625AFBBA6B7']};
  const shang=c.records.find(r=>r.id==='shang');shang.to=-1046;shang.coord=[113.65,34.75];shang.sources=['shang-zhou-chronology'];
- const zhou=c.records.find(r=>r.id==='western-zhou');zhou.from=-1046;zhou.to=-771;zhou.sources=['shang-zhou-chronology'];
+ const zhou=c.records.find(r=>r.id==='western-zhou');zhou.from=-1046;zhou.to=-770;zhou.sources=['shang-zhou-chronology','zhou-states'];
+ c.records.find(r=>r.id==='spring-autumn').to=-475;c.records.find(r=>r.id==='warring-states').from=-475;
+ for(const id of ['spring-autumn','warring-states'])c.records.find(r=>r.id===id).sources=['zhou-states'];
+ c.chinaTrail=[...require('./east-asia.cjs').records.map(r=>r.id),'yangshao','qin-unification','western-han','eastern-han','sui-unification',...china.records.map(r=>r.id)];
+ const centres=structuredClone(require('./china-centres.cjs'));Object.assign(c.sources,centres.sources);c.records.push(...centres.records);c.chinaTrail.push(...centres.records.map(r=>r.id));
+ c.chinaReference={svg:require('node:fs').readFileSync(require('node:path').join(__dirname,'china-reference-250.svg'),'utf8'),title:['Семь царств · около 250 года до н. э.','Seven states · about 250 BCE','Жети падышалык · б. з. ч. болжол менен 250-жыл'],source:'Ian Remsen. Warring States c. 250 BC (2025), CC0. Based on The Cambridge History of China, vol. 1 (1986), p. 39.',legend:[['#f5ab3a',['Цинь','Qin','Цинь']],['#e85bbf',['Чжао','Zhao','Чжао']],['#83608e',['Янь','Yan','Янь']],['#c35356',['Вэй','Wei','Вэй']],['#44c27d',['Ци','Qi','Ци']],['#dfe0df',['Хань','Han','Хань']],['#00adbc',['Чу','Chu','Чу']]]};
  const jin=c.records.find(r=>r.id==='western-jin-unification');jin.sources.push('western-jin-chronology');
  // A city reference does not imply that this city was a capital for the entire interval.
  c.records.find(r=>r.id==='rome-late').coord=[12.49,41.89];
@@ -45,7 +51,8 @@ module.exports=function prepareAncient(world,kyrgyz){
  c.records.push(...kyrgyz.cards.map(card=>{
   const d=card.date,from=d.era==='BCE'?-d.year:(d.from||d.year),last=d.to||from;
   return {id:'ky-'+card.id,from,to:calendar.add(last,1),approx:d.precision!=='exact',dateLabel:card.dateLabel,title:card.title,text:card.text,
-   region:'eurasia',kind:'witness',kyrgyz:true,coord:null,sources:card.sources.map(id=>'ky-'+id),geographyReview:card.geography};
+   region:'eurasia',kind:'witness',kyrgyz:true,coord:null,sources:card.sources.map(id=>'ky-'+id),geographyReview:card.geography,
+   passages:card.sources.filter(id=>kyrgyz.sources[id].type==='primary-text').map(id=>({source:'ky-'+id,text:kyrgyz.sources[id].passage,...(kyrgyz.sources[id].geographicPassage?{geography:kyrgyz.sources[id].geographicPassage}:{})})).filter(p=>p.text)};
  }));
  // Retain existing phase dates and descriptions, including periods that cross 610.
  // Existing 610 territory outlines are never backdated to the phase's start.
@@ -64,7 +71,7 @@ module.exports=function prepareAncient(world,kyrgyz){
  ]){const r=c.records.find(r=>r.id===id);r.coord=coord;r.coordinateSource=source;if(!r.sources.includes(source))r.sources.push(source);}
  c.records.sort((a,b)=>a.from-b.from||a.id.localeCompare(b.id));
  const budj=world.entries.find(e=>e.id==='budj');if(budj)c.records.find(r=>r.id==='budj-bim-early').coord=budj.coord;
- for(const r of c.records)if(r.id.startsWith('lapita-'))r.region='oceania';
+ for(const r of c.records)if(r.id.startsWith('lapita-')||r.id.startsWith('kuk-'))r.region='oceania';
  const boundaries=require('./load-boundaries.cjs');
  c.milestones=[...new Set([c.range.min,-1,1,609,610,...c.records.flatMap(r=>[r.from,r.to]),...boundaries.records.flatMap(r=>[r.from,r.to===-1?1:r.to+1])])].filter(y=>y>=c.range.min&&y<=610&&y!==0).sort((a,b)=>a-b);
  c.coverage={records:c.records.length,kyrgyz:c.records.filter(r=>r.kyrgyz).length,sites:c.records.filter(r=>r.coord).length,environmentRecords:c.records.filter(r=>r.kind==='environment').length,

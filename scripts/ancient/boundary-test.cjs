@@ -34,5 +34,9 @@ assert(contains('roman-empire',106,[35.444,30.328]),'Petra must pass to Rome in 
 for(const r of data.records){assert(r.from!==0&&r.to!==0&&r.from<=r.to);assert(r.to<610);assert(data.entities.find(e=>e.id===r.id).title.length===3);}
 assert(!data.records.some(r=>r.id==='shang'&&r.to>=-1046));assert(!data.records.some(r=>r.id==='xin'&&r.from<9));
 assert.equal(invalid.length,0);assert.equal(overlaps.length,0);
+// Qin's title begins in 221; its reconstruction must contain the conquered capitals.
+for(const p of [[114.49,36.61],[114.31,34.80],[118.30,36.82],[108.72,34.35],[113.74,34.40],[116.4,39.9]])assert(contains('qin',-221,p),'Qin unification '+p);
+assert(!data.entities.some(e=>['wei-state','han-state','yan-state'].includes(e.id)),'Rejected source polygons must not return');
+for(const y of [-206,-205,-204,-203]){assert(contains('han',y,[107.0,33.07]),'Han Hanzhong '+y);assert(contains('western-chu',y,[117.19,34.26]),'Western Chu Pengcheng '+y);}
 fs.writeFileSync(path.join(project,'verification-ancient-boundaries.json'),JSON.stringify(report,null,2));
 console.log(JSON.stringify({pass:true,frames:years.length,records:data.records.length,pairs,invalid:0,overlaps:0}));

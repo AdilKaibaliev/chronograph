@@ -55,4 +55,5 @@ for(const [id,title,refs,place,text]of [
  ['israel',L('Сыны Исраиля','Children of Israel','Исраил урпактары'),['3:49'],null,L('Названы адресатами миссии Исы. Название народа не задаёт государственных границ на карте.','Named as recipients of Isa’s mission. A people’s name does not establish state borders on the map.','Исанын миссиясы багытталган эл катары аталат. Элдин аталышы картадагы мамлекеттик чектерди аныктабайт.')]
 ])records.push({id,kind:'people',title,text,sources:refs.map(q),place,date:null,dateLabel:unknown,placeLabel:place?places[place].title:nowhere});
 require('./scriptural-details.cjs')({records,sources,q});
+require('./scriptural-geography.cjs')({records,sources,places,q});
 module.exports={sources,places,records};

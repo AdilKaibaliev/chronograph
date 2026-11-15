@@ -28,7 +28,16 @@ function transfer(sourceName,from,to,id){
  splitAt(id,fragments.flatMap(p=>[p.from,p.to+1]));
  for(const p of fragments){const targets=records.filter(r=>r.id===id&&r.from>=p.from&&r.to<=p.to);if(!targets.length)records.push({...p,id,controlEvent:from});else for(const r of targets){r.geometry=clip.union(r.geometry,p.geometry);r.controlEvent=from;}}
 }
+// Source Qin + Qi frames cover 222–219 BCE, with Qin's imperial title lagged
+// to 218. Union the two contemporary territories from Qi's surrender in 221.
+const qinBefore=source.features.find(f=>f.properties.Name==='Qin'&&f.properties.FromYear===-222);
+const qiBefore=source.features.find(f=>f.properties.Name==='Qi'&&f.properties.FromYear===-222);
+const asPolys=f=>f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.coordinates;
+records.push({id:'qin',from:-221,to:-219,sourceFrom:-222,sourceTo:-219,controlEvent:-221,geometry:clip.union(asPolys(qinBefore),asPolys(qiBefore))});
 // Correct the upstream snapshot lag at explicitly dated conquests.
+// The source name Han denotes different states in different periods. Only
+// these three late frames describe Liu Bang's Han, not the earlier state 韓.
+transfer('Han',-206,-203,'han');
 transfer('Neo-Babylonian Empire',-539,-531,'achaemenid');
 transfer('Twenty-sixth Dynasty of Egypt',-525,-501,'achaemenid');
 // The upstream Ptolemaic label in Alexander's lifetime is anachronistic.
@@ -82,6 +91,7 @@ function anchor(g){const p=g.reduce((a,p)=>Math.abs(signed(p[0]))>Math.abs(signe
 for(const r of records){r.anchor=anchor(r.geometry);r.areaDegrees=area(r.geometry);}
 const output={schema:1,status:'reviewed-selected-reconstruction',releaseReady:true,source:{title:'Bennett, Mutch, Tollefson et al. Cliopatria. Scientific Data 12, 247 (2025). Seshat Global History Databank, v0.2.1.',url:'https://github.com/Seshat-Global-History-Databank/cliopatria',doi:'10.1038/s41597-025-04516-9',license:'CC BY 4.0',licenseUrl:'https://creativecommons.org/licenses/by/4.0/',sha256:crypto.createHash('sha256').update(input).digest('hex'),changes:'Selected entities; chronological bounds checked against referenced chronologies; rounded coordinates to five decimals. No new sovereign boundaries inferred.'},entities:review,records};
 output.corrections=corrections;
+output.corrections.push({id:'china-control-review',years:[-221,-206,-202],decision:'Correct imperial Qin onset and distinguish early Han from Western Chu. The pre-imperial Warring States sovereign polygons failed independent capital controls (Daliang, Xinzheng, Ji, Handan) and were excluded. Their states remain represented by sourced centres and event cards, not misleading fills.',sources:[{title:'Sima Qian. Shiji, chapters 6, 7, 8 and 15.',url:'https://zh.wikisource.org/wiki/史記/卷006'},{title:'National Museum of China. Liang coin and Wei capitals.',url:'https://www.chnmuseum.cn/zp/zpml/hb/202203/t20220302_254125.shtml'}]});
 output.corrections.push({id:'nabataea-review',note:'Nabataean geometry is available from 164 BCE, not an asserted foundation date. End independent control before Roman annexation in 106 CE. Petra is tested on both sides of this transition.',sources:[{title:'Petra Museum. Gallery 7: Waning of Petra. Annexation in 106 CE.',url:'https://www.petramuseum.jo/en-us/exhibitions/waning-of-petra/'},{title:'UNESCO. Petra. Statement of Outstanding Universal Value.',url:'https://whc.unesco.org/en/list/326/'}]});
 output.cartographicSeams=seams;
 fs.writeFileSync(path.join(project,'research/ancient-boundaries.json.gz'),require('node:zlib').gzipSync(Buffer.from(JSON.stringify(output)),{level:9}));

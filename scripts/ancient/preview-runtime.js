@@ -38,32 +38,40 @@
  const pathFor=g=>{if(boundaryPaths.has(g))return boundaryPaths.get(g);const d=g.map(p=>p.map(r=>r.map((v,i)=>{const q=project(v);return(i?'L':'M')+q.map(n=>n.toFixed(3)).join(',');}).join('')+'Z').join('')).join('');boundaryPaths.set(g,d);return d;};
  const visibleTerritories=()=>environmentOnly&&year<610?[]:(year<610?boundaries.records.filter(r=>r.from<=year&&year<=r.to).map(r=>{const bridge=continuity.bridges.find(b=>b.id===r.id&&b.from<=year&&year<=b.to);return bridge?{...r,...bridge}:r;}):continuity.supplement.records.filter(r=>r.from<=year&&year<=r.to)).sort((a,b)=>b.areaDegrees-a.areaDegrees);
  let selected=null,region='all',environmentOnly=false;
- let deepModalMode=null,deepProfile=null;
+ let deepModalMode=null,deepProfile=null,historyTopic=null;
  const movementMap=document.createElementNS(svg.namespaceURI,'g');movementMap.id='ancientMovements';viewport.append(movementMap);
  const origins=button('',()=>showOrigins('dispersal'));origins.id='originsBtn';origins.dataset.localeOwned='true';$('kyrgyzHistoryBtn').after(origins);
  const textualMap=document.createElementNS(svg.namespaceURI,'g');textualMap.id='textualPlace';viewport.append(textualMap);
  const textualNote=make('div','textual-place-note');textualNote.id='textualPlaceNote';textualNote.hidden=true;$('mapCard').append(textualNote);
  function clearTextPlace(){textualMap.replaceChildren();textualNote.hidden=true;document.body.classList.remove('textual-place-mode');for(const p of document.querySelectorAll('.scriptural-map-panel'))p.remove();}
+ function profileFacts(r){
+  const box=make('div','scriptural-facts');
+  for(const [label,value]of [[loc(['Время','Time','Убакыт']),loc(r.dateLabel)],[loc(['Народ','People','Эл']),r.audience&&loc(r.audience)],[loc(['Местность','Location','Жер']),loc(r.placeLabel)]])if(value){const row=make('p','');row.append(make('strong','',label+': '),document.createTextNode(value));box.append(row);}
+  for(const relation of r.chronologyRelations||[])box.append(make('p','scriptural-relation',loc(relation.title)+' · '+catalog.scriptural.sources[relation.source].title));
+  return box;
+ }
  function locateText(r){
   const p=catalog.scriptural.places[r.place];if(!p)return;clearTextPlace();$('modalClose').click();stopPlay();document.body.classList.add('textual-place-mode');
   const [x,y]=project(p.coord),g=document.createElementNS(svg.namespaceURI,'g');g.setAttribute('transform',`translate(${x},${y})`);
-  const circle=document.createElementNS(svg.namespaceURI,'circle');circle.setAttribute('r',p.precision==='region'?'16':'5');circle.setAttribute('vector-effect','non-scaling-stroke');circle.setAttribute('class',p.precision);g.append(circle);textualMap.append(g);
+  const circle=document.createElementNS(svg.namespaceURI,'circle');circle.setAttribute('r',p.precision==='region'?'16':'5');circle.setAttribute('vector-effect','non-scaling-stroke');circle.setAttribute('class',p.precision);g.append(circle);
+  const labelGroup=document.createElementNS(svg.namespaceURI,'g');labelGroup.classList.add('textual-map-label');const label=document.createElementNS(svg.namespaceURI,'text');label.setAttribute('text-anchor','middle');label.setAttribute('y','-24');label.textContent=loc(r.title)+' · '+loc(p.title).split(' · ')[0];labelGroup.append(label);g.append(labelGroup);textualMap.append(g);
   textualNote.replaceChildren(make('strong','',loc(r.title)+' · '+loc(p.title)),make('small','',loc(r.dateLabel)),make('p','',loc(p.note)),button(loc(['Убрать отметку','Clear marker','Белгини алып салуу']),clearTextPlace));textualNote.hidden=false;focusLonLat(...p.coord,p.precision==='region'?3:5);
-  const info=make('div','scriptural-map-panel');info.dataset.localeOwned='true';info.append(make('h2','',loc(r.title)),make('p','ancient-muted',loc(r.dateLabel)),make('p','ancient-map-key',loc(p.title)+' · '+loc(p.note)),make('p','',loc(r.text)));
+  const info=make('div','scriptural-map-panel');info.dataset.localeOwned='true';info.append(make('h2','',loc(r.title)),profileFacts(r),make('p','ancient-map-key',loc(p.title)+' · '+loc(p.note)),make('p','',loc(r.text)));
   for(const d of r.details||[])info.append(make('p','',loc(d.text)),make('small','ancient-reference',[...new Set([...r.sources,...p.sources,...d.sources])].map(id=>catalog.scriptural.sources[id].title).join(' · ')));
   info.append(button(loc(['Открыть карточку','Open profile','Карточканы ачуу']),()=>{clearTextPlace();showOrigins('prophets',r.id);}));$('panel-selection').append(info);switchPanel('selection');
  }
  function showOrigins(mode='dispersal',profileId=null){
-  stopPlay();deepModalMode=mode;deepProfile=profileId;const body=$('modalBody');body.replaceChildren();body.dataset.ancientOwned='true';body.dataset.localeOwned='true';
+  stopPlay();historyTopic=null;deepModalMode=mode;deepProfile=profileId;const body=$('modalBody');body.replaceChildren();body.dataset.ancientOwned='true';body.dataset.localeOwned='true';
   body.append(make('h2','',loc(['Истоки · люди, поселения и народы','Origins · people, settlements and societies','Башаттар · адамдар, конуштар жана элдер'])));
   const nav=make('div','origins-tabs');for(const [id,name]of [['dispersal',catalog.trails[0].title],['settlement',catalog.trails[1].title],['prophets',['Пророки и народы','Prophets and peoples','Пайгамбарлар жана элдер']],['peoples',['Государства и переселения','States and migrations','Мамлекеттер жана көчүүлөр']]]){const b=button(loc(name),()=>showOrigins(id));b.setAttribute('aria-pressed',String(mode===id));nav.append(b);}body.append(nav);
   if(mode==='prophets'){
-   body.append(make('p','ancient-muted',loc(['Сведения Корана и достоверных хадисов. Дата, место и историческая датировка указаны отдельно. Порядок списка не задаёт календарных дат.','Qur’anic and authentic hadith evidence. Dates, places and historical dating are stated separately. List order does not establish calendar dates.','Куран жана сахих хадистердин маалыматтары. Дата, жер жана тарыхый даталоо өзүнчө көрсөтүлөт. Тизменин тартиби календардык даталарды аныктабайт.'])));
+   body.append(make('p','ancient-muted',loc(['Коран, достоверные хадисы и тафсир Ибн Касира. Для каждого имени указаны время, народ и местность по источникам. Где календарный год неизвестен, показаны подтверждённые связи между людьми и поколениями.','The Qur’an, authentic hadith and Ibn Kathir’s tafsir. Each profile identifies its source-based time, people and location. Where calendar dates are unknown, documented relationships between people and generations are shown.','Куран, сахих хадистер жана Ибн Касирдин тафсири. Ар бир карточкада булактар боюнча убакыт, эл жана жер көрсөтүлгөн. Календардык жыл белгисиз болсо, адамдар менен муундардын тастыкталган байланыштары берилет.'])));
+   body.append(make('small','ancient-reference',catalog.scriptural.sources['prophetic-chronology'].title));
    const focused=catalog.scriptural.records.find(r=>r.id===profileId);
    if(focused){
     body.append(button(loc(['← Все имена и народы','← All names and peoples','← Бардык ысымдар жана элдер']),()=>showOrigins('prophets')));
     const a=make('article','ancient-card scriptural-detail');a.dataset.scripturalRecord=focused.id;
-    a.append(make('h3','',loc(focused.title)),make('small','',loc(focused.dateLabel)),make('p','',loc(focused.text)));
+    a.append(make('h3','',loc(focused.title)),profileFacts(focused),make('p','',loc(focused.text)));
     for(const d of focused.details||[]){a.append(make('p','',loc(d.text)),make('small','ancient-reference',[...new Set([...focused.sources,...d.sources])].map(id=>catalog.scriptural.sources[id].title).join(' · ')));}
     a.append(make('p','ancient-muted',loc(focused.placeLabel)));if(focused.place)a.append(button(t('location'),()=>locateText(focused)));
     if(focused.openYear)a.append(button(loc(['Открыть хронологию','Open timeline','Хронологияны ачуу']),()=>{$('modalClose').click();renderYear(focused.openYear);queueLocationSave();}));
@@ -94,6 +102,7 @@
   if(r.timeMeaning==='dating-window')box.append(make('small','ancient-muted',loc(['Интервал датировки находки','Dating window of the evidence','Табылган далилдин даталоо аралыгы'])));
   if(r.coordinatePrecision==='regional-reference')box.append(make('small','ancient-muted',loc(['На карте: ориентир в районе находки','Map: a reference in the find region','Картада: табылган аймактагы багыт'])));
   if(details){box.append(make('small','ancient-reference',r.sources.map(id=>catalog.sources[id].title).join(' · ')));
+   for(const p of r.passages||[]){const quote=make('blockquote','ancient-primary-text',p.text+(p.geography?' '+p.geography:''));quote.lang='zh';box.append(quote,make('small','ancient-reference',catalog.sources[p.source].title));}
    if(r.movementId){const m=catalog.movements.find(m=>m.id===r.movementId);box.append(make('p','ancient-map-key',loc(m.caption)),button(loc(['Показать направление','Show connection','Багытты көрсөтүү']),()=>{selected=r.id;draw();focusMovement(m);}));}
    if(r.territoryId){const territory=visibleTerritories().find(t=>t.id===r.territoryId);if(territory)box.append(button(loc(['Выделить территорию','Highlight territory','Аймакты бөлүп көрсөтүү']),()=>{selected='territory:'+territory.id;renderPanels();draw();focusLonLat(...territory.anchor,4);}));}
    if(r.coord)box.append(button(t('location'),()=>focusLonLat(...r.coord,5)));else box.append(make('p','ancient-muted',t('unmapped')));
@@ -101,11 +110,21 @@
   return box;
  }
  function showKyrgyz(){
-  const body=$('modalBody');body.replaceChildren();body.dataset.ancientOwned='true';
+  stopPlay();deepModalMode=null;historyTopic='kyrgyz';const body=$('modalBody');body.replaceChildren();body.dataset.ancientOwned='true';body.dataset.localeOwned='true';
   body.append(make('h2','',t('kyrgyz')));
   for(const r of catalog.records.filter(r=>r.kyrgyz)){const c=card(r,true);c.append(button(t('view'),()=>{$('modalClose').click();openRecord(r);}));body.append(c);}
   $('modal').classList.add('show');$('modal').querySelector('.modal-box').scrollTop=0;body.querySelector('button')?.focus({preventScroll:true});
  }
+ function showChina(){
+  stopPlay();deepModalMode=null;historyTopic='china';const body=$('modalBody');body.replaceChildren();body.dataset.ancientOwned='true';body.dataset.localeOwned='true';
+  body.append(make('h2','',loc(['Китай · поселения, царства и империи','China · settlements, states and empires','Кытай · конуштар, падышалыктар жана империялар'])));
+  const reference=make('details','china-reference');reference.append(make('summary','',loc(catalog.chinaReference.title)));
+  const illustration=make('img','');illustration.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(catalog.chinaReference.svg);illustration.alt=loc(catalog.chinaReference.title);reference.append(illustration);
+  const legend=make('div','china-reference-legend');for(const [color,title]of catalog.chinaReference.legend){const item=make('span','',loc(title)),swatch=make('i','');swatch.style.background=color;item.prepend(swatch);legend.append(item);}reference.append(legend,make('small','ancient-reference',catalog.chinaReference.source),button(loc(['Открыть 250 год до н. э. на общей карте','Open 250 BCE on the world map','Жалпы картада б. з. ч. 250-жылды ачуу']),()=>{$('modalClose').click();stopPlay();renderYear(-250);focusLonLat(113,35,4);queueLocationSave();}));body.append(reference);
+  for(const r of catalog.records.filter(r=>catalog.chinaTrail.includes(r.id))){const a=card(r,true);for(const b of a.querySelectorAll('button'))b.remove();a.append(button(t('view'),()=>{$('modalClose').click();openRecord(r);}));body.append(a);}
+  $('modal').classList.add('show');$('modal').querySelector('.modal-box').scrollTop=0;body.querySelector('button')?.focus({preventScroll:true});
+ }
+ function chooseTerritory(r,focus=true){selected='territory:'+r.id;clearTextPlace();renderPanels();draw();switchPanel('selection');if(focus)focusLonLat(...r.anchor,4);}
  function renderControls(){
   if(year<610&&$('worldExploreBtn')){$('worldExploreBtn').textContent=loc(['Мир','World','Дүйнө']);$('worldExploreBtn').title=loc(['Параллельная история мира','Parallel world history','Дүйнөнүн параллелдүү тарыхы']);}
   controls.replaceChildren(make('div','section-label',t('preview')));
@@ -127,7 +146,8 @@
   if(year<610){const line=$('kyrgyzParallel');line.textContent=loc(['История кыргызов · ранние свидетельства','Kyrgyz history · early evidence','Кыргыз тарыхы · алгачкы маалыматтар']);line.title=line.textContent;}
   const nav=make('div','ancient-nav'),steps=catalog.milestones;
   for(const [y,label]of [[steps.filter(v=>v<year).at(-1),t('earlier')],[steps.find(v=>v>year),t('later')]])if(y!==undefined)nav.append(button(label+' · '+cal.format(y,language),()=>{stopPlay();renderYear(y);queueLocationSave();}));
-  nav.append(button(t('kyrgyz'),showKyrgyz));controls.append(nav);
+  controls.append(nav);
+  const topics=make('div','ancient-topics');for(const [id,title,fn]of [['ancientProphets',loc(['Пророки и народы','Prophets and peoples','Пайгамбарлар жана элдер']),()=>showOrigins('prophets')],['ancientChina',loc(['Китай','China','Кытай']),showChina],['ancientKyrgyz',loc(['Кыргызы','Kyrgyz','Кыргыздар']),showKyrgyz]]){const b=button(title,fn);b.id=id;topics.append(b);}controls.append(topics);
   const geography=button(t('geography'),()=>{environmentOnly=!environmentOnly;renderControls();renderPanels();draw();switchPanel('events');});geography.id='ancientEnvironment';geography.setAttribute('aria-pressed',String(environmentOnly));nav.append(geography);
  }
  function draw(){
@@ -185,12 +205,16 @@
  function arrangeLabels(){const occupied=[...movementMap.querySelectorAll('text'),...(year>=610?[...document.querySelectorAll('#empireLabelLayer text,#worldTerritoryLabels text,#placeLayer text')].filter(e=>getComputedStyle(e).visibility!=='hidden'&&e.getBoundingClientRect().width>0):[])].map(e=>e.getBoundingClientRect());const rect=svg.getBoundingClientRect(),detail=worldLabelMetrics().detail;for(const g of map.querySelectorAll('[data-ancient-label],[data-ancient-marker]')){const label=g.querySelector('text');label.style.fontSize=Math.min(g.dataset.ancientLabel?13.5:11,8+3*Math.log2(Math.max(1,detail)))+'px';label.style.strokeWidth='2px';label.style.visibility='visible';const box=label.getBoundingClientRect();const visible=box.left>=rect.left+6&&box.right<=rect.right-6&&box.top>=rect.top+6&&box.bottom<=rect.bottom-6;const collision=occupied.some(b=>box.left<b.right+8&&box.right>b.left-8&&box.top<b.bottom+3&&box.bottom>b.top-3);if(!visible||collision)label.style.visibility='hidden';else occupied.push(box);}}
  function renderPanels(){
   const events=panel('panel-events');events.append(make('h2','',environmentOnly?t('geography'):t('current')),make('p','ancient-muted',cal.format(year,language)),make('p','ancient-map-key',year<-7000?loc(['Точки — места свидетельств; интервалы древнейших дат округлены. Современная береговая линия служит ориентиром.','Dots locate evidence; the earliest dating windows are rounded. Modern coastlines provide a reference.','Чекиттер — далил табылган жерлер; эң байыркы даталардын аралыгы тегеректелген. Азыркы жээктер багыт берет.']):t('mapKey')));
-  const records=active(year);if(!records.length)events.append(make('p','',t('empty')));for(const r of records)events.append(card(r));
+  const shortcuts=make('div','ancient-periods');for(const [y,title]of [[-7000,['Земледельцы','Early farmers','Алгачкы дыйкандар']],[-3000,['Первые города','Early cities','Алгачкы шаарлар']],[-500,['Царства','Ancient states','Байыркы падышалыктар']],[1,['Начало нашей эры','Early CE','Биздин заман башы']],[609,['VII век','7th century','VII кылым']]])shortcuts.append(button(loc(title),()=>{region='all';environmentOnly=false;stopPlay();renderYear(y);queueLocationSave();}));events.append(shortcuts);
+  const records=active(year),territories=visibleTerritories();
+  if(!environmentOnly&&region==='all'&&territories.length){const index=make('details','ancient-territory-index');index.append(make('summary','',loc(['Государства и области на карте','States and regions on the map','Картадагы мамлекеттер жана аймактар'])+' · '+territories.length));for(const r of territories)index.append(button(loc(boundaryEntities.get(r.id).title),()=>chooseTerritory(r)));events.append(index);}
+  if(!records.length)events.append(make('p','',t('empty')));for(const r of records)events.append(card(r));
   const regions=panel('panel-regions');regions.append(make('h2','',loc(['Регионы мира','World regions','Дүйнө аймактары'])));
   const select=make('select','');select.setAttribute('aria-label',t('all'));for(const [id,name]of [['all',t('all')],...WORLD_HISTORY.regions.map(r=>[r.id,loc(r.name)])]){const o=make('option','',name);o.value=id;select.append(o);}select.value=region;select.onchange=()=>{region=select.value;renderPanels();draw();};regions.append(select);
   for(const r of records)regions.append(card(r));
-  const compare=panel('panel-compare');compare.append(make('h2','',t('chronology')));for(const r of catalog.records.filter(r=>region==='all'||r.region===region))compare.append(card(r));
-  const sources=panel('panel-sources');sources.append(make('h2','',t('sources')));const books=new Set(catalog.records.flatMap(r=>r.sources).map(id=>catalog.sources[id].title));for(const book of books)sources.append(make('p','ancient-reference',book));
+  const compare=panel('panel-compare');compare.append(make('h2','',loc(['В мире в это время','Elsewhere at this time','Ошол учурда дүйнөдө'])),make('p','ancient-muted',cal.format(year,language)));
+  for(const area of WORLD_HISTORY.regions){const local=records.filter(r=>r.region===area.id);if(!local.length)continue;const section=make('section','ancient-region-group');section.append(make('h3','',loc(area.name)));for(const r of local)section.append(card(r));compare.append(section);}
+  const sources=panel('panel-sources');sources.append(make('h2','',t('sources')));const books=new Set([...catalog.records.flatMap(r=>r.sources).map(id=>catalog.sources[id].title),...Object.values(catalog.scriptural.sources).map(s=>s.title),catalog.chinaReference.source]);for(const book of books)sources.append(make('p','ancient-reference',book));
   sources.append(make('p','ancient-reference',boundaries.source.title));
   for(const book of new Set(boundaries.corrections.flatMap(c=>c.sources.map(s=>s.title))))sources.append(make('p','ancient-reference',book));
   const license=make('a','ancient-reference',boundaries.source.license);license.href=boundaries.source.licenseUrl;license.target='_blank';license.rel='noopener noreferrer';sources.append(license);
@@ -202,7 +226,7 @@
  renderWorldHistory=function(){if(year>=610)return baseWorldRender();};
  const baseActiveEvent=activeEvent;
  activeEvent=function(y){if(y>=610)return baseActiveEvent(y);return {title:t('title'),desc:t('current'),ah:labels.era[li()][y<0?0:1],place:t('title'),type:t('title'),coord:null,world:[]};};
- setViewport=function(){baseViewport();for(const g of map.querySelectorAll('.ancient-marker-content'))g.setAttribute('transform',`scale(${1/(mapState.scale*(svg.getScreenCTM()?.a||1))})`);resizeMovements();arrangeLabels();};
+ setViewport=function(){baseViewport();for(const g of [...map.querySelectorAll('.ancient-marker-content'),...textualMap.querySelectorAll('.textual-map-label')])g.setAttribute('transform',`scale(${1/(mapState.scale*(svg.getScreenCTM()?.a||1))})`);resizeMovements();arrangeLabels();};
  window.addEventListener('resize',()=>setViewport());
  $('kyrgyzHistoryBtn').addEventListener('click',e=>{if(year<610){e.stopImmediatePropagation();showKyrgyz();}},true);
  $('kyrgyzParallel').addEventListener('click',e=>{if(year<610){e.stopImmediatePropagation();showKyrgyz();}},true);
@@ -220,8 +244,8 @@
  const continuityYears=[...new Set(continuity.supplement.records.flatMap(r=>[r.from,r.to+1]))].sort((a,b)=>a-b);
  nextPlaybackYear=function(y){if(y>=610){const target=baseNext(y),next=continuityYears.find(v=>v>y);return next!==undefined&&next<target?next:target;}let step=y<-100000?10000:y<-20000?2000:y<-7000?500:y<-1000?100:y<1?25:y<500?10:1;let target=Math.min(610,cal.add(y,step));const next=catalog.milestones.find(v=>v>y);if(next!==undefined&&next<target)target=next;return target;};
  function ticks(){entrance.textContent=cal.format(catalog.range.min,language)+' · '+loc(['Ранние люди','Early humans','Алгачкы адамдар']);$('ticks').replaceChildren();for(const y of [catalog.range.min,-100000,-20000,-7000,1,1300,TIMELINE_MAX]){const e=make('span','tick-label',cal.format(y,language));e.style.left=(scale.toPosition(y)/100000)+'%';$('ticks').append(e);}const hint=document.querySelector('.timeline-hint');if(hint){hint.dataset.localeOwned='true';hint.textContent=cal.format(catalog.range.min,language)+' — '+cal.format(TIMELINE_MAX,language);}}
- localeSelect.addEventListener('change',()=>{renderYear(year);ticks();if($('modal').classList.contains('show')){if(deepModalMode)showOrigins(deepModalMode,deepProfile);else if($('modalBody').querySelector('.ancient-card'))showKyrgyz();}});
- $('modalClose').addEventListener('click',()=>{deepModalMode=null;if($('modalBody').dataset.ancientOwned){delete $('modalBody').dataset.ancientOwned;delete $('modalBody').dataset.localeOwned;}});
+  localeSelect.addEventListener('change',()=>{renderYear(year);ticks();if($('modal').classList.contains('show')){if(deepModalMode)showOrigins(deepModalMode,deepProfile);else if(historyTopic==='china')showChina();else if(historyTopic==='kyrgyz')showKyrgyz();}});
+ $('modalClose').addEventListener('click',()=>{deepModalMode=null;historyTopic=null;if($('modalBody').dataset.ancientOwned){delete $('modalBody').dataset.ancientOwned;delete $('modalBody').dataset.localeOwned;}});
  const incoming=cal.parse(new URLSearchParams(location.search).get('year'));
  if(incoming!==null&&incoming>=catalog.range.min&&incoming<610)renderYear(incoming);else{renderControls();draw();}ticks();syncRange();
  const query=new URLSearchParams(location.search),requestedOrigins=query.get('origins');if(['prophets','dispersal','settlement','peoples'].includes(requestedOrigins))showOrigins(requestedOrigins,query.get('prophet'));

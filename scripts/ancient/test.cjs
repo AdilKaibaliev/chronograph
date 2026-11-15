@@ -15,6 +15,14 @@ assert.deepEqual(built.scriptural.records,c.scriptural.records,'Built textual ev
 assert.deepEqual(built.trails,c.trails,'Reading trails differ from reviewed sequence');
 assert.deepEqual(built.movements,c.movements,'Migration connectors differ from reviewed data');
 assert.deepEqual(built.peoplesTrail,c.peoplesTrail,'States and migration navigation differs');
+assert.deepEqual(built.chinaTrail,c.chinaTrail,'China navigation differs');
+for(const id of c.chinaTrail)assert(c.records.some(r=>r.id===id),'Missing China card '+id);
+assert.deepEqual(built.chinaReference,c.chinaReference,'Reference map differs');
+assert(c.chinaReference.svg.startsWith('<svg')&&!/<script|foreignObject|\bon\w+=|(?:href|src)=/i.test(c.chinaReference.svg),'Reference SVG must remain inert');
+for(const id of ['qin-xianyang','qi-linzi','yan-ji','zhao-handan','wei-daliang','han-xinzheng','chu-chen'])assert(c.records.some(r=>r.id===id&&r.from<=-250&&r.to>-250&&r.coord),'Missing contemporary state centre '+id);
+assert.equal(c.records.find(r=>r.id==='western-zhou').to,c.records.find(r=>r.id==='spring-autumn').from);
+assert.equal(c.records.find(r=>r.id==='spring-autumn').to,c.records.find(r=>r.id==='warring-states').from);
+for(const m of c.movements){assert(c.records.some(r=>r.id===m.record&&r.movementId===m.id));assert(m.sources.every(id=>c.sources[id]));}
 assert.deepEqual(built.milestones,c.milestones,'Built playback omits reviewed change dates');
 assert.equal(built.releaseReady,true);
 assert.deepEqual(data('const ANCIENT_BOUNDARIES='),require('./load-boundaries.cjs'),'Built territorial reconstruction differs from reviewed archive');
