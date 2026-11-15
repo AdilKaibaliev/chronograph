@@ -54,4 +54,5 @@ for(const [id,title,refs,place,text]of [
  ['saba',L('Саба','Saba','Саба'),['27:22','34:15'],'marib',L('Коран упоминает Сабу. Археологические памятники Мариба рассматриваются отдельно от недатированного рассказа.','The Qur’an mentions Saba. Marib’s archaeological monuments are considered separately from the undated account.','Куранда Саба аталат. Марибдин археологиялык эстеликтери датасы белгисиз баяндан өзүнчө каралат.')],
  ['israel',L('Сыны Исраиля','Children of Israel','Исраил урпактары'),['3:49'],null,L('Названы адресатами миссии Исы. Название народа не задаёт государственных границ на карте.','Named as recipients of Isa’s mission. A people’s name does not establish state borders on the map.','Исанын миссиясы багытталган эл катары аталат. Элдин аталышы картадагы мамлекеттик чектерди аныктабайт.')]
 ])records.push({id,kind:'people',title,text,sources:refs.map(q),place,date:null,dateLabel:unknown,placeLabel:place?places[place].title:nowhere});
+require('./scriptural-details.cjs')({records,sources,q});
 module.exports={sources,places,records};

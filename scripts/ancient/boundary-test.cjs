@@ -28,6 +28,9 @@ const contains=(id,year,point)=>data.records.some(r=>r.id===id&&r.from<=year&&ye
 for(const [year,owner,other]of [[-59,'ptolemaic','roman-republic'],[-58,'roman-republic','ptolemaic'],[-49,'roman-republic','ptolemaic'],[-48,'ptolemaic','roman-republic'],[-31,'ptolemaic','roman-republic'],[-30,'roman-republic','ptolemaic'],[-27,'roman-empire','ptolemaic']]){assert(contains(owner,year,[33,35]),'Cyprus '+year+' '+owner);assert(!contains(other,year,[33,35]));}
 for(const [year,point]of [[455,[12.5,41.9]],[458,[14,41.1]],[462,[14,41.1]]]){assert(contains('roman-west',year,point));assert(!contains('vandal',year,point));}
 assert(!data.entities.some(e=>/Kyrgyz|Great Yuan/.test(e.sourceName)),'No unsupported early Kyrgyz polygon or mislabeled Dayuan');
+for(const y of [-164,-100,-1,1,50,105])assert(contains('nabataea',y,[35.444,30.328]),'Nabataean Petra '+y);
+assert(!data.records.some(r=>r.id==='nabataea'&&(r.from<-164||r.to>=106)),'Do not backdate the first available frame or extend beyond Roman annexation');
+assert(contains('roman-empire',106,[35.444,30.328]),'Petra must pass to Rome in 106');
 for(const r of data.records){assert(r.from!==0&&r.to!==0&&r.from<=r.to);assert(r.to<610);assert(data.entities.find(e=>e.id===r.id).title.length===3);}
 assert(!data.records.some(r=>r.id==='shang'&&r.to>=-1046));assert(!data.records.some(r=>r.id==='xin'&&r.from<9));
 assert.equal(invalid.length,0);assert.equal(overlaps.length,0);

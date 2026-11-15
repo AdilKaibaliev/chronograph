@@ -13,6 +13,8 @@ assert(html.includes(fs.readFileSync(path.join(__dirname,'preview-runtime.js'),'
 assert.deepEqual(built.records,c.records,'Built ancient cards differ from reviewed data');
 assert.deepEqual(built.scriptural.records,c.scriptural.records,'Built textual evidence differs from reviewed records');
 assert.deepEqual(built.trails,c.trails,'Reading trails differ from reviewed sequence');
+assert.deepEqual(built.movements,c.movements,'Migration connectors differ from reviewed data');
+assert.deepEqual(built.peoplesTrail,c.peoplesTrail,'States and migration navigation differs');
 assert.deepEqual(built.milestones,c.milestones,'Built playback omits reviewed change dates');
 assert.equal(built.releaseReady,true);
 assert.deepEqual(data('const ANCIENT_BOUNDARIES='),require('./load-boundaries.cjs'),'Built territorial reconstruction differs from reviewed archive');

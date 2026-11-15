@@ -16,6 +16,7 @@ const rows=[
  ['Mycenaean Greece','mycenaean',['Микенские государства','Mycenaean states','Микен мамлекеттери'],-1700,-1050,'polities'],
  ['Neo-Assyrian Empire','neo-assyria',['Новоассирийская держава','Neo-Assyrian Empire','Жаңы Ассирия державасы'],-911,-609],
  ['Neo-Babylonian Empire','neo-babylon',['Нововавилонское царство','Neo-Babylonian kingdom','Жаңы Вавилон падышалыгы'],-626,-539],
+ ['Nabataeans','nabataea',['Набатейское царство','Nabataean kingdom','Набатей падышалыгы'],-300,106],
  ['Kingdom of Urartu','urartu',['Урарту','Urartu','Урарту'],-860,-590],
  ['Achaemenid Empire','achaemenid',['Персия Ахеменидов','Achaemenid Persia','Ахемениддер Персиясы'],-550,-330],
  ['Macedonian Empire','macedon',['Македонская держава','Macedonian Empire','Македония державасы'],-359,-323],
