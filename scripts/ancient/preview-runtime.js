@@ -47,7 +47,7 @@
   const circle=document.createElementNS(svg.namespaceURI,'circle');circle.setAttribute('r',p.precision==='region'?'16':'5');circle.setAttribute('vector-effect','non-scaling-stroke');circle.setAttribute('class',p.precision);g.append(circle);textualMap.append(g);
   textualNote.replaceChildren(make('strong','',loc(r.title)+' · '+loc(p.title)),make('small','',loc(r.dateLabel)),make('p','',loc(p.note)),button(loc(['Убрать отметку','Clear marker','Белгини алып салуу']),clearTextPlace));textualNote.hidden=false;focusLonLat(...p.coord,p.precision==='region'?3:5);
   const info=make('div','scriptural-map-panel');info.dataset.localeOwned='true';info.append(make('h2','',loc(r.title)),make('p','ancient-muted',loc(r.dateLabel)),make('p','ancient-map-key',loc(p.title)+' · '+loc(p.note)),make('p','',loc(r.text)));
-  for(const d of r.details||[])info.append(make('p','',loc(d.text)),make('small','ancient-reference',d.sources.map(id=>catalog.scriptural.sources[id].title).join(' · ')));
+  for(const d of r.details||[])info.append(make('p','',loc(d.text)),make('small','ancient-reference',[...new Set([...r.sources,...p.sources,...d.sources])].map(id=>catalog.scriptural.sources[id].title).join(' · ')));
   info.append(button(loc(['Открыть карточку','Open profile','Карточканы ачуу']),()=>{clearTextPlace();showOrigins('prophets',r.id);}));$('panel-selection').append(info);switchPanel('selection');
  }
  function showOrigins(mode='dispersal',profileId=null){
@@ -61,7 +61,7 @@
     body.append(button(loc(['← Все имена и народы','← All names and peoples','← Бардык ысымдар жана элдер']),()=>showOrigins('prophets')));
     const a=make('article','ancient-card scriptural-detail');a.dataset.scripturalRecord=focused.id;
     a.append(make('h3','',loc(focused.title)),make('small','',loc(focused.dateLabel)),make('p','',loc(focused.text)));
-    for(const d of focused.details||[]){a.append(make('p','',loc(d.text)),make('small','ancient-reference',d.sources.map(id=>catalog.scriptural.sources[id].title).join(' · ')));}
+    for(const d of focused.details||[]){a.append(make('p','',loc(d.text)),make('small','ancient-reference',[...new Set([...focused.sources,...d.sources])].map(id=>catalog.scriptural.sources[id].title).join(' · ')));}
     a.append(make('p','ancient-muted',loc(focused.placeLabel)));if(focused.place)a.append(button(t('location'),()=>locateText(focused)));
     if(focused.openYear)a.append(button(loc(['Открыть хронологию','Open timeline','Хронологияны ачуу']),()=>{$('modalClose').click();renderYear(focused.openYear);queueLocationSave();}));
     if(focused.related?.length){a.append(make('h4','',loc(['Связанные люди и народы','Related people and societies','Байланышкан адамдар жана элдер'])));const links=make('div','scriptural-related');for(const id of focused.related){const other=catalog.scriptural.records.find(r=>r.id===id);links.append(button(loc(other.title),()=>showOrigins('prophets',id)));}a.append(links);}
@@ -196,5 +196,5 @@
  const incoming=cal.parse(new URLSearchParams(location.search).get('year'));
  if(incoming!==null&&incoming>=catalog.range.min&&incoming<610)renderYear(incoming);else renderControls();ticks();syncRange();
  const query=new URLSearchParams(location.search),requestedOrigins=query.get('origins');if(['prophets','dispersal','settlement','peoples'].includes(requestedOrigins))showOrigins(requestedOrigins,query.get('prophet'));
- const requestedRecord=catalog.records.find(r=>r.id===query.get('ancient'));if(requestedRecord)requestAnimationFrame(()=>openRecord(requestedRecord));
+ const requestedRecord=catalog.records.find(r=>r.id===query.get('ancient')&&(incoming===null||(r.from<=incoming&&incoming<r.to)));if(requestedRecord)requestAnimationFrame(()=>openRecord(requestedRecord));
 })();
