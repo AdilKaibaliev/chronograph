@@ -43,7 +43,7 @@ const messages=[
  ['Формирование Каракитайского государства; продвижение Елюй Даши на запад.','Formation of the Qara Khitai state; Yelü Dashi’s movement westward.','Каракытай мамлекетинин калыптанышы; Елюй Дашинин батышка жылышы.']
  ,...regionalReview.messages,...mediterraneanReview.messages,...anatolianReview.messages,...europeCentralReview.messages,...arabiaKhitaiReview.messages,...altaiJochiReview.messages,...taurusChinaReview.messages,...frankishPartitions.messages,...outerFrontiers.messages];
 function prepare(input){
- const es=structuredClone(input);if(es[0]?.frontierReviewVersion===11)return es;
+ const es=structuredClone(input);if(es[0]?.frontierReviewVersion===12)return es;
  const by=new Map(es.map(e=>[e.id,e])),at=(id,y)=>by.get(id)?.keyframes.filter(f=>f.year<=y).at(-1);
  // The generic geometry compiler also accepts stand-alone regional inputs.
  // Cross-state historical repairs require the complete chronological catalogue.
@@ -56,6 +56,7 @@ function prepare(input){
   for(const y of [...new Set([from,...e.keyframes.filter(f=>f.year>=from&&f.year<to).map(f=>f.year)])])frame(id,y,{legacyContext:true,overlord:owner,...(text?{territories:text}:{}),color:by.get(owner)?.color||e.color});
   if(to<=e.to)frame(id,to,{...end,legacyContext:false,overlord:null,color:e.color});
  }
+ require('./steppe-contours.cjs').apply(es,{frame,by});
  // Regional conquests: the old state loses precisely the land painted as
  // acquired by its successor; both sides retain the same shared vertices.
  // The additional Iranian stages represent regional control, not an annual
@@ -146,7 +147,7 @@ function prepare(input){
  outerFrontiers.legacy(es,{frame,at,by,cite,I,D,B});
  iberianConquest.apply(es,{frame,at,by,cite,I,D,B});
  for(const id of ['abbasidIraq','ayyubid','mongol','ilkhanate'])cite(id,'iraqJazira');
- for(const e of es)e.frontierReviewVersion=11;
+ for(const e of es)e.frontierReviewVersion=12;
  return es;
 }
 // [losing/overextended outline, authority at the shared edge, from, until, source]
@@ -157,6 +158,9 @@ const rules=[
  ['medievalByzantine','rashidun',636,661,'conquest'],['medievalByzantine','umayyad',661,750,'conquest'],
  ['tenKingdoms','northernSong',960,979,'china'],['liao','jinChina',1115,1125,'china'],['fiveDynasties','liao',907,960,'china'],
  ['easternTurkic','sui',610,618,'china'],['easternTurkic','tang',618,630,'china'],
+ // The dated Kyrgyz political region receives its own fill from 648.
+ // Earlier population context is not an independent sovereign boundary.
+ ['westernTurkic','yeniseiKyrgyz',648,657,'altaiFrontier'],
  ['westernTurkic','tang',640,657,'china'],
  ['turgesh','tang',699,766,'china'],['karluk','tang',766,790,'china'],
  ['ghaznavid','greatSeljuk',1037,1157,'seljuk'],['buyids','greatSeljuk',1040,1062,'seljuk'],['buyids','ghaznavid',1029,1062,'ghaznavid'],

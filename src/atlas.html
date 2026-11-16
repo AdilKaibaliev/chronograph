@@ -568,7 +568,7 @@ function linePath(points){
 }
 function svgPathFromRing(ring){
   if(!ring || !ring.length) return '';
-  return ring.map((c,i)=>{ const [x,y]=project(c); return `${i?'L':'M'}${x.toFixed(2)} ${y.toFixed(2)}`; }).join(' ') + ' Z';
+  return ring.map((c,i)=>{ const [x,y]=project(c); return `${i?'L':'M'}${x.toFixed(3)} ${y.toFixed(3)}`; }).join(' ') + ' Z';
 }
 function geometryPath(geom){
   if(!geom) return '';

@@ -95,3 +95,9 @@
 .kyrgyz-journey button small{display:block;margin-top:4px;color:#c9b994;font-size:11px;line-height:1.4}
 .kyrgyz-journey button:hover,.kyrgyz-journey button[aria-current=step]{background:#453824;border-color:#d8b97b}
 .kyrgyz-journey summary:focus-visible,.kyrgyz-journey button:focus-visible{outline:2px solid #f3d99d;outline-offset:3px}
+/* One legible border weight across the historical timeline. Geometry is unchanged. */
+#worldMap .empire-path{stroke:#756448;stroke-width:.8;stroke-linejoin:round;stroke-linecap:round}
+#worldMap .empire-dependency{stroke-width:.8}
+#worldMap .world-territory>path[role=button]{stroke-width:.8}
+#worldMap .empire-path.selected,#worldMap .empire-path:hover,#worldMap .empire-path:focus-visible{stroke:#634725;stroke-width:1.8}
+#worldMap .world-territory.selected>path[role=button],#worldMap .world-territory>path[role=button]:hover,#worldMap .world-territory>path[role=button]:focus-visible{stroke:#634725;stroke-width:1.8}
