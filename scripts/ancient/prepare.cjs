@@ -3,6 +3,7 @@ const calendar=require('./calendar.js');
 module.exports=function prepareAncient(world,kyrgyz){
  const c=structuredClone(require('./catalog.cjs'));
  const deep=structuredClone(require('./prehistory.cjs'));Object.assign(c.sources,deep.sources);c.records.push(...deep.records);c.trails=deep.trails;
+ c.chronologyIntro=structuredClone(require('./chronology-intro.cjs'));
  c.scriptural=structuredClone(require('./scriptural.cjs'));
  const peoples=structuredClone(require('./peoples-movements.cjs'));Object.assign(c.sources,peoples.sources);c.records.push(...peoples.records);c.movements=peoples.movements;c.peoplesTrail=peoples.records.map(r=>r.id);
  for(const [id,source,from,to,coord,title,text]of [
@@ -83,6 +84,6 @@ module.exports=function prepareAncient(world,kyrgyz){
   datedPoliticalGeometry:boundaries.records.length,territorialEntities:boundaries.entities.length,worldComplete:false,
   publicationScope:'Selected ancient societies and source-based territorial reconstructions, joined to the existing 610–2026 atlas.',
   paleogeographyFrames:paleo.frames.length,paleogeographyRangeBP:[paleo.frames[0].bp,paleo.frames.at(-1).bp],
-  remainingResearch:['Ancient boundaries are reconstructions, not surveyed annual frontiers.','PaleoMIST physical geography uses dated 2500-year model frames, without annual interpolation. Older periods retain the modern reference. River courses and inland lake levels are not reconstructed by this marine model.','Pre-610 and post-610 territorial frames use independent sources and resolutions.']};
+  remainingResearch:['Ancient boundaries are reconstructions, not surveyed annual frontiers.','Physical geography uses Krapp2021 frames every 1000 years before 80000 BP and PaleoMIST frames every 2500 years afterwards. Source-model junctions are identified; no annual contour interpolation is asserted. River courses and inland lake levels are not reconstructed by these masks.','Pre-610 and post-610 territorial frames use independent sources and resolutions.']};
  return c;
 };

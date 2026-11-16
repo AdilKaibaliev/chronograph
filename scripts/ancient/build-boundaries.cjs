@@ -38,6 +38,19 @@ records.push({id:'qin',from:-221,to:-219,sourceFrom:-222,sourceTo:-219,controlEv
 // The source name Han denotes different states in different periods. Only
 // these three late frames describe Liu Bang's Han, not the earlier state 韓.
 transfer('Han',-206,-203,'han');
+// Wang Mang's regency is not yet the Xin dynasty. The source assigns the
+// contemporary imperial footprint to Xin three years before the 9 CE change.
+transfer('Xin Dynasty',6,8,'han');
+// Nabataea survives under Obodas III. The same source outline exists before
+// and after this six-year omission; restore that identical footprint only.
+const nabataeaBefore=records.find(r=>r.id==='nabataea'&&r.to===-26);
+const nabataeaAfter=records.find(r=>r.id==='nabataea'&&r.from===-19);
+if(!nabataeaBefore||!nabataeaAfter||JSON.stringify(nabataeaBefore.geometry)!==JSON.stringify(nabataeaAfter.geometry))throw Error('Nabataean gap requires matching dated outlines');
+records.push({...nabataeaBefore,from:-25,to:-20,sourceFrames:[-27,-19],chronologyCorrection:'nabataea-25-20'});
+// The omitted footprint was assigned to Rome during Gallus' expedition.
+// Nabataean allied forces do not imply annexation of their kingdom.
+splitAt('roman-empire',[-25,-19]);
+for(const r of records)if(r.id==='roman-empire'&&r.from>=-25&&r.to<=-20){r.geometry=clip.difference(r.geometry,nabataeaBefore.geometry);r.chronologyCorrection='nabataea-25-20';}
 transfer('Neo-Babylonian Empire',-539,-531,'achaemenid');
 transfer('Twenty-sixth Dynasty of Egypt',-525,-501,'achaemenid');
 // The upstream Ptolemaic label in Alexander's lifetime is anachronistic.
@@ -69,6 +82,8 @@ for(const r of records.filter(r=>r.id==='vandal')){const removed=r.geometry.filt
 splitAt('roman-west',italy.flatMap(r=>[r.from,r.to+1]));
 for(const r of records.filter(r=>r.id==='roman-west'))for(const raid of italy)if(r.from>=raid.from&&r.to<=raid.to)r.geometry=clip.union(r.geometry,raid.geometry);
 const corrections=[
+ {id:'han-regency-6-8',years:[6,9],decision:'Restore the contemporary imperial footprint to Han during Wang Mang’s regency in 6–8 CE. Xin starts in 9 CE. Do not backdate the 30 CE Eastern Han outline to the civil war of 25–29.',sources:[{title:'Rafe de Crespigny. To Establish Peace. Chronology: The Emperors of Han. Australian National University.',url:'https://openresearch-repository.anu.edu.au/server/api/core/bitstreams/3df5d9aa-26db-44c1-8372-14d21d5a4250/content'},{title:'The Metropolitan Museum of Art. Han Dynasty (206 B.C.–220 A.D.).',url:'https://www.metmuseum.org/essays/han-dynasty-206-b-c-220-a-d'}]},
+ {id:'nabataea-25-20',years:[-25,-20],decision:'Close an omitted interval using the identical source outlines immediately before and after it. Obodas III’s kingdom continues during the expedition of Aelius Gallus; this is not Roman annexation.',sources:[{title:'Strabo. Geography, book XVI, 4.21–24.',url:'https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Strabo/16D%2A.html'},{title:'Oliver D. Hoover. Petra on the Hudson: The Nabataeans and their Coins at the American Numismatic Society. ANS Magazine 10.1, 2011.',url:'https://numismatics.org/wp-content/uploads/Spring2011.pdf'}]},
  {id:'conquest-dates',years:[-539,-525,-332,-331,-323,-305,-30,-27],decision:'Corrected snapshot lag at the conquest of Babylon and Egypt; distinguished Alexander’s dominion, Ptolemy’s governorship, royal title and Roman annexation. Augustus’ title begins in 27 BCE.',sources:[{title:'The Metropolitan Museum of Art. Egypt, 1000 B.C.–1 A.D.; Iran, 1000 B.C.–1 A.D.',url:'https://www.metmuseum.org/toah/ht/04/afe.html'},{title:'British Museum. The Cyrus Cylinder.',url:'https://www.britishmuseum.org/collection/object/W_1880-0617-1941'}]},
  {id:'cyprus-58-48',years:[-58,-48],decision:'Cyprus assigned to Rome from 58 BCE; restored to Ptolemaic control around 48/47 BCE. Annual view uses 48 BCE. Removed double fill.',sources:[{title:'T. B. Mitford. Notes on Some Published Inscriptions of Roman Cyprus. Annual of the British School at Athens.',url:'https://www.cambridge.org/core/journals/annual-of-the-british-school-at-athens/article/abs/notes-on-some-published-inscriptions-of-roman-cyprus1/25FFC6A3A9F921ACDD23A971646A1795'},{title:'Cypriote Antiquities in Reading. Bryn Mawr Classical Review, 2016.04.42.',url:'https://bmcr.brynmawr.edu/2016/2016.04.42'}]},
  {id:'vandal-raids',years:[455,458],decision:'Removed Rome and Campania raid footprints from Vandal sovereign territory; retained in Roman western territory.',sources:[{title:'Ralph W. Mathisen. Majorian. De Imperatoribus Romanis.',url:'https://roman-emperors.sites.luc.edu/major.htm'},{title:'Thomas Hodgkin. Italy and Her Invaders, book III, chapter V.',url:'https://penelope.uchicago.edu/Thayer/E/Gazetteer/Places/Europe/Italy/_Texts/HODIHI/2d_edition/3/5%2A.html'}]}

@@ -6,6 +6,7 @@
 body:not(.ancient-mode) .ancient-controls{display:none}
 .ancient-panel{display:none}.ancient-mode .ancient-panel{display:block}.ancient-mode .side-panel>:not(.ancient-panel){display:none!important}
 .ancient-panel>h2{font:20px/1.35 Georgia,serif;color:#efdfbd;margin:10px 0}
+.ancient-chronology-intro{border:1px solid #65583f;border-radius:7px;padding:10px;margin:12px 0;font-size:12px;line-height:1.65}.ancient-chronology-intro summary{cursor:pointer;color:#efdfbd}.ancient-chronology-intro p{margin:9px 0}
 .ancient-mode #starsCard,.ancient-mode #westernRomeNote,.ancient-mode #mapBanner,.ancient-mode #mongolScope,.ancient-mode #kyrgyzScope{display:none!important}
 .ancient-mode #empireLayer,.ancient-mode #empireLabelLayer,.ancient-mode #tradeLayer,.ancient-mode #campaignLayer,.ancient-mode #kyrgyzRouteLayer,.ancient-mode #routeLayer,.ancient-mode #pulseLayer,.ancient-mode #placeLayer,.ancient-mode #worldHistoryLayer,.ancient-mode #worldTerritoryLayer,.ancient-mode #worldTerritoryLabels,.ancient-mode #incidentLayer,.ancient-mode #expansionLayer{display:none!important}
 #ancientLayer{display:none}.ancient-mode #ancientLayer{display:block}.future-mode #ancientLayer,.future-mode .ancient-controls{display:none!important}
