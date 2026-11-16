@@ -257,8 +257,11 @@
  function ticks(){entrance.textContent=cal.format(catalog.range.min,language)+' · '+loc(['Ранние люди','Early humans','Алгачкы адамдар']);$('ticks').replaceChildren();for(const y of [catalog.range.min,-100000,-20000,-7000,1,1300,TIMELINE_MAX]){const e=make('span','tick-label',cal.format(y,language));e.style.left=(scale.toPosition(y)/100000)+'%';$('ticks').append(e);}const hint=document.querySelector('.timeline-hint');if(hint){hint.dataset.localeOwned='true';hint.textContent=cal.format(catalog.range.min,language)+' — '+cal.format(TIMELINE_MAX,language);}}
   localeSelect.addEventListener('change',()=>{renderYear(year);ticks();if($('modal').classList.contains('show')){if(deepModalMode)showOrigins(deepModalMode,deepProfile);else if(historyTopic==='china')showChina();else if(historyTopic==='kyrgyz')showKyrgyz();}});
  $('modalClose').addEventListener('click',()=>{deepModalMode=null;historyTopic=null;if($('modalBody').dataset.ancientOwned){delete $('modalBody').dataset.ancientOwned;delete $('modalBody').dataset.localeOwned;}});
- const incoming=cal.parse(new URLSearchParams(location.search).get('year'));
- if(incoming!==null&&incoming>=catalog.range.min&&incoming<610)renderYear(incoming);else{renderControls();draw();}ticks();syncRange();
+ // Use the original address: other modules may already have saved their initial year.
+ const incoming=cal.parse(stateParams.get('year'));
+ if(incoming===null||incoming<catalog.range.min||incoming>TIMELINE_MAX)renderYear(catalog.range.min);
+ else if(incoming<610)renderYear(incoming);
+ else{renderControls();draw();}ticks();syncRange();
  const query=new URLSearchParams(location.search),requestedOrigins=query.get('origins');if(['prophets','dispersal','settlement','peoples'].includes(requestedOrigins))showOrigins(requestedOrigins,query.get('prophet'));
  const requestedRecord=catalog.records.find(r=>r.id===query.get('ancient')&&(incoming===null||(r.from<=incoming&&incoming<r.to)));if(requestedRecord)requestAnimationFrame(()=>openRecord(requestedRecord));
  document.addEventListener('chronograph:open-ancient',event=>{const r=catalog.records.find(r=>r.id===event.detail);if(r)openRecord(r);});
