@@ -15,6 +15,7 @@ const checks = [
   'scripts/world/render-test.cjs',
   'scripts/world/continuity-test.cjs',
   'scripts/world/steppe-contours-test.cjs',
+  'scripts/world/harsha-frontier-test.cjs',
   'scripts/world/cache-test.cjs',
   'scripts/world/labels-test.cjs',
   'scripts/world/pagination-test.cjs',

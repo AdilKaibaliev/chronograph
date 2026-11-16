@@ -10,6 +10,8 @@ module.exports=empires=>{
  for(const file of ['cartography-legacy.cjs','legacy-frontiers.cjs','bithynia-frontiers.cjs','palaiologan-frontiers.cjs','iraq-jazira.cjs','frontiers-141.json','early-boundary-review.cjs','mediterranean-review.cjs','anatolian-review.cjs','europe-central-review.cjs','arabia-khitai-review.cjs','altai-jochi-review.cjs','taurus-china-review.cjs','cartography-reviewed.cjs','qing-stages.cjs','mongol-frontiers.cjs','coast-geometry.cjs','cartography-geometry.cjs','outline-policy.cjs','land-coasts.json','land-coast-tiles.json'])hash.update(fs.readFileSync(path.join(__dirname,file)));
  hash.update(JSON.stringify(require('./pacific-land.cjs')));
  hash.update(fs.readFileSync(path.join(__dirname,'steppe-contours.cjs')));
+ hash.update(fs.readFileSync(path.join(__dirname,'harsha-frontier.cjs')));
+ hash.update(fs.readFileSync(path.join(__dirname,'../../research/harsha-southern-reference.json')));
  hash.update(fs.readFileSync(path.join(__dirname,'../../research/turkic-contours.json')));
  hash.update(fs.readFileSync(path.join(__dirname,'estuary-coasts.cjs'))).update(JSON.stringify(require('./estuary-coasts.cjs').patches));
  const key=hash.digest('hex'),cachePath=path.join(__dirname,'../../.local-checks/legacy-cartography-cache.json');

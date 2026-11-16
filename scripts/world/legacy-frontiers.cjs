@@ -43,7 +43,7 @@ const messages=[
  ['Формирование Каракитайского государства; продвижение Елюй Даши на запад.','Formation of the Qara Khitai state; Yelü Dashi’s movement westward.','Каракытай мамлекетинин калыптанышы; Елюй Дашинин батышка жылышы.']
  ,...regionalReview.messages,...mediterraneanReview.messages,...anatolianReview.messages,...europeCentralReview.messages,...arabiaKhitaiReview.messages,...altaiJochiReview.messages,...taurusChinaReview.messages,...frankishPartitions.messages,...outerFrontiers.messages];
 function prepare(input){
- const es=structuredClone(input);if(es[0]?.frontierReviewVersion===12)return es;
+ const es=structuredClone(input);if(es[0]?.frontierReviewVersion===13)return es;
  const by=new Map(es.map(e=>[e.id,e])),at=(id,y)=>by.get(id)?.keyframes.filter(f=>f.year<=y).at(-1);
  // The generic geometry compiler also accepts stand-alone regional inputs.
  // Cross-state historical repairs require the complete chronological catalogue.
@@ -146,8 +146,9 @@ function prepare(input){
  frankishPartitions.legacy(es,{frame,at,by,cite,I,D,B});
  outerFrontiers.legacy(es,{frame,at,by,cite,I,D,B});
  iberianConquest.apply(es,{frame,at,by,cite,I,D,B});
+ require('./harsha-frontier.cjs').apply(es);
  for(const id of ['abbasidIraq','ayyubid','mongol','ilkhanate'])cite(id,'iraqJazira');
- for(const e of es)e.frontierReviewVersion=12;
+ for(const e of es)e.frontierReviewVersion=13;
  return es;
 }
 // [losing/overextended outline, authority at the shared edge, from, until, source]
