@@ -6,14 +6,13 @@ const paleoTimeline=(()=>{
  function frameIndex(y,frames){
   if(!Number.isInteger(y)||!y)return -1;
   const age=toBP(y);
-  // All 33 published frames are usable. Years after 1950 use the final frame
-  // only as an explicitly dated reference, never as a present-day survey.
-  if(age>80000)return -1;
-  let best=0;
-  for(let i=1;i<frames.length;i++)if(Math.abs(frames[i].bp-age)<Math.abs(frames[best].bp-age))best=i;
-  return best;
+  if(!frames.length||age>frames[0].bp)return -1;
+  // Descending dated frames. At an exact midpoint retain the older frame.
+  let lo=0,hi=frames.length-1;
+  while(lo<hi){const mid=(lo+hi)>>1;if(frames[mid].bp>age)lo=mid+1;else hi=mid;}
+  return lo>0&&Math.abs(frames[lo-1].bp-age)<=Math.abs(frames[lo].bp-age)?lo-1:lo;
  }
- const coverage=y=>!Number.isInteger(y)||!y?'invalid':toBP(y)>80000?'unavailable':y>1950?'reference':'reconstruction';
+ const coverage=y=>!Number.isInteger(y)||!y?'invalid':toBP(y)>352000?'unavailable':y>1950?'reference':'reconstruction';
  return {fromBP,toBP,frameIndex,coverage};
 })();
 if(typeof module!=='undefined')module.exports=paleoTimeline;

@@ -7,6 +7,11 @@ const hash=s=>crypto.createHash('sha256').update(s).digest('hex');
 assert.equal(path.dirname(out),root);if(fs.existsSync(out))fs.rmSync(out,{recursive:true});fs.mkdirSync(path.join(out,'assets'),{recursive:true});
 function write(p,s){const f=path.join(out,p);fs.mkdirSync(path.dirname(f),{recursive:true});fs.writeFileSync(f,s);return '/'+p;}
 const assets=[];function asset(name,s,ext='js'){if(ext==='js')new vm.Script(s);const p=write('assets/'+name+'.'+hash(s).slice(0,16)+'.'+ext,s);assets.push({url:p,bytes:Buffer.byteLength(s),sha256:hash(s)});return p;}
+// Older landscape frames are requested only for the selected year. Keeping them
+// out of the startup scripts avoids downloading all 272 extra maps on each visit.
+const landscapeRoot=path.join(root,'research/paleogeography-older'),gunzip=require('node:zlib').gunzipSync;
+const landscapeManifest=JSON.parse(gunzip(fs.readFileSync(path.join(landscapeRoot,'manifest.json.gz'))));
+for(const f of landscapeManifest.frames){assert(/^\d+\.json\.gz$/.test(f.file));const raw=gunzip(fs.readFileSync(path.join(landscapeRoot,f.file)));assert.equal(hash(raw),f.sha256);const value=JSON.parse(raw);assert.equal(value.bp,f.bp);assert.equal(value.year,f.year);assert.equal(value.source,'krapp2021');asset('landscape-'+f.bp,raw.toString(),'json');}
 let html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const icon=decodeURIComponent(html.match(/href="data:image\/svg\+xml,([^"]+)"/)[1]);write('icon.svg',icon);write('logo.svg',icon);
 const verification=JSON.parse(fs.readFileSync(path.join(__dirname,'verification.json'),'utf8'));

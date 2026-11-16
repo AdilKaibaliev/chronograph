@@ -82,7 +82,7 @@ module.exports=function prepareAncient(world,kyrgyz){
  c.coverage={records:c.records.length,kyrgyz:c.records.filter(r=>r.kyrgyz).length,sites:c.records.filter(r=>r.coord).length,environmentRecords:c.records.filter(r=>r.kind==='environment').length,
   datedPoliticalGeometry:boundaries.records.length,territorialEntities:boundaries.entities.length,worldComplete:false,
   publicationScope:'Selected ancient societies and source-based territorial reconstructions, joined to the existing 610–2026 atlas.',
-  paleogeographyFrames:paleo.frames.length,paleogeographyRangeBP:[80000,2500],
+  paleogeographyFrames:paleo.frames.length,paleogeographyRangeBP:[paleo.frames[0].bp,paleo.frames.at(-1).bp],
   remainingResearch:['Ancient boundaries are reconstructions, not surveyed annual frontiers.','PaleoMIST physical geography uses dated 2500-year model frames, without annual interpolation. Older periods retain the modern reference. River courses and inland lake levels are not reconstructed by this marine model.','Pre-610 and post-610 territorial frames use independent sources and resolutions.']};
  return c;
 };
