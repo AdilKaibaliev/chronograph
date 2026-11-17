@@ -11,6 +11,11 @@ Harsha: restore display after 632 through 647; constrain the southern envelope
 using a documented regional reference. See HARSHA_FRONTIER_REVIEW.md. Named
 centre and neighbour checks cover 610, 620, 632, 633, 641, 646 and 647.
 
+South-West Africa: the 1890 treaty's 20E/22S/21E/18S turn is absent from
+the displayed Namibia and administering imperial profiles. Restore this
+specific segment in 1890–1945; see NAMIBIA_MERIDIAN_REVIEW.md. This does not
+certify the complete Namibian or German/British imperial profiles.
+
 ## Confirmed straight segments: preserve
 
 - USA/Canada: the displayed 49th-parallel segments west of the Rockies in
@@ -28,8 +33,13 @@ centre and neighbour checks cover 610, 620, 632, 633, 641, 646 and 647.
 
 - USA 1803–1812: a 49th-parallel segment from 95W to 111W needs review against
   the unresolved northern limit of the Louisiana Purchase before 1818.
-- Canada 1870–1931: long interior rectangular edges at 60N/95W require checking
-  against the territory transfer chronology and imperial ownership rendering.
-  The validity of the southern treaty boundary does not validate these edges.
+- Canada 1870–1945: the final displayed outlines omit Whitehorse and
+  Yellowknife and stop at 60N. Canadian Heritage's territorial chronology
+  confirms this is missing territory. A repair must distinguish the 1870
+  mainland transfer, British Columbia (1871), PEI (1873), Arctic islands
+  (1880), Alaska settlement (1903), Labrador decision (1927), and Newfoundland
+  accession (1949). Not repaired in this batch; do not shift the false
+  northern expansion from 1946 to another arbitrary year.
+  https://www.canada.ca/en/canadian-heritage/services/historical-boundaries-canada.html
 - The remaining flagged geometries require individual source and dated
   neighbour checks. No claim of complete historical verification is made.
