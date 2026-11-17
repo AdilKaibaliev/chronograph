@@ -18,6 +18,7 @@ const checks = [
   'scripts/world/harsha-frontier-test.cjs',
   'scripts/world/namibia-meridian-test.cjs',
   'scripts/world/canada-north-test.cjs',
+  'scripts/world/vancouver-island-test.cjs',
   'scripts/world/cache-test.cjs',
   'scripts/world/labels-test.cjs',
   'scripts/world/pagination-test.cjs',

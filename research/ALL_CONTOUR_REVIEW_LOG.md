@@ -37,7 +37,12 @@ certify the complete Namibian or German/British imperial profiles.
   British Columbia excluded until 1871 and the northern archipelago filled
   from 1880. See CANADA_NORTHERN_TRANSFERS_REVIEW.md. Detailed pre-1880
   island claims, the 1903 Alaska dispute, the pre-1927 Labrador dispute,
-  southern provincial sketches and Vancouver Island still require review.
+  and southern provincial sketches still require review. Vancouver Island is
+  addressed separately below.
   https://www.canada.ca/en/canadian-heritage/services/historical-boundaries-canada.html
 - The remaining flagged geometries require individual source and dated
   neighbour checks. No claim of complete historical verification is made.
+
+## Vancouver Island — 17 November 2026
+Source-backed repair of British treaty extent (1846), Canadian accession (1871), and US/Oregon exclusion including Victoria. See VANCOUVER_ISLAND_REVIEW.md. Remaining profiles are not certified by this local correction.
+

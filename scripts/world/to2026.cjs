@@ -27,7 +27,14 @@ module.exports=c=>{
   const p={...structuredClone(b.p),from:2011,to:2027,period:Array(3).fill('2011–2026'),name,title:name,approx:false,historicalContext:true,
    text:b.p.text.map((s,i)=>['Историческая справка за ','Historical background for ','Тарыхый маалымат: '][i]+period+': '+s)};
   b.e.phases.push(p);
-  c.areas.push({...structuredClone(b.a),id:id+'-2011',from:2011,to:2027,name,title:name,text:p.text});
+  const next={...structuredClone(b.a),id:id+'-2011',from:2011,to:2027,name,title:name,text:p.text};
+  // Retain the sourced Vancouver Island exclusion when the regional Oregon
+  // frame is carried into 2011; its raw sketch predates the reviewed shape.
+  if(id==='1848-oregon'){
+   const reviewed=c.cartography.shapes[c.cartography.areas[b.a.id]];
+   if(reviewed){next.polygons=structuredClone(reviewed);next.points=next.polygons[0];}
+  }
+  c.areas.push(next);
  }
  function set(id,rows,meta={}){
   revised.add(id);const b=before.get(id);let e=c.entries.find(e=>e.id===id);
