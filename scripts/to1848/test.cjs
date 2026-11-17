@@ -12,8 +12,14 @@ assert.deepEqual(delivered.range,{...c.range,max:require('../incidents/integrate
 assert(html.includes('TIMELINE_MAX='+require('../incidents/integrate.cjs').timelineMax+';'));assert(html.includes('name="chronograph-version"')); 
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html));
 for(let y=1816;y<=1848;y++){
- const current=rows=>rows.map(({entry,...item})=>({...item,entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to)}}));
- const laterAdditions=require('../world/survey-141.cjs').ids;
+ // Only Oregon's reviewed 1848+ narrative is replaced. Dedicated annual
+ // tests cover its new chronology; all older/unrelated narratives stay here.
+ const current=rows=>rows.filter(r=>r.entry.id!=='1848-oregon'||y<1848).map(({entry,...item})=>{
+  // The new 1848 phase also shortens the preceding Oregon phase by one year.
+  const normalize=p=>entry.id==='1848-oregon'?{...p,to:Math.min(p.to,1848)}:p;
+  return {...item,phase:normalize(item.phase),entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to).map(normalize)}};
+ });
+ const laterAdditions=[...require('../world/survey-141.cjs').ids,'review-krakow-republic','review-san-juan'];
  assert.deepEqual(current(dh.at(y).filter(r=>!laterAdditions.includes(r.entry.id))),current(h.at(y)));
  assert.deepEqual(dh.areasAt(y).filter(a=>!laterAdditions.includes(a.entry)).map(a=>a.entry),h.areasAt(y).map(a=>a.entry),'Dated map selection '+y);
  for(const r of c.regions)assert(h.at(y,r.id).length,'Empty region '+r.id+' in '+y);

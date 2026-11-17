@@ -21,7 +21,9 @@ const old={entries:c.entries.filter(e=>!e.id.startsWith('cartography-')).map(e=>
 assert.equal(crypto.createHash('sha256').update(JSON.stringify(require('../world/kyrgyz-baseline.cjs')(require('../world/arctic-baseline.cjs')(old,undefined,1790)))).digest('hex'),'14524ecd14c7eb7cdeef1d4ffd05d6e752c4e2040604f936c22a51279de9ef4a','Published 610–1789 catalogue changed');
 for(let y=1790;y<=1815;y++){
  const current=rows=>rows.map(({entry,...item})=>({...item,entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to)}}));
- const laterAdditions=require('../world/survey-141.cjs').ids;
+ // Kraków is a new source-backed republic, independently checked for every
+ // year of its life in krakow-oregon-test; preserve all older profiles here.
+ const laterAdditions=[...require('../world/survey-141.cjs').ids,'review-krakow-republic'];
  assert.deepEqual(current(dh.at(y).filter(r=>!laterAdditions.includes(r.entry.id))),current(h.at(y)));
  assert.deepEqual(dh.areasAt(y).filter(a=>!laterAdditions.includes(a.entry)).map(a=>a.entry),h.areasAt(y).map(a=>a.entry),'Dated map selection '+y);
  for(const r of c.regions)assert(h.at(y,r.id).length,'Empty '+r.id+' in '+y);

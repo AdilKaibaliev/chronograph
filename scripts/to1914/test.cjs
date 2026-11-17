@@ -13,9 +13,11 @@ assert.deepEqual(delivered.range,{...c.range,max:require('../incidents/integrate
 assert(html.includes('name="chronograph-version" content="1.41.0"'));
 for(const id of ['yearRange','worldYearInput'])assert(new RegExp('id="'+id+'"[^>]*max="'+require('../incidents/integrate.cjs').timelineMax+'"').test(html));
 for(let y=1849;y<=1914;y++){
- const additional=new Set(['review-ussuri-joint','review-acre-valley','review-manua','review-papuan-territory','review-kaiser-wilhelmsland','1991-belize','1991-solomons','survey-northern-solomons','survey137-mosquitia','survey138-tarapaca','survey138-tacna-coast','1939-chaco',...require('../world/survey-141.cjs').ids]);
+ const additional=new Set(['review-san-juan','review-ussuri-joint','review-acre-valley','review-manua','review-papuan-territory','review-kaiser-wilhelmsland','1991-belize','1991-solomons','survey-northern-solomons','survey137-mosquitia','survey138-tarapaca','survey138-tacna-coast','1939-chaco',...require('../world/survey-141.cjs').ids]);
  const changedSamoanPhase=row=>['1914-american-samoa','1914-western-samoa'].includes(row.entry.id)&&y<row.entry.phases.find(p=>p.from>=1914)?.from;
- const current=rows=>rows.filter(row=>!changedSamoanPhase(row)).map(({entry,...item})=>({...item,entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to)}}));assert.deepEqual(current(dh.at(y).filter(row=>!additional.has(row.entry.id))),current(h.at(y)));assert.deepEqual(dh.areasAt(y).filter(a=>!additional.has(a.entry)).map(a=>a.entry),h.areasAt(y).map(a=>a.entry),'Dated map selection '+y);
+ // Oregon's obsolete claims narrative is replaced by the independently
+ // tested 1848/1853/1859 chronology; retain its identity in the map-ID check.
+ const current=rows=>rows.filter(row=>!changedSamoanPhase(row)&&row.entry.id!=='1848-oregon').map(({entry,...item})=>({...item,entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to)}}));assert.deepEqual(current(dh.at(y).filter(row=>!additional.has(row.entry.id))),current(h.at(y)));assert.deepEqual(dh.areasAt(y).filter(a=>!additional.has(a.entry)).map(a=>a.entry),h.areasAt(y).map(a=>a.entry),'Dated map selection '+y);
  for(const r of c.regions)assert(h.at(y,r.id).length,'Empty region '+r.id+' in '+y);
  const mapped=new Set();for(const a of h.areasAt(y)){assert(h.get(a.entry,y));assert(!mapped.has(a.entry),'Duplicate area: '+a.entry);mapped.add(a.entry);}
  for(const p of h.at(y))assert(mapped.has(p.entry.id),'Unmapped profile '+p.entry.id);
