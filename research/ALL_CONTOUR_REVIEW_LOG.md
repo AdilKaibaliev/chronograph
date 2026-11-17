@@ -33,13 +33,11 @@ certify the complete Namibian or German/British imperial profiles.
 
 - USA 1803–1812: a 49th-parallel segment from 95W to 111W needs review against
   the unresolved northern limit of the Louisiana Purchase before 1818.
-- Canada 1870–1945: the final displayed outlines omit Whitehorse and
-  Yellowknife and stop at 60N. Canadian Heritage's territorial chronology
-  confirms this is missing territory. A repair must distinguish the 1870
-  mainland transfer, British Columbia (1871), PEI (1873), Arctic islands
-  (1880), Alaska settlement (1903), Labrador decision (1927), and Newfoundland
-  accession (1949). Not repaired in this batch; do not shift the false
-  northern expansion from 1946 to another arbitrary year.
+- Canada: the missing mainland north of 60N is repaired from 1870, with
+  British Columbia excluded until 1871 and the northern archipelago filled
+  from 1880. See CANADA_NORTHERN_TRANSFERS_REVIEW.md. Detailed pre-1880
+  island claims, the 1903 Alaska dispute, the pre-1927 Labrador dispute,
+  southern provincial sketches and Vancouver Island still require review.
   https://www.canada.ca/en/canadian-heritage/services/historical-boundaries-canada.html
 - The remaining flagged geometries require individual source and dated
   neighbour checks. No claim of complete historical verification is made.

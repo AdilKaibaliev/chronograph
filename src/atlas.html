@@ -1273,7 +1273,7 @@ function frameCaption(emp,y){
   if(emp.id==='kyrgyzKhaganate'&&y>=840&&y<924)return 'Внешний контур: обобщённый военно-политический охват расцвета IX века; сопоставлен с реконструкцией около 860 года.';
   const f=frameFor(emp,y);
   if(!f||f.hidden||(f.type==='population'||emp.type==='population')&&!(f.alwaysVisible||emp.alwaysVisible)&&!showKyrgyzContext)return 'Для выбранного года контур не показан.';
-  return f.year===y ? 'Контур: исторический срез '+f.year+' года.' : 'Контур: последний доступный срез '+f.year+' года; выбран '+y+' год. Изменения между срезами не восстановлены.';
+  return f.year===y ? 'Контур: исторический срез '+f.year+' года.' : 'Датировка контура: '+f.year+' год. Выбранный год: '+y+'.';
 }
 
 function sourceMeta(emp){

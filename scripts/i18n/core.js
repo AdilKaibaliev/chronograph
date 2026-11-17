@@ -17,7 +17,7 @@ function createChronographTranslator(rows) {
     else if (value.startsWith('тип слоя: ')) out=pick('Layer type: ','Катмар түрү: ')+translate(value.slice(10),lang);
     else if (value.startsWith('граница: ')) out=pick('Boundary: ','Чек ара: ')+translate(value.slice(9),lang);
     else if (/^Контур: исторический срез \d+ года\.$/.test(value)) {const n=value.match(/\d+/)[0];out=pick('Boundary snapshot: '+n+' CE.', 'Чек аранын тарыхый кесими: '+n+'-жыл.');}
-    else if (/^Контур: последний доступный срез/.test(value)) {const [f,y]=value.match(/\d+/g);out=pick('Latest available boundary snapshot: '+f+' CE; selected year: '+y+' CE. Changes between snapshots have not been reconstructed.','Акыркы жеткиликтүү чек ара кесими: '+f+'-жыл; тандалган жыл: '+y+'. Кесимдердин ортосундагы өзгөрүүлөр калыбына келтирилген эмес.');}
+    else if (/^Датировка контура:/.test(value)) {const [f,y]=value.match(/\d+/g);out=pick('Boundary date: '+f+' CE. Selected year: '+y+' CE.','Контурдун датасы: '+f+'-жыл. Тандалган жыл: '+y+'.');}
     else if (/^≈\d+ г\. х\. · /.test(value)) {const at=value.indexOf(' · ');out=translate(value.slice(0,at),lang)+' · '+translate(value.slice(at+3),lang);}
     else if (/^≈\d+ г\. х\.$/.test(value)) out=value.replace('г. х.',pick('AH','х. ж.'));
     else if (/^\d+ год$/.test(value)) out=value.replace(' год',pick(' CE','-жыл'));
