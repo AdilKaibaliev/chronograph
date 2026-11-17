@@ -104,3 +104,6 @@
 #worldMap .world-territory>path[role=button]{stroke-width:.8}
 #worldMap .empire-path.selected,#worldMap .empire-path:hover,#worldMap .empire-path:focus-visible{stroke:#634725;stroke-width:1.8}
 #worldMap .world-territory.selected>path[role=button],#worldMap .world-territory>path[role=button]:hover,#worldMap .world-territory>path[role=button]:focus-visible{stroke:#634725;stroke-width:1.8}
+.ticks .tick-label:first-child{transform:none}
+.ticks .tick-label:last-child{transform:translateX(-100%)}
+@media(max-width:700px){.timeline-row{grid-template-columns:36px max-content minmax(0,1fr)}}
