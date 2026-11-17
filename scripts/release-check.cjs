@@ -1,6 +1,6 @@
 'use strict';
 
-const { spawnSync } = require('node:child_process');
+const { spawn, spawnSync } = require('node:child_process');
 const path = require('node:path');
 
 const projectRoot = path.resolve(__dirname, '..');
@@ -83,15 +83,42 @@ const checks = [
   'scripts/seo/test.cjs'
 ];
 
-for (const file of checks) {
-  console.log(`Running ${file}`);
-  const result = spawnSync(process.execPath, [file], {
-    cwd: projectRoot,
-    stdio: 'inherit'
-  });
-  if (result.error) {
-    console.error(result.error.message);
-    process.exit(1);
+// This exhaustive annual comparison only reads the completed atlas and writes
+// its own verification report. Run it alongside the other tests, with at most
+// two children, so the full suite stays within the hosting build time limit.
+// Both builds remain serial and every check must pass before packaging.
+const parallelCheck = 'scripts/world/survey-141-test.cjs';
+let frontierProcess;
+let frontierResult;
+let completed = 0;
+
+async function runChecks() {
+  for (const file of checks) {
+    if (file === parallelCheck) continue;
+    if (file === 'scripts/seo/build.cjs') {
+      const result = await frontierResult;
+      if (!result || result.code !== 0) throw new Error(`${parallelCheck} failed (${result?.code ?? 'not started'})`);
+      completed++;
+    }
+    console.log(`Running ${file}`);
+    const result = spawnSync(process.execPath, [file], { cwd: projectRoot, stdio: 'inherit' });
+    if (result.error || result.status !== 0) throw new Error(`${file}: ${result.error?.message || `exit ${result.status}`}`);
+    completed++;
+    if (file === 'scripts/i18n/build.cjs') {
+      console.log(`Running ${parallelCheck} (independent annual comparison)`);
+      frontierProcess = spawn(process.execPath, [parallelCheck], { cwd: projectRoot, stdio: 'inherit' });
+      frontierResult = new Promise(resolve => {
+        frontierProcess.once('error', error => { console.error(error.message); resolve({ code: 1 }); });
+        frontierProcess.once('close', code => resolve({ code }));
+      });
+    }
   }
-  if (result.status !== 0) process.exit(result.status || 1);
+  if (completed !== checks.length) throw new Error(`Incomplete release checks: ${completed}/${checks.length}`);
+  console.log(JSON.stringify({ pass: true, releaseChecks: completed }));
 }
+
+runChecks().catch(error => {
+  if (frontierProcess && frontierProcess.exitCode === null) frontierProcess.kill();
+  console.error(error.message);
+  process.exitCode = 1;
+});
