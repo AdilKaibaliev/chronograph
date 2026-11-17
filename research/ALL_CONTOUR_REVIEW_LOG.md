@@ -46,3 +46,41 @@ certify the complete Namibian or German/British imperial profiles.
 ## Vancouver Island — 17 November 2026
 Source-backed repair of British treaty extent (1846), Canadian accession (1871), and US/Oregon exclusion including Victoria. See VANCOUVER_ISLAND_REVIEW.md. Remaining profiles are not certified by this local correction.
 
+## Whole-catalogue pass — 17 November 2026
+
+The new pass inventories 763 profiles, 3,546 contour records and 2,778 unique
+geometries across the ancient, medieval and world catalogues. No invalid
+coordinate records were found. The 155 shape flags remain research flags;
+long straight treaty boundaries and population-region envelopes must not be
+treated as automatic errors.
+
+The annual 610–2026 raw-frontier diagnostic examined 19,799 unique pairs:
+no empty years or geometry exceptions, 997 intersecting dated combinations
+in 114 territory pairs. These are BEFORE the boundary-evidence presentation
+pass. They are not 997 visibly overpainted areas or 997 proven ownership
+errors. Full presentation tests must be reported separately.
+
+Kraków and the Oregon narrative are corrected from primary documentary and
+cartographic sources; see KRAKOW_REPUBLIC_REVIEW.md. This pass does not
+certify every historical vertex or resolve every uncertain medieval frontier.
+
+## Verified release comparison
+
+After the Kraków, San Juan, Oregon and four frontier-pair corrections, the
+contour inventory contains 765 profiles, 3,554 records and 2,786 distinct
+geometries. Invalid-coordinate records: zero. The 155 research flags remain
+open; completing a local correction does not certify an entire profile.
+
+The 610–2026 comparison against release f6097e1 checks every annual map:
+167,341 unchanged rendered features, 520 changed features, no disappeared
+profiles and no newly introduced competing political fills. Changes are
+restricted to Warsaw, Austria, Prussia, Russia, Romania, the United States,
+the Oregon regional profile and the two new Kraków/San Juan profiles.
+Five dated attribution rules across four frontier pairs have documentary
+corroboration; see SOURCE_REVIEW_142.md. Independent annual controls cover
+103 Kraków years, 179 Oregon years and 181 San Juan years.
+
+The presentation check found a sticky-header defect at 1280×720: card action
+buttons could sit under the comparison header. At heights up to 850px that
+header now scrolls within the panel. The main timeline remains in place.
+

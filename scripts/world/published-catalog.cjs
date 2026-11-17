@@ -5,6 +5,7 @@ let c=structuredClone(require('./catalog.cjs'));
 c=require('./frontier-review.cjs')(c);
 c=require('./shared-frontiers.cjs')(c);
 c=require('./to2026.cjs')(c);
+c=require('./oregon-chronology.cjs')(c);
 // Preserve the political status of Greenland as well as its geometry across
 // the 2010/2011 catalogue transition.
 for(const a of c.areas.filter(a=>a.entry==='1789-greenland-posts'&&a.from>=2011))c.cartography.kinds[a.id]='polity';

@@ -57,7 +57,9 @@ if(fs.existsSync(baseline)){
  // Sourced Canadian transfer/island additions have separate annual geography
  // and event-date checks; retain the comparison of every older narrative.
  for(const id of ['canada-transfer-1870','canada-transfer-1871','canada-transfer-1873','canada-transfer-1880','canada-transfer-1949','canada-rupert-baffin-1870','vancouver-island-1846','vancouver-island-1849','vancouver-island-1866'])addedEvents.add(id);
- const preserved=(rows,key)=>key==='entries'?rows.filter(e=>!additions.has(e.id)).map(e=>{if(e.id==='zirid')return {...e,phases:[]};if(!['1914-american-samoa','1914-western-samoa'].includes(e.id))return e;return {...e,phases:e.phases.filter(p=>!(p.from===1899&&p.to===1900)).map(p=>p.from===1900?{...p,from:1899,period:p.period.map(t=>t.replace('1900','1899'))}:p)};}):rows.filter(e=>!addedEvents.has(e.id));
+ // The obsolete Oregon claim caption is replaced by the sourced 1848/1853/1859
+ // chronology; krakow-oregon-test checks every subsequent year independently.
+ const preserved=(rows,key)=>key==='entries'?rows.filter(e=>!additions.has(e.id)).map(e=>{if(['zirid','1848-oregon'].includes(e.id))return {...e,phases:[]};if(!['1914-american-samoa','1914-western-samoa'].includes(e.id))return e;return {...e,phases:e.phases.filter(p=>!(p.from===1899&&p.to===1900)).map(p=>p.from===1900?{...p,from:1899,period:p.period.map(t=>t.replace('1900','1899'))}:p)};}):rows.filter(e=>!addedEvents.has(e.id));
  for(const key of ['entries','events'])assert.deepEqual(preserved(require('./historical-window.cjs')(key==='events'?c[key].filter(e=>!integratedIds.has(e.id)):c[key],key),key),preserved(before[key],key),'Earlier narratives changed '+key);
  assert.deepEqual(require('./geometry-regression.cjs')(require('./historical-window.cjs')(require('./catalog.cjs').areas,'areas')),require('./geometry-regression.cjs')(before.areas),'Unexpected historical change');
 }
