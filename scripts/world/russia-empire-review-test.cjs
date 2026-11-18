@@ -50,4 +50,9 @@ for(const p of [[-153,57.5],[-134.95,57.05],[-151.26,60.55]]){point(1866,p,true,
 for(let y=1867;y<=2026;y++)point(y,[-134.95,57.05],true,'Baranof successor continuity','1789-usa');
 for(const [id,year] of [['early-bukhara',1868],['early-khwarazm',1873]]){const a=at(id,year);assert.equal(a.overlord,'1789-russian-empire');assert.equal(a.relationship,'dependency');checks+=2;}
 assert(c.russiaEmpireReview.records.length>100);for(const src of c.russiaEmpireReview.sources){assert(c.sources[src]?.title.length>20);assert(!c.sources[src].urls);}
+// Archive exceptions must never allow a deletion, a different owner or an
+// earlier transfer date. Only the newly restored land is admissible.
+const island=require('./russia-treaty-geography.json').urup,fixture={displayCartography:{land:island}},compare=require('./shoreline-fixture.cjs')(fixture,{...fixture,russiaEmpireReview:c.russiaEmpireReview});
+compare(island,[], '1918 japan');checks++;
+for(const [a,b,label] of [[[],island,'1918 japan'],[island,[],'1854 japan'],[island,[],'1918 1789-qing']]){assert.throws(()=>compare(a,b,label),/Geometry changed/);checks++;}
 console.log(JSON.stringify({pass:true,checks,annualImperialYears:196,transitionYears:[1700,1720,1721,1917,1918],scope:'Delivered coast-clipped geometry: core continuity, foreign exclusions, treaty dates, receiving states and dependencies'}));
