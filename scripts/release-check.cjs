@@ -21,6 +21,7 @@ const checks = [
   'scripts/world/vancouver-island-test.cjs',
   'scripts/world/krakow-oregon-test.cjs',
   'scripts/world/source-review-142-test.cjs',
+  'scripts/world/russia-empire-review-test.cjs',
   'scripts/world/cache-test.cjs',
   'scripts/world/labels-test.cjs',
   'scripts/world/pagination-test.cjs',

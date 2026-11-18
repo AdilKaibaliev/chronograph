@@ -97,7 +97,10 @@ module.exports=c=>{
  const ids=new Set(frames.map(f=>f.entry));
  for(const o of c.outlines.filter(o=>o.from<1946&&ids.has(o.entry))){
   const a=active(o.entry,o.from);if(!a||!frames.some(f=>f.id===a.id))continue;
-  let p=americanFix[o.entry]?americanShape(o.entry,o.polygons):shape(o.entry,o.from);
+  // A regional war-period card must not replace Russia's complete imperial
+  // envelope: doing so removed Siberia and the Pacific possessions in 1915.
+  // Apply the same external-neighbour correction to the existing whole outline.
+  let p=americanFix[o.entry]?americanShape(o.entry,o.polygons):o.entry==='1789-russian-empire'?D(o.polygons,U('China','Mongolia','Iran','Afghanistan')):shape(o.entry,o.from);
   o.polygons=p;o.points=p[0];frames.push({id:o.id,entry:o.entry,from:o.from,to:o.to,reason:'reviewed-owner-envelope'});
  }
  // These dependencies are already described explicitly in the historical
