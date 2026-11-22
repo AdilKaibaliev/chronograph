@@ -1,0 +1,53 @@
+.kyrgyz-study[hidden],#kyrgyzStudyKey[hidden]{display:none!important}
+.kyrgyz-study-mode #panel-compare>:not(#kyrgyzStudy){display:none!important}
+.kyrgyz-study-mode #panel-compare>#kyrgyzStudy:not([hidden]){display:block!important}
+.kyrgyz-study-mode #starsCard{max-height:96px}
+.kyrgyz-study-mode #starsContent{max-height:45px}
+.kyrgyz-study-mode #starsCard .stars-note{display:none}
+.kyrgyz-study-mode #worldEraStrip{display:none}
+.kyrgyz-study{padding:0 2px 18px;color:#e7dcc6;font-size:13px;line-height:1.6}
+.kyrgyz-study button,.kyrgyz-study select,.kyrgyz-study input{font:inherit;color:inherit;max-width:100%;box-sizing:border-box}
+.kyrgyz-study button{cursor:pointer;border:1px solid #756441;background:#332e23;border-radius:7px;padding:6px 9px;text-align:left}
+.kyrgyz-study button:hover,.kyrgyz-study button[aria-current=true],.kyrgyz-study button[aria-pressed=true]{background:#51452e;border-color:#d4b46f}
+.kyrgyz-study button:disabled{opacity:.4;cursor:default}
+.kyrgyz-study :is(button,input,select,summary):focus-visible{outline:2px solid #e3c783;outline-offset:2px}
+.kyrgyz-study-header{position:sticky;top:0;z-index:2;background:#242119;padding:0 0 6px;border-bottom:1px solid #695c40}
+.kyrgyz-study-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.kyrgyz-study h2{font:18px Georgia,serif;margin:2px 0 6px;color:#f2dfaf}
+.kyrgyz-study .kyrgyz-study-close{font-size:22px;line-height:1;border:0;background:none;padding:4px}
+.kyrgyz-study select,.kyrgyz-study input{display:block;width:100%;background:#342f23;border:1px solid #756441;border-radius:6px;padding:8px}
+.kyrgyz-study-intro{color:#c4b794;margin:8px 0;font-size:12px}
+.kyrgyz-study-header select{padding:5px;font-size:12px}
+.kyrgyz-study-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px}
+.kyrgyz-study-nav button{padding:4px 8px;font-size:12px}
+.kyrgyz-study-nav>span{font-variant-numeric:tabular-nums;color:#ccb783;font-size:12px;white-space:nowrap}
+.kyrgyz-study-contents{margin:6px 0;border-bottom:1px solid #514831;padding-bottom:5px}
+.kyrgyz-study summary{cursor:pointer;color:#d8bc7e;padding:4px 0;font-weight:600}
+.kyrgyz-study-contents input{margin:8px 0}
+.kyrgyz-study-contents ol{list-style:none;padding:0;margin:0;max-height:235px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.kyrgyz-study-contents li{margin:5px 0}
+.kyrgyz-study-contents button{width:100%;display:block}
+.kyrgyz-study-contents small{display:block;color:#bdb092;font-size:11px;margin-top:2px}
+.kyrgyz-study-article h3{font:22px/1.2 Georgia,serif;color:#f3e1b5;margin:7px 0 12px}
+.kyrgyz-study-meta{color:#c6ac72;font-size:11px;text-transform:uppercase;letter-spacing:.035em}
+.kyrgyz-study-article p{margin:10px 0}
+.kyrgyz-study-geography{font-size:12px;color:#bfb295;border-left:2px solid #887342;padding-left:10px}
+.kyrgyz-study h4{font-size:13px;color:#dec58e;margin:10px 0 7px}
+.kyrgyz-study-places button{display:block;width:100%;margin:6px 0}
+.kyrgyz-study .kyrgyz-study-fit{border-style:dashed;color:#dbc799;text-align:center}
+.kyrgyz-study-sources{margin:12px 0;font-size:11px;color:#b9ae95}
+.kyrgyz-study-question{margin-top:16px;border-top:1px solid #514831;padding-top:6px}
+.kyrgyz-study-question p{font-size:12px}
+.kyrgyz-study-key{position:absolute;bottom:12px;right:12px;max-width:min(280px,40%);pointer-events:none;background:#f2e8cfe8;border:1px solid #a68d53;border-radius:7px;padding:6px 9px;color:#473c27;font:11px/1.4 system-ui;z-index:6}
+.kyrgyz-study-key span{display:block}
+.kyrgyz-study-route{fill:none;stroke:var(--study-color);stroke-width:2.5;stroke-dasharray:7 5;vector-effect:non-scaling-stroke;pointer-events:none}
+.kyrgyz-study-region{fill:#c49e4540;stroke:var(--study-color);stroke-width:1;stroke-dasharray:3 3}
+.kyrgyz-study-dot{fill:var(--study-color);stroke:#fff7de;stroke-width:1.5}
+.kyrgyz-study-pin{cursor:pointer}
+.kyrgyz-study-pin:focus{outline:none}
+.kyrgyz-study-pin:focus .kyrgyz-study-dot{stroke:#151c21;stroke-width:3}
+.kyrgyz-study-number{font:700 10px system-ui;fill:#fff;stroke:none;pointer-events:none}
+.kyrgyz-study-place-name{font:600 11px system-ui;fill:#302818;stroke:#f2e9cf;stroke-width:3px;paint-order:stroke;stroke-linejoin:round;pointer-events:none}
+.kyrgyz-study-mode #tradeLayer{display:none}
+.future-mode #kyrgyzStudyMap,.future-mode #kyrgyzStudyKey{display:none}
+@media(max-width:700px){.kyrgyz-study h2{font-size:18px}.kyrgyz-study-article h3{font-size:20px}.kyrgyz-study-header{position:static}.kyrgyz-study-key{font-size:10px;bottom:56px;right:7px;max-width:65%}.kyrgyz-study-mode .map-legend{display:none}}

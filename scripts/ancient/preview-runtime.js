@@ -240,8 +240,8 @@
  activeEvent=function(y){if(y>=610)return baseActiveEvent(y);return {title:t('title'),desc:t('current'),ah:labels.era[li()][y<0?0:1],place:t('title'),type:t('title'),coord:null,world:[]};};
  setViewport=function(){baseViewport();for(const g of [...map.querySelectorAll('.ancient-marker-content'),...textualMap.querySelectorAll('.textual-map-label')])g.setAttribute('transform',`scale(${1/(mapState.scale*(svg.getScreenCTM()?.a||1))})`);resizeMovements();arrangeLabels();};
  window.addEventListener('resize',()=>setViewport());
- $('kyrgyzHistoryBtn').addEventListener('click',e=>{if(year<610){e.stopImmediatePropagation();showKyrgyz();}},true);
- $('kyrgyzParallel').addEventListener('click',e=>{if(year<610){e.stopImmediatePropagation();showKyrgyz();}},true);
+ // The unified Kyrgyz course includes these early records and owns both entry
+ // buttons after this runtime has initialised.
  renderYear=function(value){
   let target=Number(value);if(target===0)target=year<0?1:-1;if(!cal.valid(target))return;target=Math.max(catalog.range.min,Math.min(TIMELINE_MAX,target));
   clearTextPlace();clearContinuitySelection();const ancient=target<610;document.body.classList.toggle('ancient-mode',ancient);

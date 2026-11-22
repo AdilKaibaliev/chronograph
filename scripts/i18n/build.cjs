@@ -162,7 +162,9 @@ for(const event of worldData.events.filter(e=>e.base)){
  assert(event.sources.length&&event.sources.every(id=>worldData.sources[id]),'Missing reference for '+event.id);
  if([800,900,950,1000,1100,1200].includes(event.year)||/(?:^|[\s·])(?:около|ок\.)\s*\d|традиционная точка/i.test(event.title[0]))event.approx=true;
 }
-worldData.events=[...incidentData.events.filter(e=>!e.referenceOnly),...worldData.events,...incidentData.events.filter(e=>e.referenceOnly)];
+const kyrgyzStudyData=require('../world/kyrgyz-study-data.cjs');
+Object.assign(worldData.sources,kyrgyzStudyData.sources);
+worldData.events=[...incidentData.events.filter(e=>!e.referenceOnly),...worldData.events,...kyrgyzStudyData.events,...incidentData.events.filter(e=>e.referenceOnly)];
 html=html.replace('TIMELINE_MAX=2010;','TIMELINE_MAX=2026;').replaceAll('max="2010"','max="2026"').replace('1789,2010];','1789,2026];');
 const worldRuntime=fs.readFileSync(root+'/../world/core.js','utf8').replace("if(typeof module!=='undefined')module.exports={createWorldHistory};",'')+'\nconst WORLD_HISTORY='+JSON.stringify(worldData).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../world/border-evidence.js','utf8')+'\n'+fs.readFileSync(root+'/../world/runtime.js','utf8').replace('// TERRITORIES_RUNTIME',fs.readFileSync(root+'/../world/territory-runtime.js','utf8'))+'\n'+fs.readFileSync(root+'/../late/runtime.js','utf8')+'\n'+fs.readFileSync(root+'/../world/map-transition.js','utf8');
 const incidentCatalog=require('../incidents/catalog.cjs');
@@ -204,6 +206,13 @@ html=html.replace('</head>','<meta name="chronograph-version" content="1.41.0">\
 const parallelStyle='#kyrgyzParallel{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:2px 6px;background:transparent;border:0;color:#dfcca3;cursor:pointer;text-align:left;font:inherit;font-size:12px}#kyrgyzParallel:hover,#kyrgyzParallel:focus-visible{color:#fff;text-decoration:underline}.future-mode #kyrgyzParallel{display:none}.modal-box select{max-width:100%}.kyrgyz-period-nav{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0}';
 html=html.replace('</style>',parallelStyle+'</style>');
 html=require('../ancient/integrate.cjs')(html);
+const ancientStart=html.indexOf('const ANCIENT_PREVIEW=')+'const ANCIENT_PREVIEW='.length;
+const ancientForStudy=JSON.parse(html.slice(ancientStart,html.indexOf(';\n',ancientStart)));
+const kyrgyzStudy=require('../world/kyrgyz-study-catalog.cjs')(worldData,witnessData,kyrgyzStages,ancientForStudy,worldTextRow);
+const studyRuntime=fs.readFileSync(root+'/../world/kyrgyz-study-core.js','utf8').replace("if(typeof module!=='undefined')module.exports={createKyrgyzStudy};",'')+'\nconst KYRGYZ_STUDY='+JSON.stringify(kyrgyzStudy).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../world/kyrgyz-study-runtime.js','utf8');
+const studyEnd=html.lastIndexOf('})();');html=html.slice(0,studyEnd)+'\n'+studyRuntime+'\n'+html.slice(studyEnd);
+html=html.replace('</style>',fs.readFileSync(root+'/../world/kyrgyz-study-style.css','utf8')+'\n</style>');
+for(const script of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(script[1]);
 fs.writeFileSync(repositoryBuild?'index.html':'outputs/chronograph_1_1.html',html);
 fs.writeFileSync(root+'/compiled-messages.json',JSON.stringify(rows,null,2));
 console.log(JSON.stringify({messages:rows.length,eventTitles:Object.keys(translatedEvents).length,eventDescriptions:Object.values(translatedEvents).filter(x=>x.length===4).length,bytes:Buffer.byteLength(html)}));
