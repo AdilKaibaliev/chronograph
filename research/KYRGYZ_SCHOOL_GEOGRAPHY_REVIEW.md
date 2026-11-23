@@ -36,3 +36,5 @@ The speculative 1575 Pamir card anchored in Alay was removed. Atake mission and 
 Local markers use the common selected year and camera. Clicking a marker/card does not select a nearby year. Moving the timeline expires events outside their interval. A visible-area list and same-year alternatives allow co-located episodes to remain accessible. A world summary and zoom-out button preserve the same year. World territory geometry is unchanged.
 
 Final chronology check: grade 8, pp. 34–36 gives the anti-Kokand rising in 1831 and Tailak’s death in 1838. The map interval is therefore 1831–1838; the broad 1830s display must not keep him commanding in 1839. A boundary-year regression check covers 1830/1838/1839.
+
+Responsive review: actual 390×844 viewport revealed a legacy Silk Road caption scaling to roughly 63px at 24× zoom. The geographic renderer now keeps that caption at 12 screen pixels; local map markers retain their existing constant size.

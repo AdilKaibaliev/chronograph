@@ -13,6 +13,8 @@
  function visibleGroups(){const m=worldLabelMetrics();if(mapState.scale<3||document.body.classList.contains('future-mode'))return [];return groups().filter(g=>{const [x,y]=m.point(...project(g.coord));return x>12&&y>12&&x<m.width-12&&y<m.height-12;});}
  function draw(){
   frame=0;const m=worldLabelMetrics(),visible=visibleGroups(),signature=year+'|'+language+'|'+visible.map(g=>g.coord.join(',')).join(';');
+  // Keep the existing Silk Road caption legible when zooming to local history.
+  for(const label of $('tradeLayer')?.querySelectorAll('text')||[])label.style.fontSize=(12/m.scale)+'px';
   if(signature!==lastSignature){
    lastSignature=signature;layer.replaceChildren();
    for(const g of visible){
