@@ -59,7 +59,13 @@ function createWorldHistory(catalog){
  const areasAt=(year,region='all')=>snapshot(year).areas.filter(a=>region==='all'||entries.get(a.entry)?.region===region);
  const changeCache=new Map();
  const changes=(region='all')=>memo(changeCache,region,()=>[...new Set([...(catalog.areas||[]),...(catalog.outlines||[]),...relationFrames,...(catalog.cartography?.presentation||[])].filter(a=>region==='all'||entries.get(a.entry)?.region===region).flatMap(a=>[a.from,a.to]).filter(y=>y>=min&&y<=max))].sort((a,b)=>a-b)).slice();
- return {phaseAt,at,get,timeline,areasAt,mapAreasAt,mapFrames,changes,record,entry,frames};
+ // Stage buttons need dates and titles, not geometry for every other century.
+ const mapFrameDates=id=>{
+  const source=frames(id),outlines=(catalog.outlines||[]).filter(a=>a.entry===id||(a.members||[]).includes(id)||a.dependencies?.[id]);
+  const years=[...new Set([...source.map(a=>a.from),...outlines.flatMap(a=>[a.from,a.to]),...relationFrames.filter(r=>r.entry===id||r.owner===id).flatMap(r=>[r.from,r.to])])].sort((a,b)=>a-b);
+  return years.flatMap(y=>{const a=source.find(a=>a.from<=y&&y<a.to);return a?[{from:y,entry:id,title:a.title,approx:a.approx}]:[];});
+ };
+ return {phaseAt,at,get,timeline,areasAt,mapAreasAt,mapFrames,mapFrameDates,changes,record,entry,frames};
 }
 // A bounded reading window. Selection opens its page once; readers can then move
 // freely in either direction without losing access to earlier or later records.

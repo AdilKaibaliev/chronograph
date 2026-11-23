@@ -17,6 +17,7 @@ c=require('./frankish-partitions.cjs').world(c);
 c=require('./frankish-outer-frontiers.cjs').world(c);
 c=require('./treaty-frontiers.cjs').records(c);
 c=require('./russia-empire-review.cjs')(c);
+c=require('./tian-shan-review.cjs')(c);
 const G=require('./cartography-geometry.cjs');
 for(const a of c.areas)if(c.cartography.areas[a.id]===undefined){
  const p=G.merge([a.polygons]);c.cartography.areas[a.id]=c.cartography.shapes.length;c.cartography.shapes.push(p);

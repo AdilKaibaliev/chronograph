@@ -118,4 +118,5 @@ add('march-2005',2005,2005,'politics',['jalal','osh','bishkek'],['Мартовс
 add('april-2010',2010,2010,'politics',['talas','bishkek'],['Апрельская смена власти','The April change of power','Апрелдеги бийликтин алмашуусу'],['Протесты, столкновения и гибель людей сопровождали падение власти Курманбека Бакиева.','Protests, clashes and deaths accompanied the collapse of Kurmanbek Bakiyev’s rule.','Нааразылыктар, кагылышуулар жана адам өлүмү Курманбек Бакиевдин бийлигинин кулашы менен коштолгон.'],'modern','§ 25; с. 200–210');
 add('june-2010',2010,2010,'war',['osh','jalal'],['Июньское межэтническое насилие','June interethnic violence','Июнь айындагы улуттар аралык зомбулук'],['Насилие на юге привело к гибели людей, разрушениям и массовому перемещению жителей.','Violence in the south caused deaths, destruction and mass displacement.','Түштүктөгү зомбулук адам өлүмүнө, кыйроолорго жана калктын жапырт жер которушуна алып келген.'],'modern','§ 25; с. 200–210');
 require('./kyrgyz-school-supplement.cjs')({add,places,books});
+require('./kyrgyz-movement-data.cjs')(events);
 module.exports={books,places,events};

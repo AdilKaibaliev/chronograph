@@ -76,7 +76,7 @@ function checkRender(year,region){
  context.year=year;context.worldState.region=region;
  context.renderWorldMap();renders++;
  const actual=context.worldTerritoryLayer.children.filter(g=>g.dataset.worldArea);
- const expected=expectedAreas(year);
+ const expected=expectedAreas(year).filter(a=>!(a.settlementMarkersOnly&&year<1919&&a.kind==='cultural'));
  assert.deepEqual(sorted(actual.map(g=>g.getAttribute('data-territory-frame'))),sorted(expected.map(a=>a.id)),`Lost or stale territorial frames: ${year}, ${region}`);
  assert.deepEqual(sorted(actual.map(g=>g.getAttribute('data-world-area'))),sorted(expected.map(a=>a.entry)),`Region selection hid territory: ${year}, ${region}`);
  assert.equal(new Set(actual.map(g=>g.getAttribute('data-world-area'))).size,actual.length,`Duplicate territory in ${year}`);

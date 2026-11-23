@@ -1,5 +1,6 @@
 'use strict';
 module.exports=({add,places,books})=>{
+ add('sarybagysh-relocation-1825',1825,1825,'migration',['chu','issyk'],['Из Чуйской долины к Иссык-Кулю','From the Chuy valley to Issyk-Kul','Чүй өрөөнүнөн Ысык-Көлгө'],['После кокандского похода часть сарыбагышей во главе с сыновьями Атаке-бия переселилась из Чуйской долины в Иссык-Кульскую котловину.','After the Kokand campaign, some Sarybagysh groups led by Atake Biy’s sons moved from the Chuy valley to the Issyk-Kul basin.','Кокон жортуулунан кийин Атаке бийдин уулдары баштаган сарыбагыштардын бир бөлүгү Чүй өрөөнүнөн Ысык-Көл ойдуңуна көчкөн.'],'empire','§ 2, с. 7–8',{route:[[74.6,42.87],[77.2,42.4]],geographyNote:['Направление между названными в источнике районами.','Direction between the regions named in the source.','Булакта аталган аймактардын ортосундагы багыт.']});
  Object.assign(places,{
   suyab:[[75.2033,42.8019],['Суяб · Ак-Бешим','Suyab · Ak-Beshim','Суяб · Ак-Бешим']],
   koshoy:[[75.6999,41.1236],['Кошой-Коргон · средневековый Ат-Баш','Koshoy-Korgon · medieval At-Bash','Кошой-Коргон · орто кылымдагы Ат-Баш']],

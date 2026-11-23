@@ -71,6 +71,7 @@ const checks = [
   'scripts/world/border-review-test.cjs',
   'scripts/world/kyrgyz-test.cjs',
   'scripts/world/kyrgyz-study-test.cjs',
+  'scripts/world/tian-shan-review-test.cjs',
   'scripts/world/russia-outline-test.cjs',
   'scripts/world/cartography-test.cjs',
   'scripts/expansion/test.cjs',
@@ -82,7 +83,8 @@ const checks = [
   'scripts/history-test.cjs',
   'scripts/unified-map-test.cjs',
   'scripts/seo/build.cjs',
-  'scripts/seo/test.cjs'
+  'scripts/seo/test.cjs',
+  'scripts/seo/loading-test.cjs'
 ];
 
 // This exhaustive annual comparison only reads the completed atlas and writes

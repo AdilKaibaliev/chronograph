@@ -18,21 +18,28 @@ const verification=JSON.parse(fs.readFileSync(path.join(__dirname,'verification.
 const verificationTags=Object.entries(verification).map(([name,value])=>'<meta name="'+esc(name)+'" content="'+esc(value)+'">').join('');
 const releaseVersion=html.match(/<meta name="chronograph-version" content="(\d+\.\d+\.\d+)">/)[1];
 const c=JSON.parse(html.match(/const WORLD_HISTORY=([^\n]+);/)[1]);
-const originals={};let assignments=['window.CHRONOGRAPH_DATA={};'],bytes=32,parts=[];
+const originals={},pack=require('./geometry-pack.cjs')(asset),runtimeAssets=[];let assignments=['window.CHRONOGRAPH_DATA={};'],bytes=32,parts=[];
 function add(s){if(bytes+Buffer.byteLength(s)>900000&&assignments.length){parts.push(assignments.join('\n'));assignments=[];bytes=0;}assignments.push(s);bytes+=Buffer.byteLength(s);}
 function split(target,value){const json=JSON.stringify(value);if(Buffer.byteLength(json)<880000){add(target+'='+json+';');return;}add(target+'='+(Array.isArray(value)?'[]':'{}')+';');for(const [k,v]of Object.entries(value))split(target+'['+JSON.stringify(k)+']',v);}
 html=html.replace(/<script\b[^>]*>([\s\S]*?)<\/script>/g,(_,script)=>{
- script=script.replace(/^const ([A-Z][A-Z_]+)=(.+);$/gm,(line,key,json)=>{if(Buffer.byteLength(line)<100000)return line;let value;try{value=JSON.parse(json);}catch{return line;}originals[key]=value;split('window.CHRONOGRAPH_DATA.'+key,value);return 'const '+key+'=window.CHRONOGRAPH_DATA.'+key+';';});
- const p=asset('atlas-script',script);return '<script defer src="'+p+'"></script>';
+ script=script.replace(/^const ([A-Z][A-Z_]+)=(.+);$/gm,(line,key,json)=>{if(Buffer.byteLength(line)<100000)return line;let value;try{value=JSON.parse(json);}catch{return line;}originals[key]=json;split('window.CHRONOGRAPH_DATA.'+key,pack.prepare(key,value));return 'const '+key+'=window.CHRONOGRAPH_DATA.'+key+';';});
+ script=script.replace('function renderYear(y){','function renderYear(y){\n if(window.CHRONOGRAPH_LOADER&&!window.CHRONOGRAPH_LOADER.show(y,renderYear))return;');
+ const p=asset('atlas-script',script);runtimeAssets.push(p);return '<!--atlas-runtime-->';
 });
 if(assignments.length)parts.push(assignments.join('\n'));
 const dataAssets=parts.map((s,i)=>asset('atlas-data-'+String(i).padStart(3,'0'),s));
-html=html.replace(/<script defer/,dataAssets.map(p=>'<script defer src="'+p+'"></script>').join('\n')+'\n<script defer');
+const geometryManifest=pack.finish();
 // Start the small regional lookup alongside the data downloads. Deferred
 // scripts execute in document order, so the first atlas render has its language.
 html=html.replace('</head>','<script defer src="/api/atlas-locale"></script></head>');
 // Prove that chunking did not discard or change even one historical coordinate.
-const context={window:{}};vm.createContext(context);for(const s of parts)vm.runInContext(s,context);assert.equal(JSON.stringify(context.window.CHRONOGRAPH_DATA),JSON.stringify(originals));
+const context={window:{}};vm.createContext(context);for(const s of parts)vm.runInContext(s,context);for(const [key,json]of Object.entries(originals))assert.equal(JSON.stringify(pack.restore(context.window.CHRONOGRAPH_DATA[key])),JSON.stringify(JSON.parse(json)),key+' round trip');
+const startupJson=JSON.stringify(context.window.CHRONOGRAPH_DATA),compressed=require('node:zlib').gzipSync(startupJson,{level:9}),startup=[];
+assert.equal(require('node:zlib').gunzipSync(compressed).toString(),startupJson);
+for(let offset=0;offset<compressed.length;offset+=850000)startup.push(asset('atlas-startup-'+startup.length,compressed.subarray(offset,offset+850000),'bin'));
+geometryManifest.startup=startup;geometryManifest.fallback=dataAssets;
+const loader=asset('atlas-loader',fs.readFileSync(path.join(__dirname,'loader.js'),'utf8')+'('+JSON.stringify(geometryManifest)+','+JSON.stringify(runtimeAssets)+');');
+let inserted=false;html=html.replaceAll('<!--atlas-runtime-->',()=>{if(inserted)return '';inserted=true;return '<script defer src="'+loader+'"></script>';});
 html=html.replace(/<style\b[^>]*>([\s\S]*?)<\/style>/g,(_,css)=>'<link rel="stylesheet" href="'+asset('atlas',css,'css')+'">');
 const style=`:root{color-scheme:dark;font-family:Georgia,serif;background:#1e1c17;color:#ece3d0}*{box-sizing:border-box}body{margin:0}a{color:#ddbd7d;text-underline-offset:4px}a:hover{color:#fff}a:focus-visible{outline:2px solid #ddbd7d;outline-offset:5px}header,main,footer{max-width:1080px;margin:auto;padding:24px}header{display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #62543a;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-size:24px}.brand img{width:52px;height:52px}nav{display:flex;gap:16px;flex-wrap:wrap;font:15px system-ui}h1{font-size:clamp(30px,5vw,54px);line-height:1.12;max-width:850px}h2{font-size:27px;margin-top:42px}h3{font-size:22px}p,li{font-size:18px;line-height:1.65;max-width:900px}.eyebrow{font:13px system-ui;letter-spacing:.1em;color:#c5a76c}.cta{display:inline-block;background:#c5a76c;color:#1e1c17;padding:13px 20px;text-decoration:none;border-radius:8px;font:600 16px system-ui}.cta:hover{background:#dfc58c;color:#1e1c17}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}.tile,article{padding:22px;border:1px solid #514833;border-radius:12px;background:#25221b}.tile h3{margin:0 0 10px}.tile p{font-size:16px}article{margin:18px 0}article p{margin:12px 0}.source{font:14px/1.6 system-ui;color:#bdb299}.back{font:15px system-ui}footer{font:14px/1.6 system-ui;border-top:1px solid #514833;margin-top:30px}.skip{position:absolute;left:-9999px}.skip:focus{left:12px;top:12px;background:#1e1c17;padding:10px}@media(max-width:500px){header,main,footer{padding:18px}header nav{gap:12px}p,li{font-size:17px}}`;
 const css=asset('guide',style,'css');
@@ -90,6 +97,6 @@ write('robots.txt','User-agent: *\nAllow: /\n\nSitemap: '+origin+'/sitemap.xml\n
 write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+urls.map(p=>'<url><loc>'+origin+p+'</loc></url>').join('')+'</urlset>');
 write('404.html','<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Page not found — Chronograph Atlas</title></head><body><h1>Page not found</h1><p><a href="/">Open the atlas</a> · <a href="/en/guide">Read the guide</a></p></body></html>');
 write('social-card.png',Buffer.from(fs.readFileSync(path.join(__dirname,'social-card.base64'),'utf8').trim(),'base64'));
-const manifest={version:releaseVersion,sourceSha256:hash(fs.readFileSync(path.join(root,'index.html'))),htmlSha256:hash(html),htmlBytes:Buffer.byteLength(html),assets,urls,indexNowKey:key,dataRoundTrip:true};
+const manifest={version:releaseVersion,sourceSha256:hash(fs.readFileSync(path.join(root,'index.html'))),htmlSha256:hash(html),htmlBytes:Buffer.byteLength(html),assets,urls,indexNowKey:key,dataRoundTrip:true,geometry:geometryManifest,runtimes:runtimeAssets,startupAssets:[...startup,loader,...runtimeAssets]};
 fs.writeFileSync(path.join(root,'verification-seo-build.json'),JSON.stringify(manifest,null,2));
 console.log(JSON.stringify({pass:true,htmlBytes:manifest.htmlBytes,pages:urls.length,assets:assets.length,largestAsset:Math.max(...assets.map(a=>a.bytes)),dataRoundTrip:true}));

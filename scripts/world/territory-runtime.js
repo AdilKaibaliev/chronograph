@@ -42,9 +42,9 @@ function renderWorldAreaDetail(){
   for(let y=1939;y<=1945;y++){const b=we('button','',String(y));b.type='button';b.setAttribute('aria-pressed',String(y===year));b.onclick=()=>{stopPlay();renderYear(y);worldChooseTerritory('late-hre');};nav.append(b);}
   const fit=we('button','world-war-fit',wl(['Показать Европу','Show Europe','Европаны көрсөтүү']));fit.type='button';fit.onclick=()=>worldAreaCamera(a);nav.append(fit);heading.after(legend,nav);
  }
- const frames=worldHistory.mapFrames(a.entry);
+ const frames=worldHistory.mapFrameDates(a.entry);
  if(frames.length>1){const phases=we('div','world-area-stages');phases.setAttribute('role','group');phases.setAttribute('aria-label',wt('areaStages'));
-  for(const f of frames){const b=we('button','',(f.approx?'≈ ':'')+Math.max(610,f.from));b.type='button';b.setAttribute('aria-pressed',String(f.id===a.id));b.title=wl(f.title);b.onclick=()=>{stopPlay();renderYear(Math.max(610,f.from));worldChooseTerritory(f.entry);};phases.append(b);}worldAreaDetail.append(phases);
+  for(const [i,f]of frames.entries()){const b=we('button','',(f.approx?'≈ ':'')+Math.max(610,f.from));b.type='button';b.setAttribute('aria-pressed',String(f.from<=year&&year<(frames[i+1]?.from??Infinity)));b.title=wl(f.title);b.onclick=()=>{stopPlay();worldState.area=f.entry;renderYear(Math.max(610,f.from));};phases.append(b);}worldAreaDetail.append(phases);
  }
  const phase=worldHistory.get(a.entry,year)?.phase;
  if(phase)appendWorldLearning(worldAreaDetail,phase,'area-'+a.entry,true);
@@ -86,6 +86,7 @@ function renderWorldTerritories(){
  }
  const unified=areas.filter(a=>a.mongolGroup).length===4&&!(typeof showMongolUluses!=='undefined'&&showMongolUluses);
  for(const a of areas){
+  if(a.settlementMarkersOnly&&year<1919&&a.kind==='cultural')continue;
   const entry=worldHistory.entry(a.entry),selected=a.entry===worldState.area,grouped=unified&&a.mongolGroup;
   const paintId=grouped&&a.entry==='late-yuan'&&a.mongolUnion?'worldMongolRealm':a.entry;
   const cacheKey=[a.id,wl(['ru','en','ky']),selected,Boolean(grouped),a.overlord===worldState.area,grouped?a.mongolUnionId:null,a.cartographicOverlay,overlayOpacity,boundaryFrame(year).paint[paintId]].join('|');
