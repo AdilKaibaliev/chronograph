@@ -56,6 +56,8 @@ vm.runInContext(fs.readFileSync(path.join(__dirname,'territory-runtime.js'),'utf
 vm.runInContext(runtime.slice(start,end),context,{filename:'runtime.js:renderWorldMap'});
 
 const expectedAreas=year=>context.worldHistory.mapAreasAt(year);
+context.year=1950;context.renderWorldTerritories();let pathCompilations=0;const originalPath=context.polygonPath;context.polygonPath=p=>{pathCompilations++;return originalPath(p);};context.renderWorldTerritories();
+assert(pathCompilations<=context.boundaryFrame(1950).zones.length+1,'A warm redraw recalculates political/provincial mask paths');context.polygonPath=originalPath;
 // The same cached selected province must receive the CURRENT parent outline.
 context.worldState.area='late-kyrgyz-tianshan';
 for(const y of [1960,1991,1960]){
@@ -77,6 +79,11 @@ function checkRender(year,region){
  context.renderWorldMap();renders++;
  const actual=context.worldTerritoryLayer.children.filter(g=>g.dataset.worldArea);
  const expected=expectedAreas(year).filter(a=>!(a.settlementMarkersOnly&&year<1919&&a.kind==='cultural'));
+ const missing=new Set(catalog.provinceGaps?.frames.filter(f=>f[0]<=year).at(-1)?.[1]||[]);
+ const owners=[...new Set(expected.filter(a=>missing.has(a.entry)&&a.sovereign&&!a.detachedProvince&&['polity','influence','settlement'].includes(a.kind)).map(a=>context.provinceDisplayOwner(a.sovereign,new Map(expected.map(p=>[p.entry,p])))))];
+ const remainder=context.worldTerritoryLayer.children.find(g=>g.getAttribute('data-province-remainders')==='true');
+ assert.deepEqual(sorted((remainder?.children||[]).filter(n=>n.nodeName==='use').map(n=>n.getAttribute('data-sovereign'))),sorted(owners),'Hidden provincial land '+year);
+ if(remainder){assert.equal(remainder.getAttribute('mask'),'url(#worldProvinceUncovered)');for(const p of remainder.children.filter(n=>n.nodeName==='use'))assert.equal(p.getAttribute('mask'),'url(#province-remnant-mask-'+p.getAttribute('data-sovereign')+')');}
  assert.deepEqual(sorted(actual.map(g=>g.getAttribute('data-territory-frame'))),sorted(expected.map(a=>a.id)),`Lost or stale territorial frames: ${year}, ${region}`);
  assert.deepEqual(sorted(actual.map(g=>g.getAttribute('data-world-area'))),sorted(expected.map(a=>a.entry)),`Region selection hid territory: ${year}, ${region}`);
  assert.equal(new Set(actual.map(g=>g.getAttribute('data-world-area'))).size,actual.length,`Duplicate territory in ${year}`);

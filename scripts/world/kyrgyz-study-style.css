@@ -65,7 +65,7 @@
 .kyrgyz-local-pin:focus{outline:none}.kyrgyz-local-pin:focus circle{stroke:#171e22;stroke-width:3}
 .kyrgyz-local-pin text{font:600 11px system-ui;fill:#302818;stroke:#f2e9cf;stroke-width:3px;paint-order:stroke;pointer-events:none}
 .kyrgyz-movement-line,.kyrgyz-movement-halo,.kyrgyz-movement-hit{fill:none;stroke-linejoin:round;stroke-linecap:round}.kyrgyz-movement-line{animation:kyrgyz-route-flow 2s linear infinite;pointer-events:none}.kyrgyz-movement-halo{stroke:#fff4d7;opacity:.8;pointer-events:none}.kyrgyz-movement-hit{stroke:transparent;cursor:pointer}.kyrgyz-movement-hit:focus{stroke:#e0b257;stroke-opacity:.35;outline:none}.paused .kyrgyz-movement-line{animation-play-state:paused}
-.kyrgyz-study-route{display:none}
+.kyrgyz-study-route{display:none}.kyrgyz-movement-hit{touch-action:none}
 .map-toolbar>.toolbar-block{align-self:flex-start}
 @keyframes kyrgyz-route-flow{to{stroke-dashoffset:var(--route-cycle)}}
 .kyrgyz-movement-key{position:absolute;left:12px;top:52px;z-index:4;max-width:calc(100% - 190px);display:flex;gap:7px;align-items:center;flex-wrap:wrap;border:1px solid #99845d;border-radius:7px;background:#f0e7d5ee;color:#342b1b;padding:7px 9px;font:11px system-ui;box-shadow:0 2px 8px #0002}.kyrgyz-movement-key[hidden]{display:none}.kyrgyz-movement-key span:before{content:'➜';margin-right:4px;color:#28665e}.kyrgyz-movement-key span[data-kind=war]:before{color:#9e3927}.kyrgyz-movement-key span[data-kind=migration]:before{color:#86520d}.kyrgyz-movement-key button{border:1px solid #99845d;border-radius:4px;background:#fff9eb;color:#342b1b;font:inherit;cursor:pointer;padding:3px 6px}

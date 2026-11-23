@@ -63,6 +63,7 @@
 /* Context is not another sovereign colour. Preserve interactive hit areas and
    meaningful occupation hatching without darkening the country underneath. */
 .world-territory>path.world-context-outline{fill-opacity:0!important}
+.world-province-remainder{cursor:pointer;touch-action:none}.world-province-remainder:focus-visible{outline:none;stroke:#634725;stroke-width:2;vector-effect:non-scaling-stroke}
 .empire-path[data-empire-type="context"]{fill-opacity:0!important}
 .world-territory>path.world-context-tint{pointer-events:none;stroke:none!important;fill-opacity:calc(var(--area-opacity,.5)*.55)}
 .world-territory.military-occupation>path.world-context-tint{fill-opacity:var(--area-opacity,.5)}

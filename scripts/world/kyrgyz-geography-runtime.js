@@ -10,7 +10,7 @@
  const button=(text,fn)=>{const b=node('button','',text);b.type='button';b.onclick=fn;return b;};
  function date(e){return e.periodLabel?wl(e.periodLabel):e.from===e.to?ancientCalendar.format(e.year,language):ancientCalendar.format(e.from,language)+' — '+ancientCalendar.format(e.to,language);}
  function groups(){if(lastYear!==year){lastYear=year;lastGroups=history.placesAt(year);}return lastGroups;}
- function visibleGroups(){const m=worldLabelMetrics();if(mapState.scale<3||document.body.classList.contains('future-mode'))return [];return groups().filter(g=>{const [x,y]=m.point(...project(g.coord));return x>12&&y>12&&x<m.width-12&&y<m.height-12;});}
+ function visibleGroups(){const m=worldLabelMetrics();if(layerState.places===false||mapState.scale<3||document.body.classList.contains('future-mode'))return [];return groups().filter(g=>{const [x,y]=m.point(...project(g.coord));return x>12&&y>12&&x<m.width-12&&y<m.height-12;});}
  function draw(){
   frame=0;const m=worldLabelMetrics(),visible=visibleGroups(),signature=year+'|'+language+'|'+visible.map(g=>g.coord.join(',')).join(';');
   // Keep the existing Silk Road caption legible when zooming to local history.
@@ -25,6 +25,9 @@
     inner.append(dot,label);pin.append(inner,title);pin.onpointerdown=e=>e.stopPropagation();pin.onclick=()=>open(g.lessons[0].id);pin.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();open(g.lessons[0].id);}};layer.append(pin);
    }
   }
+  // At world scale or outside Kyrgyz historical places there are no local labels.
+  // Avoid forcing layout for every SVG label on each camera-animation frame.
+  if(!layer.children.length)return;
   const base=svg.getBoundingClientRect(),occupied=[];
   for(const text of viewport.querySelectorAll('text')){if(layer.contains(text))continue;const r=text.getBoundingClientRect();if(r.width&&r.height&&r.right>base.left&&r.left<base.right&&r.bottom>base.top&&r.top<base.bottom)occupied.push([r.left-base.left,r.top-base.top,r.right-base.left,r.bottom-base.top]);}
   for(const pin of layer.children){
@@ -56,6 +59,7 @@
  new MutationObserver(schedule).observe(viewport,{attributes:true,attributeFilter:['transform']});
  new MutationObserver(()=>{lastYear=null;lastSignature='';schedule();}).observe($('timelineYear'),{childList:true,subtree:true,characterData:true});
  new MutationObserver(schedule).observe(document.body,{attributes:true,attributeFilter:['class']});
+ new MutationObserver(schedule).observe(placeLayer,{attributes:true,attributeFilter:['class']});
  new ResizeObserver(schedule).observe(svg);localeSelect.addEventListener('change',()=>{lastSignature='';schedule();});
  document.addEventListener('kyrgyz-context-change',schedule);schedule();
 })();

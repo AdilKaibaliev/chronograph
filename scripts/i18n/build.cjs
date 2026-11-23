@@ -110,6 +110,7 @@ const incidentData=require('../incidents/integrate.cjs');
 const worldData={...worldCatalog,range:{...worldCatalog.range,max:incidentData.timelineMax},displayCartography:require('../world/coastal-display.cjs')(worldCatalog),sources:Object.fromEntries(Object.entries(worldCatalog.sources).map(([id,s])=>[id,{title:s.title}]))};
 const legacyCartography=require('../world/cartography-legacy.cjs')(empires);
 worldData.boundaryEvidence=require('../world/border-evidence.cjs')(worldData,empires,legacyCartography);
+worldData.provinceGaps=require('../world/province-gaps.cjs')(worldData);
 const worldTranslate=createChronographTranslator(rows);
 const worldTextRow=text=>[text,worldTranslate(text,'en'),worldTranslate(text,'ky')];
 worldData.events=[...worldData.events,...Object.entries(events).filter(([,e])=>e.coord).map(([y,e])=>({id:'atlas-'+y,from:+y,to:+y,year:+y,approx:false,region:['1171','1250'].includes(y)?'africa':'eurasia',kind:/Битва|Оборона|Поход|Экспансия/.test(e.type)?'war':/Дипломатия/.test(e.type)?'diplomacy':/Миграция/.test(e.type)?'migration':'politics',coord:e.coord,title:worldTextRow(e.title),text:worldTextRow(e.desc),sources:[],base:true}))];

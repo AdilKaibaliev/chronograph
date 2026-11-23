@@ -19,14 +19,21 @@
  const api={show(y,render){const token=++intent;y=Number(y);if(needed(y).every(c=>loaded.has(c.url))){done();return true;}busy();ensure(y).then(()=>{if(token!==intent)return;done();render(y);}).catch(()=>{if(token===intent)fail(()=>api.show(y,render));});return false;}};
  window.CHRONOGRAPH_LOADER=api;
  const script=src=>new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.onload=resolve;s.onerror=reject;document.body.append(s);});
+ // DecompressionStream is available in browsers that predate AbortSignal.timeout.
+ // Include the response body in the deadline, and clear timers after every request.
+ async function read(url,format){
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);
+  try{const r=await fetch(url,{signal:controller.signal});if(!r.ok)throw Error('Map data '+r.status);return await r[format]();}
+  finally{clearTimeout(timer);}
+ }
  async function readBundle(urls,fallback){
-  if(typeof DecompressionStream!=='function')return (await Promise.all(fallback.map(async url=>{const r=await fetch(url);if(!r.ok)throw Error('Map data '+r.status);return r.json();}))).flat();
-  const buffers=await Promise.all(urls.map(async url=>{const r=await fetch(url,{signal:AbortSignal.timeout(30000)});if(!r.ok)throw Error('Map data '+r.status);return r.arrayBuffer();}));
+  if(typeof DecompressionStream!=='function')return (await Promise.all(fallback.map(url=>read(url,'json')))).flat();
+  const buffers=await Promise.all(urls.map(url=>read(url,'arrayBuffer')));
   return new Response(new Blob(buffers).stream().pipeThrough(new DecompressionStream('gzip'))).json();
  }
  async function boot(){busy();try{
   if(typeof DecompressionStream==='function'){
-   const buffers=await Promise.all(manifest.startup.map(async url=>{const r=await fetch(url,{signal:AbortSignal.timeout(30000)});if(!r.ok)throw Error('Atlas data '+r.status);return r.arrayBuffer();}));
+   const buffers=await Promise.all(manifest.startup.map(url=>read(url,'arrayBuffer')));
    const stream=new Blob(buffers).stream().pipeThrough(new DecompressionStream('gzip'));
    window.CHRONOGRAPH_DATA=await new Response(stream).json();
   }else for(const src of manifest.fallback)await script(src);

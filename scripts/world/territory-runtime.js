@@ -1,3 +1,7 @@
+// The projection is fixed; camera movement changes the viewport transform only.
+// Reuse path strings for masks as well as features, with bounded retention.
+const worldPolygonPaths=new Map();
+function worldPolygonPath(rings){if(!rings?.length)return '';if(worldPolygonPaths.has(rings)){const d=worldPolygonPaths.get(rings);worldPolygonPaths.delete(rings);worldPolygonPaths.set(rings,d);return d;}const d=polygonPath(rings);if(worldPolygonPaths.size>=512)worldPolygonPaths.delete(worldPolygonPaths.keys().next().value);worldPolygonPaths.set(rings,d);return d;}
 function territoryStatus(area){ return area.statusLabel ? wl(area.statusLabel) : wt(area.kind); }
 function worldAreaDate(a){const from=Math.max(610,a.from),to=Math.min(TIMELINE_MAX,a.to-1);return (a.approx?wl(['ок. ','c. ','болж. ']):'')+from+(from===to?'':'–'+to)+' '+wt('era');}
 function worldAreaCamera(a){
@@ -54,7 +58,33 @@ function renderWorldAreaDetail(){
 function worldAreaOpacity(){return Math.min(.9,Math.max(.16,overlayOpacity*1.35));}
 // Reuse immutable dated features. Bound retention while readers scrub the timeline.
 const worldTerritoryNodes=new Map();
-let worldProvinceClips,worldContextMask;
+let worldProvinceClips,worldContextMask,worldPoliticalCoverage;
+let worldProvinceRemainderDefs;
+function provinceDisplayOwner(id,byEntry){const seen=new Set();while(byEntry.get(id)?.sovereign&&!seen.has(id)){seen.add(id);id=byEntry.get(id).sovereign;}return id;}
+function renderProvinceRemainders(sn,areas){
+ if(!worldProvinceRemainderDefs){worldProvinceRemainderDefs=sn('g',{'data-province-remainders-defs':'true'});worldDefs.append(worldProvinceRemainderDefs);}worldProvinceRemainderDefs.replaceChildren();
+ const ids=new Set(WORLD_HISTORY.provinceGaps?.frames.filter(f=>f[0]<=year).at(-1)?.[1]||[]),groups=new Map(),byEntry=new Map(areas.map(a=>[a.entry,a]));
+ for(const a of areas){if(!ids.has(a.entry)||!a.sovereign||a.detachedProvince||!['polity','influence','settlement'].includes(a.kind))continue;const owner=provinceDisplayOwner(a.sovereign,byEntry);if(!groups.has(owner))groups.set(owner,[]);groups.get(owner).push(a);}
+ if(!groups.size)return;
+ // A single opacity group avoids dark seams where records of the same owner meet.
+ // Existing sovereign land and already-marked uncertain borders are never repainted.
+ const baseMask=sn('mask',{id:'worldProvinceUncovered',maskUnits:'userSpaceOnUse',x:0,y:0,width:SVG_W,height:SVG_H,'mask-type':'luminance'});baseMask.append(sn('rect',{x:0,y:0,width:SVG_W,height:SVG_H,fill:'white'}),sn('use',{href:'#worldPoliticalCoverage',fill:'black'}));worldProvinceRemainderDefs.append(baseMask);
+ for(const a of areas.filter(a=>a.overlord&&!a.cartographicOverlay&&['polity','influence'].includes(a.kind)))baseMask.append(sn('path',{d:worldPolygonPath(a.polygons),fill:'black','fill-rule':'nonzero'}));
+ const layer=sn('g',{'data-province-remainders':'true',mask:'url(#worldProvinceUncovered)',opacity:worldAreaOpacity()}),paths=[],contextCoverage=sn('g',{mask:'url(#worldProvinceUncovered)'});worldContextMask.append(contextCoverage);
+ for(const [owner,rows]of groups){const p=sn('path',{id:'province-remnant-'+owner,d:rows.map(a=>worldPolygonPath(a.polygons)).join(' '),'fill-rule':'nonzero'});worldProvinceRemainderDefs.append(p);paths.push({owner,rows,p});contextCoverage.append(sn('use',{href:'#province-remnant-'+owner,fill:'black'}));}
+ const neutral=sn('path',{d:paths.map(x=>x.p.getAttribute('d')).join(' '),fill:'#cfc6b4','fill-rule':'nonzero','pointer-events':'none'});layer.append(neutral);
+ for(const item of paths){const {owner,rows}=item,mask=sn('mask',{id:'province-remnant-mask-'+owner,maskUnits:'userSpaceOnUse',x:0,y:0,width:SVG_W,height:SVG_H,'mask-type':'luminance'});mask.append(sn('rect',{x:0,y:0,width:SVG_W,height:SVG_H,fill:'white'}));
+  // Overlapping provincial reconstructions of different owners stay neutral.
+  for(const other of paths)if(other.owner!==owner)mask.append(sn('use',{href:'#province-remnant-'+other.owner,fill:'black'}));worldProvinceRemainderDefs.append(mask);
+  const p=sn('use',{href:'#province-remnant-'+owner,fill:byEntry.get(owner)?.color||rows[0].color,mask:'url(#province-remnant-mask-'+owner+')',role:'button',tabindex:0,'aria-label':wl(byEntry.get(owner)?.name||rows[0].sovereignName),class:'world-province-remainder','data-sovereign':owner});
+  const open=ev=>{if(!ev||ev.detail===0){worldChooseTerritory(owner);return;}const point=svg.createSVGPoint();point.x=ev.clientX;point.y=ev.clientY;const mapPoint=point.matrixTransform(viewport.getScreenCTM().inverse()),owners=paths.filter(x=>x.p.isPointInFill(mapPoint)).map(x=>x.owner);if(owners.length>1)openBoundaryNote(owners);else worldChooseTerritory(owner);};
+  let down=null;p.onpointerdown=e=>{if(e.button!==0)return;e.preventDefault();e.stopPropagation();down={id:e.pointerId,x:e.clientX,y:e.clientY,tx:mapState.tx,ty:mapState.ty,moved:false};p.setPointerCapture(e.pointerId);};
+  p.onpointermove=e=>{if(!down||down.id!==e.pointerId)return;e.stopPropagation();down.moved ||= Math.hypot(e.clientX-down.x,e.clientY-down.y)>5;if(down.moved){const a=screenPoint(e.clientX,e.clientY),b=screenPoint(down.x,down.y);mapState.tx=down.tx+a.x-b.x;mapState.ty=down.ty+a.y-b.y;setViewport();}};
+  p.onpointerup=e=>{if(!down||down.id!==e.pointerId)return;e.stopPropagation();const moved=down.moved;down=null;if(p.hasPointerCapture(e.pointerId))p.releasePointerCapture(e.pointerId);if(moved)queueLocationSave();else open({...e,detail:1,clientX:e.clientX,clientY:e.clientY});};p.onpointercancel=()=>{down=null;};
+  p.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();open();}};layer.append(p);
+ }
+ worldTerritoryLayer.append(layer);
+}
 function renderWorldTerritories(){
  worldTerritoryLayer.replaceChildren();worldTerritoryLabels.replaceChildren();
  worldTerritoryLayer.classList.toggle('hidden-layer',!layerState.empires);worldTerritoryLabels.classList.toggle('hidden-layer',!layerState.empires);
@@ -73,16 +103,19 @@ function renderWorldTerritories(){
  // not paint a second country colour on top. Their hatching and outlines stay
  // visible; their area tint appears only on land without a political fill.
  if(!worldContextMask){worldContextMask=sn('mask',{id:'worldContextFill',maskUnits:'userSpaceOnUse',x:0,y:0,width:SVG_W,height:SVG_H,'mask-type':'luminance'});worldDefs.append(worldContextMask);}
- worldContextMask.replaceChildren(sn('rect',{x:0,y:0,width:SVG_W,height:SVG_H,fill:'white'}));
- const covered=areas.filter(a=>!a.sovereign&&!a.overlord&&!a.cartographicOverlay&&['polity','influence'].includes(a.kind));
- for(const a of covered)worldContextMask.append(sn('path',{d:polygonPath(a.polygons),fill:'black','fill-rule':'nonzero'}));
- if(year<1300)for(const p of empireLayer.querySelectorAll('.empire-path[data-empire-type=empire],.empire-path[data-empire-type=local],.empire-path[data-empire-type=fuzzy]'))worldContextMask.append(sn('path',{d:p.getAttribute('d'),fill:'black','fill-rule':'nonzero'}));
+ if(!worldPoliticalCoverage){worldPoliticalCoverage=sn('g',{id:'worldPoliticalCoverage'});worldDefs.append(worldPoliticalCoverage);}worldPoliticalCoverage.replaceChildren();
+ worldContextMask.replaceChildren(sn('rect',{x:0,y:0,width:SVG_W,height:SVG_H,fill:'white'}),sn('use',{href:'#worldPoliticalCoverage',fill:'black'}));
+ const covered=areas.filter(a=>(!a.sovereign||a.detachedProvince)&&!a.overlord&&!a.cartographicOverlay&&['polity','influence'].includes(a.kind));
+ for(const a of covered)worldPoliticalCoverage.append(sn('path',{d:worldPolygonPath(a.polygons),fill:'black','fill-rule':'nonzero'}));
+ for(const [, ,i]of boundaryFrame(year).zones)worldPoliticalCoverage.append(sn('path',{d:worldPolygonPath(WORLD_HISTORY.boundaryEvidence.shapes[i]),fill:'black','fill-rule':'nonzero'}));
+ if(year<1300)for(const p of empireLayer.querySelectorAll('.empire-path[data-empire-type=empire],.empire-path[data-empire-type=local],.empire-path[data-empire-type=fuzzy]'))worldPoliticalCoverage.append(sn('path',{d:p.getAttribute('d'),fill:'black','fill-rule':'nonzero'}));
+ renderProvinceRemainders(sn,areas);
  if(!worldProvinceClips){worldProvinceClips=sn('g',{'data-province-clips':'true'});worldDefs.append(worldProvinceClips);}
  worldProvinceClips.replaceChildren();
  for(const id of new Set(areas.filter(a=>a.sovereign&&!a.detachedProvince&&a.entry===worldState.area).map(a=>a.sovereign))){
   const owner=parents.get(id);if(!owner)continue;
   const clip=sn('clipPath',{id:'province-boundary-'+id,clipPathUnits:'userSpaceOnUse'});
-  clip.append(sn('path',{d:polygonPath(owner.polygons),'clip-rule':'nonzero'}));worldProvinceClips.append(clip);
+  clip.append(sn('path',{d:worldPolygonPath(owner.polygons),'clip-rule':'nonzero'}));worldProvinceClips.append(clip);
  }
  const unified=areas.filter(a=>a.mongolGroup).length===4&&!(typeof showMongolUluses!=='undefined'&&showMongolUluses);
  for(const a of areas){
@@ -104,7 +137,7 @@ function renderWorldTerritories(){
   // Tiny Pacific islands are below the base map's resolution: these outlines mark
   // their local settlement vicinity. They never connect islands into ocean empires.
   if(!a.coastClipped&&entry.region!=='oceania'&&entry.id!=='mabuyag')g.setAttribute('clip-path','url(#worldLandClip)');
-  const path=sn('path',{d:polygonPath(paintId==='worldMongolRealm'?a.mongolUnion:a.polygons),fill:grouped?'#785344':a.color,stroke:grouped?'#61483a':a.color,role:'button',tabindex:0,'aria-label':wl(a.name)+' · '+territoryStatus(a)+' · '+worldAreaDate(a)});
+  const path=sn('path',{d:worldPolygonPath(paintId==='worldMongolRealm'?a.mongolUnion:a.polygons),fill:grouped?'#785344':a.color,stroke:grouped?'#61483a':a.color,role:'button',tabindex:0,'aria-label':wl(a.name)+' · '+territoryStatus(a)+' · '+worldAreaDate(a)});
   clipPoliticalPath(path,paintId,year);
   const contextual=['cultural','landscape','settlement'].includes(a.kind)||Boolean(a.cartographicOverlay)||Boolean(a.overlord);
   let tint=null;
@@ -118,9 +151,9 @@ function renderWorldTerritories(){
   if(a.sovereign&&!a.detachedProvince&&!selected){g.setAttribute('aria-hidden','true');path.setAttribute('tabindex','-1');path.setAttribute('aria-hidden','true');}
   if(a.geometryYear!==undefined)path.style.setProperty('--area-opacity',String(overlayOpacity));
   const title=sn('title');title.textContent=wl(a.name)+' · '+wl(a.title);path.append(title);g.append(path);if(tint)g.append(tint);
-  if(a.relationship==='occupation')g.append(sn('path',{d:polygonPath(a.polygons),fill:'url(#worldOccupationHatch)',class:'world-occupation-hatch'}));
-  if(a.cartographicOverlay==='resistance')g.append(sn('path',{d:polygonPath(a.polygons),fill:'url(#worldOccupationHatch)',class:'world-occupation-hatch'}));
-  if(['cultural','settlement','landscape'].includes(a.kind))g.append(sn('path',{d:polygonPath(a.polygons),fill:'url(#worldRegionHatch)',class:'world-territory-hatch'}));
+  if(a.relationship==='occupation')g.append(sn('path',{d:worldPolygonPath(a.polygons),fill:'url(#worldOccupationHatch)',class:'world-occupation-hatch'}));
+  if(a.cartographicOverlay==='resistance')g.append(sn('path',{d:worldPolygonPath(a.polygons),fill:'url(#worldOccupationHatch)',class:'world-occupation-hatch'}));
+  if(['cultural','settlement','landscape'].includes(a.kind))g.append(sn('path',{d:worldPolygonPath(a.polygons),fill:'url(#worldRegionHatch)',class:'world-territory-hatch'}));
   let pointer=null;
   path.onpointerenter=hideTooltip;
   path.onpointerdown=e=>{if(e.button!==0)return;e.preventDefault();e.stopPropagation();hideTooltip();pointer={id:e.pointerId,x:e.clientX,y:e.clientY,tx:mapState.tx,ty:mapState.ty,moved:false};path.setPointerCapture(e.pointerId);};

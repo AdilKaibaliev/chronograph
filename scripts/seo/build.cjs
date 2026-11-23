@@ -32,6 +32,9 @@ const geometryManifest=pack.finish();
 // Start the small regional lookup alongside the data downloads. Deferred
 // scripts execute in document order, so the first atlas render has its language.
 html=html.replace('</head>','<script defer src="/api/atlas-locale"></script></head>');
+// Fetch the two runtime scripts while metadata and the first dated map load.
+// Execution still waits for hydration and preserves the original script order.
+html=html.replace('</head>',runtimeAssets.map(src=>'<link rel="preload" as="script" href="'+src+'">').join('')+'</head>');
 // Prove that chunking did not discard or change even one historical coordinate.
 const context={window:{}};vm.createContext(context);for(const s of parts)vm.runInContext(s,context);for(const [key,json]of Object.entries(originals))assert.equal(JSON.stringify(pack.restore(context.window.CHRONOGRAPH_DATA[key])),JSON.stringify(JSON.parse(json)),key+' round trip');
 const startupJson=JSON.stringify(context.window.CHRONOGRAPH_DATA),compressed=require('node:zlib').gzipSync(startupJson,{level:9}),startup=[];
