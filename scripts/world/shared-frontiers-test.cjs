@@ -54,11 +54,12 @@ approvedSources.add('maghrebDependence');
 for(const id of Object.keys(require('./europe-central-review.cjs').sources))approvedSources.add(id);
 for(const id of Object.keys(require('./frankish-outer-frontiers.cjs').sources))approvedSources.add(id);
 for(const r of c.russiaEmpireReview?.records||[]){assert(c.sources[r.source],'Missing Russian treaty source');approvedSources.add(r.source);}
+for(const r of c.tianShanReview?.records||[]){assert(['1789-kokand','1789-qing'].includes(r.entry)&&r.from>=1825&&r.to<=1867,'Unexpected Tian Shan revision');assert.equal(r.source,'kyrgyzKokandValleys');assert(c.sources[r.source]);approvedSources.add(r.source);}
 // The 1.25 historical review intentionally changes these two profiles.
 // Its dedicated test independently checks cities, dependency dates and shared
 // geometry; every other original field and unrelated record stays protected.
 for(const a of c.areas.filter(a=>a.from<2011&&!a.frontierAdded)){
- const old=byId.get(a.id==='zirid-1048'?'zirid-1014':a.id.split('-edge-')[0].split('-breton-')[0].replace(/(-\d+)(?:-russia-\d+)+$/,'$1'));assert(old,'Unrecorded historical frame '+a.id);
+ const old=byId.get(a.id==='zirid-1048'?'zirid-1014':a.id.replace(/(-\d+)(?:-tianshan-\d+)+$/,'$1').split('-edge-')[0].split('-breton-')[0].replace(/(-\d+)(?:-russia-\d+)+$/,'$1'));assert(old,'Unrecorded historical frame '+a.id);
  assert(a.from>=old.from&&a.to<=old.to,'Split extends original dates '+a.id);
  // 1.33 changes only these dated outer outlines; settlement controls and
  // annual adjacency checks live in frankish-outer-frontiers-test.cjs.
