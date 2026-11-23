@@ -42,7 +42,7 @@ const context={
  WORLD_HISTORY:catalog,worldHistory:createWorldHistory(catalog),EMPIRES:JSON.parse(fs.readFileSync('index.html','utf8').match(/const EMPIRES=([^\n]+);/)[1]),translate:s=>s,language:'ru',
  year:1299,worldState:{region:'arctic',area:'',selected:'',event:''},
  layerState:{empires:true,places:true},overlayOpacity:.5,
- empireLayer:{querySelectorAll:()=>[{getAttribute:()=> 'M0 0L10 0L10 10Z'}]},
+ empireLayer:{querySelectorAll:s=>s.includes('[data-empire-type=empire]')?[{getAttribute:()=> 'M0 0L10 0L10 10Z'}]:[]},
  worldDefs:new SvgNode('defs'),worldTerritoryLayer:new SvgNode('g'),worldTerritoryLabels:new SvgNode('g'),worldLayer:new SvgNode('g'),
  document:{createElementNS:(_,name)=>new SvgNode(name)},svg:{namespaceURI:'http://www.w3.org/2000/svg'},
  SVG_W:1440,SVG_H:720,TIMELINE_MAX:catalog.range?.max??1299,
@@ -95,11 +95,13 @@ function checkRender(year,region){
   assert(group.children[0].getAttribute('aria-label').includes(frame.name[0]),'Missing territory name');
   if(group.classList.contains('contextual-fill')){
    assert(group.children[0].classList.contains('world-context-outline'),'Context keeps a competing fill');
-   const tint=group.children.find(p=>p.classList.contains('world-context-tint'));
-   assert(tint,'Uncovered contextual land disappeared');assert.equal(tint.getAttribute('mask'),'url(#worldContextFill)');
+   assert.equal(group.children.length,1,'Context duplicates the shared compositor');
   }
-  if(frame.relationship==='occupation')assert(group.children.some(p=>p.classList.contains('world-occupation-hatch')),'Occupation hatch lost');
  }
+ const occupation=expected.filter(a=>a.relationship==='occupation'||a.cartographicOverlay==='resistance'),hatches=context.worldTerritoryLayer.children.filter(p=>p.getAttribute('data-occupation-coverage')==='true');
+ assert.equal(hatches.length,occupation.length?1:0,'Occupation is missing or painted repeatedly');
+ if(occupation.length)for(const a of occupation)assert(hatches[0].getAttribute('d').includes(context.polygonPath(a.polygons)),'Lost occupation territory '+a.entry);
+ const dependent=context.worldTerritoryLayer.children.find(p=>p.getAttribute('data-dependent-fills')==='true');assert(dependent);assert.equal(dependent.getAttribute('mask'),'url(#worldDependencyOutside)');
  const labels=context.worldTerritoryLabels.children.filter(n=>n.nodeName==='text');
  assert.deepEqual(sorted(labels.map(n=>n.getAttribute('data-entry'))),sorted(expected.map(a=>a.entry)),`Lost territory labels: ${year}, ${region}`);
  const markers=context.worldLayer.children.filter(n=>n.dataset.worldPlace);

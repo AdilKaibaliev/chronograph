@@ -46,10 +46,11 @@ function renderBoundaryAreas(sn,y){
   const pat=sn('pattern',{id:'frontierReviewDots',width:4,height:4,patternUnits:'userSpaceOnUse'});
   pat.append(sn('rect',{width:4,height:4,fill:'#cfc6b4'}),sn('circle',{cx:1.6,cy:1.6,r:.57,fill:'#716956'}));worldDefs.append(pat);frontierReviewPattern=pat;
  }
- const group=sn('g',{'data-frontier-review':'true'});
+ // Composite the shared bands once: triple intersections must not darken.
+ const group=sn('g',{'data-frontier-review':'true',opacity:Math.min(1,overlayOpacity+.20)});
  for(const [a,b,i] of f.zones){
   const label=wl(['Неопределённая граница','Uncertain boundary','Так эмес чек ара'])+' · '+boundaryName(a,y)+' / '+boundaryName(b,y);
-  const p=sn('path',{d:polygonPath(WORLD_HISTORY.boundaryEvidence.shapes[i]),fill:'url(#frontierReviewDots)','fill-rule':'nonzero','fill-opacity':Math.min(1,overlayOpacity+.20),'aria-label':label,role:'button',tabindex:0,class:'frontier-review-zone'});
+  const p=sn('path',{d:polygonPath(WORLD_HISTORY.boundaryEvidence.shapes[i]),fill:'url(#frontierReviewDots)','fill-rule':'nonzero','aria-label':label,role:'button',tabindex:0,class:'frontier-review-zone'});
   const t=sn('title');t.textContent=label;p.append(t);p.dataset.owners=a+' '+b;
   const activate=(point)=>{const owners=new Set([a,b]);if(point)for(const q of group.children){if(q.isPointInFill(point))for(const id of q.dataset.owners.split(' '))owners.add(id);}openBoundaryNote([...owners]);};
   p.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}};

@@ -21,6 +21,7 @@ body:not(.ancient-mode) .ancient-controls{display:none}
 #ancientTerritories{display:none}.ancient-mode #ancientTerritories{display:block}.future-mode #ancientTerritories{display:none!important}
 #ancientTerritories path{fill-opacity:var(--ancient-opacity,.55);stroke:var(--ancient-stroke,#615747);stroke-width:.8;stroke-linejoin:round;cursor:pointer}#ancientTerritories path:hover,#ancientTerritories path:focus{fill-opacity:.8;stroke:#302819;stroke-width:1.5;outline:none}
 #ancientTerritories .ancient-boundary-band{fill:#b4a98f;stroke:none;pointer-events:none}
+#ancientTerritories .ancient-boundary-bands>path,#ancientTerritories .ancient-shared-frontiers>path{fill-opacity:1!important}
 .continuity-map #ancientTerritories,.continuity-map #ancientLayer{display:block}.continuity-selection #panel-selection>.ancient-panel{display:block}.continuity-selection #panel-selection>:not(.ancient-panel){display:none!important}
 #ancientTerritories .ancient-continuity-band{fill:#cfc6b4;fill-opacity:1;stroke:none;cursor:pointer}
 #ancientLayer .ancient-territory-label{font-size:12px;font-weight:bold;pointer-events:none}

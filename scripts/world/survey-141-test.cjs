@@ -127,7 +127,7 @@ for(let y=610;y<=2026;y++){
   const ids=new Set(rows.map(r=>r.id));for(const [a,b,k] of frame.zones){assert(ids.has(a)&&ids.has(b)&&ev.shapes[k]?.length);assert(frame.paint[a]!==undefined&&frame.paint[b]!==undefined);families.add([a,b].sort().join('/'));}
   const cur=rows.map(r=>({...r,g:geometry(r.p,frame.paint[r.id])})).sort((a,b)=>a.g.b[0]-b.g.b[0]);
   const sig=cur.map(r=>r.id+':'+r.g.key).join('|');if(signatures.has(sig))continue;signatures.add(sig);
-  for(let i=0;i<cur.length;i++){const a=cur[i];for(let j=i+1;j<cur.length;j++){const b=cur[j];if(b.g.b[0]>=a.g.b[2])break;if(a.member&&b.member||b.g.b[1]>=a.g.b[3]||a.g.b[1]>=b.g.b[3])continue;
+  for(let i=0;i<cur.length;i++){const a=cur[i];for(let j=i+1;j<cur.length;j++){const b=cur[j];if(b.g.b[0]>=a.g.b[2])break;if(b.g.b[1]>=a.g.b[3]||a.g.b[1]>=b.g.b[3])continue;
    const k=[a.g.key,b.g.key].sort().join('|');if(seen.has(k))continue;seen.add(k);
    const remaining=intArea(overlay('ctIntersection',a.g.m,b.g.m));largestRemaining=Math.max(largestRemaining,remaining);
    assert(remaining<=ev.tolerance+.0000001,'Visible double fill '+y+' '+mode+' '+a.id+'/'+b.id+' '+remaining);

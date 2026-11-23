@@ -80,5 +80,5 @@ const {legacyStateVisible}=require('./legacy-presentation.js');
 for(const [id,y]of [['earlyIslam',632],['rashidun',661],['umayyad',750],['tang',907],['northernSong',1127],['nicaea',1261]]){assert(legacyStateVisible(id,y-1));assert(!legacyStateVisible(id,y));}
 assert(html.includes('EMPIRES.filter(e=>legacyStateVisible(e.id,y))'),'Delivered succession filter missing');
 assert(html.includes('p.dataset.empireType=emp.legacyContext?"context":emp.type'),'Early state mask metadata missing');
-const runtime=fs.readFileSync('scripts/world/territory-runtime.js','utf8');assert(runtime.includes('if(tint)g.append(tint)'));assert(runtime.includes('worldContextFill'));assert(runtime.includes("Boolean(a.overlord)"));
+const runtime=fs.readFileSync('scripts/world/territory-runtime.js','utf8');assert(runtime.includes('renderWorldSupplementFills(sn,areas)'));assert(runtime.includes("'data-context-fills':'true'"));assert(runtime.includes("'data-dependent-fills':'true'"));assert(runtime.includes('worldContextFill'));assert(runtime.includes("Boolean(a.overlord)"));
 console.log(JSON.stringify({pass:true,pairs,controls,reviewedFrames:c.sharedFrontiers.frames.length,relationships:c.cartography.frontierRelations.length,checks:'dated shared edges, cities, losing-side retreat, owner intervals, legacy successions, context and occupation rendering'}));

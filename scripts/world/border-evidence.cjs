@@ -29,8 +29,12 @@ function compile(c,empires,legacy){
   const sorted=rows.slice().sort((a,b)=>a.g.b[0]-b.g.b[0]),cuts=new Map(),zones=[];
   for(let i=0;i<sorted.length;i++){const a=sorted[i],A=a.g.b;
    for(let j=i+1;j<sorted.length;j++){const b=sorted[j],B=b.g.b;if(B[0]>=A[2])break;
-    if(A[1]>=B[3]||A[3]<=B[1]||a.id===b.id||a.member&&b.member)continue;
+    if(A[1]>=B[3]||A[3]<=B[1]||a.id===b.id)continue;
     const idx=overlap(a.g,b.g);if(idx<0)continue;const names=[a.id,b.id].sort();
+    // In the detailed view a dated ulus is nested in the pre-1260 imperial
+    // parent. Keep the subdivision; subtract its paint from the parent only.
+    // Later uluses are separate reconstructions and receive the usual review band.
+    if(a.member&&b.member&&(a.id==='mongol'||b.id==='mongol')){const parent=a.id==='mongol'?a:b;if(!cuts.has(parent.id))cuts.set(parent.id,[]);cuts.get(parent.id).push(idx);continue;}
     zones.push([...names,idx]);for(const r of [a,b]){if(!cuts.has(r.id))cuts.set(r.id,[]);cuts.get(r.id).push(idx);}
    }
   }
