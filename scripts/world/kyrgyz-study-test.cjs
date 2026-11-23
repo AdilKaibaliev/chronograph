@@ -19,7 +19,7 @@ for(const e of catalog.lessons){
  assert(!e.polygons&&!e.border,'No invented tribal boundaries '+e.id);
 }
 assert(ids.size>=100,'Retain earlier reviewed history, not just new cards');
-assert.equal(catalog.chapters.length,8);
+assert.equal(catalog.chapters.length,11);
 for(const c of catalog.chapters){
  translated(c.title,c.id);translated(c.intro,c.id);assert(c.lessons.length);
  assert.equal(new Set(c.lessons).size,c.lessons.length);
@@ -32,6 +32,15 @@ for(const c of catalog.chapters){
  if(c.question){translated(c.question,c.id);translated(c.answer,c.id);}
 }
 assert.equal(course.nearest('early',-350000).id,'ky-gegun-modu');
+// A common year does not mean two records describe the same event.
+const stagePlaces={610:[92,54],820:[92,54],840:[102.66,47.43],847:[92.5,53.6],860:[108.94,34.34],924:[94,53],1207:[92.5,53.6],1218:[92.5,53.6],1273:[92.5,53.6],1293:[92.5,53.6]};
+for(const [year,point]of Object.entries(stagePlaces)){
+ const lesson=course.record('stage-'+year);assert.deepEqual(lesson.coord,point,'Wrong geography for Kyrgyz stage '+year);
+ if(lesson.eventId){const linked=world.events.find(e=>e.id===lesson.eventId);assert.deepEqual(linked.title,lesson.title,'Unrelated same-year event');assert(linked.sources.includes('kyrgyz-stage-'+year),'Missing Kyrgyz event provenance');}
+}
+assert.equal(course.record('stage-610').eventId,undefined,'Do not link the Kyrgyz overview to the beginning of revelation');
+assert.deepEqual(course.record('stage-610').mapPlaces[0][0],[92,54]);
+assert.deepEqual(world.events.find(e=>e.id==='atlas-610').coord,[39.8579,21.3891],'The independent Mecca event must retain its own location');
 assert(course.record('ky-gegun-modu').regional);
 assert.equal(course.record('ky-jiankun-zhizhi').mapPlaces.length,0,'Do not turn unlocated textual distances into an exact migration path');
 for(const id of ['stage-840','stage-1218','stage-1293','ky-study-maitobe-1847','ky-study-pishpek-1862'])assert(course.list('battles').some(e=>e.id===id),'Battle missing '+id);
@@ -59,5 +68,22 @@ assert(course.list('pamir','Гилгит').some(e=>e.id==='ky-study-pamir-return
 assert.equal(course.list('all','zz-no-match-zz').length,0);
 for(const e of additions.events){const published=world.events.find(x=>x.id===e.id);assert(published,'General atlas event missing '+e.id);assert.deepEqual(published,e);assert(e.sources.every(id=>world.sources[id]));}
 new vm.Script(fs.readFileSync(__dirname+'/kyrgyz-study-runtime.js','utf8'));
+new vm.Script(fs.readFileSync(__dirname+'/kyrgyz-geography-runtime.js','utf8'));
+const school=require('./kyrgyz-school-data.cjs');
+assert(school.events.length>=85,'Retain the geographic textbook coverage');
+for(const entry of school.events){assert.deepEqual(course.record(entry.id),entry,'School record lost in integration: '+entry.id);}
+// Inclusive event intervals, distinct locations and no same-coordinate duplicates.
+for(const y of [610,840,1514,1517,1522,1847,1855,1862,1876,1916,1917,1920,1924,1926,1936,1978,1982,1991,2010]){
+ const current=course.at(y);assert(current.length,'No history at '+y);
+ assert(current.every(e=>e.from<=y&&y<=e.to),'Wrong-year events at '+y);
+ for(const g of course.placesAt(y)){assert.equal(new Set(g.lessons.map(e=>e.id)).size,g.lessons.length);for(const e of g.lessons)assert(e.mapPlaces.some(p=>p[0].join(',')===g.coord.join(',')));}
+}
+assert(course.placesAt(610).some(p=>p.coord[0]>75&&p.coord[0]<76&&p.coord[1]>42),'Tian Shan history remains visible independently of the Yenisei');
+for(const id of ['kemin-1916','kanaat-1916','boom-1916','tokmok-1916','tyup-1916'])assert(course.at(1916).some(e=>e.id==='ky-school-'+id));
+assert(!course.at(1917).some(e=>e.id==='ky-school-tokmok-1916'),'A battle must not persist into an unrelated year');
+assert(course.at(1920).some(e=>e.id==='ky-school-refugee-assistance'));
+assert(!course.at(1935).some(e=>e.id==='ky-school-ssr-1936'));
+assert(course.at(1936).some(e=>e.id==='ky-school-ssr-1936'));
+assert.equal(course.record('ky-school-early-tianshan-question').route,undefined,'Do not invent a continuous early migration path');
 assert(!html.includes("e.stopImmediatePropagation();showKyrgyz();"),'Early history buttons must open the unified course');
 console.log(JSON.stringify({pass:true,lessons:ids.size,chapters:catalog.chapters.map(c=>[c.id,c.lessons.length]),newEvents:additions.events.length,checks:'dates, three languages, sources, destinations, return branch, flight, ancient continuity, filtered navigation and no false tribal borders'}));

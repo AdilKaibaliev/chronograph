@@ -209,7 +209,7 @@ html=require('../ancient/integrate.cjs')(html);
 const ancientStart=html.indexOf('const ANCIENT_PREVIEW=')+'const ANCIENT_PREVIEW='.length;
 const ancientForStudy=JSON.parse(html.slice(ancientStart,html.indexOf(';\n',ancientStart)));
 const kyrgyzStudy=require('../world/kyrgyz-study-catalog.cjs')(worldData,witnessData,kyrgyzStages,ancientForStudy,worldTextRow);
-const studyRuntime=fs.readFileSync(root+'/../world/kyrgyz-study-core.js','utf8').replace("if(typeof module!=='undefined')module.exports={createKyrgyzStudy};",'')+'\nconst KYRGYZ_STUDY='+JSON.stringify(kyrgyzStudy).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../world/kyrgyz-study-runtime.js','utf8');
+const studyRuntime=fs.readFileSync(root+'/../world/kyrgyz-study-core.js','utf8').replace("if(typeof module!=='undefined')module.exports={createKyrgyzStudy};",'')+'\nconst KYRGYZ_STUDY='+JSON.stringify(kyrgyzStudy).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../world/kyrgyz-study-runtime.js','utf8')+'\n'+fs.readFileSync(root+'/../world/kyrgyz-geography-runtime.js','utf8');
 const studyEnd=html.lastIndexOf('})();');html=html.slice(0,studyEnd)+'\n'+studyRuntime+'\n'+html.slice(studyEnd);
 html=html.replace('</style>',fs.readFileSync(root+'/../world/kyrgyz-study-style.css','utf8')+'\n</style>');
 for(const script of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(script[1]);

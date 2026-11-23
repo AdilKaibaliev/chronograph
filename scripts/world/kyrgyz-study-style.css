@@ -50,4 +50,18 @@
 .kyrgyz-study-place-name{font:600 11px system-ui;fill:#302818;stroke:#f2e9cf;stroke-width:3px;paint-order:stroke;stroke-linejoin:round;pointer-events:none}
 .kyrgyz-study-mode #tradeLayer{display:none}
 .future-mode #kyrgyzStudyMap,.future-mode #kyrgyzStudyKey{display:none}
+.kyrgyz-local[hidden],.future-mode #kyrgyzLocalMap{display:none!important}
+.kyrgyz-local{padding:10px 14px 12px;border-bottom:1px solid #76623d;color:#e7dcc6;font:14px/1.5 system-ui}
+.kyrgyz-local h3{font:19px Georgia,serif;color:#f2dfaf;margin:0 0 5px}
+.kyrgyz-local-date{font-size:12px;color:#c6ac72;margin:3px 0 8px}
+.kyrgyz-local-list{max-height:230px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.kyrgyz-local button,.kyrgyz-concurrent button{display:block;width:100%;border:1px solid #756441;background:#332e23;color:#f0dfbc;border-radius:6px;padding:8px 10px;margin:5px 0;text-align:left;cursor:pointer;font:inherit}
+.kyrgyz-local button:hover,.kyrgyz-concurrent button:hover{background:#51452e}
+.kyrgyz-local button:focus-visible,.kyrgyz-concurrent button:focus-visible{outline:2px solid #e3c783;outline-offset:2px}
+.kyrgyz-local small{display:block;font-size:11px;color:#c6b693;margin-top:3px}
+.kyrgyz-concurrent{margin:16px 0 8px;padding:10px 0;border-top:1px solid #695c40;font-size:13px}
+.kyrgyz-concurrent p{margin:7px 0;color:#c8bfa9}.kyrgyz-concurrent strong{color:#e0c895}
+.kyrgyz-local-pin{cursor:pointer}.kyrgyz-local-pin circle{fill:#286854;stroke:#fff6d9;stroke-width:1.5}
+.kyrgyz-local-pin:focus{outline:none}.kyrgyz-local-pin:focus circle{stroke:#171e22;stroke-width:3}
+.kyrgyz-local-pin text{font:600 11px system-ui;fill:#302818;stroke:#f2e9cf;stroke-width:3px;paint-order:stroke;pointer-events:none}
 @media(max-width:700px){.kyrgyz-study h2{font-size:18px}.kyrgyz-study-article h3{font-size:20px}.kyrgyz-study-header{position:static}.kyrgyz-study-key{font-size:10px;bottom:56px;right:7px;max-width:65%}.kyrgyz-study-mode .map-legend{display:none}}

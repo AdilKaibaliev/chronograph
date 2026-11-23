@@ -20,4 +20,8 @@ This release collects the atlas’s earlier reviewed Kyrgyz source readings into
 
 ## Verification
 
+### 23 November 2026: same-year location collision
+
+The course incorrectly reused the general `atlas-610` event's Mecca coordinate for its unrelated Kyrgyz overview. Stage records now reuse a world event only when its Russian title and `kyrgyz-stage-YEAR` source both identify the same Kyrgyz stage. Otherwise their own regional reference is retained. The 610 overview uses the existing Sayan–Yenisei reference (92° E, 54° N), labelled as a region, without changing the independent Mecca event. All ten retained stage locations were reviewed; no other mismatched same-year link was found. Regression checks assert their intended locations and the identity of every linked event.
+
 `scripts/world/kyrgyz-study-test.cjs` checks the assembled public course, references, all languages, chronological navigation, source-date intervals, return branch, flight destination, earlier records, and inclusion of new events in the general atlas. It runs as a mandatory release check. Browser checks cover actual navigation, search, language switching, numbered places, timeline changes, closing/reopening, and public deployment.

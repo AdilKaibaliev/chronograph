@@ -14,7 +14,8 @@
  function scheduleLabels(){if(!resizing)resizing=requestAnimationFrame(()=>{resizing=0;layoutLabels();});}
  function layoutLabels(){
   if(!map.children.length)return;
-  const m=worldLabelMetrics(),occupied=[];
+  const m=worldLabelMetrics(),occupied=[],base=svg.getBoundingClientRect();
+  for(const text of viewport.querySelectorAll('text')){if(map.contains(text)||text.closest('#kyrgyzLocalMap'))continue;const r=text.getBoundingClientRect();if(r.width&&r.height&&r.right>base.left&&r.left<base.right&&r.bottom>base.top&&r.top<base.bottom)occupied.push([r.left-base.left,r.top-base.top,r.right-base.left,r.bottom-base.top]);}
   for(const g of map.querySelectorAll('[data-study-pin]')){
    const inner=g.firstElementChild,label=g.querySelector('.kyrgyz-study-place-name');inner.setAttribute('transform','scale('+1/m.scale+')');label.textContent=m.width<600?g.dataset.placeName.split(' · ')[0]:g.dataset.placeName;
    const [x,y]=m.point(+g.dataset.px,+g.dataset.py),w=worldLabelWidth(label.textContent,11)+6;label.style.display='none';
@@ -61,7 +62,7 @@
   switchPanel('compare');renderYear(keepYear&&course.activeAt(id,year)?year:e.year);render();draw();if(move)focus(e);queueLocationSave();
   $('panel-compare').scrollTop=0;panel.querySelector('h3')?.focus({preventScroll:true});
  }
- function close(){state.open=false;state.selected='';panel.hidden=true;document.body.classList.remove('kyrgyz-study-mode');map.replaceChildren();key.hidden=true;renderYear(year);queueLocationSave();$('kyrgyzParallel').focus({preventScroll:true});}
+ function close(){state.open=false;state.selected='';panel.hidden=true;document.body.classList.remove('kyrgyz-study-mode');map.replaceChildren();key.hidden=true;renderYear(year);queueLocationSave();$('kyrgyzParallel').focus({preventScroll:true});document.dispatchEvent(new Event('kyrgyz-context-change'));}
  function render(){
   if(!state.open)return;renderedYear=year;panel.replaceChildren();
   const header=make('header','kyrgyz-study-header'),top=make('div','kyrgyz-study-top');top.append(make('h2','',t('title')),button('×',close,'kyrgyz-study-close'));top.lastChild.setAttribute('aria-label',t('close'));top.lastChild.title=t('close');header.append(top);
@@ -84,10 +85,14 @@
    e.mapPlaces.forEach((p,i)=>{const b=button((i+1)+'. '+wl(p[1]),()=>focusPlace(i));b.dataset.studyPlace=i;b.setAttribute('aria-pressed','false');places.append(b);});
    if(!e.mapPlaces.length)places.append(make('p','',t('noPlace')));else places.append(button(t('fit'),()=>focus(e),'kyrgyz-study-fit'));article.append(places);
    const sources=make('details','kyrgyz-study-sources');sources.append(make('summary','',t('sources')));for(const s of e.sources)sources.append(make('p','',s));article.append(sources);
-  }else article.append(make('p','',t('different')));panel.append(article);
+  }else article.append(make('h3','',wl(['Кыргызстан в выбранном году','Kyrgyzstan in the selected year','Тандалган жылдагы Кыргызстан'])));panel.append(article);
+  const active=course.at(year).filter(x=>x.id!==state.selected&&x.mapPlaces.some(p=>p[0][0]>=69&&p[0][0]<=81&&p[0][1]>=39&&p[0][1]<=44));
+  if(active.length){const nearby=make('section','kyrgyz-local');nearby.id='kyrgyzSameYear';nearby.append(make('h4','',wl(['Другие места и события этого года','Other places and events this year','Ушул жылдагы башка жерлер жана окуялар'])));const entries=make('div','kyrgyz-local-list');for(const item of active){const b=button(wl(item.title),()=>choose(item.id,false,true));b.dataset.sameYearEpisode=item.id;entries.append(b);}nearby.append(entries);panel.append(nearby);}
+  const concurrent=make('section','kyrgyz-concurrent');concurrent.id='kyrgyzConcurrent';panel.append(concurrent);document.dispatchEvent(new Event('kyrgyz-context-change'));
   if(chapter.question){const question=make('section','kyrgyz-study-question');question.append(make('h4','',t('question')),make('p','',wl(chapter.question)));const answer=make('details','');answer.append(make('summary','',t('answer')),make('p','',wl(chapter.answer)));question.append(answer);panel.append(question);}
  }
- function open(){state.open=true;state.query='';choose(course.record(state.selected)?.id||course.nearest(state.chapter,year).id);}
+ function open(){stopPlay();state.open=true;state.query='';state.selected='';panel.hidden=false;document.body.classList.add('kyrgyz-study-mode');switchPanel('compare');render();draw();focusLonLat(75.2,41.65,24);queueLocationSave();}
+ document.addEventListener('kyrgyz-open-episode',ev=>{const e=course.record(ev.detail?.id);if(e&&course.activeAt(e.id,year))choose(e.id,false,true);});
  $('kyrgyzParallel').onclick=open;
  $('kyrgyzHistoryBtn').onclick=open;
  for(const id of ['worldExploreBtn','compareBtn','atlasBtn','futureBtn'])$(id)?.addEventListener('click',()=>{if(state.open)close();},true);

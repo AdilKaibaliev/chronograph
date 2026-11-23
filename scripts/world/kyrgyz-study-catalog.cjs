@@ -1,5 +1,6 @@
 'use strict';
 const additions=require('./kyrgyz-study-data.cjs');
+const school=require('./kyrgyz-school-data.cjs');
 module.exports=function kyrgyzStudyCatalog(world,witnesses,stages,ancient,textRow){
  const lessons=[];
  const add=e=>{if(!lessons.some(x=>x.id===e.id))lessons.push(e);};
@@ -12,21 +13,27 @@ module.exports=function kyrgyzStudyCatalog(world,witnesses,stages,ancient,textRo
   // The refined witness replaces this stage when the original date or location
   // needed a source correction. Do not revive the older account in the course.
   if(witnesses.some(n=>(n.from===s.year&&s.year!==1293)||n.replacesStage===s.year))continue;
-  const event=world.events.find(e=>e.id==='atlas-'+s.year);
+  // World chronology also contains unrelated events in these years (610 is
+  // the beginning of revelation in Mecca). Only reuse a Kyrgyz stage's event
+  // when both its title and explicitly assigned source identify that stage.
+  const event=world.events.find(e=>e.id==='atlas-'+s.year&&e.title?.[0]===s.title&&e.sources?.includes('kyrgyz-stage-'+s.year));
   add({id:'stage-'+s.year,year:s.year,from:s.year===924?900:s.year,to:s.year===924?1199:s.year===860?874:s.year,kind:[820,840,1218,1273,1293].includes(s.year)?'war':event?.kind||'politics',title:textRow(s.title),text:textRow(s.text),coord:event?.coord||s.view?.slice(0,2),regional:true,route:s.route?.points,mapScale:s.view?.[2]||5,sources:[s.source],eventId:event?.id,
    ...(s.year===820?{periodLabel:['Около 820 года','Around 820','Болжол менен 820-жыл']}:s.year===924?{periodLabel:['X–XII века','10th–12th centuries','X–XII кылымдар']}:s.year===860?{periodLabel:['860–874 годы','860–874','860–874-жылдар']}:{})});
  }
  for(const r of ancient.records.filter(r=>r.kyrgyz))add({id:r.id,year:r.from,from:r.from,to:r.to-1,kind:'culture',title:r.title,text:r.text,periodLabel:r.dateLabel,coord:r.coord,
   mapPlaces:(r.geographicReferences||[]).map(p=>[p.coord,p.label||p.title]),regional:true,geographyNote:r.geographyCaption,mapScale:5,sources:r.sources.map(id=>ancient.sources[id].title)});
  for(const e of additions.events)add({...e,eventId:e.id,sources:e.sources.map(id=>additions.sources[id].title)});
+ for(const e of school.events)add({...e});
  // Add modern political chapters already reviewed in the general atlas.
- for(const entry of world.entries.filter(e=>e.kyrgyzHistory))for(const p of entry.phases.filter(p=>p.from>=1917))add({id:'state-'+entry.id+'-'+p.from,year:p.from,from:p.from,to:p.to-1,kind:'politics',coord:p.coord||entry.coord,title:p.title,text:p.text,sources:p.sources.map(id=>world.sources[id].title),mapScale:8});
+ for(const entry of world.entries.filter(e=>e.kyrgyzHistory))for(const p of entry.phases.filter(p=>p.from>=1300))add({id:'state-'+entry.id+'-'+p.from,year:p.from,from:p.from,to:p.to-1,kind:'politics',coord:p.coord||entry.coord,title:p.title,text:p.text,sources:p.sources.map(id=>world.sources[id].title),mapScale:8,background:true});
  for(const e of lessons){
   e.mapPlaces??=[];if(!e.mapPlaces.length&&e.coord)e.mapPlaces=[[e.coord,e.title]];
   e.sources=e.sources.filter(Boolean);
  }
  // Enrich older public cards without changing their reviewed chronology.
  const find=y=>lessons.find(e=>e.id==='witness-'+y);
+ const overview610=lessons.find(e=>e.id==='stage-610');
+ overview610.mapPlaces=[[[92,54],['Саяно-Енисейский регион · кыргызские земли','Sayan–Yenisei region · Kyrgyz lands','Саян–Энесай аймагы · кыргыз жерлери']]];
  const campaign840=lessons.find(e=>e.id==='stage-840');
  campaign840.mapPlaces=[[[92.5,53.6],['Верхний Енисей · район исхода','Upper Yenisei · departure region','Жогорку Энесай · жортуул башталган аймак']],[[102.66,47.43],['Орду-Балык · уйгурская столица','Ordu-Baliq · Uyghur capital','Орду-Балык · уйгур борбору']]];
  campaign840.coord=[102.66,47.43];
@@ -40,6 +47,9 @@ module.exports=function kyrgyzStudyCatalog(world,witnesses,stages,ancient,textRo
  const chapter=(id,title,intro,filter,question,answer)=>({id,title,intro,lessons:lessons.filter(filter).map(e=>e.id),question,answer});
  const chapters=[
   chapter('all',['Вся история кыргызов','All Kyrgyz history','Кыргыз тарыхы толугу менен'],['Свидетельства, общества и события на общей шкале времени.','Accounts, communities and events on the common timeline.','Жалпы убакыт тилкесиндеги маалыматтар, коомдор жана окуялар.'],()=>true),
+  chapter('school-middle',['Тянь-Шань · IX–XVIII века','Tian Shan · 9th–18th centuries','Теңир-Тоо · IX–XVIII кылымдар'],['Города, правители, общества и переселения.','Cities, rulers, communities and movements.','Шаарлар, башкаруучулар, коомдор жана көчүүлөр.'],e=>e.year>=801&&e.year<=1800),
+  chapter('school-empire',['XIX век и 1916 год','19th century and 1916','XIX кылым жана 1916-жыл'],['Коканд, местные правители, Российская империя, восстания и Үркүн.','Kokand, local rulers, the Russian Empire, uprisings and Ürkün.','Кокон, жергиликтүү башкаруучулар, Орусия империясы, көтөрүлүштөр жана Үркүн.'],e=>e.year>=1801&&e.year<=1916),
+  chapter('school-modern',['1917 год — современность','1917 to the present','1917-жылдан бүгүнкү күнгө чейин'],['Государственность, общество, культура и расселение.','Statehood, society, culture and settlement.','Мамлекеттүүлүк, коом, маданият жана жайгашуу.'],e=>e.year>=1917),
   chapter('early',['Ранние свидетельства','Early accounts','Алгачкы маалыматтар'],['Китайские хроники и география ранних упоминаний.','Chinese chronicles and the geography of early references.','Кытай жылнаамалары жана алгачкы маалыматтардын географиясы.'],e=>e.year<840,
    ['Означает ли первое упоминание дату появления народа?','Does the first written reference date the birth of a people?','Элдин алгачкы эскерилиши анын пайда болгон датасын билдиреби?'],['Нет. Это дата сохранившегося свидетельства; происхождение народа и местоположение ранних групп исследуются отдельно.','No. It dates a surviving account; the people’s origins and the location of early groups are separate research questions.','Жок. Бул — сакталып калган маалыматтын датасы; элдин теги жана алгачкы топтор жашаган жерлер өзүнчө изилденет.']),
   chapter('yenisei',['Енисей и Тянь-Шань','Yenisei and Tian Shan','Энесай жана Теңир-Тоо'],['Каганат, письменные свидетельства, походы и сообщества Тянь-Шаня.','The khaganate, written accounts, campaigns and Tian Shan communities.','Каганат, жазма маалыматтар, жортуулдар жана Теңир-Тоодогу жамааттар.'],e=>e.year>=840&&e.year<=1765,
