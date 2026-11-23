@@ -81,6 +81,9 @@ for(const y of [610,840,1514,1517,1522,1847,1855,1862,1876,1916,1917,1920,1924,1
 assert(course.placesAt(610).some(p=>p.coord[0]>75&&p.coord[0]<76&&p.coord[1]>42),'Tian Shan history remains visible independently of the Yenisei');
 for(const id of ['kemin-1916','kanaat-1916','boom-1916','tokmok-1916','tyup-1916'])assert(course.at(1916).some(e=>e.id==='ky-school-'+id));
 assert(!course.at(1917).some(e=>e.id==='ky-school-tokmok-1916'),'A battle must not persist into an unrelated year');
+assert(!course.at(1830).some(e=>e.id==='ky-school-tailak'),'Anti-Kokand campaign begins in 1831');
+assert(course.at(1838).some(e=>e.id==='ky-school-tailak'));
+assert(!course.at(1839).some(e=>e.id==='ky-school-tailak'),'Do not show Tailak commanding after his death in 1838');
 assert(course.at(1920).some(e=>e.id==='ky-school-refugee-assistance'));
 assert(!course.at(1935).some(e=>e.id==='ky-school-ssr-1936'));
 assert(course.at(1936).some(e=>e.id==='ky-school-ssr-1936'));
