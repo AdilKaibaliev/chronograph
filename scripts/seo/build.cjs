@@ -13,6 +13,11 @@ const landscapeRoot=path.join(root,'research/paleogeography-older'),gunzip=requi
 const landscapeManifest=JSON.parse(gunzip(fs.readFileSync(path.join(landscapeRoot,'manifest.json.gz'))));
 for(const f of landscapeManifest.frames){assert(/^\d+\.json\.gz$/.test(f.file));const raw=gunzip(fs.readFileSync(path.join(landscapeRoot,f.file)));assert.equal(hash(raw),f.sha256);const value=JSON.parse(raw);assert.equal(value.bp,f.bp);assert.equal(value.year,f.year);assert.equal(value.source,'krapp2021');asset('landscape-'+f.bp,raw.toString(),'json');}
 let html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+// Fetch community outlines only on the present-day map, outside startup data.
+const kyrgyzAdmin=asset('kyrgyz-admin',fs.readFileSync(path.join(root,'scripts/world/kyrgyz-admin-geography.json'),'utf8'),'json');
+html=html.replace("fetch('scripts/world/kyrgyz-admin-geography.json'","fetch('"+kyrgyzAdmin+"'");
+write('kyrgyz-geography-credits.html',fs.readFileSync(path.join(root,'research/kyrgyz-geography-credits.html'),'utf8'));
+write('geography-data.json',JSON.stringify({url:kyrgyzAdmin,license:'ODbL-1.0 for TJK/UZB; PDDL-1.0 for CHN'}));
 const icon=decodeURIComponent(html.match(/href="data:image\/svg\+xml,([^"]+)"/)[1]);write('icon.svg',icon);write('logo.svg',icon);
 const verification=JSON.parse(fs.readFileSync(path.join(__dirname,'verification.json'),'utf8'));
 const verificationTags=Object.entries(verification).map(([name,value])=>'<meta name="'+esc(name)+'" content="'+esc(value)+'">').join('');

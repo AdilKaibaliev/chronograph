@@ -109,6 +109,7 @@ const expansionRuntime=fs.readFileSync(root+'/../expansion/core.js','utf8').repl
 const incidentData=require('../incidents/integrate.cjs');
 const worldData={...worldCatalog,range:{...worldCatalog.range,max:incidentData.timelineMax},displayCartography:require('../world/coastal-display.cjs')(worldCatalog),sources:Object.fromEntries(Object.entries(worldCatalog.sources).map(([id,s])=>[id,{title:s.title}]))};
 const legacyCartography=require('../world/cartography-legacy.cjs')(empires);
+require('../world/kyrgyz-frontiers.cjs').patch(worldData);
 worldData.boundaryEvidence=require('../world/border-evidence.cjs')(worldData,empires,legacyCartography);
 worldData.provinceGaps=require('../world/province-gaps.cjs')(worldData);
 const worldTranslate=createChronographTranslator(rows);
@@ -211,8 +212,11 @@ const ancientStart=html.indexOf('const ANCIENT_PREVIEW=')+'const ANCIENT_PREVIEW
 const ancientForStudy=JSON.parse(html.slice(ancientStart,html.indexOf(';\n',ancientStart)));
 const kyrgyzStudy=require('../world/kyrgyz-study-catalog.cjs')(worldData,witnessData,kyrgyzStages,ancientForStudy,worldTextRow);
 const studyRuntime=fs.readFileSync(root+'/../world/kyrgyz-study-core.js','utf8').replace("if(typeof module!=='undefined')module.exports={createKyrgyzStudy};",'')+'\nconst KYRGYZ_STUDY='+JSON.stringify(kyrgyzStudy).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../world/kyrgyz-study-runtime.js','utf8')+'\n'+fs.readFileSync(root+'/../world/kyrgyz-geography-runtime.js','utf8');
-const studyEnd=html.lastIndexOf('})();');html=html.slice(0,studyEnd)+'\n'+studyRuntime+'\n'+fs.readFileSync(root+'/../world/kyrgyz-movement-runtime.js','utf8')+'\n'+html.slice(studyEnd);
+const kyrgyzFrontiers=require('../world/kyrgyz-frontiers.cjs');
+const frontierRuntime='const KYRGYZ_FRONTIERS='+JSON.stringify({version:kyrgyzFrontiers.version,sources:kyrgyzFrontiers.sources,records:kyrgyzFrontiers.records}).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../world/kyrgyz-frontiers-runtime.js','utf8');
+const studyEnd=html.lastIndexOf('})();');html=html.slice(0,studyEnd)+'\n'+studyRuntime+'\n'+fs.readFileSync(root+'/../world/kyrgyz-movement-runtime.js','utf8')+'\n'+frontierRuntime+'\n'+html.slice(studyEnd);
 html=html.replace('</style>',fs.readFileSync(root+'/../world/kyrgyz-study-style.css','utf8')+'\n</style>');
+html=html.replace('</style>',fs.readFileSync(root+'/../world/kyrgyz-frontiers-style.css','utf8')+'\n</style>');
 for(const script of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(script[1]);
 fs.writeFileSync(repositoryBuild?'index.html':'outputs/chronograph_1_1.html',html);
 fs.writeFileSync(root+'/compiled-messages.json',JSON.stringify(rows,null,2));
