@@ -51,6 +51,11 @@ const raw=require('./catalog.cjs'),byId=new Map(raw.areas.map(a=>[a.id,a]));
 const approvedSources=new Set(c.sharedFrontiers.frames.map(f=>f.source));
 assert.equal(c.mediterraneanReview.version,1);
 approvedSources.add('maghrebDependence');
+// The reviewed late-Yenisei regional outlines add archival geography citations
+// only to these three continuing profiles; all original sources stay protected.
+assert.deepEqual(c.areas.filter(a=>a.sources.includes('kyrgyzLateGeography')).map(a=>a.id),['late-kyrgyz-1368','late-kyrgyz-1454','late-kyrgyz-1601']);
+assert(c.sources.kyrgyzLateGeography.title.includes('Бутанаев'));
+approvedSources.add('kyrgyzLateGeography');
 for(const id of Object.keys(require('./europe-central-review.cjs').sources))approvedSources.add(id);
 for(const id of Object.keys(require('./frankish-outer-frontiers.cjs').sources))approvedSources.add(id);
 for(const r of c.russiaEmpireReview?.records||[]){assert(c.sources[r.source],'Missing Russian treaty source');approvedSources.add(r.source);}

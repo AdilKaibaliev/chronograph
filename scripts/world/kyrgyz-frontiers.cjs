@@ -71,14 +71,17 @@ modern('ulupamir',L('Улу-Памир · Эрджиш, Ван','Ulupamir · Erc
 for(const [id,title,coord]of [['moscow',L('Москва','Moscow','Москва'),[37.62,55.75]],['astana',L('Астана','Astana','Астана'),[71.43,51.13]],['prague',L('Прага','Prague','Прага'),[14.42,50.08]],['vienna',L('Вена','Vienna','Вена'),[16.37,48.21]],['antalya',L('Анталья','Antalya','Анталия'),[30.71,36.9]],['ekaterinburg',L('Екатеринбург','Yekaterinburg','Екатеринбург'),[60.6,56.84]],['novosibirsk',L('Новосибирск','Novosibirsk','Новосибирск'),[82.92,55.03]],['krasnoyarsk',L('Красноярск','Krasnoyarsk','Красноярск'),[92.87,56.01]],['irkutsk',L('Иркутск','Irkutsk','Иркутск'),[104.29,52.29]],['tomsk',L('Томск','Tomsk','Томск'),[84.95,56.48]],['barnaul',L('Барнаул','Barnaul','Барнаул'),[83.78,53.35]],['khabarovsk',L('Хабаровск','Khabarovsk','Хабаровск'),[135.07,48.48]],['sakhalin',L('Южно-Сахалинск','Yuzhno-Sakhalinsk','Түштүк-Сахалинск'),[142.74,46.96]]])modern('city-'+id,title,coord,null,['diaspora'],L('В официальном реестре указана кыргызская общественная организация этого города.','The official directory lists a Kyrgyz community organisation in this city.','Расмий реестрде бул шаардагы кыргыз коомдук уюму көрсөтүлгөн.'),'city');
 for(const[id,title,coord]of [['petersburg',L('Санкт-Петербург','Saint Petersburg','Санкт-Петербург'),[30.32,59.94]],['omsk',L('Омск','Omsk','Омск'),[73.37,54.99]],['samara',L('Самара','Samara','Самара'),[50.1,53.2]],['perm',L('Пермь','Perm','Пермь'),[56.25,58.01]],['tyumen',L('Тюмень','Tyumen','Тюмень'),[65.53,57.15]],['chelyabinsk',L('Челябинск','Chelyabinsk','Челябинск'),[61.4,55.16]],['kurgan',L('Курган','Kurgan','Курган'),[65.34,55.44]],['orenburg',L('Оренбург','Orenburg','Оренбург'),[55.1,51.77]],['voronezh',L('Воронеж','Voronezh','Воронеж'),[39.2,51.66]],['nizhny',L('Нижний Новгород','Nizhny Novgorod','Нижний Новгород'),[44,56.33]],['astrakhan',L('Астрахань','Astrakhan','Астрахань'),[48.04,46.35]],['yaroslavl',L('Ярославль','Yaroslavl','Ярославль'),[39.89,57.63]],['kaliningrad',L('Калининград','Kaliningrad','Калининград'),[20.51,54.71]],['tver',L('Тверь','Tver','Тверь'),[35.91,56.86]],['ulyanovsk',L('Ульяновск','Ulyanovsk','Ульяновск'),[48.4,54.32]],['birobidzhan',L('Биробиджан','Birobidzhan','Биробиджан'),[132.93,48.79]],['magadan',L('Магадан','Magadan','Магадан'),[150.81,59.56]],['nizhnevartovsk',L('Нижневартовск','Nizhnevartovsk','Нижневартовск'),[76.57,60.94]],['salekhard',L('Салехард','Salekhard','Салехард'),[66.61,66.53]]])modern('city-'+id,title,coord,null,['diaspora'],L('В официальном реестре указана кыргызская общественная организация этого города.','The official directory lists a Kyrgyz community organisation in this city.','Расмий реестрде бул шаардагы кыргыз коомдук уюму көрсөтүлгөн.'),'city');
 modern('city-chicago',L('Чикаго','Chicago','Чикаго'),[-87.63,41.88],null,['chicago'],L('Кыргызский общественный центр объединяет общину Чикаго и проводит культурные и образовательные мероприятия.','The Kyrgyz Community Center brings together the Chicago community through cultural and educational activities.','Кыргыз коомдук борбору Чикагодогу жамаатты бириктирип, маданий жана билим берүү иш-чараларын өткөрөт.'),'city');
-function patch(world){
- const display=world.displayCartography;const adjusted=[];
+function cite(world){
  world.sources.kyrgyzLateGeography={title:sources.yenisei+' '+sources.ulus};
  world.areas=world.areas.map(a=>a.entry==='late-kyrgyz'&&a.from>=1368&&a.from<1703?{...a,sources:[...new Set([...a.sources,'kyrgyzLateGeography'])]}:a);
+}
+function patch(world){
+ const display=world.displayCartography;const adjusted=[];
+ cite(world);
  for(const a of world.areas){
   if(a.entry!=='late-kyrgyz'||a.from<1368||a.from>=1703)continue;
   const p=G.union([regions.minusinsk]);display.areas[a.id]=display.shapes.length;display.shapes.push(p);display.labels[a.id]=[91.3,53.7];adjusted.push(a.id);
  }
  world.kyrgyzFrontierReview={version:1,adjusted,source:sources.ulus,meaning:'Middle Yenisei regional envelope, not ninth-century Tuva extent or a surveyed frontier'};
 }
-module.exports={version:1,sources,records,regions,patch};
+module.exports={version:1,sources,records,regions,cite,patch};
