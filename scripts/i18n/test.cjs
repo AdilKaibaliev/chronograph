@@ -37,10 +37,14 @@ const people=html=>JSON.parse(JSON.stringify(vm.runInNewContext(html.slice(html.
 const originalPeople=people(base),extendedPeople=people(built);
 assert.deepEqual(extendedPeople.slice(0,originalPeople.length),originalPeople,'Original biographies and dates preserved');
 assert.equal(extendedPeople.length,originalPeople.length+require('../late/biographies.cjs').length+require('../early/biographies.cjs').length+require('../to1789/biographies.cjs').length+require('../to1815/biographies.cjs').length+require('../to1848/biographies.cjs').length+require('../to1914/biographies.cjs').length+require('../to1918/biographies.cjs').length+require('../to1939/biographies.cjs').length+require('../to1945/biographies.cjs').length+require('../to1960/biographies.cjs').length+require('../to1991/biographies.cjs').length+require('../to2000/biographies.cjs').length+require('../to2010/biographies.cjs').length);
-assert(!/<a(?=\s|>)|\bhref=|window\.open\(/.test(built.replace('license.href=boundaries.source.licenseUrl;','').replace(/<link rel="icon"[^>]*>/g,'').replace(/<a class="contact-email" href="mailto:lfc@legacyfidelity\.com\?subject=Chronograph">lfc@legacyfidelity\.com<\/a>/g,'')),'Sources must remain plain text');
+assert(!/<a(?=\s|>)|\bhref=|window\.open\(/.test(built.replace('license.href=boundaries.source.licenseUrl;','').replace("credit.href='/kyrgyz-geography-credits.html';",'').replace(/<link rel="icon"[^>]*>/g,'').replace(/<a class="contact-email" href="mailto:lfc@legacyfidelity\.com\?subject=Chronograph">lfc@legacyfidelity\.com<\/a>/g,'')),'Sources must remain plain text');
 assert(!built.includes('id="translationNotice"'),'Preview notice remains');
 console.log('PASS: '+rows.length+' message pairs, Russian preservation, calendar and dynamic labels, explicit Russian fallback.');
 console.log('PASS: delivered early states match the documented frontier review; original events and person dates preserved; plain-text sources.');
 
 // Dataset attribution is a narrowly scoped license link, not a source-book link.
 assert.equal(require('../ancient/load-boundaries.cjs').source.licenseUrl,'https://creativecommons.org/licenses/by/4.0/');
+
+// Only the exact internal dataset-licence page is exempt; source books remain plain text.
+assert(fs.readFileSync('scripts/world/kyrgyz-frontiers-runtime.js','utf8').includes("credit.href='/kyrgyz-geography-credits.html';"));
+assert(fs.existsSync('research/kyrgyz-geography-credits.html'));
