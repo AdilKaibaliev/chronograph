@@ -73,6 +73,8 @@ for(const[id,title,coord]of [['petersburg',L('Санкт-Петербург','Sa
 modern('city-chicago',L('Чикаго','Chicago','Чикаго'),[-87.63,41.88],null,['chicago'],L('Кыргызский общественный центр объединяет общину Чикаго и проводит культурные и образовательные мероприятия.','The Kyrgyz Community Center brings together the Chicago community through cultural and educational activities.','Кыргыз коомдук борбору Чикагодогу жамаатты бириктирип, маданий жана билим берүү иш-чараларын өткөрөт.'),'city');
 function patch(world){
  const display=world.displayCartography;const adjusted=[];
+ world.sources.kyrgyzLateGeography={title:sources.yenisei+' '+sources.ulus};
+ world.areas=world.areas.map(a=>a.entry==='late-kyrgyz'&&a.from>=1368&&a.from<1703?{...a,sources:[...new Set([...a.sources,'kyrgyzLateGeography'])]}:a);
  for(const a of world.areas){
   if(a.entry!=='late-kyrgyz'||a.from<1368||a.from>=1703)continue;
   const p=G.union([regions.minusinsk]);display.areas[a.id]=display.shapes.length;display.shapes.push(p);display.labels[a.id]=[91.3,53.7];adjusted.push(a.id);
