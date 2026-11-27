@@ -8,6 +8,16 @@
  const panel=make('section','kyrgyz-study');panel.id='kyrgyzStudy';panel.hidden=true;panel.dataset.localeOwned='true';$('panel-compare').prepend(panel);
  const map=document.createElementNS(svg.namespaceURI,'g');map.id='kyrgyzStudyMap';map.dataset.localeOwned='true';viewport.append(map);
  const key=make('div','kyrgyz-study-key');key.id='kyrgyzStudyKey';key.dataset.localeOwned='true';key.hidden=true;$('mapCard').append(key);
+ // Stack the keys above the measured layers menu, including wrapped translations.
+ const mapCard=$('mapCard'),scope=$('kyrgyzScope'),layers=mapCard.querySelector('.map-legend'),paleo=$('paleoMapKey');
+ const stackKeys=()=>{
+  const base=mapCard.getBoundingClientRect();let bottom=12;
+  for(const item of [paleo,layers]){const r=item?.getBoundingClientRect();if(r?.height)bottom=Math.max(bottom,base.bottom-r.top+8);}
+  mapCard.style.setProperty('--kyrgyz-scope-bottom',bottom+'px');
+  const r=scope?.getBoundingClientRect();if(r?.height)bottom=Math.max(bottom,base.bottom-r.top+8);
+  mapCard.style.setProperty('--kyrgyz-study-key-bottom',bottom+'px');
+ };
+ const keyResize=new ResizeObserver(stackKeys);for(const item of [mapCard,paleo,layers,scope])if(item)keyResize.observe(item);stackKeys();
  const date=e=>e.periodLabel?wl(e.periodLabel):e.from===e.to?ancientCalendar.format(e.year,language):ancientCalendar.format(e.from,language)+' — '+ancientCalendar.format(e.to,language);
  const current=()=>state.open&&course.activeAt(state.selected,year)?course.record(state.selected):null;
  let resizing=0,renderedYear=null;
@@ -56,7 +66,7 @@
  }
  function choose(id,move=true,keepYear=false){
   const e=course.record(id);if(!e)return;
-  stopPlay();state.selected=id;state.open=true;panel.hidden=false;document.body.classList.add('kyrgyz-study-mode');
+  stopPlay();state.selected=id;state.open=true;state.expanded=false;panel.hidden=false;document.body.classList.add('kyrgyz-study-mode');
   worldState.event='';worldState.area='';worldState.selected='';
   if($('modal').classList.contains('show'))$('modalClose').click();
   switchPanel('compare');renderYear(keepYear&&course.activeAt(id,year)?year:e.year);render();draw();if(move)focus(e);queueLocationSave();
@@ -74,7 +84,7 @@
   const nav=make('nav','kyrgyz-study-nav');nav.setAttribute('aria-label',t('contents'));
   for(const [text,delta]of [[t('previous'),-1],[t('next'),1]]){const dest=course.neighbour(state.chapter,state.selected,delta,state.query),b=button(text,()=>{const target=course.neighbour(state.chapter,state.selected,delta,state.query);if(target)choose(target.id);});b.disabled=!dest;nav.append(b);}
   const progress=make('span','',idx>=0?(idx+1)+' / '+list.length:'— / '+list.length);progress.setAttribute('role','status');nav.insertBefore(progress,nav.lastChild);header.append(nav);panel.append(header);
-  const contents=make('details','kyrgyz-study-contents');contents.open=state.expanded;contents.append(make('summary','',t('contents')+' · '+list.length),make('p','kyrgyz-study-intro',wl(chapter.intro)));contents.ontoggle=()=>{state.expanded=contents.open;};
+  const contents=make('details','kyrgyz-study-contents');contents.open=state.expanded;contents.append(make('summary','',t('contents')+' · '+list.length),make('p','kyrgyz-study-intro',wl(chapter.intro)));contents.ontoggle=()=>{if(contents.isConnected)state.expanded=contents.open;};
   const input=make('input','');input.type='search';input.id='kyrgyzStudySearch';input.placeholder=t('search');input.setAttribute('aria-label',t('search'));input.value=state.query;
   const items=make('ol','');function fill(){items.replaceChildren();const matches=course.list(state.chapter,state.query);for(const item of matches){const li=make('li',''),b=button('',()=>choose(item.id));b.dataset.studyEpisode=item.id;b.setAttribute('aria-current',String(item.id===state.selected));b.append(make('span','',wl(item.title)),make('small','',date(item)));li.append(b);items.append(li);}if(!matches.length)items.append(make('li','kyrgyz-study-empty',t('empty')));contents.querySelector('summary').textContent=t('contents')+' · '+matches.length;const pos=matches.findIndex(x=>x.id===state.selected);progress.textContent=(pos>=0?pos+1:'—')+' / '+matches.length;nav.firstChild.disabled=!course.neighbour(state.chapter,state.selected,-1,state.query);nav.lastChild.disabled=!course.neighbour(state.chapter,state.selected,1,state.query);}
   input.oninput=()=>{state.query=input.value;fill();};contents.append(input,items);fill();panel.append(contents);

@@ -72,3 +72,6 @@
 @media(prefers-reduced-motion:reduce){.kyrgyz-movement-line{animation:none}}
 @media(max-width:700px){.kyrgyz-movement-key{top:86px;left:8px;max-width:calc(100% - 16px);font-size:10px}.kyrgyz-movement-key strong{display:none}}
 @media(max-width:700px){.kyrgyz-study h2{font-size:18px}.kyrgyz-study-article h3{font-size:20px}.kyrgyz-study-header{position:static}.kyrgyz-study-key{font-size:10px;bottom:56px;right:7px;max-width:65%}.kyrgyz-study-mode .map-legend{display:none}}
+#mapCard #kyrgyzScope{bottom:var(--kyrgyz-scope-bottom,122px)}
+#mapCard:has(#kyrgyzScope:not([hidden])) .map-legend{max-height:max(40px,calc(100% - 320px));overflow:auto}
+@media(max-width:700px){.kyrgyz-study-key{display:none}}
