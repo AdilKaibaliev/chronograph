@@ -89,4 +89,17 @@ assert(!course.at(1935).some(e=>e.id==='ky-school-ssr-1936'));
 assert(course.at(1936).some(e=>e.id==='ky-school-ssr-1936'));
 assert.equal(course.record('ky-school-early-tianshan-question').route,undefined,'Do not invent a continuous early migration path');
 assert(!html.includes("e.stopImmediatePropagation();showKyrgyz();"),'Early history buttons must open the unified course');
+// The timeline caption must not clamp ancient years to the 610 overview,
+// or replace a selected campaign with a different same-year relocation.
+const caption={dataset:{}},captionEvents={},captionObservers=[];
+const captionContext={year:610,language:'ru',activeStudy:false,WORLD_HISTORY:{entries:[],events:[]},KYRGYZ_WITNESSES:[],ANCIENT_PREVIEW:read('ANCIENT_PREVIEW'),worldHistory:{at:()=>[]},
+ document:{createElement:()=>caption,body:{classList:{contains:()=>captionContext.activeStudy}},addEventListener:(name,fn)=>captionEvents[name]=fn},
+ $:()=>({querySelector:()=>({after(){}})}),wl:r=>r[['ru','en','ky'].indexOf(captionContext.language)],translate:s=>s,kyrgyzHistoryForYear:()=>({year:610,title:'610 overview'}),
+ localeSelect:{addEventListener:(name,fn)=>captionEvents.locale=fn},MutationObserver:class{constructor(fn){captionObservers.push(fn);}observe(){}}};
+vm.runInNewContext(fs.readFileSync('scripts/world/kyrgyz-parallel.js','utf8'),captionContext);
+for(const y of [-350000,-201,-49,609]){captionContext.year=y;captionObservers[0]();assert(!caption.textContent.includes('610 overview'),'Future caption at '+y);}
+captionContext.year=-201;captionObservers[0]();assert(caption.textContent.includes('Гэгунь'));
+captionContext.year=1293;captionContext.activeStudy=true;caption.dataset.studyTitle='1293 · Тутуха на Енисее';captionEvents['kyrgyz-caption-change']();captionObservers[0]();assert(caption.textContent.endsWith(caption.dataset.studyTitle),'Date observer replaced the selected episode');
+caption.dataset.studyTitle='';captionEvents['kyrgyz-caption-change']();assert(!caption.textContent.includes('Тутуха'),'Old episode persisted after changing year');
+caption.dataset.studyTitle='1293 · Тутуха на Енисее';captionContext.activeStudy=false;captionObservers[0]();assert(!caption.textContent.includes('Тутуха'),'Closed study caption persisted');
 console.log(JSON.stringify({pass:true,lessons:ids.size,chapters:catalog.chapters.map(c=>[c.id,c.lessons.length]),newEvents:additions.events.length,checks:'dates, three languages, sources, destinations, return branch, flight, ancient continuity, filtered navigation and no false tribal borders'}));

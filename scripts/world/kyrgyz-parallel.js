@@ -64,7 +64,8 @@
   return later.map(x=>wl(x.phase.title)).join(' · ')||label();
  }
  function refresh(){
-  const detail=title(year);line.textContent=label()+(detail?' · '+detail:'');
+  const selected=document.body.classList.contains('kyrgyz-study-mode')&&line.dataset.studyTitle;
+  const detail=selected||title(year);line.textContent=label()+(detail?' · '+detail:'');
   line.title=line.textContent;
  }
  function open(){
@@ -108,6 +109,7 @@
   $('modal').classList.add('show');$('modal').querySelector('.modal-box').scrollTop=0;select.focus({preventScroll:true});
  }
  line.onclick=open;
+ document.addEventListener('kyrgyz-caption-change',refresh);
  new MutationObserver(refresh).observe($('timelineYear'),{childList:true,characterData:true,subtree:true});
  localeSelect.addEventListener('change',refresh);refresh();
 })();
