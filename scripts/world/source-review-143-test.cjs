@@ -15,7 +15,12 @@ function verify(c){
    point('1789-new-netherland',y,p,false);
    assert(has('1789-english-atlantic',y,p)||has('late-england',y,p),'English settlement missing '+y+' '+p);points++;
   }
-  point('1789-new-netherland',y,[-73.995,40.71]); // New Amsterdam is not transferred.
+  // Manhattan's southern tip is below the generalised coast's resolution.
+  // Check the attested New Amsterdam position against the ownership envelope,
+  // and an inland Manhattan position against the actual coast-clipped fill.
+  const raw=c.areas.find(a=>a.entry==='1789-new-netherland'&&a.from<=y&&y<a.to);
+  assert(G.covers(c.cartography.shapes[c.cartography.areas[raw.id]],[-73.995,40.71]),'New Amsterdam ownership lost '+y);
+  point('1789-new-netherland',y,[-73.98,40.76]);
  }
  for(let y=1538;y<1590;y++){
   point('early-safavid',y,[47.82,30.5],false);point('late-ottoman',y,[47.82,30.5]);
