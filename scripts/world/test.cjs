@@ -250,7 +250,7 @@ const descendants=node=>[node,...node.children.flatMap(descendants)];
 for(const lang of [0,1,2]){
  const dom={},get=id=>dom[id]??=new GuideNode('div');let closed=0,saved=0,chosen='';
  get('modalClose').onclick=()=>closed++;
- const guide={document:{createElement:tag=>new GuideNode(tag)},$:get,
+ const guide={document:Object.assign(new EventTarget(),{createElement:tag=>new GuideNode(tag),body:{classList:{contains:()=>false}}}),$:get,
   we:(tag,cls='',text='')=>Object.assign(new GuideNode(tag),{className:cls,textContent:text}),
   wl:row=>row[lang],WORLD_HISTORY:payload,worldHistory:publishedHistory,KYRGYZ_WITNESSES:require('./kyrgyz-witnesses.json'),
   KYRGYZ_STAGES:[],TIMELINE_MAX:MAX,year:1508,language:['ru','en','ky'][lang],
