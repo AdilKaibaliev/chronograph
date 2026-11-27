@@ -9,6 +9,13 @@ function verify(c){
   const english=y<1451||y===1452;point('late-england',y,p,english);point('late-france',y,p,!english);
  }
  point('late-england',1452,[-.8,43.8],false); // Talbot did not recover all Gascony.
+ for(const [y,from,to,title] of [[1624,1624,1650,null],[1649,1624,1650,null],[1650,1650,1654,'After the Hartford agreement'],[1653,1650,1654,'After the Hartford agreement'],[1654,1654,1664,'New Netherland after the loss of the Hartford post'],[1663,1654,1664,'New Netherland after the loss of the Hartford post']]){
+  const p=h.get('1789-new-netherland',y).phase;
+  assert.equal(p.from,from);assert.equal(p.to,to);
+  for(const period of p.period)assert(period.includes(String(from))&&period.includes(String(to-1)),'Dutch printed phase '+y);
+  if(title){assert.equal(p.title[1],title);assert(p.sources.includes('hartfordTreaty143'));}
+  if(y>=1650)for(const text of p.text)assert(text.includes(y<1654?'1650':'1654'),'Dated Dutch narrative '+y);
+ }
  for(const y of [1450,1451,1452,1453])point('late-england',y,[-.13,51.51]);
  for(let y=1650;y<1664;y++){
   for(const p of [[-72.925,41.308],[-73.54,41.054],[-73,40.85]]){

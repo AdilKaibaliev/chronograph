@@ -13,7 +13,15 @@ const old={entries:c.entries.map(e=>({id:e.id,region:e.region,kind:e.kind,coord:
 assert.equal(crypto.createHash('sha256').update(JSON.stringify(require('../world/kyrgyz-baseline.cjs')(require('../world/arctic-baseline.cjs')(old,undefined,1601)))).digest('hex'),'b164cde6276ba7b3d781bf4b56045c609eba2a70c223860d8014e3e5b2ecabf4','Reviewed 610–1600 continuity baseline changed');
 const dh=createWorldHistory(delivered);
 for(let y=1601;y<=1789;y++){
- const current=rows=>rows.map(({entry,...item})=>({...item,entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to)}}));
+ // The 1650 agreement and 1654 confiscation now divide the former 1624–1664
+ // Dutch phase. The documentary boundary test checks those exact intervals.
+ // Keep the original baseline comparison for every other field and profile.
+ const current=rows=>rows.map(({entry,...item})=>{
+  const oldPhase=h.get(entry.id,y)?.phase;
+  const reviewedDutch=entry.id==='1789-new-netherland'&&y>=1624&&y<1664;
+  const phase=p=>reviewedDutch?{...p,...Object.fromEntries(['from','to','period','title','text','sources'].map(k=>[k,oldPhase[k]]))}:p;
+  return {...item,phase:phase(item.phase),entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to).map(phase)}};
+ });
  const laterAdditions=require('../world/survey-141.cjs').ids;
  assert.deepEqual(current(dh.at(y).filter(r=>!laterAdditions.includes(r.entry.id))),current(h.at(y)));
  assert.deepEqual(dh.areasAt(y).filter(a=>!laterAdditions.includes(a.entry)).map(a=>a.entry),h.areasAt(y).map(a=>a.entry),'Dated map selection '+y);
