@@ -81,6 +81,7 @@
   select.onchange=()=>{state.chapter=select.value;state.query='';state.expanded=false;const first=course.list(state.chapter)[0];if(first)choose(first.id);else render();};header.append(select);
   const chapter=course.chapter(state.chapter);
   const list=course.list(state.chapter,state.query),idx=list.findIndex(e=>e.id===state.selected),e=current();
+  if(e){const line=$('kyrgyzParallel');line.textContent=t('title')+' · '+wl(e.title);line.title=line.textContent;}
   const nav=make('nav','kyrgyz-study-nav');nav.setAttribute('aria-label',t('contents'));
   for(const [text,delta]of [[t('previous'),-1],[t('next'),1]]){const dest=course.neighbour(state.chapter,state.selected,delta,state.query),b=button(text,()=>{const target=course.neighbour(state.chapter,state.selected,delta,state.query);if(target)choose(target.id);});b.disabled=!dest;nav.append(b);}
   const progress=make('span','',idx>=0?(idx+1)+' / '+list.length:'— / '+list.length);progress.setAttribute('role','status');nav.insertBefore(progress,nav.lastChild);header.append(nav);panel.append(header);

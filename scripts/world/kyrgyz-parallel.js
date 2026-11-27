@@ -55,6 +55,7 @@
   return {note,notes,early,later};
  }
  function title(y){
+  if(y<610)return ANCIENT_PREVIEW.records.filter(r=>r.kyrgyz&&r.from<=y&&y<r.to).map(r=>wl(r.title)).join(' · ');
   const {note,early,later}=reading(y);
   if(early?.year===y&&note?.periodLabel)return translate(early.title,language);
   if(note)return wl(note.title);
@@ -63,7 +64,7 @@
   return later.map(x=>wl(x.phase.title)).join(' · ')||label();
  }
  function refresh(){
-  line.textContent=label()+' · '+title(year);
+  const detail=title(year);line.textContent=label()+(detail?' · '+detail:'');
   line.title=line.textContent;
  }
  function open(){
