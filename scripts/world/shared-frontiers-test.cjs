@@ -72,6 +72,11 @@ for(const a of c.areas.filter(a=>a.from<2011&&!a.frontierAdded)){
  const partitionYear=['1914-american-samoa','1914-western-samoa'].includes(a.entry)&&a.from===1899;
  const belizeName=a.entry==='1991-belize'&&a.from>=1961&&a.to<=1981;
  const reviewed=partitionYear||belizeName?['name','title','text']:a.entry==='zirid'?['color','text','points','polygons']:a.entry==='hammadid'||outerReviewed?['points','polygons']:[];
+ // Documentary chronology revisions are restricted to these exact windows.
+ // source-review-143-test independently checks annual city ownership and the
+ // delivered narratives; geometry and every unrelated old field stay guarded.
+ if((['late-france','late-england'].includes(a.entry)&&a.from>=1450&&a.to<=1453&&a.sources.includes('gasconRolls143'))||
+    (a.entry==='1789-new-netherland'&&a.from>=1650&&a.to<=1664&&a.sources.includes('hartfordTreaty143')))reviewed.push('title','text');
  if(a.entry==='nanmadol'&&a.from>=1986){
   const federation=['Федеративные Штаты Микронезии','Federated States of Micronesia','Микронезия Федеративдик Штаттары'];
   assert.deepEqual(a.name,federation);assert.deepEqual(a.title,federation);
