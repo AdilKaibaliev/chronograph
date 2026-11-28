@@ -200,6 +200,7 @@ module.exports=c=>{
  require('./source-review-142.cjs')(c,{source,revise,visibleAt,D,I});
  require('./source-review-143.cjs')(c,{source,revise,split,visibleAt,D,I,box});
  require('./source-review-144.cjs')(c,{source,revise,split,visibleAt,D,I,box});
+ require('./source-review-145.cjs')(c,{source,revise,D});
  c.cartography.frontierRelations=relations;c.cartography.presentation=presentation;
  for(const key of ['areas','outlines']){const ids=new Set();for(const a of c[key]){if(!(a.from<a.to)||ids.has(a.id))throw Error('Invalid split frontier '+a.id);ids.add(a.id);}}
  c.sharedFrontiers={version:1,frames:reviewed,relations,presentation};
