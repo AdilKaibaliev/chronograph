@@ -14,7 +14,7 @@ The atlas uses the treaty year. It does not assert that all three garrisons chan
 
 ## Cartographic method and limits
 
-`source-review-145-geometry.json` preserves the reference feature identity, three ground-control points and the digitized trace. The northern regional shape starts from Bennett et al., *Cliopatria* v0.2.1 (CC BY 4.0), the Commonwealth feature covering 1687, spatially limited to 27.7–31.3° E / 55.45–56.6° N. Its town inclusions were checked against sheet 3. Its own chronology is **not** used to date the restitution.
+`source-review-145-geometry.json` preserves the reference feature identity, three ground-control points and the digitized trace. The northern regional shape starts from Bennett et al., *Cliopatria* v0.2.1 (CC BY 4.0), the Commonwealth feature covering 1687, spatially limited to 27.7–31.7° E / 55.0–56.8° N. Its town inclusions were checked against sheet 3. Its own chronology is **not** used to date the restitution.
 
 Cliopatria omits Velizh in that frame. The eastern extension is therefore traced independently from sheet 8 and fitted locally using Velizh, Usvyaty and Surazh. A small adjustment places the Velizh marker inside the boundary rather than on the engraved town symbol. This is a generalized regional reconstruction from an eighteenth-century map, not a surveyed county boundary or a claim of metre-level accuracy. The modern Belarus/Russia border is not substituted. The historic sheets themselves are not bundled with the public website.
 
@@ -34,3 +34,4 @@ Heper and Öntuğ (2022), pp. 63–64, additionally cite garrison orders in BOA 
 ## Verification
 
 The new test is first run against the previous publication and fails at Commonwealth ownership of Nevel in 1678. It checks all 94 years through 1771, both Russian profiles, three nearby Russian controls, Vitebsk, the years on either side of both transfers, and all three localized events. The full release gate and public deployment must pass before publication is reported complete. A separate catalogue comparison checks that unrelated profiles and all pre-existing events are unchanged. Technical checks do not certify all historical boundaries in the atlas.
+
