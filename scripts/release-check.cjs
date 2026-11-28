@@ -17,6 +17,8 @@ const checks = [
   'scripts/world/paint-composition-test.cjs',
   'scripts/world/kyrgyz-frontiers-test.cjs',
   'scripts/world/kyrgyz-frontiers-ui-test.cjs',
+  'scripts/world/kyrgyz-territories-test.cjs',
+  'scripts/world/kyrgyz-territories-ui-test.cjs',
   'scripts/world/continuity-test.cjs',
   'scripts/world/steppe-contours-test.cjs',
   'scripts/world/harsha-frontier-test.cjs',

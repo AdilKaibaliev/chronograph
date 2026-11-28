@@ -213,10 +213,13 @@ const ancientForStudy=JSON.parse(html.slice(ancientStart,html.indexOf(';\n',anci
 const kyrgyzStudy=require('../world/kyrgyz-study-catalog.cjs')(worldData,witnessData,kyrgyzStages,ancientForStudy,worldTextRow);
 const studyRuntime=fs.readFileSync(root+'/../world/kyrgyz-study-core.js','utf8').replace("if(typeof module!=='undefined')module.exports={createKyrgyzStudy};",'')+'\nconst KYRGYZ_STUDY='+JSON.stringify(kyrgyzStudy).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../world/kyrgyz-study-runtime.js','utf8')+'\n'+fs.readFileSync(root+'/../world/kyrgyz-geography-runtime.js','utf8');
 const kyrgyzFrontiers=require('../world/kyrgyz-frontiers.cjs');
+const kyrgyzTerritories=require('../world/kyrgyz-territories.cjs')(worldData,empires,kyrgyzFrontiers,ancientForStudy,kyrgyzStudy,worldTextRow);
+const territoryRuntime=fs.readFileSync(root+'/../world/kyrgyz-territories-core.js','utf8').replace("if(typeof module!=='undefined')module.exports={createKyrgyzTerritories};",'')+'\nconst KYRGYZ_TERRITORIES='+JSON.stringify(kyrgyzTerritories).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../world/kyrgyz-territories-runtime.js','utf8');
 const frontierRuntime='const KYRGYZ_FRONTIERS='+JSON.stringify({version:kyrgyzFrontiers.version,sources:kyrgyzFrontiers.sources,records:kyrgyzFrontiers.records}).replaceAll('<','\\u003c')+';\n'+fs.readFileSync(root+'/../world/kyrgyz-frontiers-runtime.js','utf8');
-const studyEnd=html.lastIndexOf('})();');html=html.slice(0,studyEnd)+'\n'+studyRuntime+'\n'+fs.readFileSync(root+'/../world/kyrgyz-movement-runtime.js','utf8')+'\n'+frontierRuntime+'\n'+html.slice(studyEnd);
+const studyEnd=html.lastIndexOf('})();');html=html.slice(0,studyEnd)+'\n'+studyRuntime+'\n'+fs.readFileSync(root+'/../world/kyrgyz-movement-runtime.js','utf8')+'\n'+frontierRuntime+'\n'+territoryRuntime+'\n'+html.slice(studyEnd);
 html=html.replace('</style>',fs.readFileSync(root+'/../world/kyrgyz-study-style.css','utf8')+'\n</style>');
 html=html.replace('</style>',fs.readFileSync(root+'/../world/kyrgyz-frontiers-style.css','utf8')+'\n</style>');
+html=html.replace('</style>',fs.readFileSync(root+'/../world/kyrgyz-territories-style.css','utf8')+'\n</style>');
 for(const script of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(script[1]);
 fs.writeFileSync(repositoryBuild?'index.html':'outputs/chronograph_1_1.html',html);
 fs.writeFileSync(root+'/compiled-messages.json',JSON.stringify(rows,null,2));
