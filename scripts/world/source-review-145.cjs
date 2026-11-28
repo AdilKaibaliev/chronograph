@@ -18,6 +18,20 @@ module.exports=function(c,{source,revise,D}){
  const mask=require('./source-review-145-geometry.json').polygons;
  revise(['early-russia','1789-russian-empire'],1678,1772,'northern-districts-returned-in-1678','northRestitution145',p=>D(p,mask));
  revise(['early-commonwealth'],1678,1772,'northern-districts-returned-in-1678','northRestitution145',p=>G.merge([p,mask]));
+ source('kirkukCampaign145','Özer Küpeli. Irak-ı Arap’ta Osmanlı–Safevi Mücadelesi (XVI–XVII. Yüzyıllar), History Studies (2010), pp. 235–237; Yusuf Heper, M. Murat Öntuğ. Bağdad Seferi’nin Hazırlıkları (1625/26), Karadeniz Araştırmaları XIX/73 (2022), pp. 63–64; BOA, Mühimme Defteri 941.4, hükümler 25, 41, 64.',[
+  'https://www.historystudies.net/dergi/tar201512ec962.pdf',
+  'https://dergipark.org.tr/tr/download/article-file/2336528',
+  'https://islamansiklopedisi.org.tr/musul--irak#2-osmanlilar-donemi'
+ ]);
+ // The campaign history resolves an omission in the brief Kerkuk entry:
+ // Ottoman recovery in 1625, then Safavid recapture after the 1626 retreat.
+ const kirkuk=G.union([[[44.27,35.43],[44.36,35.36],[44.48,35.42],[44.50,35.51],[44.41,35.58],[44.30,35.54]]]);
+ revise(['early-safavid'],1625,1626,'kirkuk-1625-ottoman-campaign','kirkukCampaign145',p=>D(p,kirkuk));
+ revise(['late-ottoman'],1625,1626,'kirkuk-1625-ottoman-campaign','kirkukCampaign145',p=>G.merge([p,kirkuk]));
+ for(const [id,y,entry,title,text]of [
+  ['kirkuk-campaign-1625',1625,'late-ottoman','Киркук в османской кампании|Kirkuk in the Ottoman campaign|Осмон жортуулундагы Киркук','Войска Хасана-паши возвращают Киркук османам. Город служит опорным пунктом похода Хафиз-Ахмеда-паши на Багдад.|Hasan Pasha’s troops recover Kirkuk for the Ottomans. The city supports Hafız Ahmed Pasha’s campaign against Baghdad.|Хасан-пашанын аскерлери Киркукту Осмондорго кайтарат. Шаар Хафыз Ахмед-пашанын Багдадга жортуулунда таяныч жай болот.'],
+  ['kirkuk-recapture-1626',1626,'early-safavid','Сефевиды вновь занимают Киркук|Safavid recapture of Kirkuk|Сефевилер Киркукту кайра ээлейт','После снятия османской осады Багдада в июле 1626 года Киркук и ряд других крепостей вновь переходят к Сефевидам.|After the Ottoman siege of Baghdad ends in July 1626, Kirkuk and several other fortresses return to Safavid control.|1626-жылдын июлунда Осмондор Багдаддын курчоосун токтоткондон кийин Киркук жана башка бир нече чеп кайра Сефевилердин колуна өтөт.']
+ ])H.event(id,y,entry,'war',[44.39,35.47],L(title),L(text),['kirkukCampaign145'],{frontierAdded:true});
  const rows=[
   ['nevel', [29.93,56.02], 'Невель|Nevel|Невель'],
   ['sebezh',[28.48,56.29], 'Себеж|Sebezh|Себеж'],

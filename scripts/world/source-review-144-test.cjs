@@ -11,8 +11,9 @@ module.exports=function verify(c){
  }
  point('early-commonwealth',1772,[30.2,55.19],false);point('1789-russian-empire',1772,[30.2,55.19]);
  for(let y=1623;y<=1639;y++){
-  point('early-safavid',y,[44.39,35.47],y>=1624&&y<1630);
-  point('late-ottoman',y,[44.39,35.47],y<1624||y>=1630);
+  // Review 145 documents the intervening Ottoman campaign in 1625.
+  point('early-safavid',y,[44.39,35.47],y>=1624&&y<1630&&y!==1625);
+  point('late-ottoman',y,[44.39,35.47],y<1624||y>=1630||y===1625);
   point('early-safavid',y,[44.36,33.31],y>=1624&&y<1638);
   point('late-ottoman',y,[43.13,36.34],y!==1624);
  }

@@ -16,6 +16,15 @@ module.exports=function verify(c){
   assert(e.sources.every(s=>c.sources[s]));for(const t of e.text)assert(t.includes('1678')&&t.includes('1772'));
   for(const t of e.title)assert(t.length>8);
  }
- return {pass:true,geographicalControls:controls,datedEvents:3};
+ for(const y of [1624,1625,1626,1629,1630]){
+  const ottoman=y===1625||y===1630;
+  point('late-ottoman',y,[44.39,35.47],ottoman);point('early-safavid',y,[44.39,35.47],!ottoman);
+  point('early-safavid',y,[44.36,33.31]);
+ }
+ for(const [id,y]of [['kirkuk-campaign-1625',1625],['kirkuk-recapture-1626',1626]]){
+  const e=c.events.find(e=>e.id===id);assert(e&&e.year===y);assert.deepEqual(e.coord,[44.39,35.47]);
+  assert.deepEqual(e.sources,['kirkukCampaign145']);assert(c.sources.kirkukCampaign145);for(const t of [...e.title,...e.text])assert(t.length>8);
+ }
+ return {pass:true,geographicalControls:controls,datedEvents:5};
 };
 if(require.main===module){const c=JSON.parse(fs.readFileSync('index.html','utf8').match(/const WORLD_HISTORY=([^\n]+);/)[1]);console.log(JSON.stringify(module.exports(c)));}

@@ -1,4 +1,4 @@
-# Nevel, Sebezh and Velizh — source review, 28 November 2026
+# Northern restitution and Kirkuk campaigns — source review, 28 November 2026
 
 ## Confirmed correction
 
@@ -23,7 +23,13 @@ The same polygon is removed from Russia and merged into the Commonwealth, avoidi
 ## Additional research, not published as a new boundary claim
 
 - Guatemala/Honduras: the existing 1933 arbitration transition was checked at seven towns and is already correct after 1933. Blank pre-1933 frontier bands are not evidence of unoccupied land. The attempted UN award download returned an HTML challenge, so it was not treated as a read PDF. Wider pre-award rural lines remain under research.
-- Ottoman/Safavid Iraq: Erbil's earlier campaign years still need direct evidence. TDV's Mosul article describes a 1625 advance through Kirkuk, whereas its Kirkuk article dates Hüsrev Pasha's recovery to 1630. That counterevidence prevents certifying uninterrupted control in the intervening years. Further campaign chronology is required; the two accounts must not be collapsed into an invented exact frontier.
+- Erbil's earlier campaign years still need direct evidence.
+
+## Kirkuk campaign correction
+
+Küpeli, *History Studies* (2010), pp. 235–237, documents the intervening Ottoman recovery in 1625 and subsequent Safavid recapture following the 1626 retreat. The existing regional envelope is corrected for 1625 only; two events are added. This supersedes review 144's uninterrupted 1625–1629 assignment. Five profiles and five new events are affected in this complete release.
+
+Heper and Öntuğ (2022), pp. 63–64, additionally cite garrison orders in BOA Mühimme Defteri 941.4, items 25, 41 and 64. Source: https://dergipark.org.tr/tr/download/article-file/2336528 . Küpeli's publisher PDF is indexed but returned 403; the author-posted full text was read at https://www.academia.edu/31642212/ . No exact recapture day or broader Iraqi territorial gain is inferred.
 
 ## Verification
 
