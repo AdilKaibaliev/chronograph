@@ -26,6 +26,7 @@ const checks = [
   'scripts/world/krakow-oregon-test.cjs',
   'scripts/world/source-review-142-test.cjs',
   'scripts/world/source-review-143-test.cjs',
+  'scripts/world/source-review-144-test.cjs',
   'scripts/world/russia-empire-review-test.cjs',
   'scripts/world/cache-test.cjs',
   'scripts/world/labels-test.cjs',

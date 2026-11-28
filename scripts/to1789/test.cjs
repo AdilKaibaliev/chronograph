@@ -19,7 +19,8 @@ for(let y=1601;y<=1789;y++){
  const current=rows=>rows.map(({entry,...item})=>{
   const oldPhase=h.get(entry.id,y)?.phase;
   const reviewedDutch=entry.id==='1789-new-netherland'&&y>=1624&&y<1664;
-  const phase=p=>reviewedDutch?{...p,...Object.fromEntries(['from','to','period','title','text','sources'].map(k=>[k,oldPhase[k]]))}:p;
+  const reviewedZuhab=entry.id==='early-safavid'&&y>=1638&&y<1722;
+  const phase=p=>reviewedDutch||reviewedZuhab?{...p,...Object.fromEntries(['from','to','period','title','text','sources'].map(k=>[k,oldPhase[k]]))}:p;
   return {...item,phase:phase(item.phase),entry:{...entry,phases:entry.phases.filter(p=>p.from<=y&&y<p.to).map(phase)}};
  });
  const laterAdditions=require('../world/survey-141.cjs').ids;

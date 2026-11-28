@@ -56,6 +56,7 @@ approvedSources.add('maghrebDependence');
 assert.deepEqual(c.areas.filter(a=>a.sources.includes('kyrgyzLateGeography')).map(a=>a.id),['late-kyrgyz-1368','late-kyrgyz-1454','late-kyrgyz-1601']);
 assert(c.sources.kyrgyzLateGeography.title.includes('Бутанаев'));
 approvedSources.add('kyrgyzLateGeography');
+approvedSources.add('zuhab144');
 for(const id of Object.keys(require('./europe-central-review.cjs').sources))approvedSources.add(id);
 for(const id of Object.keys(require('./frankish-outer-frontiers.cjs').sources))approvedSources.add(id);
 for(const r of c.russiaEmpireReview?.records||[]){assert(c.sources[r.source],'Missing Russian treaty source');approvedSources.add(r.source);}
@@ -77,6 +78,7 @@ for(const a of c.areas.filter(a=>a.from<2011&&!a.frontierAdded)){
  // delivered narratives; geometry and every unrelated old field stay guarded.
  if((['late-france','late-england'].includes(a.entry)&&a.from>=1450&&a.to<=1453&&a.sources.includes('gasconRolls143'))||
     (a.entry==='1789-new-netherland'&&a.from>=1650&&a.to<=1664&&a.sources.includes('hartfordTreaty143')))reviewed.push('title','text');
+ if(a.entry==='early-safavid'&&a.from>=1638&&a.to<=1722&&a.sources.includes('zuhab144'))reviewed.push('title','text');
  if(a.entry==='nanmadol'&&a.from>=1986){
   const federation=['Федеративные Штаты Микронезии','Federated States of Micronesia','Микронезия Федеративдик Штаттары'];
   assert.deepEqual(a.name,federation);assert.deepEqual(a.title,federation);
