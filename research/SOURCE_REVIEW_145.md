@@ -35,3 +35,5 @@ Heper and Öntuğ (2022), pp. 63–64, additionally cite garrison orders in BOA 
 
 The new test is first run against the previous publication and fails at Commonwealth ownership of Nevel in 1678. It checks all 94 years through 1771, both Russian profiles, three nearby Russian controls, Vitebsk, the years on either side of both transfers, and all three localized events. The full release gate and public deployment must pass before publication is reported complete. A separate catalogue comparison checks that unrelated profiles and all pre-existing events are unchanged. Technical checks do not certify all historical boundaries in the atlas.
 
+The first deployment exceeded Vercel's 45-minute build limit before completing the release gate. Independent verification scripts now run in two isolated worker processes, with the catalogue build and public packaging kept as exclusive sequential barriers. All 88 checks and their assertions are retained. Scheduler regression checks cover the worker limit, unchanged inventory, build ordering, failures, process-start errors and prevention of packaging after a failed check. No historical data changed as part of this scheduling fix.
+

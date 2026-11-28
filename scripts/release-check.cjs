@@ -1,6 +1,6 @@
 'use strict';
 
-const { spawn, spawnSync } = require('node:child_process');
+const { spawn } = require('node:child_process');
 const path = require('node:path');
 
 const projectRoot = path.resolve(__dirname, '..');
@@ -95,42 +95,55 @@ const checks = [
   'scripts/seo/loading-test.cjs'
 ];
 
-// This exhaustive annual comparison only reads the completed atlas and writes
-// its own verification report. Run it alongside the other tests, with at most
-// two children, so the full suite stays within the hosting build time limit.
-// Both builds remain serial and every check must pass before packaging.
-const parallelCheck = 'scripts/world/survey-141-test.cjs';
-let frontierProcess;
-let frontierResult;
-let completed = 0;
-
+// The completed catalogue is immutable during verification. Each test runs in
+// its own process; the few generated reports have distinct paths. Two workers
+// avoid recompiling the source catalogue serially for every independent check.
+// Both build steps remain exclusive barriers. No check or assertion is skipped.
 async function runChecks() {
-  for (const file of checks) {
-    if (file === parallelCheck) continue;
-    if (file === 'scripts/seo/build.cjs') {
-      const result = await frontierResult;
-      if (!result || result.code !== 0) throw new Error(`${parallelCheck} failed (${result?.code ?? 'not started'})`);
-      completed++;
-    }
+  const active = new Set(), completed = new Set();
+  let failed = false;
+  function run(file) {
     console.log(`Running ${file}`);
-    const result = spawnSync(process.execPath, [file], { cwd: projectRoot, stdio: 'inherit' });
-    if (result.error || result.status !== 0) throw new Error(`${file}: ${result.error?.message || `exit ${result.status}`}`);
-    completed++;
-    if (file === 'scripts/i18n/build.cjs') {
-      console.log(`Running ${parallelCheck} (independent annual comparison)`);
-      frontierProcess = spawn(process.execPath, [parallelCheck], { cwd: projectRoot, stdio: 'inherit' });
-      frontierResult = new Promise(resolve => {
-        frontierProcess.once('error', error => { console.error(error.message); resolve({ code: 1 }); });
-        frontierProcess.once('close', code => resolve({ code }));
+    const started = Date.now();
+    return new Promise((resolve, reject) => {
+      const child = spawn(process.execPath, [file], { cwd: projectRoot, stdio: 'inherit' });
+      active.add(child);
+      child.once('error', error => { failed = true; reject(new Error(`${file}: ${error.message}`)); });
+      child.once('close', code => {
+        active.delete(child);
+        if (code !== 0) { failed = true; reject(new Error(`${file}: exit ${code}`)); return; }
+        completed.add(file);
+        console.log(`Passed ${file} (${Math.round((Date.now() - started) / 1000)}s)`);
+        resolve();
       });
-    }
+    });
   }
-  if (completed !== checks.length) throw new Error(`Incomplete release checks: ${completed}/${checks.length}`);
-  console.log(JSON.stringify({ pass: true, releaseChecks: completed }));
+  try {
+    const build = checks.indexOf('scripts/i18n/build.cjs');
+    const packaging = checks.indexOf('scripts/seo/build.cjs');
+    for (const file of checks.slice(0, build + 1)) await run(file);
+    const pending = checks.slice(build + 1, packaging);
+    // Start the exhaustive annual comparison early so it cannot become a
+    // serial tail. It shares the same two-worker limit as all other tests.
+    const annual = pending.indexOf('scripts/world/survey-141-test.cjs');
+    pending.unshift(...pending.splice(annual, 1));
+    let next = 0;
+    async function worker() {
+      while (!failed && next < pending.length) await run(pending[next++]);
+    }
+    await Promise.all([worker(), worker()]);
+    for (const file of checks.slice(packaging)) await run(file);
+    if (completed.size !== checks.length) throw new Error(`Incomplete release checks: ${completed.size}/${checks.length}`);
+    console.log(JSON.stringify({ pass: true, releaseChecks: completed.size }));
+  } catch (error) {
+    failed = true;
+    for (const child of active) if (child.exitCode === null) child.kill();
+    throw error;
+  }
 }
 
-runChecks().catch(error => {
-  if (frontierProcess && frontierProcess.exitCode === null) frontierProcess.kill();
+module.exports = { checks, runChecks };
+if (require.main === module) runChecks().catch(error => {
   console.error(error.message);
   process.exitCode = 1;
 });
